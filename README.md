@@ -9,10 +9,22 @@ For more information see: http://www.omgwiki.org/bpmn-miwg
 
 Repository structure
 
+The top level defines test categories. 
+The second level is either a vendor or the submitted reference. 
+The third level holds the individual test case files in the form <identifier>-<test type>.filetype
+
+The vendor who provided each test case will be identified in the summarising results spreadsheet. 
+
+- README.md (this file) 
+- Results.xslx
 - A - Fixed Diagrams with Variations of Attributes
   - Business Process Incubator 4.?.?
     - A.1.0-import.png 
     - A.1.0-import.bpmn
+    - A.1.0-export.png 
+    - A.1.0-export.bpmn
+    - A.1.0-roundtrip.png 
+    - A.1.0-roundtrip.bpmn
     - ...
   - Camunda Modeler 2.0.1
     - A.1.0-import.png 
@@ -24,7 +36,7 @@ Repository structure
     - ...
   - Reference 
     - A.1.0.png 
-    - A.1.0.bpmn <-- look in xls to find vendor who provided
+    - A.1.0.bpmn <-- look in xls to find vendor who provided this reference 
     - ...
-- B - 
+- B - Validate that tool covers conformance class set
   - Camunda Modeler 
