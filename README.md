@@ -25,11 +25,33 @@ with the provided reference models depending on the capabilities of the tool.
 You will find explanations of these three procedures below.
 
 ### 3. Submit Your Test Results to BPMN MIWG
-Package all result files in a zip file and attach to new issue at: https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new
-Make sure to provide the exact name and version of the tool you tested in the issue title.
+Package all result files in a zip file and attach it to a [new issue](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new).
+Make sure to provide the exact name and version of the tool that you tested in the issue title.
+
+Alternatively, you may also [fork the repository](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/fork_select) on GitHub
+and submit test results through a [pull request](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/pull/new/master).
 
 Detailed Descrition of Test Procedures
 --------------------------------------
+
+<table>
+  <tr>
+    <th>Available Features</th>
+    <th>Possible Tests</th>
+  </tr>
+  <tr>
+    <td>import only</td>
+    <td>import</td>
+  </tr>
+  <tr>
+    <td>export only</td>
+    <td>export</td>
+  </tr>
+  <tr>
+    <td>import & export</td>
+    <td>import, export & roundtrip</td>
+  </tr>
+</table>
 
 ### 1. BPMN MIWG Import Test Procedure
 If the tool under test supports the import of BPMN XML files, you can test that feature using the following procedure:
