@@ -20,6 +20,7 @@ Depending on the capabilities of the tool under test, you may be able to test im
 
 ### BPMN XML Import
 If the tool under test supports the import of BPMN XML files, you can test that feature using the following procedure:
+
 1. Import the BPMN XML file (*.bpmn) provided with a reference model into the tool.
 2. Export the grapical representation of the model as it is imported. You can either do that through an export feature of tool, e.g. a PNG, JPEG or PDF Export, or by taking a screenshot of the canvas.
 3. Compare the result with the image provided with the reference model and report your findings in the spreadsheet `BPMN MIWG Test Case Structure.xlsx`.
@@ -29,6 +30,7 @@ Repeat these steps for all reference models.
 
 ### BPMN XML Export
 If the tool under test supports the export of BPMN XML files, you can test that feature using the following procedure:
+
 1. Draw the model as shown in the image provided with a reference model into the tool.
 2. Export the model into a BPMN XML file (*.bpmn).
 3. Compare the result with the BPMN XML file (*.bpmn) provided with the reference model and report your findings in the spreadsheet `BPMN MIWG Test Case Structure.xlsx`.
