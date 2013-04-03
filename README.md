@@ -24,7 +24,7 @@ If the tool under test supports the import of BPMN XML files, you can test that 
 1. Import the BPMN XML file (*.bpmn) provided with a reference model into the tool.
 2. Save the grapical representation of the model as it is imported. You can either do that through an export feature of tool, e.g. a PNG, JPEG or PDF Export, or by taking a screenshot of the canvas.
 3. Put the resulting file in to a folder named with the exact name and Version of the tool.
-4. Compare the result with the image provided with the reference model and report your findings in the spreadsheet `BPMN MIWG Test Case Structure.xlsx`.
+4. Compare the result with the image provided with the reference model and report your findings in the spreadsheet `Results.xlsx`.
 
 Repeat these steps for all reference models.
 
@@ -34,7 +34,7 @@ If the tool under test supports the export of BPMN XML files, you can test that 
 1. Draw the model as shown in the image provided with a reference model into the tool.
 2. Export the model into a BPMN XML file (*.bpmn).
 3. Put the resulting file in to a folder named with the exact name and Version of the tool.
-4. Compare the result with the BPMN XML file (*.bpmn) provided with the reference model and report your findings in the spreadsheet `BPMN MIWG Test Case Structure.xlsx`.
+4. Compare the result with the BPMN XML file (*.bpmn) provided with the reference model and report your findings in the spreadsheet `Results.xlsx`.
 
 Repeat these steps for all reference models.
 
@@ -43,7 +43,7 @@ If the tool under test supports the import and export of BPMN XML files, you can
 
 1. Import the BPMN XML file (*.bpmn) provided with a reference model into the tool.
 2. Export the grapical representation of the model as it is imported. You can either do that through an export feature of tool, e.g. a PNG, JPEG or PDF Export, or by taking a screenshot of the canvas.
-3. Compare the result with the BPMN XML file (*.bpmn) provided with the reference model and report your findings in the spreadsheet `BPMN MIWG Test Case Structure.xlsx`.
+3. Compare the result with the BPMN XML file (*.bpmn) provided with the reference model and report your findings in the spreadsheet `Results.xlsx`.
 4. Export the model into a BPMN XML file (*.bpmn).
 5. Put the resulting files in to a folder named with the exact name and Version of the tool.
 
