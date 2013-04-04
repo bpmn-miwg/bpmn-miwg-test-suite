@@ -84,3 +84,46 @@ You can either do that through an export feature of the tool, e.g. a PNG, JPEG o
 1. Compare the result with the BPMN XML file (*.bpmn) provided with the reference model, e.g. `A.1.0.bpmn`, and report your findings in the spreadsheet `Results.xlsx`.
 
 Repeat these steps for all reference models.
+
+Repository Structure
+====================
+
+The top level defines test categories. 
+The second level is either a vendor or the submitted reference. 
+The third level holds the individual test case files in the form `<identifier>-<test type>.filetype`.
+
+The vendor who provided the reference model for a test case will be identified in the summarising spreadsheet `Results.xlsx`.
+
+- README.md (this file)
+- Results.xslx
+- A - Fixed Diagrams with Variations of Attributes
+  - Business Process Incubator 4.?.?
+    <ul>
+      <li>A.1.0-import.png
+    - A.1.0-export.png
+    - A.1.0-export.bpmn
+    - A.1.0-roundtrip.bpmn
+    - ...
+    </ul>
+  - camunda Modeler 2.0.11
+    <ul>
+      <li>A.1.0-import.png
+    - A.1.0-roundtrip.bpmn
+    - ...
+    </ul>
+  - MID Innovator 11.5.1.30223
+    <ul>
+      <li>A.1.0-import.png
+    - A.1.0-export.bpmn
+    - ...
+    </ul>
+  - REFERENCE
+    <ul>
+      <li>A.1.0.png
+    - A.1.0.bpmn <-- look in spreadsheet `BPMN MIWG Test Case Structure.xlsx` to find vendor who provided this reference
+    - ...
+    </ul>
+- B - Validate that tool covers conformance class set
+  - Business Process Incubator 4.?.?
+  - camunda Modeler 2.0.11
+  - ...
