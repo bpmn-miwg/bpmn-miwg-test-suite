@@ -86,7 +86,7 @@ You can either do that through an export feature of the tool, e.g. a PNG, JPEG o
 Repeat these steps for all reference models.
 
 Repository Structure
-====================
+--------------------
 
 The top level defines test categories. 
 The second level is either a vendor or the submitted reference. 
@@ -97,7 +97,13 @@ The vendor who provided the reference model for a test case will be identified i
 - README.md (this file)
 - Results.xslx
 - A - Fixed Diagrams with Variations of Attributes
-  - Business Process Incubator 4.?.?
+  - Reference <-- reference files for testing
+    <ul>
+      <li>A.1.0.png
+    - A.1.0.bpmn <-- look in spreadsheet `BPMN MIWG Test Case Structure.xlsx` to find vendor who provided this reference
+    - ...
+    </ul>
+  - Business Process Incubator 4.?.? <-- test results
     <ul>
       <li>A.1.0-import.png
     - A.1.0-export.png
@@ -105,25 +111,20 @@ The vendor who provided the reference model for a test case will be identified i
     - A.1.0-roundtrip.bpmn
     - ...
     </ul>
-  - camunda Modeler 2.0.11
+  - camunda Modeler 2.0.11 <-- test results
     <ul>
       <li>A.1.0-import.png
     - A.1.0-roundtrip.bpmn
     - ...
     </ul>
-  - MID Innovator 11.5.1.30223
+  - MID Innovator 11.5.1.30223 <-- test results
     <ul>
       <li>A.1.0-import.png
     - A.1.0-export.bpmn
     - ...
     </ul>
-  - REFERENCE
-    <ul>
-      <li>A.1.0.png
-    - A.1.0.bpmn <-- look in spreadsheet `BPMN MIWG Test Case Structure.xlsx` to find vendor who provided this reference
-    - ...
-    </ul>
 - B - Validate that tool covers conformance class set
-  - Business Process Incubator 4.?.?
-  - camunda Modeler 2.0.11
+  - Reference <-- reference files for testing
+  - Business Process Incubator 4.?.? <-- test results
+  - camunda Modeler 2.0.11 <-- test results
   - ...
