@@ -31,6 +31,8 @@ Make sure to provide the exact name and version of the tool that you tested in t
 Alternatively, you may also [fork the repository](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/fork_select) on GitHub
 and submit test results through a [pull request](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/pull/new/master).
 
+Note: By submitting test results you agree that they will be published under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_CA">Creative Commons Attribution 3.0 Unported License</a>.
+
 Detailed Descrition of Test Procedures
 --------------------------------------
 
