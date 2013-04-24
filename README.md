@@ -95,8 +95,10 @@ Repeat these steps for all reference models.
 
 ### 4. BPMN Import and Export not supported
 If the tool does neither support import nor export of BPMN XML files you can not perform the tests described above. However, if the tool supports other model interchange formats, we are still interested to record this information:
+
 1. Open the spreadsheet `BPMN MIWG Test Case Structure.xlsx`, add a column labeled with tool name, version and date of test, and enter a text like:
-"The BPMN XML format is not supported. Model Interchange is only possible in the `XPDL` format. However, this has not been tested by the BPMN MIWG."
+
+> The BPMN XML format is not supported. Model Interchange is only possible in the `XPDL` format. However, this has not been tested by the BPMN MIWG.
 
 Repository Structure
 --------------------
