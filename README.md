@@ -26,12 +26,12 @@ You will find explanations of these three procedures below.
 
 ### 3. Submit Your Test Results to BPMN MIWG
 Package all result files in a zip file and attach it to a [new issue](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new).
-Make sure to provide the exact name and version of the tool that you tested in the issue title.
+Make sure to provide the exact name and version of the tool that you tested in the issue.
 
 Alternatively, you may also [fork the repository](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/fork_select) on GitHub
 and submit test results through a [pull request](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/pull/new/master).
 
-Detailed Descrition of Test Procedures
+Detailed Description of Test Procedures
 --------------------------------------
 
 <table>
@@ -57,11 +57,11 @@ Detailed Descrition of Test Procedures
 If the tool under test supports the import of BPMN XML files, you can test that feature using the following procedure:
 
 1. Import the BPMN XML file (*.bpmn) provided with a reference model into the tool, e.g. `A.1.0.bpmn`.
-1. Save the grapical representation of the model as imported to a file named `<test id>-import.<file type>`, e.g. `A.1.0-import.png`.
+1. Save the graphical representation of the model as imported to a file named `<test id>-import.<file type>`, e.g. `A.1.0-import.png`.
 You can either do that through an export feature of the tool, e.g. a PNG, JPEG or PDF Export, or by taking a screenshot of the canvas.
 1. Compare the result with the image provided with the reference model, e.g. `A.1.0.pdf`.
-1. Report your findings in the spreadsheet `BPMN MIWG Test Case Structure.xlsx` by putting either `OK` or `Issues` into the column of the tool.
-1. [Create new issues](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new) on GitHub for detailed desciptions of your findings and add the label of the tool you tested.
+1. Report your findings in the spreadsheet `BPMN MIWG Test Case Structure.xlsx` by putting either `OK` or `Issues` into a column labeled with tool name, version and date of test.
+1. [Create new issues](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new) on GitHub for detailed descriptions of your findings and add the [label](https://help.github.com/articles/customizing-issue-labels) of the tool you tested.
 
 Repeat these steps for all reference models.
 
@@ -69,12 +69,12 @@ Repeat these steps for all reference models.
 If the tool under test supports the export of BPMN XML files, you can test that feature using the following procedure:
 
 1. Draw the model as shown in the image provided with a reference model into the tool, e.g. `A.1.0.pdf`.
-1. Save the grapical representation of the model as drawn to a file named `<test id>-export.<file type>`, e.g. `A.1.0-export.png`.
+1. Save the graphical representation of the model as drawn to a file named `<test id>-export.<file type>`, e.g. `A.1.0-export.png`.
 You can either do that through an export feature of the tool, e.g. a PNG, JPEG or PDF Export, or by taking a screenshot of the canvas.
 1. Export the model into a BPMN XML file (*.bpmn) named `<test id>-export.bpmn`, e.g. `A.1.0-export.bpmn`.
 1. Compare the result with the BPMN XML file (*.bpmn) provided with the reference model, e.g. `A.1.0.bpmn`.
-1. Report your findings in the spreadsheet `BPMN MIWG Test Case Structure.xlsx` by putting either `OK` or `Issues` into the column of the tool.
-1. [Create new issues](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new) on GitHub for detailed desciptions of your findings and add the label of the tool you tested.
+1. Report your findings in the spreadsheet `BPMN MIWG Test Case Structure.xlsx` by putting either `OK` or `Issues` into a column labeled with tool name, version and date of test.
+1. [Create new issues](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new) on GitHub for detailed descriptions of your findings and add the [label](https://help.github.com/articles/customizing-issue-labels) of the tool you tested.
 
 Repeat these steps for all reference models.
 
@@ -82,12 +82,12 @@ Repeat these steps for all reference models.
 If the tool under test supports the import and export of BPMN XML files, you can test a roundtrip using the following procedure:
 
 1. Import the BPMN XML file (*.bpmn) provided with a reference model into the tool, e.g. `A.1.0.bpmn`.
-1. If not already done during an import test, save the grapical representation of the model as it is imported to a file named `<test id>-import.<file type>`, e.g. `A.1.0-import.png`.
+1. If not already done during an import test, save the graphical representation of the model as it is imported to a file named `<test id>-import.<file type>`, e.g. `A.1.0-import.png`.
 You can either do that through an export feature of the tool, e.g. a PNG, JPEG or PDF Export, or by taking a screenshot of the canvas.
 1. Export the model into a BPMN XML file (*.bpmn) named `<test id>-roundtrip.bpmn`, e.g. `A.1.0-roundtrip.bpmn`.
 1. Compare the result with the BPMN XML file (*.bpmn) provided with the reference model, e.g. `A.1.0.bpmn`.
-1. Report your findings in the spreadsheet `BPMN MIWG Test Case Structure.xlsx` by putting either `OK` or `Issues` into the column of the tool.
-1. [Create new issues](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new) on GitHub for detailed desciptions of your findings and add the label of the tool you tested.
+1. Report your findings in the spreadsheet `BPMN MIWG Test Case Structure.xlsx` by putting either `OK` or `Issues` into a column labeled with tool name, version and date of test.
+1. [Create new issues](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new) on GitHub for detailed descriptions of your findings and add the [label](https://help.github.com/articles/customizing-issue-labels) of the tool you tested.
 
 Repeat these steps for all reference models.
 
@@ -98,10 +98,10 @@ The top level defines test categories.
 The second level is either a vendor or the submitted reference. 
 The third level holds the individual test case files in the form `<identifier>-<test type>.filetype`.
 
-The vendor who provided the reference model for a test case will be identified in the summarising spreadsheet `Results.xlsx`.
+The vendor who provided the reference model for a test case will be identified in the summarizing spreadsheet `BPMN MIWG Test Case Structure.xlsx`.
 
 - README.md (this file)
-- Results.xslx
+- BPMN MIWG Test Case Structure.xlsx
 - A - Fixed Diagrams with Variations of Attributes
   - Reference <-- reference files for testing
     <ul>
