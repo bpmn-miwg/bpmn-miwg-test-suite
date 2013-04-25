@@ -25,8 +25,8 @@ with the provided reference models depending on the capabilities of the tool.
 You will find explanations of these three procedures below.
 
 ### 3. Submit Your Test Results to BPMN MIWG
-Package all result files in a zip file and attach it to a [new issue](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new).
-Make sure to provide the exact name and version of the tool that you tested in the issue.
+Package all result files in a zip file and send it via email to [MIWG@trisotech.com](mailto:MIWG@trisotech.com).
+Make sure to provide the exact name and version of the tool that you tested in the email.
 
 Alternatively, you may also [fork the repository](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/fork_select) on GitHub
 and submit test results through a [pull request](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/pull/new/master).
