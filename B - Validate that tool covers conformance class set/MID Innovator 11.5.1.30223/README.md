@@ -43,7 +43,7 @@
 	* Group -- ISSUE: Not in the model
 	* User Task 5 -- OK
 	* Exclusive Gateway Divergence 2 -- OK
-	* Collapsed Sub-Process -- ISSUE: Not displayed in a collapsed
+	* Collapsed Sub-Process -- ISSUE: Not displayed as a collapsed subprocess
 	* Service Task 7 -- OK
 		* Data Association 1 -- ISSUE: Name not displayed
 			* Data Object -- ISSUE: Name not displayed
