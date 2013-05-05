@@ -25,8 +25,8 @@ with the provided reference models depending on the capabilities of the tool.
 You will find explanations of these three procedures below.
 
 ### 3. Submit Your Test Results to BPMN MIWG
-Package all result files in a zip file and attach it to a [new issue](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new).
-Make sure to provide the exact name and version of the tool that you tested in the issue.
+Package all result files in a zip file and send it via email to [MIWG@trisotech.com](mailto:MIWG@trisotech.com).
+Make sure to provide the exact name and version of the tool that you tested in the email.
 
 Alternatively, you may also [fork the repository](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/fork_select) on GitHub
 and submit test results through a [pull request](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/pull/new/master).
@@ -63,7 +63,7 @@ If the tool under test supports the import of BPMN XML files, you can test that 
 You can either do that through an export feature of the tool, e.g. a PNG, JPEG or PDF Export, or by taking a screenshot of the canvas.
 1. Compare the result with the image provided with the reference model, e.g. `A.1.0.pdf`.
 1. Report your findings in the spreadsheet `BPMN MIWG Test Case Structure.xlsx` by putting either `OK` or `Issues` into a column labeled with tool name, version and date of test.
-1. [Create new issues](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new) on GitHub for detailed descriptions of your findings and add the [label](https://help.github.com/articles/customizing-issue-labels) of the tool you tested.
+1. [Create new issues](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new) on GitHub – one for each of your findings. Make sure to mention the tool you tested, the id of the test case (e.g. `A.1.0`) and the type of the test (e.g. `import`) in the issue title.
 
 Repeat these steps for all reference models.
 
@@ -76,7 +76,7 @@ You can either do that through an export feature of the tool, e.g. a PNG, JPEG o
 1. Export the model into a BPMN XML file (*.bpmn) named `<test id>-export.bpmn`, e.g. `A.1.0-export.bpmn`.
 1. Compare the result with the BPMN XML file (*.bpmn) provided with the reference model, e.g. `A.1.0.bpmn`.
 1. Report your findings in the spreadsheet `BPMN MIWG Test Case Structure.xlsx` by putting either `OK` or `Issues` into a column labeled with tool name, version and date of test.
-1. [Create new issues](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new) on GitHub for detailed descriptions of your findings and add the [label](https://help.github.com/articles/customizing-issue-labels) of the tool you tested.
+1. [Create new issues](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new) on GitHub – one for each of your findings. Make sure to mention the tool you tested, the id of the test case (e.g. `A.1.0`) and the type of the test (e.g. `export`) in the issue title.
 
 Repeat these steps for all reference models.
 
@@ -89,9 +89,16 @@ You can either do that through an export feature of the tool, e.g. a PNG, JPEG o
 1. Export the model into a BPMN XML file (*.bpmn) named `<test id>-roundtrip.bpmn`, e.g. `A.1.0-roundtrip.bpmn`.
 1. Compare the result with the BPMN XML file (*.bpmn) provided with the reference model, e.g. `A.1.0.bpmn`.
 1. Report your findings in the spreadsheet `BPMN MIWG Test Case Structure.xlsx` by putting either `OK` or `Issues` into a column labeled with tool name, version and date of test.
-1. [Create new issues](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new) on GitHub for detailed descriptions of your findings and add the [label](https://help.github.com/articles/customizing-issue-labels) of the tool you tested.
+1. [Create new issues](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new) on GitHub – one for each of your findings. Make sure to mention the tool you tested, the id of the test case (e.g. `A.1.0`) and the type of the test (e.g. `roundtrip`) in the issue title.
 
 Repeat these steps for all reference models.
+
+### 4. BPMN Import and Export not supported
+If the tool does neither support import nor export of BPMN XML files you can not perform the tests described above. However, if the tool supports other model interchange formats, we are still interested to record this information:
+
+1. Open the spreadsheet `BPMN MIWG Test Case Structure.xlsx`, add a column labeled with tool name, version and date of test, and enter a text like:
+
+> The BPMN XML format is not supported. Model Interchange is only possible in the `XPDL` format. However, this has not been tested by the BPMN MIWG.
 
 Repository Structure
 --------------------
