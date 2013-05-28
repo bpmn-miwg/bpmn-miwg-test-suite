@@ -7,6 +7,22 @@ For more information see: http://www.omgwiki.org/bpmn-miwg
 
 <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_CA"><img alt="Creative Commons Licence" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_CA">Creative Commons Attribution 3.0 Unported License</a>.
 
+
+**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
+
+- [BPMN Model Interchange Test Suite](#bpmn-model-interchange-test-suite)
+  - [How to test a BPMN tool using this test suite?](#how-to-test-a-bpmn-tool-using-this-test-suite)
+		- [1. Download Test Cases](#1-download-test-cases)
+		- [2. Test Import, Export and/or Roundtrip of BPMN Models.](#2-test-import-export-andor-roundtrip-of-bpmn-models)
+		- [3. Submit Your Test Results to BPMN MIWG](#3-submit-your-test-results-to-bpmn-miwg)
+	- [Detailed Descrition of Test Procedures](#detailed-descrition-of-test-procedures)
+		- [1. BPMN MIWG Import Test Procedure](#1-bpmn-miwg-import-test-procedure)
+		- [2. BPMN MIWG Export Test Procedure](#2-bpmn-miwg-export-test-procedure)
+		- [3. BPMN MIWG Roundtrip Test Procedure (BPMN Import and Export combined)](#3-bpmn-miwg-roundtrip-test-procedure-bpmn-import-and-export-combined)
+		- [4. BPMN Import and Export not supported](#4-bpmn-import-and-export-not-supported)
+	- [Repository Structure](#repository-structure)
+
+
 How to test a BPMN tool using this test suite?
 ----------------------------------------------
 
