@@ -1,4 +1,4 @@
-export BPMN_VSN=2.1.34
+export BPMN_VSN=2.2.0
 export BPMN_ED=/Applications/yaoqiang-bpmn-editor-$BPMN_VSN.jar
 export TEST_A=A\ -\ Fixed\ Digrams\ with\ Variations\ of\ Attributes
 export TEST_B=B\ -\ Validate\ that\ tool\ covers\ conformance\ class\ set
