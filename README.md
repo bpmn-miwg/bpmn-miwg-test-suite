@@ -75,7 +75,7 @@ Detailed Descrition of Test Procedures
 ### 1. BPMN MIWG Import Test Procedure
 If the tool under test supports the import of BPMN XML files, you can test that feature using the following procedure:
 
-1. Import the BPMN XML file (*.bpmn) provided with a reference model into the tool, e.g. `A.1.0.bpmn`.
+1. Import the BPMN XML file (*.bpmn) provided with a [reference model](#1-download-test-cases) into the tool, e.g. `A.1.0.bpmn`.
 1. Save the graphical representation of the model as imported to a file named `<test id>-import.<file type>`, e.g. `A.1.0-import.png`.
 You can either do that through an export feature of the tool, e.g. a PNG, JPEG or PDF Export, or by taking a screenshot of the canvas.
 1. Compare the result with the image provided with the reference model, e.g. `A.1.0.pdf`.
@@ -87,7 +87,7 @@ Repeat these steps for all reference models and [submit your test results to BPM
 ### 2. BPMN MIWG Export Test Procedure
 If the tool under test supports the export of BPMN XML files, you can test that feature using the following procedure:
 
-1. Draw the model as shown in the image provided with a reference model into the tool, e.g. `A.1.0.pdf`.
+1. Draw the model as shown in the image provided with a [reference model](#1-download-test-cases) into the tool, e.g. `A.1.0.pdf`.
 1. Save the graphical representation of the model as drawn to a file named `<test id>-export.<file type>`, e.g. `A.1.0-export.png`.
 You can either do that through an export feature of the tool, e.g. a PNG, JPEG or PDF Export, or by taking a screenshot of the canvas.
 1. Export the model into a BPMN XML file (*.bpmn) named `<test id>-export.bpmn`, e.g. `A.1.0-export.bpmn`.
@@ -100,7 +100,7 @@ Repeat these steps for all reference models and [submit your test results to BPM
 ### 3. BPMN MIWG Roundtrip Test Procedure (BPMN Import and Export combined)
 If the tool under test supports the import and export of BPMN XML files, you can test a roundtrip using the following procedure:
 
-1. Import the BPMN XML file (*.bpmn) provided with a reference model into the tool, e.g. `A.1.0.bpmn`.
+1. Import the BPMN XML file (*.bpmn) provided with a [reference model](#1-download-test-cases) into the tool, e.g. `A.1.0.bpmn`.
 1. If not already done during an import test, save the graphical representation of the model as it is imported to a file named `<test id>-import.<file type>`, e.g. `A.1.0-import.png`.
 You can either do that through an export feature of the tool, e.g. a PNG, JPEG or PDF Export, or by taking a screenshot of the canvas.
 1. Export the model into a BPMN XML file (*.bpmn) named `<test id>-roundtrip.bpmn`, e.g. `A.1.0-roundtrip.bpmn`.
