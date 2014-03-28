@@ -48,7 +48,9 @@ Alternatively, you may also [fork the repository](https://github.com/bpmn-miwg/b
 and submit test results through a [pull request](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/pull/new/master).
 
 Usually one day after your submission our [automated tools](https://github.com/bpmn-miwg/bpmn-miwg-tools)
-should have generated a [report that shows findings in your submitted files](http://tools.bpmn-miwg.cloudbees.net/).
+should have generated a [report that shows findings in your submitted files](http://bpmn-miwg.github.io/bpmn-miwg-tools/):
+
+[<img height="350" src="http://bpmn-miwg.github.io/bpmn-miwg-tools/bpmn-tools-tested-for-model-interchange-screenshot.png">](http://bpmn-miwg.github.io/bpmn-miwg-tools/)
 
 Note: By submitting test results you agree that they will be published under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_CA">Creative Commons Attribution 3.0 Unported License</a>.
 
