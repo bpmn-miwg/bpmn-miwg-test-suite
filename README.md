@@ -35,8 +35,7 @@ Here is how you do it:
 
 ### 1. Download Test Cases
 First download the [latest version of the BPMN Model Interchange Test Suite](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/archive/master.zip) and unpack it.
-The top level directories of the test suite distinguish different categories of tests.
-Inside each category there is a directory called `Reference`, which contains the files needed for testing.
+There is a directory called `Reference`, which contains the files needed for testing.
 Next to that, there will be multiple folders with test results of other tools.
 
 ### 2. Test Import, Export and/or Roundtrip of BPMN Models.
@@ -87,7 +86,7 @@ If the tool under test supports the import of BPMN XML files, you can test that 
 1. Import the BPMN XML file (*.bpmn) provided with a [reference model](#1-download-test-cases) into the tool, e.g. `A.1.0.bpmn`.
 1. Save the graphical representation of the model as imported to a file named `<test id>-import.<file type>`, e.g. `A.1.0-import.png`.
 You can either do that through an export feature of the tool, e.g. a PNG, JPEG or PDF Export, or by taking a screenshot of the canvas.
-1. Compare the result with the image provided with the reference model, e.g. `A.1.0.pdf`.
+1. Compare the result with the image provided with the reference model, e.g. `A.1.0.png`.
 1. Report your findings in the spreadsheet `BPMN MIWG Test Case Structure.xlsx` by putting either `OK` or `Issues` into a column labeled with tool name, version and date of test.
 1. [Create new issues](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new) on GitHub – one for each of your findings. Make sure to mention the tool you tested, the id of the test case (e.g. `A.1.0`) and the type of the test (e.g. `import`) in the issue title. (A moderator will create labels out of that.)
 
@@ -96,7 +95,7 @@ Repeat these steps for all reference models and [submit your test results to BPM
 ### 2. BPMN MIWG Export Test Procedure
 If the tool under test supports the export of BPMN XML files, you can test that feature using the following procedure:
 
-1. Draw the model as shown in the image provided with a [reference model](#1-download-test-cases) into the tool, e.g. `A.1.0.pdf`.
+1. Draw the model as shown in the image provided with a [reference model](#1-download-test-cases) into the tool, e.g. `A.1.0.png`.
 1. Save the graphical representation of the model as drawn to a file named `<test id>-export.<file type>`, e.g. `A.1.0-export.png`.
 You can either do that through an export feature of the tool, e.g. a PNG, JPEG or PDF Export, or by taking a screenshot of the canvas.
 1. Export the model into a BPMN XML file (*.bpmn) named `<test id>-export.bpmn`, e.g. `A.1.0-export.bpmn`.
@@ -129,43 +128,36 @@ If the tool does neither support import nor export of BPMN XML files you can not
 Repository Structure
 --------------------
 
-The top level defines test categories. 
-The second level is either a vendor or the submitted reference. 
-The third level holds the individual test case files in the form `<identifier>-<test type>.filetype`.
+The top level is either a vendor or the submitted reference. 
+The second level holds the individual test case files in the form `<identifier>-<test type>.filetype`.
 
 The vendor who provided the reference model for a test case will be identified in the summarizing spreadsheet `BPMN MIWG Test Case Structure.xlsx`.
 
 - README.md (this file)
 - BPMN MIWG Test Case Structure.xlsx
-- A - Fixed Diagrams with Variations of Attributes
-  - Reference <-- reference files for testing
-    <ul>
-      <li>A.1.0.png
-    - A.1.0.bpmn <-- look in spreadsheet `BPMN MIWG Test Case Structure.xlsx` to find vendor who provided this reference
-    - ...
-    </ul>
-  - Business Process Incubator 4.?.? <-- test results
-    <ul>
-      <li>A.1.0-import.png
-    - A.1.0-export.png
-    - A.1.0-export.bpmn
-    - A.1.0-roundtrip.bpmn
-    - ...
-    </ul>
-  - camunda Modeler 2.0.11 <-- test results
-    <ul>
-      <li>A.1.0-import.png
-    - A.1.0-roundtrip.bpmn
-    - ...
-    </ul>
-  - MID Innovator 11.5.1.30223 <-- test results
-    <ul>
-      <li>A.1.0-import.png
-    - A.1.0-export.bpmn
-    - ...
-    </ul>
-- B - Validate that tool covers conformance class set
-  - Reference <-- reference files for testing
-  - Business Process Incubator 4.?.? <-- test results
-  - camunda Modeler 2.0.11 <-- test results
+- Reference <-- reference files for testing
+  <ul>
+    <li>A.1.0.png
+  - A.1.0.bpmn <-- look in spreadsheet `BPMN MIWG Test Case Structure.xlsx` to find vendor who provided this reference
   - ...
+  </ul>
+- Business Process Incubator 4.?.? <-- test results
+  <ul>
+    <li>A.1.0-import.png
+  - A.1.0-export.png
+  - A.1.0-export.bpmn
+  - A.1.0-roundtrip.bpmn
+  - ...
+  </ul>
+- camunda Modeler 2.0.11 <-- test results
+  <ul>
+    <li>A.1.0-import.png
+  - A.1.0-roundtrip.bpmn
+  - ...
+  </ul>
+- MID Innovator 11.5.1.30223 <-- test results
+  <ul>
+    <li>A.1.0-import.png
+  - A.1.0-export.bpmn
+  - ...
+  </ul>
