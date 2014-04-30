@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
-<semantic:definitions id="definitionsA11" name="A.1.1" targetNamespace="http://www.trisotech.com/definitions/_1398195902533" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:trisofeed="http://trisotech.com/feed" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:semantic="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:rss="http://purl.org/rss/2.0/" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xmlns:service="http://www.w3schools.com/webservices">
-	<semantic:import importType="http://schemas.xmlsoap.org/wsdl/" location="http://www.w3schools.com/webservices/tempconvert.asmx?WSDL" namespace="http://www.w3schools.com/webservices"/>
-	<semantic:itemDefinition id="serviceInput" structureRef="service:CelsiusToFahrenheitSoapIn"></semantic:itemDefinition>
-	<semantic:itemDefinition id="serviceOutput" structureRef="service:CelsiusToFahrenheitSoapOut"></semantic:itemDefinition>    	
+<semantic:definitions id="definitionsA11" name="A.1.1" targetNamespace="http://www.trisotech.com/definitions/_1398195902533" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:trisofeed="http://trisotech.com/feed" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:semantic="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:rss="http://purl.org/rss/2.0/" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xmlns:miwg="http://www.omg.org/bpmn/miwg/test/">
+	<semantic:import importType="http://schemas.xmlsoap.org/wsdl/" location="https://www.knowprocess.com/miwg-service/" namespace="http://www.omg.org/bpmn/miwg/test/"/>
+	<semantic:itemDefinition id="serviceInput" structureRef="miwg:a_1_1Request"></semantic:itemDefinition>
     <semantic:resource name="Performer 1" id="resource_Performer_1"/>
     <semantic:resource name="Performer 2" id="resource_Performer_2"/>
     <semantic:message name="In Message" id="inMessage" itemRef="serviceInput"/>
-    <semantic:message name="Out Message" id="outMessage" itemRef="serviceOutput"/>
-    <semantic:interface id="serviceInterface" name="Service Interface" implementationRef="service:TempConvertSoap">
-		<semantic:operation id="operation1" name="Operation 1" implementationRef="service:CelsiusToFahrenheit">
+    <semantic:interface id="serviceInterface" name="MIWG Service Interface" implementationRef="miwg:TestServiceImpl">
+		<semantic:operation id="operation1" name="Operation 1" implementationRef="miwg:a_1_1">
 			<semantic:inMessageRef>inMessage</semantic:inMessageRef>
 		</semantic:operation>
     </semantic:interface>
@@ -34,19 +32,15 @@
 				<semantic:outputSet/>
             </semantic:ioSpecification>
             <semantic:dataInputAssociation>
-					<semantic:targetRef>dataInputTask2</semantic:targetRef>
-					<semantic:assignment>
-						<semantic:from>5</semantic:from>
-						<semantic:to>getDataInput("dataInputTask2").Celsius</semantic:to>
-					</semantic:assignment>
+				<semantic:targetRef>dataInputTask2</semantic:targetRef>
             </semantic:dataInputAssociation>
         </semantic:serviceTask>
         <semantic:userTask implementation="##WebService" completionQuantity="1" isForCompensation="false" startQuantity="1" name="Task 3" id="task3">
             <semantic:incoming>_725826e9-0e8b-4cb4-842b-e0279515d821</semantic:incoming>
             <semantic:outgoing>_737085c4-8771-41e9-b30e-fa2668d0a481</semantic:outgoing>
-            <semantic:humanPerformer>
+            <semantic:potentialOwner>
                 <semantic:resourceRef>resource_Performer_2</semantic:resourceRef>
-            </semantic:humanPerformer>
+            </semantic:potentialOwner>
         </semantic:userTask>
         <semantic:endEvent name="End Event" id="endEvent">
             <semantic:incoming>_737085c4-8771-41e9-b30e-fa2668d0a481</semantic:incoming>
