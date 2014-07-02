@@ -201,8 +201,7 @@ The vendor who provided the reference model for a test case will be identified i
 - BPMN MIWG Test Case Structure.xlsx
 - tools-tested-by-miwg.json <-- list of tested tools
 - Reference <-- reference files for testing
-  <ul>
-    <li>A.1.0.png
+  - A.1.0.png
   - A.1.0.bpmn <-- look in spreadsheet `BPMN MIWG Test Case Structure.xlsx` to find vendor who provided this reference
   - ...
   </ul>
