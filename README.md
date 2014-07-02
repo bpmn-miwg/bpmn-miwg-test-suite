@@ -210,9 +210,25 @@ The vendor who provided the reference model for a test case will be identified i
   - A.1.0-export.bpmn
   - A.1.0-roundtrip.bpmn
   - ...
+  - camunda Modeler 2.4.0 <-- cross test results
+    - A.1.0-roundtrip-import.png
+    - A.1.0-roundtrip-roundtrip.bpmn
+    - ...
+  - MID Innovator 11.5.1.30223 <-- cross test results
+    - A.1.0-export-import.png
+    - A.1.0-export-roundtrip.bpmn
+    - ...
+  - ...
 - camunda Modeler 2.4.0 <-- test results
   - A.1.0-import.png
   - A.1.0-roundtrip.bpmn
+  - ...
+  - Trisotech BPMN Web Modeler 4.1.8 <-- cross test results
+    - A.1.0-export-import.png
+    - A.1.0-export-roundtrip.bpmn
+    - A.1.0-roundtrip-import.png
+    - A.1.0-roundtrip-roundtrip.bpmn
+    - ...
   - ...
 - MID Innovator 11.5.1.30223 <-- test results
   - A.1.0-import.png
