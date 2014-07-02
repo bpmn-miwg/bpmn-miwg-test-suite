@@ -44,11 +44,22 @@ with the provided reference models depending on the capabilities of the tool.
 You will find explanations of these procedures [below](#detailed-descrition-of-test-procedures).
 
 ### 3. Submit Your Test Results to BPMN MIWG
-Package all result files in a zip file and send it via email to [MIWG@trisotech.com](mailto:MIWG@trisotech.com).
-Make sure to provide the exact name and version of the tool that you tested in the email.
+Package all result files in a zip file and send it via email to [MIWG@trisotech.com](mailto:MIWG@trisotech.com). Please use the following template for your email:
+
+```
+Vendor: 
+Tool name: 
+Version: 
+Website: 
+Supports BPMN 2.0: 
+Has BPMN XML import: 
+Has BPMN XML export: 
+License: 
+Notes: 
+```
 
 Alternatively, you may also [fork the repository](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/fork_select) on GitHub
-and submit test results through a [pull request](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/pull/new/master).
+and submit test results through a [pull request](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/pull/new/master). If you do so, make sure to update the [JSON file with the list of tools](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/blob/master/tools-tested-by-miwg.json).
 
 Usually one day after your submission our [automated tools](https://github.com/bpmn-miwg/bpmn-miwg-tools)
 should have generated a [report that shows findings in your submitted files](http://bpmn-miwg.github.io/bpmn-miwg-tools/):
