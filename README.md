@@ -204,24 +204,17 @@ The vendor who provided the reference model for a test case will be identified i
   - A.1.0.png
   - A.1.0.bpmn <-- look in spreadsheet `BPMN MIWG Test Case Structure.xlsx` to find vendor who provided this reference
   - ...
-  </ul>
 - Trisotech BPMN Web Modeler 4.1.8 <-- test results
-  <ul>
-    <li>A.1.0-import.png
+  - A.1.0-import.png
   - A.1.0-export.png
   - A.1.0-export.bpmn
   - A.1.0-roundtrip.bpmn
   - ...
-  </ul>
 - camunda Modeler 2.4.0 <-- test results
-  <ul>
-    <li>A.1.0-import.png
+  - A.1.0-import.png
   - A.1.0-roundtrip.bpmn
   - ...
-  </ul>
 - MID Innovator 11.5.1.30223 <-- test results
-  <ul>
-    <li>A.1.0-import.png
+  - A.1.0-import.png
   - A.1.0-export.bpmn
   - ...
-  </ul>
