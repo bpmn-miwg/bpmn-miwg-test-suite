@@ -83,14 +83,14 @@ Detailed Descrition of Test Procedures
 ### 1. BPMN MIWG Import Test Procedure
 If the tool under test supports the import of BPMN XML files, you can test that feature using the following procedure:
 
-1. Import the BPMN XML file (*.bpmn) provided with a [reference model](#1-download-test-cases) into the tool, e.g. `A.1.0.bpmn`.
-1. Save the graphical representation of the model as imported to a file named `<test id>-import.<file type>`, e.g. `A.1.0-import.png`.
+1. **Import** the BPMN XML file (*.bpmn) provided with a [reference model](#1-download-test-cases) into the tool, e.g. `A.1.0.bpmn`.
+1. **Save the graphical representation** of the model as imported to a file named `<test id>-import.<file type>`, e.g. `A.1.0-import.png`.
 You can either do that through an export feature of the tool, e.g. a PNG, JPEG or PDF Export, or by taking a screenshot of the canvas.
-1. Compare the result with the image provided with the reference model, e.g. `A.1.0.png`.
-1. Report any findings by [creating new issues](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new) on GitHub – one for each finding. Here is a template for your issue reports:
+1. **Compare** the result with the image provided with the reference model, e.g. `A.1.0.png`.
+1. **Report any findings** by [creating new issues](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new) on GitHub – one for each finding. Here is a template for your issue reports:
 
 ```
-    Tool name: 
+    Tool name:
     Tool version:
     Test case id:
     Test procedure: import
@@ -102,15 +102,15 @@ Repeat these steps for all reference models and [submit your result files to BPM
 ### 2. BPMN MIWG Export Test Procedure
 If the tool under test supports the export of BPMN XML files, you can test that feature using the following procedure:
 
-1. Draw the model as shown in the image provided with a [reference model](#1-download-test-cases) into the tool, e.g. `A.1.0.png`.
-1. Save the graphical representation of the model as drawn to a file named `<test id>-export.<file type>`, e.g. `A.1.0-export.png`.
+1. **Draw** the model as shown in the image provided with a [reference model](#1-download-test-cases) into the tool, e.g. `A.1.0.png`.
+1. **Save the graphical representation** of the model as drawn to a file named `<test id>-export.<file type>`, e.g. `A.1.0-export.png`.
 You can either do that through an export feature of the tool, e.g. a PNG, JPEG or PDF Export, or by taking a screenshot of the canvas.
-1. Export the model into a BPMN XML file (*.bpmn) named `<test id>-export.bpmn`, e.g. `A.1.0-export.bpmn`.
-1. Compare the result with the BPMN XML file (*.bpmn) provided with the reference model, e.g. `A.1.0.bpmn`.
-1. Report any findings by [creating new issues](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new) on GitHub – one for each finding. Here is a template for your issue reports:
+1. **Export** the model into a BPMN XML file (*.bpmn) named `<test id>-export.bpmn`, e.g. `A.1.0-export.bpmn`.
+1. **Compare** the result with the BPMN XML file (*.bpmn) provided with the reference model, e.g. `A.1.0.bpmn`.
+1. **Report any findings** by [creating new issues](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new) on GitHub – one for each finding. Here is a template for your issue reports:
 
 ```
-    Tool name: 
+    Tool name:
     Tool version:
     Test case id:
     Test procedure: export
@@ -122,15 +122,15 @@ Repeat these steps for all reference models and [submit your test results to BPM
 ### 3. BPMN MIWG Roundtrip Test Procedure (BPMN Import and Export combined)
 If the tool under test supports the import and export of BPMN XML files, you can test a roundtrip using the following procedure:
 
-1. Import the BPMN XML file (*.bpmn) provided with a [reference model](#1-download-test-cases) into the tool, e.g. `A.1.0.bpmn`.
-1. If not already done during an import test, save the graphical representation of the model as it is imported to a file named `<test id>-import.<file type>`, e.g. `A.1.0-import.png`.
+1. **Import** the BPMN XML file (*.bpmn) provided with a [reference model](#1-download-test-cases) into the tool, e.g. `A.1.0.bpmn`.
+1. If not already done during an import test, **save the graphical representation** of the model as it is imported to a file named `<test id>-import.<file type>`, e.g. `A.1.0-import.png`.
 You can either do that through an export feature of the tool, e.g. a PNG, JPEG or PDF Export, or by taking a screenshot of the canvas.
-1. Export the model into a BPMN XML file (*.bpmn) named `<test id>-roundtrip.bpmn`, e.g. `A.1.0-roundtrip.bpmn`.
-1. Compare the result with the BPMN XML file (*.bpmn) provided with the reference model, e.g. `A.1.0.bpmn`.
-1. Report any findings by [creating new issues](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new) on GitHub – one for each finding. Here is a template for your issue reports:
+1. **Export** the model into a BPMN XML file (*.bpmn) named `<test id>-roundtrip.bpmn`, e.g. `A.1.0-roundtrip.bpmn`.
+1. **Compare** the result with the BPMN XML file (*.bpmn) provided with the reference model, e.g. `A.1.0.bpmn`.
+1. **Report any findings** by [creating new issues](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new) on GitHub – one for each finding. Here is a template for your issue reports:
 
 ```
-    Tool name: 
+    Tool name:
     Tool version:
     Test case id:
     Test procedure: roundtrip
@@ -139,28 +139,29 @@ You can either do that through an export feature of the tool, e.g. a PNG, JPEG o
 
 Repeat these steps for all reference models and [submit your test results to BPMN MIWG](#3-submit-your-test-results-to-bpmn-miwg).
 
-### 4. BPMN MIWG Cross Test Procedure (BPMN Roundtrip with results of other tools)
-If the tool under test supports the import and optinally also export of BPMN XML files, you can do a cross test with other tools' results using the following procedure:
+### 4. Optional: BPMN MIWG Cross Test Procedure (BPMN Roundtrip with results of other tools)
+If the tool under test supports at least the import of BPMN XML files, you may optionally do a cross test with the roundtrip and export test results submitted by other tools:
 
-1. Import the BPMN XML files (*.bpmn) export from other tools as part of their [test results](#1-download-test-cases) into the tool, e.g. `A.1.0-roundtrip.bpmn` or `A.1.0-export.bpmn`.
-1. Save the graphical representation of the model as it is imported to a file named `<name of imported file>-import.<file type>`, e.g. `A.1.0-roundtrip-import.png` or `A.1.0-export-import.png`.
+1. **Import** the BPMN XML files (*.bpmn) exported from other tools as their [test results](#1-download-test-cases) into the tool, e.g. `A.1.0-roundtrip.bpmn` or `A.1.0-export.bpmn` from the folder of the other tool, e.g. `camunda Modeler 2.4.0`.
+1. **Save the graphical representation** of the model as imported to a file named `<name of imported file>-import.<file type>`, e.g. `A.1.0-roundtrip-import.png` or `A.1.0-export-import.png`.
 You can either do that through an export feature of the tool, e.g. a PNG, JPEG or PDF Export, or by taking a screenshot of the canvas.
 Store the result file in a folder with the name and version of the other tool that exported the file, e.g. `camunda Modeler 2.4.0`.
-1. Export the model into a BPMN XML file (*.bpmn) named `<name of imported file>-roundtrip.bpmn`, e.g. `A.1.0-roundtrip-roundtrip.bpmn` or `A.1.0-export-roundtrip.bpmn`.
+1. **Export** the model into a BPMN XML file (*.bpmn) named `<name of imported file>-roundtrip.bpmn`, e.g. `A.1.0-roundtrip-roundtrip.bpmn` or `A.1.0-export-roundtrip.bpmn`.
 Store the result file in a folder with the name and version of the other tool that exported the file, e.g. `camunda Modeler 2.4.0`.
-1. Compare the result with the BPMN XML file (*.bpmn) provided with the reference model, e.g. `A.1.0.bpmn`.
-1. Report any findings by [creating new issues](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new) on GitHub – one for each finding. Here is a template for your issue reports:
+1. **Compare** the result with the BPMN XML file (*.bpmn) provided with the reference model, e.g. `A.1.0.bpmn`, and/or the imported file, e.g. `A.1.0-roundtrip.bpmn` or `A.1.0-export.bpmn`.
+1. **Report any findings** by [creating new issues](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new) on GitHub – one for each finding. Here is a template for your issue reports:
 
 ```
-    Tool name: 
+    Tool name:
     Tool version:
     Name of imported file:
-    Tool name and version of imported file:
+    Tool name of imported file:
+    Tool version of imported file:
     Test procedure: cross
     Description:
 ```
 
-Repeat these steps for all test results of all tools and [submit your test results to BPMN MIWG](#3-submit-your-test-results-to-bpmn-miwg).
+Repeat these steps for all roundtrip and export test results of all tools and [submit your test results to BPMN MIWG](#3-submit-your-test-results-to-bpmn-miwg).
 
 ### 5. BPMN Import and Export not supported
 If the tool does neither support import nor export of BPMN XML files you can not perform the tests described above. However, if the tool supports other model interchange formats, we are still interested to record this information:
