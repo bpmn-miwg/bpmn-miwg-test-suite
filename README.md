@@ -101,11 +101,11 @@ You can either do that through an export feature of the tool, e.g. a PNG, JPEG o
 1. **Report any findings** by [creating new issues](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new) on GitHub – one for each finding. Here is a template for your issue reports:
 
 ```
-    Tool name:
-    Tool version:
-    Test case id:
-    Test procedure: import
-    Description:
+Tool name: 
+Tool version: 
+Test case id: 
+Test procedure: import
+Description: 
 ```
 
 Repeat these steps for all reference models and [submit your result files to BPMN MIWG](#3-submit-your-test-results-to-bpmn-miwg).
@@ -121,11 +121,11 @@ You can either do that through an export feature of the tool, e.g. a PNG, JPEG o
 1. **Report any findings** by [creating new issues](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new) on GitHub – one for each finding. Here is a template for your issue reports:
 
 ```
-    Tool name:
-    Tool version:
-    Test case id:
-    Test procedure: export
-    Description:
+Tool name: 
+Tool version: 
+Test case id: 
+Test procedure: export
+Description: 
 ```
 
 Repeat these steps for all reference models and [submit your test results to BPMN MIWG](#3-submit-your-test-results-to-bpmn-miwg).
@@ -141,11 +141,11 @@ You can either do that through an export feature of the tool, e.g. a PNG, JPEG o
 1. **Report any findings** by [creating new issues](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new) on GitHub – one for each finding. Here is a template for your issue reports:
 
 ```
-    Tool name:
-    Tool version:
-    Test case id:
-    Test procedure: roundtrip
-    Description:
+Tool name: 
+Tool version: 
+Test case id: 
+Test procedure: roundtrip
+Description: 
 ```
 
 Repeat these steps for all reference models and [submit your test results to BPMN MIWG](#3-submit-your-test-results-to-bpmn-miwg).
@@ -163,13 +163,13 @@ Store the result file in a folder with the name and version of the other tool th
 1. **Report any findings** by [creating new issues](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new) on GitHub – one for each finding. Here is a template for your issue reports:
 
 ```
-    Tool name:
-    Tool version:
-    Name of imported file:
-    Tool name of imported file:
-    Tool version of imported file:
-    Test procedure: cross
-    Description:
+Tool name: 
+Tool version: 
+Name of imported file: 
+Tool name of imported file: 
+Tool version of imported file: 
+Test procedure: cross
+Description: 
 ```
 
 Repeat these steps for all roundtrip and export test results of all tools and [submit your test results to BPMN MIWG](#3-submit-your-test-results-to-bpmn-miwg).
@@ -180,11 +180,11 @@ If the tool does neither support import nor export of BPMN XML files you can not
 1. Create a [new issue on GitHub](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new)  with a text like:
 
 ```
-    Tool name:
-    Tool version:
-    Description:
-        The BPMN XML format is not supported.
-        Model Interchange is only possible in the `XPDL` format.
+Tool name: 
+Tool version: 
+Description:
+   The BPMN XML format is not supported.
+   Model Interchange is only possible in the `XPDL` format.
 
 ```
 
