@@ -195,14 +195,14 @@ Repository Structure
 The top level is either a vendor or the submitted reference. 
 The second level holds the individual test case files in the form `<identifier>-<test type>.filetype`.
 
-The vendor who provided the reference model for a test case will be identified in the summarizing spreadsheet `BPMN MIWG Test Case Structure.xlsx`.
+The vendor who provided the reference model for a test case will be identified in the file `test-case-structure.json`.
 
 - README.md (this file)
-- BPMN MIWG Test Case Structure.xlsx
+- test-case-structure.json <-- list of test cases
 - tools-tested-by-miwg.json <-- list of tested tools
 - Reference <-- reference files for testing
   - A.1.0.png
-  - A.1.0.bpmn <-- look in spreadsheet `BPMN MIWG Test Case Structure.xlsx` to find vendor who provided this reference
+  - A.1.0.bpmn <-- look in spreadsheet `test-case-structure.json` to find vendor who provided this reference
   - ...
 - Trisotech BPMN Web Modeler 4.1.8 <-- test results
   - A.1.0-import.png
