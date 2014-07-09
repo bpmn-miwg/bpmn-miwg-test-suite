@@ -199,8 +199,8 @@ The second level holds the individual test case files in the form `<identifier>-
 The vendor who provided the reference model for a test case will be identified in the file `test-case-structure.json`.
 
 - README.md (this file)
-- test-case-structure.json <-- list of test cases
-- tools-tested-by-miwg.json <-- list of tested tools
+- [test-case-structure.json](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/blob/master/test-case-structure.json) <-- list of test cases
+- [tools-tested-by-miwg.json](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/blob/master/tools-tested-by-miwg.json) <-- list of tested tools
 - Reference <-- reference files for testing
   - A.1.0.png
   - A.1.0.bpmn <-- look in spreadsheet `test-case-structure.json` to find vendor who provided this reference
