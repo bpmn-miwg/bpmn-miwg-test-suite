@@ -54,6 +54,7 @@ Website:
 Supports BPMN 2.0: 
 Has BPMN XML import: 
 Has BPMN XML export: 
+Has BPMN XML roundtrip: 
 License: 
 Notes: 
 ```
