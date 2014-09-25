@@ -391,6 +391,9 @@
       </extensionElements>
       <incoming>invoiceApproved</incoming>
       <outgoing>SequenceFlow_2</outgoing>
+      <dataOutputAssociation id="DataOutputAssociation_1">
+        <targetRef>DataStoreReference_1</targetRef>
+      </dataOutputAssociation>
     </userTask>
     <endEvent id="invoiceProcessed" name="Invoice&#xA;processed">
       <extensionElements>
@@ -401,23 +404,23 @@
     </endEvent>
     <serviceTask id="archiveInvoice" camunda:delegateExpression="#{archiveService}" name="Archive&#xA;Invoice" implementation="webService">
       <extensionElements>
-        <camunda:field name="text0" stringValue="Hello World" />
+        <camunda:field name="text0" stringValue="Hello World"/>
         <camunda:field name="text1">
-	      <camunda:expression>${genderBean.getGenderString(gender)}</camunda:expression>
-	    </camunda:field>
-	    <camunda:field name="text2">
-	       <camunda:expression>Hello ${gender == 'male' ? 'Mr.' : 'Mrs.'} ${name}</camunda:expression>
-	    </camunda:field>
-	    <camunda:field name="text3">
-	        <camunda:string>
+          <camunda:expression>${genderBean.getGenderString(gender)}</camunda:expression>
+        </camunda:field>
+        <camunda:field name="text2">
+          <camunda:expression>Hello ${gender == 'male' ? 'Mr.' : 'Mrs.'} ${name}</camunda:expression>
+        </camunda:field>
+        <camunda:field name="text3">
+          <camunda:string><![CDATA[
 	          Hello World
-	      </camunda:string>
-	    </camunda:field>
-	    <camunda:field name="text4">
-	        <camunda:string><![CDATA[
+	      ]]></camunda:string>
+        </camunda:field>
+        <camunda:field name="text4">
+          <camunda:string><![CDATA[
 	          <p>Hello World</p><br>
 	      ]]></camunda:string>
-	    </camunda:field>
+        </camunda:field>
         <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc"/>
         <signavio:signavioMetaData metaKey="adaptereventtype" metaValue=""/>
         <signavio:signavioMetaData metaKey="documentationlink" metaValue="[]"/>
@@ -494,11 +497,6 @@
         <signavio:signavioMetaData metaKey="userstory" metaValue="[]"/>
       </extensionElements>
     </dataStoreReference>
-    <association id="Association_1" sourceRef="DataStoreReference_1" targetRef="prepareBankTransfer">
-      <extensionElements>
-        <signavio:signavioMetaData metaKey="userstory" metaValue="[]"/>
-      </extensionElements>
-    </association>
   </process>
   <bpmndi:BPMNDiagram id="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7">
     <bpmndi:BPMNPlane id="sid-39085760-f7ff-4491-a241-483b340d6533" bpmnElement="sid-e5defbed-c12d-4c0a-9b5e-0f187e35ffd3">
@@ -690,10 +688,6 @@
         <omgdi:waypoint xsi:type="omgdc:Point" x="325.0" y="535.0"/>
         <omgdi:waypoint xsi:type="omgdc:Point" x="368.0" y="535.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_1_gui" bpmnElement="Association_1">
-        <omgdi:waypoint xsi:type="omgdc:Point" x="640.43665" y="784.9135"/>
-        <omgdi:waypoint xsi:type="omgdc:Point" x="676.0" y="735.0"/>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="sid-90902E27-C1CD-4F90-A8F2-486DA4F42117_gui" bpmnElement="sid-90902E27-C1CD-4F90-A8F2-486DA4F42117">
         <omgdi:waypoint xsi:type="omgdc:Point" x="228.33333" y="322.0"/>
         <omgdi:waypoint xsi:type="omgdc:Point" x="228.33333" y="235.21042"/>
@@ -729,6 +723,10 @@
       <bpmndi:BPMNEdge id="sid-7971C38C-2EF5-41F2-A24E-3FFCA069EDBF_gui" bpmnElement="sid-7971C38C-2EF5-41F2-A24E-3FFCA069EDBF">
         <omgdi:waypoint xsi:type="omgdc:Point" x="129.0" y="133.0"/>
         <omgdi:waypoint xsi:type="omgdc:Point" x="167.0" y="133.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_DataOutputAssociation_1" bpmnElement="DataOutputAssociation_1" sourceElement="prepareBankTransfer_gui" targetElement="DataStoreReference_1_gui">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="674.0" y="735.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="639.0" y="784.0"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
