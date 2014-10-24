@@ -51,10 +51,10 @@ Vendor:
 Tool name: 
 Version: 
 Website: 
-Supports BPMN 2.0: 
-Has BPMN XML import: 
-Has BPMN XML export: 
-Has BPMN XML roundtrip: 
+Tool supports BPMN 2.0: 
+Tool has BPMN XML import: 
+Tool has BPMN XML export: 
+Tool supports BPMN XML roundtrip: 
 License: 
 Notes: 
 ```
