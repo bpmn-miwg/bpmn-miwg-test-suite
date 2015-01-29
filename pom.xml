@@ -23,11 +23,22 @@
     -->
   </properties>
   
+  <repositories>
+    <repository>
+      <id>bpmn-miwg-tools-mvn-repo</id>
+      <url>https://raw.github.com/bpmn-miwg/bpmn-miwg-tools/mvn-repo/</url>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
+    </repository>
+  </repositories>
+  
   <distributionManagement>
     <repository>
-        <id>internal.repo</id>
-        <name>Temporary Staging Repository</name>
-        <url>file://${project.build.directory}/mvn-repo</url>
+      <id>internal.repo</id>
+      <name>Temporary Staging Repository</name>
+      <url>file://${project.build.directory}/mvn-repo</url>
     </repository>
   </distributionManagement>
 
@@ -50,36 +61,57 @@
         <artifactId>maven-deploy-plugin</artifactId>
         <version>2.8.1</version>
         <configuration>
-            <altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
+          <altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
         </configuration>
       </plugin>
       <plugin>
-            <groupId>com.github.github</groupId>
-            <artifactId>site-maven-plugin</artifactId>
-            <version>0.10</version>
-            <configuration>
-                <message>Maven artifacts for ${project.version}</message>  <!-- git commit message -->
-                <noJekyll>true</noJekyll>                                  <!-- disable webpage processing -->
-                <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory> <!-- matches distribution management repository url above -->
-                <branch>refs/heads/mvn-repo</branch>                       <!-- remote branch name -->
-                <includes><include>**/*</include></includes>
-                <repositoryName>bpmn-miwg-tools</repositoryName>      <!-- github repo name -->
-                <repositoryOwner>bpmn-miwg</repositoryOwner>    <!-- github username  -->
-            </configuration>
-            <executions>
-              <!-- run site-maven-plugin's 'site' target as part of the build's normal 'deploy' phase -->
-              <execution>
-                <goals>
-                  <goal>site</goal>
-                </goals>
-                <phase>deploy</phase>
-              </execution>
-            </executions>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.4</version>
+        <executions>
+          <!-- jar BPMN MIWG analysis reports as part of the build's normal 'install' phase -->
+          <execution>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <phase>install</phase>
+          </execution>
+        </executions>
       </plugin>
+      <plugin>
+        <groupId>com.github.github</groupId>
+        <artifactId>site-maven-plugin</artifactId>
+        <version>0.10</version>
+        <configuration>
+          <message>Maven artifacts for ${project.version}</message>  <!-- git commit message -->
+          <noJekyll>true</noJekyll>                                  <!-- disable webpage processing -->
+          <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory> <!-- matches distribution management repository url above -->
+          <branch>refs/heads/mvn-repo</branch>                       <!-- remote branch name -->             <includes><include>**/*</include></includes>
+          <repositoryName>bpmn-miwg-test-suite</repositoryName>      <!-- github repo name -->
+          <repositoryOwner>bpmn-miwg</repositoryOwner>               <!-- github username  -->
+        </configuration>
+        <executions>
+          <!-- run site-maven-plugin's 'site' target as part of the build's normal 'deploy' phase -->
+          <execution>
+            <goals>
+              <goal>site</goal>
+            </goals>
+            <phase>deploy</phase>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- This binds the BPMN MIWG analysis tools to the test phase of the Maven lifecycle -->
       <plugin>
         <groupId>org.omg.bpmn.miwg</groupId>
         <artifactId>bpmn-miwg-maven-plugin</artifactId>
         <version>${bpmn-miwg-tools.version}</version>
+        <executions>
+          <execution>
+            <phase>test</phase>
+            <goals>
+	          <goal>test</goal>
+	        </goals>
+          </execution>
+        </executions>        
       </plugin>
     </plugins>
   </build>
