@@ -6,11 +6,7 @@
   <artifactId>test-suite</artifactId>
   <version>0.2-SNAPSHOT</version>
   <name>BPMN 2.0 MIWG Test Suite</name>
-  <description>
-    <![CDATA[
-      Reference BPMN files and various vendor's implementations of the same. 
-    ]]>
-  </description>
+  <description>Reference BPMN files and various vendor's implementations of the same.</description>
   <packaging>jar</packaging>
 
   <properties>
@@ -47,12 +43,22 @@
       <resource>
         <filtering>false</filtering>
         <directory>${basedir}</directory>
-        <includes>
-          <include>**/*</include>
+         <includes>
+          <!-- include only files that follow the naming conventions and are thus understood by the tools -->
+          <include>Reference/*.bpmn</include>
+          <include>Reference/*.png</include>
+          <include>**/*-export.bpmn</include>
+          <include>**/*-roundtrip.bpmn</include>
+          <include>**/*-import.png</include>
+          <include>**/*-export.png</include>
+          <include>*.json</include>
+          <include>LICENSE.txt</include>
         </includes>
         <excludes>
-          <exclude>target/**/*</exclude>
-          <exclude>**/*.bak</exclude>
+	  <exclude>.*</exclude><!-- ignore hidden files from Git & Eclipse -->
+	  <exclude>.*/**/*</exclude><!-- ignore hidden folders from Git & Eclipse -->
+	  <exclude>target/**/*</exclude><!-- ignore Maven build dir -->
+	  <exclude>Work in Progress/**/*</exclude><!-- ignore unfinished test cases -->
         </excludes>
       </resource>
     </resources>
