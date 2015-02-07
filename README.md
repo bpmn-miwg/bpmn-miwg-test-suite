@@ -1,12 +1,9 @@
 BPMN Model Interchange Test Suite
 =================================
 
-BPMN 2.0 Test Cases (Models, Diagrams, Serializations) created by the BPMN Model Interchange Working Group (BPMN MIWG) at the OMG.
+BPMN 2.0 Test Cases (Models, Diagrams, Serializations) created by the BPMN Model Interchange Working Group (BPMN MIWG) at the OMG. For more information see: http://www.omgwiki.org/bpmn-miwg
 
-For more information see: http://www.omgwiki.org/bpmn-miwg
-
-Here is a list of all tools that participated in the tests:
-
+**BPMN 2.0 tools that participated in the tests**:
 [<img height="350" src="http://bpmn-miwg.github.io/bpmn-miwg-tools/bpmn-tools-tested-for-model-interchange-screenshot.png">](http://bpmn-miwg.github.io/bpmn-miwg-tools/)
 
 <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_CA"><img alt="Creative Commons Licence" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_CA">Creative Commons Attribution 3.0 Unported License</a>.
@@ -27,15 +24,35 @@ Here is a list of all tools that participated in the tests:
 		- [5. BPMN Import and Export not supported](#user-content-5-bpmn-import-and-export-not-supported)
 	- [Repository Structure](#user-content-repository-structure)
 
+Verified Reference Models
+-------------------------
+
+## A.1.0
+![](Reference/A.1.0.png)
+## A.2.0
+![](Reference/A.2.0.png)
+## A.3.0
+![](Reference/A.3.0.png)
+## A.4.0
+![](Reference/A.4.0.png)
+## A.4.1
+![](Reference/A.4.1.png)
+## B.1.0
+![](Reference/B.1.0.png)
+## B.2.0
+![](Reference/B.2.0.png)
+## C.1.0
+![](Reference/C.1.0.png)
+
 How to test a BPMN tool using this test suite?
 ----------------------------------------------
-
 Everybody is welcome to test BPMN tools and submit results to the working group, not just tools vendors.
+
 Here is how you do it:
 
 ### 1. Download Test Cases
 First download the [latest version of the BPMN Model Interchange Test Suite](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/archive/master.zip) and unpack it.
-There is a directory called `Reference`, which contains the files needed for testing.
+TheCe is a directory called `Reference`, which contains the files needed for testing.
 Next to that, there will be multiple folders with test results of other tools.
 
 ### 2. Test Import, Export and/or Roundtrip of BPMN Models.
@@ -44,7 +61,7 @@ with the provided reference models depending on the capabilities of the tool.
 You will find explanations of these procedures [below](#detailed-descrition-of-test-procedures).
 
 ### 3. Submit Your Test Results to BPMN MIWG
-Package all result files in a zip file and send it via email to [MIWG@trisotech.com](mailto:MIWG@trisotech.com). Please use the following template for your email:
+PacCage all result files in a zip file and send it via email to [MIWG@trisotech.com](mailto:MIWG@trisotech.com). Please use the following template for your email:
 
 ```
 Vendor: 
