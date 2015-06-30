@@ -1,13 +1,22 @@
+**Quick links:** [How to test a tool?](#user-content-how-to-test-a-bpmn-tool-using-this-test-suite) -> [Test Results](http://bpmn-miwg.github.io/bpmn-miwg-tools/)
+
 BPMN Model Interchange Test Suite
 =================================
 
 BPMN 2.0 Test Cases (Models, Diagrams, Serializations) created by the BPMN Model Interchange Working Group (BPMN MIWG) at the OMG. For more information see: http://www.omgwiki.org/bpmn-miwg
 
+**Call for Participation:**
+
+If BPMN interchange is important to you:
+
+ - [Test your favorite BPMN tool!](#user-content-how-to-test-a-bpmn-tool-using-this-test-suite) Users can also submit test results. You don't need to be the author of a tool to test it.
+ - [Join the Group!](http://www.omgwiki.org/bpmn-miwg/doku.php#requirements_of_participation_and_how_to_join) Everybody can join. There is no need to be an OMG member. Get in touch with the people behind the standards.
+ - Make yourself heard with your vendor.
+ - Spread the word and share [the test results](http://bpmn-miwg.github.io/bpmn-miwg-tools/) with your peers.
+
 **BPMN 2.0 tools that participated in the tests**:
 
 [<img height="350" src="http://bpmn-miwg.github.io/bpmn-miwg-tools/bpmn-tools-tested-for-model-interchange-screenshot.png">](http://bpmn-miwg.github.io/bpmn-miwg-tools/)
-
-<a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_CA"><img alt="Creative Commons Licence" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_CA">Creative Commons Attribution 3.0 Unported License</a>.
 
 
 **Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
@@ -25,29 +34,9 @@ BPMN 2.0 Test Cases (Models, Diagrams, Serializations) created by the BPMN Model
 		- [5. BPMN Import and Export not supported](#user-content-5-bpmn-import-and-export-not-supported)
 	- [Repository Structure](#user-content-repository-structure)
 
-Verified Reference Models
--------------------------
-
-## A.1.0
-![](Reference/A.1.0.png)
-## A.2.0
-![](Reference/A.2.0.png)
-## A.3.0
-![](Reference/A.3.0.png)
-## A.4.0
-![](Reference/A.4.0.png)
-## A.4.1
-![](Reference/A.4.1.png)
-## B.1.0
-![](Reference/B.1.0.png)
-## B.2.0
-![](Reference/B.2.0.png)
-## C.1.0
-![](Reference/C.1.0.png)
-
 How to test a BPMN tool using this test suite?
 ----------------------------------------------
-Everybody is welcome to test BPMN tools and submit results to the working group, not just tools vendors.
+Everybody is welcome to test BPMN tools and submit results to the working group, not just tools vendors but also end users that have access to a tool.
 
 Here is how you do it:
 
@@ -253,3 +242,31 @@ The vendor who provided the reference model for a test case will be identified i
   - A.1.0-import.png
   - A.1.0-export.bpmn
   - ...
+
+Verified Reference Models
+-------------------------
+
+## A.1.0
+![](Reference/A.1.0.png)
+## A.2.0
+![](Reference/A.2.0.png)
+## A.3.0
+![](Reference/A.3.0.png)
+## A.4.0
+![](Reference/A.4.0.png)
+## A.4.1
+![](Reference/A.4.1.png)
+## B.1.0
+![](Reference/B.1.0.png)
+## B.2.0
+![](Reference/B.2.0.png)
+## C.1.0
+![](Reference/C.1.0.png)
+## C.1.1
+![](Reference/C.1.1.png)
+## C.2.0
+![](Reference/C.2.0.png)
+## C.3.0
+![](Reference/C.3.0.png)
+
+<a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_CA"><img alt="Creative Commons Licence" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_CA">Creative Commons Attribution 3.0 Unported License</a>.
