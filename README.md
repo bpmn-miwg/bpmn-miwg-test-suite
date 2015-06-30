@@ -246,27 +246,27 @@ The vendor who provided the reference model for a test case will be identified i
 Verified Reference Models
 -------------------------
 
-## A.1.0
+### A.1.0
 ![](Reference/A.1.0.png)
-## A.2.0
+### A.2.0
 ![](Reference/A.2.0.png)
-## A.3.0
+### A.3.0
 ![](Reference/A.3.0.png)
-## A.4.0
+### A.4.0
 ![](Reference/A.4.0.png)
-## A.4.1
+### A.4.1
 ![](Reference/A.4.1.png)
-## B.1.0
+### B.1.0
 ![](Reference/B.1.0.png)
-## B.2.0
+### B.2.0
 ![](Reference/B.2.0.png)
-## C.1.0
+### C.1.0
 ![](Reference/C.1.0.png)
-## C.1.1
+### C.1.1
 ![](Reference/C.1.1.png)
-## C.2.0
+### C.2.0
 ![](Reference/C.2.0.png)
-## C.3.0
+### C.3.0
 ![](Reference/C.3.0.png)
 
 <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_CA"><img alt="Creative Commons Licence" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_CA">Creative Commons Attribution 3.0 Unported License</a>.
