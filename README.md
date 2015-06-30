@@ -1,24 +1,5 @@
 **Quick links:** [How to test a tool?](#user-content-how-to-test-a-bpmn-tool-using-this-test-suite) -> [Test Results](http://bpmn-miwg.github.io/bpmn-miwg-tools/)
 
-BPMN Model Interchange Test Suite
-=================================
-
-BPMN 2.0 Test Cases (Models, Diagrams, Serializations) created by the BPMN Model Interchange Working Group (BPMN MIWG) at the OMG. For more information see: http://www.omgwiki.org/bpmn-miwg
-
-**Call for Participation:**
-
-If BPMN interchange is important to you:
-
- - [Test your favorite BPMN tool!](#user-content-how-to-test-a-bpmn-tool-using-this-test-suite) Users can also submit test results. You don't need to be the author of a tool to test it.
- - [Join the Group!](http://www.omgwiki.org/bpmn-miwg/doku.php#requirements_of_participation_and_how_to_join) Everybody can join. There is no need to be an OMG member. Get in touch with the people behind the standards.
- - Make yourself heard with your vendor.
- - Spread the word and share [the test results](http://bpmn-miwg.github.io/bpmn-miwg-tools/) with your peers.
-
-**BPMN 2.0 tools that participated in the tests**:
-
-[<img height="350" src="http://bpmn-miwg.github.io/bpmn-miwg-tools/bpmn-tools-tested-for-model-interchange-screenshot.png">](http://bpmn-miwg.github.io/bpmn-miwg-tools/)
-
-
 **Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
 
 - [BPMN Model Interchange Test Suite](#user-content-bpmn-model-interchange-test-suite)
@@ -33,6 +14,27 @@ If BPMN interchange is important to you:
 		- [4. Optional: BPMN MIWG Cross Test Procedure (BPMN Roundtrip with results of other tools)](#user-content-4-optional-bpmn-miwg-cross-test-procedure-bpmn-roundtrip-with-results-of-other-tools)
 		- [5. BPMN Import and Export not supported](#user-content-5-bpmn-import-and-export-not-supported)
 	- [Repository Structure](#user-content-repository-structure)
+
+BPMN Model Interchange Test Suite
+=================================
+
+BPMN 2.0 Test Cases (Models, Diagrams, Serializations) created by the BPMN Model Interchange Working Group (BPMN MIWG) at the OMG. For more information see: http://www.omgwiki.org/bpmn-miwg
+
+Call for Participation
+----------------------
+
+If BPMN interchange is important to you:
+
+ - [Test your favorite BPMN tool!](#user-content-how-to-test-a-bpmn-tool-using-this-test-suite) Users can also submit test results. You don't need to be the author of a tool to test it.
+ - [Join the Group!](http://www.omgwiki.org/bpmn-miwg/doku.php#requirements_of_participation_and_how_to_join) Everybody can join. There is no need to be an OMG member. Get in touch with the people behind the standards.
+ - Make yourself heard with your vendor.
+ - Spread the word and share [the test results](http://bpmn-miwg.github.io/bpmn-miwg-tools/) with your peers.
+
+Test results of BPMN 2.0 tools that participated in the tests
+-------------------------------------------------------------
+
+[<img height="350" src="http://bpmn-miwg.github.io/bpmn-miwg-tools/bpmn-tools-tested-for-model-interchange-screenshot.png">](http://bpmn-miwg.github.io/bpmn-miwg-tools/)
+
 
 How to test a BPMN tool using this test suite?
 ----------------------------------------------
