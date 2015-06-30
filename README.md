@@ -3,6 +3,8 @@
 **Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
 
 - [BPMN Model Interchange Test Suite](#user-content-bpmn-model-interchange-test-suite)
+	- [Call for Participation](#call-for-participation)
+	- [Test results of BPMN 2.0 tools that participated in the tests](#test-results-of-bpmn-20-tools-that-participated-in-the-tests)
 	- [How to test a BPMN tool using this test suite?](#user-content-how-to-test-a-bpmn-tool-using-this-test-suite)
 		- [1. Download Test Cases](#user-content-1-download-test-cases)
 		- [2. Test Import, Export and/or Roundtrip of BPMN Models.](#user-content-2-test-import-export-andor-roundtrip-of-bpmn-models)
@@ -14,6 +16,7 @@
 		- [4. Optional: BPMN MIWG Cross Test Procedure (BPMN Roundtrip with results of other tools)](#user-content-4-optional-bpmn-miwg-cross-test-procedure-bpmn-roundtrip-with-results-of-other-tools)
 		- [5. BPMN Import and Export not supported](#user-content-5-bpmn-import-and-export-not-supported)
 	- [Repository Structure](#user-content-repository-structure)
+	- [Verified Reference Models](#verified-reference-models)
 
 BPMN Model Interchange Test Suite
 =================================
