@@ -82,7 +82,7 @@ should have generated a [report that shows findings in your submitted files](htt
 Note: By submitting test results you agree that they will be published under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_CA">Creative Commons Attribution 3.0 Unported License</a>.
 
 
-Detailed Descrition of Test Procedures
+Detailed Description of Test Procedures
 --------------------------------------
 
 <table>
