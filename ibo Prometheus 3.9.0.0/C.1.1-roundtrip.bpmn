@@ -1,0 +1,532 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:xs="http://xsdTypes.org/" xmlns:signavio="http://www.signavio.com" xmlns:style="http://www.w4.eu/spec/DataComposer/20120927/Diagram/Style" xmlns:w4="http://www.w4.eu/spec/BPMN/20110701/MODEL" xmlns:ibo="http://www.ibo.de/XML/BPMN" xmlns:w4graph="http://www.w4.eu/spec/BPMN/20110930/GRAPH" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://activiti.org/bpmn" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="ibo-14d78435-af20-42e7-959d-6365bb30ad65" name="sid-bdb880ac-c464-4e5c-aa56-569d709436e0" targetNamespace="http://www.omg.org/spec/BPMN/20100524/MODEL" exporter="ibo Software" exporterVersion="3.9.0.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" w4:version="1.0" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">
+  <dataStore name="Financial Accounting System" capacity="0" isUnlimited="false" />
+  <process id="handle-invoice" name="Invoice Handling (OMG BPMN MIWG Demo)" isClosed="true" isExecutable="true">
+    <extensionElements>
+      <w4graph:graphStyle>
+        <w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+      </w4graph:graphStyle>
+    </extensionElements>
+    <userTask id="approveInvoice" camunda:assignee="${approver}" camunda:formKey="app:approveInvoice.jsf" name="Approve Invoice">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc" />
+        <signavio:signavioMetaData metaKey="adaptereventtype" metaValue="" />
+        <signavio:signavioMetaData metaKey="documentationlink" metaValue="[]" />
+        <signavio:signavioMetaData metaKey="test" metaValue="" />
+        <signavio:signavioMetaData metaKey="adaptertype" metaValue="" />
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <signavio:signavioMetaData metaKey="adapterconfiguration" metaValue="" />
+        <signavio:signavioMetaData metaKey="adapterclassname" metaValue="" />
+        <signavio:signavioMetaData metaKey="servicereferenz" metaValue="" />
+        <signavio:signavioMetaData metaKey="risiko" metaValue="" />
+        <signavio:signavioMetaData metaKey="erteiltfreigabe" metaValue="" />
+        <signavio:signavioMetaData metaKey="riskandcontrols" metaValue="" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="194,215,235" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+      </extensionElements>
+      <incoming>reviewSuccessful</incoming>
+      <incoming>sequenceFlow_178</incoming>
+      <outgoing>sequenceFlow_180</outgoing>
+      <ioSpecification id="Bpmn_InputOutputSpecification_Y6GAsLH1EeSuDf0W70XLGw">
+        <dataOutput id="Bpmn_DataOutput_Y6S1ALH1EeSuDf0W70XLGw" name="approved" itemSubjectRef="xsdBool">
+          <extensionElements>
+            <w4graph:graphStyle>
+              <w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+            </w4graph:graphStyle>
+          </extensionElements>
+        </dataOutput>
+        <inputSet id="Bpmn_InputSet_Y6GAsrH1EeSuDf0W70XLGw">
+          <outputSetRefs>Bpmn_OutputSet_Y6GAsbH1EeSuDf0W70XLGw</outputSetRefs>
+        </inputSet>
+        <outputSet id="Bpmn_OutputSet_Y6GAsbH1EeSuDf0W70XLGw" name="default output set">
+          <dataOutputRefs>Bpmn_DataOutput_Y6S1ALH1EeSuDf0W70XLGw</dataOutputRefs>
+          <inputSetRefs>Bpmn_InputSet_Y6GAsrH1EeSuDf0W70XLGw</inputSetRefs>
+        </outputSet>
+      </ioSpecification>
+      <dataOutputAssociation id="Bpmn_DataOutputAssociation_Y55MYrH1EeSuDf0W70XLGw">
+        <extensionElements>
+          <w4graph:graphStyle>
+            <w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+            <w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false" />
+          </w4graph:graphStyle>
+        </extensionElements>
+        <sourceRef>Bpmn_DataOutput_Y6S1ALH1EeSuDf0W70XLGw</sourceRef>
+        <targetRef>Bpmn_DataObjectReference_YGA4YLH1EeSuDf0W70XLGw</targetRef>
+      </dataOutputAssociation>
+    </userTask>
+    <exclusiveGateway id="invoice_approved" name="Invoice&#xD;&#xA;approved?" gatewayDirection="Diverging">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+        <signavio:signavioMetaData metaKey="adaptertype" metaValue="" />
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <signavio:signavioMetaData metaKey="adapterconfiguration" metaValue="" />
+        <signavio:signavioMetaData metaKey="adapterclassname" metaValue="" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="185,139,0" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+      </extensionElements>
+      <incoming>sequenceFlow_180</incoming>
+      <outgoing>invoiceApproved</outgoing>
+      <outgoing>invoiceNotApproved</outgoing>
+    </exclusiveGateway>
+    <userTask id="assignApprover" camunda:assignee="demo" camunda:formKey="app:assignApprover.jsf" name="Assign&#xD;&#xA;Approver">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc" />
+        <signavio:signavioMetaData metaKey="adaptereventtype" metaValue="" />
+        <signavio:signavioMetaData metaKey="documentationlink" metaValue="[]" />
+        <signavio:signavioMetaData metaKey="test" metaValue="" />
+        <signavio:signavioMetaData metaKey="adaptertype" metaValue="" />
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <signavio:signavioMetaData metaKey="adapterconfiguration" metaValue="" />
+        <signavio:signavioMetaData metaKey="adapterclassname" metaValue="" />
+        <signavio:signavioMetaData metaKey="servicereferenz" metaValue="" />
+        <signavio:signavioMetaData metaKey="risiko" metaValue="" />
+        <signavio:signavioMetaData metaKey="erteiltfreigabe" metaValue="" />
+        <signavio:signavioMetaData metaKey="riskandcontrols" metaValue="" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="194,215,235" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+      </extensionElements>
+      <incoming>SequenceFlow_1</incoming>
+      <outgoing>sequenceFlow_178</outgoing>
+      <ioSpecification id="Bpmn_InputOutputSpecification_assignApprover">
+        <dataOutput id="Bpmn_DataOutput_assignApprover" name="approver" itemSubjectRef="xsdString">
+          <extensionElements>
+            <w4graph:graphStyle>
+              <w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+            </w4graph:graphStyle>
+          </extensionElements>
+        </dataOutput>
+        <inputSet id="Bpmn_InputSet_assignApprover">
+          <outputSetRefs>Bpmn_OutputSet_assignApprover</outputSetRefs>
+        </inputSet>
+        <outputSet id="Bpmn_OutputSet_assignApprover" name="default output set">
+          <dataOutputRefs>Bpmn_DataOutput_assignApprover</dataOutputRefs>
+          <inputSetRefs>Bpmn_InputSet_assignApprover</inputSetRefs>
+        </outputSet>
+      </ioSpecification>
+      <dataOutputAssociation id="Bpmn_DataOutputAssociation_assignApprover">
+        <extensionElements>
+          <w4graph:graphStyle>
+            <w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+            <w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false" />
+          </w4graph:graphStyle>
+        </extensionElements>
+        <sourceRef>Bpmn_DataOutput_assignApprover</sourceRef>
+        <targetRef>Bpmn_DataObjectReference_assignApprover</targetRef>
+      </dataOutputAssociation>
+    </userTask>
+    <userTask id="reviewInvoice" camunda:assignee="demo" camunda:formKey="app:reviewInvoice.jsf" name="Rechnung klären">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc" />
+        <signavio:signavioMetaData metaKey="adaptereventtype" metaValue="" />
+        <signavio:signavioMetaData metaKey="documentationlink" metaValue="[]" />
+        <signavio:signavioMetaData metaKey="test" metaValue="" />
+        <signavio:signavioMetaData metaKey="adaptertype" metaValue="" />
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <signavio:signavioMetaData metaKey="adapterconfiguration" metaValue="" />
+        <signavio:signavioMetaData metaKey="adapterclassname" metaValue="" />
+        <signavio:signavioMetaData metaKey="servicereferenz" metaValue="" />
+        <signavio:signavioMetaData metaKey="risiko" metaValue="" />
+        <signavio:signavioMetaData metaKey="erteiltfreigabe" metaValue="" />
+        <signavio:signavioMetaData metaKey="riskandcontrols" metaValue="" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="194,215,235" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+      </extensionElements>
+      <incoming>invoiceNotApproved</incoming>
+      <outgoing>sequenceFlow_183</outgoing>
+      <ioSpecification id="Bpmn_InputOutputSpecification_dB6xs7H1EeSuDf0W70XLGw">
+        <dataOutput id="Bpmn_DataOutput_dCG-8LH1EeSuDf0W70XLGw" name="clarified" itemSubjectRef="xsdString">
+          <extensionElements>
+            <w4graph:graphStyle>
+              <w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+            </w4graph:graphStyle>
+          </extensionElements>
+        </dataOutput>
+        <inputSet id="Bpmn_InputSet_dB6xtbH1EeSuDf0W70XLGw">
+          <outputSetRefs>Bpmn_OutputSet_dB6xtLH1EeSuDf0W70XLGw</outputSetRefs>
+        </inputSet>
+        <outputSet id="Bpmn_OutputSet_dB6xtLH1EeSuDf0W70XLGw" name="default output set">
+          <dataOutputRefs>Bpmn_DataOutput_dCG-8LH1EeSuDf0W70XLGw</dataOutputRefs>
+          <inputSetRefs>Bpmn_InputSet_dB6xtbH1EeSuDf0W70XLGw</inputSetRefs>
+        </outputSet>
+      </ioSpecification>
+      <dataOutputAssociation id="Bpmn_DataOutputAssociation_dB6xsrH1EeSuDf0W70XLGw">
+        <extensionElements>
+          <w4graph:graphStyle>
+            <w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+            <w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false" />
+          </w4graph:graphStyle>
+        </extensionElements>
+        <sourceRef>Bpmn_DataOutput_dCG-8LH1EeSuDf0W70XLGw</sourceRef>
+        <targetRef>Bpmn_DataObjectReference_cdsDQLH1EeSuDf0W70XLGw</targetRef>
+      </dataOutputAssociation>
+    </userTask>
+    <exclusiveGateway id="reviewSuccessful_gw" name="Review&#xD;&#xA;successful?" gatewayDirection="Diverging">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+        <signavio:signavioMetaData metaKey="adaptertype" metaValue="" />
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <signavio:signavioMetaData metaKey="adapterconfiguration" metaValue="" />
+        <signavio:signavioMetaData metaKey="adapterclassname" metaValue="" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="185,139,0" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+      </extensionElements>
+      <incoming>sequenceFlow_183</incoming>
+      <outgoing>reviewSuccessful</outgoing>
+      <outgoing>reviewNotSuccessful</outgoing>
+    </exclusiveGateway>
+    <endEvent id="invoiceNotProcessed" name="Invoice not&#xD;&#xA;processed " ibo:iboName="Invoice not&#xA;processed">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="190,0,0" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+      </extensionElements>
+      <incoming>reviewNotSuccessful</incoming>
+    </endEvent>
+    <startEvent id="StartEvent_1" camunda:formKey="app:startProcess.jsf" name="Invoice&#xD;&#xA;received " ibo:iboName="Invoice&#xA;received">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="109,183,0" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+      </extensionElements>
+      <outgoing>SequenceFlow_1</outgoing>
+    </startEvent>
+    <userTask id="prepareBankTransfer" camunda:candidateGroups="accounting" camunda:formKey="app:prepareBankTransfer.jsf" name="Prepare&#xD;&#xA;Bank&#xD;&#xA;Transfer">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc" />
+        <signavio:signavioMetaData metaKey="adaptereventtype" metaValue="" />
+        <signavio:signavioMetaData metaKey="documentationlink" metaValue="[]" />
+        <signavio:signavioMetaData metaKey="test" metaValue="" />
+        <signavio:signavioMetaData metaKey="adaptertype" metaValue="" />
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <signavio:signavioMetaData metaKey="adapterconfiguration" metaValue="" />
+        <signavio:signavioMetaData metaKey="adapterclassname" metaValue="" />
+        <signavio:signavioMetaData metaKey="servicereferenz" metaValue="" />
+        <signavio:signavioMetaData metaKey="risiko" metaValue="" />
+        <signavio:signavioMetaData metaKey="erteiltfreigabe" metaValue="" />
+        <signavio:signavioMetaData metaKey="riskandcontrols" metaValue="" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="194,215,235" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+      </extensionElements>
+      <incoming>invoiceApproved</incoming>
+      <outgoing>SequenceFlow_2</outgoing>
+    </userTask>
+    <endEvent id="invoiceProcessed" name="Invoice&#xD;&#xA;processed " ibo:iboName="Invoice&#xA;processed">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="190,0,0" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+      </extensionElements>
+      <incoming>SequenceFlow_3</incoming>
+    </endEvent>
+    <serviceTask id="archiveInvoice" camunda:delegateExpression="#{archiveService}" w4:serviceName="ArchiveInvoiceService" name="Archive&#xD;&#xA;Invoice" implementation="##unspecified">
+      <extensionElements>
+        <camunda:field name="text0" stringValue="Hello World" />
+        <camunda:field name="text1">
+          <camunda:expression>${genderBean.getGenderString(gender)}</camunda:expression>
+        </camunda:field>
+        <camunda:field name="text2">
+          <camunda:expression>Hello ${gender == 'male' ? 'Mr.' : 'Mrs.'} ${name}</camunda:expression>
+        </camunda:field>
+        <camunda:field name="text3">
+          <camunda:string>
+	          Hello World
+	      </camunda:string>
+        </camunda:field>
+        <camunda:field name="text4">
+          <camunda:string>
+	          &lt;p&gt;Hello World&lt;/p&gt;&lt;br&gt;
+	      </camunda:string>
+        </camunda:field>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc" />
+        <signavio:signavioMetaData metaKey="adaptereventtype" metaValue="" />
+        <signavio:signavioMetaData metaKey="documentationlink" metaValue="[]" />
+        <signavio:signavioMetaData metaKey="test" metaValue="" />
+        <signavio:signavioMetaData metaKey="adaptertype" metaValue="" />
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <signavio:signavioMetaData metaKey="adapterconfiguration" metaValue="" />
+        <signavio:signavioMetaData metaKey="adapterclassname" metaValue="" />
+        <signavio:signavioMetaData metaKey="servicereferenz" metaValue="" />
+        <signavio:signavioMetaData metaKey="risiko" metaValue="" />
+        <signavio:signavioMetaData metaKey="erteiltfreigabe" metaValue="" />
+        <signavio:signavioMetaData metaKey="riskandcontrols" metaValue="" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="194,215,235" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+      </extensionElements>
+      <incoming>SequenceFlow_2</incoming>
+      <outgoing>SequenceFlow_3</outgoing>
+    </serviceTask>
+    <dataObjectReference id="Bpmn_DataObjectReference_assignApprover" name="approver" dataObjectRef="Bpmn_DataObject_approver">
+      <extensionElements>
+        <w4graph:graphStyle>
+          <w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+        <w4graph:graphStyle>
+          <w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+      </extensionElements>
+    </dataObjectReference>
+    <dataObjectReference id="Bpmn_DataObjectReference_YGA4YLH1EeSuDf0W70XLGw" name="approved" dataObjectRef="Bpmn_DataObject_WUfQYrH1EeSuDf0W70XLGw">
+      <extensionElements>
+        <w4graph:graphStyle>
+          <w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+        <w4graph:graphStyle>
+          <w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+      </extensionElements>
+    </dataObjectReference>
+    <dataObjectReference id="Bpmn_DataObjectReference_cdsDQLH1EeSuDf0W70XLGw" name="clarified" dataObjectRef="Bpmn_DataObject_aT_L0rH1EeSuDf0W70XLGw">
+      <extensionElements>
+        <w4graph:graphStyle>
+          <w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+        <w4graph:graphStyle>
+          <w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+      </extensionElements>
+    </dataObjectReference>
+    <dataObject id="Bpmn_DataObject_approver" name="approver" itemSubjectRef="xsdString">
+      <extensionElements>
+        <w4graph:graphStyle>
+          <w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+      </extensionElements>
+    </dataObject>
+    <dataObject id="Bpmn_DataObject_WUfQYrH1EeSuDf0W70XLGw" name="approved" itemSubjectRef="xsdBool">
+      <extensionElements>
+        <w4graph:graphStyle>
+          <w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+      </extensionElements>
+    </dataObject>
+    <dataObject id="Bpmn_DataObject_aT_L0rH1EeSuDf0W70XLGw" name="clarified" itemSubjectRef="xsdString">
+      <extensionElements>
+        <w4graph:graphStyle>
+          <w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+      </extensionElements>
+    </dataObject>
+    <sequenceFlow id="invoiceApproved" name="yes" sourceRef="invoice_approved" targetRef="prepareBankTransfer">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+          <w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false" />
+        </w4graph:graphStyle>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression" id="sid-0ed8a0cb-f28a-4689-bbd8-77dafd0ccfa0">bpmn:getDataObject('approved')</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="invoiceNotApproved" name="no" sourceRef="invoice_approved" targetRef="reviewInvoice">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+          <w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false" />
+        </w4graph:graphStyle>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression" id="sid-d4f3f0f7-79c3-4b1c-817e-13d9bdd96666">not(bpmn:getDataObject('approved'))</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="reviewSuccessful" name="yes" sourceRef="reviewSuccessful_gw" targetRef="approveInvoice">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+          <w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false" />
+        </w4graph:graphStyle>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression" id="sid-e669aead-8bad-4dbb-b282-e9f811e02f77">bpmn:getDataObject('clarified') = 'yes'</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="reviewNotSuccessful" name="no" sourceRef="reviewSuccessful_gw" targetRef="invoiceNotProcessed">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+          <w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false" />
+        </w4graph:graphStyle>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression" id="sid-628a2fdc-7654-4273-930d-8e3127b9e8b2">bpmn:getDataObject('clarified') = 'no'</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sequenceFlow_180" name="" sourceRef="approveInvoice" targetRef="invoice_approved">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+          <w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false" />
+        </w4graph:graphStyle>
+      </extensionElements>
+    </sequenceFlow>
+    <sequenceFlow id="sequenceFlow_183" name="" sourceRef="reviewInvoice" targetRef="reviewSuccessful_gw">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+          <w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false" />
+        </w4graph:graphStyle>
+      </extensionElements>
+    </sequenceFlow>
+    <sequenceFlow id="sequenceFlow_178" name="" sourceRef="assignApprover" targetRef="approveInvoice">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+          <w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false" />
+        </w4graph:graphStyle>
+      </extensionElements>
+    </sequenceFlow>
+    <sequenceFlow id="SequenceFlow_2" name="" sourceRef="prepareBankTransfer" targetRef="archiveInvoice">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+          <w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false" />
+        </w4graph:graphStyle>
+      </extensionElements>
+    </sequenceFlow>
+    <sequenceFlow id="SequenceFlow_3" name="" sourceRef="archiveInvoice" targetRef="invoiceProcessed">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+          <w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false" />
+        </w4graph:graphStyle>
+      </extensionElements>
+    </sequenceFlow>
+    <sequenceFlow id="SequenceFlow_1" name="" sourceRef="StartEvent_1" targetRef="assignApprover">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+          <w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false" />
+        </w4graph:graphStyle>
+      </extensionElements>
+    </sequenceFlow>
+  </process>
+  <resource id="Bpmn_Resource_6vVHsLHzEeS1nbPdxxCzlg" w4:type="User" name="Team Assistant" />
+  <resource id="Bpmn_Resource_8nPrkLHzEeS1nbPdxxCzlg" w4:type="User" name="Approver" />
+  <resource id="Bpmn_Resource_-IajYLHzEeS1nbPdxxCzlg" w4:type="User" name="Accountant" />
+  <message id="sid-328811a0-7f72-468f-92de-6ab19e353312" name="invoice-received-C.1.0" />
+  <itemDefinition id="xsdString" structureRef="xs:tString" />
+  <itemDefinition id="xsdBool" structureRef="xs:tBool" />
+  <bpmndi:BPMNDiagram name="C.1.1" id="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7">
+    <bpmndi:BPMNPlane id="sid-39085760-f7ff-4491-a241-483b340d6533" bpmnElement="handle-invoice">
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_assignApprover" bpmnElement="Bpmn_DataObjectReference_assignApprover">
+        <omgdc:Bounds x="212" y="174" width="35" height="35" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_YGA4YbH1EeSuDf0W70XLGw" bpmnElement="Bpmn_DataObjectReference_YGA4YLH1EeSuDf0W70XLGw">
+        <omgdc:Bounds x="385" y="350" width="35" height="35" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_cdsDQbH1EeSuDf0W70XLGw" bpmnElement="Bpmn_DataObjectReference_cdsDQLH1EeSuDf0W70XLGw">
+        <omgdc:Bounds x="580" y="174" width="35" height="35" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="approveInvoice_gui" bpmnElement="approveInvoice">
+        <omgdc:Bounds x="353" y="225" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="invoice_approved_gui" bpmnElement="invoice_approved">
+        <omgdc:Bounds x="488" y="245" width="40" height="40" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="assignApprover_gui" bpmnElement="assignApprover">
+        <omgdc:Bounds x="180" y="52" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="reviewInvoice_gui" bpmnElement="reviewInvoice">
+        <omgdc:Bounds x="548" y="52" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="reviewSuccessful_gw_gui" bpmnElement="reviewSuccessful_gw">
+        <omgdc:Bounds x="693" y="72" width="40" height="40" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="invoiceNotProcessed_gui" bpmnElement="invoiceNotProcessed">
+        <omgdc:Bounds x="926" y="78" width="28" height="28" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_1_gui" bpmnElement="StartEvent_1">
+        <omgdc:Bounds x="95" y="77" width="30" height="30" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="prepareBankTransfer_gui" bpmnElement="prepareBankTransfer">
+        <omgdc:Bounds x="638" y="385" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="invoiceProcessed_gui" bpmnElement="invoiceProcessed">
+        <omgdc:Bounds x="926" y="411" width="28" height="28" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="archiveInvoice_gui" bpmnElement="archiveInvoice">
+        <omgdc:Bounds x="780" y="385" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="invoiceApproved_gui" bpmnElement="invoiceApproved">
+        <omgdi:waypoint x="528" y="265" />
+        <omgdi:waypoint x="538" y="265" />
+        <omgdi:waypoint x="538" y="425" />
+        <omgdi:waypoint x="638" y="425" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="invoiceNotApproved_gui" bpmnElement="invoiceNotApproved">
+        <omgdi:waypoint x="508" y="245" />
+        <omgdi:waypoint x="508" y="92" />
+        <omgdi:waypoint x="548" y="92" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="reviewSuccessful_gui" bpmnElement="reviewSuccessful">
+        <omgdi:waypoint x="713" y="72" />
+        <omgdi:waypoint x="713" y="50" />
+        <omgdi:waypoint x="403" y="50" />
+        <omgdi:waypoint x="403" y="225" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="reviewNotSuccessful_gui" bpmnElement="reviewNotSuccessful">
+        <omgdi:waypoint x="733" y="92" />
+        <omgdi:waypoint x="926" y="92" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sequenceFlow_180_gui" bpmnElement="sequenceFlow_180">
+        <omgdi:waypoint x="453" y="265" />
+        <omgdi:waypoint x="488" y="265" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sequenceFlow_183_gui" bpmnElement="sequenceFlow_183">
+        <omgdi:waypoint x="648" y="92" />
+        <omgdi:waypoint x="693" y="92" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sequenceFlow_178_gui" bpmnElement="sequenceFlow_178">
+        <omgdi:waypoint x="280" y="92" />
+        <omgdi:waypoint x="290" y="92" />
+        <omgdi:waypoint x="290" y="265" />
+        <omgdi:waypoint x="353" y="265" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_2_gui" bpmnElement="SequenceFlow_2">
+        <omgdi:waypoint x="738" y="425" />
+        <omgdi:waypoint x="780" y="425" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_3_gui" bpmnElement="SequenceFlow_3">
+        <omgdi:waypoint x="880" y="425" />
+        <omgdi:waypoint x="926" y="425" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1_gui" bpmnElement="SequenceFlow_1">
+        <omgdi:waypoint x="125" y="92" />
+        <omgdi:waypoint x="180" y="92" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_Y55MYLH1EeSuDf0W70XLGw" bpmnElement="Bpmn_DataOutputAssociation_Y55MYrH1EeSuDf0W70XLGw">
+        <omgdi:waypoint x="403" y="305" />
+        <omgdi:waypoint x="403" y="315" />
+        <omgdi:waypoint x="402" y="315" />
+        <omgdi:waypoint x="402" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_assignApprover" bpmnElement="Bpmn_DataOutputAssociation_assignApprover">
+        <omgdi:waypoint x="230" y="132" />
+        <omgdi:waypoint x="230" y="142" />
+        <omgdi:waypoint x="229" y="142" />
+        <omgdi:waypoint x="229" y="174" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_dB6xsLH1EeSuDf0W70XLGw" bpmnElement="Bpmn_DataOutputAssociation_dB6xsrH1EeSuDf0W70XLGw">
+        <omgdi:waypoint x="598" y="132" />
+        <omgdi:waypoint x="598" y="142" />
+        <omgdi:waypoint x="597" y="142" />
+        <omgdi:waypoint x="597" y="174" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <import namespace="http://xsdTypes.org/" location="xsdTypes.xsd" importType="http://www.w3.org/2001/XMLSchema" />
+</definitions>
