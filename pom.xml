@@ -16,8 +16,44 @@
     <!-- Use this property to name just one tool to be tested
     <project.bpmn.application>Yaoqiang BPMN Editor 2.2.18</project.bpmn.application>
     -->
+<!-- staging area for subsequent commit and push -->
+    <local-mvn-repo.snapshot.directory>file:../bpmn-miwg-mvn-repo/snapshots</local-mvn-repo.snapshot.directory>
   </properties>
+
+  <repositories>
+    <repository>
+      <id>bpmn-miwg-snapshot-repo</id>
+      <url>http://knowprocess.com/bpmn-miwg-mvn-repo/snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+        <updatePolicy>always</updatePolicy>
+        <checksumPolicy>warn</checksumPolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+        <checksumPolicy>fail</checksumPolicy>
+      </snapshots>
+    </repository>
+  </repositories>
   
+  <pluginRepositories>
+    <pluginRepository>
+      <id>bpmn-miwg-snapshot-plugin-repo</id>
+      <url>http://knowprocess.com/bpmn-miwg-mvn-repo/snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+        <updatePolicy>always</updatePolicy>
+        <checksumPolicy>warn</checksumPolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+        <checksumPolicy>fail</checksumPolicy>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
+
   <build>
     <resources>
       <resource>
@@ -42,6 +78,15 @@
         </excludes>
       </resource>
     </resources>
+    <plugins>
+      <plugin>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <version>2.8.1</version>
+        <configuration>
+          <altDeploymentRepository>internal.repo::default::${local-mvn-repo.snapshot.directory}</altDeploymentRepository>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 
   <profiles>
