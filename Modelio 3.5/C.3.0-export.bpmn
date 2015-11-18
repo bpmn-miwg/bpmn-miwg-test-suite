@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:ns2="http://www.omg.org/spec/DD/20100524/DI" xmlns:ns3="http://www.omg.org/spec/DD/20100524/DC" xmlns:ns4="http://www.omg.org/spec/BPMN/20100524/DI" id="MO-85672021-20be-43fa-bcce-685e5343e196" name="C.3.0">
+    <collaboration name="" isClosed="false" id="MO-42755c7e-530c-4f43-9ca6-92c2daccfd32"/>
+    <process isClosed="false" isExecutable="true" processType="Private" name="Fridge Repair Process" id="MO-0e69c0b7-eff1-4a4c-b546-39d687766c61">
+        <sequenceFlow sourceRef="MO-26ab91aa-5172-476d-94cc-c5995bfaa2ef" targetRef="MO-cbe030df-51dc-4507-b3c6-dfe73b185732" name="" id="MO-55d997f2-cd19-47df-9230-8e47f625056f"/>
+        <sequenceFlow sourceRef="MO-cbe030df-51dc-4507-b3c6-dfe73b185732" targetRef="MO-00aff3e1-3492-42f1-af4e-0fa132863e47" name="Warranty" id="MO-5a0499b9-59b6-4a62-9f55-a5a5c93e0247"/>
+        <sequenceFlow sourceRef="MO-cbe030df-51dc-4507-b3c6-dfe73b185732" targetRef="MO-9afa61db-a7c1-4fcd-8235-e08d052c614e" name="Emergency service" id="MO-17551611-dc9a-4e9b-91ec-a964b968059f"/>
+        <sequenceFlow sourceRef="MO-cbe030df-51dc-4507-b3c6-dfe73b185732" targetRef="MO-460bda8b-8d07-4afb-9ba0-cfd547f40cdd" name="Regular repair service" id="MO-c5d2fe37-6a60-43af-a469-ea8772e0a33b"/>
+        <sequenceFlow sourceRef="MO-460bda8b-8d07-4afb-9ba0-cfd547f40cdd" targetRef="MO-148d5c7b-3142-4d33-8db2-d640209c815d" name="Standard" id="MO-94575508-e792-4bac-88d1-511cf505e9a2"/>
+        <sequenceFlow sourceRef="MO-460bda8b-8d07-4afb-9ba0-cfd547f40cdd" targetRef="MO-1fba8cf7-846b-4d00-b55c-9acad3f55a38" name="Premium" id="MO-83a4b7c6-94fb-4857-8ce5-fbd05a389467"/>
+        <sequenceFlow sourceRef="MO-148d5c7b-3142-4d33-8db2-d640209c815d" targetRef="MO-27c96c2d-45d8-43b5-9504-c6e4902e834b" name="" id="MO-bed8846f-5335-4ee4-92ca-7c7002b5d981"/>
+        <sequenceFlow sourceRef="MO-1fba8cf7-846b-4d00-b55c-9acad3f55a38" targetRef="MO-27c96c2d-45d8-43b5-9504-c6e4902e834b" name="" id="MO-b738ce10-3cd2-479c-aabd-a520076e287e"/>
+        <sequenceFlow sourceRef="MO-9afa61db-a7c1-4fcd-8235-e08d052c614e" targetRef="MO-506eb345-bb2d-4c03-887e-858fde9f7be6" name="" id="MO-d7dd3c98-65d2-439e-8659-a79bf3305241"/>
+        <sequenceFlow sourceRef="MO-00aff3e1-3492-42f1-af4e-0fa132863e47" targetRef="MO-38d4931c-a472-47b6-a7dd-8ff642296995" name="" id="MO-e036378d-a4e5-490a-b853-7c4059e61e7f"/>
+        <sequenceFlow sourceRef="MO-506eb345-bb2d-4c03-887e-858fde9f7be6" targetRef="MO-62898d3d-e8d2-49d9-9dd2-b849fdf46778" name="yes" id="MO-56068e4e-2adb-4463-94e0-e5f2fca395b4"/>
+        <sequenceFlow sourceRef="MO-506eb345-bb2d-4c03-887e-858fde9f7be6" targetRef="MO-00aff3e1-3492-42f1-af4e-0fa132863e47" name="no" id="MO-e44854fc-338e-4ab6-b0c1-c4f0fb332b65"/>
+        <sequenceFlow sourceRef="MO-dce0bca5-5c02-431e-858c-f05d97a52112" targetRef="MO-26ab91aa-5172-476d-94cc-c5995bfaa2ef" name="" id="MO-64979e05-90bb-4ec3-aed0-780fd6d07f06"/>
+        <sequenceFlow sourceRef="MO-67576328-998f-4f09-ab21-e7ef5a493e28" targetRef="MO-9afa61db-a7c1-4fcd-8235-e08d052c614e" name="" id="MO-0fa36bd4-1d72-4dce-b463-5e5cca3fe99e"/>
+        <sequenceFlow sourceRef="MO-fa07ef7a-ea32-4cde-b1b6-dba87083343d" targetRef="MO-1fba8cf7-846b-4d00-b55c-9acad3f55a38" name="" id="MO-44bad31f-d4b3-42c4-a742-75f6c091d9df"/>
+        <startEvent isInterrupting="true" parallelMultiple="false" name="Receive customer request" id="MO-dce0bca5-5c02-431e-858c-f05d97a52112">
+            <ns5:outgoing xmlns:ns5="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="">MO-64979e05-90bb-4ec3-aed0-780fd6d07f06</ns5:outgoing>
+            <messageEventDefinition/>
+        </startEvent>
+        <userTask implementation="##WebService" isForCompensation="false" startQuantity="2" completionQuantity="2" name="Analyse customer request" id="MO-26ab91aa-5172-476d-94cc-c5995bfaa2ef">
+            <ns5:incoming xmlns:ns5="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="">MO-64979e05-90bb-4ec3-aed0-780fd6d07f06</ns5:incoming>
+            <ns5:outgoing xmlns:ns5="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="">MO-55d997f2-cd19-47df-9230-8e47f625056f</ns5:outgoing>
+        </userTask>
+        <userTask implementation="WebService" isForCompensation="false" startQuantity="1" completionQuantity="1" name="Replace fridge" id="MO-00aff3e1-3492-42f1-af4e-0fa132863e47">
+            <ns5:incoming xmlns:ns5="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="">MO-5a0499b9-59b6-4a62-9f55-a5a5c93e0247</ns5:incoming>
+            <ns5:incoming xmlns:ns5="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="">MO-e44854fc-338e-4ab6-b0c1-c4f0fb332b65</ns5:incoming>
+            <ns5:outgoing xmlns:ns5="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="">MO-e036378d-a4e5-490a-b853-7c4059e61e7f</ns5:outgoing>
+        </userTask>
+        <endEvent name="Fridge replaced" id="MO-38d4931c-a472-47b6-a7dd-8ff642296995">
+            <ns5:incoming xmlns:ns5="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="">MO-e036378d-a4e5-490a-b853-7c4059e61e7f</ns5:incoming>
+        </endEvent>
+        <exclusiveGateway gatewayDirection="Diverging" name="Service type" id="MO-cbe030df-51dc-4507-b3c6-dfe73b185732">
+            <ns5:incoming xmlns:ns5="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="">MO-55d997f2-cd19-47df-9230-8e47f625056f</ns5:incoming>
+            <ns5:outgoing xmlns:ns5="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="">MO-5a0499b9-59b6-4a62-9f55-a5a5c93e0247</ns5:outgoing>
+            <ns5:outgoing xmlns:ns5="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="">MO-17551611-dc9a-4e9b-91ec-a964b968059f</ns5:outgoing>
+            <ns5:outgoing xmlns:ns5="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="">MO-c5d2fe37-6a60-43af-a469-ea8772e0a33b</ns5:outgoing>
+        </exclusiveGateway>
+        <endEvent name="Emergency repair completed" id="MO-62898d3d-e8d2-49d9-9dd2-b849fdf46778">
+            <ns5:incoming xmlns:ns5="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="">MO-56068e4e-2adb-4463-94e0-e5f2fca395b4</ns5:incoming>
+        </endEvent>
+        <exclusiveGateway gatewayDirection="Diverging" name="Service level" id="MO-460bda8b-8d07-4afb-9ba0-cfd547f40cdd">
+            <ns5:incoming xmlns:ns5="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="">MO-c5d2fe37-6a60-43af-a469-ea8772e0a33b</ns5:incoming>
+            <ns5:outgoing xmlns:ns5="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="">MO-94575508-e792-4bac-88d1-511cf505e9a2</ns5:outgoing>
+            <ns5:outgoing xmlns:ns5="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="">MO-83a4b7c6-94fb-4857-8ce5-fbd05a389467</ns5:outgoing>
+        </exclusiveGateway>
+        <userTask implementation="WebService" isForCompensation="false" startQuantity="1" completionQuantity="1" name="Perform repair (standard level)" id="MO-148d5c7b-3142-4d33-8db2-d640209c815d">
+            <ns5:incoming xmlns:ns5="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="">MO-94575508-e792-4bac-88d1-511cf505e9a2</ns5:incoming>
+            <ns5:outgoing xmlns:ns5="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="">MO-bed8846f-5335-4ee4-92ca-7c7002b5d981</ns5:outgoing>
+        </userTask>
+        <userTask implementation="WebService" isForCompensation="false" startQuantity="1" completionQuantity="1" name="Perform repair (premium level)" id="MO-1fba8cf7-846b-4d00-b55c-9acad3f55a38">
+            <ns5:incoming xmlns:ns5="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="">MO-83a4b7c6-94fb-4857-8ce5-fbd05a389467</ns5:incoming>
+            <ns5:incoming xmlns:ns5="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="">MO-44bad31f-d4b3-42c4-a742-75f6c091d9df</ns5:incoming>
+            <ns5:outgoing xmlns:ns5="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="">MO-b738ce10-3cd2-479c-aabd-a520076e287e</ns5:outgoing>
+        </userTask>
+        <endEvent name="Repair completed" id="MO-27c96c2d-45d8-43b5-9504-c6e4902e834b">
+            <ns5:incoming xmlns:ns5="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="">MO-bed8846f-5335-4ee4-92ca-7c7002b5d981</ns5:incoming>
+            <ns5:incoming xmlns:ns5="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="">MO-b738ce10-3cd2-479c-aabd-a520076e287e</ns5:incoming>
+        </endEvent>
+        <exclusiveGateway gatewayDirection="Diverging" name="Successful?" id="MO-506eb345-bb2d-4c03-887e-858fde9f7be6">
+            <ns5:incoming xmlns:ns5="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="">MO-d7dd3c98-65d2-439e-8659-a79bf3305241</ns5:incoming>
+            <ns5:outgoing xmlns:ns5="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="">MO-56068e4e-2adb-4463-94e0-e5f2fca395b4</ns5:outgoing>
+            <ns5:outgoing xmlns:ns5="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="">MO-e44854fc-338e-4ab6-b0c1-c4f0fb332b65</ns5:outgoing>
+        </exclusiveGateway>
+        <subProcess triggeredByEvent="false" isForCompensation="false" startQuantity="1" completionQuantity="1" name="Perform emergency repair" id="MO-9afa61db-a7c1-4fcd-8235-e08d052c614e">
+            <ns5:incoming xmlns:ns5="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="">MO-17551611-dc9a-4e9b-91ec-a964b968059f</ns5:incoming>
+            <ns5:incoming xmlns:ns5="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="">MO-0fa36bd4-1d72-4dce-b463-5e5cca3fe99e</ns5:incoming>
+            <ns5:outgoing xmlns:ns5="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="">MO-d7dd3c98-65d2-439e-8659-a79bf3305241</ns5:outgoing>
+        </subProcess>
+        <ns5:boundaryEvent xmlns:ns5="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="" attachedToRef="MO-1fba8cf7-846b-4d00-b55c-9acad3f55a38" parallelMultiple="false" name="2 hours" id="MO-67576328-998f-4f09-ab21-e7ef5a493e28">
+            <ns5:outgoing>MO-0fa36bd4-1d72-4dce-b463-5e5cca3fe99e</ns5:outgoing>
+            <ns5:timerEventDefinition/>
+        </ns5:boundaryEvent>
+        <ns5:boundaryEvent xmlns:ns5="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="" attachedToRef="MO-148d5c7b-3142-4d33-8db2-d640209c815d" parallelMultiple="false" name="" id="MO-fa07ef7a-ea32-4cde-b1b6-dba87083343d">
+            <ns5:outgoing>MO-44bad31f-d4b3-42c4-a742-75f6c091d9df</ns5:outgoing>
+            <ns5:messageEventDefinition/>
+        </ns5:boundaryEvent>
+    </process>
+    <ns4:BPMNDiagram name="Fridge Repair Process (1)" id="MO-36543078-24e4-46e4-878b-31011e056d9e">
+        <ns4:BPMNPlane xmlns:ns5="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="" bpmnElement="MO-0e69c0b7-eff1-4a4c-b546-39d687766c61">
+            <ns4:BPMNEdge bpmnElement="MO-55d997f2-cd19-47df-9230-8e47f625056f" id="MO-55d997f2-cd19-47df-9230-8e47f625056f-gr">
+                <ns2:waypoint x="239.0" y="149.0"/>
+                <ns2:waypoint x="378.0" y="149.0"/>
+            </ns4:BPMNEdge>
+            <ns4:BPMNEdge bpmnElement="MO-5a0499b9-59b6-4a62-9f55-a5a5c93e0247" id="MO-5a0499b9-59b6-4a62-9f55-a5a5c93e0247-gr">
+                <ns2:waypoint x="396.0" y="133.0"/>
+                <ns2:waypoint x="396.0" y="90.0"/>
+                <ns2:waypoint x="807.0" y="90.0"/>
+            </ns4:BPMNEdge>
+            <ns4:BPMNEdge bpmnElement="MO-17551611-dc9a-4e9b-91ec-a964b968059f" id="MO-17551611-dc9a-4e9b-91ec-a964b968059f-gr">
+                <ns2:waypoint x="418.0" y="153.0"/>
+                <ns2:waypoint x="569.0" y="153.0"/>
+                <ns2:waypoint x="569.0" y="236.0"/>
+            </ns4:BPMNEdge>
+            <ns4:BPMNEdge bpmnElement="MO-c5d2fe37-6a60-43af-a469-ea8772e0a33b" id="MO-c5d2fe37-6a60-43af-a469-ea8772e0a33b-gr">
+                <ns2:waypoint x="398.0" y="173.0"/>
+                <ns2:waypoint x="398.0" y="453.0"/>
+                <ns2:waypoint x="449.0" y="453.0"/>
+            </ns4:BPMNEdge>
+            <ns4:BPMNEdge bpmnElement="MO-94575508-e792-4bac-88d1-511cf505e9a2" id="MO-94575508-e792-4bac-88d1-511cf505e9a2-gr">
+                <ns2:waypoint x="467.0" y="475.0"/>
+                <ns2:waypoint x="467.0" y="647.0"/>
+                <ns2:waypoint x="534.0" y="647.0"/>
+            </ns4:BPMNEdge>
+            <ns4:BPMNEdge bpmnElement="MO-83a4b7c6-94fb-4857-8ce5-fbd05a389467" id="MO-83a4b7c6-94fb-4857-8ce5-fbd05a389467-gr">
+                <ns2:waypoint x="489.0" y="450.0"/>
+                <ns2:waypoint x="575.0" y="450.0"/>
+            </ns4:BPMNEdge>
+            <ns4:BPMNEdge bpmnElement="MO-bed8846f-5335-4ee4-92ca-7c7002b5d981" id="MO-bed8846f-5335-4ee4-92ca-7c7002b5d981-gr">
+                <ns2:waypoint x="655.0" y="630.0"/>
+                <ns2:waypoint x="864.0" y="630.0"/>
+                <ns2:waypoint x="876.0" y="473.0"/>
+            </ns4:BPMNEdge>
+            <ns4:BPMNEdge bpmnElement="MO-b738ce10-3cd2-479c-aabd-a520076e287e" id="MO-b738ce10-3cd2-479c-aabd-a520076e287e-gr">
+                <ns2:waypoint x="696.0" y="456.0"/>
+                <ns2:waypoint x="866.0" y="456.0"/>
+            </ns4:BPMNEdge>
+            <ns4:BPMNEdge bpmnElement="MO-d7dd3c98-65d2-439e-8659-a79bf3305241" id="MO-d7dd3c98-65d2-439e-8659-a79bf3305241-gr">
+                <ns2:waypoint x="657.0" y="273.0"/>
+                <ns2:waypoint x="875.0" y="273.0"/>
+            </ns4:BPMNEdge>
+            <ns4:BPMNEdge bpmnElement="MO-e036378d-a4e5-490a-b853-7c4059e61e7f" id="MO-e036378d-a4e5-490a-b853-7c4059e61e7f-gr">
+                <ns2:waypoint x="928.0" y="90.0"/>
+                <ns2:waypoint x="1028.0" y="90.0"/>
+            </ns4:BPMNEdge>
+            <ns4:BPMNEdge bpmnElement="MO-56068e4e-2adb-4463-94e0-e5f2fca395b4" id="MO-56068e4e-2adb-4463-94e0-e5f2fca395b4-gr">
+                <ns2:waypoint x="915.0" y="274.0"/>
+                <ns2:waypoint x="1026.0" y="274.0"/>
+            </ns4:BPMNEdge>
+            <ns4:BPMNEdge bpmnElement="MO-e44854fc-338e-4ab6-b0c1-c4f0fb332b65" id="MO-e44854fc-338e-4ab6-b0c1-c4f0fb332b65-gr">
+                <ns2:waypoint x="885.0" y="256.0"/>
+                <ns2:waypoint x="885.0" y="119.0"/>
+            </ns4:BPMNEdge>
+            <ns4:BPMNEdge bpmnElement="MO-64979e05-90bb-4ec3-aed0-780fd6d07f06" id="MO-64979e05-90bb-4ec3-aed0-780fd6d07f06-gr">
+                <ns2:waypoint x="43.0" y="151.0"/>
+                <ns2:waypoint x="118.0" y="151.0"/>
+            </ns4:BPMNEdge>
+            <ns4:BPMNEdge bpmnElement="MO-0fa36bd4-1d72-4dce-b463-5e5cca3fe99e" id="MO-0fa36bd4-1d72-4dce-b463-5e5cca3fe99e-gr">
+                <ns2:waypoint x="655.0" y="404.0"/>
+                <ns2:waypoint x="649.0" y="349.0"/>
+                <ns2:waypoint x="573.0" y="349.0"/>
+                <ns2:waypoint x="573.0" y="311.0"/>
+            </ns4:BPMNEdge>
+            <ns4:BPMNEdge bpmnElement="MO-44bad31f-d4b3-42c4-a742-75f6c091d9df" id="MO-44bad31f-d4b3-42c4-a742-75f6c091d9df-gr">
+                <ns2:waypoint x="618.0" y="604.0"/>
+                <ns2:waypoint x="618.0" y="479.0"/>
+            </ns4:BPMNEdge>
+            <ns4:BPMNShape bpmnElement="MO-dce0bca5-5c02-431e-858c-f05d97a52112" id="MO-dce0bca5-5c02-431e-858c-f05d97a52112-gr">
+                <ns3:Bounds x="10.0" y="140.0" width="33.0" height="33.0"/>
+            </ns4:BPMNShape>
+            <ns4:BPMNShape bpmnElement="MO-26ab91aa-5172-476d-94cc-c5995bfaa2ef" id="MO-26ab91aa-5172-476d-94cc-c5995bfaa2ef-gr">
+                <ns3:Bounds x="118.0" y="120.0" width="121.0" height="59.0"/>
+            </ns4:BPMNShape>
+            <ns4:BPMNShape bpmnElement="MO-00aff3e1-3492-42f1-af4e-0fa132863e47" id="MO-00aff3e1-3492-42f1-af4e-0fa132863e47-gr">
+                <ns3:Bounds x="807.0" y="60.0" width="121.0" height="59.0"/>
+            </ns4:BPMNShape>
+            <ns4:BPMNShape bpmnElement="MO-38d4931c-a472-47b6-a7dd-8ff642296995" id="MO-38d4931c-a472-47b6-a7dd-8ff642296995-gr">
+                <ns3:Bounds x="1028.0" y="80.0" width="33.0" height="33.0"/>
+            </ns4:BPMNShape>
+            <ns4:BPMNShape bpmnElement="MO-cbe030df-51dc-4507-b3c6-dfe73b185732" id="MO-cbe030df-51dc-4507-b3c6-dfe73b185732-gr">
+                <ns3:Bounds x="378.0" y="133.0" width="40.0" height="40.0"/>
+            </ns4:BPMNShape>
+            <ns4:BPMNShape bpmnElement="MO-62898d3d-e8d2-49d9-9dd2-b849fdf46778" id="MO-62898d3d-e8d2-49d9-9dd2-b849fdf46778-gr">
+                <ns3:Bounds x="1026.0" y="260.0" width="33.0" height="33.0"/>
+            </ns4:BPMNShape>
+            <ns4:BPMNShape bpmnElement="MO-460bda8b-8d07-4afb-9ba0-cfd547f40cdd" id="MO-460bda8b-8d07-4afb-9ba0-cfd547f40cdd-gr">
+                <ns3:Bounds x="449.0" y="435.0" width="40.0" height="40.0"/>
+            </ns4:BPMNShape>
+            <ns4:BPMNShape bpmnElement="MO-148d5c7b-3142-4d33-8db2-d640209c815d" id="MO-148d5c7b-3142-4d33-8db2-d640209c815d-gr">
+                <ns3:Bounds x="534.0" y="620.0" width="121.0" height="59.0"/>
+            </ns4:BPMNShape>
+            <ns4:BPMNShape bpmnElement="MO-1fba8cf7-846b-4d00-b55c-9acad3f55a38" id="MO-1fba8cf7-846b-4d00-b55c-9acad3f55a38-gr">
+                <ns3:Bounds x="575.0" y="420.0" width="121.0" height="59.0"/>
+            </ns4:BPMNShape>
+            <ns4:BPMNShape bpmnElement="MO-27c96c2d-45d8-43b5-9504-c6e4902e834b" id="MO-27c96c2d-45d8-43b5-9504-c6e4902e834b-gr">
+                <ns3:Bounds x="866.0" y="440.0" width="33.0" height="33.0"/>
+            </ns4:BPMNShape>
+            <ns4:BPMNShape bpmnElement="MO-506eb345-bb2d-4c03-887e-858fde9f7be6" id="MO-506eb345-bb2d-4c03-887e-858fde9f7be6-gr">
+                <ns3:Bounds x="875.0" y="256.0" width="40.0" height="40.0"/>
+            </ns4:BPMNShape>
+            <ns4:BPMNShape bpmnElement="MO-9afa61db-a7c1-4fcd-8235-e08d052c614e" id="MO-9afa61db-a7c1-4fcd-8235-e08d052c614e-gr">
+                <ns3:Bounds x="520.0" y="236.0" width="137.0" height="75.0"/>
+            </ns4:BPMNShape>
+            <ns4:BPMNShape bpmnElement="MO-67576328-998f-4f09-ab21-e7ef5a493e28" id="MO-67576328-998f-4f09-ab21-e7ef5a493e28-gr">
+                <ns3:Bounds x="645.0" y="404.0" width="33.0" height="33.0"/>
+            </ns4:BPMNShape>
+            <ns4:BPMNShape bpmnElement="MO-fa07ef7a-ea32-4cde-b1b6-dba87083343d" id="MO-fa07ef7a-ea32-4cde-b1b6-dba87083343d-gr">
+                <ns3:Bounds x="602.0" y="604.0" width="33.0" height="33.0"/>
+            </ns4:BPMNShape>
+        </ns4:BPMNPlane>
+    </ns4:BPMNDiagram>
+</definitions>
