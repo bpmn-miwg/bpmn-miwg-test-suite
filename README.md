@@ -71,7 +71,7 @@ License:
 Notes: 
 ```
 
-Alternatively, you may also [fork the repository](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/fork_select) on GitHub
+Alternatively, you may also [fork the repository](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/fork_select) on GitHub, [upload the files using your Web browser](https://help.github.com/articles/adding-a-file-to-a-repository/)
 and submit test results through a [pull request](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/pull/new/master). If you do so, make sure to update the [JSON file with the list of tools](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/blob/master/tools-tested-by-miwg.json).
 
 Usually one day after your submission our [automated tools](https://github.com/bpmn-miwg/bpmn-miwg-tools)
@@ -255,6 +255,8 @@ Verified Reference Models
 ![](Reference/A.1.0.png)
 ### A.2.0
 ![](Reference/A.2.0.png)
+### A.2.1
+![](Reference/A.2.1.png)
 ### A.3.0
 ![](Reference/A.3.0.png)
 ### A.4.0
