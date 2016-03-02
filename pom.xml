@@ -86,7 +86,26 @@
           <altDeploymentRepository>internal.repo::default::${local-mvn-repo.snapshot.directory}</altDeploymentRepository>
         </configuration>
       </plugin>
-    </plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-jar-plugin</artifactId>
+			<executions>
+				<execution>
+					<id>reference-only</id>
+					<phase>package</phase>
+					<goals>
+						<goal>jar</goal>
+					</goals>
+					<configuration>
+						<classifier>reference-only-jar</classifier>
+						<includes>
+							<include>Reference/*.bpmn</include>
+						</includes>
+					</configuration>
+				</execution>
+			</executions>
+		</plugin>
+	</plugins>
   </build>
 
   <profiles>
