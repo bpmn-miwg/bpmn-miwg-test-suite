@@ -1,0 +1,419 @@
+<?xml version="1.0"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" exporter="ModelFoundry" exporterVersion="1.0.2" id="sid-bdb880ac-c464-4e5c-aa56-569d709436e0" name="sid-bdb880ac-c464-4e5c-aa56-569d709436e0" targetNamespace="http://www.signavio.com/bpmn20" expressionLanguage="http://www.w3.org/1999/XPath" typeLanguage="http://www.w3.org/2001/XMLSchema">
+  <message id="sid-328811a0-7f72-468f-92de-6ab19e353312" name="invoice-received-C.1.0"/>
+  <collaboration id="sid-e5defbed-c12d-4c0a-9b5e-0f187e35ffd3">
+    <participant id="sid-46891B57-A9D3-4A8B-AEBF-D4BA5F3961AD" name="Team-Assistant" processRef="sid-5FBB6CB3-8A7C-42B5-9024-15BB2684EC57"/>
+    <participant id="Process_Engine_1" name="Process Engine - Invoice Receipt" processRef="bpmn-miwg-test-case-c.1.0"/>
+    <messageFlow id="sid-915AC9A0-CD35-4DF2-93F7-4535397622F8" sourceRef="sid-6FC20E19-AF3A-4A77-8588-2D671C98D93D" targetRef="reviewInvoice"/>
+    <messageFlow id="sid-AB6EB7C8-DF5E-42C2-88D0-FA166583AF15" sourceRef="sid-64AFCE49-96A2-4A51-96CB-9DF689C37DAD" targetRef="assignApprover"/>
+    <messageFlow id="sid-7A070DED-8B83-48E1-88A1-5543C481E7BC" sourceRef="sid-05039C4F-59F7-4CBD-8C84-D35E27C7B5EF" targetRef="StartEvent_1"/>
+    <messageFlow id="sid-90902E27-C1CD-4F90-A8F2-486DA4F42117" sourceRef="assignApprover" targetRef="sid-40EC6574-E644-425C-8CE7-EE384F0C3520"/>
+    <messageFlow id="sid-0518A412-1ED3-4CFD-A75C-69FF37EFFC16" sourceRef="reviewInvoice" targetRef="sid-B548B980-12E3-408E-9AC4-7031B85A8F2D"/>
+  </collaboration>
+  <process id="sid-5FBB6CB3-8A7C-42B5-9024-15BB2684EC57" name="Team-Assistant" isClosed="true" isExecutable="false" processType="None">
+    <startEvent id="sid-36EA43D1-0FE6-4197-AC57-7A43785B784B" name="Invoice&#10;received" isInterrupting="true">
+      <messageEventDefinition id="sid-7f89416b-58ec-4e26-b9bc-390f9e8f2ae0"/>
+      <outgoing>sid-7971C38C-2EF5-41F2-A24E-3FFCA069EDBF</outgoing>
+    </startEvent>
+    <task id="sid-05039C4F-59F7-4CBD-8C84-D35E27C7B5EF" name="Scan Invoice" isForCompensation="false" startQuantity="1" completionQuantity="1">
+      <incoming>sid-7971C38C-2EF5-41F2-A24E-3FFCA069EDBF</incoming>
+      <outgoing>sid-7A070DED-8B83-48E1-88A1-5543C481E7BC</outgoing>
+      <outgoing>sid-3E8B2FCF-E408-4A5D-9455-8FDE7BB3EF96</outgoing>
+    </task>
+    <task id="sid-CFAC8502-0E69-4F08-BE36-8499B8C0FA44" name="Archive&#10;original" isForCompensation="false" startQuantity="1" completionQuantity="1">
+      <incoming>sid-3E8B2FCF-E408-4A5D-9455-8FDE7BB3EF96</incoming>
+      <outgoing>sid-C0540F47-C3C0-4FA8-B000-6D87640A6178</outgoing>
+    </task>
+    <endEvent id="sid-BC9AC0B6-1785-4E35-A974-7FEF1A586B9D">
+      <incoming>sid-3019478F-48D5-4B85-95B1-E192B9BE4183</incoming>
+    </endEvent>
+    <intermediateCatchEvent id="sid-40EC6574-E644-425C-8CE7-EE384F0C3520" name="Approver to &#10;be assigned">
+      <messageEventDefinition id="sid-29fbb68c-e460-48c1-bba9-a1b16906afec"/>
+      <incoming>sid-90902E27-C1CD-4F90-A8F2-486DA4F42117</incoming>
+      <incoming>sid-C0540F47-C3C0-4FA8-B000-6D87640A6178</incoming>
+      <outgoing>sid-4AD2006C-9290-42B0-A904-DD8076B791C4</outgoing>
+    </intermediateCatchEvent>
+    <task id="sid-64AFCE49-96A2-4A51-96CB-9DF689C37DAD" name="Assign approver" isForCompensation="false" startQuantity="1" completionQuantity="1">
+      <incoming>sid-4AD2006C-9290-42B0-A904-DD8076B791C4</incoming>
+      <outgoing>sid-AB6EB7C8-DF5E-42C2-88D0-FA166583AF15</outgoing>
+      <outgoing>sid-26030150-7369-4B7F-8264-B3ABC62BA735</outgoing>
+    </task>
+    <intermediateCatchEvent id="sid-B548B980-12E3-408E-9AC4-7031B85A8F2D" name="Invoice review&#10; needed">
+      <messageEventDefinition id="sid-b9aae81c-0006-46ad-9445-89307e8eeed8"/>
+      <incoming>sid-0518A412-1ED3-4CFD-A75C-69FF37EFFC16</incoming>
+      <incoming>sid-4686AFBC-E33A-4657-95A0-B2E27E704152</incoming>
+      <outgoing>sid-D03CC374-8575-4F38-98B4-4DFF014C43CB</outgoing>
+    </intermediateCatchEvent>
+    <task id="sid-6FC20E19-AF3A-4A77-8588-2D671C98D93D" name="Review and document result" isForCompensation="false" startQuantity="1" completionQuantity="1">
+      <incoming>sid-D03CC374-8575-4F38-98B4-4DFF014C43CB</incoming>
+      <outgoing>sid-915AC9A0-CD35-4DF2-93F7-4535397622F8</outgoing>
+      <outgoing>sid-6CB8539C-E02A-4496-94E7-17FAECB0D4B1</outgoing>
+    </task>
+    <intermediateCatchEvent id="sid-0E349B8B-14A7-4565-988A-38F3A9B624D2" name="7 days">
+      <timerEventDefinition id="sid-6517379a-613c-497d-81cc-b710878d9ebb"/>
+      <incoming>sid-71EF9530-A32A-49BC-A783-9B98A5801362</incoming>
+      <outgoing>sid-3019478F-48D5-4B85-95B1-E192B9BE4183</outgoing>
+    </intermediateCatchEvent>
+    <endEvent id="sid-282524E6-660F-431D-8F19-1C3E9E9DE817">
+      <incoming>sid-6CB8539C-E02A-4496-94E7-17FAECB0D4B1</incoming>
+    </endEvent>
+    <eventBasedGateway id="sid-F0D29912-929D-491C-8D23-73BD80CF980A" gatewayDirection="Diverging" instantiate="false" eventGatewayType="Exclusive">
+      <incoming>sid-26030150-7369-4B7F-8264-B3ABC62BA735</incoming>
+      <outgoing>sid-71EF9530-A32A-49BC-A783-9B98A5801362</outgoing>
+      <outgoing>sid-4686AFBC-E33A-4657-95A0-B2E27E704152</outgoing>
+    </eventBasedGateway>
+    <laneSet id="laneSet_">
+      <lane id="sid-744AEFB3-C93D-46A3-8976-EFA91784A51F">
+        <flowNodeRef>sid-36EA43D1-0FE6-4197-AC57-7A43785B784B</flowNodeRef>
+        <flowNodeRef>sid-05039C4F-59F7-4CBD-8C84-D35E27C7B5EF</flowNodeRef>
+        <flowNodeRef>sid-CFAC8502-0E69-4F08-BE36-8499B8C0FA44</flowNodeRef>
+        <flowNodeRef>sid-BC9AC0B6-1785-4E35-A974-7FEF1A586B9D</flowNodeRef>
+        <flowNodeRef>sid-40EC6574-E644-425C-8CE7-EE384F0C3520</flowNodeRef>
+        <flowNodeRef>sid-64AFCE49-96A2-4A51-96CB-9DF689C37DAD</flowNodeRef>
+        <flowNodeRef>sid-F0D29912-929D-491C-8D23-73BD80CF980A</flowNodeRef>
+        <flowNodeRef>sid-B548B980-12E3-408E-9AC4-7031B85A8F2D</flowNodeRef>
+        <flowNodeRef>sid-6FC20E19-AF3A-4A77-8588-2D671C98D93D</flowNodeRef>
+        <flowNodeRef>sid-0E349B8B-14A7-4565-988A-38F3A9B624D2</flowNodeRef>
+        <flowNodeRef>sid-282524E6-660F-431D-8F19-1C3E9E9DE817</flowNodeRef>
+      </lane>
+    </laneSet>
+    <sequenceFlow id="sid-71EF9530-A32A-49BC-A783-9B98A5801362" sourceRef="sid-F0D29912-929D-491C-8D23-73BD80CF980A" targetRef="sid-0E349B8B-14A7-4565-988A-38F3A9B624D2" isImmediate="true"/>
+    <sequenceFlow id="sid-C0540F47-C3C0-4FA8-B000-6D87640A6178" sourceRef="sid-CFAC8502-0E69-4F08-BE36-8499B8C0FA44" targetRef="sid-40EC6574-E644-425C-8CE7-EE384F0C3520" isImmediate="true"/>
+    <sequenceFlow id="sid-4AD2006C-9290-42B0-A904-DD8076B791C4" sourceRef="sid-40EC6574-E644-425C-8CE7-EE384F0C3520" targetRef="sid-64AFCE49-96A2-4A51-96CB-9DF689C37DAD" isImmediate="true"/>
+    <sequenceFlow id="sid-3E8B2FCF-E408-4A5D-9455-8FDE7BB3EF96" sourceRef="sid-05039C4F-59F7-4CBD-8C84-D35E27C7B5EF" targetRef="sid-CFAC8502-0E69-4F08-BE36-8499B8C0FA44" isImmediate="true"/>
+    <sequenceFlow id="sid-4686AFBC-E33A-4657-95A0-B2E27E704152" sourceRef="sid-F0D29912-929D-491C-8D23-73BD80CF980A" targetRef="sid-B548B980-12E3-408E-9AC4-7031B85A8F2D" isImmediate="true"/>
+    <sequenceFlow id="sid-6CB8539C-E02A-4496-94E7-17FAECB0D4B1" sourceRef="sid-6FC20E19-AF3A-4A77-8588-2D671C98D93D" targetRef="sid-282524E6-660F-431D-8F19-1C3E9E9DE817" isImmediate="true"/>
+    <sequenceFlow id="sid-D03CC374-8575-4F38-98B4-4DFF014C43CB" sourceRef="sid-B548B980-12E3-408E-9AC4-7031B85A8F2D" targetRef="sid-6FC20E19-AF3A-4A77-8588-2D671C98D93D" isImmediate="true"/>
+    <sequenceFlow id="sid-3019478F-48D5-4B85-95B1-E192B9BE4183" sourceRef="sid-0E349B8B-14A7-4565-988A-38F3A9B624D2" targetRef="sid-BC9AC0B6-1785-4E35-A974-7FEF1A586B9D" isImmediate="true"/>
+    <sequenceFlow id="sid-26030150-7369-4B7F-8264-B3ABC62BA735" sourceRef="sid-64AFCE49-96A2-4A51-96CB-9DF689C37DAD" targetRef="sid-F0D29912-929D-491C-8D23-73BD80CF980A" isImmediate="true"/>
+    <sequenceFlow id="sid-7971C38C-2EF5-41F2-A24E-3FFCA069EDBF" sourceRef="sid-36EA43D1-0FE6-4197-AC57-7A43785B784B" targetRef="sid-05039C4F-59F7-4CBD-8C84-D35E27C7B5EF" isImmediate="true"/>
+  </process>
+  <process id="bpmn-miwg-test-case-c.1.0" name="BPMN MIWG Test Case C.1.0" isClosed="true" isExecutable="true" processType="None">
+    <userTask id="approveInvoice" name="Approve Invoice" isForCompensation="false" startQuantity="1" completionQuantity="1" implementation="webService">
+      <incoming>reviewSuccessful</incoming>
+      <incoming>sequenceFlow_178</incoming>
+      <outgoing>sequenceFlow_180</outgoing>
+    </userTask>
+    <userTask id="assignApprover" name="Assign&#10;Approver" isForCompensation="false" startQuantity="1" completionQuantity="1" implementation="webService">
+      <incoming>sid-AB6EB7C8-DF5E-42C2-88D0-FA166583AF15</incoming>
+      <incoming>SequenceFlow_1</incoming>
+      <outgoing>sid-90902E27-C1CD-4F90-A8F2-486DA4F42117</outgoing>
+      <outgoing>sequenceFlow_178</outgoing>
+    </userTask>
+    <userTask id="reviewInvoice" name="Rechnung kl&#xE4;ren" isForCompensation="false" startQuantity="1" completionQuantity="1" implementation="webService">
+      <incoming>sid-915AC9A0-CD35-4DF2-93F7-4535397622F8</incoming>
+      <incoming>invoiceNotApproved</incoming>
+      <outgoing>sid-0518A412-1ED3-4CFD-A75C-69FF37EFFC16</outgoing>
+      <outgoing>sequenceFlow_183</outgoing>
+    </userTask>
+    <endEvent id="invoiceNotProcessed" name="Invoice not&#10;processed">
+      <incoming>reviewNotSuccessful</incoming>
+    </endEvent>
+    <startEvent id="StartEvent_1" name="Invoice&#10;received" isInterrupting="true">
+      <messageEventDefinition id="sid-14929637-5f1e-4d27-811c-ef5e4ddaa4c7" messageRef="sid-328811a0-7f72-468f-92de-6ab19e353312"/>
+      <incoming>sid-7A070DED-8B83-48E1-88A1-5543C481E7BC</incoming>
+      <outgoing>SequenceFlow_1</outgoing>
+    </startEvent>
+    <userTask id="prepareBankTransfer" name="Prepare&#13;&#10;Bank&#13;&#10;Transfer" isForCompensation="false" startQuantity="1" completionQuantity="1" implementation="webService">
+      <incoming>invoiceApproved</incoming>
+      <outgoing>SequenceFlow_2</outgoing>
+    </userTask>
+    <endEvent id="invoiceProcessed" name="Invoice&#10;processed">
+      <incoming>SequenceFlow_3</incoming>
+    </endEvent>
+    <serviceTask id="archiveInvoice" name="Archive&#10;Invoice" isForCompensation="false" startQuantity="1" completionQuantity="1" implementation="webService">
+      <incoming>SequenceFlow_2</incoming>
+      <outgoing>SequenceFlow_3</outgoing>
+    </serviceTask>
+    <exclusiveGateway id="invoice_approved" name="Invoice&#10;approved?" gatewayDirection="Diverging">
+      <incoming>sequenceFlow_180</incoming>
+      <outgoing>invoiceApproved</outgoing>
+      <outgoing>invoiceNotApproved</outgoing>
+    </exclusiveGateway>
+    <exclusiveGateway id="reviewSuccessful_gw" name="Review&#10;successful?" gatewayDirection="Diverging">
+      <incoming>sequenceFlow_183</incoming>
+      <outgoing>reviewSuccessful</outgoing>
+      <outgoing>reviewNotSuccessful</outgoing>
+    </exclusiveGateway>
+    <laneSet id="laneSet_">
+      <lane id="Approver" name="Approver">
+        <flowNodeRef>approveInvoice</flowNodeRef>
+        <flowNodeRef>invoice_approved</flowNodeRef>
+      </lane>
+      <lane id="teamAssistant" name="Team Assistant">
+        <flowNodeRef>assignApprover</flowNodeRef>
+        <flowNodeRef>reviewInvoice</flowNodeRef>
+        <flowNodeRef>reviewSuccessful_gw</flowNodeRef>
+        <flowNodeRef>invoiceNotProcessed</flowNodeRef>
+        <flowNodeRef>StartEvent_1</flowNodeRef>
+      </lane>
+      <lane id="Accountant" name="Accountant">
+        <flowNodeRef>prepareBankTransfer</flowNodeRef>
+        <flowNodeRef>invoiceProcessed</flowNodeRef>
+        <flowNodeRef>archiveInvoice</flowNodeRef>
+      </lane>
+    </laneSet>
+    <sequenceFlow id="invoiceApproved" name="yes" sourceRef="invoice_approved" targetRef="prepareBankTransfer" isImmediate="true">
+      <conditionExpression xsi:type="bpmn:tExpression"><![CDATA[${approved}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="invoiceNotApproved" name="no" sourceRef="invoice_approved" targetRef="reviewInvoice" isImmediate="true">
+      <conditionExpression xsi:type="bpmn:tExpression"><![CDATA[${!approved}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="reviewSuccessful" name="yes" sourceRef="reviewSuccessful_gw" targetRef="approveInvoice" isImmediate="true">
+      <conditionExpression xsi:type="bpmn:tExpression"><![CDATA[${clarified == 'yes'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="reviewNotSuccessful" name="no" sourceRef="reviewSuccessful_gw" targetRef="invoiceNotProcessed" isImmediate="true">
+      <conditionExpression xsi:type="bpmn:tExpression"><![CDATA[${clarified == 'no'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sequenceFlow_180" sourceRef="approveInvoice" targetRef="invoice_approved" isImmediate="true"/>
+    <sequenceFlow id="sequenceFlow_183" sourceRef="reviewInvoice" targetRef="reviewSuccessful_gw" isImmediate="true"/>
+    <sequenceFlow id="sequenceFlow_178" sourceRef="assignApprover" targetRef="approveInvoice" isImmediate="true"/>
+    <sequenceFlow id="SequenceFlow_2" sourceRef="prepareBankTransfer" targetRef="archiveInvoice" isImmediate="true"/>
+    <sequenceFlow id="SequenceFlow_3" sourceRef="archiveInvoice" targetRef="invoiceProcessed" isImmediate="true"/>
+    <sequenceFlow id="SequenceFlow_1" sourceRef="StartEvent_1" targetRef="assignApprover" isImmediate="true"/>
+  </process>
+  <bpmndi:BPMNDiagram id="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7" name="Collaboration C.1.0">
+    <bpmndi:BPMNPlane bpmnElement="sid-e5defbed-c12d-4c0a-9b5e-0f187e35ffd3">
+      <bpmndi:BPMNShape bpmnElement="sid-46891B57-A9D3-4A8B-AEBF-D4BA5F3961AD" id="sid-46891B57-A9D3-4A8B-AEBF-D4BA5F3961AD_gui" isHorizontal="true">
+        <dc:Bounds height="205.0" width="1007.0" x="17.0" y="15.0"/>
+        <bpmndi:BPMNLabel labelStyle="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7_Arial12255"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Process_Engine_1" id="Process_Engine_1_gui" isHorizontal="true">
+        <dc:Bounds height="488.0" width="1009.0" x="15.0" y="270.0"/>
+        <bpmndi:BPMNLabel labelStyle="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7_Arial12255"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-744AEFB3-C93D-46A3-8976-EFA91784A51F" id="sid-744AEFB3-C93D-46A3-8976-EFA91784A51F_gui" isHorizontal="true">
+        <dc:Bounds height="205.0" width="977.0" x="47.0" y="15.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-36EA43D1-0FE6-4197-AC57-7A43785B784B" id="sid-36EA43D1-0FE6-4197-AC57-7A43785B784B_gui">
+        <dc:Bounds height="30.0" width="30.0" x="99.0" y="118.0"/>
+        <bpmndi:BPMNLabel labelStyle="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7_Arial12255">
+          <dc:Bounds height="34.0" width="57.0" x="86" y="148"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-05039C4F-59F7-4CBD-8C84-D35E27C7B5EF" id="sid-05039C4F-59F7-4CBD-8C84-D35E27C7B5EF_gui">
+        <dc:Bounds height="80.0" width="100.0" x="167.0" y="93.0"/>
+        <bpmndi:BPMNLabel labelStyle="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7_Arial12255"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-CFAC8502-0E69-4F08-BE36-8499B8C0FA44" id="sid-CFAC8502-0E69-4F08-BE36-8499B8C0FA44_gui">
+        <dc:Bounds height="80.0" width="100.0" x="315.0" y="93.0"/>
+        <bpmndi:BPMNLabel labelStyle="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7_Arial12255"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-BC9AC0B6-1785-4E35-A974-7FEF1A586B9D" id="sid-BC9AC0B6-1785-4E35-A974-7FEF1A586B9D_gui">
+        <dc:Bounds height="28.0" width="28.0" x="941.0" y="63.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-40EC6574-E644-425C-8CE7-EE384F0C3520" id="sid-40EC6574-E644-425C-8CE7-EE384F0C3520_gui">
+        <dc:Bounds height="30.0" width="30.0" x="455.75" y="118.0"/>
+        <bpmndi:BPMNLabel labelStyle="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7_Arial12255">
+          <dc:Bounds height="34.0" width="73.0" x="434" y="84"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-64AFCE49-96A2-4A51-96CB-9DF689C37DAD" id="sid-64AFCE49-96A2-4A51-96CB-9DF689C37DAD_gui">
+        <dc:Bounds height="80.0" width="100.0" x="527.5" y="93.0"/>
+        <bpmndi:BPMNLabel labelStyle="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7_Arial12255"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-F0D29912-929D-491C-8D23-73BD80CF980A" id="sid-F0D29912-929D-491C-8D23-73BD80CF980A_gui">
+        <dc:Bounds height="40.0" width="40.0" x="652.5" y="113.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-B548B980-12E3-408E-9AC4-7031B85A8F2D" id="sid-B548B980-12E3-408E-9AC4-7031B85A8F2D_gui">
+        <dc:Bounds height="30.0" width="30.0" x="731.75" y="159.0"/>
+        <bpmndi:BPMNLabel labelStyle="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7_Arial12255">
+          <dc:Bounds height="34.0" width="90.0" x="701" y="125"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-6FC20E19-AF3A-4A77-8588-2D671C98D93D" id="sid-6FC20E19-AF3A-4A77-8588-2D671C98D93D_gui">
+        <dc:Bounds height="80.0" width="100.0" x="797.5" y="134.0"/>
+        <bpmndi:BPMNLabel labelStyle="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7_Arial12255"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-0E349B8B-14A7-4565-988A-38F3A9B624D2" id="sid-0E349B8B-14A7-4565-988A-38F3A9B624D2_gui">
+        <dc:Bounds height="30.0" width="30.0" x="731.75" y="62.0"/>
+        <bpmndi:BPMNLabel labelStyle="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7_Arial12255">
+          <dc:Bounds height="17.0" width="42.0" x="725" y="45"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-282524E6-660F-431D-8F19-1C3E9E9DE817" id="sid-282524E6-660F-431D-8F19-1C3E9E9DE817_gui">
+        <dc:Bounds height="28.0" width="28.0" x="941.0" y="160.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Approver" id="Approver_gui" isHorizontal="true">
+        <dc:Bounds height="161.0" width="979.0" x="45.0" y="453.0"/>
+        <bpmndi:BPMNLabel labelStyle="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7_Arial12255"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="teamAssistant" id="teamAssistant_gui" isHorizontal="true">
+        <dc:Bounds height="183.0" width="979.0" x="45.0" y="270.0"/>
+        <bpmndi:BPMNLabel labelStyle="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7_Arial12255"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Accountant" id="Accountant_gui" isHorizontal="true">
+        <dc:Bounds height="144.0" width="979.0" x="45.0" y="614.0"/>
+        <bpmndi:BPMNLabel labelStyle="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7_Arial12255"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="approveInvoice" id="approveInvoice_gui">
+        <dc:Bounds height="80.0" width="100.0" x="368.0" y="495.0"/>
+        <bpmndi:BPMNLabel labelStyle="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7_Arial12255"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="invoice_approved" id="invoice_approved_gui">
+        <dc:Bounds height="40.0" width="40.0" x="503.0" y="515.0"/>
+        <bpmndi:BPMNLabel labelStyle="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7_Arial12255"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="assignApprover" id="assignApprover_gui">
+        <dc:Bounds height="80.0" width="100.0" x="195.0" y="322.0"/>
+        <bpmndi:BPMNLabel labelStyle="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7_Arial12255"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="reviewInvoice" id="reviewInvoice_gui">
+        <dc:Bounds height="80.0" width="100.0" x="563.0" y="322.0"/>
+        <bpmndi:BPMNLabel labelStyle="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7_Arial12255"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="reviewSuccessful_gw" id="reviewSuccessful_gw_gui">
+        <dc:Bounds height="40.0" width="40.0" x="708.0" y="342.0"/>
+        <bpmndi:BPMNLabel labelStyle="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7_Arial12255"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="invoiceNotProcessed" id="invoiceNotProcessed_gui">
+        <dc:Bounds height="28.0" width="28.0" x="941.0" y="348.0"/>
+        <bpmndi:BPMNLabel labelStyle="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7_Arial12255">
+          <dc:Bounds height="34.0" width="72.0" x="919" y="376"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="StartEvent_1" id="StartEvent_1_gui">
+        <dc:Bounds height="30.0" width="30.0" x="110.0" y="347.0"/>
+        <bpmndi:BPMNLabel labelStyle="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7_Arial12255">
+          <dc:Bounds height="34.0" width="57.0" x="97" y="377"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="prepareBankTransfer" id="prepareBankTransfer_gui">
+        <dc:Bounds height="80.0" width="100.0" x="653.0" y="655.0"/>
+        <bpmndi:BPMNLabel labelStyle="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7_Arial12255"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="invoiceProcessed" id="invoiceProcessed_gui">
+        <dc:Bounds height="28.0" width="28.0" x="941.0" y="681.0"/>
+        <bpmndi:BPMNLabel labelStyle="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7_Arial12255">
+          <dc:Bounds height="34.0" width="63.0" x="924" y="709"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="archiveInvoice" id="archiveInvoice_gui">
+        <dc:Bounds height="80.0" width="100.0" x="795.0" y="655.0"/>
+        <bpmndi:BPMNLabel labelStyle="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7_Arial12255"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-71EF9530-A32A-49BC-A783-9B98A5801362" id="sid-71EF9530-A32A-49BC-A783-9B98A5801362_gui">
+        <di:waypoint x="672.0" y="113.0"/>
+        <di:waypoint x="672.0" y="77.0"/>
+        <di:waypoint x="731.0" y="77.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="invoiceApproved" id="invoiceApproved_gui">
+        <di:waypoint x="543.0" y="535.0"/>
+        <di:waypoint x="602.0" y="535.0"/>
+        <di:waypoint x="602.0" y="695.0"/>
+        <di:waypoint x="653.0" y="695.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-C0540F47-C3C0-4FA8-B000-6D87640A6178" id="sid-C0540F47-C3C0-4FA8-B000-6D87640A6178_gui">
+        <di:waypoint x="415.0" y="133.0"/>
+        <di:waypoint x="455.0" y="133.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-4AD2006C-9290-42B0-A904-DD8076B791C4" id="sid-4AD2006C-9290-42B0-A904-DD8076B791C4_gui">
+        <di:waypoint x="485.0" y="133.0"/>
+        <di:waypoint x="527.0" y="133.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-3E8B2FCF-E408-4A5D-9455-8FDE7BB3EF96" id="sid-3E8B2FCF-E408-4A5D-9455-8FDE7BB3EF96_gui">
+        <di:waypoint x="267.0" y="133.0"/>
+        <di:waypoint x="315.0" y="133.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-4686AFBC-E33A-4657-95A0-B2E27E704152" id="sid-4686AFBC-E33A-4657-95A0-B2E27E704152_gui">
+        <di:waypoint x="672.0" y="153.0"/>
+        <di:waypoint x="672.0" y="174.0"/>
+        <di:waypoint x="731.0" y="174.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="invoiceNotApproved" id="invoiceNotApproved_gui">
+        <di:waypoint x="523.0" y="515.0"/>
+        <di:waypoint x="523.0" y="362.0"/>
+        <di:waypoint x="563.0" y="362.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-915AC9A0-CD35-4DF2-93F7-4535397622F8" id="sid-915AC9A0-CD35-4DF2-93F7-4535397622F8_gui">
+        <di:waypoint x="846.0" y="214.0"/>
+        <di:waypoint x="846.0" y="254.0"/>
+        <di:waypoint x="629.0" y="254.0"/>
+        <di:waypoint x="629.0" y="322.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-AB6EB7C8-DF5E-42C2-88D0-FA166583AF15" id="sid-AB6EB7C8-DF5E-42C2-88D0-FA166583AF15_gui">
+        <di:waypoint x="576.0" y="173.0"/>
+        <di:waypoint x="576.0" y="254.0"/>
+        <di:waypoint x="261.0" y="254.0"/>
+        <di:waypoint x="261.0" y="322.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="reviewSuccessful" id="reviewSuccessful_gui">
+        <di:waypoint x="728.0" y="342.0"/>
+        <di:waypoint x="728.0" y="305.0"/>
+        <di:waypoint x="418.0" y="305.0"/>
+        <di:waypoint x="418.0" y="495.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="reviewNotSuccessful" id="reviewNotSuccessful_gui">
+        <di:waypoint x="748.0" y="362.0"/>
+        <di:waypoint x="941.0" y="362.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow_180" id="sequenceFlow_180_gui">
+        <di:waypoint x="468.0" y="535.0"/>
+        <di:waypoint x="503.0" y="535.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-6CB8539C-E02A-4496-94E7-17FAECB0D4B1" id="sid-6CB8539C-E02A-4496-94E7-17FAECB0D4B1_gui">
+        <di:waypoint x="897.0" y="174.0"/>
+        <di:waypoint x="941.0" y="174.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow_183" id="sequenceFlow_183_gui">
+        <di:waypoint x="663.0" y="362.0"/>
+        <di:waypoint x="708.0" y="362.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-7A070DED-8B83-48E1-88A1-5543C481E7BC" id="sid-7A070DED-8B83-48E1-88A1-5543C481E7BC_gui">
+        <di:waypoint x="216.0" y="173.0"/>
+        <di:waypoint x="216.0" y="253.0"/>
+        <di:waypoint x="125.0" y="253.0"/>
+        <di:waypoint x="125.0" y="347.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-D03CC374-8575-4F38-98B4-4DFF014C43CB" id="sid-D03CC374-8575-4F38-98B4-4DFF014C43CB_gui">
+        <di:waypoint x="761.0" y="174.0"/>
+        <di:waypoint x="797.0" y="174.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow_178" id="sequenceFlow_178_gui">
+        <di:waypoint x="295.0" y="362.0"/>
+        <di:waypoint x="325.0" y="362.0"/>
+        <di:waypoint x="325.0" y="535.0"/>
+        <di:waypoint x="368.0" y="535.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-90902E27-C1CD-4F90-A8F2-486DA4F42117" id="sid-90902E27-C1CD-4F90-A8F2-486DA4F42117_gui">
+        <di:waypoint x="228.0" y="322.0"/>
+        <di:waypoint x="228.0" y="235.0"/>
+        <di:waypoint x="470.0" y="235.0"/>
+        <di:waypoint x="470.0" y="148.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-0518A412-1ED3-4CFD-A75C-69FF37EFFC16" id="sid-0518A412-1ED3-4CFD-A75C-69FF37EFFC16_gui">
+        <di:waypoint x="596.0" y="322.0"/>
+        <di:waypoint x="596.0" y="237.0"/>
+        <di:waypoint x="746.0" y="237.0"/>
+        <di:waypoint x="746.0" y="189.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_2" id="SequenceFlow_2_gui">
+        <di:waypoint x="753.0" y="695.0"/>
+        <di:waypoint x="795.0" y="695.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_3" id="SequenceFlow_3_gui">
+        <di:waypoint x="895.0" y="695.0"/>
+        <di:waypoint x="941.0" y="695.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_1" id="SequenceFlow_1_gui">
+        <di:waypoint x="140.0" y="362.0"/>
+        <di:waypoint x="195.0" y="362.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-3019478F-48D5-4B85-95B1-E192B9BE4183" id="sid-3019478F-48D5-4B85-95B1-E192B9BE4183_gui">
+        <di:waypoint x="761.0" y="77.0"/>
+        <di:waypoint x="941.0" y="77.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-26030150-7369-4B7F-8264-B3ABC62BA735" id="sid-26030150-7369-4B7F-8264-B3ABC62BA735_gui">
+        <di:waypoint x="627.0" y="133.0"/>
+        <di:waypoint x="652.0" y="133.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-7971C38C-2EF5-41F2-A24E-3FFCA069EDBF" id="sid-7971C38C-2EF5-41F2-A24E-3FFCA069EDBF_gui">
+        <di:waypoint x="129.0" y="133.0"/>
+        <di:waypoint x="167.0" y="133.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+    <bpmndi:BPMNLabelStyle id="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7_Arial12255">
+      <dc:Font isBold="false" isItalic="false" isStrikeThrough="false" isUnderline="false" name="Arial" size="12"/>
+    </bpmndi:BPMNLabelStyle>
+  </bpmndi:BPMNDiagram>
+</definitions>
