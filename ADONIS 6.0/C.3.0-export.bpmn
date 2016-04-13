@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:signavio="http://www.signavio.com"
+             xmlns:inspire="http://bpminspire.com/bpmn2/extension/inspire"
+             xmlns:camunda="http://activiti.org/bpmn"
+             xmlns:yaoqiang="http://bpmn.sourceforge.net"
+             xmlns:itp="http://www.itp-commerce.com/BPMN2.0"
+             xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:w4="http://www.w4.eu/spec/BPMN/20110701/MODEL"
+             xmlns:w4graph="http://www.w4.eu/spec/BPMN/20110930/GRAPH"
+             xmlns:ns2="http://www.ibm.com/bpm/Extensions"
+             xmlns:ns3="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:ns4="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:ns5="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:res="http://www.ibm.com/WebSphere/bpm/BlueworksLive/Resources"
+             xmlns:bwl0="http://www.ibm.com/WebSphere/bpm/BlueworksLive/Glossaries"
+             xmlns:xmi="http://www.omg.org/XMI"
+             xmlns:trisofeed="http://trisotech.com/feed"
+             xmlns:bpsim="http://www.bpsim.org/schemas/1.0"
+             xmlns:rss="http://purl.org/rss/2.0/"
+             xmlns:vp="http://www.visual-paradigm.com/bpmn/vpspecificcontent"
+             xmlns:style="http://www.w4.eu/spec/DataComposer/20120927/Diagram/Style"
+             xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:ix="http://www.igrafx.com/2007/igrafx-document"
+             xmlns:ixbpmn="http://www.igrafx.com/2011/bpmn"
+             xmlns:xs="http://xsdTypes.org/"
+             xmlns:i="http://www.igrafx.com/2007/igxmldoc"
+             xmlns:ixtim="http://www.igrafx.com/2012/timext"
+             xmlns:ibo="http://www.ibo.de/XML/BPMN"
+             xmlns:fox="http://www.camunda.com/fox"
+             xmlns:adonis="http://www.boc-group.com"
+             xmlns:semantic="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:GRAPH="http://www.w4.eu/spec/BPMN/20110930/GRAPH"
+             xmlns:bpmn2_1="http://www.sap.com/bpm/bpmn2"
+             xmlns:BPMN2.0="http://www.itp-commerce.com/BPMN2.0"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             exporter="ADONIS"
+             exporterVersion="6.1.4.1"
+             expressionLanguage="http://www.w3.org/1999/XPath"
+             targetNamespace="http://www.omg.org/bpmn20"
+             id="def_230410"
+             name="def_C.3.0"
+             typeLanguage="http://www.w3.org/2001/XMLSchema"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://www.omg.org/spec/BPMN/2.0/20100501/BPMN20.xsd">
+   <process id="process_230410" name="C.3.0" isExecutable="false" isClosed="false">
+      <extensionElements>
+         <adonis:modelattributes/>
+      </extensionElements>
+      <laneSet id="laneSet_230410"/>
+      <startEvent name="Receive customer request" id="obj.230609">
+         <extensionElements>
+            <adonis:instance/>
+         </extensionElements>
+         <outgoing>con.230615</outgoing>
+         <outputSet/>
+         <messageEventDefinition id="messageEventDefinition_obj.230609"/>
+      </startEvent>
+      <userTask name="Analyse customer request" id="obj.230612" isForCompensation="false"
+                implementation="##WebService">
+         <documentation id="obj.230612_documentation">First contact with customer</documentation>
+         <extensionElements>
+            <adonis:instance/>
+         </extensionElements>
+         <incoming>con.230615</incoming>
+         <outgoing>con.230619</outgoing>
+         <ioSpecification>
+            <inputSet/>
+            <outputSet/>
+         </ioSpecification>
+      </userTask>
+      <exclusiveGateway name="Service type" id="obj.230616">
+         <extensionElements>
+            <adonis:instance/>
+         </extensionElements>
+         <incoming>con.230619</incoming>
+         <outgoing>con.230623</outgoing>
+         <outgoing>con.230639</outgoing>
+         <outgoing>con.230652</outgoing>
+      </exclusiveGateway>
+      <userTask name="Replace fridge" id="obj.230620" isForCompensation="false"
+                implementation="##WebService">
+         <documentation id="obj.230620_documentation">Fridge replaced if still under warranty.</documentation>
+         <extensionElements>
+            <adonis:instance/>
+         </extensionElements>
+         <incoming>con.230623</incoming>
+         <incoming>con.230648</incoming>
+         <outgoing>con.230635</outgoing>
+         <ioSpecification>
+            <inputSet/>
+            <outputSet/>
+         </ioSpecification>
+      </userTask>
+      <endEvent name="Fridge replaced" id="obj.230632">
+         <extensionElements>
+            <adonis:instance/>
+         </extensionElements>
+         <incoming>con.230635</incoming>
+         <inputSet/>
+      </endEvent>
+      <subProcess name="Perform emergency repair" id="obj.230636" isForCompensation="false">
+         <documentation id="obj.230636_documentation">This is a special case for handling emergencies for clients such as Hospitals or Commercial fridges.</documentation>
+         <extensionElements>
+            <adonis:instance/>
+         </extensionElements>
+         <incoming>con.230639</incoming>
+         <incoming>con.230660</incoming>
+         <outgoing>con.230643</outgoing>
+         <ioSpecification>
+            <inputSet/>
+            <outputSet/>
+         </ioSpecification>
+      </subProcess>
+      <exclusiveGateway name="Successful?" id="obj.230640">
+         <extensionElements>
+            <adonis:instance/>
+         </extensionElements>
+         <incoming>con.230643</incoming>
+         <outgoing>con.230647</outgoing>
+         <outgoing>con.230648</outgoing>
+      </exclusiveGateway>
+      <endEvent name="Emergency repair completed" id="obj.230644">
+         <extensionElements>
+            <adonis:instance/>
+         </extensionElements>
+         <incoming>con.230647</incoming>
+         <inputSet/>
+      </endEvent>
+      <exclusiveGateway name="Service level" id="obj.230649">
+         <extensionElements>
+            <adonis:instance/>
+         </extensionElements>
+         <incoming>con.230652</incoming>
+         <outgoing>con.230656</outgoing>
+         <outgoing>con.230668</outgoing>
+      </exclusiveGateway>
+      <userTask name="Perform repair (premium level)" id="obj.230653" isForCompensation="false"
+                implementation="##WebService">
+         <documentation id="obj.230653_documentation">These customers get special service in case of damage.
+This service level guarantees less than two days to solve the issue.</documentation>
+         <extensionElements>
+            <adonis:instance/>
+         </extensionElements>
+         <incoming>con.230656</incoming>
+         <incoming>con.230673</incoming>
+         <outgoing>con.230664</outgoing>
+         <ioSpecification>
+            <inputSet/>
+            <outputSet/>
+         </ioSpecification>
+      </userTask>
+      <boundaryEvent name="2 hours" id="obj.230657" cancelActivity="true" attachedToRef="obj.230653">
+         <extensionElements>
+            <adonis:instance/>
+         </extensionElements>
+         <outgoing>con.230660</outgoing>
+         <timerEventDefinition id="timerEventDefinition_obj.230657">
+            <timeDuration xsi:type="tFormalExpression">00:000:02:00:00</timeDuration>
+         </timerEventDefinition>
+      </boundaryEvent>
+      <endEvent name="Repair completed" id="obj.230661">
+         <extensionElements>
+            <adonis:instance/>
+         </extensionElements>
+         <incoming>con.230664</incoming>
+         <incoming>con.230669</incoming>
+         <inputSet/>
+      </endEvent>
+      <userTask name="Perform repair (standard level)" id="obj.230665"
+                isForCompensation="false"
+                implementation="##WebService">
+         <documentation id="obj.230665_documentation">Standard service level is common for most customer support.
+This level guarantees the fridge will be repaired in a reasonable amount of time.
+Customers may decide to raise the service level to Premium while waiting for the standard service to solve the issue.</documentation>
+         <extensionElements>
+            <adonis:instance/>
+         </extensionElements>
+         <incoming>con.230668</incoming>
+         <outgoing>con.230669</outgoing>
+         <ioSpecification>
+            <inputSet/>
+            <outputSet/>
+         </ioSpecification>
+      </userTask>
+      <boundaryEvent name="Intermediate Event (boundary)" id="obj.230670" cancelActivity="true">
+         <extensionElements>
+            <adonis:instance/>
+         </extensionElements>
+         <outgoing>con.230673</outgoing>
+         <messageEventDefinition id="messageEventDefinition_obj.230670"/>
+      </boundaryEvent>
+      <sequenceFlow sourceRef="obj.230609" targetRef="obj.230612" name="" id="con.230615">
+         <extensionElements>
+            <adonis:connector/>
+         </extensionElements>
+      </sequenceFlow>
+      <sequenceFlow sourceRef="obj.230612" targetRef="obj.230616" name="" id="con.230619">
+         <extensionElements>
+            <adonis:connector/>
+         </extensionElements>
+      </sequenceFlow>
+      <sequenceFlow sourceRef="obj.230616" targetRef="obj.230620" name="Warranty" id="con.230623">
+         <extensionElements>
+            <adonis:connector/>
+         </extensionElements>
+      </sequenceFlow>
+      <sequenceFlow sourceRef="obj.230620" targetRef="obj.230632" name="" id="con.230635">
+         <extensionElements>
+            <adonis:connector/>
+         </extensionElements>
+      </sequenceFlow>
+      <sequenceFlow sourceRef="obj.230616" targetRef="obj.230636" name="Emergency service"
+                    id="con.230639">
+         <extensionElements>
+            <adonis:connector/>
+         </extensionElements>
+      </sequenceFlow>
+      <sequenceFlow sourceRef="obj.230636" targetRef="obj.230640" name="" id="con.230643">
+         <extensionElements>
+            <adonis:connector/>
+         </extensionElements>
+      </sequenceFlow>
+      <sequenceFlow sourceRef="obj.230640" targetRef="obj.230644" name="yes" id="con.230647">
+         <extensionElements>
+            <adonis:connector/>
+         </extensionElements>
+      </sequenceFlow>
+      <sequenceFlow sourceRef="obj.230640" targetRef="obj.230620" name="no" id="con.230648">
+         <extensionElements>
+            <adonis:connector/>
+         </extensionElements>
+      </sequenceFlow>
+      <sequenceFlow sourceRef="obj.230616" targetRef="obj.230649" name="Regular repair service"
+                    id="con.230652">
+         <extensionElements>
+            <adonis:connector/>
+         </extensionElements>
+      </sequenceFlow>
+      <sequenceFlow sourceRef="obj.230649" targetRef="obj.230653" name="Premium" id="con.230656">
+         <extensionElements>
+            <adonis:connector/>
+         </extensionElements>
+      </sequenceFlow>
+      <sequenceFlow sourceRef="obj.230657" targetRef="obj.230636" name="" id="con.230660">
+         <extensionElements>
+            <adonis:connector/>
+         </extensionElements>
+      </sequenceFlow>
+      <sequenceFlow sourceRef="obj.230653" targetRef="obj.230661" name="" id="con.230664">
+         <extensionElements>
+            <adonis:connector/>
+         </extensionElements>
+      </sequenceFlow>
+      <sequenceFlow sourceRef="obj.230649" targetRef="obj.230665" name="Standard" id="con.230668">
+         <extensionElements>
+            <adonis:connector/>
+         </extensionElements>
+      </sequenceFlow>
+      <sequenceFlow sourceRef="obj.230665" targetRef="obj.230661" name="" id="con.230669">
+         <extensionElements>
+            <adonis:connector/>
+         </extensionElements>
+      </sequenceFlow>
+      <sequenceFlow sourceRef="obj.230670" targetRef="obj.230653" name="" id="con.230673">
+         <extensionElements>
+            <adonis:connector/>
+         </extensionElements>
+      </sequenceFlow>
+   </process>
+   <bpmndi:BPMNDiagram name="C.3.0" id="Diagram_230410">
+      <bpmndi:BPMNPlane id="BPMNPlane_230410" bpmnElement="process_230410">
+         <bpmndi:BPMNShape bpmnElement="obj.230609" id="BPMN_Shape_obj.230609">
+            <omgdc:Bounds width="53" height="53" x="68" y="68"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="obj.230612" id="BPMN_Shape_obj.230612">
+            <omgdc:Bounds height="57" width="106" x="212" y="66"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="obj.230616" id="BPMN_Shape_obj.230616">
+            <omgdc:Bounds width="53" height="53" x="389" y="68"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="obj.230620" id="BPMN_Shape_obj.230620">
+            <omgdc:Bounds height="57" width="106" x="684" y="9"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="obj.230632" id="BPMN_Shape_obj.230632">
+            <omgdc:Bounds width="53" height="53" x="843" y="11"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="obj.230636" isExpanded="true" id="BPMN_Shape_obj.230636">
+            <omgdc:Bounds height="57" width="106" x="552" y="217"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="obj.230640" id="BPMN_Shape_obj.230640">
+            <omgdc:Bounds width="53" height="53" x="711" y="219"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="obj.230644" id="BPMN_Shape_obj.230644">
+            <omgdc:Bounds width="53" height="53" x="843" y="219"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="obj.230649" id="BPMN_Shape_obj.230649">
+            <omgdc:Bounds width="53" height="53" x="389" y="352"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="obj.230653" id="BPMN_Shape_obj.230653">
+            <omgdc:Bounds height="57" width="106" x="552" y="350"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="obj.230657" id="BPMN_Shape_obj.230657">
+            <omgdc:Bounds width="53" height="53" x="597" y="370"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="obj.230661" id="BPMN_Shape_obj.230661">
+            <omgdc:Bounds width="53" height="53" x="843" y="352"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="obj.230665" id="BPMN_Shape_obj.230665">
+            <omgdc:Bounds height="57" width="106" x="552" y="520"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="obj.230670" id="BPMN_Shape_obj.230670">
+            <omgdc:Bounds width="53" height="53" x="597" y="541"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNEdge id="BPMN_Edge_con.230615" bpmnElement="con.230615">
+            <omgdi:waypoint x="95" y="95"/>
+            <omgdi:waypoint x="265" y="95"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge id="BPMN_Edge_con.230619" bpmnElement="con.230619">
+            <omgdi:waypoint x="265" y="95"/>
+            <omgdi:waypoint x="416" y="95"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge id="BPMN_Edge_con.230623" bpmnElement="con.230623">
+            <omgdi:waypoint x="416" y="95"/>
+            <omgdi:waypoint x="416" y="38"/>
+            <omgdi:waypoint x="737" y="38"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge id="BPMN_Edge_con.230635" bpmnElement="con.230635">
+            <omgdi:waypoint x="737" y="38"/>
+            <omgdi:waypoint x="869" y="38"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge id="BPMN_Edge_con.230639" bpmnElement="con.230639">
+            <omgdi:waypoint x="416" y="95"/>
+            <omgdi:waypoint x="605" y="95"/>
+            <omgdi:waypoint x="605" y="246"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge id="BPMN_Edge_con.230643" bpmnElement="con.230643">
+            <omgdi:waypoint x="605" y="246"/>
+            <omgdi:waypoint x="737" y="246"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge id="BPMN_Edge_con.230647" bpmnElement="con.230647">
+            <omgdi:waypoint x="737" y="246"/>
+            <omgdi:waypoint x="869" y="246"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge id="BPMN_Edge_con.230648" bpmnElement="con.230648">
+            <omgdi:waypoint x="737" y="246"/>
+            <omgdi:waypoint x="737" y="38"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge id="BPMN_Edge_con.230652" bpmnElement="con.230652">
+            <omgdi:waypoint x="416" y="95"/>
+            <omgdi:waypoint x="416" y="378"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge id="BPMN_Edge_con.230656" bpmnElement="con.230656">
+            <omgdi:waypoint x="416" y="378"/>
+            <omgdi:waypoint x="605" y="378"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge id="BPMN_Edge_con.230660" bpmnElement="con.230660">
+            <omgdi:waypoint x="624" y="397"/>
+            <omgdi:waypoint x="624" y="473"/>
+            <omgdi:waypoint x="680" y="473"/>
+            <omgdi:waypoint x="680" y="321"/>
+            <omgdi:waypoint x="605" y="321"/>
+            <omgdi:waypoint x="605" y="246"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge id="BPMN_Edge_con.230664" bpmnElement="con.230664">
+            <omgdi:waypoint x="605" y="378"/>
+            <omgdi:waypoint x="869" y="378"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge id="BPMN_Edge_con.230668" bpmnElement="con.230668">
+            <omgdi:waypoint x="416" y="378"/>
+            <omgdi:waypoint x="416" y="548"/>
+            <omgdi:waypoint x="605" y="548"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge id="BPMN_Edge_con.230669" bpmnElement="con.230669">
+            <omgdi:waypoint x="605" y="548"/>
+            <omgdi:waypoint x="869" y="548"/>
+            <omgdi:waypoint x="869" y="378"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge id="BPMN_Edge_con.230673" bpmnElement="con.230673">
+            <omgdi:waypoint x="624" y="567"/>
+            <omgdi:waypoint x="624" y="624"/>
+            <omgdi:waypoint x="680" y="624"/>
+            <omgdi:waypoint x="680" y="491"/>
+            <omgdi:waypoint x="605" y="491"/>
+            <omgdi:waypoint x="605" y="378"/>
+         </bpmndi:BPMNEdge>
+      </bpmndi:BPMNPlane>
+   </bpmndi:BPMNDiagram>
+</definitions>
