@@ -1,0 +1,291 @@
+<bpmn2:definitions id='_0' exporter='BeePMN' name='definitions'
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xmlns:bpmn2='http://www.omg.org/spec/BPMN/20100524/MODEL' xsi:schemaLocation='http://www.omg.org/spec/BPMN/20100524/MODEL http://bpmn.sourceforge.net/schemas/BPMN20.xsd' targetNamespace='http://www.esteco.com/bpmn' expressionLanguage='http://www.ecma-international.org/ecma-262/5.1' typeLanguage='https://jcp.org/en/jsr/detail?id=337'
+    xmlns:bpmndi='http://www.omg.org/spec/BPMN/20100524/DI'
+    xmlns:dc='http://www.omg.org/spec/DD/20100524/DC'
+    xmlns:di='http://www.omg.org/spec/DD/20100524/DI'>
+    <bpmn2:itemDefinition id='_101' itemKind='Information' structureRef='Long' isCollection='false'></bpmn2:itemDefinition>
+    <bpmn2:itemDefinition id='_104' itemKind='Information' structureRef='Double' isCollection='false'></bpmn2:itemDefinition>
+    <bpmn2:itemDefinition id='_105' itemKind='Information' structureRef='Boolean' isCollection='false'></bpmn2:itemDefinition>
+    <bpmn2:itemDefinition id='_106' itemKind='Information' structureRef='URI' isCollection='false'></bpmn2:itemDefinition>
+    <bpmn2:itemDefinition id='_107' itemKind='Information' structureRef='String' isCollection='false'></bpmn2:itemDefinition>
+    <bpmn2:itemDefinition id='_111' itemKind='Information' structureRef='Array.Long' isCollection='false'></bpmn2:itemDefinition>
+    <bpmn2:itemDefinition id='_114' itemKind='Information' structureRef='Array.Double' isCollection='false'></bpmn2:itemDefinition>
+    <bpmn2:itemDefinition id='_115' itemKind='Information' structureRef='Array.Boolean' isCollection='false'></bpmn2:itemDefinition>
+    <bpmn2:itemDefinition id='_116' itemKind='Information' structureRef='Array.URI' isCollection='false'></bpmn2:itemDefinition>
+    <bpmn2:itemDefinition id='_117' itemKind='Information' structureRef='Array.String' isCollection='false'></bpmn2:itemDefinition>
+    <bpmn2:resource id='_18' name='Team Assistant'></bpmn2:resource>
+    <bpmn2:resource id='_19' name='Approver'></bpmn2:resource>
+    <bpmn2:resource id='_20' name='Accountant'></bpmn2:resource>
+    <bpmn2:process id='_1'>
+        <bpmn2:startEvent id='_12' name='Invoice received'>
+            <bpmn2:outgoing>_14</bpmn2:outgoing>
+        </bpmn2:startEvent>
+        <bpmn2:endEvent id='_61' name='Invoice processed'>
+            <bpmn2:incoming>_62</bpmn2:incoming>
+        </bpmn2:endEvent>
+        <bpmn2:endEvent id='_91' name='Invoice not processed'>
+            <bpmn2:incoming>_92</bpmn2:incoming>
+        </bpmn2:endEvent>
+        <bpmn2:exclusiveGateway id='_44' name='Invoice approved?' gatewayDirection='Diverging' default='_50'>
+            <bpmn2:incoming>_45</bpmn2:incoming>
+            <bpmn2:outgoing>_50</bpmn2:outgoing>
+            <bpmn2:outgoing>_67</bpmn2:outgoing>
+        </bpmn2:exclusiveGateway>
+        <bpmn2:exclusiveGateway id='_80' name='Review successful?' gatewayDirection='Diverging' default='_85'>
+            <bpmn2:incoming>_81</bpmn2:incoming>
+            <bpmn2:outgoing>_85</bpmn2:outgoing>
+            <bpmn2:outgoing>_92</bpmn2:outgoing>
+        </bpmn2:exclusiveGateway>
+        <bpmn2:dataObject id='_35' name='approver' itemSubjectRef='_107' isCollection='false'></bpmn2:dataObject>
+        <bpmn2:dataObject id='_43' name='approved' itemSubjectRef='_105' isCollection='false'></bpmn2:dataObject>
+        <bpmn2:dataObject id='_79' name='clarified' itemSubjectRef='_107' isCollection='false'></bpmn2:dataObject>
+        <bpmn2:sequenceFlow id='_14' sourceRef='_12' targetRef='_13' name=''></bpmn2:sequenceFlow>
+        <bpmn2:sequenceFlow id='_24' sourceRef='_13' targetRef='_23' name=''></bpmn2:sequenceFlow>
+        <bpmn2:sequenceFlow id='_45' sourceRef='_23' targetRef='_44' name=''></bpmn2:sequenceFlow>
+        <bpmn2:sequenceFlow id='_50' sourceRef='_44' targetRef='_49' name='yes'>
+            <bpmn2:conditionExpression id='ConditionExpression_50'>
+                <![CDATA[bpmn:getDataObject('approved')]]>
+            </bpmn2:conditionExpression>
+        </bpmn2:sequenceFlow>
+        <bpmn2:sequenceFlow id='_57' sourceRef='_49' targetRef='_56' name=''></bpmn2:sequenceFlow>
+        <bpmn2:sequenceFlow id='_62' sourceRef='_56' targetRef='_61' name=''></bpmn2:sequenceFlow>
+        <bpmn2:sequenceFlow id='_67' sourceRef='_44' targetRef='_66' name='no'>
+            <bpmn2:conditionExpression id='ConditionExpression_67'>
+                <![CDATA[not(bpmn:getDataObject('approved')]]>
+            </bpmn2:conditionExpression>
+        </bpmn2:sequenceFlow>
+        <bpmn2:sequenceFlow id='_81' sourceRef='_66' targetRef='_80' name=''></bpmn2:sequenceFlow>
+        <bpmn2:sequenceFlow id='_85' sourceRef='_80' targetRef='_23' name='yes'>
+            <bpmn2:conditionExpression id='ConditionExpression_85'>
+                <![CDATA[bpmn:getDataObject('clarified') = 'yes']]>
+            </bpmn2:conditionExpression>
+        </bpmn2:sequenceFlow>
+        <bpmn2:sequenceFlow id='_92' sourceRef='_80' targetRef='_91' name='no'>
+            <bpmn2:conditionExpression id='ConditionExpression_92'>
+                <![CDATA[bpmn:getDataObject('clarified') = 'no']]>
+            </bpmn2:conditionExpression>
+        </bpmn2:sequenceFlow>
+        <bpmn2:userTask id='_13' name='Assign Approver' implementation='##unspecified'>
+            <bpmn2:incoming>_14</bpmn2:incoming>
+            <bpmn2:outgoing>_24</bpmn2:outgoing>
+            <bpmn2:ioSpecification id='_21'>
+                <bpmn2:dataOutput id='_22' name='approver' itemSubjectRef='_107' isCollection='false'/>
+                <bpmn2:inputSet/>
+                <bpmn2:outputSet id='outputSet_21' name='default output set'>
+                    <bpmn2:dataOutputRefs>_22</bpmn2:dataOutputRefs>
+                </bpmn2:outputSet>
+            </bpmn2:ioSpecification>
+            <bpmn2:dataOutputAssociation id='_31'>
+                <bpmn2:sourceRef>_22</bpmn2:sourceRef>
+                <bpmn2:targetRef>_30</bpmn2:targetRef>
+            </bpmn2:dataOutputAssociation>
+            <bpmn2:potentialOwner id='PotentialOwner_13' name=''>
+                <bpmn2:resourceRef>_18</bpmn2:resourceRef>
+            </bpmn2:potentialOwner>
+        </bpmn2:userTask>
+        <bpmn2:userTask id='_23' name='Approve Invoice' implementation='##unspecified'>
+            <bpmn2:incoming>_24</bpmn2:incoming>
+            <bpmn2:incoming>_85</bpmn2:incoming>
+            <bpmn2:outgoing>_45</bpmn2:outgoing>
+            <bpmn2:ioSpecification id='_36'>
+                <bpmn2:dataOutput id='_37' name='approved' itemSubjectRef='_105' isCollection='false'/>
+                <bpmn2:inputSet/>
+                <bpmn2:outputSet id='outputSet_36' name='default output set'>
+                    <bpmn2:dataOutputRefs>_37</bpmn2:dataOutputRefs>
+                </bpmn2:outputSet>
+            </bpmn2:ioSpecification>
+            <bpmn2:dataOutputAssociation id='_39'>
+                <bpmn2:sourceRef>_37</bpmn2:sourceRef>
+                <bpmn2:targetRef>_38</bpmn2:targetRef>
+            </bpmn2:dataOutputAssociation>
+            <bpmn2:potentialOwner id='PotentialOwner_23' name=''>
+                <bpmn2:resourceRef>_19</bpmn2:resourceRef>
+            </bpmn2:potentialOwner>
+        </bpmn2:userTask>
+        <bpmn2:userTask id='_49' name='Prepare Bank Transfer' implementation='##unspecified'>
+            <bpmn2:incoming>_50</bpmn2:incoming>
+            <bpmn2:outgoing>_57</bpmn2:outgoing>
+            <bpmn2:potentialOwner id='PotentialOwner_49' name=''>
+                <bpmn2:resourceRef>_20</bpmn2:resourceRef>
+            </bpmn2:potentialOwner>
+        </bpmn2:userTask>
+        <bpmn2:userTask id='_66' name='Rechnung klären' implementation='##unspecified'>
+            <bpmn2:incoming>_67</bpmn2:incoming>
+            <bpmn2:outgoing>_81</bpmn2:outgoing>
+            <bpmn2:ioSpecification id='_72'>
+                <bpmn2:dataOutput id='_73' name='clarified' itemSubjectRef='_107' isCollection='false'/>
+                <bpmn2:inputSet/>
+                <bpmn2:outputSet id='outputSet_72' name='default output set'>
+                    <bpmn2:dataOutputRefs>_73</bpmn2:dataOutputRefs>
+                </bpmn2:outputSet>
+            </bpmn2:ioSpecification>
+            <bpmn2:dataOutputAssociation id='_75'>
+                <bpmn2:targetRef>_74</bpmn2:targetRef>
+            </bpmn2:dataOutputAssociation>
+            <bpmn2:potentialOwner id='PotentialOwner_66' name=''>
+                <bpmn2:resourceRef>_18</bpmn2:resourceRef>
+            </bpmn2:potentialOwner>
+        </bpmn2:userTask>
+        <bpmn2:dataObjectReference id='_30' name='approver' dataObjectRef='_35'></bpmn2:dataObjectReference>
+        <bpmn2:dataObjectReference id='_38' name='approved' dataObjectRef='_43'></bpmn2:dataObjectReference>
+        <bpmn2:dataObjectReference id='_74' name='clarified' dataObjectRef='_79'></bpmn2:dataObjectReference>
+        <bpmn2:serviceTask id='_56' name='Archive Invoice' implementation='##unspecified'>
+            <bpmn2:incoming>_57</bpmn2:incoming>
+            <bpmn2:outgoing>_62</bpmn2:outgoing>
+        </bpmn2:serviceTask>
+    </bpmn2:process>
+    <bpmndi:BPMNDiagram id='_1000' name='Diagram'>
+        <bpmndi:BPMNPlane bpmnElement='_1'>
+            <bpmndi:BPMNShape bpmnElement='_12' id='_BPMNShape_12'>
+                <dc:Bounds x='97.0' y='77.0' width='30.0' height='30.0'/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x='78.5' y='119.0' width='67.0' height='30.0'/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement='_61' id='_BPMNShape_61'>
+                <dc:Bounds x='1092.0' y='423.0' width='32.0' height='32.0'/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x='1073.0' y='463.0' width='70.0' height='32.0'/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement='_91' id='_BPMNShape_91'>
+                <dc:Bounds x='1092.0' y='76.0' width='32.0' height='32.0'/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x='1060.0' y='116.0' width='96.0' height='22.0'/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement='_30' id='_BPMNShape_30'>
+                <dc:Bounds x='214.0' y='215.0' width='32.0' height='40.0'/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x='178.0' y='263.0' width='104.0' height='22.0'/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement='_38' id='_BPMNShape_38'>
+                <dc:Bounds x='492.5' y='384.0' width='32.0' height='40.0'/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x='456.5' y='432.0' width='104.0' height='22.0'/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement='_74' id='_BPMNShape_74'>
+                <dc:Bounds x='726.0' y='196.0' width='32.0' height='40.0'/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x='690.0' y='244.0' width='104.0' height='22.0'/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement='_56' id='_BPMNShape_56'>
+                <dc:Bounds x='923.0' y='399.0' width='100.0' height='80.0'/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x='939.0' y='431.0' width='64.0' height='22.0'/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement='_13' id='_BPMNShape_13'>
+                <dc:Bounds x='180.0' y='52.0' width='100.0' height='80.0'/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x='204.0' y='78.0' width='55.0' height='36.0'/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement='_23' id='_BPMNShape_23'>
+                <dc:Bounds x='458.5' y='236.5' width='100.0' height='80.0'/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x='465.0148514851485' y='264.0584415584416' width='84.0' height='28.0'/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement='_49' id='_BPMNShape_49'>
+                <dc:Bounds x='772.0' y='399.0' width='100.0' height='80.0'/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x='791.0' y='418.0' width='62.0' height='47.0'/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement='_66' id='_BPMNShape_66'>
+                <dc:Bounds x='692.0' y='52.0' width='100.0' height='80.0'/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x='713.0' y='81.0' width='64.0' height='22.0'/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement='_44' id='_BPMNShape_44'>
+                <dc:Bounds x='612.0' y='256.5' width='40.0' height='40.0'/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x='591.5' y='309.0' width='81.0' height='36.0'/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement='_80' id='_BPMNShape_80'>
+                <dc:Bounds x='884.0' y='72.0' width='40.0' height='40.0'/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x='864.5' y='125.0' width='79.0' height='53.0'/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement='_14' id='_BPMNEdge_14'>
+                <di:waypoint x='127.0' y='92.0'></di:waypoint>
+                <di:waypoint x='180.0' y='92.0'></di:waypoint>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement='_24' id='_BPMNEdge_24'>
+                <di:waypoint x='280.0' y='92.0'></di:waypoint>
+                <di:waypoint x='360.0' y='92.0'></di:waypoint>
+                <di:waypoint x='360.0' y='273.5'></di:waypoint>
+                <di:waypoint x='458.5' y='275.49'></di:waypoint>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement='_45' id='_BPMNEdge_45'>
+                <di:waypoint x='558.5' y='276.5'></di:waypoint>
+                <di:waypoint x='612.0' y='276.5'></di:waypoint>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement='_50' id='_BPMNEdge_50'>
+                <di:waypoint x='652.0' y='276.5'></di:waypoint>
+                <di:waypoint x='721.360824742268' y='276.5'></di:waypoint>
+                <di:waypoint x='721.360824742268' y='439.0'></di:waypoint>
+                <di:waypoint x='772.0' y='439.0'></di:waypoint>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x='654.3529411764706' y='252.0' width='80.0' height='22.0'/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement='_57' id='_BPMNEdge_57'>
+                <di:waypoint x='872.0' y='439.0'></di:waypoint>
+                <di:waypoint x='923.0' y='439.0'></di:waypoint>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement='_62' id='_BPMNEdge_62'>
+                <di:waypoint x='1023.0' y='439.0'></di:waypoint>
+                <di:waypoint x='1092.0' y='439.0'></di:waypoint>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement='_67' id='_BPMNEdge_67'>
+                <di:waypoint x='632.0' y='256.5'></di:waypoint>
+                <di:waypoint x='632.0' y='92.0'></di:waypoint>
+                <di:waypoint x='692.0' y='92.0'></di:waypoint>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x='604.0' y='206.0' width='80.0' height='25.0'/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement='_81' id='_BPMNEdge_81'>
+                <di:waypoint x='792.0' y='92.0'></di:waypoint>
+                <di:waypoint x='884.0' y='92.0'></di:waypoint>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement='_85' id='_BPMNEdge_85'>
+                <di:waypoint x='904.0' y='72.0'></di:waypoint>
+                <di:waypoint x='904.0' y='28.927835051546392'></di:waypoint>
+                <di:waypoint x='508.5' y='28.927835051546392'></di:waypoint>
+                <di:waypoint x='508.5' y='236.5'></di:waypoint>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x='881.0' y='44.456116222088724' width='80.0' height='22.0'/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement='_92' id='_BPMNEdge_92'>
+                <di:waypoint x='924.0' y='92.0'></di:waypoint>
+                <di:waypoint x='1092.0' y='92.0'></di:waypoint>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x='919.8032786885246' y='93.33999999999999' width='80.0' height='22.0'/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement='_31' id='_BPMNEdge_31' sourceElement='_BPMNShape_13'>
+                <di:waypoint x='230.0' y='132.0'></di:waypoint>
+                <di:waypoint x='230.0' y='215.0'></di:waypoint>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement='_39' id='_BPMNEdge_39' sourceElement='_BPMNShape_23'>
+                <di:waypoint x='508.5' y='316.5'></di:waypoint>
+                <di:waypoint x='508.5' y='384.0'></di:waypoint>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement='_75' id='_BPMNEdge_75' sourceElement='_BPMNShape_66'>
+                <di:waypoint x='742.0' y='132.0'></di:waypoint>
+                <di:waypoint x='742.0' y='196.0'></di:waypoint>
+            </bpmndi:BPMNEdge>
+        </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+</bpmn2:definitions>

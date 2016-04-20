@@ -1,0 +1,188 @@
+<?xml version="1.0"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" exporter="ModelFoundry" exporterVersion="1.0.2" id="sid-bdb880ac-c464-4e5c-aa56-569d709436e0" name="sid-bdb880ac-c464-4e5c-aa56-569d709436e0" targetNamespace="http://www.omg.org/spec/BPMN/20100524/MODEL" expressionLanguage="http://www.w3.org/1999/XPath" typeLanguage="http://www.w3.org/2001/XMLSchema">
+  <import id="sid-bdb880ac-c464-4e5c-aa56-569d709436e0-import0" name="http://www.w3.org/2001/XMLSchema" location="xsdTypes.xsd" namespace="http://xsdTypes.org/"/>
+  <dataStore id="sid-14ef3d18-7218-4f57-98f0-bb595114754b" name="Financial Accounting System" isUnlimited="false"/>
+  <message id="sid-328811a0-7f72-468f-92de-6ab19e353312" name="invoice-received-C.1.0"/>
+  <process id="handle-invoice" name="Invoice Handling (OMG BPMN MIWG Demo)" isClosed="true" isExecutable="true" processType="None">
+    <dataObject id="Bpmn_DataObject_approver" name="approver" isCollection="false"/>
+    <dataObjectReference id="Bpmn_DataObjectReference_assignApprover" name="approver" dataObjectRef="Bpmn_DataObject_approver"/>
+    <dataObject id="Bpmn_DataObject_WUfQYrH1EeSuDf0W70XLGw" name="approved" isCollection="false"/>
+    <dataObjectReference id="Bpmn_DataObjectReference_YGA4YLH1EeSuDf0W70XLGw" name="approved" dataObjectRef="Bpmn_DataObject_WUfQYrH1EeSuDf0W70XLGw"/>
+    <dataObject id="Bpmn_DataObject_aT_L0rH1EeSuDf0W70XLGw" name="clarified" isCollection="false"/>
+    <dataObjectReference id="Bpmn_DataObjectReference_cdsDQLH1EeSuDf0W70XLGw" name="clarified" dataObjectRef="Bpmn_DataObject_aT_L0rH1EeSuDf0W70XLGw"/>
+    <userTask id="approveInvoice" name="Approve Invoice" isForCompensation="false" startQuantity="1" completionQuantity="1" implementation="##unspecified">
+      <incoming>reviewSuccessful</incoming>
+      <incoming>sequenceFlow_178</incoming>
+      <outgoing>sequenceFlow_180</outgoing>
+    </userTask>
+    <userTask id="assignApprover" name="Assign&#10;Approver" isForCompensation="false" startQuantity="1" completionQuantity="1" implementation="##unspecified">
+      <incoming>SequenceFlow_1</incoming>
+      <outgoing>sequenceFlow_178</outgoing>
+    </userTask>
+    <userTask id="reviewInvoice" name="Rechnung kl&#xE4;ren" isForCompensation="false" startQuantity="1" completionQuantity="1" implementation="##unspecified">
+      <incoming>invoiceNotApproved</incoming>
+      <outgoing>sequenceFlow_183</outgoing>
+    </userTask>
+    <endEvent id="invoiceNotProcessed" name="Invoice not&#10;processed">
+      <incoming>reviewNotSuccessful</incoming>
+    </endEvent>
+    <startEvent id="StartEvent_1" name="Invoice&#10;received">
+      <outgoing>SequenceFlow_1</outgoing>
+    </startEvent>
+    <userTask id="prepareBankTransfer" name="Prepare&#13;&#10;Bank&#13;&#10;Transfer" isForCompensation="false" startQuantity="1" completionQuantity="1" implementation="##unspecified">
+      <incoming>invoiceApproved</incoming>
+      <outgoing>SequenceFlow_2</outgoing>
+    </userTask>
+    <endEvent id="invoiceProcessed" name="Invoice&#10;processed">
+      <incoming>SequenceFlow_3</incoming>
+    </endEvent>
+    <serviceTask id="archiveInvoice" name="Archive&#10;Invoice" isForCompensation="false" startQuantity="1" completionQuantity="1" implementation="##unspecified">
+      <incoming>SequenceFlow_2</incoming>
+      <outgoing>SequenceFlow_3</outgoing>
+    </serviceTask>
+    <exclusiveGateway id="invoice_approved" name="Invoice&#10;approved?" gatewayDirection="Diverging">
+      <incoming>sequenceFlow_180</incoming>
+      <outgoing>invoiceApproved</outgoing>
+      <outgoing>invoiceNotApproved</outgoing>
+    </exclusiveGateway>
+    <exclusiveGateway id="reviewSuccessful_gw" name="Review&#10;successful?" gatewayDirection="Diverging">
+      <incoming>sequenceFlow_183</incoming>
+      <outgoing>reviewSuccessful</outgoing>
+      <outgoing>reviewNotSuccessful</outgoing>
+    </exclusiveGateway>
+    <sequenceFlow id="invoiceApproved" name="yes" sourceRef="invoice_approved" targetRef="prepareBankTransfer" isImmediate="true">
+      <conditionExpression xsi:type="bpmn:tExpression"><![CDATA[bpmn:getDataObject('approved')]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="invoiceNotApproved" name="no" sourceRef="invoice_approved" targetRef="reviewInvoice" isImmediate="true">
+      <conditionExpression xsi:type="bpmn:tExpression"><![CDATA[not(bpmn:getDataObject('approved'))]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="reviewSuccessful" name="yes" sourceRef="reviewSuccessful_gw" targetRef="approveInvoice" isImmediate="true">
+      <conditionExpression xsi:type="bpmn:tExpression"><![CDATA[bpmn:getDataObject('clarified') = 'yes']]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="reviewNotSuccessful" name="no" sourceRef="reviewSuccessful_gw" targetRef="invoiceNotProcessed" isImmediate="true">
+      <conditionExpression xsi:type="bpmn:tExpression"><![CDATA[bpmn:getDataObject('clarified') = 'no']]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sequenceFlow_180" sourceRef="approveInvoice" targetRef="invoice_approved" isImmediate="true"/>
+    <sequenceFlow id="sequenceFlow_183" sourceRef="reviewInvoice" targetRef="reviewSuccessful_gw" isImmediate="true"/>
+    <sequenceFlow id="sequenceFlow_178" sourceRef="assignApprover" targetRef="approveInvoice" isImmediate="true"/>
+    <sequenceFlow id="SequenceFlow_2" sourceRef="prepareBankTransfer" targetRef="archiveInvoice" isImmediate="true"/>
+    <sequenceFlow id="SequenceFlow_3" sourceRef="archiveInvoice" targetRef="invoiceProcessed" isImmediate="true"/>
+    <sequenceFlow id="SequenceFlow_1" sourceRef="StartEvent_1" targetRef="assignApprover" isImmediate="true"/>
+  </process>
+  <itemDefinition id="xsdString" itemKind="Information" structureRef="xs:tString" isCollection="false"/>
+  <itemDefinition id="xsdBool" itemKind="Information" structureRef="xs:tBool" isCollection="false"/>
+  <bpmndi:BPMNDiagram id="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7" name="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7">
+    <bpmndi:BPMNPlane bpmnElement="handle-invoice">
+      <bpmndi:BPMNShape bpmnElement="approveInvoice" id="approveInvoice_gui">
+        <dc:Bounds height="80.0" width="100.0" x="353.0" y="225.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="invoice_approved" id="invoice_approved_gui">
+        <dc:Bounds height="40.0" width="40.0" x="488.0" y="245.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="assignApprover" id="assignApprover_gui">
+        <dc:Bounds height="80.0" width="100.0" x="180.0" y="52.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="reviewInvoice" id="reviewInvoice_gui">
+        <dc:Bounds height="80.0" width="100.0" x="548.0" y="52.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="reviewSuccessful_gw" id="reviewSuccessful_gw_gui">
+        <dc:Bounds height="40.0" width="40.0" x="693.0" y="72.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="invoiceNotProcessed" id="invoiceNotProcessed_gui">
+        <dc:Bounds height="28.0" width="28.0" x="926.0" y="78.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="StartEvent_1" id="StartEvent_1_gui">
+        <dc:Bounds height="30.0" width="30.0" x="95.0" y="77.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="prepareBankTransfer" id="prepareBankTransfer_gui">
+        <dc:Bounds height="80.0" width="100.0" x="638.0" y="385.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="invoiceProcessed" id="invoiceProcessed_gui">
+        <dc:Bounds height="28.0" width="28.0" x="926.0" y="411.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="archiveInvoice" id="archiveInvoice_gui">
+        <dc:Bounds height="80.0" width="100.0" x="780.0" y="385.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Bpmn_DataObjectReference_assignApprover" id="Bpmndi_BPMNShape_assignApprover">
+        <dc:Bounds height="35.0" width="35.0" x="212.0" y="174.0"/>
+        <bpmndi:BPMNLabel labelStyle="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7_Arial9.0255">
+          <dc:Bounds height="22.0" width="56.0" x="201" y="229"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Bpmn_DataObjectReference_YGA4YLH1EeSuDf0W70XLGw" id="Bpmndi_BPMNShape_YGA4YbH1EeSuDf0W70XLGw">
+        <dc:Bounds height="35.0" width="35.0" x="385.0" y="350.0"/>
+        <bpmndi:BPMNLabel labelStyle="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7_Arial9.0255">
+          <dc:Bounds height="22.0" width="59.0" x="365" y="400"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Bpmn_DataObjectReference_cdsDQLH1EeSuDf0W70XLGw" id="Bpmndi_BPMNShape_cdsDQbH1EeSuDf0W70XLGw">
+        <dc:Bounds height="35.0" width="35.0" x="580.0" y="174.0"/>
+        <bpmndi:BPMNLabel labelStyle="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7_Arial9.0255">
+          <dc:Bounds height="22.0" width="51.0" x="556" y="229"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="invoiceApproved" id="invoiceApproved_gui">
+        <di:waypoint x="528.0" y="265.0"/>
+        <di:waypoint x="587.0" y="265.0"/>
+        <di:waypoint x="587.0" y="425.0"/>
+        <di:waypoint x="638.0" y="425.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="invoiceNotApproved" id="invoiceNotApproved_gui">
+        <di:waypoint x="508.0" y="245.0"/>
+        <di:waypoint x="508.0" y="92.0"/>
+        <di:waypoint x="548.0" y="92.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="reviewSuccessful" id="reviewSuccessful_gui">
+        <di:waypoint x="713.0" y="72.0"/>
+        <di:waypoint x="713.0" y="35.0"/>
+        <di:waypoint x="403.0" y="35.0"/>
+        <di:waypoint x="403.0" y="225.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="reviewNotSuccessful" id="reviewNotSuccessful_gui">
+        <di:waypoint x="733.0" y="92.0"/>
+        <di:waypoint x="926.0" y="92.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow_180" id="sequenceFlow_180_gui">
+        <di:waypoint x="453.0" y="265.0"/>
+        <di:waypoint x="488.0" y="265.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow_183" id="sequenceFlow_183_gui">
+        <di:waypoint x="648.0" y="92.0"/>
+        <di:waypoint x="693.0" y="92.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow_178" id="sequenceFlow_178_gui">
+        <di:waypoint x="280.0" y="92.0"/>
+        <di:waypoint x="310.0" y="92.0"/>
+        <di:waypoint x="310.0" y="265.0"/>
+        <di:waypoint x="353.0" y="265.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_2" id="SequenceFlow_2_gui">
+        <di:waypoint x="738.0" y="425.0"/>
+        <di:waypoint x="780.0" y="425.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_3" id="SequenceFlow_3_gui">
+        <di:waypoint x="880.0" y="425.0"/>
+        <di:waypoint x="926.0" y="425.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_1" id="SequenceFlow_1_gui">
+        <di:waypoint x="125.0" y="92.0"/>
+        <di:waypoint x="180.0" y="92.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Bpmn_DataOutputAssociation_assignApprover" id="Bpmndi_BPMNEdge_assignApprover">
+        <di:waypoint x="230.0" y="132.0"/>
+        <di:waypoint x="229.0" y="174.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Bpmn_DataOutputAssociation_Y55MYrH1EeSuDf0W70XLGw" id="Bpmndi_BPMNEdge_Y55MYLH1EeSuDf0W70XLGw">
+        <di:waypoint x="403.0" y="305.0"/>
+        <di:waypoint x="402.0" y="350.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Bpmn_DataOutputAssociation_dB6xsrH1EeSuDf0W70XLGw" id="Bpmndi_BPMNEdge_dB6xsLH1EeSuDf0W70XLGw">
+        <di:waypoint x="598.0" y="132.0"/>
+        <di:waypoint x="597.0" y="174.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+    <bpmndi:BPMNLabelStyle id="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7_Arial9.0255">
+      <dc:Font isBold="false" isItalic="false" isStrikeThrough="false" isUnderline="false" name="Arial" size="9.0"/>
+    </bpmndi:BPMNLabelStyle>
+  </bpmndi:BPMNDiagram>
+</definitions>

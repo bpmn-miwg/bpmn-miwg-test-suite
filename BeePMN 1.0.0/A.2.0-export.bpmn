@@ -1,0 +1,156 @@
+<bpmn2:definitions id='_0' exporter='BeePMN' name='definitions'
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xmlns:bpmn2='http://www.omg.org/spec/BPMN/20100524/MODEL' xsi:schemaLocation='http://www.omg.org/spec/BPMN/20100524/MODEL http://bpmn.sourceforge.net/schemas/BPMN20.xsd' targetNamespace='http://www.esteco.com/bpmn' expressionLanguage='http://www.ecma-international.org/ecma-262/5.1' typeLanguage='https://jcp.org/en/jsr/detail?id=337'
+    xmlns:bpmndi='http://www.omg.org/spec/BPMN/20100524/DI'
+    xmlns:dc='http://www.omg.org/spec/DD/20100524/DC'
+    xmlns:di='http://www.omg.org/spec/DD/20100524/DI'>
+    <bpmn2:itemDefinition id='_101' itemKind='Information' structureRef='Long' isCollection='false'></bpmn2:itemDefinition>
+    <bpmn2:itemDefinition id='_104' itemKind='Information' structureRef='Double' isCollection='false'></bpmn2:itemDefinition>
+    <bpmn2:itemDefinition id='_105' itemKind='Information' structureRef='Boolean' isCollection='false'></bpmn2:itemDefinition>
+    <bpmn2:itemDefinition id='_106' itemKind='Information' structureRef='URI' isCollection='false'></bpmn2:itemDefinition>
+    <bpmn2:itemDefinition id='_107' itemKind='Information' structureRef='String' isCollection='false'></bpmn2:itemDefinition>
+    <bpmn2:itemDefinition id='_111' itemKind='Information' structureRef='Array.Long' isCollection='false'></bpmn2:itemDefinition>
+    <bpmn2:itemDefinition id='_114' itemKind='Information' structureRef='Array.Double' isCollection='false'></bpmn2:itemDefinition>
+    <bpmn2:itemDefinition id='_115' itemKind='Information' structureRef='Array.Boolean' isCollection='false'></bpmn2:itemDefinition>
+    <bpmn2:itemDefinition id='_116' itemKind='Information' structureRef='Array.URI' isCollection='false'></bpmn2:itemDefinition>
+    <bpmn2:itemDefinition id='_117' itemKind='Information' structureRef='Array.String' isCollection='false'></bpmn2:itemDefinition>
+    <bpmn2:process id='_1'>
+        <bpmn2:startEvent id='_12' name='StartEvent'>
+            <bpmn2:outgoing>_14</bpmn2:outgoing>
+        </bpmn2:startEvent>
+        <bpmn2:endEvent id='_51' name='End Event'>
+            <bpmn2:incoming>_52</bpmn2:incoming>
+            <bpmn2:incoming>_57</bpmn2:incoming>
+        </bpmn2:endEvent>
+        <bpmn2:exclusiveGateway id='_18' name='Gateway (Split Flow)' gatewayDirection='Diverging' default='_26'>
+            <bpmn2:incoming>_19</bpmn2:incoming>
+            <bpmn2:outgoing>_31</bpmn2:outgoing>
+            <bpmn2:outgoing>_35</bpmn2:outgoing>
+            <bpmn2:outgoing>_26</bpmn2:outgoing>
+        </bpmn2:exclusiveGateway>
+        <bpmn2:exclusiveGateway id='_40' name='Gateway (Merge Flows)' gatewayDirection='Converging' default='_52'>
+            <bpmn2:incoming>_41</bpmn2:incoming>
+            <bpmn2:incoming>_46</bpmn2:incoming>
+            <bpmn2:outgoing>_52</bpmn2:outgoing>
+        </bpmn2:exclusiveGateway>
+        <bpmn2:sequenceFlow id='_14' sourceRef='_12' targetRef='_13' name=''></bpmn2:sequenceFlow>
+        <bpmn2:sequenceFlow id='_19' sourceRef='_13' targetRef='_18' name=''></bpmn2:sequenceFlow>
+        <bpmn2:sequenceFlow id='_26' sourceRef='_18' targetRef='_23' name=''></bpmn2:sequenceFlow>
+        <bpmn2:sequenceFlow id='_31' sourceRef='_18' targetRef='_24' name=''></bpmn2:sequenceFlow>
+        <bpmn2:sequenceFlow id='_35' sourceRef='_18' targetRef='_25' name=''></bpmn2:sequenceFlow>
+        <bpmn2:sequenceFlow id='_41' sourceRef='_24' targetRef='_40' name=''></bpmn2:sequenceFlow>
+        <bpmn2:sequenceFlow id='_46' sourceRef='_25' targetRef='_40' name=''></bpmn2:sequenceFlow>
+        <bpmn2:sequenceFlow id='_52' sourceRef='_40' targetRef='_51' name=''></bpmn2:sequenceFlow>
+        <bpmn2:sequenceFlow id='_57' sourceRef='_23' targetRef='_51' name=''></bpmn2:sequenceFlow>
+        <bpmn2:task id='_13' name='Task 1'>
+            <bpmn2:incoming>_14</bpmn2:incoming>
+            <bpmn2:outgoing>_19</bpmn2:outgoing>
+        </bpmn2:task>
+        <bpmn2:task id='_23' name='Task 2'>
+            <bpmn2:incoming>_26</bpmn2:incoming>
+            <bpmn2:outgoing>_57</bpmn2:outgoing>
+        </bpmn2:task>
+        <bpmn2:task id='_24' name='Task 3'>
+            <bpmn2:incoming>_31</bpmn2:incoming>
+            <bpmn2:outgoing>_41</bpmn2:outgoing>
+        </bpmn2:task>
+        <bpmn2:task id='_25' name='Task 4'>
+            <bpmn2:incoming>_35</bpmn2:incoming>
+            <bpmn2:outgoing>_46</bpmn2:outgoing>
+        </bpmn2:task>
+    </bpmn2:process>
+    <bpmndi:BPMNDiagram id='_1000' name='Diagram'>
+        <bpmndi:BPMNPlane bpmnElement='_1'>
+            <bpmndi:BPMNShape bpmnElement='_12' id='_BPMNShape_12'>
+                <dc:Bounds x='186.0' y='276.0' width='30.0' height='30.0'/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x='145.0' y='314.0' width='112.0' height='22.0'/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement='_51' id='_BPMNShape_51'>
+                <dc:Bounds x='744.0' y='238.0' width='32.0' height='32.0'/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x='653.0' y='243.0' width='96.0' height='22.0'/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement='_13' id='_BPMNShape_13'>
+                <dc:Bounds x='252.0' y='257.0' width='83.0' height='68.0'/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x='262.0' y='282.125' width='64.0' height='22.0'/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement='_23' id='_BPMNShape_23'>
+                <dc:Bounds x='480.0' y='172.0' width='83.0' height='68.0'/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x='489.0' y='198.0' width='64.0' height='22.0'/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement='_24' id='_BPMNShape_24'>
+                <dc:Bounds x='480.0' y='257.0' width='83.0' height='68.0'/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x='489.0' y='283.0' width='64.0' height='22.0'/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement='_25' id='_BPMNShape_25'>
+                <dc:Bounds x='480.0' y='354.0' width='83.0' height='68.0'/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x='489.0' y='379.0' width='64.0' height='22.0'/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement='_18' id='_BPMNShape_18'>
+                <dc:Bounds x='399.0' y='270.0' width='42.0' height='42.0'/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x='351.0' y='308.0' width='57.0' height='30.0'/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement='_40' id='_BPMNShape_40'>
+                <dc:Bounds x='631.0' y='319.0' width='40.0' height='40.0'/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x='657.0' y='350.0' width='74.0' height='37.0'/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement='_14' id='_BPMNEdge_14'>
+                <di:waypoint x='216.0' y='291.0'></di:waypoint>
+                <di:waypoint x='252.0' y='291.0'></di:waypoint>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement='_19' id='_BPMNEdge_19'>
+                <di:waypoint x='335.0' y='291.0'></di:waypoint>
+                <di:waypoint x='399.0' y='291.0'></di:waypoint>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement='_26' id='_BPMNEdge_26'>
+                <di:waypoint x='419.5' y='270.0'></di:waypoint>
+                <di:waypoint x='419.5' y='206.0'></di:waypoint>
+                <di:waypoint x='480.0' y='206.0'></di:waypoint>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement='_31' id='_BPMNEdge_31'>
+                <di:waypoint x='441.0' y='291.0'></di:waypoint>
+                <di:waypoint x='480.0' y='291.0'></di:waypoint>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement='_35' id='_BPMNEdge_35'>
+                <di:waypoint x='419.43000000000006' y='312.0'></di:waypoint>
+                <di:waypoint x='419.43000000000006' y='388.0'></di:waypoint>
+                <di:waypoint x='480.0' y='388.0'></di:waypoint>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement='_41' id='_BPMNEdge_41'>
+                <di:waypoint x='563.0' y='291.0'></di:waypoint>
+                <di:waypoint x='651.0' y='291.0'></di:waypoint>
+                <di:waypoint x='651.0' y='319.0'></di:waypoint>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement='_46' id='_BPMNEdge_46'>
+                <di:waypoint x='563.0' y='388.0'></di:waypoint>
+                <di:waypoint x='651.0' y='388.0'></di:waypoint>
+                <di:waypoint x='651.0' y='359.0'></di:waypoint>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement='_52' id='_BPMNEdge_52'>
+                <di:waypoint x='671.0' y='339.0'></di:waypoint>
+                <di:waypoint x='760.0' y='339.0'></di:waypoint>
+                <di:waypoint x='760.0' y='270.0'></di:waypoint>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement='_57' id='_BPMNEdge_57'>
+                <di:waypoint x='563.0' y='206.0'></di:waypoint>
+                <di:waypoint x='760.0' y='206.0'></di:waypoint>
+                <di:waypoint x='760.0' y='238.0'></di:waypoint>
+            </bpmndi:BPMNEdge>
+        </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+</bpmn2:definitions>
