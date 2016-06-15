@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:signavio="http://www.signavio.com"
+             xmlns:inspire="http://bpminspire.com/bpmn2/extension/inspire"
+             xmlns:camunda="http://activiti.org/bpmn"
+             xmlns:yaoqiang="http://bpmn.sourceforge.net"
+             xmlns:itp="http://www.itp-commerce.com/BPMN2.0"
+             xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:w4="http://www.w4.eu/spec/BPMN/20110701/MODEL"
+             xmlns:w4graph="http://www.w4.eu/spec/BPMN/20110930/GRAPH"
+             xmlns:ns2="http://www.ibm.com/bpm/Extensions"
+             xmlns:ns3="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:ns4="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:ns5="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:res="http://www.ibm.com/WebSphere/bpm/BlueworksLive/Resources"
+             xmlns:bwl0="http://www.ibm.com/WebSphere/bpm/BlueworksLive/Glossaries"
+             xmlns:xmi="http://www.omg.org/XMI"
+             xmlns:trisofeed="http://trisotech.com/feed"
+             xmlns:bpsim="http://www.bpsim.org/schemas/1.0"
+             xmlns:rss="http://purl.org/rss/2.0/"
+             xmlns:vp="http://www.visual-paradigm.com/bpmn/vpspecificcontent"
+             xmlns:style="http://www.w4.eu/spec/DataComposer/20120927/Diagram/Style"
+             xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:ix="http://www.igrafx.com/2007/igrafx-document"
+             xmlns:ixbpmn="http://www.igrafx.com/2011/bpmn"
+             xmlns:xs="http://xsdTypes.org/"
+             xmlns:i="http://www.igrafx.com/2007/igxmldoc"
+             xmlns:ixtim="http://www.igrafx.com/2012/timext"
+             xmlns:ibo="http://www.ibo.de/XML/BPMN"
+             xmlns:fox="http://www.camunda.com/fox"
+             xmlns:adonis="http://www.boc-group.com"
+             xmlns:semantic="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:GRAPH="http://www.w4.eu/spec/BPMN/20110930/GRAPH"
+             xmlns:bpmn2_1="http://www.sap.com/bpm/bpmn2"
+             xmlns:BPMN2.0="http://www.itp-commerce.com/BPMN2.0"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             exporter="ADONIS"
+             exporterVersion="6.1.4.1"
+             expressionLanguage="http://www.w3.org/1999/XPath"
+             targetNamespace="http://www.omg.org/bpmn20"
+             id="def_225062"
+             name="def_C.1.1"
+             typeLanguage="http://www.w3.org/2001/XMLSchema"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://www.omg.org/spec/BPMN/2.0/20100501/BPMN20.xsd">
+   <process id="process_225062" name="C.1.1" isExecutable="false" isClosed="false">
+      <extensionElements>
+         <adonis:modelattributes/>
+      </extensionElements>
+      <laneSet id="laneSet_225062"/>
+      <dataObject name="approver" id="dataObject_obj.225104" isCollection="false"/>
+      <dataObject name="approved" id="dataObject_obj.225108" isCollection="false"/>
+      <dataObject name="clarified" id="dataObject_obj.225112" isCollection="false"/>
+      <startEvent name="Invoice received " id="obj.225064">
+         <extensionElements>
+            <adonis:instance/>
+         </extensionElements>
+         <outgoing>con.225094</outgoing>
+         <outputSet/>
+      </startEvent>
+      <userTask name="Assign Approver" id="obj.225067" isForCompensation="false"
+                implementation="##WebService">
+         <extensionElements>
+            <adonis:instance/>
+         </extensionElements>
+         <incoming>con.225094</incoming>
+         <outgoing>con.225095</outgoing>
+         <ioSpecification>
+            <dataOutput id="dataOutput_con.225107"/>
+            <inputSet/>
+            <outputSet>
+               <dataOutputRefs>dataOutput_con.225107</dataOutputRefs>
+            </outputSet>
+         </ioSpecification>
+         <dataOutputAssociation id="con.225107">
+            <sourceRef>dataOutput_con.225107</sourceRef>
+            <targetRef>obj.225104</targetRef>
+         </dataOutputAssociation>
+      </userTask>
+      <userTask name="Approve Invoice" id="obj.225070" isForCompensation="false"
+                implementation="##WebService">
+         <extensionElements>
+            <adonis:instance/>
+         </extensionElements>
+         <incoming>con.225095</incoming>
+         <incoming>con.225100</incoming>
+         <outgoing>con.225096</outgoing>
+         <ioSpecification>
+            <dataOutput id="dataOutput_con.225111"/>
+            <inputSet/>
+            <outputSet>
+               <dataOutputRefs>dataOutput_con.225111</dataOutputRefs>
+            </outputSet>
+         </ioSpecification>
+         <dataOutputAssociation id="con.225111">
+            <sourceRef>dataOutput_con.225111</sourceRef>
+            <targetRef>obj.225108</targetRef>
+         </dataOutputAssociation>
+      </userTask>
+      <exclusiveGateway name="Invoice approved?" id="obj.225073">
+         <extensionElements>
+            <adonis:instance/>
+         </extensionElements>
+         <incoming>con.225096</incoming>
+         <outgoing>con.225097</outgoing>
+         <outgoing>con.225101</outgoing>
+      </exclusiveGateway>
+      <userTask name="Rechnung klären" id="obj.225076" isForCompensation="false"
+                implementation="##WebService">
+         <extensionElements>
+            <adonis:instance/>
+         </extensionElements>
+         <incoming>con.225097</incoming>
+         <outgoing>con.225098</outgoing>
+         <ioSpecification>
+            <dataOutput id="dataOutput_con.225115"/>
+            <inputSet/>
+            <outputSet>
+               <dataOutputRefs>dataOutput_con.225115</dataOutputRefs>
+            </outputSet>
+         </ioSpecification>
+         <dataOutputAssociation id="con.225115">
+            <sourceRef>dataOutput_con.225115</sourceRef>
+            <targetRef>obj.225112</targetRef>
+         </dataOutputAssociation>
+      </userTask>
+      <exclusiveGateway name="Review successful?" id="obj.225079">
+         <extensionElements>
+            <adonis:instance/>
+         </extensionElements>
+         <incoming>con.225098</incoming>
+         <outgoing>con.225099</outgoing>
+         <outgoing>con.225100</outgoing>
+      </exclusiveGateway>
+      <endEvent name="Invoice not processed" id="obj.225082">
+         <extensionElements>
+            <adonis:instance/>
+         </extensionElements>
+         <incoming>con.225099</incoming>
+         <inputSet/>
+      </endEvent>
+      <userTask name="Prepare Bank Transfer" id="obj.225085" isForCompensation="false"
+                implementation="##WebService">
+         <extensionElements>
+            <adonis:instance/>
+         </extensionElements>
+         <incoming>con.225101</incoming>
+         <outgoing>con.225102</outgoing>
+         <ioSpecification>
+            <inputSet/>
+            <outputSet/>
+         </ioSpecification>
+      </userTask>
+      <serviceTask name="Archive Invoice" id="obj.225088" isForCompensation="false"
+                   implementation="##WebService">
+         <extensionElements>
+            <adonis:instance/>
+         </extensionElements>
+         <incoming>con.225102</incoming>
+         <outgoing>con.225103</outgoing>
+         <ioSpecification>
+            <inputSet/>
+            <outputSet/>
+         </ioSpecification>
+      </serviceTask>
+      <endEvent name="Invoice processed" id="obj.225091">
+         <extensionElements>
+            <adonis:instance/>
+         </extensionElements>
+         <incoming>con.225103</incoming>
+         <inputSet/>
+      </endEvent>
+      <dataObjectReference id="obj.225104" name="approver" dataObjectRef="dataObject_obj.225104">
+         <extensionElements>
+            <adonis:instance/>
+         </extensionElements>
+      </dataObjectReference>
+      <dataObjectReference id="obj.225108" name="approved" dataObjectRef="dataObject_obj.225108">
+         <extensionElements>
+            <adonis:instance/>
+         </extensionElements>
+      </dataObjectReference>
+      <dataObjectReference id="obj.225112" name="clarified" dataObjectRef="dataObject_obj.225112">
+         <extensionElements>
+            <adonis:instance/>
+         </extensionElements>
+      </dataObjectReference>
+      <sequenceFlow sourceRef="obj.225064" targetRef="obj.225067" name="" id="con.225094">
+         <extensionElements>
+            <adonis:connector/>
+         </extensionElements>
+      </sequenceFlow>
+      <sequenceFlow sourceRef="obj.225067" targetRef="obj.225070" name="" id="con.225095">
+         <extensionElements>
+            <adonis:connector/>
+         </extensionElements>
+      </sequenceFlow>
+      <sequenceFlow sourceRef="obj.225070" targetRef="obj.225073" name="" id="con.225096">
+         <extensionElements>
+            <adonis:connector/>
+         </extensionElements>
+      </sequenceFlow>
+      <sequenceFlow sourceRef="obj.225073" targetRef="obj.225076" name="no" id="con.225097">
+         <extensionElements>
+            <adonis:connector/>
+         </extensionElements>
+      </sequenceFlow>
+      <sequenceFlow sourceRef="obj.225076" targetRef="obj.225079" name="" id="con.225098">
+         <extensionElements>
+            <adonis:connector/>
+         </extensionElements>
+      </sequenceFlow>
+      <sequenceFlow sourceRef="obj.225079" targetRef="obj.225082" name="no" id="con.225099">
+         <extensionElements>
+            <adonis:connector/>
+         </extensionElements>
+      </sequenceFlow>
+      <sequenceFlow sourceRef="obj.225079" targetRef="obj.225070" name="yes" id="con.225100">
+         <extensionElements>
+            <adonis:connector/>
+         </extensionElements>
+      </sequenceFlow>
+      <sequenceFlow sourceRef="obj.225073" targetRef="obj.225085" name="yes" id="con.225101">
+         <extensionElements>
+            <adonis:connector/>
+         </extensionElements>
+      </sequenceFlow>
+      <sequenceFlow sourceRef="obj.225085" targetRef="obj.225088" name="" id="con.225102">
+         <extensionElements>
+            <adonis:connector/>
+         </extensionElements>
+      </sequenceFlow>
+      <sequenceFlow sourceRef="obj.225088" targetRef="obj.225091" name="" id="con.225103">
+         <extensionElements>
+            <adonis:connector/>
+         </extensionElements>
+      </sequenceFlow>
+   </process>
+   <bpmndi:BPMNDiagram name="C.1.1" id="Diagram_225062">
+      <bpmndi:BPMNPlane id="BPMNPlane_225062" bpmnElement="process_225062">
+         <bpmndi:BPMNShape bpmnElement="obj.225064" id="BPMN_Shape_obj.225064">
+            <omgdc:Bounds width="53" height="53" x="49" y="68"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="obj.225067" id="BPMN_Shape_obj.225067">
+            <omgdc:Bounds height="57" width="106" x="155" y="66"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="obj.225070" id="BPMN_Shape_obj.225070">
+            <omgdc:Bounds height="57" width="106" x="325" y="217"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="obj.225073" isMarkerVisible="true" id="BPMN_Shape_obj.225073">
+            <omgdc:Bounds width="53" height="53" x="503" y="219"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="obj.225076" id="BPMN_Shape_obj.225076">
+            <omgdc:Bounds height="57" width="106" x="590" y="66"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="obj.225079" id="BPMN_Shape_obj.225079">
+            <omgdc:Bounds width="53" height="53" x="767" y="68"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="obj.225082" id="BPMN_Shape_obj.225082">
+            <omgdc:Bounds width="53" height="53" x="994" y="68"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="obj.225085" id="BPMN_Shape_obj.225085">
+            <omgdc:Bounds height="57" width="106" x="646" y="369"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="obj.225088" id="BPMN_Shape_obj.225088">
+            <omgdc:Bounds height="57" width="106" x="798" y="369"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="obj.225091" id="BPMN_Shape_obj.225091">
+            <omgdc:Bounds width="53" height="53" x="994" y="370"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="obj.225104" id="BPMN_Shape_obj.225104">
+            <omgdc:Bounds width="45" height="53" x="185" y="163"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="obj.225108" id="BPMN_Shape_obj.225108">
+            <omgdc:Bounds width="45" height="53" x="355" y="333"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="obj.225112" id="BPMN_Shape_obj.225112">
+            <omgdc:Bounds width="45" height="53" x="620" y="163"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNEdge id="BPMN_Edge_con.225094" bpmnElement="con.225094">
+            <omgdi:waypoint x="76" y="95"/>
+            <omgdi:waypoint x="208" y="95"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge id="BPMN_Edge_con.225095" bpmnElement="con.225095">
+            <omgdi:waypoint x="208" y="95"/>
+            <omgdi:waypoint x="283" y="95"/>
+            <omgdi:waypoint x="283" y="246"/>
+            <omgdi:waypoint x="378" y="246"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge id="BPMN_Edge_con.225096" bpmnElement="con.225096">
+            <omgdi:waypoint x="378" y="246"/>
+            <omgdi:waypoint x="529" y="246"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge id="BPMN_Edge_con.225097" bpmnElement="con.225097">
+            <omgdi:waypoint x="529" y="246"/>
+            <omgdi:waypoint x="529" y="95"/>
+            <omgdi:waypoint x="643" y="95"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge id="BPMN_Edge_con.225098" bpmnElement="con.225098">
+            <omgdi:waypoint x="643" y="95"/>
+            <omgdi:waypoint x="794" y="95"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge id="BPMN_Edge_con.225099" bpmnElement="con.225099">
+            <omgdi:waypoint x="794" y="95"/>
+            <omgdi:waypoint x="1021" y="95"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge id="BPMN_Edge_con.225100" bpmnElement="con.225100">
+            <omgdi:waypoint x="794" y="95"/>
+            <omgdi:waypoint x="794" y="38"/>
+            <omgdi:waypoint x="378" y="38"/>
+            <omgdi:waypoint x="378" y="246"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge id="BPMN_Edge_con.225101" bpmnElement="con.225101">
+            <omgdi:waypoint x="529" y="246"/>
+            <omgdi:waypoint x="605" y="246"/>
+            <omgdi:waypoint x="605" y="397"/>
+            <omgdi:waypoint x="699" y="397"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge id="BPMN_Edge_con.225102" bpmnElement="con.225102">
+            <omgdi:waypoint x="699" y="397"/>
+            <omgdi:waypoint x="851" y="397"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge id="BPMN_Edge_con.225103" bpmnElement="con.225103">
+            <omgdi:waypoint x="851" y="397"/>
+            <omgdi:waypoint x="1021" y="397"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge id="BPMN_Edge_con.225107" bpmnElement="con.225107">
+            <omgdi:waypoint x="208" y="95"/>
+            <omgdi:waypoint x="208" y="189"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge id="BPMN_Edge_con.225111" bpmnElement="con.225111">
+            <omgdi:waypoint x="378" y="246"/>
+            <omgdi:waypoint x="378" y="359"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge id="BPMN_Edge_con.225115" bpmnElement="con.225115">
+            <omgdi:waypoint x="643" y="95"/>
+            <omgdi:waypoint x="643" y="189"/>
+         </bpmndi:BPMNEdge>
+      </bpmndi:BPMNPlane>
+   </bpmndi:BPMNDiagram>
+</definitions>
