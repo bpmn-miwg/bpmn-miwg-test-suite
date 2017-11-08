@@ -109,7 +109,7 @@ If the tool under test supports the import of BPMN XML files, you can test that 
 
 1. **Import** the BPMN XML file (*.bpmn) provided with a [reference model](#1-download-test-cases) into the tool, e.g. `A.1.0.bpmn`.
 1. **Save the graphical representation** of the model as imported to a file named `<test id>-import.<diagramNumber>.png`, e.g. `A.1.0-import.1.png`.
-You can either do that through an export feature of the tool or by taking a screenshot of the canvas. It needs to be saved in PNG format.
+You can either do that through an export feature of the tool or by taking a screenshot of the canvas. It needs to be saved in PNG format. The `<diagramNumber>` should be counted in the order in which the diagrams appear inside reference XML file.
 1. **Compare** the result with the image provided with the reference model, e.g. `A.1.0.png`.
 1. **Report any findings** by [creating new issues](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new) on GitHub – one for each finding. Here is a template for your issue reports:
 
@@ -148,7 +148,7 @@ If the tool under test supports the import and export of BPMN XML files, you can
 
 1. **Import** the BPMN XML file (*.bpmn) provided with a [reference model](#1-download-test-cases) into the tool, e.g. `A.1.0.bpmn`.
 1. If not already done during an import test, **save the graphical representation** of the model as it is imported to a file named `<test id>-import.<diagramNumber>.png`, e.g. `A.1.0-import.1.png`.
-You can either do that through an export feature of the tool or by taking a screenshot of the canvas. It needs to be saved in PNG format.
+You can either do that through an export feature of the tool or by taking a screenshot of the canvas. It needs to be saved in PNG format. The `<diagramNumber>` should be counted in the order in which the diagrams appear inside reference XML file.
 1. **Export** the model into a BPMN XML file (*.bpmn) named `<test id>-roundtrip.bpmn`, e.g. `A.1.0-roundtrip.bpmn`.
 1. **Compare** the result with the BPMN XML file (*.bpmn) provided with the reference model, e.g. `A.1.0.bpmn`.
 1. **Report any findings** by [creating new issues](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues/new) on GitHub – one for each finding. Here is a template for your issue reports:
@@ -168,7 +168,7 @@ If the tool under test supports at least the import of BPMN XML files, you may o
 
 1. **Import** the BPMN XML files (*.bpmn) exported from other tools as their [test results](#1-download-test-cases) into the tool, e.g. `A.1.0-roundtrip.bpmn` or `A.1.0-export.bpmn` from the folder of the other tool, e.g. `camunda Modeler 2.4.0`.
 1. **Save the graphical representation** of the model as imported to a file named `<name of imported file>-import.<diagramNumber>.png`, e.g. `A.1.0-roundtrip-import.1.png` or `A.1.0-export-import.1.png`.
-You can either do that through an export feature of the tool or by taking a screenshot of the canvas. It needs to be saved in PNG format.
+You can either do that through an export feature of the tool or by taking a screenshot of the canvas. It needs to be saved in PNG format. The `<diagramNumber>` should be counted in the order in which the diagrams appear inside reference XML file.
 Store the result file in a folder with the name and version of the other tool that exported the file, e.g. `camunda Modeler 2.4.0`.
 1. **Export** the model into a BPMN XML file (*.bpmn) named `<name of imported file>-roundtrip.bpmn`, e.g. `A.1.0-roundtrip-roundtrip.bpmn` or `A.1.0-export-roundtrip.bpmn`.
 Store the result file in a folder with the name and version of the other tool that exported the file, e.g. `camunda Modeler 2.4.0`.
