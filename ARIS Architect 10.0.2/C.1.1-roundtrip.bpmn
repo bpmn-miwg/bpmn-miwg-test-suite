@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<semantic:definitions xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:semantic="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" id="Definitions_sid-78cf0368-c97e-4dea-885f-0e535c20d6c7" name="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7" targetNamespace="http://www.softwareag.com/aris/bpmn2">
+    <semantic:process isClosed="true" isExecutable="true" name="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7" id="Process_sid-78cf0368-c97e-4dea-885f-0e535c20d6c7">
+        <semantic:dataObject isCollection="false" name="approver" id="Bpmn_DataObject_approver"/>
+        <semantic:dataObject isCollection="false" name="approved" id="Bpmn_DataObject_WUfQYrH1EeSuDf0W70XLGw"/>
+        <semantic:dataObject isCollection="false" name="clarified" id="Bpmn_DataObject_aT_L0rH1EeSuDf0W70XLGw"/>
+        <semantic:userTask name="Approve Invoice" id="approveInvoice">
+            <semantic:incoming>reviewSuccessful</semantic:incoming>
+            <semantic:incoming>sequenceFlow_178</semantic:incoming>
+            <semantic:outgoing>sequenceFlow_180</semantic:outgoing>
+            <semantic:ioSpecification>
+                <semantic:dataOutput id="DataOutput_approveInvoice"/>
+                <semantic:inputSet/>
+                <semantic:outputSet>
+                    <semantic:dataOutputRefs>DataOutput_approveInvoice</semantic:dataOutputRefs>
+                </semantic:outputSet>
+            </semantic:ioSpecification>
+            <semantic:dataOutputAssociation id="Bpmn_DataOutputAssociation_Y55MYrH1EeSuDf0W70XLGw">
+                <semantic:sourceRef>DataOutput_approveInvoice</semantic:sourceRef>
+                <semantic:targetRef>Reference_Bpmn_DataObject_WUfQYrH1EeSuDf0W70XLGw</semantic:targetRef>
+            </semantic:dataOutputAssociation>
+        </semantic:userTask>
+        <semantic:exclusiveGateway name="Invoice&#13;&#10;approved?" id="invoice_approved">
+            <semantic:incoming>sequenceFlow_180</semantic:incoming>
+            <semantic:outgoing>invoiceApproved</semantic:outgoing>
+            <semantic:outgoing>invoiceNotApproved</semantic:outgoing>
+        </semantic:exclusiveGateway>
+        <semantic:userTask name="Assign&#13;&#10;Approver" id="assignApprover">
+            <semantic:incoming>SequenceFlow_1</semantic:incoming>
+            <semantic:outgoing>sequenceFlow_178</semantic:outgoing>
+            <semantic:ioSpecification>
+                <semantic:dataOutput id="DataOutput_assignApprover"/>
+                <semantic:inputSet/>
+                <semantic:outputSet>
+                    <semantic:dataOutputRefs>DataOutput_assignApprover</semantic:dataOutputRefs>
+                </semantic:outputSet>
+            </semantic:ioSpecification>
+            <semantic:dataOutputAssociation id="Bpmn_DataOutputAssociation_assignApprover">
+                <semantic:sourceRef>DataOutput_assignApprover</semantic:sourceRef>
+                <semantic:targetRef>Reference_Bpmn_DataObject_approver</semantic:targetRef>
+            </semantic:dataOutputAssociation>
+        </semantic:userTask>
+        <semantic:userTask name="Rechnung klären" id="reviewInvoice">
+            <semantic:incoming>invoiceNotApproved</semantic:incoming>
+            <semantic:outgoing>sequenceFlow_183</semantic:outgoing>
+            <semantic:ioSpecification>
+                <semantic:dataOutput id="DataOutput_reviewInvoice"/>
+                <semantic:inputSet/>
+                <semantic:outputSet>
+                    <semantic:dataOutputRefs>DataOutput_reviewInvoice</semantic:dataOutputRefs>
+                </semantic:outputSet>
+            </semantic:ioSpecification>
+            <semantic:dataOutputAssociation id="Bpmn_DataOutputAssociation_dB6xsrH1EeSuDf0W70XLGw">
+                <semantic:sourceRef>DataOutput_reviewInvoice</semantic:sourceRef>
+                <semantic:targetRef>Reference_Bpmn_DataObject_aT_L0rH1EeSuDf0W70XLGw</semantic:targetRef>
+            </semantic:dataOutputAssociation>
+        </semantic:userTask>
+        <semantic:exclusiveGateway name="Review&#13;&#10;successful?" id="reviewSuccessful_gw">
+            <semantic:incoming>sequenceFlow_183</semantic:incoming>
+            <semantic:outgoing>reviewSuccessful</semantic:outgoing>
+            <semantic:outgoing>reviewNotSuccessful</semantic:outgoing>
+        </semantic:exclusiveGateway>
+        <semantic:endEvent name="Invoice not&#13;&#10;processed" id="invoiceNotProcessed">
+            <semantic:incoming>reviewNotSuccessful</semantic:incoming>
+        </semantic:endEvent>
+        <semantic:startEvent name="Invoice&#13;&#10;received" id="StartEvent_1">
+            <semantic:outgoing>SequenceFlow_1</semantic:outgoing>
+        </semantic:startEvent>
+        <semantic:userTask name="Prepare&#13;&#10;Bank&#13;&#10;Transfer" id="prepareBankTransfer">
+            <semantic:incoming>invoiceApproved</semantic:incoming>
+            <semantic:outgoing>SequenceFlow_2</semantic:outgoing>
+        </semantic:userTask>
+        <semantic:endEvent name="Invoice&#13;&#10;processed" id="invoiceProcessed">
+            <semantic:incoming>SequenceFlow_3</semantic:incoming>
+        </semantic:endEvent>
+        <semantic:serviceTask name="Archive&#13;&#10;Invoice" id="archiveInvoice">
+            <semantic:incoming>SequenceFlow_2</semantic:incoming>
+            <semantic:outgoing>SequenceFlow_3</semantic:outgoing>
+        </semantic:serviceTask>
+        <semantic:dataObjectReference dataObjectRef="Bpmn_DataObject_approver" name="approver" id="Reference_Bpmn_DataObject_approver"/>
+        <semantic:dataObjectReference dataObjectRef="Bpmn_DataObject_WUfQYrH1EeSuDf0W70XLGw" name="approved" id="Reference_Bpmn_DataObject_WUfQYrH1EeSuDf0W70XLGw"/>
+        <semantic:dataObjectReference dataObjectRef="Bpmn_DataObject_aT_L0rH1EeSuDf0W70XLGw" name="clarified" id="Reference_Bpmn_DataObject_aT_L0rH1EeSuDf0W70XLGw"/>
+        <semantic:sequenceFlow sourceRef="invoice_approved" targetRef="prepareBankTransfer" name="yes" id="invoiceApproved">
+            <semantic:conditionExpression>bpmn:getDataObject('approved')</semantic:conditionExpression>
+        </semantic:sequenceFlow>
+        <semantic:sequenceFlow sourceRef="invoice_approved" targetRef="reviewInvoice" name="no" id="invoiceNotApproved">
+            <semantic:conditionExpression>not(bpmn:getDataObject('approved'))</semantic:conditionExpression>
+        </semantic:sequenceFlow>
+        <semantic:sequenceFlow sourceRef="reviewSuccessful_gw" targetRef="approveInvoice" name="yes" id="reviewSuccessful">
+            <semantic:conditionExpression>bpmn:getDataObject('clarified') = 'yes'</semantic:conditionExpression>
+        </semantic:sequenceFlow>
+        <semantic:sequenceFlow sourceRef="reviewSuccessful_gw" targetRef="invoiceNotProcessed" name="no" id="reviewNotSuccessful">
+            <semantic:conditionExpression>bpmn:getDataObject('clarified') = 'no'</semantic:conditionExpression>
+        </semantic:sequenceFlow>
+        <semantic:sequenceFlow sourceRef="approveInvoice" targetRef="invoice_approved" id="sequenceFlow_180"/>
+        <semantic:sequenceFlow sourceRef="reviewInvoice" targetRef="reviewSuccessful_gw" id="sequenceFlow_183"/>
+        <semantic:sequenceFlow sourceRef="assignApprover" targetRef="approveInvoice" id="sequenceFlow_178"/>
+        <semantic:sequenceFlow sourceRef="prepareBankTransfer" targetRef="archiveInvoice" id="SequenceFlow_2"/>
+        <semantic:sequenceFlow sourceRef="archiveInvoice" targetRef="invoiceProcessed" id="SequenceFlow_3"/>
+        <semantic:sequenceFlow sourceRef="StartEvent_1" targetRef="assignApprover" id="SequenceFlow_1"/>
+    </semantic:process>
+    <bpmndi:BPMNDiagram name="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7" resolution="254.0" id="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7">
+        <bpmndi:BPMNPlane bpmnElement="Process_sid-78cf0368-c97e-4dea-885f-0e535c20d6c7" id="Plane_sid-78cf0368-c97e-4dea-885f-0e535c20d6c7">
+            <bpmndi:BPMNShape bpmnElement="approveInvoice" id="Shape_approveInvoice">
+                <dc:Bounds x="1245.0" y="794.0" width="353.0" height="282.0"/>
+                <bpmndi:BPMNLabel labelStyle="LabelStyle_0_0">
+                    <dc:Bounds x="1316.0" y="882.0" width="212.0" height="106.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="invoice_approved" isMarkerVisible="true" id="Shape_invoice_approved">
+                <dc:Bounds x="1722.0" y="864.0" width="141.0" height="141.0"/>
+                <bpmndi:BPMNLabel labelStyle="LabelStyle_0_0">
+                    <dc:Bounds x="1679.0" y="1005.0" width="226.0" height="106.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="assignApprover" id="Shape_assignApprover">
+                <dc:Bounds x="635.0" y="183.0" width="353.0" height="282.0"/>
+                <bpmndi:BPMNLabel labelStyle="LabelStyle_0_0">
+                    <dc:Bounds x="699.0" y="272.0" width="226.0" height="106.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="reviewInvoice" id="Shape_reviewInvoice">
+                <dc:Bounds x="1933.0" y="183.0" width="353.0" height="282.0"/>
+                <bpmndi:BPMNLabel labelStyle="LabelStyle_0_0">
+                    <dc:Bounds x="1990.0" y="272.0" width="243.0" height="106.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="reviewSuccessful_gw" id="Shape_reviewSuccessful_gw">
+                <dc:Bounds x="2445.0" y="254.0" width="141.0" height="141.0"/>
+                <bpmndi:BPMNLabel labelStyle="LabelStyle_0_0">
+                    <dc:Bounds x="2385.0" y="395.0" width="265.0" height="106.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="invoiceNotProcessed" id="Shape_invoiceNotProcessed">
+                <dc:Bounds x="3267.0" y="275.0" width="99.0" height="99.0"/>
+                <bpmndi:BPMNLabel labelStyle="LabelStyle_0_0">
+                    <dc:Bounds x="3186.0" y="374.0" width="265.0" height="106.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="StartEvent_1" id="Shape_StartEvent_1">
+                <dc:Bounds x="335.0" y="272.0" width="106.0" height="106.0"/>
+                <bpmndi:BPMNLabel labelStyle="LabelStyle_0_0">
+                    <dc:Bounds x="289.0" y="377.0" width="201.0" height="106.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="prepareBankTransfer" id="Shape_prepareBankTransfer">
+                <dc:Bounds x="2251.0" y="1358.0" width="353.0" height="282.0"/>
+                <bpmndi:BPMNLabel labelStyle="LabelStyle_0_0">
+                    <dc:Bounds x="2318.0" y="1422.0" width="222.0" height="159.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="invoiceProcessed" id="Shape_invoiceProcessed">
+                <dc:Bounds x="3267.0" y="1450.0" width="99.0" height="99.0"/>
+                <bpmndi:BPMNLabel labelStyle="LabelStyle_0_0">
+                    <dc:Bounds x="3207.0" y="1549.0" width="222.0" height="106.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="archiveInvoice" id="Shape_archiveInvoice">
+                <dc:Bounds x="2752.0" y="1358.0" width="353.0" height="282.0"/>
+                <bpmndi:BPMNLabel labelStyle="LabelStyle_0_0">
+                    <dc:Bounds x="2829.0" y="1446.0" width="201.0" height="106.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="invoiceApproved" id="Edge_invoiceApproved">
+                <di:waypoint x="1863.0" y="935.0"/>
+                <di:waypoint x="2071.0" y="935.0"/>
+                <di:waypoint x="2071.0" y="1499.0"/>
+                <di:waypoint x="2251.0" y="1499.0"/>
+                <bpmndi:BPMNLabel labelStyle="LabelStyle_0_0">
+                    <dc:Bounds x="1880.0" y="953.0" width="113.0" height="92.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="invoiceNotApproved" id="Edge_invoiceNotApproved">
+                <di:waypoint x="1792.0" y="864.0"/>
+                <di:waypoint x="1792.0" y="325.0"/>
+                <di:waypoint x="1933.0" y="325.0"/>
+                <bpmndi:BPMNLabel labelStyle="LabelStyle_0_0">
+                    <dc:Bounds x="1810.0" y="797.0" width="81.0" height="53.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="reviewSuccessful" id="Edge_reviewSuccessful">
+                <di:waypoint x="2515.0" y="254.0"/>
+                <di:waypoint x="2515.0" y="123.0"/>
+                <di:waypoint x="1422.0" y="123.0"/>
+                <di:waypoint x="1422.0" y="794.0"/>
+                <bpmndi:BPMNLabel labelStyle="LabelStyle_0_0">
+                    <dc:Bounds x="2533.0" y="159.0" width="95.0" height="78.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="reviewNotSuccessful" id="Edge_reviewNotSuccessful">
+                <di:waypoint x="2586.0" y="325.0"/>
+                <di:waypoint x="3267.0" y="325.0"/>
+                <bpmndi:BPMNLabel labelStyle="LabelStyle_0_0">
+                    <dc:Bounds x="2604.0" y="342.0" width="85.0" height="92.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="sequenceFlow_180" id="Edge_sequenceFlow_180">
+                <di:waypoint x="1598.0" y="935.0"/>
+                <di:waypoint x="1722.0" y="935.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="sequenceFlow_183" id="Edge_sequenceFlow_183">
+                <di:waypoint x="2286.0" y="325.0"/>
+                <di:waypoint x="2445.0" y="325.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="sequenceFlow_178" id="Edge_sequenceFlow_178">
+                <di:waypoint x="988.0" y="325.0"/>
+                <di:waypoint x="1094.0" y="325.0"/>
+                <di:waypoint x="1094.0" y="935.0"/>
+                <di:waypoint x="1245.0" y="935.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="SequenceFlow_2" id="Edge_SequenceFlow_2">
+                <di:waypoint x="2604.0" y="1499.0"/>
+                <di:waypoint x="2752.0" y="1499.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="SequenceFlow_3" id="Edge_SequenceFlow_3">
+                <di:waypoint x="3104.0" y="1499.0"/>
+                <di:waypoint x="3267.0" y="1499.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="SequenceFlow_1" id="Edge_SequenceFlow_1">
+                <di:waypoint x="441.0" y="325.0"/>
+                <di:waypoint x="635.0" y="325.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="Reference_Bpmn_DataObject_approver" id="Shape_Reference_Bpmn_DataObject_approver">
+                <dc:Bounds x="748.0" y="614.0" width="123.0" height="123.0"/>
+                <bpmndi:BPMNLabel labelStyle="LabelStyle_0_0">
+                    <dc:Bounds x="709.0" y="737.0" width="201.0" height="53.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="Bpmn_DataOutputAssociation_assignApprover" id="Edge_Bpmn_DataOutputAssociation_assignApprover">
+                <di:waypoint x="811.0" y="466.0"/>
+                <di:waypoint x="811.0" y="614.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="Reference_Bpmn_DataObject_WUfQYrH1EeSuDf0W70XLGw" id="Shape_Reference_Bpmn_DataObject_WUfQYrH1EeSuDf0W70XLGw">
+                <dc:Bounds x="1358.0" y="1235.0" width="123.0" height="123.0"/>
+                <bpmndi:BPMNLabel labelStyle="LabelStyle_0_0">
+                    <dc:Bounds x="1316.0" y="1358.0" width="208.0" height="78.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="Bpmn_DataOutputAssociation_Y55MYrH1EeSuDf0W70XLGw" id="Edge_Bpmn_DataOutputAssociation_Y55MYrH1EeSuDf0W70XLGw">
+                <di:waypoint x="1422.0" y="1076.0"/>
+                <di:waypoint x="1422.0" y="1235.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="Reference_Bpmn_DataObject_aT_L0rH1EeSuDf0W70XLGw" id="Shape_Reference_Bpmn_DataObject_aT_L0rH1EeSuDf0W70XLGw">
+                <dc:Bounds x="2046.0" y="614.0" width="123.0" height="123.0"/>
+                <bpmndi:BPMNLabel labelStyle="LabelStyle_0_0">
+                    <dc:Bounds x="1997.0" y="737.0" width="222.0" height="53.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="Bpmn_DataOutputAssociation_dB6xsrH1EeSuDf0W70XLGw" id="Edge_Bpmn_DataOutputAssociation_dB6xsrH1EeSuDf0W70XLGw">
+                <di:waypoint x="2110.0" y="466.0"/>
+                <di:waypoint x="2110.0" y="614.0"/>
+            </bpmndi:BPMNEdge>
+        </bpmndi:BPMNPlane>
+        <bpmndi:BPMNLabelStyle id="LabelStyle_0_0">
+            <dc:Font name="Segoe UI" size="8.0" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+        </bpmndi:BPMNLabelStyle>
+    </bpmndi:BPMNDiagram>
+</semantic:definitions>
