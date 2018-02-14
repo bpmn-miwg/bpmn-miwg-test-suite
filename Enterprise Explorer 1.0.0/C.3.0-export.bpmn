@@ -1,191 +1,638 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<semantic:definitions name="C.3.0" id="_14fdd4b6-ebc5-4a77-aa28-8bd71197d6f5" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:semantic="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ca="http://caseagile.com/schema/BPMN/20170414/MODEL" targetNamespace="http://caseagile.com/schema/BPMN/20170414/MODEL">
-	<semantic:process id="_7bd82c18-27fb-4df0-91c5-9a839b14cc2f" name="Page-1" isExecutable="false">
-		<semantic:endEvent id="_f6ca6025-012f-49d3-a96d-0e8ba0584937" name="Fridge replaced">
-			<semantic:incoming>_127002fb-a41d-480d-ae35-0d10064595da</semantic:incoming>
-		</semantic:endEvent>
-		<semantic:endEvent id="_955b7f64-d8e4-4dfe-b93d-0495c814234a" name="Emergency repair completed">
-			<semantic:incoming>_b46d70dd-90cf-46ce-88a0-c4e74703857a</semantic:incoming>
-		</semantic:endEvent>
-		<semantic:endEvent id="_59981dc6-0beb-4606-92be-93ef041e7e74" name="Repair completed">
-			<semantic:incoming>_db4f03c8-71dc-4d4d-82bf-ee8c3dd8a90c</semantic:incoming>
-		</semantic:endEvent>
-		<semantic:exclusiveGateway id="_63c97444-3799-47cb-95a7-1f5067a1da43" name="Service type">
-			<semantic:incoming>_1d695aa5-8490-4915-acf8-54107df18f5c</semantic:incoming>
-			<semantic:outgoing>_67454bb8-4bdb-4319-96c8-f4f8d6ae2842</semantic:outgoing>
-		</semantic:exclusiveGateway>
-		<semantic:exclusiveGateway id="_a0df5d29-ef3a-4c84-b609-8bae2684b4b7" name="Service level">
-			<semantic:incoming>_f1f78175-ac56-484a-afe6-f33b1a61f1f4</semantic:incoming>
-			<semantic:outgoing>_e41306f3-bd92-4d22-9eb2-473b7e99bf4c</semantic:outgoing>
-		</semantic:exclusiveGateway>
-		<semantic:exclusiveGateway id="_49ba6978-9d17-47ab-8ede-acb78c1b5fbd" name="Successful?">
-			<semantic:incoming>_c219464a-1348-4905-9c3c-c049acdcfe22</semantic:incoming>
-			<semantic:outgoing>_b46d70dd-90cf-46ce-88a0-c4e74703857a</semantic:outgoing>
-		</semantic:exclusiveGateway>
-		<semantic:intermediateCatchEvent id="_bed8d1b1-0644-4ef5-8665-eb3f7781aa35" name="2 hours">
-			<semantic:outgoing>_ea2c7a73-88cf-422e-afa6-148f0d107dc0</semantic:outgoing>
-			<semantic:timerEventDefinition id="_0f25e946-0a77-4482-955a-2b066fb9657e" />
-		</semantic:intermediateCatchEvent>
-		<semantic:intermediateCatchEvent id="_c85b18d3-30aa-449e-aa21-399c1b253b4e" name="">
-			<semantic:outgoing>_70c1a683-2c82-4c17-9a1b-d5523f6b1568</semantic:outgoing>
-			<semantic:messageEventDefinition id="_75ab8e43-7903-4011-8b08-c9f1d5c3e150" />
-		</semantic:intermediateCatchEvent>
-		<semantic:sequenceFlow id="_1d695aa5-8490-4915-acf8-54107df18f5c" name="" sourceRef="_529c87ab-68f9-4a2b-aecb-8ce71494cd8e" targetRef="_63c97444-3799-47cb-95a7-1f5067a1da43" />
-		<semantic:sequenceFlow id="_67454bb8-4bdb-4319-96c8-f4f8d6ae2842" name="Warranty" sourceRef="_63c97444-3799-47cb-95a7-1f5067a1da43" targetRef="_61fd64f2-4125-48c3-9d88-fca0fa8ad20d" />
-		<semantic:sequenceFlow id="_12df6843-d474-4e3e-bfae-4e09156e0b39" name="Emergency service" sourceRef="_63c97444-3799-47cb-95a7-1f5067a1da43" targetRef="_979a6502-7914-4619-9cc5-707c1c366b07" />
-		<semantic:sequenceFlow id="_f1f78175-ac56-484a-afe6-f33b1a61f1f4" name="Regular repair service" sourceRef="_63c97444-3799-47cb-95a7-1f5067a1da43" targetRef="_a0df5d29-ef3a-4c84-b609-8bae2684b4b7" />
-		<semantic:sequenceFlow id="_e41306f3-bd92-4d22-9eb2-473b7e99bf4c" name="Standard" sourceRef="_a0df5d29-ef3a-4c84-b609-8bae2684b4b7" targetRef="_43504e08-0304-492a-8f9c-2ccbfdc5ba31" />
-		<semantic:sequenceFlow id="_4095e5ef-731b-4b55-b8cc-44250e0f45a5" name="Premium" sourceRef="_a0df5d29-ef3a-4c84-b609-8bae2684b4b7" targetRef="_2a38aaaa-6ff4-4ba4-9ca5-334f5d8c1a39" />
-		<semantic:sequenceFlow id="_db4f03c8-71dc-4d4d-82bf-ee8c3dd8a90c" name="" sourceRef="_43504e08-0304-492a-8f9c-2ccbfdc5ba31" targetRef="_59981dc6-0beb-4606-92be-93ef041e7e74" />
-		<semantic:sequenceFlow id="_c34167ad-bc4d-433a-9758-f6ddf263dc7f" name="" sourceRef="_2a38aaaa-6ff4-4ba4-9ca5-334f5d8c1a39" targetRef="_59981dc6-0beb-4606-92be-93ef041e7e74" />
-		<semantic:sequenceFlow id="_c219464a-1348-4905-9c3c-c049acdcfe22" name="" sourceRef="_979a6502-7914-4619-9cc5-707c1c366b07" targetRef="_49ba6978-9d17-47ab-8ede-acb78c1b5fbd" />
-		<semantic:sequenceFlow id="_127002fb-a41d-480d-ae35-0d10064595da" name="" sourceRef="_61fd64f2-4125-48c3-9d88-fca0fa8ad20d" targetRef="_f6ca6025-012f-49d3-a96d-0e8ba0584937" />
-		<semantic:sequenceFlow id="_b46d70dd-90cf-46ce-88a0-c4e74703857a" name="yes" sourceRef="_49ba6978-9d17-47ab-8ede-acb78c1b5fbd" targetRef="_955b7f64-d8e4-4dfe-b93d-0495c814234a" />
-		<semantic:sequenceFlow id="_0ffb4674-713d-4d5a-8975-229485684581" name="no" sourceRef="_49ba6978-9d17-47ab-8ede-acb78c1b5fbd" targetRef="_61fd64f2-4125-48c3-9d88-fca0fa8ad20d" />
-		<semantic:sequenceFlow id="_d026e7c2-ca64-43a8-b694-27f0afb10256" name="" sourceRef="_a914c490-f3f7-4517-803b-57e122f4c841" targetRef="_529c87ab-68f9-4a2b-aecb-8ce71494cd8e" />
-		<semantic:sequenceFlow id="_ea2c7a73-88cf-422e-afa6-148f0d107dc0" name="" sourceRef="_bed8d1b1-0644-4ef5-8665-eb3f7781aa35" targetRef="_979a6502-7914-4619-9cc5-707c1c366b07" />
-		<semantic:sequenceFlow id="_70c1a683-2c82-4c17-9a1b-d5523f6b1568" name="" sourceRef="_c85b18d3-30aa-449e-aa21-399c1b253b4e" targetRef="_2a38aaaa-6ff4-4ba4-9ca5-334f5d8c1a39" />
-		<semantic:startEvent id="_a914c490-f3f7-4517-803b-57e122f4c841" name="Receive customer request">
-			<semantic:outgoing>_d026e7c2-ca64-43a8-b694-27f0afb10256</semantic:outgoing>
-			<semantic:messageEventDefinition id="_a13f832a-dd15-4fa2-acee-28157b8383d8" />
-		</semantic:startEvent>
-		<semantic:subProcess id="_979a6502-7914-4619-9cc5-707c1c366b07" name="Perform emergency repair" triggeredByEvent="false">
-			<semantic:incoming>_12df6843-d474-4e3e-bfae-4e09156e0b39</semantic:incoming>
-			<semantic:outgoing>_c219464a-1348-4905-9c3c-c049acdcfe22</semantic:outgoing>
-		</semantic:subProcess>
-		<semantic:userTask id="_529c87ab-68f9-4a2b-aecb-8ce71494cd8e" name="Analyse customer request">
-			<semantic:incoming>_d026e7c2-ca64-43a8-b694-27f0afb10256</semantic:incoming>
-			<semantic:outgoing>_1d695aa5-8490-4915-acf8-54107df18f5c</semantic:outgoing>
-		</semantic:userTask>
-		<semantic:userTask id="_61fd64f2-4125-48c3-9d88-fca0fa8ad20d" name="Replace fridge">
-			<semantic:incoming>_67454bb8-4bdb-4319-96c8-f4f8d6ae2842</semantic:incoming>
-			<semantic:outgoing>_127002fb-a41d-480d-ae35-0d10064595da</semantic:outgoing>
-		</semantic:userTask>
-		<semantic:userTask id="_43504e08-0304-492a-8f9c-2ccbfdc5ba31" name="Perform repair (standard level)">
-			<semantic:incoming>_e41306f3-bd92-4d22-9eb2-473b7e99bf4c</semantic:incoming>
-			<semantic:outgoing>_db4f03c8-71dc-4d4d-82bf-ee8c3dd8a90c</semantic:outgoing>
-		</semantic:userTask>
-		<semantic:userTask id="_2a38aaaa-6ff4-4ba4-9ca5-334f5d8c1a39" name="Perform repair (premium level)">
-			<semantic:incoming>_4095e5ef-731b-4b55-b8cc-44250e0f45a5</semantic:incoming>
-			<semantic:outgoing>_c34167ad-bc4d-433a-9758-f6ddf263dc7f</semantic:outgoing>
-		</semantic:userTask>
-	</semantic:process>
-	<semantic:BPMNDiagram name="Page-1" resolution="96" id="_dfc3e444-865b-4d5c-9a8a-a72cb625367b" xmlns:semantic="http://www.omg.org/spec/BPMN/20100524/DI">
-		<bpmndi:BPMNPlane bpmnElement="_7bd82c18-27fb-4df0-91c5-9a839b14cc2f">
-			<di:BPMNEdge id="_0fae169b-1b09-4a47-801f-302402263c03" bpmnElement="_1d695aa5-8490-4915-acf8-54107df18f5c" xmlns:di="http://www.omg.org/spec/BPMN/20100524/DI">
-				<di:waypoint x="309" y="197" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-				<di:waypoint x="392" y="197" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-			</di:BPMNEdge>
-			<di:BPMNEdge id="_5453c5e3-d732-4d47-8205-deee08ba2471" bpmnElement="_67454bb8-4bdb-4319-96c8-f4f8d6ae2842" xmlns:di="http://www.omg.org/spec/BPMN/20100524/DI">
-				<di:waypoint x="408" y="181" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-				<di:waypoint x="408" y="160" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-				<di:waypoint x="752" y="160" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-			</di:BPMNEdge>
-			<di:BPMNEdge id="_fca09dc4-0c01-445d-9818-5e2252ac61fc" bpmnElement="_12df6843-d474-4e3e-bfae-4e09156e0b39" xmlns:di="http://www.omg.org/spec/BPMN/20100524/DI">
-				<di:waypoint x="423" y="197" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-				<di:waypoint x="588" y="197" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-				<di:waypoint x="588" y="280" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-			</di:BPMNEdge>
-			<di:BPMNEdge id="_80ddc0c0-ed16-4858-b63b-ad205a496c14" bpmnElement="_f1f78175-ac56-484a-afe6-f33b1a61f1f4" xmlns:di="http://www.omg.org/spec/BPMN/20100524/DI">
-				<di:waypoint x="408" y="213" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-				<di:waypoint x="408" y="479" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-			</di:BPMNEdge>
-			<di:BPMNEdge id="_72e68652-a429-4ca5-a292-2fc529906dad" bpmnElement="_e41306f3-bd92-4d22-9eb2-473b7e99bf4c" xmlns:di="http://www.omg.org/spec/BPMN/20100524/DI">
-				<di:waypoint x="408" y="509" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-				<di:waypoint x="408" y="662" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-				<di:waypoint x="527" y="662" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-			</di:BPMNEdge>
-			<di:BPMNEdge id="_11096fbf-af00-49e0-90ce-367f019530d3" bpmnElement="_4095e5ef-731b-4b55-b8cc-44250e0f45a5" xmlns:di="http://www.omg.org/spec/BPMN/20100524/DI">
-				<di:waypoint x="423" y="494" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-				<di:waypoint x="527" y="494" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-			</di:BPMNEdge>
-			<di:BPMNEdge id="_0ff54cf5-49b1-4876-b91b-0a9a2c87f0ba" bpmnElement="_db4f03c8-71dc-4d4d-82bf-ee8c3dd8a90c" xmlns:di="http://www.omg.org/spec/BPMN/20100524/DI">
-				<di:waypoint x="648" y="662" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-				<di:waypoint x="994" y="662" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-				<di:waypoint x="994" y="502" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-			</di:BPMNEdge>
-			<di:BPMNEdge id="_1925232a-46c0-4238-a6a9-751280d18f7e" bpmnElement="_c34167ad-bc4d-433a-9758-f6ddf263dc7f" xmlns:di="http://www.omg.org/spec/BPMN/20100524/DI">
-				<di:waypoint x="648" y="494" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-				<di:waypoint x="986" y="494" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-			</di:BPMNEdge>
-			<di:BPMNEdge id="_ddb70c2d-e29d-4b56-9de4-e9954c98e672" bpmnElement="_c219464a-1348-4905-9c3c-c049acdcfe22" xmlns:di="http://www.omg.org/spec/BPMN/20100524/DI">
-				<di:waypoint x="648" y="309" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-				<di:waypoint x="792" y="309" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-			</di:BPMNEdge>
-			<di:BPMNEdge id="_cacd9ce0-cabe-45c5-b88b-54f7babbde99" bpmnElement="_127002fb-a41d-480d-ae35-0d10064595da" xmlns:di="http://www.omg.org/spec/BPMN/20100524/DI">
-				<di:waypoint x="873" y="160" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-				<di:waypoint x="891" y="160" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-				<di:waypoint x="891" y="159" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-				<di:waypoint x="992" y="159" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-			</di:BPMNEdge>
-			<di:BPMNEdge id="_d23b274f-24aa-46a5-8313-09dbd8b1fd6c" bpmnElement="_b46d70dd-90cf-46ce-88a0-c4e74703857a" xmlns:di="http://www.omg.org/spec/BPMN/20100524/DI">
-				<di:waypoint x="822" y="309" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-				<di:waypoint x="983" y="309" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-			</di:BPMNEdge>
-			<di:BPMNEdge id="_aaf0208b-addc-4769-9bdc-4dc49efd1122" bpmnElement="_0ffb4674-713d-4d5a-8975-229485684581" xmlns:di="http://www.omg.org/spec/BPMN/20100524/DI">
-				<di:waypoint x="807" y="294" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-				<di:waypoint x="807" y="276" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-				<di:waypoint x="812" y="276" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-				<di:waypoint x="812" y="189" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-			</di:BPMNEdge>
-			<di:BPMNEdge id="_a64a9ae9-19db-4eb1-a969-5386d18edef6" bpmnElement="_d026e7c2-ca64-43a8-b694-27f0afb10256" xmlns:di="http://www.omg.org/spec/BPMN/20100524/DI">
-				<di:waypoint x="104" y="197" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-				<di:waypoint x="188" y="197" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-			</di:BPMNEdge>
-			<di:BPMNEdge id="_fd316b9e-d7f2-4b29-ab87-34c91292f39c" bpmnElement="_ea2c7a73-88cf-422e-afa6-148f0d107dc0" xmlns:di="http://www.omg.org/spec/BPMN/20100524/DI">
-				<di:waypoint x="588" y="536" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-				<di:waypoint x="588" y="554" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-				<di:waypoint x="558" y="554" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-				<di:waypoint x="558" y="339" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-			</di:BPMNEdge>
-			<di:BPMNEdge id="_47606d1f-6947-4fb9-bed1-c0981436067c" bpmnElement="_70c1a683-2c82-4c17-9a1b-d5523f6b1568" xmlns:di="http://www.omg.org/spec/BPMN/20100524/DI">
-				<di:waypoint x="588" y="704" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-				<di:waypoint x="588" y="722" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-				<di:waypoint x="558" y="722" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-				<di:waypoint x="558" y="523" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" />
-			</di:BPMNEdge>
-			<di:BPMNShape id="_59cb8c47-73eb-4776-b3e3-a3b939151fab" bpmnElement="_a914c490-f3f7-4517-803b-57e122f4c841" isHorizontal="false" isExpanded="false" isMarkerVisible="false" isMessageVisible="false" xmlns:di="http://www.omg.org/spec/BPMN/20100524/DI">
-				<di:Bounds x="87" y="189" width="16" height="16" xmlns:di="http://www.omg.org/spec/DD/20100524/DC" />
-			</di:BPMNShape>
-			<di:BPMNShape id="_216200c9-856d-4c5e-842d-581bf15c86ff" bpmnElement="_529c87ab-68f9-4a2b-aecb-8ce71494cd8e" isHorizontal="false" isExpanded="false" isMarkerVisible="false" isMessageVisible="false" xmlns:di="http://www.omg.org/spec/BPMN/20100524/DI">
-				<di:Bounds x="188" y="168" width="121" height="58" xmlns:di="http://www.omg.org/spec/DD/20100524/DC" />
-			</di:BPMNShape>
-			<di:BPMNShape id="_fd25f759-59d4-4209-89e9-4710f36f0e1e" bpmnElement="_61fd64f2-4125-48c3-9d88-fca0fa8ad20d" isHorizontal="false" isExpanded="false" isMarkerVisible="false" isMessageVisible="false" xmlns:di="http://www.omg.org/spec/BPMN/20100524/DI">
-				<di:Bounds x="752" y="131" width="121" height="58" xmlns:di="http://www.omg.org/spec/DD/20100524/DC" />
-			</di:BPMNShape>
-			<di:BPMNShape id="_7a94783d-796b-4ee9-9915-64abf25cfd66" bpmnElement="_f6ca6025-012f-49d3-a96d-0e8ba0584937" isHorizontal="false" isExpanded="false" isMarkerVisible="false" isMessageVisible="false" xmlns:di="http://www.omg.org/spec/BPMN/20100524/DI">
-				<di:Bounds x="992" y="152" width="16" height="16" xmlns:di="http://www.omg.org/spec/DD/20100524/DC" />
-			</di:BPMNShape>
-			<di:BPMNShape id="_e8155429-1fa2-4582-b598-dca0c6f88d4d" bpmnElement="_63c97444-3799-47cb-95a7-1f5067a1da43" isHorizontal="false" isExpanded="false" isMarkerVisible="false" isMessageVisible="false" xmlns:di="http://www.omg.org/spec/BPMN/20100524/DI">
-				<di:Bounds x="392" y="182" width="31" height="31" xmlns:di="http://www.omg.org/spec/DD/20100524/DC" />
-			</di:BPMNShape>
-			<di:BPMNShape id="_dc05430b-6de5-40c3-8eae-31acb16941f2" bpmnElement="_955b7f64-d8e4-4dfe-b93d-0495c814234a" isHorizontal="false" isExpanded="false" isMarkerVisible="false" isMessageVisible="false" xmlns:di="http://www.omg.org/spec/BPMN/20100524/DI">
-				<di:Bounds x="983" y="302" width="16" height="16" xmlns:di="http://www.omg.org/spec/DD/20100524/DC" />
-			</di:BPMNShape>
-			<di:BPMNShape id="_4c075097-52e6-4a34-bfb4-271fb844d0a8" bpmnElement="_a0df5d29-ef3a-4c84-b609-8bae2684b4b7" isHorizontal="false" isExpanded="false" isMarkerVisible="false" isMessageVisible="false" xmlns:di="http://www.omg.org/spec/BPMN/20100524/DI">
-				<di:Bounds x="392" y="478" width="31" height="31" xmlns:di="http://www.omg.org/spec/DD/20100524/DC" />
-			</di:BPMNShape>
-			<di:BPMNShape id="_2b93a960-e415-42cb-a112-f57330427482" bpmnElement="_43504e08-0304-492a-8f9c-2ccbfdc5ba31" isHorizontal="false" isExpanded="false" isMarkerVisible="false" isMessageVisible="false" xmlns:di="http://www.omg.org/spec/BPMN/20100524/DI">
-				<di:Bounds x="527" y="633" width="121" height="58" xmlns:di="http://www.omg.org/spec/DD/20100524/DC" />
-			</di:BPMNShape>
-			<di:BPMNShape id="_1607fcb4-3daa-46b9-bc95-78ae1b6611b9" bpmnElement="_2a38aaaa-6ff4-4ba4-9ca5-334f5d8c1a39" isHorizontal="false" isExpanded="false" isMarkerVisible="false" isMessageVisible="false" xmlns:di="http://www.omg.org/spec/BPMN/20100524/DI">
-				<di:Bounds x="527" y="466" width="121" height="58" xmlns:di="http://www.omg.org/spec/DD/20100524/DC" />
-			</di:BPMNShape>
-			<di:BPMNShape id="_b4d09cbd-80ee-4e7c-8c30-4c9f9515517c" bpmnElement="_59981dc6-0beb-4606-92be-93ef041e7e74" isHorizontal="false" isExpanded="false" isMarkerVisible="false" isMessageVisible="false" xmlns:di="http://www.omg.org/spec/BPMN/20100524/DI">
-				<di:Bounds x="986" y="487" width="16" height="16" xmlns:di="http://www.omg.org/spec/DD/20100524/DC" />
-			</di:BPMNShape>
-			<di:BPMNShape id="_bf487cb3-f89b-4459-b566-d88b56aa407b" bpmnElement="_49ba6978-9d17-47ab-8ede-acb78c1b5fbd" isHorizontal="false" isExpanded="false" isMarkerVisible="false" isMessageVisible="false" xmlns:di="http://www.omg.org/spec/BPMN/20100524/DI">
-				<di:Bounds x="792" y="294" width="31" height="31" xmlns:di="http://www.omg.org/spec/DD/20100524/DC" />
-			</di:BPMNShape>
-			<di:BPMNShape id="_2f48a5b6-4627-44a2-a5c3-bd563b079257" bpmnElement="_979a6502-7914-4619-9cc5-707c1c366b07" isHorizontal="false" isExpanded="false" isMarkerVisible="false" isMessageVisible="false" xmlns:di="http://www.omg.org/spec/BPMN/20100524/DI">
-				<di:Bounds x="527" y="281" width="121" height="58" xmlns:di="http://www.omg.org/spec/DD/20100524/DC" />
-			</di:BPMNShape>
-			<di:BPMNShape id="_c2d7d70d-4c86-427b-8aec-4330dfdd9de7" bpmnElement="_bed8d1b1-0644-4ef5-8665-eb3f7781aa35" isHorizontal="false" isExpanded="false" isMarkerVisible="false" isMessageVisible="false" xmlns:di="http://www.omg.org/spec/BPMN/20100524/DI">
-				<di:Bounds x="576" y="512" width="24" height="24" xmlns:di="http://www.omg.org/spec/DD/20100524/DC" />
-			</di:BPMNShape>
-			<di:BPMNShape id="_289ae895-7ef9-4972-a38a-31c84d25e737" bpmnElement="_c85b18d3-30aa-449e-aa21-399c1b253b4e" isHorizontal="false" isExpanded="false" isMarkerVisible="false" isMessageVisible="false" xmlns:di="http://www.omg.org/spec/BPMN/20100524/DI">
-				<di:Bounds x="576" y="680" width="24" height="24" xmlns:di="http://www.omg.org/spec/DD/20100524/DC" />
-			</di:BPMNShape>
-		</bpmndi:BPMNPlane>
-	</semantic:BPMNDiagram>
-</semantic:definitions>
+<definitions id="_7b350035-1ecd-4938-82a3-cafaac755798" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:semantic="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:caseagile="http://caseagile.com/schema/BPMN/20170414/MODEL" targetNamespace="http://caseagile.com/schema/BPMN/20170414/MODEL" exporter="Enterprise Composer" exporterVersion="1.0.0.0" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">
+	<extension definition="caseagile:model">
+		<documentation id="author">User</documentation>
+		<documentation id="created">2018-02-14 06:42:09</documentation>
+		<documentation id="editor">User</documentation>
+		<documentation id="modified">2018-02-14 06:42:09</documentation>
+	</extension>
+	<process id="_05622d3f-4471-465c-9422-b21c1bf2947b" name="Fridge Repair Process (1)" isExecutable="false">
+		<extensionElements>
+			<caseagile:model>
+				<caseagile:element id="e64928bf-84e2-449e-8511-b555bc3a7dec" />
+				<caseagile:principal id="User" />
+				<caseagile:created date="2018-02-14 06:42:09" />
+				<caseagile:modified date="2018-02-14 06:42:09" />
+				<caseagile:properties>
+					<caseagile:property name="bgcolor" description="Background Color" type="int" format="hex" default="FFFFFF" minimum="000000" maximum="FFFFFF" visible="True" readOnly="False" />
+				</caseagile:properties>
+				<caseagile:values>
+					<caseagile:value name="bgcolor" value="FFFFFF" />
+				</caseagile:values>
+			</caseagile:model>
+		</extensionElements>
+		<endEvent id="_bc22575c-8a4c-4e24-b07e-eb8096b02b8e" name="Fridge replaced">
+			<extensionElements>
+				<caseagile:model>
+					<caseagile:element id="73918c12-9ea3-4983-ad8e-8c00d49fb946" />
+					<caseagile:principal id="User" />
+					<caseagile:created date="2018-02-14 06:42:09" />
+					<caseagile:modified date="2018-02-14 06:42:09" />
+					<caseagile:properties>
+						<caseagile:property name="bgcolor" description="Background Color" type="int" format="hex" default="FFFFFF" minimum="000000" maximum="FFFFFF" visible="True" readOnly="False" />
+					</caseagile:properties>
+					<caseagile:values>
+						<caseagile:value name="bgcolor" value="FFFFFF" />
+					</caseagile:values>
+				</caseagile:model>
+			</extensionElements>
+			<incoming>_f1ed5a1f-1cfa-4bee-a38a-ac2601eb0f52</incoming>
+		</endEvent>
+		<endEvent id="_7b3e5df4-3639-4795-8bcc-997086f72905" name="Emergency repair completed">
+			<extensionElements>
+				<caseagile:model>
+					<caseagile:element id="3d212efb-21d8-4703-b173-718911c1e8c3" />
+					<caseagile:principal id="User" />
+					<caseagile:created date="2018-02-14 06:42:09" />
+					<caseagile:modified date="2018-02-14 06:42:09" />
+					<caseagile:properties>
+						<caseagile:property name="bgcolor" description="Background Color" type="int" format="hex" default="FFFFFF" minimum="000000" maximum="FFFFFF" visible="True" readOnly="False" />
+					</caseagile:properties>
+					<caseagile:values>
+						<caseagile:value name="bgcolor" value="FFFFFF" />
+					</caseagile:values>
+				</caseagile:model>
+			</extensionElements>
+			<incoming>_0591b1d8-b829-4eb4-b902-ef6070c72ec7</incoming>
+		</endEvent>
+		<endEvent id="_285ed4bf-f5b6-4a2a-a010-b48972ba0589" name="Repair completed">
+			<extensionElements>
+				<caseagile:model>
+					<caseagile:element id="6f88c06c-769f-4f88-9f51-c9c9d1e55e71" />
+					<caseagile:principal id="User" />
+					<caseagile:created date="2018-02-14 06:42:09" />
+					<caseagile:modified date="2018-02-14 06:42:09" />
+					<caseagile:properties>
+						<caseagile:property name="bgcolor" description="Background Color" type="int" format="hex" default="FFFFFF" minimum="000000" maximum="FFFFFF" visible="True" readOnly="False" />
+					</caseagile:properties>
+					<caseagile:values>
+						<caseagile:value name="bgcolor" value="FFFFFF" />
+					</caseagile:values>
+				</caseagile:model>
+			</extensionElements>
+			<incoming>_3aa63aac-719e-4c18-acc0-3cce119bdcf6</incoming>
+		</endEvent>
+		<exclusiveGateway id="_a48064ef-bbd0-4038-a02a-fcb9fb182003" name="Service type">
+			<extensionElements>
+				<caseagile:model>
+					<caseagile:element id="661cd2b1-f0aa-4ccf-b095-450df0c2c11b" />
+					<caseagile:principal id="User" />
+					<caseagile:created date="2018-02-14 06:42:09" />
+					<caseagile:modified date="2018-02-14 06:42:09" />
+					<caseagile:properties>
+						<caseagile:property name="bgcolor" description="Background Color" type="int" format="hex" default="FFFFFF" minimum="000000" maximum="FFFFFF" visible="True" readOnly="False" />
+					</caseagile:properties>
+					<caseagile:values>
+						<caseagile:value name="bgcolor" value="FFFFFF" />
+					</caseagile:values>
+				</caseagile:model>
+			</extensionElements>
+			<incoming>_beda35e0-107b-4fa4-b76a-a9e2b77c54e2</incoming>
+			<outgoing>_0210a588-75f2-4432-8799-866abac93265</outgoing>
+		</exclusiveGateway>
+		<exclusiveGateway id="_94755f43-a829-47ef-b07e-ad99e513caf5" name="Service level">
+			<extensionElements>
+				<caseagile:model>
+					<caseagile:element id="114d6084-cb75-4a5b-bfc7-da310465f426" />
+					<caseagile:principal id="User" />
+					<caseagile:created date="2018-02-14 06:42:09" />
+					<caseagile:modified date="2018-02-14 06:42:09" />
+					<caseagile:properties>
+						<caseagile:property name="bgcolor" description="Background Color" type="int" format="hex" default="FFFFFF" minimum="000000" maximum="FFFFFF" visible="True" readOnly="False" />
+					</caseagile:properties>
+					<caseagile:values>
+						<caseagile:value name="bgcolor" value="FFFFFF" />
+					</caseagile:values>
+				</caseagile:model>
+			</extensionElements>
+			<incoming>_b8deb149-4473-41e0-b274-a46565cfe5e3</incoming>
+			<outgoing>_aac66a91-dffd-4bcc-9108-33dc66e93215</outgoing>
+		</exclusiveGateway>
+		<exclusiveGateway id="_2e7b5d5f-ea76-4935-a995-d24d710b4f03" name="Successful?">
+			<extensionElements>
+				<caseagile:model>
+					<caseagile:element id="a426bcb1-2c8f-4885-a28a-b4c2942c9272" />
+					<caseagile:principal id="User" />
+					<caseagile:created date="2018-02-14 06:42:09" />
+					<caseagile:modified date="2018-02-14 06:42:09" />
+					<caseagile:properties>
+						<caseagile:property name="bgcolor" description="Background Color" type="int" format="hex" default="FFFFFF" minimum="000000" maximum="FFFFFF" visible="True" readOnly="False" />
+					</caseagile:properties>
+					<caseagile:values>
+						<caseagile:value name="bgcolor" value="FFFFFF" />
+					</caseagile:values>
+				</caseagile:model>
+			</extensionElements>
+			<incoming>_428f6b96-27ce-4466-be97-16a9930a3919</incoming>
+			<outgoing>_0591b1d8-b829-4eb4-b902-ef6070c72ec7</outgoing>
+		</exclusiveGateway>
+		<intermediateCatchEvent id="_046fabfb-2462-4e8e-8418-05c0af569a87" name="2 hours">
+			<extensionElements>
+				<caseagile:model>
+					<caseagile:element id="8df32ef1-0037-4258-bf5c-bef02d9d649a" />
+					<caseagile:principal id="User" />
+					<caseagile:created date="2018-02-14 06:42:09" />
+					<caseagile:modified date="2018-02-14 06:42:09" />
+					<caseagile:properties>
+						<caseagile:property name="bgcolor" description="Background Color" type="int" format="hex" default="FFFFFF" minimum="000000" maximum="FFFFFF" visible="True" readOnly="False" />
+					</caseagile:properties>
+					<caseagile:values>
+						<caseagile:value name="bgcolor" value="FFFFFF" />
+					</caseagile:values>
+				</caseagile:model>
+			</extensionElements>
+			<outgoing>_4a764dfb-4da3-4610-a13a-2f9438c1b25a</outgoing>
+			<timerEventDefinition id="_26b300f2-0451-4ab5-9764-409839081074" />
+		</intermediateCatchEvent>
+		<intermediateCatchEvent id="_2b08b77a-b823-4c65-a079-5e0726880e74" name="">
+			<extensionElements>
+				<caseagile:model>
+					<caseagile:element id="9586552c-9f4c-4053-85b4-d2a9e20eb307" />
+					<caseagile:principal id="User" />
+					<caseagile:created date="2018-02-14 06:42:09" />
+					<caseagile:modified date="2018-02-14 06:42:09" />
+					<caseagile:properties>
+						<caseagile:property name="bgcolor" description="Background Color" type="int" format="hex" default="FFFFFF" minimum="000000" maximum="FFFFFF" visible="True" readOnly="False" />
+					</caseagile:properties>
+					<caseagile:values>
+						<caseagile:value name="bgcolor" value="FFFFFF" />
+					</caseagile:values>
+				</caseagile:model>
+			</extensionElements>
+			<outgoing>_e2c4668a-6aca-47f6-8ba8-0efbf071f34d</outgoing>
+			<messageEventDefinition id="_eb78b758-a219-43a0-9489-746207e84686" />
+		</intermediateCatchEvent>
+		<sequenceFlow id="_beda35e0-107b-4fa4-b76a-a9e2b77c54e2" name="" sourceRef="_bdd7ea2c-b3d0-49e5-ba70-d7de2534bd18" targetRef="_a48064ef-bbd0-4038-a02a-fcb9fb182003">
+			<extensionElements>
+				<caseagile:model>
+					<caseagile:element id="86b35768-5380-464f-98ee-2040de228907" />
+					<caseagile:principal id="User" />
+					<caseagile:created date="2018-02-14 06:42:09" />
+					<caseagile:modified date="2018-02-14 06:42:09" />
+					<caseagile:properties>
+						<caseagile:property name="bgcolor" description="Background Color" type="int" format="hex" default="FFFFFF" minimum="000000" maximum="FFFFFF" visible="True" readOnly="False" />
+					</caseagile:properties>
+					<caseagile:values>
+						<caseagile:value name="bgcolor" value="FFFFFF" />
+					</caseagile:values>
+				</caseagile:model>
+			</extensionElements>
+		</sequenceFlow>
+		<sequenceFlow id="_0210a588-75f2-4432-8799-866abac93265" name="Warranty" sourceRef="_a48064ef-bbd0-4038-a02a-fcb9fb182003" targetRef="_23a32e37-1c86-4931-a1aa-be26ba29dc60">
+			<extensionElements>
+				<caseagile:model>
+					<caseagile:element id="714ed791-296d-4779-8e83-5b52069df293" />
+					<caseagile:principal id="User" />
+					<caseagile:created date="2018-02-14 06:42:09" />
+					<caseagile:modified date="2018-02-14 06:42:09" />
+					<caseagile:properties>
+						<caseagile:property name="bgcolor" description="Background Color" type="int" format="hex" default="FFFFFF" minimum="000000" maximum="FFFFFF" visible="True" readOnly="False" />
+					</caseagile:properties>
+					<caseagile:values>
+						<caseagile:value name="bgcolor" value="FFFFFF" />
+					</caseagile:values>
+				</caseagile:model>
+			</extensionElements>
+		</sequenceFlow>
+		<sequenceFlow id="_53d61e5a-2049-4266-8391-4351db5293f0" name="Emergency service" sourceRef="_a48064ef-bbd0-4038-a02a-fcb9fb182003" targetRef="_7a3785db-5b95-40a7-81fd-1689b86d900c">
+			<extensionElements>
+				<caseagile:model>
+					<caseagile:element id="ca7de001-cab2-42a7-a0cb-4e9268132efa" />
+					<caseagile:principal id="User" />
+					<caseagile:created date="2018-02-14 06:42:09" />
+					<caseagile:modified date="2018-02-14 06:42:09" />
+					<caseagile:properties>
+						<caseagile:property name="bgcolor" description="Background Color" type="int" format="hex" default="FFFFFF" minimum="000000" maximum="FFFFFF" visible="True" readOnly="False" />
+					</caseagile:properties>
+					<caseagile:values>
+						<caseagile:value name="bgcolor" value="FFFFFF" />
+					</caseagile:values>
+				</caseagile:model>
+			</extensionElements>
+		</sequenceFlow>
+		<sequenceFlow id="_b8deb149-4473-41e0-b274-a46565cfe5e3" name="Regular repair service" sourceRef="_a48064ef-bbd0-4038-a02a-fcb9fb182003" targetRef="_94755f43-a829-47ef-b07e-ad99e513caf5">
+			<extensionElements>
+				<caseagile:model>
+					<caseagile:element id="f13030cb-55c9-40df-ad2c-80e882ceb61a" />
+					<caseagile:principal id="User" />
+					<caseagile:created date="2018-02-14 06:42:09" />
+					<caseagile:modified date="2018-02-14 06:42:09" />
+					<caseagile:properties>
+						<caseagile:property name="bgcolor" description="Background Color" type="int" format="hex" default="FFFFFF" minimum="000000" maximum="FFFFFF" visible="True" readOnly="False" />
+					</caseagile:properties>
+					<caseagile:values>
+						<caseagile:value name="bgcolor" value="FFFFFF" />
+					</caseagile:values>
+				</caseagile:model>
+			</extensionElements>
+		</sequenceFlow>
+		<sequenceFlow id="_aac66a91-dffd-4bcc-9108-33dc66e93215" name="Standard" sourceRef="_94755f43-a829-47ef-b07e-ad99e513caf5" targetRef="_a6849bdd-29dd-4929-89d5-bd83f8a7f613">
+			<extensionElements>
+				<caseagile:model>
+					<caseagile:element id="70865bf0-9a8f-4b79-bfe1-154a51146138" />
+					<caseagile:principal id="User" />
+					<caseagile:created date="2018-02-14 06:42:09" />
+					<caseagile:modified date="2018-02-14 06:42:09" />
+					<caseagile:properties>
+						<caseagile:property name="bgcolor" description="Background Color" type="int" format="hex" default="FFFFFF" minimum="000000" maximum="FFFFFF" visible="True" readOnly="False" />
+					</caseagile:properties>
+					<caseagile:values>
+						<caseagile:value name="bgcolor" value="FFFFFF" />
+					</caseagile:values>
+				</caseagile:model>
+			</extensionElements>
+		</sequenceFlow>
+		<sequenceFlow id="_4e3283ce-f95a-4158-ade1-b3b15f12e12c" name="Premium" sourceRef="_94755f43-a829-47ef-b07e-ad99e513caf5" targetRef="_a943dc6a-0b19-41ea-a4e1-e9d260631748">
+			<extensionElements>
+				<caseagile:model>
+					<caseagile:element id="0360768c-9918-466d-b094-cc65bfda1618" />
+					<caseagile:principal id="User" />
+					<caseagile:created date="2018-02-14 06:42:09" />
+					<caseagile:modified date="2018-02-14 06:42:09" />
+					<caseagile:properties>
+						<caseagile:property name="bgcolor" description="Background Color" type="int" format="hex" default="FFFFFF" minimum="000000" maximum="FFFFFF" visible="True" readOnly="False" />
+					</caseagile:properties>
+					<caseagile:values>
+						<caseagile:value name="bgcolor" value="FFFFFF" />
+					</caseagile:values>
+				</caseagile:model>
+			</extensionElements>
+		</sequenceFlow>
+		<sequenceFlow id="_3aa63aac-719e-4c18-acc0-3cce119bdcf6" name="" sourceRef="_a6849bdd-29dd-4929-89d5-bd83f8a7f613" targetRef="_285ed4bf-f5b6-4a2a-a010-b48972ba0589">
+			<extensionElements>
+				<caseagile:model>
+					<caseagile:element id="7c3ad39b-d1d0-4190-bdd2-196171c7eece" />
+					<caseagile:principal id="User" />
+					<caseagile:created date="2018-02-14 06:42:09" />
+					<caseagile:modified date="2018-02-14 06:42:09" />
+					<caseagile:properties>
+						<caseagile:property name="bgcolor" description="Background Color" type="int" format="hex" default="FFFFFF" minimum="000000" maximum="FFFFFF" visible="True" readOnly="False" />
+					</caseagile:properties>
+					<caseagile:values>
+						<caseagile:value name="bgcolor" value="FFFFFF" />
+					</caseagile:values>
+				</caseagile:model>
+			</extensionElements>
+		</sequenceFlow>
+		<sequenceFlow id="_df37b7bc-128f-4c89-bf44-4279c6ba8814" name="" sourceRef="_a943dc6a-0b19-41ea-a4e1-e9d260631748" targetRef="_285ed4bf-f5b6-4a2a-a010-b48972ba0589">
+			<extensionElements>
+				<caseagile:model>
+					<caseagile:element id="18e3cf9b-d586-41b6-9112-0b78e20351d7" />
+					<caseagile:principal id="User" />
+					<caseagile:created date="2018-02-14 06:42:09" />
+					<caseagile:modified date="2018-02-14 06:42:09" />
+					<caseagile:properties>
+						<caseagile:property name="bgcolor" description="Background Color" type="int" format="hex" default="FFFFFF" minimum="000000" maximum="FFFFFF" visible="True" readOnly="False" />
+					</caseagile:properties>
+					<caseagile:values>
+						<caseagile:value name="bgcolor" value="FFFFFF" />
+					</caseagile:values>
+				</caseagile:model>
+			</extensionElements>
+		</sequenceFlow>
+		<sequenceFlow id="_428f6b96-27ce-4466-be97-16a9930a3919" name="" sourceRef="_7a3785db-5b95-40a7-81fd-1689b86d900c" targetRef="_2e7b5d5f-ea76-4935-a995-d24d710b4f03">
+			<extensionElements>
+				<caseagile:model>
+					<caseagile:element id="002e69e9-2bce-4678-a26d-10d8f1cd18b4" />
+					<caseagile:principal id="User" />
+					<caseagile:created date="2018-02-14 06:42:09" />
+					<caseagile:modified date="2018-02-14 06:42:09" />
+					<caseagile:properties>
+						<caseagile:property name="bgcolor" description="Background Color" type="int" format="hex" default="FFFFFF" minimum="000000" maximum="FFFFFF" visible="True" readOnly="False" />
+					</caseagile:properties>
+					<caseagile:values>
+						<caseagile:value name="bgcolor" value="FFFFFF" />
+					</caseagile:values>
+				</caseagile:model>
+			</extensionElements>
+		</sequenceFlow>
+		<sequenceFlow id="_f1ed5a1f-1cfa-4bee-a38a-ac2601eb0f52" name="" sourceRef="_23a32e37-1c86-4931-a1aa-be26ba29dc60" targetRef="_bc22575c-8a4c-4e24-b07e-eb8096b02b8e">
+			<extensionElements>
+				<caseagile:model>
+					<caseagile:element id="101ee318-878e-40ba-ae6b-e13792e5a3b4" />
+					<caseagile:principal id="User" />
+					<caseagile:created date="2018-02-14 06:42:09" />
+					<caseagile:modified date="2018-02-14 06:42:09" />
+					<caseagile:properties>
+						<caseagile:property name="bgcolor" description="Background Color" type="int" format="hex" default="FFFFFF" minimum="000000" maximum="FFFFFF" visible="True" readOnly="False" />
+					</caseagile:properties>
+					<caseagile:values>
+						<caseagile:value name="bgcolor" value="FFFFFF" />
+					</caseagile:values>
+				</caseagile:model>
+			</extensionElements>
+		</sequenceFlow>
+		<sequenceFlow id="_0591b1d8-b829-4eb4-b902-ef6070c72ec7" name="yes" sourceRef="_2e7b5d5f-ea76-4935-a995-d24d710b4f03" targetRef="_7b3e5df4-3639-4795-8bcc-997086f72905">
+			<extensionElements>
+				<caseagile:model>
+					<caseagile:element id="1cd894ba-b422-44a4-b1f9-8299fbeddf43" />
+					<caseagile:principal id="User" />
+					<caseagile:created date="2018-02-14 06:42:09" />
+					<caseagile:modified date="2018-02-14 06:42:09" />
+					<caseagile:properties>
+						<caseagile:property name="bgcolor" description="Background Color" type="int" format="hex" default="FFFFFF" minimum="000000" maximum="FFFFFF" visible="True" readOnly="False" />
+					</caseagile:properties>
+					<caseagile:values>
+						<caseagile:value name="bgcolor" value="FFFFFF" />
+					</caseagile:values>
+				</caseagile:model>
+			</extensionElements>
+		</sequenceFlow>
+		<sequenceFlow id="_51160fe1-171e-4dbf-b434-0c353ab78d12" name="no" sourceRef="_2e7b5d5f-ea76-4935-a995-d24d710b4f03" targetRef="_23a32e37-1c86-4931-a1aa-be26ba29dc60">
+			<extensionElements>
+				<caseagile:model>
+					<caseagile:element id="52657e9a-484e-41cd-a482-61f86eebfb8b" />
+					<caseagile:principal id="User" />
+					<caseagile:created date="2018-02-14 06:42:09" />
+					<caseagile:modified date="2018-02-14 06:42:09" />
+					<caseagile:properties>
+						<caseagile:property name="bgcolor" description="Background Color" type="int" format="hex" default="FFFFFF" minimum="000000" maximum="FFFFFF" visible="True" readOnly="False" />
+					</caseagile:properties>
+					<caseagile:values>
+						<caseagile:value name="bgcolor" value="FFFFFF" />
+					</caseagile:values>
+				</caseagile:model>
+			</extensionElements>
+		</sequenceFlow>
+		<sequenceFlow id="_101d0793-4f31-410a-ab78-dd2583ee467d" name="" sourceRef="_79956b5f-803f-423f-879f-2abe80dad65a" targetRef="_bdd7ea2c-b3d0-49e5-ba70-d7de2534bd18">
+			<extensionElements>
+				<caseagile:model>
+					<caseagile:element id="81d16af4-dda2-48d1-af7d-42bab962a527" />
+					<caseagile:principal id="User" />
+					<caseagile:created date="2018-02-14 06:42:09" />
+					<caseagile:modified date="2018-02-14 06:42:09" />
+					<caseagile:properties>
+						<caseagile:property name="bgcolor" description="Background Color" type="int" format="hex" default="FFFFFF" minimum="000000" maximum="FFFFFF" visible="True" readOnly="False" />
+					</caseagile:properties>
+					<caseagile:values>
+						<caseagile:value name="bgcolor" value="FFFFFF" />
+					</caseagile:values>
+				</caseagile:model>
+			</extensionElements>
+		</sequenceFlow>
+		<sequenceFlow id="_4a764dfb-4da3-4610-a13a-2f9438c1b25a" name="" sourceRef="_046fabfb-2462-4e8e-8418-05c0af569a87" targetRef="_7a3785db-5b95-40a7-81fd-1689b86d900c">
+			<extensionElements>
+				<caseagile:model>
+					<caseagile:element id="55074e6e-a83c-445e-adbb-91645fa061a6" />
+					<caseagile:principal id="User" />
+					<caseagile:created date="2018-02-14 06:42:09" />
+					<caseagile:modified date="2018-02-14 06:42:09" />
+					<caseagile:properties>
+						<caseagile:property name="bgcolor" description="Background Color" type="int" format="hex" default="FFFFFF" minimum="000000" maximum="FFFFFF" visible="True" readOnly="False" />
+					</caseagile:properties>
+					<caseagile:values>
+						<caseagile:value name="bgcolor" value="FFFFFF" />
+					</caseagile:values>
+				</caseagile:model>
+			</extensionElements>
+		</sequenceFlow>
+		<sequenceFlow id="_e2c4668a-6aca-47f6-8ba8-0efbf071f34d" name="" sourceRef="_2b08b77a-b823-4c65-a079-5e0726880e74" targetRef="_a943dc6a-0b19-41ea-a4e1-e9d260631748">
+			<extensionElements>
+				<caseagile:model>
+					<caseagile:element id="e8382766-3297-4a08-9011-09f03e410518" />
+					<caseagile:principal id="User" />
+					<caseagile:created date="2018-02-14 06:42:09" />
+					<caseagile:modified date="2018-02-14 06:42:09" />
+					<caseagile:properties>
+						<caseagile:property name="bgcolor" description="Background Color" type="int" format="hex" default="FFFFFF" minimum="000000" maximum="FFFFFF" visible="True" readOnly="False" />
+					</caseagile:properties>
+					<caseagile:values>
+						<caseagile:value name="bgcolor" value="FFFFFF" />
+					</caseagile:values>
+				</caseagile:model>
+			</extensionElements>
+		</sequenceFlow>
+		<startEvent id="_79956b5f-803f-423f-879f-2abe80dad65a" name="Receive customer request">
+			<extensionElements>
+				<caseagile:model>
+					<caseagile:element id="0dfb197d-aae7-4908-bf57-a2f2e3b22cc8" />
+					<caseagile:principal id="User" />
+					<caseagile:created date="2018-02-14 06:42:09" />
+					<caseagile:modified date="2018-02-14 06:42:09" />
+					<caseagile:properties>
+						<caseagile:property name="bgcolor" description="Background Color" type="int" format="hex" default="FFFFFF" minimum="000000" maximum="FFFFFF" visible="True" readOnly="False" />
+					</caseagile:properties>
+					<caseagile:values>
+						<caseagile:value name="bgcolor" value="FFFFFF" />
+					</caseagile:values>
+				</caseagile:model>
+			</extensionElements>
+			<outgoing>_101d0793-4f31-410a-ab78-dd2583ee467d</outgoing>
+			<messageEventDefinition id="_976a41cb-be9c-4ae8-b854-ab165634dff5" />
+		</startEvent>
+		<subProcess id="_7a3785db-5b95-40a7-81fd-1689b86d900c" name="Perform emergency repair" triggeredByEvent="false">
+			<extensionElements>
+				<caseagile:model>
+					<caseagile:element id="b768f10c-41dc-4810-9506-9513cca2ad68" />
+					<caseagile:principal id="User" />
+					<caseagile:created date="2018-02-14 06:42:09" />
+					<caseagile:modified date="2018-02-14 06:42:09" />
+					<caseagile:properties>
+						<caseagile:property name="bgcolor" description="Background Color" type="int" format="hex" default="FFFFFF" minimum="000000" maximum="FFFFFF" visible="True" readOnly="False" />
+					</caseagile:properties>
+					<caseagile:values>
+						<caseagile:value name="bgcolor" value="FFFFFF" />
+					</caseagile:values>
+				</caseagile:model>
+			</extensionElements>
+			<incoming>_53d61e5a-2049-4266-8391-4351db5293f0</incoming>
+			<outgoing>_428f6b96-27ce-4466-be97-16a9930a3919</outgoing>
+		</subProcess>
+		<userTask id="_bdd7ea2c-b3d0-49e5-ba70-d7de2534bd18" name="Analyse customer request">
+			<extensionElements>
+				<caseagile:model>
+					<caseagile:element id="1be9c8f7-5152-4e42-a784-f7c7bfdd2196" />
+					<caseagile:principal id="User" />
+					<caseagile:created date="2018-02-14 06:42:09" />
+					<caseagile:modified date="2018-02-14 06:42:09" />
+					<caseagile:properties>
+						<caseagile:property name="bgcolor" description="Background Color" type="int" format="hex" default="FFFFFF" minimum="000000" maximum="FFFFFF" visible="True" readOnly="False" />
+					</caseagile:properties>
+					<caseagile:values>
+						<caseagile:value name="bgcolor" value="FFFFFF" />
+					</caseagile:values>
+				</caseagile:model>
+			</extensionElements>
+			<incoming>_101d0793-4f31-410a-ab78-dd2583ee467d</incoming>
+			<outgoing>_beda35e0-107b-4fa4-b76a-a9e2b77c54e2</outgoing>
+		</userTask>
+		<userTask id="_23a32e37-1c86-4931-a1aa-be26ba29dc60" name="Replace fridge">
+			<extensionElements>
+				<caseagile:model>
+					<caseagile:element id="1833403a-0cdc-4d5a-911f-bb750fd8926b" />
+					<caseagile:principal id="User" />
+					<caseagile:created date="2018-02-14 06:42:09" />
+					<caseagile:modified date="2018-02-14 06:42:09" />
+					<caseagile:properties>
+						<caseagile:property name="bgcolor" description="Background Color" type="int" format="hex" default="FFFFFF" minimum="000000" maximum="FFFFFF" visible="True" readOnly="False" />
+					</caseagile:properties>
+					<caseagile:values>
+						<caseagile:value name="bgcolor" value="FFFFFF" />
+					</caseagile:values>
+				</caseagile:model>
+			</extensionElements>
+			<incoming>_0210a588-75f2-4432-8799-866abac93265</incoming>
+			<outgoing>_f1ed5a1f-1cfa-4bee-a38a-ac2601eb0f52</outgoing>
+		</userTask>
+		<userTask id="_a6849bdd-29dd-4929-89d5-bd83f8a7f613" name="Perform repair (standard level)">
+			<extensionElements>
+				<caseagile:model>
+					<caseagile:element id="035c0d85-0aee-4f28-8c15-1ede26cd3282" />
+					<caseagile:principal id="User" />
+					<caseagile:created date="2018-02-14 06:42:09" />
+					<caseagile:modified date="2018-02-14 06:42:09" />
+					<caseagile:properties>
+						<caseagile:property name="bgcolor" description="Background Color" type="int" format="hex" default="FFFFFF" minimum="000000" maximum="FFFFFF" visible="True" readOnly="False" />
+					</caseagile:properties>
+					<caseagile:values>
+						<caseagile:value name="bgcolor" value="FFFFFF" />
+					</caseagile:values>
+				</caseagile:model>
+			</extensionElements>
+			<incoming>_aac66a91-dffd-4bcc-9108-33dc66e93215</incoming>
+			<outgoing>_3aa63aac-719e-4c18-acc0-3cce119bdcf6</outgoing>
+		</userTask>
+		<userTask id="_a943dc6a-0b19-41ea-a4e1-e9d260631748" name="Perform repair (premium level)">
+			<extensionElements>
+				<caseagile:model>
+					<caseagile:element id="76635074-5945-4d3b-9bf8-683c33149e73" />
+					<caseagile:principal id="User" />
+					<caseagile:created date="2018-02-14 06:42:09" />
+					<caseagile:modified date="2018-02-14 06:42:09" />
+					<caseagile:properties>
+						<caseagile:property name="bgcolor" description="Background Color" type="int" format="hex" default="FFFFFF" minimum="000000" maximum="FFFFFF" visible="True" readOnly="False" />
+					</caseagile:properties>
+					<caseagile:values>
+						<caseagile:value name="bgcolor" value="FFFFFF" />
+					</caseagile:values>
+				</caseagile:model>
+			</extensionElements>
+			<incoming>_4e3283ce-f95a-4158-ade1-b3b15f12e12c</incoming>
+			<outgoing>_df37b7bc-128f-4c89-bf44-4279c6ba8814</outgoing>
+		</userTask>
+	</process>
+	<BPMNDiagram name="Fridge Repair Process (1)" resolution="96" id="_b20d7ee5-bb3a-47a5-bc7f-a2a8bacecec6" xmlns="http://www.omg.org/spec/BPMN/20100524/DI">
+		<BPMNPlane bpmnElement="_05622d3f-4471-465c-9422-b21c1bf2947b">
+			<BPMNEdge id="_90b6d2d0-d5ce-4eb7-9b92-111b41a6614a" bpmnElement="_beda35e0-107b-4fa4-b76a-a9e2b77c54e2">
+				<waypoint x="264" y="216" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="328" y="216" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+			</BPMNEdge>
+			<BPMNEdge id="_5c73d800-4529-4ac5-9db4-cb7706789bf7" bpmnElement="_0210a588-75f2-4432-8799-866abac93265">
+				<waypoint x="376" y="180" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="376" y="144" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="744" y="144" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+			</BPMNEdge>
+			<BPMNEdge id="_f682f003-58e2-4764-bc0d-43009e00f6ed" bpmnElement="_53d61e5a-2049-4266-8391-4351db5293f0">
+				<waypoint x="424" y="216" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="576" y="216" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="576" y="276" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+			</BPMNEdge>
+			<BPMNEdge id="_6362cd4e-9258-41a4-b99e-8e5d712447b7" bpmnElement="_b8deb149-4473-41e0-b274-a46565cfe5e3">
+				<waypoint x="376" y="252" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="376" y="432" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+			</BPMNEdge>
+			<BPMNEdge id="_f286ea97-ba50-4d0b-b012-185d94c05f34" bpmnElement="_aac66a91-dffd-4bcc-9108-33dc66e93215">
+				<waypoint x="376" y="504" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="376" y="655" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="528" y="655" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+			</BPMNEdge>
+			<BPMNEdge id="_68e58553-206f-4bdd-acd2-15ef460f00c5" bpmnElement="_4e3283ce-f95a-4158-ade1-b3b15f12e12c">
+				<waypoint x="424" y="468" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="528" y="468" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+			</BPMNEdge>
+			<BPMNEdge id="_62dd5d8e-82c0-42b7-9d04-6d2cefe3d7cf" bpmnElement="_3aa63aac-719e-4c18-acc0-3cce119bdcf6">
+				<waypoint x="624" y="655" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="656" y="655" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="663" y="655" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="1000" y="655" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="1000" y="486" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+			</BPMNEdge>
+			<BPMNEdge id="_e61eaeb5-07d2-4363-bf46-b25dae263eb2" bpmnElement="_df37b7bc-128f-4c89-bf44-4279c6ba8814">
+				<waypoint x="624" y="468" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="642" y="468" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="642" y="471" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="656" y="471" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="664" y="471" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="985" y="471" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+			</BPMNEdge>
+			<BPMNEdge id="_11d58ddd-485a-4d69-aada-d34d057af7ff" bpmnElement="_428f6b96-27ce-4466-be97-16a9930a3919">
+				<waypoint x="624" y="312" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="744" y="312" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+			</BPMNEdge>
+			<BPMNEdge id="_c3956d3d-3068-47ea-92af-a5f3f4143561" bpmnElement="_f1ed5a1f-1cfa-4bee-a38a-ac2601eb0f52">
+				<waypoint x="840" y="144" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="984" y="144" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+			</BPMNEdge>
+			<BPMNEdge id="_2e33e64b-ddec-4891-ae94-a9cd0d6f0d24" bpmnElement="_0591b1d8-b829-4eb4-b902-ef6070c72ec7">
+				<waypoint x="840" y="312" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="984" y="312" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+			</BPMNEdge>
+			<BPMNEdge id="_9e8aa576-7f82-4a7f-81e0-93402eb0eab3" bpmnElement="_51160fe1-171e-4dbf-b434-0c353ab78d12">
+				<waypoint x="792" y="276" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="792" y="180" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+			</BPMNEdge>
+			<BPMNEdge id="_d372d6f1-2770-48d3-8885-5a238cebedaa" bpmnElement="_101d0793-4f31-410a-ab78-dd2583ee467d">
+				<waypoint x="117" y="216" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="168" y="216" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+			</BPMNEdge>
+			<BPMNEdge id="_1f89d258-8171-44a0-b58c-75e7d61bd0fe" bpmnElement="_4a764dfb-4da3-4610-a13a-2f9438c1b25a">
+				<waypoint x="591" y="519" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="591" y="556" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="660" y="556" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="660" y="387" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="552" y="387" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="552" y="348" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+			</BPMNEdge>
+			<BPMNEdge id="_0fe586e7-9983-444f-9620-85e3f73fc608" bpmnElement="_e2c4668a-6aca-47f6-8ba8-0efbf071f34d">
+				<waypoint x="600" y="706" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="600" y="724" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="660" y="724" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="660" y="585" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="552" y="585" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+				<waypoint x="552" y="504" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+			</BPMNEdge>
+			<BPMNShape id="_1cc1979a-9151-4ddd-bee6-d74c08a2afd3" bpmnElement="_79956b5f-803f-423f-879f-2abe80dad65a" isHorizontal="false" isExpanded="false" isMarkerVisible="false" isMessageVisible="false">
+				<Bounds x="87" y="201" width="30" height="30" xmlns="http://www.omg.org/spec/DD/20100524/DC" />
+			</BPMNShape>
+			<BPMNShape id="_855336c7-12a9-41bd-b093-e8443c7fff83" bpmnElement="_bdd7ea2c-b3d0-49e5-ba70-d7de2534bd18" isHorizontal="false" isExpanded="false" isMarkerVisible="false" isMessageVisible="false">
+				<Bounds x="168" y="180" width="96" height="72" xmlns="http://www.omg.org/spec/DD/20100524/DC" />
+			</BPMNShape>
+			<BPMNShape id="_7e7f3011-f8e9-4a7d-89c0-3523e9fb0b64" bpmnElement="_23a32e37-1c86-4931-a1aa-be26ba29dc60" isHorizontal="false" isExpanded="false" isMarkerVisible="false" isMessageVisible="false">
+				<Bounds x="744" y="108" width="96" height="72" xmlns="http://www.omg.org/spec/DD/20100524/DC" />
+			</BPMNShape>
+			<BPMNShape id="_af1bc703-e3c7-4340-9fb7-71b459ddcd1c" bpmnElement="_bc22575c-8a4c-4e24-b07e-eb8096b02b8e" isHorizontal="false" isExpanded="false" isMarkerVisible="false" isMessageVisible="false">
+				<Bounds x="984" y="129" width="30" height="30" xmlns="http://www.omg.org/spec/DD/20100524/DC" />
+			</BPMNShape>
+			<BPMNShape id="_e3bc67a4-9abb-48fc-8b85-18737f341a4e" bpmnElement="_a48064ef-bbd0-4038-a02a-fcb9fb182003" isHorizontal="false" isExpanded="false" isMarkerVisible="false" isMessageVisible="false">
+				<Bounds x="328" y="180" width="96" height="72" xmlns="http://www.omg.org/spec/DD/20100524/DC" />
+			</BPMNShape>
+			<BPMNShape id="_ff8382c0-c9ab-4396-9694-7fc862f84ebb" bpmnElement="_7b3e5df4-3639-4795-8bcc-997086f72905" isHorizontal="false" isExpanded="false" isMarkerVisible="false" isMessageVisible="false">
+				<Bounds x="984" y="297" width="30" height="30" xmlns="http://www.omg.org/spec/DD/20100524/DC" />
+			</BPMNShape>
+			<BPMNShape id="_cfeeae11-5001-4113-a178-0ccb9fdbdb96" bpmnElement="_94755f43-a829-47ef-b07e-ad99e513caf5" isHorizontal="false" isExpanded="false" isMarkerVisible="false" isMessageVisible="false">
+				<Bounds x="328" y="432" width="96" height="72" xmlns="http://www.omg.org/spec/DD/20100524/DC" />
+			</BPMNShape>
+			<BPMNShape id="_7feeaf77-a122-4563-9f20-eb40adcb7627" bpmnElement="_a6849bdd-29dd-4929-89d5-bd83f8a7f613" isHorizontal="false" isExpanded="false" isMarkerVisible="false" isMessageVisible="false">
+				<Bounds x="528" y="619" width="96" height="72" xmlns="http://www.omg.org/spec/DD/20100524/DC" />
+			</BPMNShape>
+			<BPMNShape id="_b4b0bda3-033c-4803-80b6-73d4f847d4eb" bpmnElement="_a943dc6a-0b19-41ea-a4e1-e9d260631748" isHorizontal="false" isExpanded="false" isMarkerVisible="false" isMessageVisible="false">
+				<Bounds x="528" y="432" width="96" height="72" xmlns="http://www.omg.org/spec/DD/20100524/DC" />
+			</BPMNShape>
+			<BPMNShape id="_512b5147-dea6-47b5-af0b-d9bbbcdc3ad7" bpmnElement="_285ed4bf-f5b6-4a2a-a010-b48972ba0589" isHorizontal="false" isExpanded="false" isMarkerVisible="false" isMessageVisible="false">
+				<Bounds x="985" y="456" width="30" height="30" xmlns="http://www.omg.org/spec/DD/20100524/DC" />
+			</BPMNShape>
+			<BPMNShape id="_06a713c8-5190-43c7-8794-62ae1f7cf666" bpmnElement="_2e7b5d5f-ea76-4935-a995-d24d710b4f03" isHorizontal="false" isExpanded="false" isMarkerVisible="false" isMessageVisible="false">
+				<Bounds x="744" y="276" width="96" height="72" xmlns="http://www.omg.org/spec/DD/20100524/DC" />
+			</BPMNShape>
+			<BPMNShape id="_a7520488-1d64-4f85-a756-f36409a891e0" bpmnElement="_7a3785db-5b95-40a7-81fd-1689b86d900c" isHorizontal="false" isExpanded="false" isMarkerVisible="false" isMessageVisible="false">
+				<Bounds x="528" y="276" width="96" height="72" xmlns="http://www.omg.org/spec/DD/20100524/DC" />
+			</BPMNShape>
+			<BPMNShape id="_02b59c0b-0b8d-4cdb-8e4e-7e1aba0748cf" bpmnElement="_046fabfb-2462-4e8e-8418-05c0af569a87" isHorizontal="false" isExpanded="false" isMarkerVisible="false" isMessageVisible="false">
+				<Bounds x="576" y="489" width="30" height="30" xmlns="http://www.omg.org/spec/DD/20100524/DC" />
+			</BPMNShape>
+			<BPMNShape id="_bf098931-eb8f-4f07-99b2-8a1ebc48c456" bpmnElement="_2b08b77a-b823-4c65-a079-5e0726880e74" isHorizontal="false" isExpanded="false" isMarkerVisible="false" isMessageVisible="false">
+				<Bounds x="585" y="676" width="30" height="30" xmlns="http://www.omg.org/spec/DD/20100524/DC" />
+			</BPMNShape>
+		</BPMNPlane>
+	</BPMNDiagram>
+</definitions>
