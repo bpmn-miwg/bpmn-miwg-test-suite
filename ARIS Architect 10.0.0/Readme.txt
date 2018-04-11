@@ -1,4 +1,0 @@
-- (Rel. B.1.0, B.2.0 ) Since ARIS‘ BPMN import and export are two different processes, ARIS is able to import these diagrams, but needs the Call Activity to be a Collaboration Diagram instead of a Process Diagram. Changing the type manually solves the problem.
-- (Rel. A.4.0) ARIS imports the semantic part from a file and enriches it with grafical information found in the second part. Since the second pool is not participant in the semantic part, ARIS ignores it.
-- (Rel. C.2.0) ARIS' import method does not support edges between a sub-process and parent process.
-- general remark: there will be a fresh BPMN import/export implementation in ARIS, addressing the above mentioned problems and enhancing the overall round trip capabilities.
