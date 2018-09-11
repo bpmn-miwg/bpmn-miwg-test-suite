@@ -12,7 +12,7 @@
   <properties>
     <java.version>1.6</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <bpmn-miwg-tools.version>0.5.0</bpmn-miwg-tools.version>
+    <bpmn-miwg-tools.version>0.6.0</bpmn-miwg-tools.version>
     <!-- Use this property to name just one tool to be tested
     <project.bpmn.application>Yaoqiang BPMN Editor 2.2.18</project.bpmn.application>
     -->
@@ -20,19 +20,32 @@
     <local-mvn-repo.snapshot.directory>file:${user.home}/bpmn-miwg-mvn-repo/snapshots</local-mvn-repo.snapshot.directory>
   </properties>
 
+  <scm>
+    <connection>scm:git:https://github.com/bpmn-miwg/bpmn-miwg-test-suite</connection>
+    <url>https://github.com/bpmn-miwg/bpmn-miwg-test-suite</url>
+  </scm>
+
   <repositories>
     <repository>
       <id>bpmn-miwg-repo</id>
       <url>https://raw.githubusercontent.com/bpmn-miwg/bpmn-miwg-mvn-repo/master/</url>
     </repository>
   </repositories>
-  
+
   <pluginRepositories>
     <pluginRepository>
       <id>bpmn-miwg-plugin-repo</id>
       <url>https://raw.githubusercontent.com/bpmn-miwg/bpmn-miwg-mvn-repo/master/</url>
     </pluginRepository>
   </pluginRepositories>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.omg.bpmn.miwg</groupId>
+      <artifactId>bounds-generator</artifactId>
+      <version>${bpmn-miwg-tools.version}</version>
+    </dependency>
+  </dependencies>
 
   <build>
     <resources>
@@ -51,10 +64,10 @@
           <include>LICENSE.txt</include>
         </includes>
         <excludes>
-    <exclude>.*</exclude><!-- ignore hidden files from Git & Eclipse -->
-    <exclude>.*/**/*</exclude><!-- ignore hidden folders from Git & Eclipse -->
-    <exclude>target/**/*</exclude><!-- ignore Maven build dir -->
-    <exclude>Work in Progress/**/*</exclude><!-- ignore unfinished test cases -->
+          <exclude>.*</exclude><!-- ignore hidden files from Git & Eclipse -->
+          <exclude>.*/**/*</exclude><!-- ignore hidden folders from Git & Eclipse -->
+          <exclude>target/**/*</exclude><!-- ignore Maven build dir -->
+          <exclude>Work in Progress/**/*</exclude><!-- ignore unfinished test cases -->
         </excludes>
       </resource>
     </resources>
@@ -66,26 +79,27 @@
           <altDeploymentRepository>internal.repo::default::${local-mvn-repo.snapshot.directory}</altDeploymentRepository>
         </configuration>
       </plugin>
-		<plugin>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-jar-plugin</artifactId>
-			<executions>
-				<execution>
-					<id>reference-only</id>
-					<phase>package</phase>
-					<goals>
-						<goal>jar</goal>
-					</goals>
-					<configuration>
-						<classifier>reference-only</classifier>
-						<includes>
-							<include>Reference/*.bpmn</include>
-						</includes>
-					</configuration>
-				</execution>
-			</executions>
-		</plugin>
-	</plugins>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-jar-plugin</artifactId>
+      <version>3.0.2</version>
+      <executions>
+        <execution>
+          <id>reference-only</id>
+          <phase>package</phase>
+          <goals>
+            <goal>jar</goal>
+          </goals>
+          <configuration>
+            <classifier>reference-only</classifier>
+            <includes>
+              <include>Reference/*.bpmn</include>
+            </includes>
+          </configuration>
+        </execution>
+      </executions>
+    </plugin>
+  </plugins>
   </build>
 
   <profiles>
@@ -93,6 +107,34 @@
       <id>analysis</id>
       <build>
         <plugins>
+          <plugin>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.8</version>
+            <executions>
+              <execution>
+                <phase>process-resources</phase>
+                <configuration>
+                  <target>
+                    <property name="compile_classpath" refid="maven.compile.classpath"/>
+                    <property name="runtime_classpath" refid="maven.runtime.classpath"/>
+                    <property name="test_classpath" refid="maven.test.classpath"/>
+                    <property name="plugin_classpath" refid="maven.plugin.classpath"/>
+
+                    <java classname="org.omg.bpmn.miwg.boundary.BoundaryCreator">
+                      <arg value="Reference"/>
+                      <arg value="${project.build.directory}/site/Reference/Bounds"/>
+                      <classpath>
+                        <pathelement path="${compile_classpath}"/>
+                      </classpath>
+                    </java>
+                  </target>
+                </configuration>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
           <plugin>
             <artifactId>maven-site-plugin</artifactId>
             <version>3.4</version>
