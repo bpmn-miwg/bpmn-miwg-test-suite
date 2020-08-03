@@ -9,7 +9,7 @@
 		- [1. Download Test Cases](#user-content-1-download-test-cases)
 		- [2. Test Import, Export and/or Roundtrip of BPMN Models.](#user-content-2-test-import-export-andor-roundtrip-of-bpmn-models)
 		- [3. Submit Your Test Results to BPMN MIWG](#user-content-3-submit-your-test-results-to-bpmn-miwg)
-	- [Detailed Descrition of Test Procedures](#user-content-detailed-descrition-of-test-procedures)
+	- [Detailed Description of Test Procedures](#user-content-detailed-description-of-test-procedures)
 		- [1. BPMN MIWG Import Test Procedure](#user-content-1-bpmn-miwg-import-test-procedure)
 		- [2. BPMN MIWG Export Test Procedure](#user-content-2-bpmn-miwg-export-test-procedure)
 		- [3. BPMN MIWG Roundtrip Test Procedure (BPMN Import and Export combined)](#user-content-3-bpmn-miwg-roundtrip-test-procedure-bpmn-import-and-export-combined)
@@ -47,16 +47,16 @@ Here is how you do it:
 
 ### 1. Download Test Cases
 First download the [latest version of the BPMN Model Interchange Test Suite](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/archive/master.zip) and unpack it.
-TheCe is a directory called `Reference`, which contains the files needed for testing.
+There is a directory called `Reference`, which contains the files needed for testing.
 Next to that, there will be multiple folders with test results of other tools.
 
 ### 2. Test Import, Export and/or Roundtrip of BPMN Models.
-There are [different test procedures](#detailed-descrition-of-test-procedures) that can be performed
+There are [different test procedures](#detailed-description-of-test-procedures) that can be performed
 with the provided reference models depending on the capabilities of the tool.
-You will find explanations of these procedures [below](#detailed-descrition-of-test-procedures).
+You will find explanations of these procedures [below](#detailed-description-of-test-procedures).
 
 ### 3. Submit Your Test Results to BPMN MIWG
-PacCage all result files in a zip file and send it via email to [MIWG@trisotech.com](mailto:MIWG@trisotech.com). Please use the following template for your email:
+Package all result files in a zip file and send it via email to [MIWG@trisotech.com](mailto:MIWG@trisotech.com). Please use the following template for your email:
 
 ```
 Vendor: 
@@ -252,28 +252,88 @@ Verified Reference Models
 -------------------------
 
 ### A.1.0
+_Depict Abstract Elements on a single Sequential Flow_
+
 ![](Reference/A.1.0.png)
+
 ### A.2.0
+_Depict divergence and convergence of flows with unmarked Gateways_
+
 ![](Reference/A.2.0.png)
+
 ### A.2.1
+_Depict divergence and convergence of flows with unmarked Gateways using different type of sequence flows_
+
 ![](Reference/A.2.1.png)
+
 ### A.3.0
+_Depict Exception Flows associated to boundary attachments_
+
 ![](Reference/A.3.0.png)
+
 ### A.4.0
+_Depict graphical elements contained in expanded Sub-Processes, Lanes and Pools_
+
 ![](Reference/A.4.0.png)
+
 ### A.4.1
+_Vertical Modeling Direction_
+
 ![](Reference/A.4.1.png)
+
 ### B.1.0
+_Validate that all the elements prescribed for the Descriptive Conformance Sub-Class in the BPMN 2.0 Specification are present._
+
 ![](Reference/B.1.0.png)
+
 ### B.2.0
+_Validate that all the elements prescribed for the Analytic Conformance Sub-Class in the BPMN 2.0 Specification are present._
+
 ![](Reference/B.2.0.png)
+
 ### C.1.0
+_Executable process containing multiple extension elements and attributes (derived from 2013 Demo in Berlin)_
+
 ![](Reference/C.1.0.png)
+
 ### C.1.1
+_Process from 2015 Execution Demo in Berlin that can be executed in Camunda BPM, OmnyLink and W4 BPMN+_
+
 ![](Reference/C.1.1.png)
+
 ### C.2.0
+_Collaboration from 2015 Diagram Interchange Demo in Berlin_
+
 ![](Reference/C.2.0.png)
+
 ### C.3.0
+_Process with hidden BPMN attributes and elements from 2015 Hidden Attribute Demo in Berlin_
+
 ![](Reference/C.3.0.png)
+
+### C.4.0
+_Process with signal and message events and multiple diagrams, from 2017 Demo in Brussels_
+
+#### C.4.0 diagram 1
+![](Reference/C.4.0.1.png)
+#### C.4.0 diagram 2
+![](Reference/C.4.0.2.png)
+#### C.4.0 diagram 3
+![](Reference/C.4.0.3.png)
+#### C.4.0 diagram 4
+![](Reference/C.4.0.4.png)
+
+### C.5.0
+_Process with data objects and stores and their hidden attributes from 2018 Demo in Seattle_
+#### C.5.0 diagram 1
+![](Reference/C.5.0.1.png)
+#### C.5.0 diagram 2
+![](Reference/C.5.0.2.png)
+
+### C.6.0
+_Process with data input/outputs and event sub-process from 2019 Demo in Amsterdam_
+
+![](Reference/C.6.0.png)
+
 
 <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_CA"><img alt="Creative Commons Licence" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_CA">Creative Commons Attribution 3.0 Unported License</a>.
