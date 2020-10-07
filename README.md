@@ -336,4 +336,10 @@ _Process with data input/outputs and event sub-process from 2019 Demo in Amsterd
 ![](Reference/C.6.0.png)
 
 
+### C.7.0
+_Process with senquence flow on sequence flow from 2020 Demo in Orlando_
+
+![](Reference/C.7.0.png)
+
+
 <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_CA"><img alt="Creative Commons Licence" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_CA">Creative Commons Attribution 3.0 Unported License</a>.
