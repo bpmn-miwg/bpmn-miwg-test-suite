@@ -337,7 +337,7 @@ _Process with data input/outputs and event sub-process from 2019 Demo in Amsterd
 
 
 ### C.7.0
-_Process with senquence flow on sequence flow from 2020 Demo in Orlando_
+_Process with data inputs and data object connected to sequence flow from 2020 Virtual Demo_
 
 ![](Reference/C.7.0.png)
 
