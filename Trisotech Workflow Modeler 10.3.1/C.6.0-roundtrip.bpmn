@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<semantic:definitions xmlns:semantic="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:trisobpmn="http://www.trisotech.com/2014/triso/bpmn" xmlns:triso="http://www.trisotech.com/2015/triso/modeling" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:rss="http://purl.org/rss/2.0/" xmlns:trisofeed="http://trisotech.com/feed"              xmlns:drools="http://www.jboss.org/drools"  xmlns:openapi="https://openapis.org/omg/extension/1.0"  xmlns="http://www.trisotech.com/definitions/_af3cbf6a-9c69-460b-9a1d-276711d30213" id="_af3cbf6a-9c69-460b-9a1d-276711d30213" targetNamespace="http://www.trisotech.com/definitions/_af3cbf6a-9c69-460b-9a1d-276711d30213" expressionLanguage="http://www.w3.org/1999/XPath" exporter="BPMN Modeler" exporterVersion="6.2.9.1" name="Travel Booking with Event Subprocess" trisobpmn:logoChoice="Default">
-    <semantic:itemDefinition structureRef="string" triso:basicType="true" triso:definitionType="http://www.trisotech.com/2015/triso/modeling/ItemDefinitionType" id="_triso-default-bpmnItemDefinition-string_id" triso:name="triso_string"/>
-    <semantic:process id="_898aa942-9a96-4405-ae71-22b5e2e3d235" name="Simple Travel Booking" isClosed="false">
+<semantic:definitions xmlns:semantic="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:trisobpmn="http://www.trisotech.com/2014/triso/bpmn" xmlns:triso="http://www.trisotech.com/2015/triso/modeling" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:openapi="https://openapis.org/omg/extension/1.0" xmlns:rss="http://purl.org/rss/2.0/" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:trisofeed="http://trisotech.com/feed"                 xmlns:drools="http://www.jboss.org/drools"  xmlns:i18n="http://www.omg.org/spec/BPMN/non-normative/extensions/i18n/1.0"  xmlns="http://www.trisotech.com/definitions/_af3cbf6a-9c69-460b-9a1d-276711d30213" id="_af3cbf6a-9c69-460b-9a1d-276711d30213" targetNamespace="http://www.trisotech.com/definitions/_af3cbf6a-9c69-460b-9a1d-276711d30213" expressionLanguage="http://www.w3.org/1999/XPath" exporter="Workflow Modeler" exporterVersion="7.3.1" name="Travel Booking with Event Subprocess" xml:lang="en" triso:translationLanguages="" trisobpmn:logoChoice="Default">
+    <semantic:itemDefinition structureRef="feel:string" triso:basicType="true" triso:definitionType="http://www.trisotech.com/2015/triso/modeling/ItemDefinitionType" triso:name="triso_string" id="_triso-default-bpmnItemDefinition-string_id"/>
+    <semantic:process id="_898aa942-9a96-4405-ae71-22b5e2e3d235" name="Simple Travel Booking" isExecutable="false" isClosed="false">
         <semantic:ioSpecification>
             <semantic:dataInput name="Travel Request" isCollection="false" id="_e8347f3a-e1a1-41d1-b2e1-4089c02028bc"/>
             <semantic:dataOutput name="Itinerary" isCollection="false" id="_1a713fab-bf18-4975-afe3-d2bd2820023b"/>
-            <semantic:inputSet id="_cce765bb-4a53-491c-ae8a-6f6650ca7001">
+            <semantic:inputSet id="_567b6484-aca0-4efc-9baa-9389185efef6">
                 <semantic:dataInputRefs>_e8347f3a-e1a1-41d1-b2e1-4089c02028bc</semantic:dataInputRefs>
             </semantic:inputSet>
-            <semantic:outputSet id="_1dccbda0-432a-4761-8d07-c8629b814dae">
+            <semantic:outputSet id="_cf411abe-9fec-43d5-8cac-6eb662ee03f6">
                 <semantic:dataOutputRefs>_1a713fab-bf18-4975-afe3-d2bd2820023b</semantic:dataOutputRefs>
             </semantic:outputSet>
         </semantic:ioSpecification>
@@ -32,7 +32,7 @@
         <semantic:intermediateThrowEvent id="_6a5cdbbf-2618-496e-b728-955dc215ef9d" name="Booking">
             <semantic:incoming>_b792d502-a08e-4a3d-bdc1-1fc33a2022f6</semantic:incoming>
             <semantic:outgoing>_c72535b8-43f7-4906-9f18-691e03050c24</semantic:outgoing>
-            <semantic:compensateEventDefinition/>
+            <semantic:compensateEventDefinition waitForCompletion="false"/>
         </semantic:intermediateThrowEvent>
         <semantic:endEvent id="_88247168-b457-4663-aad0-753a0236c8df" name="Offer Expired">
             <semantic:incoming>_51e34f49-b9eb-4f10-ac0a-7af81e1370ff</semantic:incoming>
@@ -79,16 +79,16 @@
                 <semantic:intermediateThrowEvent id="_99bf4db9-3616-4ed1-a0f8-b8175c3fd46f" name="Hotel">
                     <semantic:incoming>_64d60a4e-90cf-4a9a-afbb-631739b6b704</semantic:incoming>
                     <semantic:outgoing>_8d0dadf1-129e-4ba8-b829-3e7e176bf775</semantic:outgoing>
-                    <semantic:compensateEventDefinition/>
+                    <semantic:compensateEventDefinition waitForCompletion="false"/>
                 </semantic:intermediateThrowEvent>
                 <semantic:intermediateThrowEvent id="_e4b9fa74-efd8-409f-a2e4-ad917df767b4" name="Flight">
                     <semantic:incoming>_3cd5068b-6df1-4a62-a06a-369d063f6160</semantic:incoming>
                     <semantic:outgoing>_b62ef735-9d04-494a-aeb4-95fd4862cc45</semantic:outgoing>
-                    <semantic:compensateEventDefinition/>
+                    <semantic:compensateEventDefinition waitForCompletion="false"/>
                 </semantic:intermediateThrowEvent>
                 <semantic:startEvent id="_8af17ed4-6e13-463b-8333-d397b3002c65" name="Booking">
                     <semantic:outgoing>_e0c52135-c57f-4ee6-b488-22bbab06dccc</semantic:outgoing>
-                    <semantic:compensateEventDefinition id="_434dc71e-6d59-4940-8e27-a911bf891cdf"/>
+                    <semantic:compensateEventDefinition waitForCompletion="false" id="_434dc71e-6d59-4940-8e27-a911bf891cdf"/>
                 </semantic:startEvent>
                 <semantic:parallelGateway id="_c4ddacd9-6e12-49e3-b058-e71c0af08c68" gatewayDirection="Converging">
                     <semantic:incoming>_8d0dadf1-129e-4ba8-b829-3e7e176bf775</semantic:incoming>
@@ -100,12 +100,12 @@
                     <semantic:outgoing>_64d60a4e-90cf-4a9a-afbb-631739b6b704</semantic:outgoing>
                     <semantic:outgoing>_3cd5068b-6df1-4a62-a06a-369d063f6160</semantic:outgoing>
                 </semantic:parallelGateway>
-                <semantic:sequenceFlow id="_b3d5a547-87a4-460d-b7c1-53b6506127e9" sourceRef="_c4ddacd9-6e12-49e3-b058-e71c0af08c68" targetRef="_fc4826b1-1e63-49f6-8670-7cc8104e45ea"/>
-                <semantic:sequenceFlow id="_8d0dadf1-129e-4ba8-b829-3e7e176bf775" sourceRef="_99bf4db9-3616-4ed1-a0f8-b8175c3fd46f" targetRef="_c4ddacd9-6e12-49e3-b058-e71c0af08c68"/>
-                <semantic:sequenceFlow id="_b62ef735-9d04-494a-aeb4-95fd4862cc45" sourceRef="_e4b9fa74-efd8-409f-a2e4-ad917df767b4" targetRef="_c4ddacd9-6e12-49e3-b058-e71c0af08c68"/>
-                <semantic:sequenceFlow id="_64d60a4e-90cf-4a9a-afbb-631739b6b704" sourceRef="_08cd4ce0-bf7c-4a05-bacf-546daa51ce9c" targetRef="_99bf4db9-3616-4ed1-a0f8-b8175c3fd46f"/>
-                <semantic:sequenceFlow id="_3cd5068b-6df1-4a62-a06a-369d063f6160" sourceRef="_08cd4ce0-bf7c-4a05-bacf-546daa51ce9c" targetRef="_e4b9fa74-efd8-409f-a2e4-ad917df767b4"/>
-                <semantic:sequenceFlow id="_e0c52135-c57f-4ee6-b488-22bbab06dccc" sourceRef="_8af17ed4-6e13-463b-8333-d397b3002c65" targetRef="_08cd4ce0-bf7c-4a05-bacf-546daa51ce9c"/>
+                <semantic:sequenceFlow id="_b3d5a547-87a4-460d-b7c1-53b6506127e9" sourceRef="_c4ddacd9-6e12-49e3-b058-e71c0af08c68" targetRef="_fc4826b1-1e63-49f6-8670-7cc8104e45ea" isImmediate="false"/>
+                <semantic:sequenceFlow id="_8d0dadf1-129e-4ba8-b829-3e7e176bf775" sourceRef="_99bf4db9-3616-4ed1-a0f8-b8175c3fd46f" targetRef="_c4ddacd9-6e12-49e3-b058-e71c0af08c68" isImmediate="false"/>
+                <semantic:sequenceFlow id="_b62ef735-9d04-494a-aeb4-95fd4862cc45" sourceRef="_e4b9fa74-efd8-409f-a2e4-ad917df767b4" targetRef="_c4ddacd9-6e12-49e3-b058-e71c0af08c68" isImmediate="false"/>
+                <semantic:sequenceFlow id="_64d60a4e-90cf-4a9a-afbb-631739b6b704" sourceRef="_08cd4ce0-bf7c-4a05-bacf-546daa51ce9c" targetRef="_99bf4db9-3616-4ed1-a0f8-b8175c3fd46f" isImmediate="false"/>
+                <semantic:sequenceFlow id="_3cd5068b-6df1-4a62-a06a-369d063f6160" sourceRef="_08cd4ce0-bf7c-4a05-bacf-546daa51ce9c" targetRef="_e4b9fa74-efd8-409f-a2e4-ad917df767b4" isImmediate="false"/>
+                <semantic:sequenceFlow id="_e0c52135-c57f-4ee6-b488-22bbab06dccc" sourceRef="_8af17ed4-6e13-463b-8333-d397b3002c65" targetRef="_08cd4ce0-bf7c-4a05-bacf-546daa51ce9c" isImmediate="false"/>
             </semantic:subProcess>
             <semantic:parallelGateway id="_749dd603-40f5-40fb-89b4-0e305b29892c" gatewayDirection="Diverging">
                 <semantic:incoming>_d51b76e8-b096-4376-ba01-7ca63ae51f70</semantic:incoming>
@@ -128,17 +128,17 @@
             </semantic:serviceTask>
             <semantic:serviceTask id="_0198160d-b56c-4919-9920-db5f32d16b3f" name="Cancel Flight" isForCompensation="true" implementation="##WebService"/>
             <semantic:boundaryEvent id="_b25ecc7c-4eff-4a70-96f2-6b2f94cf19b1" name="Hotel" attachedToRef="_b595ec43-0769-4864-8f2e-403c405c8217">
-                <semantic:compensateEventDefinition/>
+                <semantic:compensateEventDefinition waitForCompletion="false"/>
             </semantic:boundaryEvent>
             <semantic:boundaryEvent id="_fe3f9094-097b-416d-adeb-4b7e7e753f3c" name="Flight" attachedToRef="_ea5cc55d-bfce-49c6-8a1a-a8a41a85da12">
-                <semantic:compensateEventDefinition/>
+                <semantic:compensateEventDefinition waitForCompletion="false"/>
             </semantic:boundaryEvent>
-            <semantic:sequenceFlow id="_d51b76e8-b096-4376-ba01-7ca63ae51f70" sourceRef="_31a01c78-9a86-4b53-a485-e8a973ba6383" targetRef="_749dd603-40f5-40fb-89b4-0e305b29892c"/>
-            <semantic:sequenceFlow id="_eba304c2-42e8-4d65-a9dc-e2483fd8ad86" sourceRef="_6a68d4b4-7549-42ce-b903-9da8b2024d31" targetRef="_6ff2b954-2017-46dd-941e-4badd9326eac"/>
-            <semantic:sequenceFlow id="_018e5307-4c8d-46fd-ba84-7b75409b3124" sourceRef="_749dd603-40f5-40fb-89b4-0e305b29892c" targetRef="_ea5cc55d-bfce-49c6-8a1a-a8a41a85da12"/>
-            <semantic:sequenceFlow id="_b08efa4c-c27c-4654-9901-279a8c456a4f" sourceRef="_ea5cc55d-bfce-49c6-8a1a-a8a41a85da12" targetRef="_6a68d4b4-7549-42ce-b903-9da8b2024d31"/>
-            <semantic:sequenceFlow id="_e6011c12-800f-44e6-8ae8-51866664afcf" sourceRef="_b595ec43-0769-4864-8f2e-403c405c8217" targetRef="_6a68d4b4-7549-42ce-b903-9da8b2024d31"/>
-            <semantic:sequenceFlow id="_b2d48080-6bb1-4ae9-85c9-916d87536a49" sourceRef="_749dd603-40f5-40fb-89b4-0e305b29892c" targetRef="_b595ec43-0769-4864-8f2e-403c405c8217"/>
+            <semantic:sequenceFlow id="_d51b76e8-b096-4376-ba01-7ca63ae51f70" sourceRef="_31a01c78-9a86-4b53-a485-e8a973ba6383" targetRef="_749dd603-40f5-40fb-89b4-0e305b29892c" isImmediate="false"/>
+            <semantic:sequenceFlow id="_eba304c2-42e8-4d65-a9dc-e2483fd8ad86" sourceRef="_6a68d4b4-7549-42ce-b903-9da8b2024d31" targetRef="_6ff2b954-2017-46dd-941e-4badd9326eac" isImmediate="false"/>
+            <semantic:sequenceFlow id="_018e5307-4c8d-46fd-ba84-7b75409b3124" sourceRef="_749dd603-40f5-40fb-89b4-0e305b29892c" targetRef="_ea5cc55d-bfce-49c6-8a1a-a8a41a85da12" isImmediate="false"/>
+            <semantic:sequenceFlow id="_b08efa4c-c27c-4654-9901-279a8c456a4f" sourceRef="_ea5cc55d-bfce-49c6-8a1a-a8a41a85da12" targetRef="_6a68d4b4-7549-42ce-b903-9da8b2024d31" isImmediate="false"/>
+            <semantic:sequenceFlow id="_e6011c12-800f-44e6-8ae8-51866664afcf" sourceRef="_b595ec43-0769-4864-8f2e-403c405c8217" targetRef="_6a68d4b4-7549-42ce-b903-9da8b2024d31" isImmediate="false"/>
+            <semantic:sequenceFlow id="_b2d48080-6bb1-4ae9-85c9-916d87536a49" sourceRef="_749dd603-40f5-40fb-89b4-0e305b29892c" targetRef="_b595ec43-0769-4864-8f2e-403c405c8217" isImmediate="false"/>
             <semantic:association id="_651344ad-d784-4ef2-9655-4bc6393ac323" sourceRef="_b25ecc7c-4eff-4a70-96f2-6b2f94cf19b1" targetRef="_3a2f133c-3ae1-4e21-94b5-6e8cf51acd74" associationDirection="One"/>
             <semantic:association id="_98b2bd26-e113-4d19-b6a8-bcda781a823b" sourceRef="_fe3f9094-097b-416d-adeb-4b7e7e753f3c" targetRef="_0198160d-b56c-4919-9920-db5f32d16b3f" associationDirection="One"/>
         </semantic:subProcess>
@@ -146,9 +146,9 @@
             <semantic:incoming>_65293cb4-b859-4ff7-bcd3-ba4e38cf8763</semantic:incoming>
             <semantic:outgoing>_c69565cd-3a08-4532-b466-8f9a9ebdc1e1</semantic:outgoing>
             <semantic:ioSpecification>
-                <semantic:dataOutput name="Itinerary" isCollection="false" id="_29b8c649-e2a0-4dd3-804b-567e8cc71718"/>
+                <semantic:dataOutput name="Itinerary" isCollection="false" triso:hidden="false" id="_29b8c649-e2a0-4dd3-804b-567e8cc71718"/>
                 <semantic:inputSet/>
-                <semantic:outputSet id="_62785611-92f3-4c2c-85aa-46d8ebd218d3">
+                <semantic:outputSet id="_b36998f2-1c91-4a4c-a085-39a4ce484520">
                     <semantic:dataOutputRefs>_29b8c649-e2a0-4dd3-804b-567e8cc71718</semantic:dataOutputRefs>
                 </semantic:outputSet>
             </semantic:ioSpecification>
@@ -170,7 +170,7 @@
             <semantic:outgoing>_bcb8805c-5e93-41ec-991b-575d26ed3a9c</semantic:outgoing>
             <semantic:ioSpecification>
                 <semantic:dataInput name="Travel Request" isCollection="false" id="_9628422b-85a6-4857-8c14-7289b9fd9a8a"/>
-                <semantic:inputSet id="_4694f07d-9696-4d90-8fd5-83f53af6d68c">
+                <semantic:inputSet id="_b9445240-2617-4d4f-b324-ba07a16b5687">
                     <semantic:dataInputRefs>_9628422b-85a6-4857-8c14-7289b9fd9a8a</semantic:dataInputRefs>
                 </semantic:inputSet>
                 <semantic:outputSet/>
@@ -207,26 +207,26 @@
                 <semantic:timeDate/>
             </semantic:timerEventDefinition>
         </semantic:boundaryEvent>
-        <semantic:sequenceFlow id="_c7c2f8e1-a93f-44d6-9a94-cb92d7466d73" sourceRef="_15fef309-6718-4352-9b71-f757bcd8c023" targetRef="_e839800f-ad4f-4bcc-aaf2-d38fe4a32bcd"/>
-        <semantic:sequenceFlow id="_16857297-f0fb-4027-87f6-633a76267c84" sourceRef="_7ab6dbdf-f55b-4be6-bb41-d99793135c1d" targetRef="_87baeef0-f32e-4a93-b802-fdd588aaf729"/>
-        <semantic:sequenceFlow id="_54044d90-3a1e-4a49-99a3-1497045c7235" sourceRef="_7ab6dbdf-f55b-4be6-bb41-d99793135c1d" targetRef="_15fef309-6718-4352-9b71-f757bcd8c023"/>
-        <semantic:sequenceFlow id="_2403da0e-5b49-43fa-ba00-ec6c1f3e4790" sourceRef="_7ab6dbdf-f55b-4be6-bb41-d99793135c1d" targetRef="_e5c69e92-6f98-47c8-bc22-b75d38620f95"/>
-        <semantic:sequenceFlow id="_b792d502-a08e-4a3d-bdc1-1fc33a2022f6" sourceRef="_6db9a77f-189f-4c07-b33b-e0c88f09e0db" targetRef="_6a5cdbbf-2618-496e-b728-955dc215ef9d"/>
-        <semantic:sequenceFlow id="_c69565cd-3a08-4532-b466-8f9a9ebdc1e1" sourceRef="_22612d45-65ca-4a74-a6eb-53af7ebcb5ff" targetRef="_42e03d0f-6c6b-4493-971f-c6928eb563b0"/>
-        <semantic:sequenceFlow id="_8eac4fb5-c746-42e4-ab0b-80cdfaf76007" sourceRef="_54d6e34f-4613-48d4-9143-b90927448adb" targetRef="_c8fa5253-dde9-471e-b933-58b00e8f374c"/>
-        <semantic:sequenceFlow id="_ec8c7430-02e1-4298-9b00-33c4d56d0fac" sourceRef="_c8fa5253-dde9-471e-b933-58b00e8f374c" targetRef="_a68b0941-b7e3-4791-8e13-fd9622e4448c"/>
-        <semantic:sequenceFlow id="_65293cb4-b859-4ff7-bcd3-ba4e38cf8763" sourceRef="_614d6469-2bb8-4ad6-a20a-db5db6321c6b" targetRef="_22612d45-65ca-4a74-a6eb-53af7ebcb5ff"/>
-        <semantic:sequenceFlow id="_f81560f5-e1c5-497d-a159-dce350f2283c" sourceRef="_c38139c7-a2d1-47c7-b75a-19e14c7212c8" targetRef="_614d6469-2bb8-4ad6-a20a-db5db6321c6b"/>
-        <semantic:sequenceFlow id="_9ec5ad1d-0662-42a4-9118-bca0bf744422" sourceRef="_44e3f1fa-42cd-40b7-9980-a51ac49d5fa3" targetRef="_9cc2ac34-f12c-49e0-b37c-144e5a84fd92"/>
-        <semantic:sequenceFlow id="_bcb8805c-5e93-41ec-991b-575d26ed3a9c" sourceRef="_9cc2ac34-f12c-49e0-b37c-144e5a84fd92" targetRef="_7ab6dbdf-f55b-4be6-bb41-d99793135c1d"/>
-        <semantic:sequenceFlow id="_f072c57e-dcc6-4a16-8f28-13a2cd6e43ed" sourceRef="_e5c69e92-6f98-47c8-bc22-b75d38620f95" targetRef="_8afc49f0-42c2-4da9-8e79-e08dbe349776"/>
-        <semantic:sequenceFlow id="_e396fc69-5792-41e3-8a92-ee6b83cd0909" sourceRef="_8afc49f0-42c2-4da9-8e79-e08dbe349776" targetRef="_7eb87eb8-0d7a-445b-b768-90d754a938ed"/>
-        <semantic:sequenceFlow id="_649072fc-31c7-4e04-bc58-d4442a06f076" sourceRef="_87baeef0-f32e-4a93-b802-fdd588aaf729" targetRef="_de7e721e-a073-4857-b8c3-c6ae886dbb46"/>
-        <semantic:sequenceFlow id="_51e34f49-b9eb-4f10-ac0a-7af81e1370ff" sourceRef="_de7e721e-a073-4857-b8c3-c6ae886dbb46" targetRef="_88247168-b457-4663-aad0-753a0236c8df"/>
-        <semantic:sequenceFlow id="_a0c99000-31e1-4de9-baf7-45c2d09ebbff" sourceRef="_32c4138c-74ae-484a-a7e5-0609370d7080" targetRef="_de7e721e-a073-4857-b8c3-c6ae886dbb46"/>
-        <semantic:sequenceFlow id="_c72535b8-43f7-4906-9f18-691e03050c24" sourceRef="_6a5cdbbf-2618-496e-b728-955dc215ef9d" targetRef="_2d6586cf-81fc-4e2a-83ec-6cfff5b34bb0"/>
-        <semantic:sequenceFlow id="_94e0bd86-6659-4669-baee-ce671c7f33d6" sourceRef="_2d6586cf-81fc-4e2a-83ec-6cfff5b34bb0" targetRef="_babdfa54-b55f-463f-9341-424b42db9760"/>
-        <semantic:sequenceFlow id="_7efd61ea-979e-44f4-91c8-e212ae6b22c7" sourceRef="_e839800f-ad4f-4bcc-aaf2-d38fe4a32bcd" targetRef="_c38139c7-a2d1-47c7-b75a-19e14c7212c8"/>
+        <semantic:sequenceFlow id="_c7c2f8e1-a93f-44d6-9a94-cb92d7466d73" sourceRef="_15fef309-6718-4352-9b71-f757bcd8c023" targetRef="_e839800f-ad4f-4bcc-aaf2-d38fe4a32bcd" isImmediate="false"/>
+        <semantic:sequenceFlow id="_16857297-f0fb-4027-87f6-633a76267c84" sourceRef="_7ab6dbdf-f55b-4be6-bb41-d99793135c1d" targetRef="_87baeef0-f32e-4a93-b802-fdd588aaf729" isImmediate="false"/>
+        <semantic:sequenceFlow id="_54044d90-3a1e-4a49-99a3-1497045c7235" sourceRef="_7ab6dbdf-f55b-4be6-bb41-d99793135c1d" targetRef="_15fef309-6718-4352-9b71-f757bcd8c023" isImmediate="false"/>
+        <semantic:sequenceFlow id="_2403da0e-5b49-43fa-ba00-ec6c1f3e4790" sourceRef="_7ab6dbdf-f55b-4be6-bb41-d99793135c1d" targetRef="_e5c69e92-6f98-47c8-bc22-b75d38620f95" isImmediate="false"/>
+        <semantic:sequenceFlow id="_b792d502-a08e-4a3d-bdc1-1fc33a2022f6" sourceRef="_6db9a77f-189f-4c07-b33b-e0c88f09e0db" targetRef="_6a5cdbbf-2618-496e-b728-955dc215ef9d" isImmediate="false"/>
+        <semantic:sequenceFlow id="_c69565cd-3a08-4532-b466-8f9a9ebdc1e1" sourceRef="_22612d45-65ca-4a74-a6eb-53af7ebcb5ff" targetRef="_42e03d0f-6c6b-4493-971f-c6928eb563b0" isImmediate="false"/>
+        <semantic:sequenceFlow id="_8eac4fb5-c746-42e4-ab0b-80cdfaf76007" sourceRef="_54d6e34f-4613-48d4-9143-b90927448adb" targetRef="_c8fa5253-dde9-471e-b933-58b00e8f374c" isImmediate="false"/>
+        <semantic:sequenceFlow id="_ec8c7430-02e1-4298-9b00-33c4d56d0fac" sourceRef="_c8fa5253-dde9-471e-b933-58b00e8f374c" targetRef="_a68b0941-b7e3-4791-8e13-fd9622e4448c" isImmediate="false"/>
+        <semantic:sequenceFlow id="_65293cb4-b859-4ff7-bcd3-ba4e38cf8763" sourceRef="_614d6469-2bb8-4ad6-a20a-db5db6321c6b" targetRef="_22612d45-65ca-4a74-a6eb-53af7ebcb5ff" isImmediate="false"/>
+        <semantic:sequenceFlow id="_f81560f5-e1c5-497d-a159-dce350f2283c" sourceRef="_c38139c7-a2d1-47c7-b75a-19e14c7212c8" targetRef="_614d6469-2bb8-4ad6-a20a-db5db6321c6b" isImmediate="false"/>
+        <semantic:sequenceFlow id="_9ec5ad1d-0662-42a4-9118-bca0bf744422" sourceRef="_44e3f1fa-42cd-40b7-9980-a51ac49d5fa3" targetRef="_9cc2ac34-f12c-49e0-b37c-144e5a84fd92" isImmediate="false"/>
+        <semantic:sequenceFlow id="_bcb8805c-5e93-41ec-991b-575d26ed3a9c" sourceRef="_9cc2ac34-f12c-49e0-b37c-144e5a84fd92" targetRef="_7ab6dbdf-f55b-4be6-bb41-d99793135c1d" isImmediate="false"/>
+        <semantic:sequenceFlow id="_f072c57e-dcc6-4a16-8f28-13a2cd6e43ed" sourceRef="_e5c69e92-6f98-47c8-bc22-b75d38620f95" targetRef="_8afc49f0-42c2-4da9-8e79-e08dbe349776" isImmediate="false"/>
+        <semantic:sequenceFlow id="_e396fc69-5792-41e3-8a92-ee6b83cd0909" sourceRef="_8afc49f0-42c2-4da9-8e79-e08dbe349776" targetRef="_7eb87eb8-0d7a-445b-b768-90d754a938ed" isImmediate="false"/>
+        <semantic:sequenceFlow id="_649072fc-31c7-4e04-bc58-d4442a06f076" sourceRef="_87baeef0-f32e-4a93-b802-fdd588aaf729" targetRef="_de7e721e-a073-4857-b8c3-c6ae886dbb46" isImmediate="false"/>
+        <semantic:sequenceFlow id="_51e34f49-b9eb-4f10-ac0a-7af81e1370ff" sourceRef="_de7e721e-a073-4857-b8c3-c6ae886dbb46" targetRef="_88247168-b457-4663-aad0-753a0236c8df" isImmediate="false"/>
+        <semantic:sequenceFlow id="_a0c99000-31e1-4de9-baf7-45c2d09ebbff" sourceRef="_32c4138c-74ae-484a-a7e5-0609370d7080" targetRef="_de7e721e-a073-4857-b8c3-c6ae886dbb46" isImmediate="false"/>
+        <semantic:sequenceFlow id="_c72535b8-43f7-4906-9f18-691e03050c24" sourceRef="_6a5cdbbf-2618-496e-b728-955dc215ef9d" targetRef="_2d6586cf-81fc-4e2a-83ec-6cfff5b34bb0" isImmediate="false"/>
+        <semantic:sequenceFlow id="_94e0bd86-6659-4669-baee-ce671c7f33d6" sourceRef="_2d6586cf-81fc-4e2a-83ec-6cfff5b34bb0" targetRef="_babdfa54-b55f-463f-9341-424b42db9760" isImmediate="false"/>
+        <semantic:sequenceFlow id="_7efd61ea-979e-44f4-91c8-e212ae6b22c7" sourceRef="_e839800f-ad4f-4bcc-aaf2-d38fe4a32bcd" targetRef="_c38139c7-a2d1-47c7-b75a-19e14c7212c8" isImmediate="false"/>
     </semantic:process>
     <bpmndi:BPMNDiagram id="_f1aecfc3-a3da-4bde-bece-87786e25273d" name="Simple Travel Booking">
         <bpmndi:BPMNPlane bpmnElement="_898aa942-9a96-4405-ae71-22b5e2e3d235" id="_f1aecfc3-a3da-4bde-bece-87786e25273d_plane" trisobpmn:diagramWidth="2031.3859249319685" trisobpmn:diagramHeight="892.2783205633923">
