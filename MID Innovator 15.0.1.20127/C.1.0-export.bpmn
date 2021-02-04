@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<bpmn:definitions xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:tns="http://sample.bpmn.mid.de/" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://www.omg.org/spec/BPMN/20100501/BPMN20.xsd http://www.omg.org/spec/BPMN/20100524/DI http://www.omg.org/spec/BPMN/20100501/BPMNDI.xsd http://www.omg.org/spec/DD/20100524/DC http://www.omg.org/spec/BPMN/20100501/DC.xsd http://www.omg.org/spec/DD/20100524/DI http://www.omg.org/spec/BPMN/20100501/DI.xsd" targetNamespace="http://sample.bpmn.mid.de/" exporter="MID Innovator" exporterVersion="15.0" typeLanguage="http://www.w3.org/2001/XMLSchema" xml:lang="de">
+  <bpmn:message name="invoice-received-C.1.0" id="sid-328811a0-7f72-468f-92de-6ab19e353312" />
+  <bpmn:collaboration name="Collaboration C.1.0" id="sid-e5defbed-c12d-4c0a-9b5e-0f187e35ffd3">
+    <bpmn:participant name="Process Engine - Invoice Receipt" processRef="bpmn-miwg-test-case-c.1.0" id="Process_Engine_1" />
+    <bpmn:participant name="Team-Assistant" processRef="sid-5FBB6CB3-8A7C-42B5-9024-15BB2684EC57" id="sid-46891B57-A9D3-4A8B-AEBF-D4BA5F3961AD" />
+    <bpmn:messageFlow name="" sourceRef="reviewInvoice" targetRef="sid-B548B980-12E3-408E-9AC4-7031B85A8F2D" id="sid-0518A412-1ED3-4CFD-A75C-69FF37EFFC16" />
+    <bpmn:messageFlow name="" sourceRef="sid-05039C4F-59F7-4CBD-8C84-D35E27C7B5EF" targetRef="StartEvent_1" id="sid-7A070DED-8B83-48E1-88A1-5543C481E7BC" />
+    <bpmn:messageFlow name="" sourceRef="assignApprover" targetRef="sid-40EC6574-E644-425C-8CE7-EE384F0C3520" id="sid-90902E27-C1CD-4F90-A8F2-486DA4F42117" />
+    <bpmn:messageFlow name="" sourceRef="sid-6FC20E19-AF3A-4A77-8588-2D671C98D93D" targetRef="reviewInvoice" id="sid-915AC9A0-CD35-4DF2-93F7-4535397622F8" />
+    <bpmn:messageFlow name="" sourceRef="sid-64AFCE49-96A2-4A51-96CB-9DF689C37DAD" targetRef="assignApprover" id="sid-AB6EB7C8-DF5E-42C2-88D0-FA166583AF15" />
+  </bpmn:collaboration>
+  <bpmn:messageEventDefinition messageRef="sid-328811a0-7f72-468f-92de-6ab19e353312" id="sid-14929637-5f1e-4d27-811c-ef5e4ddaa4c7" />
+  <bpmn:messageEventDefinition id="sid-29fbb68c-e460-48c1-bba9-a1b16906afec" />
+  <bpmn:timerEventDefinition id="sid-6517379a-613c-497d-81cc-b710878d9ebb">
+    <bpmn:timeDate />
+  </bpmn:timerEventDefinition>
+  <bpmn:messageEventDefinition id="sid-7f89416b-58ec-4e26-b9bc-390f9e8f2ae0" />
+  <bpmn:messageEventDefinition id="sid-b9aae81c-0006-46ad-9445-89307e8eeed8" />
+  <bpmn:process isExecutable="false" name="BPMN MIWG Test Case C.1.0" id="bpmn-miwg-test-case-c.1.0">
+    <bpmn:laneSet name="&lt;ohne Namen&gt;" id="sid-499dfba4-1449-4914-9e85-55b252800bad">
+      <bpmn:lane name="Accountant" id="Accountant">
+        <bpmn:flowNodeRef>prepareBankTransfer</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>invoiceProcessed</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>archiveInvoice</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane name="Approver" id="Approver">
+        <bpmn:flowNodeRef>approveInvoice</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>invoice_approved</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane name="Team Assistant" id="teamAssistant">
+        <bpmn:flowNodeRef>assignApprover</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>reviewInvoice</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>reviewSuccessful_gw</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>invoiceNotProcessed</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent name="Invoice received" id="StartEvent_1">
+      <bpmn:outgoing>SequenceFlow_1</bpmn:outgoing>
+      <bpmn:eventDefinitionRef>sid-14929637-5f1e-4d27-811c-ef5e4ddaa4c7</bpmn:eventDefinitionRef>
+    </bpmn:startEvent>
+    <bpmn:endEvent name="Invoice not processed" id="invoiceNotProcessed">
+      <bpmn:incoming>reviewNotSuccessful</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent name="Invoice processed" id="invoiceProcessed">
+      <bpmn:incoming>SequenceFlow_3</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:exclusiveGateway gatewayDirection="Diverging" name="Invoice approved?" id="invoice_approved">
+      <bpmn:incoming>sequenceFlow_180</bpmn:incoming>
+      <bpmn:outgoing>invoiceNotApproved</bpmn:outgoing>
+      <bpmn:outgoing>invoiceApproved</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway gatewayDirection="Diverging" name="Review successful?" id="reviewSuccessful_gw">
+      <bpmn:incoming>sequenceFlow_183</bpmn:incoming>
+      <bpmn:outgoing>reviewNotSuccessful</bpmn:outgoing>
+      <bpmn:outgoing>reviewSuccessful</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="StartEvent_1" targetRef="assignApprover" id="SequenceFlow_1" />
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="prepareBankTransfer" targetRef="archiveInvoice" id="SequenceFlow_2" />
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="archiveInvoice" targetRef="invoiceProcessed" id="SequenceFlow_3" />
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="invoice_approved" targetRef="prepareBankTransfer" name="yes" id="invoiceApproved">
+      <bpmn:conditionExpression>${approved}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="invoice_approved" targetRef="reviewInvoice" name="no" id="invoiceNotApproved">
+      <bpmn:conditionExpression>${!approved}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="reviewSuccessful_gw" targetRef="invoiceNotProcessed" name="no" id="reviewNotSuccessful">
+      <bpmn:conditionExpression>${clarified == 'no'}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="reviewSuccessful_gw" targetRef="approveInvoice" name="yes" id="reviewSuccessful">
+      <bpmn:conditionExpression>${clarified == 'yes'}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="assignApprover" targetRef="approveInvoice" id="sequenceFlow_178" />
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="approveInvoice" targetRef="invoice_approved" id="sequenceFlow_180" />
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="reviewInvoice" targetRef="reviewSuccessful_gw" id="sequenceFlow_183" />
+    <bpmn:userTask isForCompensation="false" startQuantity="1" name="Approve Invoice" id="approveInvoice">
+      <bpmn:incoming>reviewSuccessful</bpmn:incoming>
+      <bpmn:incoming>sequenceFlow_178</bpmn:incoming>
+      <bpmn:outgoing>sequenceFlow_180</bpmn:outgoing>
+      <bpmn:potentialOwner name="Approve Invoice Potential Owner" id="Bpmn_ResourceRole_m_HMwJ1_EeS1-pEyeWEPig">
+        <bpmn:resourceRef>Bpmn_Resource_U0nLMJ1_EeS1-pEyeWEPig</bpmn:resourceRef>
+      </bpmn:potentialOwner>
+    </bpmn:userTask>
+    <bpmn:serviceTask implementation="##unspecified" isForCompensation="false" startQuantity="1" name="Archive Invoice" id="archiveInvoice">
+      <bpmn:incoming>SequenceFlow_2</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_3</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask isForCompensation="false" startQuantity="1" name="Assign Approver" id="assignApprover">
+      <bpmn:incoming>SequenceFlow_1</bpmn:incoming>
+      <bpmn:outgoing>sequenceFlow_178</bpmn:outgoing>
+      <bpmn:potentialOwner name="Assign Approver Potential Owner" id="Bpmn_ResourceRole_cyfnwJ1_EeS1-pEyeWEPig">
+        <bpmn:resourceRef>Bpmn_Resource_SVLUUJ1_EeS1-pEyeWEPig</bpmn:resourceRef>
+      </bpmn:potentialOwner>
+    </bpmn:userTask>
+    <bpmn:userTask isForCompensation="false" startQuantity="1" name="Prepare Bank Transfer" id="prepareBankTransfer">
+      <bpmn:incoming>invoiceApproved</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_2</bpmn:outgoing>
+      <bpmn:potentialOwner name="Prepare Bank Transfer Potential Owner" id="Bpmn_ResourceRole_qEZisJ1_EeS1-pEyeWEPig">
+        <bpmn:resourceRef>Bpmn_Resource_XNpfIJ1_EeS1-pEyeWEPig</bpmn:resourceRef>
+      </bpmn:potentialOwner>
+    </bpmn:userTask>
+    <bpmn:userTask isForCompensation="false" startQuantity="1" name="Rechnung klären" id="reviewInvoice">
+      <bpmn:incoming>invoiceNotApproved</bpmn:incoming>
+      <bpmn:outgoing>sequenceFlow_183</bpmn:outgoing>
+      <bpmn:potentialOwner name="Rechnung Klären Potential Owner" id="Bpmn_ResourceRole_kGy70J1_EeS1-pEyeWEPig">
+        <bpmn:resourceRef>Bpmn_Resource_SVLUUJ1_EeS1-pEyeWEPig</bpmn:resourceRef>
+      </bpmn:potentialOwner>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmn:process isExecutable="false" name="Team-Assistant" id="sid-5FBB6CB3-8A7C-42B5-9024-15BB2684EC57">
+    <bpmn:laneSet name="&lt;ohne Namen&gt;" id="sid-c6eca5e8-8b8f-4e42-b8d8-6b7e858672df">
+      <bpmn:lane name="&lt;ohne Namen&gt;" id="sid-744AEFB3-C93D-46A3-8976-EFA91784A51F">
+        <bpmn:flowNodeRef>sid-36EA43D1-0FE6-4197-AC57-7A43785B784B</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>sid-05039C4F-59F7-4CBD-8C84-D35E27C7B5EF</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>sid-CFAC8502-0E69-4F08-BE36-8499B8C0FA44</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>sid-BC9AC0B6-1785-4E35-A974-7FEF1A586B9D</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>sid-40EC6574-E644-425C-8CE7-EE384F0C3520</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>sid-64AFCE49-96A2-4A51-96CB-9DF689C37DAD</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>sid-F0D29912-929D-491C-8D23-73BD80CF980A</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>sid-B548B980-12E3-408E-9AC4-7031B85A8F2D</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>sid-6FC20E19-AF3A-4A77-8588-2D671C98D93D</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>sid-0E349B8B-14A7-4565-988A-38F3A9B624D2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>sid-282524E6-660F-431D-8F19-1C3E9E9DE817</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:intermediateCatchEvent name="7 days" id="sid-0E349B8B-14A7-4565-988A-38F3A9B624D2">
+      <bpmn:incoming>sid-71EF9530-A32A-49BC-A783-9B98A5801362</bpmn:incoming>
+      <bpmn:outgoing>sid-3019478F-48D5-4B85-95B1-E192B9BE4183</bpmn:outgoing>
+      <bpmn:eventDefinitionRef>sid-6517379a-613c-497d-81cc-b710878d9ebb</bpmn:eventDefinitionRef>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="sid-282524E6-660F-431D-8F19-1C3E9E9DE817">
+      <bpmn:incoming>sid-6CB8539C-E02A-4496-94E7-17FAECB0D4B1</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:startEvent name="Invoice received" id="sid-36EA43D1-0FE6-4197-AC57-7A43785B784B">
+      <bpmn:outgoing>sid-7971C38C-2EF5-41F2-A24E-3FFCA069EDBF</bpmn:outgoing>
+      <bpmn:eventDefinitionRef>sid-7f89416b-58ec-4e26-b9bc-390f9e8f2ae0</bpmn:eventDefinitionRef>
+    </bpmn:startEvent>
+    <bpmn:intermediateCatchEvent name="Approver to be assigned" id="sid-40EC6574-E644-425C-8CE7-EE384F0C3520">
+      <bpmn:incoming>sid-C0540F47-C3C0-4FA8-B000-6D87640A6178</bpmn:incoming>
+      <bpmn:outgoing>sid-4AD2006C-9290-42B0-A904-DD8076B791C4</bpmn:outgoing>
+      <bpmn:eventDefinitionRef>sid-29fbb68c-e460-48c1-bba9-a1b16906afec</bpmn:eventDefinitionRef>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent name="Invoice review needed" id="sid-B548B980-12E3-408E-9AC4-7031B85A8F2D">
+      <bpmn:incoming>sid-4686AFBC-E33A-4657-95A0-B2E27E704152</bpmn:incoming>
+      <bpmn:outgoing>sid-D03CC374-8575-4F38-98B4-4DFF014C43CB</bpmn:outgoing>
+      <bpmn:eventDefinitionRef>sid-b9aae81c-0006-46ad-9445-89307e8eeed8</bpmn:eventDefinitionRef>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="sid-BC9AC0B6-1785-4E35-A974-7FEF1A586B9D">
+      <bpmn:incoming>sid-3019478F-48D5-4B85-95B1-E192B9BE4183</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:eventBasedGateway gatewayDirection="Diverging" eventGatewayType="Exclusive" id="sid-F0D29912-929D-491C-8D23-73BD80CF980A">
+      <bpmn:incoming>sid-26030150-7369-4B7F-8264-B3ABC62BA735</bpmn:incoming>
+      <bpmn:outgoing>sid-4686AFBC-E33A-4657-95A0-B2E27E704152</bpmn:outgoing>
+      <bpmn:outgoing>sid-71EF9530-A32A-49BC-A783-9B98A5801362</bpmn:outgoing>
+    </bpmn:eventBasedGateway>
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="sid-64AFCE49-96A2-4A51-96CB-9DF689C37DAD" targetRef="sid-F0D29912-929D-491C-8D23-73BD80CF980A" id="sid-26030150-7369-4B7F-8264-B3ABC62BA735" />
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="sid-0E349B8B-14A7-4565-988A-38F3A9B624D2" targetRef="sid-BC9AC0B6-1785-4E35-A974-7FEF1A586B9D" id="sid-3019478F-48D5-4B85-95B1-E192B9BE4183" />
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="sid-05039C4F-59F7-4CBD-8C84-D35E27C7B5EF" targetRef="sid-CFAC8502-0E69-4F08-BE36-8499B8C0FA44" id="sid-3E8B2FCF-E408-4A5D-9455-8FDE7BB3EF96" />
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="sid-F0D29912-929D-491C-8D23-73BD80CF980A" targetRef="sid-B548B980-12E3-408E-9AC4-7031B85A8F2D" id="sid-4686AFBC-E33A-4657-95A0-B2E27E704152" />
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="sid-40EC6574-E644-425C-8CE7-EE384F0C3520" targetRef="sid-64AFCE49-96A2-4A51-96CB-9DF689C37DAD" id="sid-4AD2006C-9290-42B0-A904-DD8076B791C4" />
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="sid-6FC20E19-AF3A-4A77-8588-2D671C98D93D" targetRef="sid-282524E6-660F-431D-8F19-1C3E9E9DE817" id="sid-6CB8539C-E02A-4496-94E7-17FAECB0D4B1" />
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="sid-F0D29912-929D-491C-8D23-73BD80CF980A" targetRef="sid-0E349B8B-14A7-4565-988A-38F3A9B624D2" id="sid-71EF9530-A32A-49BC-A783-9B98A5801362" />
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="sid-36EA43D1-0FE6-4197-AC57-7A43785B784B" targetRef="sid-05039C4F-59F7-4CBD-8C84-D35E27C7B5EF" id="sid-7971C38C-2EF5-41F2-A24E-3FFCA069EDBF" />
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="sid-CFAC8502-0E69-4F08-BE36-8499B8C0FA44" targetRef="sid-40EC6574-E644-425C-8CE7-EE384F0C3520" id="sid-C0540F47-C3C0-4FA8-B000-6D87640A6178" />
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="sid-B548B980-12E3-408E-9AC4-7031B85A8F2D" targetRef="sid-6FC20E19-AF3A-4A77-8588-2D671C98D93D" id="sid-D03CC374-8575-4F38-98B4-4DFF014C43CB" />
+    <bpmn:task isForCompensation="false" startQuantity="1" name="Scan Invoice" id="sid-05039C4F-59F7-4CBD-8C84-D35E27C7B5EF">
+      <bpmn:incoming>sid-7971C38C-2EF5-41F2-A24E-3FFCA069EDBF</bpmn:incoming>
+      <bpmn:outgoing>sid-3E8B2FCF-E408-4A5D-9455-8FDE7BB3EF96</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task isForCompensation="false" startQuantity="1" name="Assign approver" id="sid-64AFCE49-96A2-4A51-96CB-9DF689C37DAD">
+      <bpmn:incoming>sid-4AD2006C-9290-42B0-A904-DD8076B791C4</bpmn:incoming>
+      <bpmn:outgoing>sid-26030150-7369-4B7F-8264-B3ABC62BA735</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task isForCompensation="false" startQuantity="1" name="Review and document result" id="sid-6FC20E19-AF3A-4A77-8588-2D671C98D93D">
+      <bpmn:incoming>sid-D03CC374-8575-4F38-98B4-4DFF014C43CB</bpmn:incoming>
+      <bpmn:outgoing>sid-6CB8539C-E02A-4496-94E7-17FAECB0D4B1</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task isForCompensation="false" startQuantity="1" name="Archive original" id="sid-CFAC8502-0E69-4F08-BE36-8499B8C0FA44">
+      <bpmn:incoming>sid-3E8B2FCF-E408-4A5D-9455-8FDE7BB3EF96</bpmn:incoming>
+      <bpmn:outgoing>sid-C0540F47-C3C0-4FA8-B000-6D87640A6178</bpmn:outgoing>
+    </bpmn:task>
+  </bpmn:process>
+  <bpmn:resource name="Team Assistant" id="Bpmn_Resource_SVLUUJ1_EeS1-pEyeWEPig" />
+  <bpmn:resource name="Approver" id="Bpmn_Resource_U0nLMJ1_EeS1-pEyeWEPig" />
+  <bpmn:resource name="Accountant" id="Bpmn_Resource_XNpfIJ1_EeS1-pEyeWEPig" />
+  <bpmndi:BPMNDiagram name="Collaboration C.1.0" resolution="96" id="_8d6c1af9-3427-f204-d8db-0fe01b52bf74">
+    <bpmndi:BPMNPlane bpmnElement="sid-e5defbed-c12d-4c0a-9b5e-0f187e35ffd3" id="_e75c57ae-d803-c731-1636-fc78ee854a3a">
+      <bpmndi:BPMNShape bpmnElement="Process_Engine_1" id="_26f3d753-eacb-3887-cc45-91a2ce943f30" isHorizontal="true">
+        <dc:Bounds height="690.0" width="1470.0" x="170.0" y="430.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-46891B57-A9D3-4A8B-AEBF-D4BA5F3961AD" id="_3a019aeb-b86f-a854-12e3-62b3525f6e7f" isHorizontal="true">
+        <dc:Bounds height="320.0" width="1460.0" x="170.0" y="90.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="bpmn-miwg-test-case-c.1.0" id="_86984749-308f-6420-f7ff-6c830b439130">
+        <dc:Bounds height="690.0" width="1370.0" x="220.0" y="430.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="teamAssistant" id="_f4bb7de6-86c2-ca48-5c69-7aa7d85f3174" isHorizontal="true">
+        <dc:Bounds height="250.0" width="1330.0" x="240.0" y="430.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Approver" id="_0ae5521a-6905-79e0-bbf9-a1fb1221cc3c" isHorizontal="true">
+        <dc:Bounds height="220.0" width="1320.0" x="240.0" y="680.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Accountant" id="_15924427-fa6f-09db-a81b-98359d617b36" isHorizontal="true">
+        <dc:Bounds height="220.0" width="1330.0" x="240.0" y="900.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="assignApprover" id="_42280409-9d12-0505-0b5a-450a62157c65">
+        <dc:Bounds height="110.0" width="130.0" x="480.0" y="510.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="invoiceNotProcessed" id="_0832ca9e-0046-8076-03a8-d1997fb6af93">
+        <dc:Bounds height="40.0" width="40.0" x="1470.0" y="540.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="reviewSuccessful_gw" id="_db1aae86-a8e9-406e-d559-e70ffa28968d" isMarkerVisible="true">
+        <dc:Bounds height="40.0" width="40.0" x="1170.0" y="540.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="StartEvent_1" id="_370bae80-8f04-175f-3125-816416dbc2ed">
+        <dc:Bounds height="40.0" width="40.0" x="370.0" y="540.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="reviewInvoice" id="_b263a1f8-b76d-daa4-3832-d04f19db3968">
+        <dc:Bounds height="110.0" width="130.0" x="970.0" y="510.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="approveInvoice" id="_9d2faec7-f7fa-3345-2d97-cfb9f52691b7">
+        <dc:Bounds height="110.0" width="130.0" x="710.0" y="750.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="invoice_approved" id="_81dc82e2-2ff3-d942-d86b-8fc3a02ecc77" isMarkerVisible="true">
+        <dc:Bounds height="40.0" width="40.0" x="900.0" y="780.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="invoiceProcessed" id="_9e2d2343-8abd-baf3-4f2f-4826f7627901">
+        <dc:Bounds height="40.0" width="40.0" x="1470.0" y="1000.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="prepareBankTransfer" id="_77289f75-29a9-5d41-588f-2ff89753e897">
+        <dc:Bounds height="110.0" width="130.0" x="1090.0" y="960.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="archiveInvoice" id="_59447e26-3462-003e-c872-01d89120092e">
+        <dc:Bounds height="110.0" width="130.0" x="1280.0" y="960.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-5FBB6CB3-8A7C-42B5-9024-15BB2684EC57" id="_036a5924-5441-5af6-83c8-61dd5b0d8846">
+        <dc:Bounds height="320.0" width="1360.0" x="220.0" y="90.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-744AEFB3-C93D-46A3-8976-EFA91784A51F" id="_79772877-dca2-f6ef-adc7-cb9a1c955bd9" isHorizontal="true">
+        <dc:Bounds height="320.0" width="1320.0" x="240.0" y="90.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-F0D29912-929D-491C-8D23-73BD80CF980A" id="_925cdcab-9642-cf5c-34fe-2ebb493b91ec">
+        <dc:Bounds height="40.0" width="40.0" x="1090.0" y="240.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-05039C4F-59F7-4CBD-8C84-D35E27C7B5EF" id="_7ad9c077-c7e9-b7db-5afe-bb239c16623d">
+        <dc:Bounds height="110.0" width="130.0" x="440.0" y="200.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-CFAC8502-0E69-4F08-BE36-8499B8C0FA44" id="_1fd78b53-46c7-a659-4551-dbee13c33953">
+        <dc:Bounds height="110.0" width="130.0" x="640.0" y="200.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-64AFCE49-96A2-4A51-96CB-9DF689C37DAD" id="_3ef3ebc0-5571-27c4-508d-9a1f9f38d6cb">
+        <dc:Bounds height="110.0" width="130.0" x="920.0" y="200.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-6FC20E19-AF3A-4A77-8588-2D671C98D93D" id="_9818b905-8ac4-75a0-ec69-88b335cd60dd">
+        <dc:Bounds height="110.0" width="130.0" x="1280.0" y="260.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-36EA43D1-0FE6-4197-AC57-7A43785B784B" id="_250b4ba2-c189-5045-d189-1baa51afa9fc">
+        <dc:Bounds height="40.0" width="40.0" x="350.0" y="240.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-BC9AC0B6-1785-4E35-A974-7FEF1A586B9D" id="_77eff1ae-e111-a50a-89ed-4d504e24dfd0">
+        <dc:Bounds height="40.0" width="40.0" x="1470.0" y="160.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-40EC6574-E644-425C-8CE7-EE384F0C3520" id="_b156316f-7e48-b6c6-4cee-67c341cffc1b">
+        <dc:Bounds height="40.0" width="40.0" x="830.0" y="240.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-B548B980-12E3-408E-9AC4-7031B85A8F2D" id="_63c37585-48bb-f9e9-dee3-a57408a7874e">
+        <dc:Bounds height="40.0" width="40.0" x="1190.0" y="290.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-0E349B8B-14A7-4565-988A-38F3A9B624D2" id="_3cb5fd9a-ac06-1055-c84a-1ba5a3da62ae">
+        <dc:Bounds height="40.0" width="40.0" x="1190.0" y="160.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-282524E6-660F-431D-8F19-1C3E9E9DE817" id="_417b47a9-cf6a-a0ca-61f0-1f131db83975">
+        <dc:Bounds height="40.0" width="40.0" x="1470.0" y="290.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-AB6EB7C8-DF5E-42C2-88D0-FA166583AF15" id="_0482c423-400f-479e-a008-22bd204dc782">
+        <di:waypoint x="982.0" y="310.0" />
+        <di:waypoint x="982.0" y="416.0" />
+        <di:waypoint x="564.0" y="416.0" />
+        <di:waypoint x="564.0" y="507.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-7971C38C-2EF5-41F2-A24E-3FFCA069EDBF" id="_05bc0f0c-30f0-af2c-c7f4-1e6f271033d3">
+        <di:waypoint x="390.0" y="260.0" />
+        <di:waypoint x="440.0" y="260.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-3E8B2FCF-E408-4A5D-9455-8FDE7BB3EF96" id="_12fc54d1-286f-0744-9ac8-9820770e2178">
+        <di:waypoint x="569.0" y="255.0" />
+        <di:waypoint x="635.0" y="255.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow_180" id="_21945c49-0520-5f47-7438-c86b14d67215">
+        <di:waypoint x="839.0" y="805.0" />
+        <di:waypoint x="888.0" y="805.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-6CB8539C-E02A-4496-94E7-17FAECB0D4B1" id="_28f9f10f-d9f4-520e-d2a8-457ab5683533">
+        <di:waypoint x="1408.0" y="315.0" />
+        <di:waypoint x="1469.0" y="315.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="invoiceNotApproved" id="_39be492b-763b-16d5-967e-252a0e3e66f3">
+        <di:waypoint x="919.0" y="780.0" />
+        <di:waypoint x="919.0" y="562.0" />
+        <di:waypoint x="950.0" y="562.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_2" id="_4e926195-4414-eef4-73dd-076a2dffa442">
+        <di:waypoint x="1219.0" y="1015.0" />
+        <di:waypoint x="1277.0" y="1015.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="reviewSuccessful" id="_502a4133-fe6a-e70e-0a43-b7098f03c188">
+        <di:waypoint x="1189.0" y="540.0" />
+        <di:waypoint x="1189.0" y="484.0" />
+        <di:waypoint x="780.0" y="484.0" />
+        <di:waypoint x="780.0" y="730.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-D03CC374-8575-4F38-98B4-4DFF014C43CB" id="_596452ef-f542-fe61-c469-891d01044651">
+        <di:waypoint x="1229.0" y="310.0" />
+        <di:waypoint x="1276.0" y="310.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-4686AFBC-E33A-4657-95A0-B2E27E704152" id="_5b2661f6-8e13-904a-a147-1d2ccf29ca48">
+        <di:waypoint x="1109.0" y="280.0" />
+        <di:waypoint x="1109.0" y="310.0" />
+        <di:waypoint x="1189.0" y="310.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-4AD2006C-9290-42B0-A904-DD8076B791C4" id="_62d1322a-a5cd-497e-b709-d1c44af4f821">
+        <di:waypoint x="869.0" y="260.0" />
+        <di:waypoint x="925.0" y="260.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-90902E27-C1CD-4F90-A8F2-486DA4F42117" id="_7644997a-b738-f560-e289-02bf9f92e405">
+        <di:waypoint x="522.0" y="510.0" />
+        <di:waypoint x="522.0" y="396.0" />
+        <di:waypoint x="845.0" y="396.0" />
+        <di:waypoint x="845.0" y="280.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-3019478F-48D5-4B85-95B1-E192B9BE4183" id="_88fe3836-e243-30e4-e318-56e53e0fe527">
+        <di:waypoint x="1229.0" y="180.0" />
+        <di:waypoint x="1468.0" y="180.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-7A070DED-8B83-48E1-88A1-5543C481E7BC" id="_90ba91a2-cfdf-ec89-4547-470e701fb5ab">
+        <di:waypoint x="503.0" y="310.0" />
+        <di:waypoint x="503.0" y="415.0" />
+        <di:waypoint x="383.0" y="415.0" />
+        <di:waypoint x="383.0" y="540.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow_178" id="_91f4f99a-7220-08a3-8c3d-279e621aefd5">
+        <di:waypoint x="609.0" y="565.0" />
+        <di:waypoint x="651.0" y="565.0" />
+        <di:waypoint x="651.0" y="801.0" />
+        <di:waypoint x="690.0" y="801.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-C0540F47-C3C0-4FA8-B000-6D87640A6178" id="_98eed6eb-216e-1d58-54a9-d72e8e5ac72e">
+        <di:waypoint x="769.0" y="255.0" />
+        <di:waypoint x="824.0" y="255.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-26030150-7369-4B7F-8264-B3ABC62BA735" id="_99d8d6fd-382d-e880-d32d-0d3e914f6248">
+        <di:waypoint x="1048.0" y="255.0" />
+        <di:waypoint x="1084.0" y="255.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-915AC9A0-CD35-4DF2-93F7-4535397622F8" id="_9dfa06be-ab1e-cbf6-31f1-bcc58ccba500">
+        <di:waypoint x="1342.0" y="370.0" />
+        <di:waypoint x="1342.0" y="421.0" />
+        <di:waypoint x="1054.0" y="421.0" />
+        <di:waypoint x="1054.0" y="512.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="reviewNotSuccessful" id="_c6defab2-d9eb-0c1d-4b05-6ed6f70d486e">
+        <di:waypoint x="1209.0" y="559.0" />
+        <di:waypoint x="1473.0" y="559.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow_183" id="_db6aa2b5-3fa3-74ff-2b69-1b9512cc446c">
+        <di:waypoint x="1099.0" y="565.0" />
+        <di:waypoint x="1161.0" y="565.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-71EF9530-A32A-49BC-A783-9B98A5801362" id="_e8bc2756-7686-1a8d-36c9-ddfcbddcb2bb">
+        <di:waypoint x="1109.0" y="240.0" />
+        <di:waypoint x="1109.0" y="180.0" />
+        <di:waypoint x="1189.0" y="180.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_3" id="_edf59fc0-5364-5c94-b051-a9c0e8d5a127">
+        <di:waypoint x="1409.0" y="1015.0" />
+        <di:waypoint x="1472.0" y="1015.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-0518A412-1ED3-4CFD-A75C-69FF37EFFC16" id="_ef76b762-d026-af40-3d23-0c65f670024b">
+        <di:waypoint x="1012.0" y="510.0" />
+        <di:waypoint x="1012.0" y="399.0" />
+        <di:waypoint x="1212.0" y="399.0" />
+        <di:waypoint x="1212.0" y="335.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_1" id="_f1738da7-e885-b07f-604d-f4931f933c13">
+        <di:waypoint x="410.0" y="560.0" />
+        <di:waypoint x="483.0" y="560.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="invoiceApproved" id="_fbf01343-9f7b-9e66-4e43-9bc0f3ce045f">
+        <di:waypoint x="940.0" y="799.0" />
+        <di:waypoint x="1025.0" y="799.0" />
+        <di:waypoint x="1025.0" y="1011.0" />
+        <di:waypoint x="1070.0" y="1011.0" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
