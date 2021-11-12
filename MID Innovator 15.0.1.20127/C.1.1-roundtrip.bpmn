@@ -1,106 +1,81 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<bpmn:definitions xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:tns="http://sample.bpmn.mid.de/" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://www.omg.org/spec/BPMN/20100501/BPMN20.xsd http://www.omg.org/spec/BPMN/20100524/DI http://www.omg.org/spec/BPMN/20100501/BPMNDI.xsd http://www.omg.org/spec/DD/20100524/DC http://www.omg.org/spec/BPMN/20100501/DC.xsd http://www.omg.org/spec/DD/20100524/DI http://www.omg.org/spec/BPMN/20100501/DI.xsd" targetNamespace="http://sample.bpmn.mid.de/" exporter="MID Innovator" exporterVersion="%BUILD_NAME%" typeLanguage="http://www.w3.org/2001/XMLSchema" xml:lang="de">
+<bpmn:definitions exporter="MID Innovator" exporterVersion="15.1" targetNamespace="http://sample.bpmn.mid.de/" typeLanguage="http://www.w3.org/2001/XMLSchema" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:i18n="http://www.omg.org/spec/BPMN/non-normative/extensions/i18n/1.0" xmlns:tns="http://sample.bpmn.mid.de/" xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://www.omg.org/spec/BPMN/20100501/BPMN20.xsd http://www.omg.org/spec/BPMN/20100524/DI http://www.omg.org/spec/BPMN/20100501/BPMNDI.xsd http://www.omg.org/spec/DD/20100524/DC http://www.omg.org/spec/BPMN/20100501/DC.xsd http://www.omg.org/spec/DD/20100524/DI http://www.omg.org/spec/BPMN/20100501/DI.xsd" xml:lang="de">
   <bpmn:message name="invoice-received-C.1.0" id="sid-328811a0-7f72-468f-92de-6ab19e353312" />
-  <bpmn:itemDefinition id="xsdBool" />
   <bpmn:itemDefinition id="xsdString" />
+  <bpmn:itemDefinition id="xsdBool" />
   <bpmn:dataStore name="Financial Accounting System" isUnlimited="false" id="sid-14ef3d18-7218-4f57-98f0-bb595114754b" />
   <bpmn:process isExecutable="false" name="Invoice Handling (OMG BPMN MIWG Demo)" id="handle-invoice">
-    <bpmn:startEvent name="Invoice received" id="StartEvent_1">
-      <bpmn:outgoing>SequenceFlow_1</bpmn:outgoing>
-    </bpmn:startEvent>
-    <bpmn:endEvent name="Invoice not processed" id="invoiceNotProcessed">
-      <bpmn:incoming>reviewNotSuccessful</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:endEvent name="Invoice processed" id="invoiceProcessed">
-      <bpmn:incoming>SequenceFlow_3</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:exclusiveGateway gatewayDirection="Diverging" name="Invoice approved?" id="invoice_approved">
-      <bpmn:incoming>sequenceFlow_180</bpmn:incoming>
-      <bpmn:outgoing>invoiceNotApproved</bpmn:outgoing>
-      <bpmn:outgoing>invoiceApproved</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:exclusiveGateway gatewayDirection="Diverging" name="Review successful?" id="reviewSuccessful_gw">
-      <bpmn:incoming>sequenceFlow_183</bpmn:incoming>
-      <bpmn:outgoing>reviewNotSuccessful</bpmn:outgoing>
-      <bpmn:outgoing>reviewSuccessful</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:dataObjectReference name="approved" id="Bpmn_DataObjectReference_YGA4YLH1EeSuDf0W70XLGw" dataObjectRef="dataObject_Bpmn_DataObjectReference_YGA4YLH1EeSuDf0W70XLGw" />
-    <bpmn:dataObject name="approved" id="dataObject_Bpmn_DataObjectReference_YGA4YLH1EeSuDf0W70XLGw" itemSubjectRef="xsdBool" />
-    <bpmn:dataObjectReference name="approver" id="Bpmn_DataObjectReference_assignApprover" dataObjectRef="dataObject_Bpmn_DataObjectReference_assignApprover" />
-    <bpmn:dataObject name="approver" id="dataObject_Bpmn_DataObjectReference_assignApprover" itemSubjectRef="xsdString" />
-    <bpmn:dataObjectReference name="clarified" id="Bpmn_DataObjectReference_cdsDQLH1EeSuDf0W70XLGw" dataObjectRef="dataObject_Bpmn_DataObjectReference_cdsDQLH1EeSuDf0W70XLGw" />
-    <bpmn:dataObject name="clarified" id="dataObject_Bpmn_DataObjectReference_cdsDQLH1EeSuDf0W70XLGw" itemSubjectRef="xsdString" />
-    <bpmn:sequenceFlow isImmediate="true" sourceRef="StartEvent_1" targetRef="Bpmn_DataOutput_assignApprover" id="SequenceFlow_1" />
-    <bpmn:sequenceFlow isImmediate="true" sourceRef="prepareBankTransfer" targetRef="archiveInvoice" id="SequenceFlow_2" />
-    <bpmn:sequenceFlow isImmediate="true" sourceRef="archiveInvoice" targetRef="invoiceProcessed" id="SequenceFlow_3" />
-    <bpmn:sequenceFlow isImmediate="true" sourceRef="invoice_approved" targetRef="prepareBankTransfer" name="yes" id="invoiceApproved">
-      <bpmn:conditionExpression>bpmn:getDataObject('approved')</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow isImmediate="true" sourceRef="invoice_approved" targetRef="Bpmn_DataOutput_dCG-8LH1EeSuDf0W70XLGw" name="no" id="invoiceNotApproved">
-      <bpmn:conditionExpression>not(bpmn:getDataObject('approved'))</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow isImmediate="true" sourceRef="reviewSuccessful_gw" targetRef="invoiceNotProcessed" name="no" id="reviewNotSuccessful">
-      <bpmn:conditionExpression>bpmn:getDataObject('clarified') = 'no'</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow isImmediate="true" sourceRef="reviewSuccessful_gw" targetRef="Bpmn_DataOutput_Y6S1ALH1EeSuDf0W70XLGw" name="yes" id="reviewSuccessful">
-      <bpmn:conditionExpression>bpmn:getDataObject('clarified') = 'yes'</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow isImmediate="true" sourceRef="Bpmn_DataOutput_assignApprover" targetRef="Bpmn_DataOutput_Y6S1ALH1EeSuDf0W70XLGw" id="sequenceFlow_178" />
-    <bpmn:sequenceFlow isImmediate="true" sourceRef="Bpmn_DataOutput_Y6S1ALH1EeSuDf0W70XLGw" targetRef="invoice_approved" id="sequenceFlow_180" />
-    <bpmn:sequenceFlow isImmediate="true" sourceRef="Bpmn_DataOutput_dCG-8LH1EeSuDf0W70XLGw" targetRef="reviewSuccessful_gw" id="sequenceFlow_183" />
-    <bpmn:userTask isForCompensation="false" startQuantity="1" name="Approve Invoice" id="Bpmn_DataOutput_Y6S1ALH1EeSuDf0W70XLGw">
+    <bpmn:userTask isForCompensation="false" startQuantity="1" name="Approve Invoice" id="approveInvoice">
       <bpmn:incoming>reviewSuccessful</bpmn:incoming>
       <bpmn:incoming>sequenceFlow_178</bpmn:incoming>
       <bpmn:outgoing>sequenceFlow_180</bpmn:outgoing>
       <bpmn:ioSpecification>
-        <bpmn:dataOutput name="approved" id="_f5858b9a-1078-257a-0250-93e875294257" itemSubjectRef="xsdBool" />
+        <bpmn:dataOutput name="approved" id="Bpmn_DataOutput_Y6S1ALH1EeSuDf0W70XLGw" itemSubjectRef="xsdBool" />
         <bpmn:inputSet />
         <bpmn:outputSet />
       </bpmn:ioSpecification>
       <bpmn:dataOutputAssociation id="Bpmn_DataOutputAssociation_Y55MYrH1EeSuDf0W70XLGw">
-        <bpmn:sourceRef>_f5858b9a-1078-257a-0250-93e875294257</bpmn:sourceRef>
+        <bpmn:sourceRef>Bpmn_DataOutput_Y6S1ALH1EeSuDf0W70XLGw</bpmn:sourceRef>
         <bpmn:targetRef>Bpmn_DataObjectReference_YGA4YLH1EeSuDf0W70XLGw</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
       <bpmn:potentialOwner name="Approve Invoice Potential Owner" id="Bpmn_ResourceRole_MdyGcLH0EeS1nbPdxxCzlg">
         <bpmn:resourceRef>Bpmn_Resource_8nPrkLHzEeS1nbPdxxCzlg</bpmn:resourceRef>
       </bpmn:potentialOwner>
     </bpmn:userTask>
-    <bpmn:userTask isForCompensation="false" startQuantity="1" name="Assign Approver" id="Bpmn_DataOutput_assignApprover">
+    <bpmn:dataObjectReference name="approver" id="Bpmn_DataObjectReference_assignApprover" dataObjectRef="dataObject_Bpmn_DataObjectReference_assignApprover" />
+    <bpmn:dataObject name="approver" id="dataObject_Bpmn_DataObjectReference_assignApprover" itemSubjectRef="xsdString" />
+    <bpmn:dataObjectReference name="approved" id="Bpmn_DataObjectReference_YGA4YLH1EeSuDf0W70XLGw" dataObjectRef="dataObject_Bpmn_DataObjectReference_YGA4YLH1EeSuDf0W70XLGw" />
+    <bpmn:dataObject name="approved" id="dataObject_Bpmn_DataObjectReference_YGA4YLH1EeSuDf0W70XLGw" itemSubjectRef="xsdBool" />
+    <bpmn:exclusiveGateway gatewayDirection="Diverging" name="Invoice approved?" id="invoice_approved">
+      <bpmn:incoming>sequenceFlow_180</bpmn:incoming>
+      <bpmn:outgoing>invoiceNotApproved</bpmn:outgoing>
+      <bpmn:outgoing>invoiceApproved</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask isForCompensation="false" startQuantity="1" name="Assign Approver" id="assignApprover">
       <bpmn:incoming>SequenceFlow_1</bpmn:incoming>
       <bpmn:outgoing>sequenceFlow_178</bpmn:outgoing>
       <bpmn:ioSpecification>
-        <bpmn:dataOutput name="approver" id="_6e4fda3e-f359-8b31-398a-5e38c1ca9efe" itemSubjectRef="xsdString" />
+        <bpmn:dataOutput name="approver" id="Bpmn_DataOutput_assignApprover" itemSubjectRef="xsdString" />
         <bpmn:inputSet />
         <bpmn:outputSet />
       </bpmn:ioSpecification>
       <bpmn:dataOutputAssociation id="Bpmn_DataOutputAssociation_assignApprover">
-        <bpmn:sourceRef>_6e4fda3e-f359-8b31-398a-5e38c1ca9efe</bpmn:sourceRef>
+        <bpmn:sourceRef>Bpmn_DataOutput_assignApprover</bpmn:sourceRef>
         <bpmn:targetRef>Bpmn_DataObjectReference_assignApprover</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
       <bpmn:potentialOwner name="Assign Approver Potential Owner" id="Bpmn_ResourceRole_DSeNcLH0EeS1nbPdxxCzlg">
         <bpmn:resourceRef>Bpmn_Resource_6vVHsLHzEeS1nbPdxxCzlg</bpmn:resourceRef>
       </bpmn:potentialOwner>
     </bpmn:userTask>
-    <bpmn:userTask isForCompensation="false" startQuantity="1" name="Rechnung klären" id="Bpmn_DataOutput_dCG-8LH1EeSuDf0W70XLGw">
+    <bpmn:dataObjectReference name="clarified" id="Bpmn_DataObjectReference_cdsDQLH1EeSuDf0W70XLGw" dataObjectRef="dataObject_Bpmn_DataObjectReference_cdsDQLH1EeSuDf0W70XLGw" />
+    <bpmn:dataObject name="clarified" id="dataObject_Bpmn_DataObjectReference_cdsDQLH1EeSuDf0W70XLGw" itemSubjectRef="xsdString" />
+    <bpmn:userTask isForCompensation="false" startQuantity="1" name="Rechnung klären" id="reviewInvoice">
       <bpmn:incoming>invoiceNotApproved</bpmn:incoming>
       <bpmn:outgoing>sequenceFlow_183</bpmn:outgoing>
       <bpmn:ioSpecification>
-        <bpmn:dataOutput name="clarified" id="_6ec8eda8-05e1-07d3-5d3d-9473f58609bb" itemSubjectRef="xsdString" />
+        <bpmn:dataOutput name="clarified" id="Bpmn_DataOutput_dCG-8LH1EeSuDf0W70XLGw" itemSubjectRef="xsdString" />
         <bpmn:inputSet />
         <bpmn:outputSet />
       </bpmn:ioSpecification>
       <bpmn:dataOutputAssociation id="Bpmn_DataOutputAssociation_dB6xsrH1EeSuDf0W70XLGw">
-        <bpmn:sourceRef>_6ec8eda8-05e1-07d3-5d3d-9473f58609bb</bpmn:sourceRef>
+        <bpmn:sourceRef>Bpmn_DataOutput_dCG-8LH1EeSuDf0W70XLGw</bpmn:sourceRef>
         <bpmn:targetRef>Bpmn_DataObjectReference_cdsDQLH1EeSuDf0W70XLGw</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
       <bpmn:potentialOwner name="Review Invoice Potential Owner" id="Bpmn_ResourceRole_GrG9MLH0EeS1nbPdxxCzlg">
         <bpmn:resourceRef>Bpmn_Resource_6vVHsLHzEeS1nbPdxxCzlg</bpmn:resourceRef>
       </bpmn:potentialOwner>
     </bpmn:userTask>
-    <bpmn:serviceTask implementation="##unspecified" isForCompensation="false" startQuantity="1" name="Archive Invoice" id="archiveInvoice">
-      <bpmn:incoming>SequenceFlow_2</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_3</bpmn:outgoing>
-    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway gatewayDirection="Diverging" name="Review successful?" id="reviewSuccessful_gw">
+      <bpmn:incoming>sequenceFlow_183</bpmn:incoming>
+      <bpmn:outgoing>reviewNotSuccessful</bpmn:outgoing>
+      <bpmn:outgoing>reviewSuccessful</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent name="Invoice not processed" id="invoiceNotProcessed">
+      <bpmn:incoming>reviewNotSuccessful</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:startEvent name="Invoice received" id="StartEvent_1">
+      <bpmn:outgoing>SequenceFlow_1</bpmn:outgoing>
+    </bpmn:startEvent>
     <bpmn:userTask isForCompensation="false" startQuantity="1" name="Prepare Bank Transfer" id="prepareBankTransfer">
       <bpmn:incoming>invoiceApproved</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_2</bpmn:outgoing>
@@ -108,109 +83,146 @@
         <bpmn:resourceRef>Bpmn_Resource_-IajYLHzEeS1nbPdxxCzlg</bpmn:resourceRef>
       </bpmn:potentialOwner>
     </bpmn:userTask>
+    <bpmn:endEvent name="Invoice processed" id="invoiceProcessed">
+      <bpmn:incoming>SequenceFlow_3</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask implementation="##unspecified" isForCompensation="false" startQuantity="1" name="Archive Invoice" id="archiveInvoice">
+      <bpmn:incoming>SequenceFlow_2</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_3</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="StartEvent_1" targetRef="assignApprover" id="SequenceFlow_1" />
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="prepareBankTransfer" targetRef="archiveInvoice" id="SequenceFlow_2" />
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="archiveInvoice" targetRef="invoiceProcessed" id="SequenceFlow_3" />
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="invoice_approved" targetRef="prepareBankTransfer" name="yes" id="invoiceApproved">
+      <bpmn:conditionExpression>bpmn:getDataObject('approved')</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="invoice_approved" targetRef="reviewInvoice" name="no" id="invoiceNotApproved">
+      <bpmn:conditionExpression>not(bpmn:getDataObject('approved'))</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="reviewSuccessful_gw" targetRef="invoiceNotProcessed" name="no" id="reviewNotSuccessful">
+      <bpmn:conditionExpression>bpmn:getDataObject('clarified') = 'no'</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="reviewSuccessful_gw" targetRef="approveInvoice" name="yes" id="reviewSuccessful">
+      <bpmn:conditionExpression>bpmn:getDataObject('clarified') = 'yes'</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="assignApprover" targetRef="approveInvoice" id="sequenceFlow_178" />
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="approveInvoice" targetRef="invoice_approved" id="sequenceFlow_180" />
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="reviewInvoice" targetRef="reviewSuccessful_gw" id="sequenceFlow_183" />
   </bpmn:process>
-  <bpmn:resource name="Accountant" id="Bpmn_Resource_-IajYLHzEeS1nbPdxxCzlg" />
   <bpmn:resource name="Team Assistant" id="Bpmn_Resource_6vVHsLHzEeS1nbPdxxCzlg" />
   <bpmn:resource name="Approver" id="Bpmn_Resource_8nPrkLHzEeS1nbPdxxCzlg" />
-  <bpmndi:BPMNDiagram name="Invoice Handling (OMG BPMN MIWG Demo)" resolution="96" id="_261174a8-a874-d31d-e452-fdfa1a118c99">
-    <bpmndi:BPMNPlane bpmnElement="handle-invoice" id="_fea1fad5-f608-8d0d-0540-afd74d3fb081">
-      <bpmndi:BPMNShape bpmnElement="Bpmn_DataOutput_Y6S1ALH1EeSuDf0W70XLGw" id="_c415cda7-4df3-b01c-3c61-2c5f5601e59f">
-        <dc:Bounds height="110.0" width="130.0" x="380.0" y="260.0" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="invoice_approved" id="_87e5e322-2eb7-5277-6b90-b2f8c7aa90c0" isMarkerVisible="true">
+  <bpmn:resource name="Accountant" id="Bpmn_Resource_-IajYLHzEeS1nbPdxxCzlg" />
+  <bpmndi:BPMNDiagram name="Invoice Handling (OMG BPMN MIWG Demo)" resolution="96" id="_846b6e63-f048-c919-9a17-85f04033bb37">
+    <bpmndi:BPMNPlane bpmnElement="handle-invoice" id="_1e54028f-b754-a9bf-dea0-6fcc764139e8">
+      <bpmndi:BPMNShape bpmnElement="invoice_approved" id="_adafd142-3ae0-da87-bb96-c3d4e338e038" isMarkerVisible="true" color:background-color="#b98b00">
         <dc:Bounds height="40.0" width="40.0" x="570.0" y="290.0" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="Bpmn_DataOutput_assignApprover" id="_ef957e04-20b2-dcb4-8a62-67fb778bd3f4">
-        <dc:Bounds height="110.0" width="130.0" x="150.0" y="30.0" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="Bpmn_DataOutput_dCG-8LH1EeSuDf0W70XLGw" id="_a1c3c190-905c-1a56-23b9-66832e22db73">
-        <dc:Bounds height="110.0" width="130.0" x="640.0" y="30.0" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="reviewSuccessful_gw" id="_a279763a-8c35-92ab-d626-5c35da12f810" isMarkerVisible="true">
+      <bpmndi:BPMNShape bpmnElement="reviewSuccessful_gw" id="_06aa1f4d-cc15-71ea-9c35-8fddc5d78bcf" isMarkerVisible="true" color:background-color="#b98b00">
         <dc:Bounds height="40.0" width="40.0" x="840.0" y="60.0" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="invoiceNotProcessed" id="_6e0cfa87-3856-6e47-1e6b-546836e762e2">
-        <dc:Bounds height="40.0" width="40.0" x="1150.0" y="60.0" />
+      <bpmndi:BPMNShape bpmnElement="approveInvoice" id="_f0663138-9389-af53-225a-38c3aa6a0ebf" color:background-color="#c2d7eb">
+        <dc:Bounds height="110.0" width="130.0" x="380.0" y="260.0" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="StartEvent_1" id="_39e6be0c-012b-07d8-8134-c10effb9ea0a">
-        <dc:Bounds height="40.0" width="40.0" x="40.0" y="60.0" />
+      <bpmndi:BPMNShape bpmnElement="assignApprover" id="_272386cb-5503-5c18-c367-49d6bc50c9aa" color:background-color="#c2d7eb">
+        <dc:Bounds height="110.0" width="130.0" x="150.0" y="30.0" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="prepareBankTransfer" id="_113c8bdd-2139-f3bd-b218-591d1113b135">
+      <bpmndi:BPMNShape bpmnElement="reviewInvoice" id="_d9e18c3f-b245-d34d-7da6-e424525e0e6a" color:background-color="#c2d7eb">
+        <dc:Bounds height="110.0" width="130.0" x="640.0" y="30.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="prepareBankTransfer" id="_e55a75e4-bfa5-9425-5a60-c4bf1cf4254f" color:background-color="#c2d7eb">
         <dc:Bounds height="110.0" width="130.0" x="760.0" y="470.0" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="invoiceProcessed" id="_809d6d13-31a4-01b4-1cf0-fc6b31d6fe3c">
-        <dc:Bounds height="40.0" width="40.0" x="1150.0" y="510.0" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="archiveInvoice" id="_ccd0fd56-4533-305a-2841-5bf39c400d6f">
+      <bpmndi:BPMNShape bpmnElement="archiveInvoice" id="_36f0dfac-5371-5f64-63ac-321c3cab68aa" color:background-color="#c2d7eb">
         <dc:Bounds height="110.0" width="130.0" x="950.0" y="470.0" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="Bpmn_DataObjectReference_assignApprover" id="_3fe0a293-fdc4-b464-756a-0493dfc2d3ee">
+      <bpmndi:BPMNShape bpmnElement="Bpmn_DataObjectReference_assignApprover" id="_2945e205-cca3-b59a-e92b-0f0474489294" color:background-color="#999999">
         <dc:Bounds height="60.0" width="40.0" x="200.0" y="190.0" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="Bpmn_DataObjectReference_YGA4YLH1EeSuDf0W70XLGw" id="_4b5e2bc2-fb24-5d16-1af9-c02dca3a96d8">
+      <bpmndi:BPMNShape bpmnElement="Bpmn_DataObjectReference_YGA4YLH1EeSuDf0W70XLGw" id="_3119c395-a8e9-c600-8f49-b3d0a0a9198e" color:background-color="#999999">
         <dc:Bounds height="60.0" width="40.0" x="430.0" y="420.0" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="Bpmn_DataObjectReference_cdsDQLH1EeSuDf0W70XLGw" id="_27fc91ad-c820-b8ef-931f-972995345913">
+      <bpmndi:BPMNShape bpmnElement="Bpmn_DataObjectReference_cdsDQLH1EeSuDf0W70XLGw" id="_e2bdb8d5-e6b3-0c33-67a0-2e609ec7905d" color:background-color="#999999">
         <dc:Bounds height="60.0" width="40.0" x="690.0" y="190.0" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge bpmnElement="invoiceNotApproved" id="_1305851c-6762-edc3-7d9a-7addd390a55d">
-        <di:waypoint x="589.0" y="290.0" />
-        <di:waypoint x="589.0" y="82.0" />
-        <di:waypoint x="620.0" y="82.0" />
+      <bpmndi:BPMNShape bpmnElement="invoiceNotProcessed" id="_68c62243-a1a6-366c-12b8-e8aed969a8fc" color:background-color="#be0000">
+        <dc:Bounds height="40.0" width="40.0" x="1150.0" y="60.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="StartEvent_1" id="_0b0c8a65-e9f2-4a7b-7aeb-0eed4f406bd1" color:background-color="#6db700">
+        <dc:Bounds height="40.0" width="40.0" x="40.0" y="60.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="invoiceProcessed" id="_97e0e191-b05d-7375-23c4-ee1b91b9e1f5" color:background-color="#be0000">
+        <dc:Bounds height="40.0" width="40.0" x="1150.0" y="510.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow_180" id="_0985b445-c00b-7493-d976-780a8ac3fc1c">
+        <di:waypoint x="510.0" y="315.0" />
+        <di:waypoint x="0.0" y="0.0" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_2" id="_1505edc1-605a-a50b-e0a6-01579df191be">
-        <di:waypoint x="889.0" y="525.0" />
-        <di:waypoint x="947.0" y="525.0" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="sequenceFlow_178" id="_1718039e-772f-9bd5-ef93-d96d2da5da28">
-        <di:waypoint x="279.0" y="85.0" />
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow_178" id="_18b0948f-6948-61a8-0ef4-0c5ed2934090">
+        <di:waypoint x="280.0" y="85.0" />
         <di:waypoint x="321.0" y="85.0" />
         <di:waypoint x="321.0" y="311.0" />
-        <di:waypoint x="360.0" y="311.0" />
+        <di:waypoint x="0.0" y="0.0" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_1" id="_1a0bb344-9ed2-4283-b6dd-ea5ccde88b6e">
+      <bpmndi:BPMNEdge bpmnElement="invoiceNotApproved" id="_201ea1dc-b088-0aba-fcb3-8a731d1dfecd">
+        <di:waypoint x="589.0" y="290.0" />
+        <di:waypoint x="589.0" y="82.0" />
+        <di:waypoint x="0.0" y="0.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="15.0" width="23.0" x="593.0" y="265.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_1" id="_23fafc12-96c8-cb09-3f09-bc5526acc405">
         <di:waypoint x="80.0" y="80.0" />
-        <di:waypoint x="153.0" y="80.0" />
+        <di:waypoint x="150.0" y="80.0" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="Bpmn_DataOutputAssociation_Y55MYrH1EeSuDf0W70XLGw" id="_436c459c-2f4d-3195-ef58-2ebfb7d77a30">
+      <bpmndi:BPMNEdge bpmnElement="Bpmn_DataOutputAssociation_Y55MYrH1EeSuDf0W70XLGw" id="_39cf902d-a419-a21b-974c-631126f89244">
         <di:waypoint x="444.0" y="370.0" />
-        <di:waypoint x="444.0" y="428.0" />
+        <di:waypoint x="444.0" y="420.0" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="invoiceApproved" id="_5f9c301e-43f8-b521-c373-e2f9c781eb50">
-        <di:waypoint x="610.0" y="310.0" />
-        <di:waypoint x="695.0" y="310.0" />
-        <di:waypoint x="695.0" y="521.0" />
-        <di:waypoint x="740.0" y="521.0" />
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_2" id="_3c04d1ff-6f25-2ecf-bfff-4adfd591aa1b">
+        <di:waypoint x="890.0" y="525.0" />
+        <di:waypoint x="0.0" y="0.0" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="sequenceFlow_180" id="_7624eed2-5edc-5092-5d87-9fe7a73d5524">
-        <di:waypoint x="509.0" y="315.0" />
-        <di:waypoint x="558.0" y="315.0" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_3" id="_8e543cdd-477b-1eab-7d2e-2de8508ad4d4">
-        <di:waypoint x="1079.0" y="525.0" />
-        <di:waypoint x="1142.0" y="525.0" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="sequenceFlow_183" id="_97081466-2775-00b2-1ff9-bb319704c966">
-        <di:waypoint x="769.0" y="85.0" />
-        <di:waypoint x="831.0" y="85.0" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="Bpmn_DataOutputAssociation_dB6xsrH1EeSuDf0W70XLGw" id="_b5e32dc4-bc46-8b44-fc3f-24335aea81ae">
-        <di:waypoint x="704.0" y="140.0" />
-        <di:waypoint x="704.0" y="194.0" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="reviewSuccessful" id="_baecb338-4917-2be6-7843-85a30a037fc1">
+      <bpmndi:BPMNEdge bpmnElement="reviewSuccessful" id="_571dc81b-29d2-db34-9670-7a335fcfb0c0">
         <di:waypoint x="859.0" y="60.0" />
         <di:waypoint x="859.0" y="4.0" />
         <di:waypoint x="450.0" y="4.0" />
-        <di:waypoint x="450.0" y="240.0" />
+        <di:waypoint x="0.0" y="0.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="22.0" width="27.0" x="866.0" y="17.0" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="Bpmn_DataOutputAssociation_assignApprover" id="_d31a70e3-8f83-f10c-756b-67851e3cfed0">
+      <bpmndi:BPMNEdge bpmnElement="Bpmn_DataOutputAssociation_assignApprover" id="_5b6922ad-cfc9-1a10-870c-fd73dcf8cb2c">
         <di:waypoint x="214.0" y="140.0" />
-        <di:waypoint x="214.0" y="194.0" />
+        <di:waypoint x="214.0" y="190.0" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="reviewNotSuccessful" id="_d9705f28-8636-fcc9-b5e7-e31aa2bc04c6">
-        <di:waypoint x="879.0" y="79.0" />
-        <di:waypoint x="1143.0" y="79.0" />
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_3" id="_86738dc2-0d50-ba8e-70b8-020239476f0f">
+        <di:waypoint x="1080.0" y="525.0" />
+        <di:waypoint x="0.0" y="0.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="invoiceApproved" id="_aaff0868-73da-6a18-1678-7fd630039120">
+        <di:waypoint x="610.0" y="310.0" />
+        <di:waypoint x="695.0" y="310.0" />
+        <di:waypoint x="695.0" y="521.0" />
+        <di:waypoint x="0.0" y="0.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="26.0" width="32.0" x="615.0" y="316.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Bpmn_DataOutputAssociation_dB6xsrH1EeSuDf0W70XLGw" id="_b6e8cc73-992b-d3d8-f23c-05aadc2eb0b9">
+        <di:waypoint x="704.0" y="140.0" />
+        <di:waypoint x="704.0" y="190.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="reviewNotSuccessful" id="_ed3939c0-bec2-6ee3-bdd3-d44bba0fabcc">
+        <di:waypoint x="880.0" y="79.0" />
+        <di:waypoint x="0.0" y="0.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="26.0" width="24.0" x="886.0" y="79.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow_183" id="_f2dc0697-95c7-1128-63d4-84910c38abf3">
+        <di:waypoint x="770.0" y="85.0" />
+        <di:waypoint x="0.0" y="0.0" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
