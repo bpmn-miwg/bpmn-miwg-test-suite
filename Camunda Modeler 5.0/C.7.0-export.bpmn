@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<semantic:definitions xmlns:semantic="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/"  xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:openapi="https://openapis.org/omg/extension/1.0" xmlns:bpsim="http://www.bpsim.org/schemas/1.0"   id="_7e80c232-2bf0-46e0-b77e-29ec586a23a6" name="Advertise a job vacancy"  exporter="Camunda Modeler" exporterVersion="5.0.0-nightly.20220320" >
+  <semantic:itemDefinition id="default-bpmnItemDefinition-string_id" structureRef="feel:string" />
+  <semantic:itemDefinition id="_bd0e1992-4669-4a5b-98ea-641930d87150" structureRef="collectionOfString"  name="Définition d&#39;un item Collection de Texte" />
+  <semantic:resource id="_b5b6808a-be81-426c-98ae-f33f44a2f871" name="Hiring manager" />
+  <semantic:resource id="_dc7df8e9-cc60-4953-9ae5-a9ea25fd9c5b" name="Recruiter" />
+  <semantic:collaboration id="_0322c8c5-b921-44cc-9bf7-261dcb16f257">
+    <semantic:participant id="EUBankParticipant" name="EU Bank" processRef="_4a690dd7-809a-4fa9-ad63-515ac6685375" />
+  </semantic:collaboration>
+  <semantic:process id="_4a690dd7-809a-4fa9-ad63-515ac6685375" name="EU Bank - Process" isClosed="false" isExecutable="false" >
+    <semantic:ioSpecification>
+      <semantic:dataInput id="RoleRequiredDataInput" itemSubjectRef="default-bpmnItemDefinition-string_id" name="Role &#10;required" />
+      <semantic:dataOutput id="AdvertisementDataOutput" itemSubjectRef="default-bpmnItemDefinition-string_id" name="Advertisement">
+        <semantic:dataState name="Approved" />
+      </semantic:dataOutput>
+      <semantic:inputSet id="_e717d617-bac8-4278-ac70-3a9767e3b27f">
+        <semantic:dataInputRefs>RoleRequiredDataInput</semantic:dataInputRefs>
+      </semantic:inputSet>
+      <semantic:outputSet id="_a8015818-8340-4ba0-a3c9-84ee85a353eb">
+        <semantic:dataOutputRefs>AdvertisementDataOutput</semantic:dataOutputRefs>
+      </semantic:outputSet>
+    </semantic:ioSpecification>
+    <semantic:laneSet>
+      <semantic:lane id="RecruitmentLane" name="Recruitment">
+        <semantic:flowNodeRef>CompleteAdvertisementTask</semantic:flowNodeRef>
+        <semantic:flowNodeRef>_b13d6fa3-fc78-40c7-ae77-609be07493e9</semantic:flowNodeRef>
+        <semantic:flowNodeRef>PublishOnHomepageTask</semantic:flowNodeRef>
+        <semantic:flowNodeRef>SelectOtherPlatformsTask</semantic:flowNodeRef>
+        <semantic:flowNodeRef>_0783f019-f40c-43d6-ab40-0f1c81f8d9e7</semantic:flowNodeRef>
+        <semantic:flowNodeRef>VacancyAdvertisedEndEvent</semantic:flowNodeRef>
+        <semantic:flowNodeRef>PublishOnOtherPlatformsTask</semantic:flowNodeRef>
+      </semantic:lane>
+      <semantic:lane id="HiringManagerLane" name="Hiring manager">
+        <semantic:flowNodeRef>JobVacancyStartEvent</semantic:flowNodeRef>
+        <semantic:flowNodeRef>WriteDescriptionTask</semantic:flowNodeRef>
+        <semantic:flowNodeRef>ApproveAdvertisementTask</semantic:flowNodeRef>
+        <semantic:flowNodeRef>AdvertisementApprovedGateway</semantic:flowNodeRef>
+      </semantic:lane>
+    </semantic:laneSet>
+    <semantic:startEvent id="JobVacancyStartEvent" name="Job &#10;vacancy">
+      <semantic:outgoing>_a4c93e8a-2b52-4367-8381-a3f78450a075</semantic:outgoing>
+    </semantic:startEvent>
+    <semantic:userTask id="WriteDescriptionTask" name="Write &#10;description" implementation="##unspecified">
+      <semantic:documentation textFormat="text/html">&lt;p&gt;A very specific requirement to the job vacancy has to be written and forwarded to the recruitment department.&lt;/p&gt;</semantic:documentation>
+      <semantic:incoming>_a4c93e8a-2b52-4367-8381-a3f78450a075</semantic:incoming>
+      <semantic:outgoing>_8a27a9ee-b8e5-49d8-8b7d-41a59d74b3f3</semantic:outgoing>
+      <semantic:ioSpecification>
+        <semantic:dataOutput id="_31ca347a-7ad3-4416-9d4a-c080479329c7" itemSubjectRef="default-bpmnItemDefinition-string_id" name="Description"  />
+        <semantic:inputSet />
+        <semantic:outputSet id="_0d01e81d-03c2-4002-ae80-53df972febb6">
+          <semantic:dataOutputRefs>_31ca347a-7ad3-4416-9d4a-c080479329c7</semantic:dataOutputRefs>
+        </semantic:outputSet>
+      </semantic:ioSpecification>
+      <semantic:dataOutputAssociation id="_e2734375-2aa0-418c-9f0b-8c2ca1022285">
+        <semantic:sourceRef>_31ca347a-7ad3-4416-9d4a-c080479329c7</semantic:sourceRef>
+        <semantic:targetRef>DescriptionDataObjectReference</semantic:targetRef>
+      </semantic:dataOutputAssociation>
+      <semantic:performer id="_c663bd75-4868-4eb4-8829-0cbbd5ae4580">
+        <semantic:resourceRef>_b5b6808a-be81-426c-98ae-f33f44a2f871</semantic:resourceRef>
+      </semantic:performer>
+    </semantic:userTask>
+    <semantic:userTask id="ApproveAdvertisementTask" name="Approve advertisement" implementation="##unspecified">
+      <semantic:documentation textFormat="text/html">&lt;p&gt;The job description edited to a job advertisement has to be checked and approved.&lt;/p&gt;</semantic:documentation>
+      <semantic:incoming>_842553bd-02e1-45f7-aed0-c78e9dba9e2b</semantic:incoming>
+      <semantic:outgoing>_7b66938e-e5cb-4026-a863-1e6de6d11a79</semantic:outgoing>
+      <semantic:ioSpecification>
+        <semantic:dataInput id="_b02b2e9f-17f7-4663-b12c-255ee4351d42" itemSubjectRef="default-bpmnItemDefinition-string_id" name="Advertisement" />
+        <semantic:dataOutput id="_e115b5bb-0dd7-444f-b5ec-20cffffef082" itemSubjectRef="default-bpmnItemDefinition-string_id" name="Advertisement"  />
+        <semantic:inputSet id="_0cddfa48-58e5-47f8-92f0-a5153ae17d78">
+          <semantic:dataInputRefs>_b02b2e9f-17f7-4663-b12c-255ee4351d42</semantic:dataInputRefs>
+        </semantic:inputSet>
+        <semantic:outputSet id="_9492b1d3-f6ff-4c9c-8707-07e2d7b07c89">
+          <semantic:dataOutputRefs>_e115b5bb-0dd7-444f-b5ec-20cffffef082</semantic:dataOutputRefs>
+        </semantic:outputSet>
+      </semantic:ioSpecification>
+      <semantic:property id="Property_0mwe765" name="__targetRef_placeholder" />
+      <semantic:dataInputAssociation id="_9ce7bb4a-930c-4132-a09d-61b345cce434">
+        <semantic:sourceRef>AdvertisementDataObjectReference</semantic:sourceRef>
+        <semantic:targetRef>Property_0mwe765</semantic:targetRef>
+      </semantic:dataInputAssociation>
+      <semantic:dataOutputAssociation id="_adddc8ea-507e-4894-ac4b-92bca7e0a89f">
+        <semantic:sourceRef>_e115b5bb-0dd7-444f-b5ec-20cffffef082</semantic:sourceRef>
+        <semantic:targetRef>AdvertisementDataOutput</semantic:targetRef>
+      </semantic:dataOutputAssociation>
+      <semantic:performer id="_ceb60e9f-c1f4-43bc-aefd-6f346c176a6c">
+        <semantic:resourceRef>_b5b6808a-be81-426c-98ae-f33f44a2f871</semantic:resourceRef>
+      </semantic:performer>
+    </semantic:userTask>
+    <semantic:exclusiveGateway id="AdvertisementApprovedGateway" name="Advertisement approved?" gatewayDirection="Diverging">
+      <semantic:incoming>_7b66938e-e5cb-4026-a863-1e6de6d11a79</semantic:incoming>
+      <semantic:outgoing>NoSequenceFlow</semantic:outgoing>
+      <semantic:outgoing>YesSequenceFlow</semantic:outgoing>
+    </semantic:exclusiveGateway>
+    <semantic:dataObjectReference id="DescriptionDataObjectReference" name="Description" dataObjectRef="_8f2796af-2fbe-4f72-80c1-96933c38990f" />
+    <semantic:dataObject id="_8f2796af-2fbe-4f72-80c1-96933c38990f" name="Description" itemSubjectRef="default-bpmnItemDefinition-string_id" />
+    <semantic:userTask id="CompleteAdvertisementTask" name="Complete advertisement" implementation="##unspecified">
+      <semantic:documentation textFormat="text/html">&lt;p&gt;The job description received from the specialist department has to be completed (layout, additional information etc.) to a job advertisement in accordance to the guidelines and approved by the Hiring Manager.&lt;/p&gt;</semantic:documentation>
+      <semantic:incoming>_8a27a9ee-b8e5-49d8-8b7d-41a59d74b3f3</semantic:incoming>
+      <semantic:incoming>NoSequenceFlow</semantic:incoming>
+      <semantic:outgoing>_842553bd-02e1-45f7-aed0-c78e9dba9e2b</semantic:outgoing>
+      <semantic:ioSpecification>
+        <semantic:dataInput id="_c083f111-3c38-4250-9594-3f25b4620db3" itemSubjectRef="default-bpmnItemDefinition-string_id" name="Description" />
+        <semantic:dataOutput id="_50a31269-be15-435b-81e0-0a91b57ba10d" itemSubjectRef="default-bpmnItemDefinition-string_id" name="Advertisement"  />
+        <semantic:inputSet id="_9c3de1df-92ef-4b69-9585-311d8d45952f">
+          <semantic:dataInputRefs>_c083f111-3c38-4250-9594-3f25b4620db3</semantic:dataInputRefs>
+        </semantic:inputSet>
+        <semantic:outputSet id="_a4d61918-d67b-4038-b488-95c244824918">
+          <semantic:dataOutputRefs>_50a31269-be15-435b-81e0-0a91b57ba10d</semantic:dataOutputRefs>
+        </semantic:outputSet>
+      </semantic:ioSpecification>
+      <semantic:property id="Property_09gobit" name="__targetRef_placeholder" />
+      <semantic:dataInputAssociation id="_5c3fc96e-20d0-4879-8471-d41224632e24">
+        <semantic:sourceRef>DescriptionDataObjectReference</semantic:sourceRef>
+        <semantic:targetRef>Property_09gobit</semantic:targetRef>
+      </semantic:dataInputAssociation>
+      <semantic:dataOutputAssociation id="_4164c380-3ee3-4a6a-8e66-5bc201416108">
+        <semantic:sourceRef>_50a31269-be15-435b-81e0-0a91b57ba10d</semantic:sourceRef>
+        <semantic:targetRef>AdvertisementDataObjectReference</semantic:targetRef>
+      </semantic:dataOutputAssociation>
+      <semantic:performer id="_41c0e9b3-8ef9-4657-baab-c59b6ba1b1c4">
+        <semantic:resourceRef>_dc7df8e9-cc60-4953-9ae5-a9ea25fd9c5b</semantic:resourceRef>
+      </semantic:performer>
+    </semantic:userTask>
+    <semantic:parallelGateway id="_b13d6fa3-fc78-40c7-ae77-609be07493e9" gatewayDirection="Diverging">
+      <semantic:incoming>YesSequenceFlow</semantic:incoming>
+      <semantic:outgoing>_f476667f-44f5-4fec-9414-bf70d987853f</semantic:outgoing>
+      <semantic:outgoing>_f3187dce-c37e-4d5b-b49c-ed28965abb73</semantic:outgoing>
+    </semantic:parallelGateway>
+    <semantic:serviceTask id="PublishOnHomepageTask" name="Publish on &#10;homepage" implementation="##WebService">
+      <semantic:documentation textFormat="text/html">&lt;p&gt;The approved job advertisement has to be published on the homepage.&lt;/p&gt;</semantic:documentation>
+      <semantic:incoming>_f476667f-44f5-4fec-9414-bf70d987853f</semantic:incoming>
+      <semantic:outgoing>_720cb9a3-20df-4da1-a923-5336b269c104</semantic:outgoing>
+      <semantic:performer id="_2d69e812-dd75-4405-ae41-5f64be302e5f">
+        <semantic:resourceRef>_dc7df8e9-cc60-4953-9ae5-a9ea25fd9c5b</semantic:resourceRef>
+      </semantic:performer>
+    </semantic:serviceTask>
+    <semantic:businessRuleTask id="SelectOtherPlatformsTask" name="Select &#10;other platforms" implementation="##unspecified">
+      <semantic:documentation textFormat="text/html">&lt;p&gt;3rd party career platforms have to be selected on which the job advertisement will be published.&lt;/p&gt;</semantic:documentation>
+      <semantic:incoming>_f3187dce-c37e-4d5b-b49c-ed28965abb73</semantic:incoming>
+      <semantic:outgoing>_64ac4473-a38f-4043-973a-69c497adc88a</semantic:outgoing>
+      <semantic:ioSpecification>
+        <semantic:dataOutput id="_3daad61f-55b2-4fbd-bc79-dff572a23d69" itemSubjectRef="default-bpmnItemDefinition-string_id" name="Selected&#10; platforms" isCollection="true"  />
+        <semantic:inputSet />
+        <semantic:outputSet id="_a389083a-36ae-4975-b210-9464fe82c22e">
+          <semantic:dataOutputRefs>_3daad61f-55b2-4fbd-bc79-dff572a23d69</semantic:dataOutputRefs>
+        </semantic:outputSet>
+      </semantic:ioSpecification>
+      <semantic:dataOutputAssociation id="_d65b0a3d-8c42-4be7-9ac1-7324aa3d31f8">
+        <semantic:sourceRef>_3daad61f-55b2-4fbd-bc79-dff572a23d69</semantic:sourceRef>
+        <semantic:targetRef>SelectedPlatformsDataObjectReference</semantic:targetRef>
+      </semantic:dataOutputAssociation>
+      <semantic:performer id="_867590ee-ec0c-4f56-b0f0-32e444b73079">
+        <semantic:resourceRef>_dc7df8e9-cc60-4953-9ae5-a9ea25fd9c5b</semantic:resourceRef>
+      </semantic:performer>
+    </semantic:businessRuleTask>
+    <semantic:parallelGateway id="_0783f019-f40c-43d6-ab40-0f1c81f8d9e7" gatewayDirection="Converging">
+      <semantic:incoming>_720cb9a3-20df-4da1-a923-5336b269c104</semantic:incoming>
+      <semantic:incoming>_847352f2-ac0c-44be-9e24-f4c7f76bfe7e</semantic:incoming>
+      <semantic:outgoing>_c43defc5-4470-4bfe-8a8f-4d59ca6abeeb</semantic:outgoing>
+    </semantic:parallelGateway>
+    <semantic:endEvent id="VacancyAdvertisedEndEvent" name="Vacancy &#10;advertised">
+      <semantic:incoming>_c43defc5-4470-4bfe-8a8f-4d59ca6abeeb</semantic:incoming>
+    </semantic:endEvent>
+    <semantic:serviceTask id="PublishOnOtherPlatformsTask" name="Publish on &#10;other platforms" implementation="##WebService">
+      <semantic:incoming>_64ac4473-a38f-4043-973a-69c497adc88a</semantic:incoming>
+      <semantic:outgoing>_847352f2-ac0c-44be-9e24-f4c7f76bfe7e</semantic:outgoing>
+      <semantic:ioSpecification>
+        <semantic:dataInput id="_d130e681-7e04-48d6-be39-2b7cfe24b9d4" itemSubjectRef="default-bpmnItemDefinition-string_id" name="Selected&#10; platforms" isCollection="true" />
+        <semantic:inputSet id="_f49af959-916f-43bc-9f37-00ef9c44e967">
+          <semantic:dataInputRefs>_d130e681-7e04-48d6-be39-2b7cfe24b9d4</semantic:dataInputRefs>
+        </semantic:inputSet>
+        <semantic:outputSet />
+      </semantic:ioSpecification>
+      <semantic:dataInputAssociation id="_505fa8cf-5697-4e35-bc4e-63df8e99093e">
+        <semantic:sourceRef>SelectedPlatformsDataObjectReference</semantic:sourceRef>
+        <semantic:targetRef>_d130e681-7e04-48d6-be39-2b7cfe24b9d4</semantic:targetRef>
+      </semantic:dataInputAssociation>
+      <semantic:multiInstanceLoopCharacteristics id="_970a7f54-893a-495e-8cbc-545fd631f626" />
+    </semantic:serviceTask>
+    <semantic:dataObjectReference id="AdvertisementDataObjectReference" name="Advertisement" dataObjectRef="_f60fe1d9-58bd-462c-9d62-153e530dc79d" />
+    <semantic:dataObject id="_f60fe1d9-58bd-462c-9d62-153e530dc79d" name="Advertisement" itemSubjectRef="default-bpmnItemDefinition-string_id" />
+    <semantic:dataObjectReference id="SelectedPlatformsDataObjectReference" name="Selected&#10; platforms" dataObjectRef="_ef29e636-bdfe-4eb0-9633-7d0195a8ae3a" />
+    <semantic:dataObject id="_ef29e636-bdfe-4eb0-9633-7d0195a8ae3a" name="Selected&#10; platforms" itemSubjectRef="_bd0e1992-4669-4a5b-98ea-641930d87150" isCollection="true" />
+    <semantic:sequenceFlow id="_847352f2-ac0c-44be-9e24-f4c7f76bfe7e" sourceRef="PublishOnOtherPlatformsTask" targetRef="_0783f019-f40c-43d6-ab40-0f1c81f8d9e7" />
+    <semantic:sequenceFlow id="_c43defc5-4470-4bfe-8a8f-4d59ca6abeeb" sourceRef="_0783f019-f40c-43d6-ab40-0f1c81f8d9e7" targetRef="VacancyAdvertisedEndEvent" />
+    <semantic:sequenceFlow id="_64ac4473-a38f-4043-973a-69c497adc88a" sourceRef="SelectOtherPlatformsTask" targetRef="PublishOnOtherPlatformsTask"  />
+    <semantic:sequenceFlow id="_720cb9a3-20df-4da1-a923-5336b269c104" sourceRef="PublishOnHomepageTask" targetRef="_0783f019-f40c-43d6-ab40-0f1c81f8d9e7" />
+    <semantic:sequenceFlow id="_f3187dce-c37e-4d5b-b49c-ed28965abb73" sourceRef="_b13d6fa3-fc78-40c7-ae77-609be07493e9" targetRef="SelectOtherPlatformsTask" />
+    <semantic:sequenceFlow id="_f476667f-44f5-4fec-9414-bf70d987853f" sourceRef="_b13d6fa3-fc78-40c7-ae77-609be07493e9" targetRef="PublishOnHomepageTask" />
+    <semantic:sequenceFlow id="YesSequenceFlow" name="Yes" sourceRef="AdvertisementApprovedGateway" targetRef="_b13d6fa3-fc78-40c7-ae77-609be07493e9" />
+    <semantic:sequenceFlow id="NoSequenceFlow" name="No" sourceRef="AdvertisementApprovedGateway" targetRef="CompleteAdvertisementTask" />
+    <semantic:sequenceFlow id="_7b66938e-e5cb-4026-a863-1e6de6d11a79" sourceRef="ApproveAdvertisementTask" targetRef="AdvertisementApprovedGateway" />
+    <semantic:sequenceFlow id="_842553bd-02e1-45f7-aed0-c78e9dba9e2b" sourceRef="CompleteAdvertisementTask" targetRef="ApproveAdvertisementTask" />
+    <semantic:sequenceFlow id="_8a27a9ee-b8e5-49d8-8b7d-41a59d74b3f3" sourceRef="WriteDescriptionTask" targetRef="CompleteAdvertisementTask" />
+    <semantic:sequenceFlow id="_a4c93e8a-2b52-4367-8381-a3f78450a075" sourceRef="JobVacancyStartEvent" targetRef="WriteDescriptionTask" />
+  </semantic:process>
+  <bpmndi:BPMNDiagram id="_9786170f-6612-400e-a37d-2970ab70f1f3" name="C.7.0">
+    <bpmndi:BPMNPlane id="_9786170f-6612-400e-a37d-2970ab70f1f3_plane" bpmnElement="_0322c8c5-b921-44cc-9bf7-261dcb16f257" >
+      <bpmndi:BPMNShape id="_3946a034-888b-406b-a4bb-cdbee3f27655" bpmnElement="EUBankParticipant" isHorizontal="true" color:background-color="#ffffff" color:border-color="#000000">
+        <dc:Bounds x="160" y="50" width="1483" height="824" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000" >
+          <dc:Bounds x="55" y="52.99999377131468" width="12.015625" height="818.01220703125" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_3f64498d-0903-4b45-8c4f-fd7fab12d54c" bpmnElement="RecruitmentLane" isHorizontal="true" color:background-color="#ffffff" color:border-color="#000000">
+        <dc:Bounds x="190" y="453" width="1453" height="421" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000" >
+          <dc:Bounds x="85" y="455.9999937713146" width="12.015625" height="415.01220703125" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_dbc86830-61a4-4a1f-9e5f-69a97aa06e61" bpmnElement="HiringManagerLane" isHorizontal="true" color:background-color="#ffffff" color:border-color="#000000">
+        <dc:Bounds x="190" y="50" width="1453" height="403" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000" >
+          <dc:Bounds x="85" y="53" width="12.015625" height="397" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="_012d4172-086e-4cd7-8834-3f055e54f77f" bpmnElement="_847352f2-ac0c-44be-9e24-f4c7f76bfe7e" color:border-color="#000000">
+        <di:waypoint x="1406.5" y="681" />
+        <di:waypoint x="1454.7867965698242" y="681" />
+        <di:waypoint x="1454.7867965698242" y="624.0121945738792" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000"  />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_8e6aa554-08d3-44ec-a4a8-4aa74b66351d" bpmnElement="_c43defc5-4470-4bfe-8a8f-4d59ca6abeeb" color:border-color="#000000">
+        <di:waypoint x="1475.7867965698242" y="603.7867955565453" />
+        <di:waypoint x="1562.3603897094727" y="604" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000"  />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_d481109d-4c89-406f-af68-5fda941707f9" bpmnElement="_64ac4473-a38f-4043-973a-69c497adc88a" color:border-color="#000000">
+        <di:waypoint x="1218.7867965698242" y="681" />
+        <di:waypoint x="1311.5" y="681" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000"  />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_a62d1fcf-2639-4f32-a919-0001e5403a72" bpmnElement="_720cb9a3-20df-4da1-a923-5336b269c104" color:border-color="#000000">
+        <di:waypoint x="1294.2867965698242" y="524.5" />
+        <di:waypoint x="1454.7867965698242" y="524.5" />
+        <di:waypoint x="1454.7867965698242" y="583.9878054261208" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000"  />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_8e566432-8dca-46b3-b56e-0b681dbf2b69" bpmnElement="_f3187dce-c37e-4d5b-b49c-ed28965abb73" color:border-color="#000000">
+        <di:waypoint x="1060.2132034301758" y="624.0121945738792" />
+        <di:waypoint x="1060.2132034301758" y="681" />
+        <di:waypoint x="1123.7867965698242" y="681" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000"  />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_a1bdc324-0e7c-4dd6-ba11-5abf577834dd" bpmnElement="_f476667f-44f5-4fec-9414-bf70d987853f" color:border-color="#000000">
+        <di:waypoint x="1060.2132034301758" y="583.9878054261208" />
+        <di:waypoint x="1060.2132034301758" y="524.5" />
+        <di:waypoint x="1199.2867965698242" y="524.5" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000"  />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_fc80eee4-2fb2-415f-b847-92e979377e1b" bpmnElement="YesSequenceFlow" color:border-color="#000000">
+        <di:waypoint x="966" y="293.28679555654526" />
+        <di:waypoint x="1002.6066017150879" y="293.28679555654526" />
+        <di:waypoint x="1002.6066017150879" y="603.7867955565453" />
+        <di:waypoint x="1039.2132034301758" y="603.7867955565453" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000" >
+          <dc:Bounds x="985" y="274" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_4f9ac13d-ebf2-42e5-b3fc-15ba4cdcfbab" bpmnElement="NoSequenceFlow" color:border-color="#000000">
+        <di:waypoint x="945" y="273.48780542612076" />
+        <di:waypoint x="945" y="253.48780542612076" />
+        <di:waypoint x="601" y="253.48780542612076" />
+        <di:waypoint x="601" y="566" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000" >
+          <dc:Bounds x="954" y="199" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_ef2bb966-fe1b-4a19-a84e-40b4ecc61d47" bpmnElement="_7b66938e-e5cb-4026-a863-1e6de6d11a79" color:border-color="#000000">
+        <di:waypoint x="844" y="293.5" />
+        <di:waypoint x="924" y="293.5" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000"  />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_a60a45e1-047e-4b6b-835b-7f6018b7ad92" bpmnElement="_842553bd-02e1-45f7-aed0-c78e9dba9e2b" color:border-color="#000000">
+        <di:waypoint x="648" y="604" />
+        <di:waypoint x="698.5" y="604" />
+        <di:waypoint x="698.5" y="293.5" />
+        <di:waypoint x="749" y="293.5" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000"  />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_cf13630a-2e86-4a3a-a2b1-8046c33ba0d9" bpmnElement="_8a27a9ee-b8e5-49d8-8b7d-41a59d74b3f3" color:border-color="#000000">
+        <di:waypoint x="456" y="293.5" />
+        <di:waypoint x="504.5" y="293.5" />
+        <di:waypoint x="504.5" y="604" />
+        <di:waypoint x="553" y="604" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000"  />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_19374b5c-d456-43e2-bc4e-3f3553583ab4" bpmnElement="_a4c93e8a-2b52-4367-8381-a3f78450a075" color:border-color="#000000">
+        <di:waypoint x="304" y="293.5" />
+        <di:waypoint x="360" y="293.5" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000"  />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_e0800ebd-85ea-4c90-af70-c0cb3f35d7ef" bpmnElement="JobVacancyStartEvent" color:background-color="#ffffff" color:border-color="#000000">
+        <dc:Bounds x="273" y="278" width="32" height="32" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000" >
+          <dc:Bounds x="269" y="320" width="41" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_8ce3cd47-c554-4454-80c4-7e045d45a7cc" bpmnElement="WriteDescriptionTask" color:background-color="#ffffff" color:border-color="#000000">
+        <dc:Bounds x="360" y="256" width="96" height="76" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000" >
+          <dc:Bounds x="363.5" y="281" width="89" height="26" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_59a87229-94ce-4df6-ab1d-b669632dc093" bpmnElement="ApproveAdvertisementTask" color:background-color="#ffffff" color:border-color="#000000">
+        <dc:Bounds x="749" y="256" width="96" height="76" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000" >
+          <dc:Bounds x="752.5" y="281" width="89" height="26" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_99380e5f-656e-4d5c-b43c-80a9b20c6cc8" bpmnElement="AdvertisementApprovedGateway" isMarkerVisible="true" color:background-color="#ffffff" color:border-color="#000000">
+        <dc:Bounds x="924" y="273" width="42" height="40" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000" >
+          <dc:Bounds x="910" y="322" width="71" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_bd7b6a15-4ef8-46a9-8be9-20a5abb32abd_di" bpmnElement="DescriptionDataObjectReference" color:background-color="#ffffff" color:border-color="#000000">
+        <dc:Bounds x="444" y="160" width="34" height="40" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000" >
+          <dc:Bounds x="433" y="205" width="56" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_292acb9f-6f5b-402b-adc0-0bd34c2d558d" bpmnElement="CompleteAdvertisementTask" color:background-color="#ffffff" color:border-color="#000000">
+        <dc:Bounds x="553" y="566" width="96" height="76" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000" >
+          <dc:Bounds x="556.5" y="591" width="89" height="26" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_975aa6c7-f142-47ed-a405-ce482d61eb2b" bpmnElement="_b13d6fa3-fc78-40c7-ae77-609be07493e9" color:background-color="#ffffff" color:border-color="#000000">
+        <dc:Bounds x="1039" y="584" width="42" height="40" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000"  />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_f0775e8e-8c6a-44fd-838e-0872f5f93f0f" bpmnElement="PublishOnHomepageTask" color:background-color="#ffffff" color:border-color="#000000">
+        <dc:Bounds x="1199" y="487" width="96" height="76" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000" >
+          <dc:Bounds x="1202.5" y="512" width="89" height="26" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_fd4a4d27-2b4e-4f14-b7ff-f820f630a363" bpmnElement="SelectOtherPlatformsTask" color:background-color="#ffffff" color:border-color="#000000">
+        <dc:Bounds x="1124" y="643" width="96" height="76" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000" >
+          <dc:Bounds x="1127.5" y="668" width="89" height="26" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_4a654e20-8f3e-4e42-bb84-56d1caf793d0" bpmnElement="_0783f019-f40c-43d6-ab40-0f1c81f8d9e7" color:background-color="#ffffff" color:border-color="#000000">
+        <dc:Bounds x="1434" y="584" width="42" height="40" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000"  />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_f80d237a-08ab-4237-a706-0df1d4fda58b" bpmnElement="VacancyAdvertisedEndEvent" color:background-color="#ffffff" color:border-color="#000000">
+        <dc:Bounds x="1562" y="586" width="36" height="36" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000" >
+          <dc:Bounds x="1555" y="632" width="51" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_bc8f619b-ffc6-41ad-90c0-56dada9790d4" bpmnElement="PublishOnOtherPlatformsTask" color:background-color="#ffffff" color:border-color="#000000">
+        <dc:Bounds x="1311" y="643" width="96" height="76" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000" >
+          <dc:Bounds x="1314.5" y="668" width="89" height="26" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_bac0224d-62f1-46aa-bb4c-5371c3983ffb_di" bpmnElement="AdvertisementDataObjectReference" color:background-color="#ffffff" color:border-color="#000000">
+        <dc:Bounds x="661" y="701" width="34" height="40" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000" >
+          <dc:Bounds x="643" y="746" width="71" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_c68abea8-c5b4-4aef-b1a5-1e81caec0cba_di" bpmnElement="SelectedPlatformsDataObjectReference" color:background-color="#ffffff" color:border-color="#000000">
+        <dc:Bounds x="1212" y="774" width="34" height="40" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000" >
+          <dc:Bounds x="1206" y="819" width="46" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_938dfdaf-0fe4-4def-b8cc-1aade8108f2e" bpmnElement="RoleRequiredDataInput" color:background-color="#ffffff" color:border-color="#000000">
+        <dc:Bounds x="246" y="130" width="34" height="40" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000" >
+          <dc:Bounds x="243" y="175" width="41" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_927164d8-b3df-447f-bd7f-f5786c37c279" bpmnElement="AdvertisementDataOutput" color:background-color="#ffffff" color:border-color="#000000">
+        <dc:Bounds x="854" y="146" width="34" height="40" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000" >
+          <dc:Bounds x="835" y="191" width="71" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="_e8b6f60a-4389-4b71-9d2e-c73bcca8ffda" bpmnElement="_e2734375-2aa0-418c-9f0b-8c2ca1022285" sourceElement="_8ce3cd47-c554-4454-80c4-7e045d45a7cc" color:border-color="#000000">
+        <di:waypoint x="408" y="256.5" />
+        <di:waypoint x="408" y="179.5" />
+        <di:waypoint x="444" y="179.5" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000"  />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_1b44492b-f117-42e7-a97e-98e7e4b7f7e3" bpmnElement="_9ce7bb4a-930c-4132-a09d-61b345cce434" targetElement="_59a87229-94ce-4df6-ab1d-b669632dc093" color:border-color="#000000">
+        <di:waypoint x="694" y="721" />
+        <di:waypoint x="797" y="721" />
+        <di:waypoint x="797" y="331.5" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000"  />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_2cdd2564-d1ab-4d16-8a55-3c66271890ca" bpmnElement="_adddc8ea-507e-4894-ac4b-92bca7e0a89f" sourceElement="_59a87229-94ce-4df6-ab1d-b669632dc093" color:border-color="#000000">
+        <di:waypoint x="813" y="255.5" />
+        <di:waypoint x="813" y="166" />
+        <di:waypoint x="853.5" y="166" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000"  />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_115b0056-5e1b-483a-b8a9-81677d847e18" bpmnElement="_5c3fc96e-20d0-4879-8471-d41224632e24" targetElement="_292acb9f-6f5b-402b-adc0-0bd34c2d558d" color:border-color="#000000">
+        <di:waypoint x="477" y="179.5" />
+        <di:waypoint x="572.2" y="179.5" />
+        <di:waypoint x="572.2" y="566" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000"  />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_850ff2e3-6389-4b70-895b-b9e4381e9b98" bpmnElement="_4164c380-3ee3-4a6a-8e66-5bc201416108" sourceElement="_292acb9f-6f5b-402b-adc0-0bd34c2d558d" color:border-color="#000000">
+        <di:waypoint x="601" y="641.05" />
+        <di:waypoint x="601" y="721" />
+        <di:waypoint x="661" y="721" />
+        <bpmndi:BPMNLabel labelStyle="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0" color:color="#000000"  />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+    <bpmndi:BPMNLabelStyle id="LS_9786170f-6612-400e-a37d-2970ab70f1f3_0">
+      <dc:Font name="arial,helvetica,sans-serif" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" />
+    </bpmndi:BPMNLabelStyle>
+  </bpmndi:BPMNDiagram>
+
+</semantic:definitions>

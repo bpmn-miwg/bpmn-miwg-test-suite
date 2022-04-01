@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" id="sid-ad44e239-e96e-4a80-b0e4-cf63b741c3cb" name="A.4.1" exporter="Camunda Modeler" exporterVersion="4.12.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://www.omg.org/spec/BPMN/2.0/20100501/BPMN20.xsd">
+  <collaboration id="Colaboration_bd57">
+    <participant id="Pool1Participant" name="Pool 1" processRef="Process_B219" />
+    <participant id="Pool2Participant" name="Pool 2" processRef="Process_99DB" />
+    <messageFlow id="MessageFlow2MessageFlow" name="Message Flow 2 " sourceRef="Task5Task" targetRef="Task2Task" />
+    <messageFlow id="MessageFlow1MessageFlow" name="Message Flow 1 " sourceRef="Task1Task" targetRef="Task3Task" />
+  </collaboration>
+  <process id="Process_B219" name="Pool 1" processType="None" isClosed="false" isExecutable="false">
+    <extensionElements />
+    <laneSet id="Laneset_a60a">
+      <lane id="Lane1Lane" name="Lane 1">
+        <flowNodeRef>EndEvent1EndEvent</flowNodeRef>
+        <flowNodeRef>Task1Task</flowNodeRef>
+        <flowNodeRef>Task2Task</flowNodeRef>
+        <flowNodeRef>StartEvent1StartEvent</flowNodeRef>
+      </lane>
+    </laneSet>
+    <endEvent id="EndEvent1EndEvent" name="End Event 1 ">
+      <incoming>Flow_b7a8</incoming>
+    </endEvent>
+    <task id="Task1Task" name="Task 1 ">
+      <incoming>Flow_09ad</incoming>
+      <outgoing>Flow_82a0</outgoing>
+    </task>
+    <task id="Task2Task" name="Task 2 ">
+      <incoming>Flow_82a0</incoming>
+      <outgoing>Flow_b7a8</outgoing>
+    </task>
+    <startEvent id="StartEvent1StartEvent" name="Start Event 1 ">
+      <outgoing>Flow_09ad</outgoing>
+    </startEvent>
+    <sequenceFlow id="Flow_b7a8" name="" isImmediate="true" sourceRef="Task2Task" targetRef="EndEvent1EndEvent" />
+    <sequenceFlow id="Flow_82a0" name="" isImmediate="true" sourceRef="Task1Task" targetRef="Task2Task" />
+    <sequenceFlow id="Flow_09ad" name="" isImmediate="true" sourceRef="StartEvent1StartEvent" targetRef="Task1Task" />
+  </process>
+  <process id="Process_99DB" name="Pool 2" processType="None" isClosed="false" isExecutable="false">
+    <extensionElements />
+    <laneSet id="Laneset_4b59">
+      <lane id="Lane3Lane" name="Lane 3">
+        <flowNodeRef>EndEvent5EndEvent</flowNodeRef>
+        <flowNodeRef>ExpandedSubProcess2SubProcess</flowNodeRef>
+      </lane>
+      <lane id="Lane2Lane" name="Lane 2 ">
+        <flowNodeRef>EndEvent2EndEvent</flowNodeRef>
+        <flowNodeRef>Task3Task</flowNodeRef>
+        <flowNodeRef>Task5Task</flowNodeRef>
+        <flowNodeRef>StartEvent2StartEvent</flowNodeRef>
+        <flowNodeRef>ExpandedSubProcess1SubProcess</flowNodeRef>
+      </lane>
+    </laneSet>
+    <endEvent id="EndEvent2EndEvent" name="End Event 2 ">
+      <incoming>Flow_4e81</incoming>
+    </endEvent>
+    <task id="Task3Task" name="Task 3 ">
+      <incoming>Flow_add5</incoming>
+      <outgoing>Flow_cb50</outgoing>
+      <outgoing>Flow_276d</outgoing>
+    </task>
+    <subProcess id="ExpandedSubProcess1SubProcess" name="Expanded Sub-Process 1 ">
+      <incoming>Flow_276d</incoming>
+      <outgoing>Flow_4a6a</outgoing>
+      <startEvent id="StartEvent3StartEvent" name="Start Event 3 ">
+        <outgoing>Flow_ff45</outgoing>
+      </startEvent>
+      <task id="Task4Task" name="Task 4 ">
+        <incoming>Flow_ff45</incoming>
+        <outgoing>Flow_4917</outgoing>
+      </task>
+      <endEvent id="EndEvent3EndEvent" name="End Event 3 ">
+        <incoming>Flow_4917</incoming>
+      </endEvent>
+      <sequenceFlow id="Flow_ff45" name="" isImmediate="true" sourceRef="StartEvent3StartEvent" targetRef="Task4Task" />
+      <sequenceFlow id="Flow_4917" name="" isImmediate="true" sourceRef="Task4Task" targetRef="EndEvent3EndEvent" />
+    </subProcess>
+    <task id="Task5Task" name="Task 5 ">
+      <incoming>Flow_4a6a</incoming>
+      <outgoing>Flow_4e81</outgoing>
+    </task>
+    <startEvent id="StartEvent2StartEvent" name="Start Event 2 ">
+      <outgoing>Flow_add5</outgoing>
+    </startEvent>
+    <endEvent id="EndEvent5EndEvent" name="End Event 5 ">
+      <incoming>Flow_4bcb</incoming>
+    </endEvent>
+    <subProcess id="ExpandedSubProcess2SubProcess" name="Expanded Sub-Process 2 ">
+      <incoming>Flow_cb50</incoming>
+      <outgoing>Flow_4bcb</outgoing>
+      <startEvent id="StartEvent4StartEvent" name="Start Event 4 ">
+        <outgoing>Flow_eaf2</outgoing>
+      </startEvent>
+      <task id="Task6Task" name="Task 6 ">
+        <incoming>Flow_eaf2</incoming>
+        <outgoing>Flow_16ca</outgoing>
+      </task>
+      <endEvent id="EndEvent4EndEvent" name="End Event 4 ">
+        <incoming>Flow_16ca</incoming>
+      </endEvent>
+      <sequenceFlow id="Flow_eaf2" name="" isImmediate="true" sourceRef="StartEvent4StartEvent" targetRef="Task6Task" />
+      <sequenceFlow id="Flow_16ca" name="" isImmediate="true" sourceRef="Task6Task" targetRef="EndEvent4EndEvent" />
+    </subProcess>
+    <sequenceFlow id="Flow_4e81" name="" isImmediate="true" sourceRef="Task5Task" targetRef="EndEvent2EndEvent" />
+    <sequenceFlow id="Flow_276d" name="" isImmediate="true" sourceRef="Task3Task" targetRef="ExpandedSubProcess1SubProcess" />
+    <sequenceFlow id="Flow_add5" name="" isImmediate="true" sourceRef="StartEvent2StartEvent" targetRef="Task3Task" />
+    <sequenceFlow id="Flow_cb50" name="" isImmediate="true" sourceRef="Task3Task" targetRef="ExpandedSubProcess2SubProcess" />
+    <sequenceFlow id="Flow_4a6a" name="" isImmediate="true" sourceRef="ExpandedSubProcess1SubProcess" targetRef="Task5Task" />
+    <sequenceFlow id="Flow_4bcb" name="" isImmediate="true" sourceRef="ExpandedSubProcess2SubProcess" targetRef="EndEvent5EndEvent" />
+  </process>
+  <bpmndi:BPMNDiagram id="Diagram_7a52" name="Collaboration A.4.1">
+    <bpmndi:BPMNPlane id="Lane_0c43" bpmnElement="Colaboration_bd57">
+      <bpmndi:BPMNShape id="Shape_4ba7" bpmnElement="Pool1Participant" isHorizontal="true">
+        <omgdc:Bounds x="154" y="73" width="190" height="679" />
+        <bpmndi:BPMNLabel labelStyle="Label_bd5c">
+          <omgdc:Bounds x="290.8571406773159" y="78.5" width="36.857147216796875" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_1cb0" bpmnElement="Lane1Lane" isHorizontal="true">
+        <omgdc:Bounds x="154" y="103" width="190" height="649" />
+        <bpmndi:BPMNLabel labelStyle="Label_bd5c">
+          <omgdc:Bounds x="289.1428615025112" y="108.5" width="40.28570556640625" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_09ad_gui" bpmnElement="Flow_09ad">
+        <omgdi:waypoint x="257" y="185" />
+        <omgdi:waypoint x="257" y="224" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_82a0_gui" bpmnElement="Flow_82a0">
+        <omgdi:waypoint x="258.32142857142856" y="292.44999999999993" />
+        <omgdi:waypoint x="258.32142857142856" y="607.75" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_b7a8_gui" bpmnElement="Flow_b7a8">
+        <omgdi:waypoint x="260" y="675.75" />
+        <omgdi:waypoint x="259.3883495145631" y="697.8" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Shape_96ef" bpmnElement="EndEvent1EndEvent">
+        <omgdc:Bounds x="245" y="698" width="28" height="28" />
+        <bpmndi:BPMNLabel labelStyle="Label_4ca7">
+          <omgdc:Bounds x="229" y="728" width="60" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_d669" bpmnElement="Task1Task" color:background-color="#ffffcc">
+        <omgdc:Bounds x="216" y="224" width="83" height="68" />
+        <bpmndi:BPMNLabel labelStyle="Label_bd5c">
+          <omgdc:Bounds x="237.3571434020996" y="251" width="40.28571319580078" height="11.999999999999972" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_9e1c" bpmnElement="Task2Task" color:background-color="#ffffcc">
+        <omgdc:Bounds x="218" y="608" width="83" height="68" />
+        <bpmndi:BPMNLabel labelStyle="Label_bd5c">
+          <omgdc:Bounds x="239.3571434020996" y="635" width="40.28571319580078" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_4301" bpmnElement="StartEvent1StartEvent">
+        <omgdc:Bounds x="242" y="155" width="30" height="30" />
+        <bpmndi:BPMNLabel labelStyle="Label_4ca7">
+          <omgdc:Bounds x="226" y="136" width="64" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_8a28" bpmnElement="Pool2Participant" isHorizontal="true">
+        <omgdc:Bounds x="413" y="74" width="581" height="676" />
+        <bpmndi:BPMNLabel labelStyle="Label_bd5c">
+          <omgdc:Bounds x="745.142558506557" y="79.5" width="36.857147216796875" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_b714" bpmnElement="Lane2Lane" isHorizontal="true">
+        <omgdc:Bounds x="413" y="104" width="290" height="646" />
+        <bpmndi:BPMNLabel labelStyle="Label_bd5c">
+          <omgdc:Bounds x="597.7142900739398" y="109.5" width="40.28570556640625" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_4bb2" bpmnElement="Lane3Lane" isHorizontal="true">
+        <omgdc:Bounds x="703" y="104" width="291" height="646" />
+        <bpmndi:BPMNLabel labelStyle="Label_bd5c">
+          <omgdc:Bounds x="888.4282869611467" y="109.5" width="40.28572082519531" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_4bcb_gui" bpmnElement="Flow_4bcb">
+        <omgdi:waypoint x="838.5714285714284" y="578.7" />
+        <omgdi:waypoint x="837.0389610389609" y="696.7" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_4a6a_gui" bpmnElement="Flow_4a6a">
+        <omgdi:waypoint x="557.4285714285714" y="578.7" />
+        <omgdi:waypoint x="556.6428571428571" y="607.75" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_cb50_gui" bpmnElement="Flow_cb50">
+        <omgdi:waypoint x="598.8571428571429" y="259.35" />
+        <omgdi:waypoint x="834.2857142857142" y="259.35" />
+        <omgdi:waypoint x="834.2857142857142" y="322" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_add5_gui" bpmnElement="Flow_add5">
+        <omgdi:waypoint x="557.2132686590518" y="194.7" />
+        <omgdi:waypoint x="557.3571428571429" y="225.35" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_276d_gui" bpmnElement="Flow_276d">
+        <omgdi:waypoint x="556.6428571428571" y="293.35" />
+        <omgdi:waypoint x="556.6428571428571" y="320.19999999999993" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_4e81_gui" bpmnElement="Flow_4e81">
+        <omgdi:waypoint x="556.8571428571429" y="675.75" />
+        <omgdi:waypoint x="556.2577151032087" y="696.7" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Shape_9cf1_gui" bpmnElement="EndEvent2EndEvent">
+        <omgdc:Bounds x="542" y="697" width="28" height="28" />
+        <bpmndi:BPMNLabel labelStyle="Label_4ca7">
+          <omgdc:Bounds x="526" y="727" width="60" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_5c2a_gui" bpmnElement="Task3Task" color:background-color="#ffffcc">
+        <omgdc:Bounds x="516" y="225" width="83" height="68" />
+        <bpmndi:BPMNLabel labelStyle="Label_bd5c">
+          <omgdc:Bounds x="537.3571434020996" y="252" width="40.28571319580078" height="12.000000000000028" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_1doa_gui" bpmnElement="ExpandedSubProcess1SubProcess" isExpanded="true">
+        <omgdc:Bounds x="459" y="320" width="197" height="259" />
+        <bpmndi:BPMNLabel labelStyle="Label_bd5c">
+          <omgdc:Bounds x="467" y="330" width="152.57142639160156" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_4917_gui" bpmnElement="Flow_4917">
+        <omgdi:waypoint x="557.3571428571429" y="502.8499999999999" />
+        <omgdi:waypoint x="557.0368604437924" y="527.8" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ff45_gui" bpmnElement="Flow_ff45">
+        <omgdi:waypoint x="557.7110863819724" y="398.49999999999994" />
+        <omgdi:waypoint x="557.3571428571429" y="434.8499999999999" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Shape_9a68_gui" bpmnElement="StartEvent3StartEvent">
+        <omgdc:Bounds x="543" y="368" width="30" height="30" />
+        <bpmndi:BPMNLabel labelStyle="Label_4ca7">
+          <omgdc:Bounds x="527" y="349" width="64" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_43ee_gui" bpmnElement="Task4Task" color:background-color="#ffffcc">
+        <omgdc:Bounds x="516" y="435" width="83" height="68" />
+        <bpmndi:BPMNLabel labelStyle="Label_bd5c">
+          <omgdc:Bounds x="537.3571434020996" y="462" width="40.28571319580078" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_5e32_gui" bpmnElement="EndEvent3EndEvent">
+        <omgdc:Bounds x="543" y="528" width="28" height="28" />
+        <bpmndi:BPMNLabel labelStyle="Label_4ca7">
+          <omgdc:Bounds x="527" y="558" width="60" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_4b41_gui" bpmnElement="Task5Task" color:background-color="#ffffcc">
+        <omgdc:Bounds x="515" y="608" width="83" height="68" />
+        <bpmndi:BPMNLabel labelStyle="Label_bd5c">
+          <omgdc:Bounds x="536.3571434020996" y="635" width="40.28571319580078" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_4e5f_gui" bpmnElement="StartEvent2StartEvent">
+        <omgdc:Bounds x="542" y="165" width="30" height="30" />
+        <bpmndi:BPMNLabel labelStyle="Label_4ca7">
+          <omgdc:Bounds x="526" y="146" width="64" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_4eof_gui" bpmnElement="EndEvent5EndEvent">
+        <omgdc:Bounds x="823" y="697" width="28" height="28" />
+        <bpmndi:BPMNLabel labelStyle="Label_4ca7">
+          <omgdc:Bounds x="807" y="727" width="60" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_D61f_gui" bpmnElement="ExpandedSubProcess2SubProcess" isExpanded="true">
+        <omgdc:Bounds x="733" y="322" width="210" height="257" />
+        <bpmndi:BPMNLabel labelStyle="Label_bd5c">
+          <omgdc:Bounds x="741" y="332" width="152.57142639160156" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_16ca_gui" bpmnElement="Flow_16ca">
+        <omgdi:waypoint x="837.3571428571427" y="502.8499999999999" />
+        <omgdi:waypoint x="837.0368604437922" y="527.8" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_eaf2_gui" bpmnElement="Flow_eaf2">
+        <omgdi:waypoint x="837.7110863819722" y="398.49999999999994" />
+        <omgdi:waypoint x="837.3571428571427" y="434.8499999999999" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Shape_099f_gui" bpmnElement="StartEvent4StartEvent">
+        <omgdc:Bounds x="823" y="368" width="30" height="30" />
+        <bpmndi:BPMNLabel labelStyle="Label_4ca7">
+          <omgdc:Bounds x="807" y="349" width="64" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_b4e4_gui" bpmnElement="Task6Task" color:background-color="#ffffcc">
+        <omgdc:Bounds x="796" y="435" width="83" height="68" />
+        <bpmndi:BPMNLabel labelStyle="Label_bd5c">
+          <omgdc:Bounds x="817.3571434020996" y="462" width="40.28571319580078" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_45fe_gui" bpmnElement="EndEvent4EndEvent">
+        <omgdc:Bounds x="823" y="528" width="28" height="28" />
+        <bpmndi:BPMNLabel labelStyle="Label_4ca7">
+          <omgdc:Bounds x="807" y="558" width="60" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Edge_42b1_gui" bpmnElement="MessageFlow2MessageFlow">
+        <omgdi:waypoint x="515.1428571428571" y="641.75" />
+        <omgdi:waypoint x="301" y="641.75" />
+        <bpmndi:BPMNLabel labelStyle="Label_4ca7">
+          <omgdc:Bounds x="368" y="622" width="81" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_cbfb_gui" bpmnElement="MessageFlow1MessageFlow">
+        <omgdi:waypoint x="298.64285714285717" y="258.9" />
+        <omgdi:waypoint x="515.8571428571429" y="258.9" />
+        <bpmndi:BPMNLabel labelStyle="Label_4ca7">
+          <omgdc:Bounds x="367" y="239" width="81" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+    <bpmndi:BPMNLabelStyle id="Label_4ca7">
+      <omgdc:Font name="Arial" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" />
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Label_bd5c">
+      <omgdc:Font name="Arial" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" />
+    </bpmndi:BPMNLabelStyle>
+  </bpmndi:BPMNDiagram>
+</definitions>

@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_008og7z" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0-nightly.20220320" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.17.0">
+  <bpmn:collaboration id="Collaboration_1kcxib3">
+    <bpmn:participant id="Participant_0mv7b0j" processRef="Process_0zs5k23" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_0zs5k23" isExecutable="true">
+    <bpmn:laneSet id="LaneSet_12o2qvg">
+      <bpmn:lane id="HRDepartmentLane" name="HR Department">
+        <bpmn:flowNodeRef>CandidateAcceptedOfferStartEvent</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SendCandidateContractTask</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ContractTermsAcceptedGateway</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GetSignaturesOnContractAndNotifyResponsibleDepartmentTask</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ReviewTermsOfContractTask</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>NonexclusiveGatewayGateway</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>InformEmployeeOfCompanyPoliciesTask</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>IntroduceEmployeeToCompanyMissionVisionAndValuesTask</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>RegisterForMedicalInsuranceTask</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>NonexclusiveGatewayGateway1</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="ResponsibleDepartmentLane" name="Responsible Department">
+        <bpmn:flowNodeRef>RequestPreparationsForANewEmployeeTask</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>NewEmployeeInDepartmentXEvent</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>IntroduceNewEmployeeToTheTeamTask</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>PerformTrainingForPositionTask</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>NonexclusiveGatewayGateway2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>InputFromPayrollReadyEvent</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>InputFromFacilitiesReadyEvent</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>NonexclusiveGatewayGateway3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>InputFromITReadyEvent</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>CompileWelcomePackageTask</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GiveEmployeeWelcomePackageTask</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEventEndEvent</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:sequenceFlow id="Flow_1ljg69d" sourceRef="CandidateAcceptedOfferStartEvent" targetRef="SendCandidateContractTask" />
+    <bpmn:sequenceFlow id="Flow_07623u7" sourceRef="SendCandidateContractTask" targetRef="ContractTermsAcceptedGateway" />
+    <bpmn:sequenceFlow id="YesSequenceFlow" name="Yes" sourceRef="ContractTermsAcceptedGateway" targetRef="GetSignaturesOnContractAndNotifyResponsibleDepartmentTask" />
+    <bpmn:startEvent id="CandidateAcceptedOfferStartEvent" name="Candidate accepted offer">
+      <bpmn:outgoing>Flow_1ljg69d</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="SendCandidateContractTask" name="Send candidate Contract">
+      <bpmn:incoming>Flow_1ljg69d</bpmn:incoming>
+      <bpmn:incoming>Flow_1nc870t</bpmn:incoming>
+      <bpmn:outgoing>Flow_07623u7</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="ContractTermsAcceptedGateway" name="Contract terms accepted?">
+      <bpmn:incoming>Flow_07623u7</bpmn:incoming>
+      <bpmn:outgoing>YesSequenceFlow</bpmn:outgoing>
+      <bpmn:outgoing>NoSequenceFlow</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="NoSequenceFlow" name="No" sourceRef="ContractTermsAcceptedGateway" targetRef="ReviewTermsOfContractTask" />
+    <bpmn:userTask id="GetSignaturesOnContractAndNotifyResponsibleDepartmentTask" name="Get signatures on contract and notify responsible department">
+      <bpmn:incoming>YesSequenceFlow</bpmn:incoming>
+      <bpmn:outgoing>Flow_0kr00kd</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_0zsziik">
+        <bpmn:targetRef>EmployeeDetailsDataStoreReference</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:userTask>
+    <bpmn:userTask id="ReviewTermsOfContractTask" name="Review terms of contract">
+      <bpmn:incoming>NoSequenceFlow</bpmn:incoming>
+      <bpmn:outgoing>Flow_1nc870t</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1nc870t" sourceRef="ReviewTermsOfContractTask" targetRef="SendCandidateContractTask" />
+    <bpmn:dataStoreReference id="EmployeeDetailsDataStoreReference" name="Employee details" />
+    <bpmn:sequenceFlow id="Flow_0kr00kd" sourceRef="GetSignaturesOnContractAndNotifyResponsibleDepartmentTask" targetRef="NonexclusiveGatewayGateway" />
+    <bpmn:parallelGateway id="NonexclusiveGatewayGateway" name="Non-exclusive gateway">
+      <bpmn:incoming>Flow_0kr00kd</bpmn:incoming>
+      <bpmn:outgoing>Flow_0dc4jqr</bpmn:outgoing>
+      <bpmn:outgoing>Flow_07v9296</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:sequenceFlow id="Flow_0dc4jqr" sourceRef="NonexclusiveGatewayGateway" targetRef="InformEmployeeOfCompanyPoliciesTask" />
+    <bpmn:userTask id="InformEmployeeOfCompanyPoliciesTask" name="Inform employee of company policies">
+      <bpmn:incoming>Flow_0dc4jqr</bpmn:incoming>
+      <bpmn:outgoing>Flow_05r0oa8</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_05r0oa8" sourceRef="InformEmployeeOfCompanyPoliciesTask" targetRef="IntroduceEmployeeToCompanyMissionVisionAndValuesTask" />
+    <bpmn:userTask id="IntroduceEmployeeToCompanyMissionVisionAndValuesTask" name="Introduce employee to company Mission, Vision and Values">
+      <bpmn:incoming>Flow_05r0oa8</bpmn:incoming>
+      <bpmn:outgoing>Flow_0eggplg</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0eggplg" sourceRef="IntroduceEmployeeToCompanyMissionVisionAndValuesTask" targetRef="RegisterForMedicalInsuranceTask" />
+    <bpmn:userTask id="RegisterForMedicalInsuranceTask" name="Register for medical insurance">
+      <bpmn:incoming>Flow_0eggplg</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ht0rb8</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1ht0rb8" sourceRef="RegisterForMedicalInsuranceTask" targetRef="NonexclusiveGatewayGateway1" />
+    <bpmn:parallelGateway id="NonexclusiveGatewayGateway1" name="Non-exclusive gateway">
+      <bpmn:incoming>Flow_1ht0rb8</bpmn:incoming>
+      <bpmn:incoming>Flow_1giwtf9</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ublyw1</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:sequenceFlow id="Flow_07v9296" sourceRef="NonexclusiveGatewayGateway" targetRef="RequestPreparationsForANewEmployeeTask" />
+    <bpmn:userTask id="RequestPreparationsForANewEmployeeTask" name="Request preparations for a new employee">
+      <bpmn:incoming>Flow_07v9296</bpmn:incoming>
+      <bpmn:outgoing>Flow_1f49ekr</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1f49ekr" sourceRef="RequestPreparationsForANewEmployeeTask" targetRef="NewEmployeeInDepartmentXEvent" />
+    <bpmn:intermediateThrowEvent id="NewEmployeeInDepartmentXEvent" name="New employee in department X">
+      <bpmn:incoming>Flow_1f49ekr</bpmn:incoming>
+      <bpmn:outgoing>Flow_1giwtf9</bpmn:outgoing>
+      <bpmn:property id="Property_1ylqb5f" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_0p7hubg">
+        <bpmn:sourceRef>EmployeeDetailsDataStoreReference</bpmn:sourceRef>
+        <bpmn:targetRef>Property_1ylqb5f</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+      <bpmn:signalEventDefinition id="SignalEventDefinition_0gpxpgx" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:sequenceFlow id="Flow_1giwtf9" sourceRef="NewEmployeeInDepartmentXEvent" targetRef="NonexclusiveGatewayGateway1" />
+    <bpmn:sequenceFlow id="Flow_0ublyw1" sourceRef="NonexclusiveGatewayGateway1" targetRef="IntroduceNewEmployeeToTheTeamTask" />
+    <bpmn:userTask id="IntroduceNewEmployeeToTheTeamTask" name="Introduce new employee to the team">
+      <bpmn:incoming>Flow_0ublyw1</bpmn:incoming>
+      <bpmn:outgoing>Flow_1fy06q2</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1fy06q2" sourceRef="IntroduceNewEmployeeToTheTeamTask" targetRef="PerformTrainingForPositionTask" />
+    <bpmn:userTask id="PerformTrainingForPositionTask" name="Perform training for position">
+      <bpmn:incoming>Flow_1fy06q2</bpmn:incoming>
+      <bpmn:outgoing>Flow_0e72kiw</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0e72kiw" sourceRef="PerformTrainingForPositionTask" targetRef="NonexclusiveGatewayGateway2" />
+    <bpmn:parallelGateway id="NonexclusiveGatewayGateway2" name="Non-exclusive gateway">
+      <bpmn:incoming>Flow_0e72kiw</bpmn:incoming>
+      <bpmn:outgoing>Flow_03y1old</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1v71mv9</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1it49gb</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:sequenceFlow id="Flow_03y1old" sourceRef="NonexclusiveGatewayGateway2" targetRef="InputFromPayrollReadyEvent" />
+    <bpmn:intermediateCatchEvent id="InputFromPayrollReadyEvent" name="Input from Payroll ready">
+      <bpmn:incoming>Flow_03y1old</bpmn:incoming>
+      <bpmn:outgoing>Flow_1j4fw0c</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0nq7fqh" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:sequenceFlow id="Flow_1v71mv9" sourceRef="NonexclusiveGatewayGateway2" targetRef="InputFromFacilitiesReadyEvent" />
+    <bpmn:intermediateCatchEvent id="InputFromFacilitiesReadyEvent" name="Input from Facilities ready">
+      <bpmn:incoming>Flow_1v71mv9</bpmn:incoming>
+      <bpmn:outgoing>Flow_0lt09ii</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1tfi6lz" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:sequenceFlow id="Flow_1it49gb" sourceRef="NonexclusiveGatewayGateway2" targetRef="InputFromITReadyEvent" />
+    <bpmn:sequenceFlow id="Flow_1j4fw0c" sourceRef="InputFromPayrollReadyEvent" targetRef="NonexclusiveGatewayGateway3" />
+    <bpmn:parallelGateway id="NonexclusiveGatewayGateway3" name="Non-exclusive gateway">
+      <bpmn:incoming>Flow_1j4fw0c</bpmn:incoming>
+      <bpmn:incoming>Flow_1m9ivs0</bpmn:incoming>
+      <bpmn:incoming>Flow_0lt09ii</bpmn:incoming>
+      <bpmn:outgoing>Flow_0nd7uvo</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:intermediateCatchEvent id="InputFromITReadyEvent" name="Input from IT ready">
+      <bpmn:incoming>Flow_1it49gb</bpmn:incoming>
+      <bpmn:outgoing>Flow_1m9ivs0</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_145oyeu" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:sequenceFlow id="Flow_1m9ivs0" sourceRef="InputFromITReadyEvent" targetRef="NonexclusiveGatewayGateway3" />
+    <bpmn:sequenceFlow id="Flow_0lt09ii" sourceRef="InputFromFacilitiesReadyEvent" targetRef="NonexclusiveGatewayGateway3" />
+    <bpmn:sequenceFlow id="Flow_0nd7uvo" sourceRef="NonexclusiveGatewayGateway3" targetRef="CompileWelcomePackageTask" />
+    <bpmn:userTask id="CompileWelcomePackageTask" name="Compile welcome package">
+      <bpmn:incoming>Flow_0nd7uvo</bpmn:incoming>
+      <bpmn:outgoing>Flow_06jbbhk</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_06jbbhk" sourceRef="CompileWelcomePackageTask" targetRef="GiveEmployeeWelcomePackageTask" />
+    <bpmn:userTask id="GiveEmployeeWelcomePackageTask" name="Give employee welcome package">
+      <bpmn:incoming>Flow_06jbbhk</bpmn:incoming>
+      <bpmn:outgoing>Flow_11n4bk4</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="EndEventEndEvent" name="End Event">
+      <bpmn:incoming>Flow_11n4bk4</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_11n4bk4" sourceRef="GiveEmployeeWelcomePackageTask" targetRef="EndEventEndEvent" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1kcxib3">
+      <bpmndi:BPMNShape id="Participant_0mv7b0j_di" bpmnElement="Participant_0mv7b0j" isHorizontal="true">
+        <dc:Bounds x="120" y="60" width="2978" height="898" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_02xbw9n_di" bpmnElement="HRDepartmentLane" isHorizontal="true">
+        <dc:Bounds x="150" y="60" width="2948" height="420" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_0v9a9uq_di" bpmnElement="ResponsibleDepartmentLane" isHorizontal="true">
+        <dc:Bounds x="150" y="480" width="2948" height="478" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1ljg69d_di" bpmnElement="Flow_1ljg69d">
+        <di:waypoint x="248" y="260" />
+        <di:waypoint x="320" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_07623u7_di" bpmnElement="Flow_07623u7">
+        <di:waypoint x="420" y="260" />
+        <di:waypoint x="475" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0toucbz_di" bpmnElement="YesSequenceFlow">
+        <di:waypoint x="525" y="260" />
+        <di:waypoint x="610" y="260" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="559" y="242" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0juau2k_di" bpmnElement="NoSequenceFlow">
+        <di:waypoint x="500" y="235" />
+        <di:waypoint x="500" y="170" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="508" y="200" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1nc870t_di" bpmnElement="Flow_1nc870t">
+        <di:waypoint x="450" y="130" />
+        <di:waypoint x="300" y="130" />
+        <di:waypoint x="300" y="230" />
+        <di:waypoint x="320" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0kr00kd_di" bpmnElement="Flow_0kr00kd">
+        <di:waypoint x="710" y="260" />
+        <di:waypoint x="795" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0dc4jqr_di" bpmnElement="Flow_0dc4jqr">
+        <di:waypoint x="845" y="260" />
+        <di:waypoint x="930" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_05r0oa8_di" bpmnElement="Flow_05r0oa8">
+        <di:waypoint x="1030" y="260" />
+        <di:waypoint x="1120" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0eggplg_di" bpmnElement="Flow_0eggplg">
+        <di:waypoint x="1220" y="260" />
+        <di:waypoint x="1310" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ht0rb8_di" bpmnElement="Flow_1ht0rb8">
+        <di:waypoint x="1410" y="260" />
+        <di:waypoint x="1505" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_07v9296_di" bpmnElement="Flow_07v9296">
+        <di:waypoint x="820" y="285" />
+        <di:waypoint x="820" y="670" />
+        <di:waypoint x="950" y="670" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1f49ekr_di" bpmnElement="Flow_1f49ekr">
+        <di:waypoint x="1050" y="670" />
+        <di:waypoint x="1162" y="670" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1giwtf9_di" bpmnElement="Flow_1giwtf9">
+        <di:waypoint x="1198" y="670" />
+        <di:waypoint x="1530" y="670" />
+        <di:waypoint x="1530" y="285" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ublyw1_di" bpmnElement="Flow_0ublyw1">
+        <di:waypoint x="1555" y="260" />
+        <di:waypoint x="1600" y="260" />
+        <di:waypoint x="1600" y="660" />
+        <di:waypoint x="1650" y="660" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1fy06q2_di" bpmnElement="Flow_1fy06q2">
+        <di:waypoint x="1750" y="660" />
+        <di:waypoint x="1850" y="660" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0e72kiw_di" bpmnElement="Flow_0e72kiw">
+        <di:waypoint x="1950" y="660" />
+        <di:waypoint x="2055" y="660" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_03y1old_di" bpmnElement="Flow_03y1old">
+        <di:waypoint x="2105" y="660" />
+        <di:waypoint x="2212" y="660" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1v71mv9_di" bpmnElement="Flow_1v71mv9">
+        <di:waypoint x="2080" y="685" />
+        <di:waypoint x="2080" y="770" />
+        <di:waypoint x="2212" y="770" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1it49gb_di" bpmnElement="Flow_1it49gb">
+        <di:waypoint x="2080" y="635" />
+        <di:waypoint x="2080" y="550" />
+        <di:waypoint x="2212" y="550" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1j4fw0c_di" bpmnElement="Flow_1j4fw0c">
+        <di:waypoint x="2248" y="660" />
+        <di:waypoint x="2355" y="660" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1m9ivs0_di" bpmnElement="Flow_1m9ivs0">
+        <di:waypoint x="2248" y="550" />
+        <di:waypoint x="2380" y="550" />
+        <di:waypoint x="2380" y="635" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0lt09ii_di" bpmnElement="Flow_0lt09ii">
+        <di:waypoint x="2248" y="770" />
+        <di:waypoint x="2380" y="770" />
+        <di:waypoint x="2380" y="685" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0nd7uvo_di" bpmnElement="Flow_0nd7uvo">
+        <di:waypoint x="2405" y="660" />
+        <di:waypoint x="2520" y="660" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_06jbbhk_di" bpmnElement="Flow_06jbbhk">
+        <di:waypoint x="2620" y="660" />
+        <di:waypoint x="2740" y="660" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_11n4bk4_di" bpmnElement="Flow_11n4bk4">
+        <di:waypoint x="2840" y="660" />
+        <di:waypoint x="2962" y="660" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="CandidateAcceptedOfferStartEvent">
+        <dc:Bounds x="212" y="242" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="195" y="285" width="70" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ynnoa2_di" bpmnElement="SendCandidateContractTask">
+        <dc:Bounds x="320" y="220" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1p6pq0r_di" bpmnElement="ContractTermsAcceptedGateway" isMarkerVisible="true">
+        <dc:Bounds x="475" y="235" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="463" y="295" width="73" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0psv9r9_di" bpmnElement="GetSignaturesOnContractAndNotifyResponsibleDepartmentTask">
+        <dc:Bounds x="610" y="220" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_19zxcb3_di" bpmnElement="ReviewTermsOfContractTask">
+        <dc:Bounds x="450" y="90" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataStoreReference_13u0zvb_di" bpmnElement="EmployeeDetailsDataStoreReference">
+        <dc:Bounds x="635" y="365" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="618" y="422" width="84" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0izxcu7_di" bpmnElement="NonexclusiveGatewayGateway">
+        <dc:Bounds x="795" y="235" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="785" y="198" width="70" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1t391kp_di" bpmnElement="InformEmployeeOfCompanyPoliciesTask">
+        <dc:Bounds x="930" y="220" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0v5x89c_di" bpmnElement="IntroduceEmployeeToCompanyMissionVisionAndValuesTask">
+        <dc:Bounds x="1120" y="220" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_07abw1f_di" bpmnElement="RegisterForMedicalInsuranceTask">
+        <dc:Bounds x="1310" y="220" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0e4nvx1_di" bpmnElement="NonexclusiveGatewayGateway1">
+        <dc:Bounds x="1505" y="235" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1495" y="198" width="70" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ltum2f_di" bpmnElement="RequestPreparationsForANewEmployeeTask">
+        <dc:Bounds x="950" y="630" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0gr8ngw_di" bpmnElement="NewEmployeeInDepartmentXEvent">
+        <dc:Bounds x="1162" y="652" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1138" y="695" width="85" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_19wofrc_di" bpmnElement="IntroduceNewEmployeeToTheTeamTask">
+        <dc:Bounds x="1650" y="620" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0r6iibv_di" bpmnElement="PerformTrainingForPositionTask">
+        <dc:Bounds x="1850" y="620" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0fp8y17_di" bpmnElement="NonexclusiveGatewayGateway2">
+        <dc:Bounds x="2055" y="635" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2045" y="696" width="70" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1bco6sg_di" bpmnElement="InputFromPayrollReadyEvent">
+        <dc:Bounds x="2212" y="642" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2187" y="685" width="87" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1fwccy9_di" bpmnElement="InputFromFacilitiesReadyEvent">
+        <dc:Bounds x="2212" y="752" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2193" y="795" width="74" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1jxismc_di" bpmnElement="NonexclusiveGatewayGateway3">
+        <dc:Bounds x="2355" y="635" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2345" y="695" width="70" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0calken_di" bpmnElement="InputFromITReadyEvent">
+        <dc:Bounds x="2212" y="532" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2199" y="575" width="63" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1qszgis_di" bpmnElement="CompileWelcomePackageTask">
+        <dc:Bounds x="2520" y="620" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1h60gl9_di" bpmnElement="GiveEmployeeWelcomePackageTask">
+        <dc:Bounds x="2740" y="620" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_14gzrh9_di" bpmnElement="EndEventEndEvent">
+        <dc:Bounds x="2962" y="642" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2955" y="685" width="51" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0zsziik_di" bpmnElement="DataOutputAssociation_0zsziik">
+        <di:waypoint x="658" y="300" />
+        <di:waypoint x="656" y="365" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_0p7hubg_di" bpmnElement="DataInputAssociation_0p7hubg">
+        <di:waypoint x="685" y="390" />
+        <di:waypoint x="1180" y="390" />
+        <di:waypoint x="1180" y="652" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
