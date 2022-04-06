@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="sample-diagram" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:process id="Process_09qr2pa">
+    <bpmn:startEvent id="Event_1dmev6o" name="Check for connected clients">
+      <bpmn:outgoing>Flow_1wgj4tp</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1wgj4tp" sourceRef="Event_1dmev6o" targetRef="Activity_19n9zoj" />
+    <bpmn:exclusiveGateway id="Gateway_1ndcgid" name="Group of connected Clients existing?">
+      <bpmn:incoming>Flow_1o2hgyp</bpmn:incoming>
+      <bpmn:outgoing>Flow_0dc6cpt</bpmn:outgoing>
+      <bpmn:outgoing>Flow_00pjn5q</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1o2hgyp" sourceRef="Activity_19n9zoj" targetRef="Gateway_1ndcgid" />
+    <bpmn:exclusiveGateway id="Gateway_1nvhx66">
+      <bpmn:incoming>Flow_0dc6cpt</bpmn:incoming>
+      <bpmn:incoming>Flow_0krythj</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ectes8</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_0dc6cpt" name="No" sourceRef="Gateway_1ndcgid" targetRef="Gateway_1nvhx66" />
+    <bpmn:endEvent id="Event_0mcm3af">
+      <bpmn:incoming>Flow_0ectes8</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0ectes8" sourceRef="Gateway_1nvhx66" targetRef="Event_0mcm3af" />
+    <bpmn:task id="Activity_0pg7a37" name="Document group of connected clients according to Capital Requirements Regulation (CRR)">
+      <bpmn:incoming>Flow_00pjn5q</bpmn:incoming>
+      <bpmn:outgoing>Flow_0krythj</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_00pjn5q" name="Yes" sourceRef="Gateway_1ndcgid" targetRef="Activity_0pg7a37" />
+    <bpmn:sequenceFlow id="Flow_0krythj" sourceRef="Activity_0pg7a37" targetRef="Gateway_1nvhx66" />
+    <bpmn:userTask id="Activity_19n9zoj" name="Check if group of connected clients exists">
+      <bpmn:incoming>Flow_1wgj4tp</bpmn:incoming>
+      <bpmn:outgoing>Flow_1o2hgyp</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_09qr2pa">
+      <bpmndi:BPMNEdge id="Flow_1wgj4tp_di" bpmnElement="Flow_1wgj4tp">
+        <di:waypoint x="488" y="230" />
+        <di:waypoint x="540" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1o2hgyp_di" bpmnElement="Flow_1o2hgyp">
+        <di:waypoint x="640" y="230" />
+        <di:waypoint x="695" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0dc6cpt_di" bpmnElement="Flow_0dc6cpt">
+        <di:waypoint x="745" y="230" />
+        <di:waypoint x="985" y="230" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="763" y="212" width="14" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ectes8_di" bpmnElement="Flow_0ectes8">
+        <di:waypoint x="1035" y="230" />
+        <di:waypoint x="1102" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_00pjn5q_di" bpmnElement="Flow_00pjn5q">
+        <di:waypoint x="720" y="255" />
+        <di:waypoint x="720" y="340" />
+        <di:waypoint x="807" y="340" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="725" y="263" width="20" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0krythj_di" bpmnElement="Flow_0krythj">
+        <di:waypoint x="972" y="340" />
+        <di:waypoint x="1010" y="340" />
+        <di:waypoint x="1010" y="255" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_1dmev6o_di" bpmnElement="Event_1dmev6o">
+        <dc:Bounds x="452" y="212" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="427" y="255" width="86" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1ndcgid_di" bpmnElement="Gateway_1ndcgid" isMarkerVisible="true">
+        <dc:Bounds x="695" y="205" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="676" y="160" width="87" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1nvhx66_di" bpmnElement="Gateway_1nvhx66" isMarkerVisible="true">
+        <dc:Bounds x="985" y="205" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0mcm3af_di" bpmnElement="Event_0mcm3af">
+        <dc:Bounds x="1102" y="212" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0pg7a37_di" bpmnElement="Activity_0pg7a37">
+        <dc:Bounds x="807" y="300" width="165" height="100" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0wnwdx6_di" bpmnElement="Activity_19n9zoj">
+        <dc:Bounds x="540" y="190" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
