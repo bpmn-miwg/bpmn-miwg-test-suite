@@ -29,4 +29,11 @@ jobs:
       run: mvn --batch-mode deploy --file pom.xml
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+    - name: Publish to Github pages
+      # See https://github.com/marketplace/actions/github-pages-action
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        personal_token: ${{ secrets.TSTEPHEN_GITHUB_MIWG_TOKEN }}
+        external_repository: bpmn-miwg/bpmn-miwg-tools
+        publish_dir: .
+        publish_branch: gh-pages
