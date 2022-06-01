@@ -201,6 +201,25 @@ Description:
 
 ```
 
+## Naming Conventions
+
+The name and version of a tool must be the same across folder name, issue label name, and entry in JSON file
+[tools-tested-by-miwg.json](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/blob/master/tools-tested-by-miwg.json).
+
+For example:
+- Folder name: [IBM Process Designer 8.0.1](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/tree/master/IBM%20Process%20Designer%208.0.1) 
+- Issue label: [Tool: IBM Process Designer](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/labels/Tool%3A%20IBM%20Process%20Designer)
+- JSON entry:
+
+```json
+    {
+      "vendor": "IBM",
+      "tool": "IBM Process Designer",
+      "version": "8.0.1",
+      ...
+    }
+```
+
 
 Repository Structure
 --------------------
