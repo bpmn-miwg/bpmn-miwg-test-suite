@@ -301,37 +301,37 @@ _Vertical Modeling Direction_
 ![](Reference/A.4.1.png)
 
 ### B.1.0
-_Validate that all the elements prescribed for the Descriptive Conformance Sub-Class in the BPMN 2.0 Specification are present._
+_Descriptive Sub-Class (Conformance class coverage) - Validate that all the elements prescribed for the Descriptive Conformance Sub-Class in the BPMN 2.0 Specification are present._
 
 ![](Reference/B.1.0.png)
 
 ### B.2.0
-_Validate that all the elements prescribed for the Analytic Conformance Sub-Class in the BPMN 2.0 Specification are present._
+_Analytic Sub-Class (Conformance class coverage) - Validate that all the elements prescribed for the Analytic Conformance Sub-Class in the BPMN 2.0 Specification are present._
 
 ![](Reference/B.2.0.png)
 
 ### C.1.0
-_Executable process containing multiple extension elements and attributes (derived from 2013 Demo in Berlin)_
+_Invoice Collaboration - Executable process containing multiple extension elements and attributes (derived from 2013 Demo in Berlin)_
 
 ![](Reference/C.1.0.png)
 
 ### C.1.1
-_Process from 2015 Execution Demo in Berlin that can be executed in Camunda BPM, OmnyLink and W4 BPMN+_
+_Invoice Collaboration - Process from 2015 Execution Demo in Berlin that can be executed in Camunda BPM, OmnyLink and W4 BPMN+_
 
 ![](Reference/C.1.1.png)
 
 ### C.2.0
-_Collaboration from 2015 Diagram Interchange Demo in Berlin_
+_Buying at Amazon Collaboration - Collaboration from 2015 Diagram Interchange Demo in Berlin_
 
 ![](Reference/C.2.0.png)
 
 ### C.3.0
-_Process with hidden BPMN attributes and elements from 2015 Hidden Attribute Demo in Berlin_
+_Fridge Repair Service - Process with hidden BPMN attributes and elements from 2015 Hidden Attribute Demo in Berlin_
 
 ![](Reference/C.3.0.png)
 
 ### C.4.0
-_Process with signal and message events and multiple diagrams, from 2017 Demo in Brussels_
+_New Employee Onboarding - Process with signal and message events and multiple diagrams, from 2017 Demo in Brussels_
 
 #### C.4.0 diagram 1
 ![](Reference/C.4.0.1.png)
@@ -343,22 +343,31 @@ _Process with signal and message events and multiple diagrams, from 2017 Demo in
 ![](Reference/C.4.0.4.png)
 
 ### C.5.0
-_Process with data objects and stores and their hidden attributes from 2018 Demo in Seattle_
+_New Bank Customer - Process with data objects and stores and their hidden attributes from 2018 Demo in Seattle_
 #### C.5.0 diagram 1
 ![](Reference/C.5.0.1.png)
 #### C.5.0 diagram 2
 ![](Reference/C.5.0.2.png)
 
 ### C.6.0
-_Process with data input/outputs and event sub-process from 2019 Demo in Amsterdam_
+_Travel Booking - Process with data input/outputs and event sub-process from 2019 Demo in Amsterdam_
 
 ![](Reference/C.6.0.png)
 
-
 ### C.7.0
-_Process with data inputs and data object connected to sequence flow from 2020 Virtual Demo_
+_Advertise a job vacancy - Process with data inputs and data object connected to sequence flow from 2020 Virtual Demo_
 
 ![](Reference/C.7.0.png)
+
+### C.8.0
+_Vacation Request - Process with color and internationalization from 2022 Demo_
+
+![](Reference/C.8.0.png)
+
+### C.8.1
+_Vacation Request - Process with automation extensions from 2022 Demo_
+
+![](Reference/C.8.1.png)
 
 
 <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_CA"><img alt="Creative Commons Licence" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_CA">Creative Commons Attribution 3.0 Unported License</a>.
