@@ -70,7 +70,7 @@
       <resource>
         <filtering>false</filtering>
         <directory>${basedir}</directory>
-         <includes>
+        <includes>
           <!-- include only files that follow the naming conventions and are thus understood by the tools -->
           <include>Reference/*.bpmn</include>
           <include>Reference/*.png</include>
@@ -145,6 +145,48 @@
                 <goals>
                   <goal>run</goal>
                 </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-resources-plugin</artifactId>
+            <version>3.3.0</version>
+            <!-- duplicate vendor files to site as well as classes (which are used for jar) -->
+            <executions>
+              <execution>
+                <configuration>
+                  <outputDirectory>${basedir}/target/site/</outputDirectory>
+                  <resources>
+                    <resource>
+                      <filtering>false</filtering>
+                      <directory>${basedir}</directory>
+                      <includes>
+                        <!-- include only files that follow the naming conventions and are thus understood by the tools -->
+                        <include>Reference/*.bpmn</include>
+                        <include>Reference/*.png</include>
+                        <include>**/*-export.bpmn</include>
+                        <include>**/*-roundtrip.bpmn</include>
+                        <include>**/*-import.png</include>
+                        <include>**/*-export.png</include>
+                        <include>**/*-import.*.png</include>
+                        <include>**/*-export.*.png</include>
+                        <include>*.json</include>
+                        <include>LICENSE.txt</include>
+                      </includes>
+                      <excludes>
+                        <exclude>.*</exclude><!-- ignore hidden files from Git & Eclipse -->
+                        <exclude>.*/**/*</exclude><!-- ignore hidden folders from Git & Eclipse -->
+                        <exclude>target/**/*</exclude><!-- ignore Maven build dir -->
+                        <exclude>Work in Progress/**/*</exclude><!-- ignore unfinished test cases -->
+                      </excludes>
+                    </resource>
+                  </resources>
+                </configuration>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <phase>process-resources</phase>
               </execution>
             </executions>
           </plugin>
