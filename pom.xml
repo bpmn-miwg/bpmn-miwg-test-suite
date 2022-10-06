@@ -63,6 +63,11 @@
       <artifactId>bounds-generator</artifactId>
       <version>${bpmn-miwg-tools.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.omg.bpmn.miwg</groupId>
+      <artifactId>submission-counter</artifactId>
+      <version>${bpmn-miwg-tools.version}</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -132,7 +137,17 @@
                     <property name="runtime_classpath" refid="maven.runtime.classpath"/>
                     <property name="test_classpath" refid="maven.test.classpath"/>
                     <property name="plugin_classpath" refid="maven.plugin.classpath"/>
+                    <property environment="env"/>
 
+                    <java classname="org.omg.bpmn.miwg.submission.RepoScanner" fork="true">
+                      <env key="GITHUB_ACTOR" value="${env.GITHUB_ACTOR}"/>
+                      <env key="GITHUB_TOKEN" value="${env.GITHUB_TOKEN}"/>
+                      <arg value="Reference"/>
+                      <arg value="${project.build.directory}/site/Reference/Bounds"/>
+                      <classpath>
+                        <pathelement path="${compile_classpath}"/>
+                      </classpath>
+                    </java>
                     <java classname="org.omg.bpmn.miwg.boundary.BoundaryCreator">
                       <arg value="Reference"/>
                       <arg value="${project.build.directory}/site/Reference/Bounds"/>
