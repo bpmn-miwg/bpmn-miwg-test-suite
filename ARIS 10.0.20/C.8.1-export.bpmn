@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<semantic:definitions xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:semantic="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:arisebpmn="http://www.softwareag.com/aris/ebpmn" xmlns:i18n="http://www.omg.org/spec/BPMN/non-normative/extensions/i18n/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:aris="http://www.softwareag.com/aris/attributes" id="Definitions_ID-09253d31-4f8a-11ed-17f9-8cec4b8c3cc3" name="Vacation Request" targetNamespace="http://www.softwareag.com/aris/bpmn2" exporter="ARIS" exporterVersion="10.0.0.42424242" xml:lang="en">
+    <semantic:collaboration name="Vacation Request" id="Collaboration_ID-09253d31-4f8a-11ed-17f9-8cec4b8c3cc3" arisebpmn:type="MT_ENTERPRISE_BPMN_COLLABORATION">
+        <semantic:participant name="Vacation Request" processRef="Process_ID-1166e2f0-4f8a-11ed-17f9-8cec4b8c3cc3" id="ID-1166e2f0-4f8a-11ed-17f9-8cec4b8c3cc3"/>
+    </semantic:collaboration>
+    <semantic:process id="Process_ID-1166e2f0-4f8a-11ed-17f9-8cec4b8c3cc3">
+        <semantic:ioSpecification>
+            <semantic:dataInput name="Employee Badge Number" isCollection="false" id="ID-ae4071ba-4e07-11ed-17f9-8cec4b8c3cc3"/>
+            <semantic:dataInput name="From" isCollection="false" id="ID-ae4071c4-4e07-11ed-17f9-8cec4b8c3cc3"/>
+            <semantic:dataInput name="To" isCollection="false" id="ID-ae4071c6-4e07-11ed-17f9-8cec4b8c3cc3"/>
+            <semantic:dataOutput name="Vacation Approval" isCollection="false" id="ID-ae4071ca-4e07-11ed-17f9-8cec4b8c3cc3"/>
+            <semantic:dataOutput name="Reason" isCollection="false" id="ID-ae4071cc-4e07-11ed-17f9-8cec4b8c3cc3"/>
+            <semantic:inputSet>
+                <semantic:dataInputRefs>ID-ae4071ba-4e07-11ed-17f9-8cec4b8c3cc3</semantic:dataInputRefs>
+                <semantic:dataInputRefs>ID-ae4071c4-4e07-11ed-17f9-8cec4b8c3cc3</semantic:dataInputRefs>
+                <semantic:dataInputRefs>ID-ae4071c6-4e07-11ed-17f9-8cec4b8c3cc3</semantic:dataInputRefs>
+            </semantic:inputSet>
+            <semantic:outputSet>
+                <semantic:dataOutputRefs>ID-ae4071ca-4e07-11ed-17f9-8cec4b8c3cc3</semantic:dataOutputRefs>
+                <semantic:dataOutputRefs>ID-ae4071cc-4e07-11ed-17f9-8cec4b8c3cc3</semantic:dataOutputRefs>
+            </semantic:outputSet>
+        </semantic:ioSpecification>
+        <semantic:dataObject isCollection="false" name="Current Vacation Status" id="ID-ae4071bd-4e07-11ed-17f9-8cec4b8c3cc3"/>
+        <semantic:startEvent name="Vacation Request Received" id="ID-ae4071b2-4e07-11ed-17f9-8cec4b8c3cc3">
+            <semantic:outgoing>ID-1166e2fc-4f8a-11ed-17f9-8cec4b8c3cc3</semantic:outgoing>
+        </semantic:startEvent>
+        <semantic:serviceTask name="Fetch Vacation Information" id="ID-1166e2f9-4f8a-11ed-17f9-8cec4b8c3cc3">
+            <semantic:incoming>ID-1166e2fc-4f8a-11ed-17f9-8cec4b8c3cc3</semantic:incoming>
+            <semantic:outgoing>ID-1166e310-4f8a-11ed-17f9-8cec4b8c3cc3</semantic:outgoing>
+            <semantic:ioSpecification>
+                <semantic:dataInput id="DataInput_ID-1166e2f9-4f8a-11ed-17f9-8cec4b8c3cc3"/>
+                <semantic:dataOutput id="DataOutput_ID-1166e2f9-4f8a-11ed-17f9-8cec4b8c3cc3"/>
+                <semantic:inputSet>
+                    <semantic:dataInputRefs>DataInput_ID-1166e2f9-4f8a-11ed-17f9-8cec4b8c3cc3</semantic:dataInputRefs>
+                </semantic:inputSet>
+                <semantic:outputSet>
+                    <semantic:dataOutputRefs>DataOutput_ID-1166e2f9-4f8a-11ed-17f9-8cec4b8c3cc3</semantic:dataOutputRefs>
+                </semantic:outputSet>
+            </semantic:ioSpecification>
+            <semantic:dataInputAssociation id="ID-1166e305-4f8a-11ed-17f9-8cec4b8c3cc3">
+                <semantic:sourceRef>ID-ae4071ba-4e07-11ed-17f9-8cec4b8c3cc3</semantic:sourceRef>
+                <semantic:targetRef>DataInput_ID-1166e2f9-4f8a-11ed-17f9-8cec4b8c3cc3</semantic:targetRef>
+            </semantic:dataInputAssociation>
+            <semantic:dataOutputAssociation id="ID-1166e308-4f8a-11ed-17f9-8cec4b8c3cc3">
+                <semantic:sourceRef>DataOutput_ID-1166e2f9-4f8a-11ed-17f9-8cec4b8c3cc3</semantic:sourceRef>
+                <semantic:targetRef>Reference_ID-ae4071bd-4e07-11ed-17f9-8cec4b8c3cc3</semantic:targetRef>
+            </semantic:dataOutputAssociation>
+        </semantic:serviceTask>
+        <semantic:dataObjectReference dataObjectRef="ID-ae4071bd-4e07-11ed-17f9-8cec4b8c3cc3" name="Current Vacation Status" id="Reference_ID-ae4071bd-4e07-11ed-17f9-8cec4b8c3cc3"/>
+        <semantic:businessRuleTask name="Vacation Approval" id="ID-1166e30d-4f8a-11ed-17f9-8cec4b8c3cc3">
+            <semantic:incoming>ID-1166e310-4f8a-11ed-17f9-8cec4b8c3cc3</semantic:incoming>
+            <semantic:outgoing>ID-f8f8329f-4f8a-11ed-17f9-8cec4b8c3cc3</semantic:outgoing>
+            <semantic:ioSpecification>
+                <semantic:dataInput id="DataInput_ID-1166e30d-4f8a-11ed-17f9-8cec4b8c3cc3"/>
+                <semantic:dataInput id="DataInput_ID-1166e30d-4f8a-11ed-17f9-8cec4b8c3cc3_1"/>
+                <semantic:dataOutput id="DataOutput_ID-1166e30d-4f8a-11ed-17f9-8cec4b8c3cc3"/>
+                <semantic:dataOutput id="DataOutput_ID-1166e30d-4f8a-11ed-17f9-8cec4b8c3cc3_1"/>
+                <semantic:inputSet>
+                    <semantic:dataInputRefs>DataInput_ID-1166e30d-4f8a-11ed-17f9-8cec4b8c3cc3</semantic:dataInputRefs>
+                    <semantic:dataInputRefs>DataInput_ID-1166e30d-4f8a-11ed-17f9-8cec4b8c3cc3_1</semantic:dataInputRefs>
+                </semantic:inputSet>
+                <semantic:outputSet>
+                    <semantic:dataOutputRefs>DataOutput_ID-1166e30d-4f8a-11ed-17f9-8cec4b8c3cc3</semantic:dataOutputRefs>
+                    <semantic:dataOutputRefs>DataOutput_ID-1166e30d-4f8a-11ed-17f9-8cec4b8c3cc3_1</semantic:dataOutputRefs>
+                </semantic:outputSet>
+            </semantic:ioSpecification>
+            <semantic:dataInputAssociation id="ID-1166e31b-4f8a-11ed-17f9-8cec4b8c3cc3">
+                <semantic:sourceRef>ID-ae4071c6-4e07-11ed-17f9-8cec4b8c3cc3</semantic:sourceRef>
+                <semantic:targetRef>DataInput_ID-1166e30d-4f8a-11ed-17f9-8cec4b8c3cc3</semantic:targetRef>
+            </semantic:dataInputAssociation>
+            <semantic:dataInputAssociation id="ID-1166e31c-4f8a-11ed-17f9-8cec4b8c3cc3">
+                <semantic:sourceRef>ID-ae4071c4-4e07-11ed-17f9-8cec4b8c3cc3</semantic:sourceRef>
+                <semantic:targetRef>DataInput_ID-1166e30d-4f8a-11ed-17f9-8cec4b8c3cc3_1</semantic:targetRef>
+            </semantic:dataInputAssociation>
+            <semantic:dataOutputAssociation id="ID-f8f8329a-4f8a-11ed-17f9-8cec4b8c3cc3">
+                <semantic:sourceRef>DataOutput_ID-1166e30d-4f8a-11ed-17f9-8cec4b8c3cc3</semantic:sourceRef>
+                <semantic:targetRef>ID-ae4071ca-4e07-11ed-17f9-8cec4b8c3cc3</semantic:targetRef>
+            </semantic:dataOutputAssociation>
+            <semantic:dataOutputAssociation id="ID-f8f8329b-4f8a-11ed-17f9-8cec4b8c3cc3">
+                <semantic:sourceRef>DataOutput_ID-1166e30d-4f8a-11ed-17f9-8cec4b8c3cc3_1</semantic:sourceRef>
+                <semantic:targetRef>ID-ae4071cc-4e07-11ed-17f9-8cec4b8c3cc3</semantic:targetRef>
+            </semantic:dataOutputAssociation>
+        </semantic:businessRuleTask>
+        <semantic:exclusiveGateway default="ID-16a6a88a-4f8c-11ed-17f9-8cec4b8c3cc3" id="ID-f8f8329c-4f8a-11ed-17f9-8cec4b8c3cc3">
+            <semantic:incoming>ID-f8f8329f-4f8a-11ed-17f9-8cec4b8c3cc3</semantic:incoming>
+            <semantic:outgoing>ID-f8f832a5-4f8a-11ed-17f9-8cec4b8c3cc3</semantic:outgoing>
+            <semantic:outgoing>ID-16a6a871-4f8c-11ed-17f9-8cec4b8c3cc3</semantic:outgoing>
+            <semantic:outgoing>ID-16a6a88a-4f8c-11ed-17f9-8cec4b8c3cc3</semantic:outgoing>
+        </semantic:exclusiveGateway>
+        <semantic:sendTask name="Notify Employee of Approval" id="ID-ae4071d5-4e07-11ed-17f9-8cec4b8c3cc3">
+            <semantic:incoming>ID-f8f832a5-4f8a-11ed-17f9-8cec4b8c3cc3</semantic:incoming>
+            <semantic:outgoing>ID-ae4071da-4e07-11ed-17f9-8cec4b8c3cc3</semantic:outgoing>
+        </semantic:sendTask>
+        <semantic:serviceTask name="Update Remaining Vacation" id="ID-ae4071d8-4e07-11ed-17f9-8cec4b8c3cc3">
+            <semantic:incoming>ID-ae4071da-4e07-11ed-17f9-8cec4b8c3cc3</semantic:incoming>
+            <semantic:outgoing>ID-ae4071e0-4e07-11ed-17f9-8cec4b8c3cc3</semantic:outgoing>
+        </semantic:serviceTask>
+        <semantic:endEvent name="Vacation Approved Automatically" id="ID-ae4071de-4e07-11ed-17f9-8cec4b8c3cc3">
+            <semantic:incoming>ID-ae4071e0-4e07-11ed-17f9-8cec4b8c3cc3</semantic:incoming>
+        </semantic:endEvent>
+        <semantic:endEvent name="Employee not found" id="ID-845cdb36-4e0e-11ed-17f9-8cec4b8c3cc3">
+            <semantic:incoming>ID-f8f832bd-4f8a-11ed-17f9-8cec4b8c3cc3</semantic:incoming>
+        </semantic:endEvent>
+        <semantic:boundaryEvent cancelActivity="true" attachedToRef="ID-1166e2f9-4f8a-11ed-17f9-8cec4b8c3cc3" id="ID-f8f832b8-4f8a-11ed-17f9-8cec4b8c3cc3">
+            <semantic:outgoing>ID-f8f832bd-4f8a-11ed-17f9-8cec4b8c3cc3</semantic:outgoing>
+            <semantic:errorEventDefinition id="Definition_ID-f8f832b8-4f8a-11ed-17f9-8cec4b8c3cc3"/>
+        </semantic:boundaryEvent>
+        <semantic:userTask name="Manually Approve Vacation" id="ID-ae4071e1-4e07-11ed-17f9-8cec4b8c3cc3">
+            <semantic:incoming>ID-16a6a871-4f8c-11ed-17f9-8cec4b8c3cc3</semantic:incoming>
+            <semantic:outgoing>ID-16a6a875-4f8c-11ed-17f9-8cec4b8c3cc3</semantic:outgoing>
+        </semantic:userTask>
+        <semantic:exclusiveGateway default="ID-16a6a89b-4f8c-11ed-17f9-8cec4b8c3cc3" id="ID-16a6a872-4f8c-11ed-17f9-8cec4b8c3cc3">
+            <semantic:incoming>ID-16a6a875-4f8c-11ed-17f9-8cec4b8c3cc3</semantic:incoming>
+            <semantic:outgoing>ID-16a6a87a-4f8c-11ed-17f9-8cec4b8c3cc3</semantic:outgoing>
+            <semantic:outgoing>ID-16a6a89b-4f8c-11ed-17f9-8cec4b8c3cc3</semantic:outgoing>
+        </semantic:exclusiveGateway>
+        <semantic:sendTask name="Notify Employee of Approval" id="ID-ae4071d5-4e07-11ed-17f9-8cec4b8c3cc3_1">
+            <semantic:incoming>ID-16a6a87a-4f8c-11ed-17f9-8cec4b8c3cc3</semantic:incoming>
+            <semantic:outgoing>ID-ae4071da-4e07-11ed-17f9-8cec4b8c3cc3_1</semantic:outgoing>
+        </semantic:sendTask>
+        <semantic:serviceTask name="Update Remaining Vacation" id="ID-ae4071d8-4e07-11ed-17f9-8cec4b8c3cc3_1">
+            <semantic:incoming>ID-ae4071da-4e07-11ed-17f9-8cec4b8c3cc3_1</semantic:incoming>
+            <semantic:outgoing>ID-845cdb2f-4e0e-11ed-17f9-8cec4b8c3cc3</semantic:outgoing>
+        </semantic:serviceTask>
+        <semantic:endEvent name="Vacation Approved by Manager" id="ID-845cdb2d-4e0e-11ed-17f9-8cec4b8c3cc3">
+            <semantic:incoming>ID-845cdb2f-4e0e-11ed-17f9-8cec4b8c3cc3</semantic:incoming>
+        </semantic:endEvent>
+        <semantic:sendTask name="Notify Employee of Refusal" id="ID-845cdb30-4e0e-11ed-17f9-8cec4b8c3cc3">
+            <semantic:incoming>ID-16a6a88a-4f8c-11ed-17f9-8cec4b8c3cc3</semantic:incoming>
+            <semantic:outgoing>ID-16a6a88e-4f8c-11ed-17f9-8cec4b8c3cc3</semantic:outgoing>
+        </semantic:sendTask>
+        <semantic:endEvent name="Vacation Refused Automatically" id="ID-16a6a88b-4f8c-11ed-17f9-8cec4b8c3cc3">
+            <semantic:incoming>ID-16a6a88e-4f8c-11ed-17f9-8cec4b8c3cc3</semantic:incoming>
+        </semantic:endEvent>
+        <semantic:sendTask name="Notify Employee of Refusal" id="ID-845cdb30-4e0e-11ed-17f9-8cec4b8c3cc3_1">
+            <semantic:incoming>ID-16a6a89b-4f8c-11ed-17f9-8cec4b8c3cc3</semantic:incoming>
+            <semantic:outgoing>ID-845cdb35-4e0e-11ed-17f9-8cec4b8c3cc3</semantic:outgoing>
+        </semantic:sendTask>
+        <semantic:endEvent name="Vacation Refused by Manager" id="ID-845cdb33-4e0e-11ed-17f9-8cec4b8c3cc3">
+            <semantic:incoming>ID-845cdb35-4e0e-11ed-17f9-8cec4b8c3cc3</semantic:incoming>
+        </semantic:endEvent>
+        <semantic:sequenceFlow sourceRef="ID-ae4071b2-4e07-11ed-17f9-8cec4b8c3cc3" targetRef="ID-1166e2f9-4f8a-11ed-17f9-8cec4b8c3cc3" id="ID-1166e2fc-4f8a-11ed-17f9-8cec4b8c3cc3"/>
+        <semantic:sequenceFlow sourceRef="ID-1166e2f9-4f8a-11ed-17f9-8cec4b8c3cc3" targetRef="ID-1166e30d-4f8a-11ed-17f9-8cec4b8c3cc3" id="ID-1166e310-4f8a-11ed-17f9-8cec4b8c3cc3"/>
+        <semantic:sequenceFlow sourceRef="ID-1166e30d-4f8a-11ed-17f9-8cec4b8c3cc3" targetRef="ID-f8f8329c-4f8a-11ed-17f9-8cec4b8c3cc3" id="ID-f8f8329f-4f8a-11ed-17f9-8cec4b8c3cc3"/>
+        <semantic:sequenceFlow sourceRef="ID-f8f8329c-4f8a-11ed-17f9-8cec4b8c3cc3" targetRef="ID-ae4071d5-4e07-11ed-17f9-8cec4b8c3cc3" id="ID-f8f832a5-4f8a-11ed-17f9-8cec4b8c3cc3">
+            <semantic:conditionExpression>Approved</semantic:conditionExpression>
+        </semantic:sequenceFlow>
+        <semantic:sequenceFlow sourceRef="ID-ae4071d5-4e07-11ed-17f9-8cec4b8c3cc3" targetRef="ID-ae4071d8-4e07-11ed-17f9-8cec4b8c3cc3" id="ID-ae4071da-4e07-11ed-17f9-8cec4b8c3cc3"/>
+        <semantic:sequenceFlow sourceRef="ID-ae4071d8-4e07-11ed-17f9-8cec4b8c3cc3" targetRef="ID-ae4071de-4e07-11ed-17f9-8cec4b8c3cc3" id="ID-ae4071e0-4e07-11ed-17f9-8cec4b8c3cc3"/>
+        <semantic:sequenceFlow sourceRef="ID-f8f832b8-4f8a-11ed-17f9-8cec4b8c3cc3" targetRef="ID-845cdb36-4e0e-11ed-17f9-8cec4b8c3cc3" id="ID-f8f832bd-4f8a-11ed-17f9-8cec4b8c3cc3"/>
+        <semantic:sequenceFlow sourceRef="ID-f8f8329c-4f8a-11ed-17f9-8cec4b8c3cc3" targetRef="ID-ae4071e1-4e07-11ed-17f9-8cec4b8c3cc3" id="ID-16a6a871-4f8c-11ed-17f9-8cec4b8c3cc3">
+            <semantic:conditionExpression>Manual Validation Required</semantic:conditionExpression>
+        </semantic:sequenceFlow>
+        <semantic:sequenceFlow sourceRef="ID-ae4071e1-4e07-11ed-17f9-8cec4b8c3cc3" targetRef="ID-16a6a872-4f8c-11ed-17f9-8cec4b8c3cc3" id="ID-16a6a875-4f8c-11ed-17f9-8cec4b8c3cc3"/>
+        <semantic:sequenceFlow sourceRef="ID-16a6a872-4f8c-11ed-17f9-8cec4b8c3cc3" targetRef="ID-ae4071d5-4e07-11ed-17f9-8cec4b8c3cc3_1" id="ID-16a6a87a-4f8c-11ed-17f9-8cec4b8c3cc3">
+            <semantic:conditionExpression>Approved</semantic:conditionExpression>
+        </semantic:sequenceFlow>
+        <semantic:sequenceFlow sourceRef="ID-ae4071d5-4e07-11ed-17f9-8cec4b8c3cc3_1" targetRef="ID-ae4071d8-4e07-11ed-17f9-8cec4b8c3cc3_1" id="ID-ae4071da-4e07-11ed-17f9-8cec4b8c3cc3_1"/>
+        <semantic:sequenceFlow sourceRef="ID-ae4071d8-4e07-11ed-17f9-8cec4b8c3cc3_1" targetRef="ID-845cdb2d-4e0e-11ed-17f9-8cec4b8c3cc3" id="ID-845cdb2f-4e0e-11ed-17f9-8cec4b8c3cc3"/>
+        <semantic:sequenceFlow sourceRef="ID-845cdb30-4e0e-11ed-17f9-8cec4b8c3cc3" targetRef="ID-16a6a88b-4f8c-11ed-17f9-8cec4b8c3cc3" id="ID-16a6a88e-4f8c-11ed-17f9-8cec4b8c3cc3"/>
+        <semantic:sequenceFlow sourceRef="ID-f8f8329c-4f8a-11ed-17f9-8cec4b8c3cc3" targetRef="ID-845cdb30-4e0e-11ed-17f9-8cec4b8c3cc3" id="ID-16a6a88a-4f8c-11ed-17f9-8cec4b8c3cc3">
+            <semantic:conditionExpression>Refused</semantic:conditionExpression>
+        </semantic:sequenceFlow>
+        <semantic:sequenceFlow sourceRef="ID-845cdb30-4e0e-11ed-17f9-8cec4b8c3cc3_1" targetRef="ID-845cdb33-4e0e-11ed-17f9-8cec4b8c3cc3" id="ID-845cdb35-4e0e-11ed-17f9-8cec4b8c3cc3"/>
+        <semantic:sequenceFlow sourceRef="ID-16a6a872-4f8c-11ed-17f9-8cec4b8c3cc3" targetRef="ID-845cdb30-4e0e-11ed-17f9-8cec4b8c3cc3_1" id="ID-16a6a89b-4f8c-11ed-17f9-8cec4b8c3cc3">
+            <semantic:conditionExpression>Refused</semantic:conditionExpression>
+        </semantic:sequenceFlow>
+    </semantic:process>
+    <bpmndi:BPMNDiagram name="Vacation Request" resolution="72.0" id="ID-09253d31-4f8a-11ed-17f9-8cec4b8c3cc3">
+        <bpmndi:BPMNPlane bpmnElement="Collaboration_ID-09253d31-4f8a-11ed-17f9-8cec4b8c3cc3" id="Plane_ID-09253d31-4f8a-11ed-17f9-8cec4b8c3cc3">
+            <bpmndi:BPMNShape bpmnElement="ID-1166e2f0-4f8a-11ed-17f9-8cec4b8c3cc3" isHorizontal="true" id="Shape_ID-1166e2f0-4f8a-11ed-17f9-8cec4b8c3cc3" color:background-color="#ffffff" color:border-color="#5e5e5e">
+                <dc:Bounds x="141.73" y="141.73" width="2409.45" height="850.39"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="141.73" y="141.73" width="42.52" height="850.39"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="ID-ae4071b2-4e07-11ed-17f9-8cec4b8c3cc3" id="Shape_ID-ae4071b2-4e07-11ed-17f9-8cec4b8c3cc3" color:background-color="#ffffff" color:border-color="#72ab16">
+                <dc:Bounds x="237.83" y="521.29" width="34.58" height="34.58"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="195.87" y="558.71" width="118.49" height="11.34"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="ID-1166e2f9-4f8a-11ed-17f9-8cec4b8c3cc3" id="Shape_ID-1166e2f9-4f8a-11ed-17f9-8cec4b8c3cc3" color:background-color="#ffffff" color:border-color="#00a2ce">
+                <dc:Bounds x="401.39" y="507.4" width="104.31" height="62.36"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="421.51" y="535.18" width="64.35" height="22.68"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="ID-1166e2fc-4f8a-11ed-17f9-8cec4b8c3cc3" id="Edge_ID-1166e2fc-4f8a-11ed-17f9-8cec4b8c3cc3" color:border-color="#666666">
+                <di:waypoint x="272.41" y="538.58"/>
+                <di:waypoint x="401.39" y="538.58"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="ID-ae4071ba-4e07-11ed-17f9-8cec4b8c3cc3" id="Shape_ID-ae4071ba-4e07-11ed-17f9-8cec4b8c3cc3" color:background-color="#ffffff" color:border-color="#5e5e5e">
+                <dc:Bounds x="324.28" y="393.17" width="48.76" height="64.06"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="327.69" y="417.26" width="42.24" height="34.02"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="Reference_ID-ae4071bd-4e07-11ed-17f9-8cec4b8c3cc3" id="Shape_Reference_ID-ae4071bd-4e07-11ed-17f9-8cec4b8c3cc3" color:background-color="#ffffff" color:border-color="#5e5e5e">
+                <dc:Bounds x="534.05" y="393.17" width="48.76" height="64.06"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="540.0" y="413.01" width="37.13" height="34.02"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="ID-1166e305-4f8a-11ed-17f9-8cec4b8c3cc3" id="Edge_ID-1166e305-4f8a-11ed-17f9-8cec4b8c3cc3" color:border-color="#666666">
+                <di:waypoint x="373.04" y="425.2"/>
+                <di:waypoint x="439.37" y="425.2"/>
+                <di:waypoint x="439.37" y="507.4"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="ID-1166e308-4f8a-11ed-17f9-8cec4b8c3cc3" id="Edge_ID-1166e308-4f8a-11ed-17f9-8cec4b8c3cc3" color:border-color="#666666">
+                <di:waypoint x="453.54" y="507.4"/>
+                <di:waypoint x="453.54" y="425.2"/>
+                <di:waypoint x="534.05" y="425.2"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="ID-1166e30d-4f8a-11ed-17f9-8cec4b8c3cc3" id="Shape_ID-1166e30d-4f8a-11ed-17f9-8cec4b8c3cc3" color:background-color="#ffffff" color:border-color="#00a2ce">
+                <dc:Bounds x="743.81" y="507.4" width="104.31" height="62.36"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="757.13" y="540.85" width="77.67" height="11.34"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="ID-1166e310-4f8a-11ed-17f9-8cec4b8c3cc3" id="Edge_ID-1166e310-4f8a-11ed-17f9-8cec4b8c3cc3" color:border-color="#666666">
+                <di:waypoint x="505.7" y="538.58"/>
+                <di:waypoint x="743.81" y="538.58"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="ID-ae4071c4-4e07-11ed-17f9-8cec4b8c3cc3" id="Shape_ID-ae4071c4-4e07-11ed-17f9-8cec4b8c3cc3" color:background-color="#ffffff" color:border-color="#5e5e5e">
+                <dc:Bounds x="655.94" y="180.57" width="48.76" height="64.06"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="668.98" y="216.0" width="22.68" height="11.34"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="ID-ae4071c6-4e07-11ed-17f9-8cec4b8c3cc3" id="Shape_ID-ae4071c6-4e07-11ed-17f9-8cec4b8c3cc3" color:background-color="#ffffff" color:border-color="#5e5e5e">
+                <dc:Bounds x="655.94" y="272.98" width="48.76" height="64.06"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="674.93" y="308.41" width="11.06" height="11.34"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="ID-1166e31b-4f8a-11ed-17f9-8cec4b8c3cc3" id="Edge_ID-1166e31b-4f8a-11ed-17f9-8cec4b8c3cc3" color:border-color="#666666">
+                <di:waypoint x="704.69" y="305.01"/>
+                <di:waypoint x="795.97" y="305.01"/>
+                <di:waypoint x="795.97" y="507.4"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="ID-1166e31c-4f8a-11ed-17f9-8cec4b8c3cc3" id="Edge_ID-1166e31c-4f8a-11ed-17f9-8cec4b8c3cc3" color:border-color="#666666">
+                <di:waypoint x="704.69" y="212.6"/>
+                <di:waypoint x="795.97" y="212.6"/>
+                <di:waypoint x="795.97" y="507.4"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="ID-ae4071ca-4e07-11ed-17f9-8cec4b8c3cc3" id="Shape_ID-ae4071ca-4e07-11ed-17f9-8cec4b8c3cc3" color:background-color="#ffffff" color:border-color="#5e5e5e">
+                <dc:Bounds x="876.47" y="615.4" width="48.76" height="64.06"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="882.14" y="645.17" width="37.7" height="22.68"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="ID-ae4071cc-4e07-11ed-17f9-8cec4b8c3cc3" id="Shape_ID-ae4071cc-4e07-11ed-17f9-8cec4b8c3cc3" color:background-color="#ffffff" color:border-color="#5e5e5e">
+                <dc:Bounds x="876.47" y="740.13" width="48.76" height="64.06"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="884.41" y="775.56" width="32.88" height="11.34"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="ID-f8f8329a-4f8a-11ed-17f9-8cec4b8c3cc3" id="Edge_ID-f8f8329a-4f8a-11ed-17f9-8cec4b8c3cc3" color:border-color="#666666">
+                <di:waypoint x="795.97" y="569.76"/>
+                <di:waypoint x="795.97" y="647.43"/>
+                <di:waypoint x="876.47" y="647.43"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="ID-f8f8329b-4f8a-11ed-17f9-8cec4b8c3cc3" id="Edge_ID-f8f8329b-4f8a-11ed-17f9-8cec4b8c3cc3" color:border-color="#666666">
+                <di:waypoint x="795.97" y="569.76"/>
+                <di:waypoint x="795.97" y="772.16"/>
+                <di:waypoint x="876.47" y="772.16"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="ID-f8f8329c-4f8a-11ed-17f9-8cec4b8c3cc3" isMarkerVisible="true" id="Shape_ID-f8f8329c-4f8a-11ed-17f9-8cec4b8c3cc3" color:background-color="#ffffff" color:border-color="#5e5e5e">
+                <dc:Bounds x="1024.72" y="514.49" width="48.19" height="48.19"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="ID-f8f8329f-4f8a-11ed-17f9-8cec4b8c3cc3" id="Edge_ID-f8f8329f-4f8a-11ed-17f9-8cec4b8c3cc3" color:border-color="#666666">
+                <di:waypoint x="848.13" y="538.58"/>
+                <di:waypoint x="1024.72" y="538.58"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="ID-ae4071d5-4e07-11ed-17f9-8cec4b8c3cc3" id="Shape_ID-ae4071d5-4e07-11ed-17f9-8cec4b8c3cc3" color:background-color="#ffffff" color:border-color="#00a2ce">
+                <dc:Bounds x="1249.51" y="272.98" width="104.31" height="64.06"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="1261.42" y="301.32" width="80.5" height="22.68"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="ID-f8f832a5-4f8a-11ed-17f9-8cec4b8c3cc3" id="Edge_ID-f8f832a5-4f8a-11ed-17f9-8cec4b8c3cc3" color:border-color="#666666">
+                <di:waypoint x="1048.82" y="514.49"/>
+                <di:waypoint x="1048.82" y="305.01"/>
+                <di:waypoint x="1249.51" y="305.01"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="1128.76" y="290.83" width="41.1" height="11.34"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="ID-ae4071d8-4e07-11ed-17f9-8cec4b8c3cc3" id="Shape_ID-ae4071d8-4e07-11ed-17f9-8cec4b8c3cc3" color:background-color="#ffffff" color:border-color="#00a2ce">
+                <dc:Bounds x="1549.42" y="272.98" width="104.31" height="64.06"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="1561.89" y="301.32" width="79.37" height="22.68"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="ID-ae4071da-4e07-11ed-17f9-8cec4b8c3cc3" id="Edge_ID-ae4071da-4e07-11ed-17f9-8cec4b8c3cc3" color:border-color="#666666">
+                <di:waypoint x="1353.83" y="305.01"/>
+                <di:waypoint x="1549.42" y="305.01"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="ID-ae4071de-4e07-11ed-17f9-8cec4b8c3cc3" id="Shape_ID-ae4071de-4e07-11ed-17f9-8cec4b8c3cc3" color:background-color="#ffffff" color:border-color="#fd6767">
+                <dc:Bounds x="2351.62" y="288.57" width="32.88" height="32.88"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="2297.76" y="324.28" width="140.88" height="11.34"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="ID-ae4071e0-4e07-11ed-17f9-8cec4b8c3cc3" id="Edge_ID-ae4071e0-4e07-11ed-17f9-8cec4b8c3cc3" color:border-color="#666666">
+                <di:waypoint x="1653.73" y="305.01"/>
+                <di:waypoint x="2351.62" y="305.01"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="ID-845cdb36-4e0e-11ed-17f9-8cec4b8c3cc3" id="Shape_ID-845cdb36-4e0e-11ed-17f9-8cec4b8c3cc3" color:background-color="#ffffff" color:border-color="#fd6767">
+                <dc:Bounds x="2351.62" y="876.47" width="32.88" height="32.88"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="2325.54" y="912.19" width="85.32" height="11.34"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="ID-f8f832b8-4f8a-11ed-17f9-8cec4b8c3cc3" id="Shape_ID-f8f832b8-4f8a-11ed-17f9-8cec4b8c3cc3" color:background-color="#ffffff" color:border-color="#da7400">
+                <dc:Bounds x="478.77" y="552.47" width="34.58" height="34.58"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="ID-f8f832bd-4f8a-11ed-17f9-8cec4b8c3cc3" id="Edge_ID-f8f832bd-4f8a-11ed-17f9-8cec4b8c3cc3" color:border-color="#666666">
+                <di:waypoint x="496.06" y="587.06"/>
+                <di:waypoint x="496.06" y="892.91"/>
+                <di:waypoint x="2351.62" y="892.91"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="ID-ae4071e1-4e07-11ed-17f9-8cec4b8c3cc3" id="Shape_ID-ae4071e1-4e07-11ed-17f9-8cec4b8c3cc3" color:background-color="#ffffff" color:border-color="#00a2ce">
+                <dc:Bounds x="1350.99" y="506.55" width="104.31" height="64.06"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="1364.88" y="534.9" width="76.54" height="22.68"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="ID-16a6a871-4f8c-11ed-17f9-8cec4b8c3cc3" id="Edge_ID-16a6a871-4f8c-11ed-17f9-8cec4b8c3cc3" color:border-color="#666666">
+                <di:waypoint x="1072.35" y="538.87"/>
+                <di:waypoint x="1350.99" y="538.87"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="1153.13" y="524.69" width="117.07" height="11.34"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="ID-16a6a872-4f8c-11ed-17f9-8cec4b8c3cc3" isMarkerVisible="true" id="Shape_ID-16a6a872-4f8c-11ed-17f9-8cec4b8c3cc3" color:background-color="#ffffff" color:border-color="#5e5e5e">
+                <dc:Bounds x="1620.0" y="514.49" width="48.19" height="48.19"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="ID-16a6a875-4f8c-11ed-17f9-8cec4b8c3cc3" id="Edge_ID-16a6a875-4f8c-11ed-17f9-8cec4b8c3cc3" color:border-color="#666666">
+                <di:waypoint x="1455.31" y="538.58"/>
+                <di:waypoint x="1620.0" y="538.58"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="ID-ae4071d5-4e07-11ed-17f9-8cec4b8c3cc3_1" id="Shape_ID-ae4071d5-4e07-11ed-17f9-8cec4b8c3cc3_1" color:background-color="#ffffff" color:border-color="#00a2ce">
+                <dc:Bounds x="1813.61" y="506.55" width="104.31" height="64.06"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="1825.51" y="534.9" width="80.5" height="22.68"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="ID-16a6a87a-4f8c-11ed-17f9-8cec4b8c3cc3" id="Edge_ID-16a6a87a-4f8c-11ed-17f9-8cec4b8c3cc3" color:border-color="#666666">
+                <di:waypoint x="1667.62" y="538.87"/>
+                <di:waypoint x="1813.61" y="538.87"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="1720.06" y="524.69" width="41.1" height="11.34"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="ID-ae4071d8-4e07-11ed-17f9-8cec4b8c3cc3_1" id="Shape_ID-ae4071d8-4e07-11ed-17f9-8cec4b8c3cc3_1" color:background-color="#ffffff" color:border-color="#00a2ce">
+                <dc:Bounds x="2082.61" y="506.55" width="104.31" height="64.06"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="2095.09" y="534.9" width="79.37" height="22.68"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="ID-ae4071da-4e07-11ed-17f9-8cec4b8c3cc3_1" id="Edge_ID-ae4071da-4e07-11ed-17f9-8cec4b8c3cc3_1" color:border-color="#666666">
+                <di:waypoint x="1917.92" y="538.58"/>
+                <di:waypoint x="2082.61" y="538.58"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="ID-845cdb2d-4e0e-11ed-17f9-8cec4b8c3cc3" id="Shape_ID-845cdb2d-4e0e-11ed-17f9-8cec4b8c3cc3" color:background-color="#ffffff" color:border-color="#fd6767">
+                <dc:Bounds x="2351.62" y="522.14" width="32.88" height="32.88"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="2300.88" y="557.86" width="134.65" height="11.34"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="ID-845cdb2f-4e0e-11ed-17f9-8cec4b8c3cc3" id="Edge_ID-845cdb2f-4e0e-11ed-17f9-8cec4b8c3cc3" color:border-color="#666666">
+                <di:waypoint x="2186.93" y="538.58"/>
+                <di:waypoint x="2351.62" y="538.58"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="ID-845cdb30-4e0e-11ed-17f9-8cec4b8c3cc3" id="Shape_ID-845cdb30-4e0e-11ed-17f9-8cec4b8c3cc3" color:background-color="#ffffff" color:border-color="#00a2ce">
+                <dc:Bounds x="1450.2" y="719.15" width="104.31" height="64.06"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="1462.11" y="747.5" width="80.5" height="22.68"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="ID-16a6a88b-4f8c-11ed-17f9-8cec4b8c3cc3" id="Shape_ID-16a6a88b-4f8c-11ed-17f9-8cec4b8c3cc3" color:background-color="#ffffff" color:border-color="#fd6767">
+                <dc:Bounds x="2351.62" y="734.74" width="32.88" height="32.88"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="2300.31" y="770.46" width="135.78" height="11.34"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="ID-16a6a88e-4f8c-11ed-17f9-8cec4b8c3cc3" id="Edge_ID-16a6a88e-4f8c-11ed-17f9-8cec4b8c3cc3" color:border-color="#666666">
+                <di:waypoint x="1554.52" y="751.18"/>
+                <di:waypoint x="2351.62" y="751.18"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="ID-16a6a88a-4f8c-11ed-17f9-8cec4b8c3cc3" id="Edge_ID-16a6a88a-4f8c-11ed-17f9-8cec4b8c3cc3" color:border-color="#666666">
+                <di:waypoint x="1049.1" y="562.11"/>
+                <di:waypoint x="1049.1" y="751.18"/>
+                <di:waypoint x="1450.2" y="751.18"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="1231.65" y="737.01" width="36.0" height="11.34"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="ID-845cdb30-4e0e-11ed-17f9-8cec4b8c3cc3_1" id="Shape_ID-845cdb30-4e0e-11ed-17f9-8cec4b8c3cc3_1" color:background-color="#ffffff" color:border-color="#00a2ce">
+                <dc:Bounds x="1946.27" y="616.25" width="104.31" height="62.36"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="1958.17" y="644.03" width="80.5" height="22.68"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="ID-845cdb33-4e0e-11ed-17f9-8cec4b8c3cc3" id="Shape_ID-845cdb33-4e0e-11ed-17f9-8cec4b8c3cc3" color:background-color="#ffffff" color:border-color="#fd6767">
+                <dc:Bounds x="2351.62" y="630.99" width="32.88" height="32.88"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="2303.43" y="666.71" width="129.54" height="11.34"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="ID-845cdb35-4e0e-11ed-17f9-8cec4b8c3cc3" id="Edge_ID-845cdb35-4e0e-11ed-17f9-8cec4b8c3cc3" color:border-color="#666666">
+                <di:waypoint x="2050.58" y="647.43"/>
+                <di:waypoint x="2351.62" y="647.43"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="ID-16a6a89b-4f8c-11ed-17f9-8cec4b8c3cc3" id="Edge_ID-16a6a89b-4f8c-11ed-17f9-8cec4b8c3cc3" color:border-color="#666666">
+                <di:waypoint x="1644.09" y="562.68"/>
+                <di:waypoint x="1644.09" y="647.43"/>
+                <di:waypoint x="1946.27" y="647.43"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="1777.32" y="633.26" width="36.0" height="11.34"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNEdge>
+        </bpmndi:BPMNPlane>
+        <bpmndi:BPMNLabelStyle id="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159">
+            <dc:Font name="Arial" size="11.0" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+        </bpmndi:BPMNLabelStyle>
+    </bpmndi:BPMNDiagram>
+</semantic:definitions>
