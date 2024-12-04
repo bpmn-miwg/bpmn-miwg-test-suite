@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sem:definitions expressionLanguage="http://www.omninet.de/bpmn/expressions/v1" typeLanguage="http://www.omninet.de/bpmn/types/v1" targetNamespace="http://www.omninet.de/bpmn/definitions/v1" xmlns:sem="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:ot="http://www.omninet.de/ot/bpmn/v1">
+	<sem:collaboration id="_2" ot:outerProcess="_5">
+		<sem:participant id="_3" name="Document Request" processRef="_4"/>
+	</sem:collaboration>
+	<sem:process name="Document Request" ot:alias="process1" ot:displayName="Document Request" id="_4">
+		<sem:laneSet id="_6" ot:alias="laneSetNode1">
+			<sem:lane id="_7" name="" ot:alias="lane1"/>
+		</sem:laneSet>
+		<sem:sequenceFlow id="_8" ot:alias="flow1" sourceRef="_9" targetRef="_10"/>
+		<sem:sequenceFlow id="_11" ot:alias="flow2" sourceRef="_10" targetRef="_12"/>
+		<sem:sequenceFlow id="_13" ot:alias="flow4" sourceRef="_14" targetRef="_15"/>
+		<sem:sequenceFlow id="_16" ot:alias="flow5" sourceRef="_15" targetRef="_17"/>
+		<sem:sequenceFlow id="_18" ot:alias="flow3" sourceRef="_12" targetRef="_19"/>
+		<sem:sequenceFlow id="_20" ot:alias="flow6" sourceRef="_21" targetRef="_22"/>
+		<sem:sequenceFlow id="_23" ot:alias="flow7" sourceRef="_22" targetRef="_24"/>
+		<sem:startEvent id="_9" name="Document requested" ot:displayName="Document requested" ot:alias="event1"/>
+		<sem:endEvent id="_19" name="Document received" ot:displayName="Document received" ot:alias="event2"/>
+		<sem:sendTask id="_10" name="Request document" ot:displayName="Request document" ot:alias="task1">
+			<sem:ioSpecification>
+				<sem:dataInput id="_msgdata_10"/>
+				<sem:inputSet>
+					<sem:dataInputRefs>_msgdata_10</sem:dataInputRefs>
+				</sem:inputSet>
+				<sem:outputSet/>
+			</sem:ioSpecification>
+		</sem:sendTask>
+		<sem:receiveTask id="_12" name="Wait for answer" ot:displayName="Wait for answer" ot:alias="task2"/>
+		<sem:boundaryEvent id="_14" name="daily" ot:displayName="daily" ot:alias="event3" attachedToRef="_12" cancelActivity="false">
+			<sem:timerEventDefinition/>
+		</sem:boundaryEvent>
+		<sem:sendTask id="_15" name="Send reminder email" ot:displayName="Send reminder email" ot:alias="task3">
+			<sem:ioSpecification>
+				<sem:dataInput id="_msgdata_15"/>
+				<sem:inputSet>
+					<sem:dataInputRefs>_msgdata_15</sem:dataInputRefs>
+				</sem:inputSet>
+				<sem:outputSet/>
+			</sem:ioSpecification>
+		</sem:sendTask>
+		<sem:endEvent id="_17" name="Email sent" ot:displayName="Email sent" ot:alias="event4"/>
+		<sem:boundaryEvent id="_21" name="1 week" ot:displayName="1 week" ot:alias="event5" attachedToRef="_12">
+			<sem:timerEventDefinition/>
+		</sem:boundaryEvent>
+		<sem:userTask id="_22" name="Call customer" ot:displayName="Call customer" ot:alias="task4">
+			<sem:extensionElements>
+				<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" displayOkButton="false" displayApplyButton="false" formTitle="" otObject=""/>
+			</sem:extensionElements>
+		</sem:userTask>
+		<sem:endEvent id="_24" name="Answer received" ot:displayName="Answer received" ot:alias="event6"/>
+	</sem:process>
+	<sem:process name="process2" ot:alias="process2" id="_5"/>
+	<bpmndi:BPMNDiagram id="_1" name="Diagram for Document Request">
+		<bpmndi:BPMNPlane ot:alias="diagram1" ot:diagramType="executable" ot:diagramStatus="new" ot:createdBy="User(&quot;Superuser&quot;)" ot:createdDate="18.07.2024 15:28:16" ot:lastChangedBy="User(&quot;Superuser&quot;)" ot:lastChangedDate="18.07.2024 15:28:16" bpmnElement="_2">
+			<bpmndi:BPMNShape bpmnElement="_3" isHorizontal="true">
+				<dc:Bounds x="0" y="0" width="1023.99999037849" height="454.999995655484"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_7" isHorizontal="true">
+				<dc:Bounds x="0" y="0" width="1023.99999037849" height="454.999995655484"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge bpmnElement="_8">
+				<di:waypoint x="99.9999957614478" y="125"/>
+				<di:waypoint x="179.999993430244" y="125"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_11">
+				<di:waypoint x="279.999993430244" y="125"/>
+				<di:waypoint x="324.999993430244" y="125"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_13">
+				<di:waypoint x="369.35702085741" y="181"/>
+				<di:waypoint x="369.35702085741" y="283.499997827742"/>
+				<di:waypoint x="485.690354190743" y="283.499997827742"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_16">
+				<di:waypoint x="575.690354190743" y="283.499997827742"/>
+				<di:waypoint x="892.690354190743" y="283.499997827742"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_18">
+				<di:waypoint x="424.999993430244" y="125"/>
+				<di:waypoint x="900" y="125"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_20">
+				<di:waypoint x="418.690354190743" y="181"/>
+				<di:waypoint x="418.690354190743" y="201.499997827742"/>
+				<di:waypoint x="485.690354190743" y="201.499997827742"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_23">
+				<di:waypoint x="575.690354190743" y="201.499997827742"/>
+				<di:waypoint x="889.35702085741" y="201.499997827742"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNShape bpmnElement="_9">
+				<dc:Bounds x="69.9999957614478" y="110" width="30" height="30"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_19">
+				<dc:Bounds x="900" y="111" width="28" height="28"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_10">
+				<dc:Bounds x="179.999993430244" y="85" width="100" height="80"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_12">
+				<dc:Bounds x="324.999993430244" y="85" width="100" height="80"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_14">
+				<dc:Bounds x="353.35702085741" y="149" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_15">
+				<dc:Bounds x="485.690354190743" y="253.499997827742" width="90" height="60"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_17">
+				<dc:Bounds x="892.690354190743" y="267.499997827742" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_21">
+				<dc:Bounds x="402.690354190743" y="149" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_22">
+				<dc:Bounds x="485.690354190743" y="171.499997827742" width="90" height="60"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_24">
+				<dc:Bounds x="889.35702085741" y="185.499997827742" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+		</bpmndi:BPMNPlane>
+	</bpmndi:BPMNDiagram>
+</sem:definitions>
