@@ -31,6 +31,13 @@ jobs:
       run: mvn -P analysis --batch-mode deploy --file pom.xml
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Upload static files as artifact
+      id: deployment
+      uses: actions/upload-pages-artifact@v3 # or specific "vX.X.X" version tag for this action
+      with:
+        path: target/site/
+
     - name: Publish to Github pages
       # See https://github.com/marketplace/actions/github-pages-action
       uses: peaceiris/actions-gh-pages@v4
@@ -42,11 +49,6 @@ jobs:
         publish_dir: target/site
         publish_branch: gh-pages
 
-    - name: Upload static files as artifact
-      id: deployment
-      uses: actions/upload-pages-artifact@v3 # or specific "vX.X.X" version tag for this action
-      with:
-        path: target/site/
   # Deployment job
   deploy:
     environment:
