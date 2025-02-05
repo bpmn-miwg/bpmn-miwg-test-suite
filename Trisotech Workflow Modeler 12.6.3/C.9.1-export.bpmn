@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<semantic:definitions xmlns:semantic="http://www.omg.org/spec/BPMN/20100524/MODEL"  xmlns:sdmn="https://www.omg.org/spec/SDMN/"  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"  xmlns:dmn="https://www.omg.org/spec/DMN/20240513/MODEL/"  xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0"  xmlns:trisobpmn="http://www.trisotech.com/2014/triso/bpmn"  xmlns:triso="http://www.trisotech.com/2015/triso/modeling"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xmlns:feel="https://www.omg.org/spec/DMN/20240513/FEEL/"  xmlns:trisofeed="http://trisotech.com/feed"  xmlns:bpsim="http://www.bpsim.org/schemas/1.0"  xmlns:rss="http://purl.org/rss/2.0/"  xmlns:drools="http://www.jboss.org/drools"  xmlns:openapi="https://openapis.org/omg/extension/1.0"   xmlns:i18n="http://www.omg.org/spec/BPMN/non-normative/extensions/i18n/1.0"  xmlns:boxedext="https://www.trisotech.com/spec/DMN/20191111/EXT/"  xmlns="http://www.trisotech.com/definitions/_0f8d7d8a-8dd0-44db-9e57-f167869a81df" id="_0f8d7d8a-8dd0-44db-9e57-f167869a81df" targetNamespace="http://www.trisotech.com/definitions/_0f8d7d8a-8dd0-44db-9e57-f167869a81df" expressionLanguage="https://www.omg.org/spec/DMN/20240513/FEEL/" typeLanguage="http://www.trisotech.com/2015/triso/modeling/ItemDefinitionType" exporter="Workflow Modeler" exporterVersion="8.7.0" name="Drawing 1" xml:lang="en" trisobpmn:logoChoice="Default">
+    <semantic:itemDefinition triso:basicType="true" structureRef="feel:string" triso:definitionType="http://www.trisotech.com/2015/triso/modeling/ItemDefinitionType" triso:name="triso_string" id="_triso-default-bpmnItemDefinition-string_id"/>
+    <semantic:itemDefinition triso:basicType="true" structureRef="feel:Any" triso:definitionType="http://www.trisotech.com/2015/triso/modeling/ItemDefinitionType" triso:name="triso_Any" id="_triso-default-bpmnItemDefinition-Any_id"/>
+    <semantic:collaboration id="_10d83349-768f-47be-a80e-79de1567a71c">
+        <semantic:participant id="_a6573191-dba2-47db-a964-54d185032814" name="Document Request" triso:readOnly="false" processRef="_27d3a165-03fd-4efc-927d-b9097e841d41"/>
+    </semantic:collaboration>
+    <semantic:process id="_27d3a165-03fd-4efc-927d-b9097e841d41" name="Document Request - Process" triso:readOnly="false" triso:collectEnds="true" isClosed="false">
+        <semantic:startEvent id="_f022ef3e-c298-47f7-91a1-571b074b416e" name="Document&#10;requested" triso:readOnly="false">
+            <semantic:outgoing>_2d2421fd-8ec8-41b4-a3aa-8e364dcbff0c</semantic:outgoing>
+        </semantic:startEvent>
+        <semantic:sendTask id="_b7a52a00-ac1a-459f-af49-2695c56c6f06" name="Request document" triso:readOnly="false" implementation="##WebService">
+            <semantic:incoming>_2d2421fd-8ec8-41b4-a3aa-8e364dcbff0c</semantic:incoming>
+            <semantic:outgoing>_43a41c48-8b96-4c25-b442-0bc74987869e</semantic:outgoing>
+        </semantic:sendTask>
+        <semantic:receiveTask id="_a74d683a-3b15-454b-9e8b-eb4c77a04129" name="Wait for answer" triso:readOnly="false" implementation="##WebService" instantiate="false">
+            <semantic:incoming>_43a41c48-8b96-4c25-b442-0bc74987869e</semantic:incoming>
+            <semantic:outgoing>_35ddd8b6-c40d-4bec-9d48-371ac3be8fd1</semantic:outgoing>
+        </semantic:receiveTask>
+        <semantic:endEvent id="_0c24474b-0a0e-4f24-97f3-9ee2b05cc09c" name="Document received" triso:readOnly="false">
+            <semantic:incoming>_35ddd8b6-c40d-4bec-9d48-371ac3be8fd1</semantic:incoming>
+        </semantic:endEvent>
+        <semantic:boundaryEvent id="_b9487ce6-dc98-462c-aa09-e7e0d7a8512b" triso:readOnly="false" attachedToRef="_a74d683a-3b15-454b-9e8b-eb4c77a04129" cancelActivity="false">
+            <semantic:outgoing>_1939739c-48e5-4bd6-b6d6-a72adff168d0</semantic:outgoing>
+            <semantic:timerEventDefinition id="_aacd8779-3ce7-4a39-965f-b0d1da7d2725"/>
+        </semantic:boundaryEvent>
+        <semantic:boundaryEvent id="_748ecbcb-f2a4-478b-831a-faed30b9552f" triso:readOnly="false" attachedToRef="_a74d683a-3b15-454b-9e8b-eb4c77a04129" cancelActivity="true">
+            <semantic:outgoing>_e10dfcb1-05c8-40fc-92c6-0f03c725f442</semantic:outgoing>
+            <semantic:timerEventDefinition id="_fd006da6-fc2e-4351-a7ae-36d2bef6e1ac"/>
+        </semantic:boundaryEvent>
+        <semantic:userTask id="_333e5790-ad78-4c66-acc1-5f0e0171c34f" name="Call customer" triso:readOnly="false" implementation="##unspecified">
+            <semantic:extensionElements>
+                <triso:notification id="_abe1c1c7-761d-48c3-a186-80d103225cc9" type="email" mode="others"/>
+            </semantic:extensionElements>
+            <semantic:incoming>_e10dfcb1-05c8-40fc-92c6-0f03c725f442</semantic:incoming>
+            <semantic:outgoing>_fc88e482-6db9-440f-b058-dd0c2d73945b</semantic:outgoing>
+        </semantic:userTask>
+        <semantic:sendTask id="_370a0f04-8c42-4904-9ecf-b6de06d7af4a" name="Send reminder email" triso:readOnly="false" implementation="##WebService">
+            <semantic:incoming>_1939739c-48e5-4bd6-b6d6-a72adff168d0</semantic:incoming>
+            <semantic:outgoing>_2df37c26-7ed8-4a5d-b942-8457b9921b7d</semantic:outgoing>
+        </semantic:sendTask>
+        <semantic:endEvent id="_a4557ca7-104f-4357-91b9-67f163bbce16" name="Answer received" triso:readOnly="false">
+            <semantic:incoming>_fc88e482-6db9-440f-b058-dd0c2d73945b</semantic:incoming>
+        </semantic:endEvent>
+        <semantic:endEvent id="_982dcdc3-323a-4b11-b688-f5e9773b5fba" name="Email sent" triso:readOnly="false">
+            <semantic:incoming>_2df37c26-7ed8-4a5d-b942-8457b9921b7d</semantic:incoming>
+        </semantic:endEvent>
+        <semantic:sequenceFlow id="_2d2421fd-8ec8-41b4-a3aa-8e364dcbff0c" triso:readOnly="false" sourceRef="_f022ef3e-c298-47f7-91a1-571b074b416e" targetRef="_b7a52a00-ac1a-459f-af49-2695c56c6f06"/>
+        <semantic:sequenceFlow id="_43a41c48-8b96-4c25-b442-0bc74987869e" triso:readOnly="false" sourceRef="_b7a52a00-ac1a-459f-af49-2695c56c6f06" targetRef="_a74d683a-3b15-454b-9e8b-eb4c77a04129"/>
+        <semantic:sequenceFlow id="_35ddd8b6-c40d-4bec-9d48-371ac3be8fd1" triso:readOnly="false" sourceRef="_a74d683a-3b15-454b-9e8b-eb4c77a04129" targetRef="_0c24474b-0a0e-4f24-97f3-9ee2b05cc09c"/>
+        <semantic:sequenceFlow id="_e10dfcb1-05c8-40fc-92c6-0f03c725f442" triso:readOnly="false" sourceRef="_748ecbcb-f2a4-478b-831a-faed30b9552f" targetRef="_333e5790-ad78-4c66-acc1-5f0e0171c34f"/>
+        <semantic:sequenceFlow id="_1939739c-48e5-4bd6-b6d6-a72adff168d0" triso:readOnly="false" sourceRef="_b9487ce6-dc98-462c-aa09-e7e0d7a8512b" targetRef="_370a0f04-8c42-4904-9ecf-b6de06d7af4a"/>
+        <semantic:sequenceFlow id="_fc88e482-6db9-440f-b058-dd0c2d73945b" triso:readOnly="false" sourceRef="_333e5790-ad78-4c66-acc1-5f0e0171c34f" targetRef="_a4557ca7-104f-4357-91b9-67f163bbce16"/>
+        <semantic:sequenceFlow id="_2df37c26-7ed8-4a5d-b942-8457b9921b7d" triso:readOnly="false" sourceRef="_370a0f04-8c42-4904-9ecf-b6de06d7af4a" targetRef="_982dcdc3-323a-4b11-b688-f5e9773b5fba"/>
+    </semantic:process>
+    <bpmndi:BPMNDiagram id="_d555bb77-3a61-4f2c-89cb-814a6ba8273e" name="Page 1">
+        <bpmndi:BPMNPlane bpmnElement="_10d83349-768f-47be-a80e-79de1567a71c" id="_d555bb77-3a61-4f2c-89cb-814a6ba8273e_plane" trisobpmn:diagramWidth="1681" trisobpmn:diagramHeight="1258">
+            <bpmndi:BPMNShape id="_917ac1e4-08b7-4345-bc33-9a2371d2c64f" bpmnElement="_a6573191-dba2-47db-a964-54d185032814" isHorizontal="true" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="121.5" y="167" width="782" height="358"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" labelStyle="LS_d555bb77-3a61-4f2c-89cb-814a6ba8273e_0">
+                    <dc:Bounds height="358" width="16" x="121.5" y="167"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="_f550f5c9-ed5d-442a-b5b3-d9537908d15c" bpmnElement="_f022ef3e-c298-47f7-91a1-571b074b416e" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="184.5" y="226" width="32" height="32"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" labelStyle="LS_d555bb77-3a61-4f2c-89cb-814a6ba8273e_0">
+                    <dc:Bounds height="31" width="110" x="145.5" y="267"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="_6d6b2fd1-434c-42d9-b6ab-dbfa03703242" bpmnElement="_b7a52a00-ac1a-459f-af49-2695c56c6f06" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="271.5" y="204" width="96" height="76"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" labelStyle="LS_d555bb77-3a61-4f2c-89cb-814a6ba8273e_0">
+                    <dc:Bounds height="31" width="90" x="274.5" y="226.5"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="_226b59ba-4d9f-4be1-8a56-3d9531778d42" bpmnElement="_a74d683a-3b15-454b-9e8b-eb4c77a04129" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="422.5" y="204" width="96" height="76"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" labelStyle="LS_d555bb77-3a61-4f2c-89cb-814a6ba8273e_0">
+                    <dc:Bounds height="16" width="90" x="425.5" y="234"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="_883f63fa-4b03-489d-8759-e95595559e89" bpmnElement="_0c24474b-0a0e-4f24-97f3-9ee2b05cc09c" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="700.5" y="224" width="36" height="36"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" labelStyle="LS_d555bb77-3a61-4f2c-89cb-814a6ba8273e_0">
+                    <dc:Bounds height="16" width="110" x="663.5" y="267"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="_ebea6201-519b-4a4d-b97f-5dafa017e812" bpmnElement="_b9487ce6-dc98-462c-aa09-e7e0d7a8512b" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="452.5" y="263" width="36" height="36"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" labelStyle="LS_d555bb77-3a61-4f2c-89cb-814a6ba8273e_0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="_90a85efa-299b-4e18-8f0f-4e23a889b56f" bpmnElement="_748ecbcb-f2a4-478b-831a-faed30b9552f" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="501.2840458244617" y="262.6207029443656" width="36" height="36"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" labelStyle="LS_d555bb77-3a61-4f2c-89cb-814a6ba8273e_0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="_f107f506-3fd4-4356-a3ee-0daec25b0286" bpmnElement="_333e5790-ad78-4c66-acc1-5f0e0171c34f" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="549.5" y="326" width="96" height="76"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" labelStyle="LS_d555bb77-3a61-4f2c-89cb-814a6ba8273e_0">
+                    <dc:Bounds height="16" width="90" x="552.5" y="356"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="_942df227-0b65-484b-97e7-139e09af3723" bpmnElement="_370a0f04-8c42-4904-9ecf-b6de06d7af4a" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="549.5" y="421" width="96" height="76"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" labelStyle="LS_d555bb77-3a61-4f2c-89cb-814a6ba8273e_0">
+                    <dc:Bounds height="31" width="90" x="552.5" y="443.5"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="_39b2c848-68ff-4a78-bb7f-d22c444eee16" bpmnElement="_a4557ca7-104f-4357-91b9-67f163bbce16" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="700.5" y="346" width="36" height="36"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" labelStyle="LS_d555bb77-3a61-4f2c-89cb-814a6ba8273e_0">
+                    <dc:Bounds height="16" width="110" x="663.5" y="389"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="_c25b846c-286b-4153-8339-1a01ebe47cb2" bpmnElement="_982dcdc3-323a-4b11-b688-f5e9773b5fba" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="700.5" y="441" width="36" height="36"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" labelStyle="LS_d555bb77-3a61-4f2c-89cb-814a6ba8273e_0">
+                    <dc:Bounds height="16" width="110" x="663.5" y="484"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge id="_2a97722d-9ad4-4b74-98b9-e7446fdb36b3" color:border-color="#000000" bpmnElement="_2d2421fd-8ec8-41b4-a3aa-8e364dcbff0c">
+                <di:waypoint x="215.5" y="242"/>
+                <di:waypoint x="271.5" y="242"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" triso:labelPosition="midbottom" labelStyle="LS_d555bb77-3a61-4f2c-89cb-814a6ba8273e_0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="_5a5e87e9-f1cd-493a-bc06-7f4ce9862563" color:border-color="#000000" bpmnElement="_43a41c48-8b96-4c25-b442-0bc74987869e">
+                <di:waypoint x="366.5" y="242"/>
+                <di:waypoint x="422.5" y="242"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" triso:labelPosition="midbottom" labelStyle="LS_d555bb77-3a61-4f2c-89cb-814a6ba8273e_0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="_1ea278e7-81b5-4a7a-ad6b-64ccf2d2f960" color:border-color="#000000" bpmnElement="_35ddd8b6-c40d-4bec-9d48-371ac3be8fd1">
+                <di:waypoint x="517.5" y="242"/>
+                <di:waypoint x="700.5" y="242"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" triso:labelPosition="midbottom" labelStyle="LS_d555bb77-3a61-4f2c-89cb-814a6ba8273e_0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="_7e4dbb65-c9d4-4b07-ae72-46664edaa456" color:border-color="#000000" bpmnElement="_e10dfcb1-05c8-40fc-92c6-0f03c725f442">
+                <di:waypoint x="519.2840458244617" y="297.6207029443656"/>
+                <di:waypoint x="519.2840458244617" y="364"/>
+                <di:waypoint x="549.5" y="364"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" triso:labelPosition="midbottom" labelStyle="LS_d555bb77-3a61-4f2c-89cb-814a6ba8273e_0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="_2ae75453-7821-4f2b-866c-5921cb267af4" color:border-color="#000000" bpmnElement="_1939739c-48e5-4bd6-b6d6-a72adff168d0">
+                <di:waypoint x="470.5" y="298"/>
+                <di:waypoint x="470.5" y="459"/>
+                <di:waypoint x="549.5" y="459"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" triso:labelPosition="midbottom" labelStyle="LS_d555bb77-3a61-4f2c-89cb-814a6ba8273e_0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="_19216ba8-e2df-42f9-9adb-239af8e7f91a" color:border-color="#000000" bpmnElement="_fc88e482-6db9-440f-b058-dd0c2d73945b">
+                <di:waypoint x="644.5" y="364"/>
+                <di:waypoint x="700.5" y="364"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" triso:labelPosition="midbottom" labelStyle="LS_d555bb77-3a61-4f2c-89cb-814a6ba8273e_0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="_3a89eb74-b279-4c9d-a7a6-c2686e41f03c" color:border-color="#000000" bpmnElement="_2df37c26-7ed8-4a5d-b942-8457b9921b7d">
+                <di:waypoint x="644.5" y="459"/>
+                <di:waypoint x="700.5" y="459"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" triso:labelPosition="midbottom" labelStyle="LS_d555bb77-3a61-4f2c-89cb-814a6ba8273e_0"/>
+            </bpmndi:BPMNEdge>
+        </bpmndi:BPMNPlane>
+        <bpmndi:BPMNLabelStyle id="LS_d555bb77-3a61-4f2c-89cb-814a6ba8273e_0">
+            <dc:Font name="arial,helvetica,sans-serif" size="11" isBold="false" isItalic="false" isStrikeThrough="false" isUnderline="false"/>
+        </bpmndi:BPMNLabelStyle>
+    </bpmndi:BPMNDiagram>
+</semantic:definitions>

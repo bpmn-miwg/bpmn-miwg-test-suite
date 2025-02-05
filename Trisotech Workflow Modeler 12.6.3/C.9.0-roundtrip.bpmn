@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<semantic:definitions xmlns:semantic="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:sdmn="https://www.omg.org/spec/SDMN/" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:dmn="https://www.omg.org/spec/DMN/20240513/MODEL/" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:trisobpmn="http://www.trisotech.com/2014/triso/bpmn" xmlns:triso="http://www.trisotech.com/2015/triso/modeling" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:openapi="https://openapis.org/omg/extension/1.0" xmlns:boxedext="https://www.trisotech.com/spec/DMN/20191111/EXT/" xmlns:tc="http://www.omg.org/spec/DMN/20160719/testcase" xmlns:rss="http://purl.org/rss/2.0/" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:trisofeed="http://trisotech.com/feed" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL"                     xmlns:feel="https://www.omg.org/spec/DMN/20240513/FEEL/"  xmlns:drools="http://www.jboss.org/drools"  xmlns:i18n="http://www.omg.org/spec/BPMN/non-normative/extensions/i18n/1.0"  xmlns="http://camunda.org/schema/1.0/bpmn" id="_5SVkEIXnEeSmwfgVk-ryvQ" targetNamespace="http://camunda.org/schema/1.0/bpmn" exporter="Workflow Modeler" exporterVersion="8.7.0" name="Drawing 1" xml:lang="en" triso:translationLanguages="" trisobpmn:logoChoice="Default">
+    <semantic:itemDefinition triso:basicType="true" structureRef="feel:string" triso:definitionType="http://www.trisotech.com/2015/triso/modeling/ItemDefinitionType" triso:name="triso_string" id="_triso-default-bpmnItemDefinition-string_id"/>
+    <semantic:itemDefinition triso:basicType="true" structureRef="feel:Any" triso:definitionType="http://www.trisotech.com/2015/triso/modeling/ItemDefinitionType" triso:name="triso_Any" id="_triso-default-bpmnItemDefinition-Any_id"/>
+    <semantic:error name="Error_FraudDetected" errorCode="02" triso:allowProvidedAuth="false" triso:allowUrlOverride="false" id="Error_01bezxs"/>
+    <semantic:error name="Error_Timeout" errorCode="00" triso:allowProvidedAuth="false" triso:allowUrlOverride="false" id="Error_1u68flh"/>
+    <semantic:message name="Message_DocumentRequested" triso:allowProvidedAuth="false" triso:allowUrlOverride="false" id="Message_0fvpzfg">
+        <semantic:extensionElements>
+            <zeebe:subscription correlationKey="= documentReferenceId"/>
+        </semantic:extensionElements>
+    </semantic:message>
+    <semantic:message name="Message_CancellationRequested" triso:allowProvidedAuth="false" triso:allowUrlOverride="false" id="Message_0dm6uaq">
+        <semantic:extensionElements>
+            <zeebe:subscription correlationKey="=01"/>
+        </semantic:extensionElements>
+    </semantic:message>
+    <semantic:collaboration id="Collaboration_CustomerOnboarding">
+        <semantic:participant id="Participant_00" name="Customer Onboarding" triso:readOnly="false" processRef="customer_onboarding_en"/>
+    </semantic:collaboration>
+    <semantic:process id="customer_onboarding_en" name="Customer Onboarding" triso:readOnly="false" triso:collectEnds="true" isExecutable="true" isClosed="false">
+        <semantic:extensionElements>
+            <zeebe:userTaskForm id="userTaskForm_0khiqpl">{
+  "components": [
+    {
+      "text": "&lt;img src=\"http://localhost:8080/camunda/online/banking/img/core-img/logo.png\"&gt;&lt;h2&gt;Instructions:&lt;/h2&gt;&lt;p&gt;Based on internal protocal and the given information below, tick the checkbox for 'Approved' if this application should be approved.&lt;/p&gt;&lt;p&gt; Otherwise, leave this checkbox blank.&lt;/p&gt;",
+      "type": "text",
+      "id": "Field_0e9521u"
+    },
+    {
+      "key": "applicationNumber",
+      "label": "Application Number",
+      "type": "textfield",
+      "id": "Field_1djmro0"
+    },
+    {
+      "key": "applicantName",
+      "label": "Applicant",
+      "type": "textfield",
+      "id": "Field_1ex9187"
+    },
+    {
+      "key": "age",
+      "label": "Current Age",
+      "type": "number",
+      "id": "Field_17vnd80"
+    },
+    {
+      "key": "employment",
+      "label": "Employment",
+      "type": "textfield",
+      "id": "Field_08mj5fv"
+    },
+    {
+      "key": "category",
+      "label": "Category",
+      "type": "textfield",
+      "id": "Field_1k7e84u"
+    },
+    {
+      "key": "priceIndication",
+      "label": "Price indication",
+      "type": "textfield",
+      "id": "Field_1d6bhc2"
+    },
+    {
+      "label": "Risks",
+      "type": "textfield",
+      "id": "Field_0qvctdt",
+      "key": "risksText",
+      "disabled": true
+    },
+    {
+      "key": "approved",
+      "label": "Approved",
+      "type": "checkbox",
+      "id": "Field_0hwfap9"
+    }
+  ],
+  "schemaVersion": 4,
+  "type": "default",
+  "id": "Form_0840o2b",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "1.1",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.0.0"
+  }
+}</zeebe:userTaskForm>
+        </semantic:extensionElements>
+        <semantic:startEvent id="StartEvent_ApplicationReceived" name="Application received" triso:readOnly="false">
+            <semantic:extensionElements>
+                <zeebe:ioMapping>
+                    <zeebe:output source="= string(now())" target="documentReferenceId"/>
+                </zeebe:ioMapping>
+            </semantic:extensionElements>
+            <semantic:outgoing>SequenceFlow_6</semantic:outgoing>
+        </semantic:startEvent>
+        <semantic:subProcess id="Activity_1ke2ixr" triso:readOnly="false" triggeredByEvent="true">
+            <semantic:endEvent id="EndMessageEvent_Timeout" name="Timeout handled" triso:readOnly="false">
+                <semantic:documentation>Ends the subprocess and send message timeout handled</semantic:documentation>
+                <semantic:extensionElements>
+                    <zeebe:taskDefinition type="timeoutHandled"/>
+                </semantic:extensionElements>
+                <semantic:incoming>Flow_0dppbeu</semantic:incoming>
+                <semantic:messageEventDefinition id="MessageEventDefinition_0tax7tp"/>
+            </semantic:endEvent>
+            <semantic:startEvent id="StartErrorEvent_Timeout" name="Timeout" triso:readOnly="false">
+                <semantic:documentation>Catches timeout error event and starts the subprocess</semantic:documentation>
+                <semantic:outgoing>Flow_151qlxc</semantic:outgoing>
+                <semantic:errorEventDefinition errorRef="Error_1u68flh" id="ErrorEventDefinition_0ra1xn3"/>
+            </semantic:startEvent>
+            <semantic:userTask id="UserTask_HandleTimeout" name="Handle Timeout" triso:readOnly="false" implementation="##unspecified">
+                <semantic:documentation>Manually handles the timeout</semantic:documentation>
+                <semantic:incoming>Flow_151qlxc</semantic:incoming>
+                <semantic:outgoing>Flow_0dppbeu</semantic:outgoing>
+            </semantic:userTask>
+            <semantic:sequenceFlow id="Flow_151qlxc" triso:readOnly="false" sourceRef="StartErrorEvent_Timeout" targetRef="UserTask_HandleTimeout" isImmediate="false"/>
+            <semantic:sequenceFlow id="Flow_0dppbeu" triso:readOnly="false" sourceRef="UserTask_HandleTimeout" targetRef="EndMessageEvent_Timeout" isImmediate="false"/>
+        </semantic:subProcess>
+        <semantic:subProcess id="Activity_0vp33kx" triso:readOnly="false" triggeredByEvent="true">
+            <semantic:startEvent id="StartMessageEvent_CancellationRequested" name="Cancelation requested" triso:readOnly="false">
+                <semantic:documentation>Customer onboarding cancellation message received</semantic:documentation>
+                <semantic:outgoing>Flow_12nmks0</semantic:outgoing>
+                <semantic:messageEventDefinition messageRef="Message_0dm6uaq" id="MessageEventDefinition_0tj9nv6"/>
+            </semantic:startEvent>
+            <semantic:serviceTask id="ServiceTask_CancelApplication" name="Cancel application" triso:readOnly="false" implementation="##WebService">
+                <semantic:documentation>Cancel application</semantic:documentation>
+                <semantic:extensionElements>
+                    <zeebe:taskDefinition type="cancelApplication"/>
+                </semantic:extensionElements>
+                <semantic:incoming>Flow_12nmks0</semantic:incoming>
+                <semantic:outgoing>Flow_19iipc6</semantic:outgoing>
+            </semantic:serviceTask>
+            <semantic:endEvent id="EndMessageEvent_InformCustomer" name="Customer notified about successful cancelation" triso:readOnly="false">
+                <semantic:documentation>Inform customer of a successful cancelation</semantic:documentation>
+                <semantic:extensionElements>
+                    <zeebe:taskDefinition type="informCustomerSuccessfulCancelation"/>
+                </semantic:extensionElements>
+                <semantic:incoming>Flow_0qrakss</semantic:incoming>
+                <semantic:messageEventDefinition id="MessageEventDefinition_0j82oqj"/>
+            </semantic:endEvent>
+            <semantic:parallelGateway id="ParallelGateway_CancelApplication" triso:readOnly="false" gatewayDirection="Diverging">
+                <semantic:incoming>Flow_19iipc6</semantic:incoming>
+                <semantic:outgoing>Flow_0qrakss</semantic:outgoing>
+                <semantic:outgoing>Flow_1jml1az</semantic:outgoing>
+            </semantic:parallelGateway>
+            <semantic:endEvent id="EndMessageEvent_InformOperations" name="Operations Team notified about successful cancelation" triso:readOnly="false">
+                <semantic:documentation>Inform operations team of a successful cancelation</semantic:documentation>
+                <semantic:extensionElements>
+                    <zeebe:taskDefinition type="informOperationsSuccessfulCancelation"/>
+                </semantic:extensionElements>
+                <semantic:incoming>Flow_1jml1az</semantic:incoming>
+                <semantic:messageEventDefinition id="MessageEventDefinition_1qmp27r"/>
+            </semantic:endEvent>
+            <semantic:sequenceFlow id="Flow_12nmks0" triso:readOnly="false" sourceRef="StartMessageEvent_CancellationRequested" targetRef="ServiceTask_CancelApplication" isImmediate="false"/>
+            <semantic:sequenceFlow id="Flow_19iipc6" triso:readOnly="false" sourceRef="ServiceTask_CancelApplication" targetRef="ParallelGateway_CancelApplication" isImmediate="false"/>
+            <semantic:sequenceFlow id="Flow_0qrakss" triso:readOnly="false" sourceRef="ParallelGateway_CancelApplication" targetRef="EndMessageEvent_InformCustomer" isImmediate="false"/>
+            <semantic:sequenceFlow id="Flow_1jml1az" triso:readOnly="false" sourceRef="ParallelGateway_CancelApplication" targetRef="EndMessageEvent_InformOperations" isImmediate="false"/>
+        </semantic:subProcess>
+        <semantic:callActivity id="Activity_ManualCheck" name="Manual Check" triso:readOnly="false" trisobpmn:calledElementType="process">
+            <semantic:extensionElements>
+                <zeebe:calledElement processId="ManualCheck" propagateAllChildVariables="false"/>
+            </semantic:extensionElements>
+            <semantic:incoming>SequenceFlow_Yellow</semantic:incoming>
+            <semantic:outgoing>Flow_0ik8h65</semantic:outgoing>
+        </semantic:callActivity>
+        <semantic:endEvent id="EndEvent_ApplicationIssued" name="Application&#10; issued" triso:readOnly="false">
+            <semantic:documentation>Customer onboarding process end application issued</semantic:documentation>
+            <semantic:incoming>SequenceFlow_11</semantic:incoming>
+        </semantic:endEvent>
+        <semantic:serviceTask id="SendTask_SendPolicy" name="Send confirmation" triso:readOnly="false" zeebe:modelerTemplate="io.camunda.connectors.SendGrid.v1.template" zeebe:modelerTemplateIcon="data:image/svg+xml;utf8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20d%3D%22M0.285706%205.40847H5.43837V10.5611H0.285706V5.40847Z%22%20fill%3D%22white%22%2F%3E%0A%3Cpath%20d%3D%22M0.285706%205.40847H5.43837V10.5611H0.285706V5.40847Z%22%20fill%3D%22%2399E1F4%22%2F%3E%0A%3Cpath%20d%3D%22M5.43837%2010.5611L10.5611%2010.5616V15.6844H5.43837V10.5611Z%22%20fill%3D%22white%22%2F%3E%0A%3Cpath%20d%3D%22M5.43837%2010.5611L10.5611%2010.5616V15.6844H5.43837V10.5611Z%22%20fill%3D%22%2399E1F4%22%2F%3E%0A%3Cpath%20d%3D%22M0.285706%2015.6846L5.43837%2015.6844V15.7143H0.285706V15.6846ZM0.285706%2010.5619H5.43837V15.6844L0.285706%2015.6846V10.5619Z%22%20fill%3D%22%231A82E2%22%2F%3E%0A%3Cpath%20d%3D%22M5.43837%200.285706H10.5611V5.40847H5.43837V0.285706ZM10.5616%205.43837H15.7143V10.5611H10.5616V5.43837Z%22%20fill%3D%22%2300B3E3%22%2F%3E%0A%3Cpath%20d%3D%22M5.43837%2010.5611L10.5611%2010.5616V5.40847H5.43837V10.5611Z%22%20fill%3D%22%23009DD9%22%2F%3E%0A%3Cpath%20d%3D%22M10.5611%200.285706H15.7143V5.40847H10.5611V0.285706Z%22%20fill%3D%22%231A82E2%22%2F%3E%0A%3Cpath%20d%3D%22M10.5611%205.40847H15.7143V5.43837H10.5616L10.5611%205.40847Z%22%20fill%3D%22%231A82E2%22%2F%3E%0A%3C%2Fsvg%3E" implementation="##WebService">
+            <semantic:extensionElements>
+                <zeebe:taskDefinition type="io.camunda:sendgrid:1"/>
+                <zeebe:ioMapping>
+                    <zeebe:input source="demo@camunda.com" target="from.email"/>
+                    <zeebe:input source="d-0d0120b0c7f148ef8a1c262f2cf07092" target="template.id"/>
+                    <zeebe:input source="secrets.SENDGRID_DEMO" target="apiKey"/>
+                    <zeebe:input source="= corporation" target="from.name"/>
+                    <zeebe:input source="= applicant.name" target="to.name"/>
+                    <zeebe:input source="= applicant.email" target="to.email"/>
+                    <zeebe:input source="= {&#10;    &quot;name&quot;: applicant.name,&#10;    &quot;applicationNumber&quot;: applicationNumber,&#10;    &quot;product&quot;: product&#10;}" target="template.data"/>
+                </zeebe:ioMapping>
+            </semantic:extensionElements>
+            <semantic:incoming>SequenceFlow_10</semantic:incoming>
+            <semantic:outgoing>SequenceFlow_11</semantic:outgoing>
+        </semantic:serviceTask>
+        <semantic:serviceTask id="ServiceTask_DeliverPolicy" name="Deliver confirmation" triso:readOnly="false" implementation="##WebService">
+            <semantic:documentation>Deliver policy</semantic:documentation>
+            <semantic:extensionElements>
+                <zeebe:taskDefinition type="issuePolicy"/>
+            </semantic:extensionElements>
+            <semantic:incoming>SequenceFlow_Green</semantic:incoming>
+            <semantic:incoming>SequenceFlow_ApplicationAccepted</semantic:incoming>
+            <semantic:outgoing>SequenceFlow_10</semantic:outgoing>
+        </semantic:serviceTask>
+        <semantic:exclusiveGateway id="ExclusiveGateway_Decision" name="Decision?" triso:readOnly="false" gatewayDirection="Diverging">
+            <semantic:incoming>Flow_0ik8h65</semantic:incoming>
+            <semantic:outgoing>SequenceFlow_ApplicationAccepted</semantic:outgoing>
+            <semantic:outgoing>SequenceFlow_ApplicationDeclined</semantic:outgoing>
+        </semantic:exclusiveGateway>
+        <semantic:endEvent id="EndEvent_ApplicationRejected" name="Application &#10;rejected" triso:readOnly="false">
+            <semantic:documentation>Customer onboarding process end application rejected</semantic:documentation>
+            <semantic:incoming>SequenceFlow_13</semantic:incoming>
+        </semantic:endEvent>
+        <semantic:serviceTask id="ServiceTask_RejectPolicy" name="Reject application" triso:readOnly="false" implementation="##WebService">
+            <semantic:documentation>Reject policy</semantic:documentation>
+            <semantic:extensionElements>
+                <zeebe:taskDefinition type="rejectPolicy"/>
+            </semantic:extensionElements>
+            <semantic:incoming>SequenceFlow_Red</semantic:incoming>
+            <semantic:incoming>SequenceFlow_ApplicationDeclined</semantic:incoming>
+            <semantic:outgoing>SequenceFlow_01vh1zw</semantic:outgoing>
+        </semantic:serviceTask>
+        <semantic:serviceTask id="SendTask_SendRejection" name="Send rejection" triso:readOnly="false" zeebe:modelerTemplate="io.camunda.connectors.SendGrid.v1.template" zeebe:modelerTemplateIcon="data:image/svg+xml;utf8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20d%3D%22M0.285706%205.40847H5.43837V10.5611H0.285706V5.40847Z%22%20fill%3D%22white%22%2F%3E%0A%3Cpath%20d%3D%22M0.285706%205.40847H5.43837V10.5611H0.285706V5.40847Z%22%20fill%3D%22%2399E1F4%22%2F%3E%0A%3Cpath%20d%3D%22M5.43837%2010.5611L10.5611%2010.5616V15.6844H5.43837V10.5611Z%22%20fill%3D%22white%22%2F%3E%0A%3Cpath%20d%3D%22M5.43837%2010.5611L10.5611%2010.5616V15.6844H5.43837V10.5611Z%22%20fill%3D%22%2399E1F4%22%2F%3E%0A%3Cpath%20d%3D%22M0.285706%2015.6846L5.43837%2015.6844V15.7143H0.285706V15.6846ZM0.285706%2010.5619H5.43837V15.6844L0.285706%2015.6846V10.5619Z%22%20fill%3D%22%231A82E2%22%2F%3E%0A%3Cpath%20d%3D%22M5.43837%200.285706H10.5611V5.40847H5.43837V0.285706ZM10.5616%205.43837H15.7143V10.5611H10.5616V5.43837Z%22%20fill%3D%22%2300B3E3%22%2F%3E%0A%3Cpath%20d%3D%22M5.43837%2010.5611L10.5611%2010.5616V5.40847H5.43837V10.5611Z%22%20fill%3D%22%23009DD9%22%2F%3E%0A%3Cpath%20d%3D%22M10.5611%200.285706H15.7143V5.40847H10.5611V0.285706Z%22%20fill%3D%22%231A82E2%22%2F%3E%0A%3Cpath%20d%3D%22M10.5611%205.40847H15.7143V5.43837H10.5616L10.5611%205.40847Z%22%20fill%3D%22%231A82E2%22%2F%3E%0A%3C%2Fsvg%3E" implementation="##WebService">
+            <semantic:extensionElements>
+                <zeebe:ioMapping>
+                    <zeebe:input source="secrets.SENDGRID_DEMO" target="apiKey"/>
+                    <zeebe:input source="demo@camunda.com" target="from.email"/>
+                    <zeebe:input source="d-aa6a58aaded54a83884518433ac2dd56" target="template.id"/>
+                    <zeebe:input source="= {&#10;    &quot;name&quot;: applicant.name&#10;}" target="template.data"/>
+                    <zeebe:input source="= applicant.email" target="to.email"/>
+                    <zeebe:input source="= applicant.name" target="to.name"/>
+                    <zeebe:input source="= corporation" target="from.name"/>
+                </zeebe:ioMapping>
+                <zeebe:taskDefinition type="io.camunda:sendgrid:1"/>
+            </semantic:extensionElements>
+            <semantic:incoming>SequenceFlow_01vh1zw</semantic:incoming>
+            <semantic:outgoing>SequenceFlow_13</semantic:outgoing>
+        </semantic:serviceTask>
+        <semantic:sendTask id="SendTask_ReportFraud" name="Report fraud" triso:readOnly="false" implementation="##WebService">
+            <semantic:extensionElements>
+                <zeebe:taskDefinition type="reportFraud"/>
+            </semantic:extensionElements>
+            <semantic:incoming>Flow_177paze</semantic:incoming>
+            <semantic:outgoing>Flow_0cvhizd</semantic:outgoing>
+        </semantic:sendTask>
+        <semantic:endEvent id="TerminateEvent_ApplicationCanceledFraud" name="Application canceled due to fraud" triso:readOnly="false">
+            <semantic:documentation>Customer onboarding process terminated due to fraud</semantic:documentation>
+            <semantic:incoming>Flow_0cvhizd</semantic:incoming>
+            <semantic:terminateEventDefinition id="TerminateEventDefinition_1am7et0"/>
+        </semantic:endEvent>
+        <semantic:exclusiveGateway id="ExclusiveGateway_Risk" name="Risk?" triso:readOnly="false" gatewayDirection="Diverging" default="SequenceFlow_Green">
+            <semantic:documentation>Route process based on risk, "green" automatic onboarding, "yellow" manual check, "red" automatic rejection</semantic:documentation>
+            <semantic:incoming>SequenceFlow_2</semantic:incoming>
+            <semantic:outgoing>SequenceFlow_Red</semantic:outgoing>
+            <semantic:outgoing>SequenceFlow_Green</semantic:outgoing>
+            <semantic:outgoing>SequenceFlow_Yellow</semantic:outgoing>
+        </semantic:exclusiveGateway>
+        <semantic:businessRuleTask id="BusinessRuleTask_CheckApplicationAutomatically" name="Check application automatically" triso:readOnly="false" implementation="##unspecified">
+            <semantic:documentation>Identify risk for prospect client</semantic:documentation>
+            <semantic:extensionElements>
+                <zeebe:ioMapping>
+                    <zeebe:output source="= if result != null then result.riskLevel else [&quot;green&quot;]" target="riskLevels"/>
+                    <zeebe:output source="= if result != null then result.risk else []" target="risks"/>
+                </zeebe:ioMapping>
+                <zeebe:calledDecision decisionId="risk_check" resultVariable="result"/>
+            </semantic:extensionElements>
+            <semantic:incoming>SequenceFlow_1gd6p37</semantic:incoming>
+            <semantic:outgoing>SequenceFlow_2</semantic:outgoing>
+        </semantic:businessRuleTask>
+        <semantic:serviceTask id="ServiceTask_GetCreditScore" name="Get credit score" triso:readOnly="false" implementation="##WebService">
+            <semantic:documentation>Gets credit score for prospect client</semantic:documentation>
+            <semantic:extensionElements>
+                <zeebe:taskDefinition type="calculateScore"/>
+            </semantic:extensionElements>
+            <semantic:incoming>SequenceFlow_6</semantic:incoming>
+            <semantic:outgoing>SequenceFlow_1gd6p37</semantic:outgoing>
+        </semantic:serviceTask>
+        <semantic:boundaryEvent id="ErrorBoundaryEvent_FraudDetected" name="Fraud detected" triso:readOnly="false" attachedToRef="Activity_ManualCheck">
+            <semantic:documentation>Captures error if fraud is detected</semantic:documentation>
+            <semantic:outgoing>Flow_177paze</semantic:outgoing>
+            <semantic:errorEventDefinition errorRef="Error_01bezxs" id="ErrorEventDefinition_1ylbfzv"/>
+        </semantic:boundaryEvent>
+        <semantic:sequenceFlow id="SequenceFlow_1gd6p37" triso:readOnly="false" sourceRef="ServiceTask_GetCreditScore" targetRef="BusinessRuleTask_CheckApplicationAutomatically" isImmediate="false"/>
+        <semantic:sequenceFlow id="SequenceFlow_01vh1zw" triso:readOnly="false" sourceRef="ServiceTask_RejectPolicy" targetRef="SendTask_SendRejection" isImmediate="false"/>
+        <semantic:sequenceFlow id="SequenceFlow_13" triso:readOnly="false" sourceRef="SendTask_SendRejection" targetRef="EndEvent_ApplicationRejected" isImmediate="false"/>
+        <semantic:sequenceFlow id="SequenceFlow_Red" name="Red (severe risk)" triso:readOnly="false" sourceRef="ExclusiveGateway_Risk" targetRef="ServiceTask_RejectPolicy" isImmediate="false">
+            <semantic:documentation>Automatic rejection -severe risk</semantic:documentation>
+            <semantic:conditionExpression xsi:type="semantic:tFormalExpression" triso:unparsed="false">= some risk in riskLevels satisfies risk = "red"</semantic:conditionExpression>
+        </semantic:sequenceFlow>
+        <semantic:sequenceFlow id="SequenceFlow_2" triso:readOnly="false" sourceRef="BusinessRuleTask_CheckApplicationAutomatically" targetRef="ExclusiveGateway_Risk" isImmediate="false"/>
+        <semantic:sequenceFlow id="SequenceFlow_Green" name="Green (no risk)" triso:readOnly="false" sourceRef="ExclusiveGateway_Risk" targetRef="ServiceTask_DeliverPolicy" isImmediate="false">
+            <semantic:documentation>Automatic approval - no risk</semantic:documentation>
+        </semantic:sequenceFlow>
+        <semantic:sequenceFlow id="SequenceFlow_10" triso:readOnly="false" sourceRef="ServiceTask_DeliverPolicy" targetRef="SendTask_SendPolicy" isImmediate="false"/>
+        <semantic:sequenceFlow id="SequenceFlow_11" triso:readOnly="false" sourceRef="SendTask_SendPolicy" targetRef="EndEvent_ApplicationIssued" isImmediate="false"/>
+        <semantic:sequenceFlow id="SequenceFlow_ApplicationAccepted" name="Application accepted" triso:readOnly="false" sourceRef="ExclusiveGateway_Decision" targetRef="ServiceTask_DeliverPolicy" isImmediate="false">
+            <semantic:conditionExpression xsi:type="semantic:tFormalExpression" triso:unparsed="false">= approved</semantic:conditionExpression>
+        </semantic:sequenceFlow>
+        <semantic:sequenceFlow id="SequenceFlow_ApplicationDeclined" name="Application declined" triso:readOnly="false" sourceRef="ExclusiveGateway_Decision" targetRef="ServiceTask_RejectPolicy" isImmediate="false">
+            <semantic:conditionExpression xsi:type="semantic:tFormalExpression" triso:unparsed="false">= not(approved)</semantic:conditionExpression>
+        </semantic:sequenceFlow>
+        <semantic:sequenceFlow id="SequenceFlow_6" triso:readOnly="false" sourceRef="StartEvent_ApplicationReceived" targetRef="ServiceTask_GetCreditScore" isImmediate="false"/>
+        <semantic:sequenceFlow id="SequenceFlow_Yellow" name="Yellow (moderate risk)" triso:readOnly="false" sourceRef="ExclusiveGateway_Risk" targetRef="Activity_ManualCheck" isImmediate="false">
+            <semantic:documentation>Manual check - moderate risk</semantic:documentation>
+            <semantic:conditionExpression xsi:type="semantic:tFormalExpression" triso:unparsed="false">= every risk in riskLevels satisfies risk = "yellow"</semantic:conditionExpression>
+        </semantic:sequenceFlow>
+        <semantic:sequenceFlow id="Flow_0ik8h65" triso:readOnly="false" sourceRef="Activity_ManualCheck" targetRef="ExclusiveGateway_Decision" isImmediate="false"/>
+        <semantic:sequenceFlow id="Flow_177paze" triso:readOnly="false" sourceRef="ErrorBoundaryEvent_FraudDetected" targetRef="SendTask_ReportFraud" isImmediate="false"/>
+        <semantic:sequenceFlow id="Flow_0cvhizd" triso:readOnly="false" sourceRef="SendTask_ReportFraud" targetRef="TerminateEvent_ApplicationCanceledFraud" isImmediate="false"/>
+    </semantic:process>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_1" name="Page 1">
+        <bpmndi:BPMNPlane bpmnElement="Collaboration_CustomerOnboarding" id="BPMNPlane_1" trisobpmn:diagramWidth="1686" trisobpmn:diagramHeight="1050">
+            <bpmndi:BPMNShape id="Participant_0477s11_di" bpmnElement="Participant_00" isHorizontal="true" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="156" y="71" width="1470" height="599"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="599" width="16" x="156" y="71"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="_BPMNShape_StartEvent_4" bpmnElement="StartEvent_ApplicationReceived" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="206" y="113" width="36" height="36"/>
+                <bpmndi:BPMNLabel color:color="#000000" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="31" width="53" x="199" y="154"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="BPMNShape_1quvn5y" bpmnElement="Activity_1ke2ixr" isExpanded="true" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="200" y="240" width="340" height="142"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" labelStyle="LSBPMNDiagram_1_0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="BPMNShape_1g4vznl" bpmnElement="EndMessageEvent_Timeout" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="472" y="284" width="36" height="36"/>
+                <bpmndi:BPMNLabel color:color="#000000" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="16" width="81" x="450" y="327"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Event_1urac9n_di" bpmnElement="StartErrorEvent_Timeout" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="220" y="284" width="36" height="36"/>
+                <bpmndi:BPMNLabel color:color="#000000" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="16" width="40" x="219" y="327"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Activity_1ryuh2x_di" bpmnElement="UserTask_HandleTimeout" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="310" y="262" width="100" height="80"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="16" width="94" x="313" y="294"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Activity_0q5qosr_di" bpmnElement="Activity_0vp33kx" isExpanded="true" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="200" y="400" width="440" height="250"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" labelStyle="LSBPMNDiagram_1_0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Event_1xf7lj1_di" bpmnElement="StartMessageEvent_CancellationRequested" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="220" y="444" width="36" height="36"/>
+                <bpmndi:BPMNLabel color:color="#000000" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="31" width="59" x="209" y="487"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Activity_0kuhdn6_di" bpmnElement="ServiceTask_CancelApplication" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="310" y="422" width="100" height="80"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="16" width="94" x="313" y="454"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Event_1ck9hv0_di" bpmnElement="EndMessageEvent_InformCustomer" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="552" y="444" width="36" height="36"/>
+                <bpmndi:BPMNLabel color:color="#000000" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="47" width="87" x="527" y="487"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Gateway_1a6njvb_di" bpmnElement="ParallelGateway_CancelApplication" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="465" y="437" width="50" height="50"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" labelStyle="LSBPMNDiagram_1_0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Event_0rel1ew_di" bpmnElement="EndMessageEvent_InformOperations" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="552" y="552" width="36" height="36"/>
+                <bpmndi:BPMNLabel color:color="#000000" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="62" width="84" x="528" y="595"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Activity_0avcol9_di" bpmnElement="Activity_ManualCheck" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="770" y="217" width="100" height="80"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="16" width="94" x="773" y="249"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="_BPMNShape_EndEvent_2" bpmnElement="EndEvent_ApplicationIssued" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="1555" y="113" width="36" height="36"/>
+                <bpmndi:BPMNLabel color:color="#000000" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="31" width="54" x="1548" y="154"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="_BPMNShape_SendTask_2" bpmnElement="SendTask_SendPolicy" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="1400" y="91" width="100" height="80"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="16" width="94" x="1403" y="123"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_3" bpmnElement="ServiceTask_DeliverPolicy" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="1249" y="91" width="100" height="80"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="31" width="94" x="1252" y="115.5"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="_BPMNShape_ExclusiveGateway_3" bpmnElement="ExclusiveGateway_Decision" isMarkerVisible="true" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="1165" y="232" width="50" height="50"/>
+                <bpmndi:BPMNLabel color:color="#000000" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="16" width="49" x="1239" y="247"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="_BPMNShape_EndEvent_3" bpmnElement="EndEvent_ApplicationRejected" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="1555" y="516" width="36" height="36"/>
+                <bpmndi:BPMNLabel color:color="#000000" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="31" width="54" x="1547" y="557"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="ServiceTask_0o3o39j_di" bpmnElement="ServiceTask_RejectPolicy" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="1249" y="494" width="100" height="80"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="16" width="94" x="1252" y="526"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Activity_04dzezq_di" bpmnElement="SendTask_SendRejection" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="1400" y="494" width="100" height="80"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="16" width="94" x="1403" y="526"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Activity_0aif1w3_di" bpmnElement="SendTask_ReportFraud" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="940" y="340" width="100" height="80"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="16" width="94" x="943" y="372"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Event_1h4o5lj_di" bpmnElement="TerminateEvent_ApplicationCanceledFraud" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="1092" y="362" width="36" height="36"/>
+                <bpmndi:BPMNLabel color:color="#000000" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="47" width="78" x="1071" y="405"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="_BPMNShape_ExclusiveGateway_2" bpmnElement="ExclusiveGateway_Risk" isMarkerVisible="true" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="635" y="106" width="50" height="50"/>
+                <bpmndi:BPMNLabel color:color="#000000" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="16" width="28" x="646" y="81"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="_BPMNShape_BusinessRuleTask_2" bpmnElement="BusinessRuleTask_CheckApplicationAutomatically" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="460" y="91" width="100" height="80"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="31" width="94" x="463" y="115.5"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="ServiceTask_0tixwo5_di" bpmnElement="ServiceTask_GetCreditScore" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="300" y="91" width="100" height="80"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="16" width="94" x="303" y="123"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Event_0pxe3bh_di" bpmnElement="ErrorBoundaryEvent_FraudDetected" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="852" y="279" width="36" height="36"/>
+                <bpmndi:BPMNLabel color:color="#000000" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="16" width="74" x="893" y="301"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge id="BPMNEdge_03tyru5" color:border-color="#000000" bpmnElement="Flow_151qlxc">
+                <di:waypoint x="256" y="302"/>
+                <di:waypoint x="310" y="302"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" triso:labelPosition="midbottom" labelStyle="LSBPMNDiagram_1_0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="BPMNEdge_0vhug0y" color:border-color="#000000" bpmnElement="Flow_0dppbeu">
+                <di:waypoint x="410" y="302"/>
+                <di:waypoint x="472" y="302"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" triso:labelPosition="midbottom" labelStyle="LSBPMNDiagram_1_0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Flow_12nmks0_di" color:border-color="#000000" bpmnElement="Flow_12nmks0">
+                <di:waypoint x="256" y="462"/>
+                <di:waypoint x="310" y="462"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" triso:labelPosition="midbottom" labelStyle="LSBPMNDiagram_1_0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Flow_19iipc6_di" color:border-color="#000000" bpmnElement="Flow_19iipc6">
+                <di:waypoint x="410" y="462"/>
+                <di:waypoint x="465" y="462"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" triso:labelPosition="midbottom" labelStyle="LSBPMNDiagram_1_0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Flow_0qrakss_di" color:border-color="#000000" bpmnElement="Flow_0qrakss">
+                <di:waypoint x="515" y="462"/>
+                <di:waypoint x="552" y="462"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" triso:labelPosition="midbottom" labelStyle="LSBPMNDiagram_1_0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Flow_1jml1az_di" color:border-color="#000000" bpmnElement="Flow_1jml1az">
+                <di:waypoint x="490" y="487"/>
+                <di:waypoint x="490" y="570"/>
+                <di:waypoint x="552" y="570"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" triso:labelPosition="midbottom" labelStyle="LSBPMNDiagram_1_0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="SequenceFlow_1gd6p37_di" color:border-color="#000000" bpmnElement="SequenceFlow_1gd6p37">
+                <di:waypoint x="400" y="131"/>
+                <di:waypoint x="460" y="131"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" triso:labelPosition="midbottom" labelStyle="LSBPMNDiagram_1_0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="SequenceFlow_01vh1zw_di" color:border-color="#000000" bpmnElement="SequenceFlow_01vh1zw">
+                <di:waypoint x="1349" y="534"/>
+                <di:waypoint x="1400" y="534"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:labelPosition="custom" labelStyle="LSBPMNDiagram_1_0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_13" color:border-color="#000000" bpmnElement="SequenceFlow_13">
+                <di:waypoint x="1500" y="534"/>
+                <di:waypoint x="1555" y="534"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:labelPosition="custom" labelStyle="LSBPMNDiagram_1_0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_16" color:border-color="#000000" bpmnElement="SequenceFlow_Red">
+                <di:waypoint x="660" y="156"/>
+                <di:waypoint x="660" y="534"/>
+                <di:waypoint x="1249" y="534"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:labelPosition="custom" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="16" width="85" x="666" y="513"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" color:border-color="#000000" bpmnElement="SequenceFlow_2">
+                <di:waypoint x="560" y="131"/>
+                <di:waypoint x="635" y="131"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:labelPosition="custom" labelStyle="LSBPMNDiagram_1_0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_7" color:border-color="#000000" bpmnElement="SequenceFlow_Green">
+                <di:waypoint x="685" y="131"/>
+                <di:waypoint x="1249" y="131"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:labelPosition="custom" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="16" width="74" x="683" y="136"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_10" color:border-color="#000000" bpmnElement="SequenceFlow_10">
+                <di:waypoint x="1349" y="131"/>
+                <di:waypoint x="1400" y="131"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:labelPosition="custom" labelStyle="LSBPMNDiagram_1_0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_11" color:border-color="#000000" bpmnElement="SequenceFlow_11">
+                <di:waypoint x="1500" y="131"/>
+                <di:waypoint x="1555" y="131"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:labelPosition="custom" labelStyle="LSBPMNDiagram_1_0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_8" color:border-color="#000000" bpmnElement="SequenceFlow_ApplicationAccepted">
+                <di:waypoint x="1190" y="232"/>
+                <di:waypoint x="1190" y="149"/>
+                <di:waypoint x="1249" y="149"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:labelPosition="custom" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="31" width="53" x="1208" y="185"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_12" color:border-color="#000000" bpmnElement="SequenceFlow_ApplicationDeclined">
+                <di:waypoint x="1190" y="282"/>
+                <di:waypoint x="1190" y="515"/>
+                <di:waypoint x="1249" y="515"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:labelPosition="custom" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="31" width="53" x="1200" y="294"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_6" color:border-color="#000000" bpmnElement="SequenceFlow_6">
+                <di:waypoint x="242" y="131"/>
+                <di:waypoint x="300" y="131"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:labelPosition="custom" labelStyle="LSBPMNDiagram_1_0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Flow_0o00may_di" color:border-color="#000000" bpmnElement="SequenceFlow_Yellow">
+                <di:waypoint x="660" y="156"/>
+                <di:waypoint x="660" y="257"/>
+                <di:waypoint x="770" y="257"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:labelPosition="custom" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="31" width="84" x="669" y="226"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Flow_0ik8h65_di" color:border-color="#000000" bpmnElement="Flow_0ik8h65">
+                <di:waypoint x="870" y="257"/>
+                <di:waypoint x="1165" y="257"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" triso:labelPosition="midbottom" labelStyle="LSBPMNDiagram_1_0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Flow_177paze_di" color:border-color="#000000" bpmnElement="Flow_177paze">
+                <di:waypoint x="870" y="315"/>
+                <di:waypoint x="870" y="380"/>
+                <di:waypoint x="940" y="380"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" triso:labelPosition="midbottom" labelStyle="LSBPMNDiagram_1_0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Flow_0cvhizd_di" color:border-color="#000000" bpmnElement="Flow_0cvhizd">
+                <di:waypoint x="1040" y="380"/>
+                <di:waypoint x="1092" y="380"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" triso:labelPosition="midbottom" labelStyle="LSBPMNDiagram_1_0"/>
+            </bpmndi:BPMNEdge>
+        </bpmndi:BPMNPlane>
+        <bpmndi:BPMNLabelStyle id="LSBPMNDiagram_1_0">
+            <dc:Font name="arial,helvetica,sans-serif" size="11" isBold="false" isItalic="false" isStrikeThrough="false" isUnderline="false"/>
+        </bpmndi:BPMNLabelStyle>
+    </bpmndi:BPMNDiagram>
+</semantic:definitions>
