@@ -16,12 +16,14 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      deployments: write
+      id-token: write
       packages: write
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Set up JDK 11
-      uses: actions/setup-java@v3
+      uses: actions/setup-java@v4
       with:
         java-version: '11'
         distribution: 'temurin'
@@ -30,12 +32,35 @@ jobs:
       run: mvn -P analysis --batch-mode deploy --file pom.xml
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Upload static files as artifact
+      id: deployment
+      uses: actions/upload-pages-artifact@v3 # or specific "vX.X.X" version tag for this action
+      with:
+        path: target/site/
+
     - name: Publish to Github pages
       # See https://github.com/marketplace/actions/github-pages-action
-      uses: peaceiris/actions-gh-pages@v3
+      uses: peaceiris/actions-gh-pages@v4
       with:
+        # github_token: ${{ secrets.GITHUB_TOKEN }}
         personal_token: ${{ secrets.TSTEPHEN_GITHUB_MIWG_TOKEN }}
         external_repository: bpmn-miwg/bpmn-miwg-tools
         keep_files: true
         publish_dir: target/site
         publish_branch: gh-pages
+
+  # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      pages: write
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
