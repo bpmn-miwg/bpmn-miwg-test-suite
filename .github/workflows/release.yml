@@ -1,11 +1,7 @@
-name: Create and Release Zip
+name: Create Release Zip
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: "Version"
-        required: true
-        default: "v0.0.1"
+  release:
+    types: [created]
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
@@ -21,17 +17,6 @@ jobs:
           zip -r ../release.zip .
           cd ..
 
-      - name: Create GitHub release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.event.inputs.version }}  # The version tag that triggered the workflow
-          release_name: ${{ github.event.inputs.version }}
-          draft: true
-          prerelease: true
-
       - name: Upload release asset
         uses: actions/upload-release-asset@v1
         env:
@@ -39,5 +24,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./release.zip
-          asset_name: bpmn-miwg-test-suite-${{ github.event.inputs.version }}.zip
+          asset_name: bpmn-miwg-test-suite-${{ github.event.release.tag_name }}.zip
           asset_content_type: application/zip
