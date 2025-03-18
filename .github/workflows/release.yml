@@ -1,5 +1,11 @@
 name: Create and Release Zip
 on:
+  workflow_dispatch:
+    inputs:
+      input1:
+        description: "Version"
+        required: true
+        default: "v0.0.1"
   push:
     tags:
       - 'v*.*.*'  # Triggers the workflow on version tag pushes (e.g., v1.0.0)
@@ -36,5 +42,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./release.zip
-          asset_name: release.zip
+          asset_name: bpmn-miwg-test-suite-${{ github.ref }}.zip
           asset_content_type: application/zip
