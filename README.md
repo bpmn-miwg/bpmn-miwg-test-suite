@@ -46,7 +46,7 @@ Everybody is welcome to test BPMN tools and submit results to the working group,
 Here is how you do it:
 
 ### 1. Download Test Cases
-First download the [latest version of the BPMN Model Interchange Test Suite](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/archive/master.zip) and unpack it.
+First download the [latest version of the BPMN Model Interchange Test Suite](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/releases/download/v0.0.8/bpmn-miwg-test-suite-v0.0.8.zip) and unpack it.
 There is a directory called `Reference`, which contains the files needed for testing.
 Next to that, there will be multiple folders with test results of other tools.
 
