@@ -1,0 +1,36 @@
+name: Create and Release Zip
+on:
+  push:
+    tags:
+      - 'v*.*.*'  # Triggers the workflow on version tag pushes (e.g., v1.0.0)
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Create zip file
+        run: |
+          mkdir release
+          cp -r Reference/*.bpmn LICENSE.txt README.md release/
+          cd release
+          zip -r ../release.zip .
+          cd ..
+
+      - name: Create GitHub release
+        id: create_release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ github.ref }}  # The version tag that triggered the workflow
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./release.zip
+          asset_name: release.zip
+          asset_content_type: application/zip
