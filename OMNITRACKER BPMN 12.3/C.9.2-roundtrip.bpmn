@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sem:definitions expressionLanguage="http://www.omninet.de/bpmn/expressions/v1" typeLanguage="http://www.omninet.de/bpmn/types/v1" targetNamespace="http://www.omninet.de/bpmn/definitions/v1" xmlns:sem="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:ot="http://www.omninet.de/ot/bpmn/v1">
+	<sem:itemDefinition id="_OT_NAMESPACES_">
+		<sem:extensionElements>
+			<ot:namespace id="_1" name="MIWG Test Cases" alias="MiwgTestCases">
+				<ot:schemaObjectDescription>
+					<ot:translatedText lang="de"/>
+				</ot:schemaObjectDescription>
+			</ot:namespace>
+			<ot:namespace id="_2" name="C 9.2" alias="C92" parent="_1">
+				<ot:schemaObjectDescription>
+					<ot:translatedText lang="en"/>
+				</ot:schemaObjectDescription>
+			</ot:namespace>
+		</sem:extensionElements>
+	</sem:itemDefinition>
+	<sem:error id="_3" name="Error_FraudDetected" ot:alias="error1" ot:namespace="_2" errorCode="02"/>
+	<sem:message id="_4" name="Message_DocumentRequested" ot:alias="message1" ot:namespace="_2"/>
+	<sem:message id="_5" name="Message_FraudSuspected" ot:alias="message2" ot:namespace="_2"/>
+	<sem:collaboration id="_7">
+		<sem:participant id="_8" name="Manual Check" processRef="_9"/>
+	</sem:collaboration>
+	<sem:process name="Manual Check" ot:alias="process1" ot:displayName="Manual Check" id="_9">
+		<sem:extensionElements>
+			<ot:startPermission/>
+		</sem:extensionElements>
+		<sem:sequenceFlow id="_10" ot:alias="flow11" sourceRef="_11" targetRef="_12"/>
+		<sem:sequenceFlow id="_13" ot:alias="flow10" sourceRef="_14" targetRef="_15"/>
+		<sem:sequenceFlow id="_16" ot:alias="flow9" sourceRef="_17" targetRef="_14"/>
+		<sem:endEvent id="_15" name="Manually Decided" ot:displayName="Manually Decided" ot:alias="event4"/>
+		<sem:userTask id="_14" name="Decide on application" ot:displayName="Decide on application" ot:alias="task1">
+			<sem:extensionElements>
+				<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" displayOkButton="false" displayApplyButton="false" formTitle="" otObject="" reassignMode="explicit"/>
+			</sem:extensionElements>
+		</sem:userTask>
+		<sem:endEvent id="_12" name="Timeout" ot:displayName="Timeout" ot:alias="event3">
+			<sem:dataInput id="_d_18"/>
+			<sem:inputSet>
+				<sem:dataInputRefs>_d_18</sem:dataInputRefs>
+			</sem:inputSet>
+			<sem:errorEventDefinition errorRef="_3"/>
+		</sem:endEvent>
+		<sem:boundaryEvent id="_11" name="Timeout (7 days)" ot:displayName="Timeout (7 days)" ot:alias="event2" attachedToRef="_14">
+			<sem:timerEventDefinition>
+				<sem:timeDuration>P7D</sem:timeDuration>
+			</sem:timerEventDefinition>
+		</sem:boundaryEvent>
+		<sem:startEvent id="_17" name="Decide Manually" ot:displayName="Decide Manually" ot:alias="event1"/>
+		<sem:subProcess id="_19" name="Activity_0uvp3cb" ot:displayName="Activity_0uvp3cb" ot:subProcessAlias="subProcess1" ot:alias="process2" triggeredByEvent="true">
+			<sem:sequenceFlow id="_20" ot:alias="flow1" sourceRef="_21" targetRef="_22"/>
+			<sem:endEvent id="_22" name="Document Received" ot:displayName="Document Received" ot:alias="event6"/>
+			<sem:startEvent id="_21" name="Document requested" ot:displayName="Document requested" ot:alias="event5" isInterrupting="false">
+				<sem:dataOutput id="_d_23"/>
+				<sem:outputSet>
+					<sem:dataOutputRefs>_d_23</sem:dataOutputRefs>
+				</sem:outputSet>
+				<sem:messageEventDefinition messageRef="_4"/>
+			</sem:startEvent>
+		</sem:subProcess>
+		<sem:subProcess id="_24" name="Activity_02a6b2h" ot:displayName="Activity_02a6b2h" ot:subProcessAlias="subProcess3" ot:alias="process4" triggeredByEvent="true">
+			<sem:sequenceFlow id="_25" ot:alias="flow7" sourceRef="_26" targetRef="_27"/>
+			<sem:sequenceFlow id="_28" name="Yes" ot:displayName="Yes" ot:alias="flow6" sourceRef="_27" targetRef="_29">
+				<sem:conditionExpression>=fraud</sem:conditionExpression>
+			</sem:sequenceFlow>
+			<sem:sequenceFlow id="_30" name="No" ot:displayName="No" ot:alias="flow8" sourceRef="_27" targetRef="_31"/>
+			<sem:sequenceFlow id="_32" ot:alias="flow5" sourceRef="_33" targetRef="_26"/>
+			<sem:endEvent id="_29" name="Fraud Detected" ot:displayName="Fraud Detected" ot:alias="event10">
+				<sem:dataInput id="_d_34"/>
+				<sem:inputSet>
+					<sem:dataInputRefs>_d_34</sem:dataInputRefs>
+				</sem:inputSet>
+				<sem:errorEventDefinition errorRef="_3"/>
+			</sem:endEvent>
+			<sem:startEvent id="_33" name="Fraud suspected" ot:displayName="Fraud suspected" ot:alias="event9" isInterrupting="false">
+				<sem:dataOutput id="_d_35"/>
+				<sem:outputSet>
+					<sem:dataOutputRefs>_d_35</sem:dataOutputRefs>
+				</sem:outputSet>
+				<sem:messageEventDefinition messageRef="_5"/>
+			</sem:startEvent>
+			<sem:userTask id="_26" name="Check for Fraud" ot:displayName="Check for Fraud" ot:alias="task4">
+				<sem:extensionElements>
+					<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" displayOkButton="false" displayApplyButton="false" formTitle="" otObject="" reassignMode="explicit"/>
+				</sem:extensionElements>
+			</sem:userTask>
+			<sem:exclusiveGateway id="_27" name="Fraud detected?" ot:displayName="Fraud detected?" ot:alias="gateway1" default="_30"/>
+			<sem:endEvent id="_31" name="Fraud no detected" ot:displayName="Fraud no detected" ot:alias="event11"/>
+		</sem:subProcess>
+		<sem:subProcess id="_36" name="Activity_1esx1s7" ot:displayName="Activity_1esx1s7" ot:subProcessAlias="subProcess2" ot:alias="process3" triggeredByEvent="true">
+			<sem:sequenceFlow id="_37" ot:alias="flow2" sourceRef="_38" targetRef="_39"/>
+			<sem:sequenceFlow id="_40" ot:alias="flow3" sourceRef="_41" targetRef="_42"/>
+			<sem:sequenceFlow id="_43" ot:alias="flow4" sourceRef="_39" targetRef="_41"/>
+			<sem:sendTask id="_39" name="Notify customer about delay" ot:displayName="Notify customer about delay" ot:alias="task3">
+				<sem:ioSpecification>
+					<sem:dataInput id="_msgdata_39"/>
+					<sem:inputSet>
+						<sem:dataInputRefs>_msgdata_39</sem:dataInputRefs>
+					</sem:inputSet>
+					<sem:outputSet/>
+				</sem:ioSpecification>
+			</sem:sendTask>
+			<sem:userTask id="_41" name="Accelerate decision making" ot:displayName="Accelerate decision making" ot:alias="task2">
+				<sem:extensionElements>
+					<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" displayOkButton="false" displayApplyButton="false" formTitle="" otObject="" reassignMode="explicit"/>
+				</sem:extensionElements>
+			</sem:userTask>
+			<sem:endEvent id="_42" name="Decision accelerated" ot:displayName="Decision accelerated" ot:alias="event8"/>
+			<sem:startEvent id="_38" name="Accelerated decision" ot:displayName="Accelerated decision" ot:alias="event7" isInterrupting="false">
+				<sem:timerEventDefinition>
+					<sem:timeCycle>R1/P5D</sem:timeCycle>
+				</sem:timerEventDefinition>
+			</sem:startEvent>
+		</sem:subProcess>
+	</sem:process>
+	<bpmndi:BPMNDiagram id="_6" name="Diagram for Manual Check">
+		<bpmndi:BPMNPlane ot:namespace="_2" ot:alias="diagram1" ot:diagramType="executable" ot:diagramStatus="new" ot:createdBy="User(&quot;superuser&quot;)" ot:createdDate="01.04.2025 12:49:29" ot:lastChangedBy="User(&quot;superuser&quot;)" ot:lastChangedDate="01.04.2025 09:59:09" bpmnElement="_7">
+			<bpmndi:BPMNShape bpmnElement="_8" isHorizontal="true">
+				<dc:Bounds x="0" y="0" width="610" height="720"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge bpmnElement="_10">
+				<di:waypoint x="230" y="128"/>
+				<di:waypoint x="230" y="160"/>
+				<di:waypoint x="328" y="160"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_13">
+				<di:waypoint x="246" y="70"/>
+				<di:waypoint x="328" y="70"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_16">
+				<di:waypoint x="98" y="70"/>
+				<di:waypoint x="146" y="70"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNShape bpmnElement="_15">
+				<dc:Bounds x="328" y="52" width="36" height="36"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_14">
+				<dc:Bounds x="146" y="30" width="100" height="80"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_12">
+				<dc:Bounds x="328" y="142" width="36" height="36"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_11">
+				<dc:Bounds x="212" y="92" width="36" height="36"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_17">
+				<dc:Bounds x="62" y="52" width="36" height="36"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge bpmnElement="_20">
+				<di:waypoint x="106" y="270"/>
+				<di:waypoint x="150" y="270"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNShape bpmnElement="_22">
+				<dc:Bounds x="302" y="252" width="36" height="36"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_21">
+				<dc:Bounds x="70" y="252" width="36" height="36"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_19">
+				<dc:Bounds x="50" y="210" width="314" height="130"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge bpmnElement="_25">
+				<di:waypoint x="256" y="570"/>
+				<di:waypoint x="295" y="570"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_28">
+				<di:waypoint x="320" y="595"/>
+				<di:waypoint x="320" y="640"/>
+				<di:waypoint x="392" y="640"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_30">
+				<di:waypoint x="345" y="570"/>
+				<di:waypoint x="392" y="570"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_32">
+				<di:waypoint x="112" y="570"/>
+				<di:waypoint x="156" y="570"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNShape bpmnElement="_29">
+				<dc:Bounds x="392" y="622" width="36" height="36"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_33">
+				<dc:Bounds x="76" y="552" width="36" height="36"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_26">
+				<dc:Bounds x="156" y="530" width="100" height="80"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_27" isMarkerVisible="true">
+				<dc:Bounds x="295" y="545" width="50" height="50"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_31">
+				<dc:Bounds x="392" y="552" width="36" height="36"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_24">
+				<dc:Bounds x="50" y="510" width="410" height="190"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge bpmnElement="_37">
+				<di:waypoint x="112" y="420"/>
+				<di:waypoint x="150" y="420"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_40">
+				<di:waypoint x="400" y="420"/>
+				<di:waypoint x="446" y="420"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_43">
+				<di:waypoint x="250" y="420"/>
+				<di:waypoint x="300" y="420"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNShape bpmnElement="_39">
+				<dc:Bounds x="150" y="380" width="100" height="80"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_41">
+				<dc:Bounds x="300" y="380" width="100" height="80"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_42">
+				<dc:Bounds x="446" y="402" width="36" height="36"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_38">
+				<dc:Bounds x="76" y="402" width="36" height="36"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_36">
+				<dc:Bounds x="50" y="360" width="540" height="130"/>
+			</bpmndi:BPMNShape>
+		</bpmndi:BPMNPlane>
+	</bpmndi:BPMNDiagram>
+</sem:definitions>

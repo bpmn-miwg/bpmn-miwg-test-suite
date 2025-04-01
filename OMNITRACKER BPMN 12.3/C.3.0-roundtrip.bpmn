@@ -2,160 +2,175 @@
 <sem:definitions expressionLanguage="http://www.omninet.de/bpmn/expressions/v1" typeLanguage="http://www.omninet.de/bpmn/types/v1" targetNamespace="http://www.omninet.de/bpmn/definitions/v1" xmlns:sem="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:ot="http://www.omninet.de/ot/bpmn/v1">
 	<sem:itemDefinition id="_OT_NAMESPACES_">
 		<sem:extensionElements>
-			<ot:namespace id="_1" name="MIWG Tests 2022" alias="MiwgTests2022">
+			<ot:namespace id="_1" name="MIWG Test Cases" alias="MiwgTestCases">
 				<ot:schemaObjectDescription>
 					<ot:translatedText lang="de"/>
 				</ot:schemaObjectDescription>
 			</ot:namespace>
-			<ot:namespace id="_2" name="01. Import" alias="Import" parent="_1">
-				<ot:schemaObjectDescription>
-					<ot:translatedText lang="de"/>
-				</ot:schemaObjectDescription>
-			</ot:namespace>
-			<ot:namespace id="_3" name="C.3.0" alias="C30" parent="_2">
+			<ot:namespace id="_2" name="C.3.0" alias="C30" parent="_1">
 				<ot:schemaObjectDescription>
 					<ot:translatedText lang="de"/>
 				</ot:schemaObjectDescription>
 			</ot:namespace>
 		</sem:extensionElements>
 	</sem:itemDefinition>
-	<sem:message id="_4" name="Service Level" ot:alias="message1" ot:namespace="_3"/>
-	<sem:process name="Fridge Repair Process" ot:alias="process1" ot:displayName="Fridge Repair Process" id="_6">
+	<sem:message id="_3" name="Service Level" ot:alias="message1" ot:namespace="_2"/>
+	<sem:process name="Fridge Repair Process" ot:alias="process1" ot:displayName="Fridge Repair Process" id="_5">
 		<sem:extensionElements>
 			<ot:startPermission/>
 		</sem:extensionElements>
-		<sem:sequenceFlow id="_7" ot:alias="flow1" sourceRef="_8" targetRef="_9"/>
-		<sem:sequenceFlow id="_10" name="Warranty" ot:displayName="Warranty" ot:alias="flow2" sourceRef="_9" targetRef="_11"/>
-		<sem:sequenceFlow id="_12" name="Emergency service" ot:displayName="Emergency service" ot:alias="flow3" sourceRef="_9" targetRef="_13"/>
-		<sem:sequenceFlow id="_14" name="Regular repair service" ot:displayName="Regular repair service" ot:alias="flow4" sourceRef="_9" targetRef="_15"/>
-		<sem:sequenceFlow id="_16" name="Standard" ot:displayName="Standard" ot:alias="flow5" sourceRef="_15" targetRef="_17"/>
-		<sem:sequenceFlow id="_18" name="Premium" ot:displayName="Premium" ot:alias="flow6" sourceRef="_15" targetRef="_19">
+		<sem:sequenceFlow id="_6" ot:alias="flow1" sourceRef="_7" targetRef="_8"/>
+		<sem:sequenceFlow id="_9" name="Warranty" ot:displayName="Warranty" ot:alias="flow2" sourceRef="_8" targetRef="_10"/>
+		<sem:sequenceFlow id="_11" name="Emergency service" ot:displayName="Emergency service" ot:alias="flow3" sourceRef="_8" targetRef="_12"/>
+		<sem:sequenceFlow id="_13" name="Regular repair service" ot:displayName="Regular repair service" ot:alias="flow4" sourceRef="_8" targetRef="_14"/>
+		<sem:sequenceFlow id="_15" name="Standard" ot:displayName="Standard" ot:alias="flow5" sourceRef="_14" targetRef="_16"/>
+		<sem:sequenceFlow id="_17" name="Premium" ot:displayName="Premium" ot:alias="flow6" sourceRef="_14" targetRef="_18">
 			<sem:conditionExpression>Service Level == 'Premium'</sem:conditionExpression>
 		</sem:sequenceFlow>
-		<sem:sequenceFlow id="_20" ot:alias="flow7" sourceRef="_17" targetRef="_21"/>
-		<sem:sequenceFlow id="_22" ot:alias="flow8" sourceRef="_19" targetRef="_21"/>
-		<sem:sequenceFlow id="_23" ot:alias="flow9" sourceRef="_13" targetRef="_24"/>
-		<sem:sequenceFlow id="_25" ot:alias="flow10" sourceRef="_11" targetRef="_26"/>
-		<sem:sequenceFlow id="_27" name="yes" ot:displayName="yes" ot:alias="flow11" sourceRef="_24" targetRef="_28"/>
-		<sem:sequenceFlow id="_29" name="no" ot:displayName="no" ot:alias="flow12" sourceRef="_24" targetRef="_11"/>
-		<sem:sequenceFlow id="_30" ot:alias="flow13" sourceRef="_31" targetRef="_8"/>
-		<sem:sequenceFlow id="_32" ot:alias="flow14" sourceRef="_33" targetRef="_13"/>
-		<sem:sequenceFlow id="_34" ot:alias="flow15" sourceRef="_35" targetRef="_19"/>
-		<sem:startEvent id="_31" name="Receive customer request" ot:displayName="Receive customer request" ot:alias="event1">
+		<sem:sequenceFlow id="_19" ot:alias="flow7" sourceRef="_16" targetRef="_20"/>
+		<sem:sequenceFlow id="_21" ot:alias="flow8" sourceRef="_18" targetRef="_20"/>
+		<sem:sequenceFlow id="_22" ot:alias="flow9" sourceRef="_12" targetRef="_23"/>
+		<sem:sequenceFlow id="_24" ot:alias="flow10" sourceRef="_10" targetRef="_25"/>
+		<sem:sequenceFlow id="_26" name="yes" ot:displayName="yes" ot:alias="flow11" sourceRef="_23" targetRef="_27"/>
+		<sem:sequenceFlow id="_28" name="no" ot:displayName="no" ot:alias="flow12" sourceRef="_23" targetRef="_10"/>
+		<sem:sequenceFlow id="_29" ot:alias="flow13" sourceRef="_30" targetRef="_7"/>
+		<sem:sequenceFlow id="_31" ot:alias="flow14" sourceRef="_32" targetRef="_12"/>
+		<sem:sequenceFlow id="_33" ot:alias="flow15" sourceRef="_34" targetRef="_18"/>
+		<sem:startEvent id="_30" name="Receive customer request" ot:displayName="Receive customer request" ot:alias="event1">
+			<sem:dataOutput id="_d_35"/>
+			<sem:outputSet>
+				<sem:dataOutputRefs>_d_35</sem:dataOutputRefs>
+			</sem:outputSet>
+			<sem:messageEventDefinition messageRef="_3"/>
+		</sem:startEvent>
+		<sem:exclusiveGateway id="_8" name="Service type" ot:displayName="Service type" ot:alias="gateway1"/>
+		<sem:subProcess id="_12" name="Perform emergency repair" ot:displayName="Perform emergency repair" ot:subProcessAlias="subProcess1" ot:alias="process2">
+			<sem:documentation textFormat="application/x-ot-schemaObjectDescription">
+				<ot:schemaObjectDescription>
+					<ot:translatedText lang="de">This is a special case for handling emergencies for clients such as Hospitals or Commercial fridges.</ot:translatedText>
+				</ot:schemaObjectDescription>
+			</sem:documentation>
+		</sem:subProcess>
+		<sem:userTask id="_18" name="Perform repair (premium level)" ot:displayName="Perform repair (premium level)" ot:alias="task4">
+			<sem:documentation textFormat="application/x-ot-schemaObjectDescription">
+				<ot:schemaObjectDescription>
+					<ot:translatedText lang="de">These customers get special service in case of damage.
+This service level guarantees less than two days to solve the issue.</ot:translatedText>
+				</ot:schemaObjectDescription>
+			</sem:documentation>
+			<sem:extensionElements>
+				<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" displayOkButton="false" displayApplyButton="false" formTitle="" otObject="" reassignMode="explicit"/>
+			</sem:extensionElements>
+		</sem:userTask>
+		<sem:userTask id="_16" name="Perform repair (standard level)" ot:displayName="Perform repair (standard level)" ot:alias="task3">
+			<sem:documentation textFormat="application/x-ot-schemaObjectDescription">
+				<ot:schemaObjectDescription>
+					<ot:translatedText lang="de">Standard service level is common for most customer support.
+This level guarantees the fridge will be repaired in a reasonable amount of time.
+Customers may decide to raise the service level to Premium while waiting for the standard service to solve the issue.</ot:translatedText>
+				</ot:schemaObjectDescription>
+			</sem:documentation>
+			<sem:extensionElements>
+				<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" displayOkButton="false" displayApplyButton="false" formTitle="" otObject="" reassignMode="explicit"/>
+			</sem:extensionElements>
+		</sem:userTask>
+		<sem:userTask id="_10" name="Replace fridge" ot:displayName="Replace fridge" ot:alias="task2">
+			<sem:documentation textFormat="application/x-ot-schemaObjectDescription">
+				<ot:schemaObjectDescription>
+					<ot:translatedText lang="de">Fridge replaced if still under warranty.</ot:translatedText>
+				</ot:schemaObjectDescription>
+			</sem:documentation>
+			<sem:extensionElements>
+				<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" displayOkButton="false" displayApplyButton="false" formTitle="" otObject="" reassignMode="explicit"/>
+			</sem:extensionElements>
+		</sem:userTask>
+		<sem:userTask id="_7" name="Analyse customer request" ot:displayName="Analyse customer request" ot:alias="task1" startQuantity="2" completionQuantity="2">
+			<sem:documentation textFormat="application/x-ot-schemaObjectDescription">
+				<ot:schemaObjectDescription>
+					<ot:translatedText lang="de">First contact with customer</ot:translatedText>
+				</ot:schemaObjectDescription>
+			</sem:documentation>
+			<sem:extensionElements>
+				<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" displayOkButton="false" displayApplyButton="false" formTitle="" otObject="" reassignMode="explicit"/>
+			</sem:extensionElements>
+		</sem:userTask>
+		<sem:exclusiveGateway id="_14" name="Service level" ot:displayName="Service level" ot:alias="gateway2"/>
+		<sem:boundaryEvent id="_34" ot:alias="event6" attachedToRef="_16">
 			<sem:dataOutput id="_d_36"/>
 			<sem:outputSet>
 				<sem:dataOutputRefs>_d_36</sem:dataOutputRefs>
 			</sem:outputSet>
-			<sem:messageEventDefinition messageRef="_4"/>
-		</sem:startEvent>
-		<sem:exclusiveGateway id="_9" name="Service type" ot:displayName="Service type" ot:alias="gateway1"/>
-		<sem:subProcess id="_13" name="Perform emergency repair" ot:displayName="Perform emergency repair" ot:subProcessAlias="subProcess1" ot:alias="process2">
-			<sem:documentation textFormat="text/plain">This is a special case for handling emergencies for clients such as Hospitals or Commercial fridges.</sem:documentation>
-		</sem:subProcess>
-		<sem:userTask id="_19" name="Perform repair (premium level)" ot:displayName="Perform repair (premium level)" ot:alias="task4">
-			<sem:documentation textFormat="text/plain">These customers get special service in case of damage.
-This service level guarantees less than two days to solve the issue.</sem:documentation>
-			<sem:extensionElements>
-				<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" formTitle="" otObject="" reassignMode="explicit"/>
-			</sem:extensionElements>
-		</sem:userTask>
-		<sem:userTask id="_17" name="Perform repair (standard level)" ot:displayName="Perform repair (standard level)" ot:alias="task3">
-			<sem:documentation textFormat="text/plain">Standard service level is common for most customer support.
-This level guarantees the fridge will be repaired in a reasonable amount of time.
-Customers may decide to raise the service level to Premium while waiting for the standard service to solve the issue.</sem:documentation>
-			<sem:extensionElements>
-				<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" formTitle="" otObject="" reassignMode="explicit"/>
-			</sem:extensionElements>
-		</sem:userTask>
-		<sem:userTask id="_11" name="Replace fridge" ot:displayName="Replace fridge" ot:alias="task2">
-			<sem:documentation textFormat="text/plain">Fridge replaced if still under warranty.</sem:documentation>
-			<sem:extensionElements>
-				<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" formTitle="" otObject="" reassignMode="explicit"/>
-			</sem:extensionElements>
-		</sem:userTask>
-		<sem:userTask id="_8" name="Analyse customer request" ot:displayName="Analyse customer request" ot:alias="task1" startQuantity="2" completionQuantity="2">
-			<sem:documentation textFormat="text/plain">First contact with customer</sem:documentation>
-			<sem:extensionElements>
-				<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" formTitle="" otObject="" reassignMode="explicit"/>
-			</sem:extensionElements>
-		</sem:userTask>
-		<sem:exclusiveGateway id="_15" name="Service level" ot:displayName="Service level" ot:alias="gateway2"/>
-		<sem:boundaryEvent id="_35" ot:alias="event6" attachedToRef="_17">
-			<sem:dataOutput id="_d_37"/>
-			<sem:outputSet>
-				<sem:dataOutputRefs>_d_37</sem:dataOutputRefs>
-			</sem:outputSet>
-			<sem:messageEventDefinition messageRef="_4"/>
+			<sem:messageEventDefinition messageRef="_3"/>
 		</sem:boundaryEvent>
-		<sem:boundaryEvent id="_33" name="2 hours" ot:displayName="2 hours" ot:alias="event5" attachedToRef="_19">
+		<sem:boundaryEvent id="_32" name="2 hours" ot:displayName="2 hours" ot:alias="event5" attachedToRef="_18">
 			<sem:timerEventDefinition>
 				<sem:timeDuration>PT2H</sem:timeDuration>
 			</sem:timerEventDefinition>
 		</sem:boundaryEvent>
-		<sem:endEvent id="_21" name="Repair completed" ot:displayName="Repair completed" ot:alias="event4"/>
-		<sem:endEvent id="_28" name="Emergency repair completed" ot:displayName="Emergency repair completed" ot:alias="event3"/>
-		<sem:endEvent id="_26" name="Fridge replaced" ot:displayName="Fridge replaced" ot:alias="event2"/>
-		<sem:exclusiveGateway id="_24" name="Successful?" ot:displayName="Successful?" ot:alias="gateway3"/>
+		<sem:endEvent id="_20" name="Repair completed" ot:displayName="Repair completed" ot:alias="event4"/>
+		<sem:endEvent id="_27" name="Emergency repair completed" ot:displayName="Emergency repair completed" ot:alias="event3"/>
+		<sem:endEvent id="_25" name="Fridge replaced" ot:displayName="Fridge replaced" ot:alias="event2"/>
+		<sem:exclusiveGateway id="_23" name="Successful?" ot:displayName="Successful?" ot:alias="gateway3"/>
 	</sem:process>
-	<bpmndi:BPMNDiagram id="_5" name="Fridge Repair Process (1)">
-		<bpmndi:BPMNPlane ot:namespace="_3" ot:alias="diagram1" ot:diagramType="executable" bpmnElement="_6">
-			<bpmndi:BPMNEdge bpmnElement="_7">
+	<bpmndi:BPMNDiagram id="_4" name="Fridge Repair Process (1)">
+		<bpmndi:BPMNPlane ot:namespace="_2" ot:alias="diagram1" ot:diagramType="executable" ot:diagramStatus="new" ot:createdBy="User(&quot;superuser&quot;)" ot:createdDate="01.04.2025 13:41:56" ot:lastChangedBy="User(&quot;superuser&quot;)" ot:lastChangedDate="31.07.2024 14:05:25" bpmnElement="_5">
+			<bpmndi:BPMNEdge bpmnElement="_6">
 				<di:waypoint x="221" y="67"/>
 				<di:waypoint x="305" y="67"/>
 			</bpmndi:BPMNEdge>
-			<bpmndi:BPMNEdge bpmnElement="_10">
+			<bpmndi:BPMNEdge bpmnElement="_9">
 				<di:waypoint x="321" y="51"/>
 				<di:waypoint x="321" y="29"/>
 				<di:waypoint x="664" y="29"/>
 			</bpmndi:BPMNEdge>
-			<bpmndi:BPMNEdge bpmnElement="_12">
+			<bpmndi:BPMNEdge bpmnElement="_11">
 				<di:waypoint x="336" y="67"/>
 				<di:waypoint x="500" y="67"/>
 				<di:waypoint x="500" y="149"/>
 			</bpmndi:BPMNEdge>
-			<bpmndi:BPMNEdge bpmnElement="_14">
+			<bpmndi:BPMNEdge bpmnElement="_13">
 				<di:waypoint x="320" y="82"/>
 				<di:waypoint x="320" y="348"/>
 			</bpmndi:BPMNEdge>
-			<bpmndi:BPMNEdge bpmnElement="_16">
+			<bpmndi:BPMNEdge bpmnElement="_15">
 				<di:waypoint x="320" y="379"/>
 				<di:waypoint x="320" y="527"/>
 				<di:waypoint x="440" y="527"/>
 			</bpmndi:BPMNEdge>
-			<bpmndi:BPMNEdge bpmnElement="_18">
+			<bpmndi:BPMNEdge bpmnElement="_17">
 				<di:waypoint x="336" y="364"/>
 				<di:waypoint x="440" y="364"/>
 			</bpmndi:BPMNEdge>
-			<bpmndi:BPMNEdge bpmnElement="_20">
+			<bpmndi:BPMNEdge bpmnElement="_19">
 				<di:waypoint x="561" y="530"/>
 				<di:waypoint x="905" y="530"/>
 				<di:waypoint x="905" y="372"/>
 			</bpmndi:BPMNEdge>
-			<bpmndi:BPMNEdge bpmnElement="_22">
+			<bpmndi:BPMNEdge bpmnElement="_21">
 				<di:waypoint x="561" y="364"/>
 				<di:waypoint x="898" y="364"/>
 			</bpmndi:BPMNEdge>
-			<bpmndi:BPMNEdge bpmnElement="_23">
+			<bpmndi:BPMNEdge bpmnElement="_22">
 				<di:waypoint x="561" y="178"/>
 				<di:waypoint x="704" y="178"/>
 			</bpmndi:BPMNEdge>
-			<bpmndi:BPMNEdge bpmnElement="_25">
+			<bpmndi:BPMNEdge bpmnElement="_24">
 				<di:waypoint x="785" y="30"/>
 				<di:waypoint x="904" y="30"/>
 			</bpmndi:BPMNEdge>
-			<bpmndi:BPMNEdge bpmnElement="_27">
+			<bpmndi:BPMNEdge bpmnElement="_26">
 				<di:waypoint x="735" y="179"/>
 				<di:waypoint x="896" y="179"/>
 			</bpmndi:BPMNEdge>
-			<bpmndi:BPMNEdge bpmnElement="_29">
+			<bpmndi:BPMNEdge bpmnElement="_28">
 				<di:waypoint x="719" y="163"/>
 				<di:waypoint x="719" y="59"/>
 			</bpmndi:BPMNEdge>
-			<bpmndi:BPMNEdge bpmnElement="_30">
+			<bpmndi:BPMNEdge bpmnElement="_29">
 				<di:waypoint x="17" y="67"/>
 				<di:waypoint x="100" y="67"/>
 			</bpmndi:BPMNEdge>
-			<bpmndi:BPMNEdge bpmnElement="_32">
+			<bpmndi:BPMNEdge bpmnElement="_31">
 				<di:waypoint x="500" y="405"/>
 				<di:waypoint x="500" y="435"/>
 				<di:waypoint x="587" y="435"/>
@@ -163,7 +178,7 @@ Customers may decide to raise the service level to Premium while waiting for the
 				<di:waypoint x="468" y="260"/>
 				<di:waypoint x="468" y="208"/>
 			</bpmndi:BPMNEdge>
-			<bpmndi:BPMNEdge bpmnElement="_34">
+			<bpmndi:BPMNEdge bpmnElement="_33">
 				<di:waypoint x="500" y="573"/>
 				<di:waypoint x="500" y="592"/>
 				<di:waypoint x="587" y="592"/>
@@ -171,46 +186,46 @@ Customers may decide to raise the service level to Premium while waiting for the
 				<di:waypoint x="470" y="468"/>
 				<di:waypoint x="470" y="393"/>
 			</bpmndi:BPMNEdge>
-			<bpmndi:BPMNShape bpmnElement="_31">
+			<bpmndi:BPMNShape bpmnElement="_30">
 				<dc:Bounds x="0" y="58" width="17" height="17"/>
 			</bpmndi:BPMNShape>
-			<bpmndi:BPMNShape bpmnElement="_9" isMarkerVisible="true">
+			<bpmndi:BPMNShape bpmnElement="_8" isMarkerVisible="true">
 				<dc:Bounds x="305" y="51" width="31" height="31"/>
 			</bpmndi:BPMNShape>
-			<bpmndi:BPMNShape bpmnElement="_13">
+			<bpmndi:BPMNShape bpmnElement="_12">
 				<dc:Bounds x="440" y="149" width="121" height="59"/>
 			</bpmndi:BPMNShape>
-			<bpmndi:BPMNShape bpmnElement="_19">
+			<bpmndi:BPMNShape bpmnElement="_18">
 				<dc:Bounds x="440" y="334" width="121" height="59"/>
 			</bpmndi:BPMNShape>
-			<bpmndi:BPMNShape bpmnElement="_17">
+			<bpmndi:BPMNShape bpmnElement="_16">
 				<dc:Bounds x="440" y="502" width="121" height="59"/>
 			</bpmndi:BPMNShape>
-			<bpmndi:BPMNShape bpmnElement="_11">
+			<bpmndi:BPMNShape bpmnElement="_10">
 				<dc:Bounds x="664" y="0" width="121" height="59"/>
 			</bpmndi:BPMNShape>
-			<bpmndi:BPMNShape bpmnElement="_8">
+			<bpmndi:BPMNShape bpmnElement="_7">
 				<dc:Bounds x="100" y="37" width="121" height="59"/>
 			</bpmndi:BPMNShape>
-			<bpmndi:BPMNShape bpmnElement="_15" isMarkerVisible="true">
+			<bpmndi:BPMNShape bpmnElement="_14" isMarkerVisible="true">
 				<dc:Bounds x="305" y="348" width="31" height="31"/>
 			</bpmndi:BPMNShape>
-			<bpmndi:BPMNShape bpmnElement="_35">
+			<bpmndi:BPMNShape bpmnElement="_34">
 				<dc:Bounds x="488" y="549" width="24" height="24"/>
 			</bpmndi:BPMNShape>
-			<bpmndi:BPMNShape bpmnElement="_33">
+			<bpmndi:BPMNShape bpmnElement="_32">
 				<dc:Bounds x="488" y="381" width="24" height="24"/>
 			</bpmndi:BPMNShape>
-			<bpmndi:BPMNShape bpmnElement="_21">
+			<bpmndi:BPMNShape bpmnElement="_20">
 				<dc:Bounds x="898" y="355" width="17" height="17"/>
 			</bpmndi:BPMNShape>
-			<bpmndi:BPMNShape bpmnElement="_28">
+			<bpmndi:BPMNShape bpmnElement="_27">
 				<dc:Bounds x="896" y="170" width="17" height="17"/>
 			</bpmndi:BPMNShape>
-			<bpmndi:BPMNShape bpmnElement="_26">
+			<bpmndi:BPMNShape bpmnElement="_25">
 				<dc:Bounds x="904" y="20" width="17" height="17"/>
 			</bpmndi:BPMNShape>
-			<bpmndi:BPMNShape bpmnElement="_24" isMarkerVisible="true">
+			<bpmndi:BPMNShape bpmnElement="_23" isMarkerVisible="true">
 				<dc:Bounds x="704" y="163" width="31" height="31"/>
 			</bpmndi:BPMNShape>
 		</bpmndi:BPMNPlane>
