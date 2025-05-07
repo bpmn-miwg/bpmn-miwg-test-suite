@@ -46,7 +46,7 @@ Everybody is welcome to test BPMN tools and submit results to the working group,
 Here is how you do it:
 
 ### 1. Download Test Cases
-First download the [latest version of the BPMN Model Interchange Test Suite](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/releases/download/v0.0.8/bpmn-miwg-test-suite-v0.0.8.zip) and unpack it.
+First download the [latest release of the BPMN Model Interchange Test Suite](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/releases) and unpack it.
 There is a directory called `Reference`, which contains the files needed for testing.
 Next to that, there will be multiple folders with test results of other tools.
 
@@ -369,5 +369,13 @@ _Vacation Request - Process with automation extensions from 2022 Demo_
 
 ![](Reference/C.8.1.png)
 
+
+Creating a Release (for project maintainers)
+--------------------------------------------
+Create a [new release](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/releases/new),
+enter the current year as name for a new tag to create, e.g. `2026`,
+and name the release accordingly, e.g. `BPMN Model Interchange Test Suite 2026`.
+You can try to use the button `Generate Release Notes` but it might be a little verbose and contain a lot of test result updates.
+Most interesting would be to reference any [additions or changes to the `References` folder](https://github.com/bpmn-miwg/bpmn-miwg-test-suite/commits/master/Reference).
 
 <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_CA"><img alt="Creative Commons Licence" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_CA">Creative Commons Attribution 3.0 Unported License</a>.
