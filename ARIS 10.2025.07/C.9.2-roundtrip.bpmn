@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<semantic:definitions xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:semantic="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:deco="http://www.omg.org/spec/BPMN/non-normative/extensions/envelope-decorator-bounds/1.0" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:arisebpmn="http://www.softwareag.com/aris/ebpmn" xmlns:i18n="http://www.omg.org/spec/BPMN/non-normative/extensions/i18n/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:aris="http://www.softwareag.com/aris/attributes" id="Definitions_BPMNDiagram_1" targetNamespace="http://www.softwareag.com/aris/bpmn2" exporter="ARIS" exporterVersion="10.0.0.42424242" xml:lang="en">
+    <semantic:collaboration id="Collaboration_ManualDecision" arisebpmn:type="MT_ENTERPRISE_BPMN_COLLABORATION">
+        <semantic:participant name="Manual Check" processRef="ManualCheck" id="Participant_01"/>
+    </semantic:collaboration>
+    <semantic:process isExecutable="true" name="Manual Check" id="ManualCheck">
+        <semantic:extensionElements>
+            <zeebe:userTaskForm xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" id="userTaskForm_2s8lq02">{
+  "components": [
+    {
+      "key": "applicationNumber",
+      "label": "Application Number",
+      "type": "textfield",
+      "id": "Field_1djmro0"
+    },
+    {
+      "text": "&lt;img src=\"http://localhost:8080/camunda/online/banking/img/core-img/logo.png\"&gt;&lt;h2&gt;Instructions:&lt;/h2&gt;&lt;p&gt;Based on internal protocal and the given information below, tick the checkbox for 'Approved' if this application should be approved.&lt;/p&gt;&lt;p&gt; Otherwise, leave this checkbox blank.&lt;/p&gt;",
+      "type": "text",
+      "id": "Field_0e9521u"
+    },
+    {
+      "key": "applicantName",
+      "label": "Applicant",
+      "type": "textfield",
+      "id": "Field_1ex9187"
+    },
+    {
+      "key": "age",
+      "label": "Current Age",
+      "type": "number",
+      "id": "Field_17vnd80"
+    },
+    {
+      "key": "employment",
+      "label": "Employment",
+      "type": "textfield",
+      "id": "Field_08mj5fv"
+    },
+    {
+      "key": "category",
+      "label": "Category",
+      "type": "textfield",
+      "id": "Field_1k7e84u"
+    },
+    {
+      "key": "priceIndication",
+      "label": "Price indication",
+      "type": "textfield",
+      "id": "Field_1d6bhc2"
+    },
+    {
+      "key": "approved",
+      "label": "Approved",
+      "type": "checkbox",
+      "id": "Field_0hwfap9"
+    }
+  ],
+  "schemaVersion": 4,
+  "type": "default",
+  "id": "Form_0840o2b",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "1.1",
+  "exporter": {
+    "name": "Camunda Web Modeler",
+    "version": "1db7fd4"
+  }
+}</zeebe:userTaskForm>
+        </semantic:extensionElements>
+        <semantic:userTask name="Decide on application" id="UserTask_DecideOnApplication">
+            <semantic:extensionElements>
+                <zeebe:ioMapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0">
+                    <zeebe:input source="= string join(risks, &quot;, &quot;)" target="risksText"/>
+                    <zeebe:input source="= applicant.age" target="age"/>
+                    <zeebe:input source="= applicant.name" target="applicantName"/>
+                </zeebe:ioMapping>
+                <zeebe:assignmentDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" candidateGroups="clerks"/>
+                <zeebe:formDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" formKey="camunda-forms:bpmn:userTaskForm_2s8lq02"/>
+            </semantic:extensionElements>
+            <semantic:incoming>Flow_08vmski</semantic:incoming>
+            <semantic:outgoing>Flow_0vjv3ik</semantic:outgoing>
+        </semantic:userTask>
+        <semantic:startEvent name="Decide Manually" id="StartEvent_DecideManually">
+            <semantic:outgoing>Flow_08vmski</semantic:outgoing>
+        </semantic:startEvent>
+        <semantic:subProcess triggeredByEvent="true" id="Activity_0uvp3cb">
+            <semantic:startEvent isInterrupting="false" name="Document requested" id="StartMessageEvent_DocumentRequested">
+                <semantic:outgoing>Flow_0irfroh</semantic:outgoing>
+                <semantic:messageEventDefinition id="Definition_StartMessageEvent_DocumentRequested"/>
+            </semantic:startEvent>
+            <semantic:endEvent name="Document Received" id="EndEvent_DocumentReceived">
+                <semantic:incoming>Flow_1wwxns6</semantic:incoming>
+            </semantic:endEvent>
+            <semantic:callActivity name="Document Request" id="CallActivity_RequestDocument">
+                <semantic:extensionElements>
+                    <zeebe:calledElement xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" processId="requestDocument_en" propagateAllChildVariables="true"/>
+                </semantic:extensionElements>
+                <semantic:incoming>Flow_0irfroh</semantic:incoming>
+                <semantic:outgoing>Flow_1wwxns6</semantic:outgoing>
+                <semantic:multiInstanceLoopCharacteristics isSequential="false"/>
+            </semantic:callActivity>
+            <semantic:sequenceFlow sourceRef="StartMessageEvent_DocumentRequested" targetRef="CallActivity_RequestDocument" id="Flow_0irfroh"/>
+            <semantic:sequenceFlow sourceRef="CallActivity_RequestDocument" targetRef="EndEvent_DocumentReceived" id="Flow_1wwxns6"/>
+        </semantic:subProcess>
+        <semantic:subProcess triggeredByEvent="true" id="Activity_1esx1s7">
+            <semantic:startEvent isInterrupting="false" name="Accelerated decision" id="StartTimerEvent_AcceleratedDecision">
+                <semantic:outgoing>Flow_0kaot38</semantic:outgoing>
+                <semantic:timerEventDefinition id="Definition_StartTimerEvent_AcceleratedDecision">
+                    <semantic:timeCycle>R1/P5D</semantic:timeCycle>
+                </semantic:timerEventDefinition>
+            </semantic:startEvent>
+            <semantic:userTask name="Accelerate decision making" id="UserTask_AccelerateDecision">
+                <semantic:extensionElements>
+                    <zeebe:assignmentDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" candidateGroups="teamleaders"/>
+                </semantic:extensionElements>
+                <semantic:incoming>Flow_1octlto</semantic:incoming>
+                <semantic:outgoing>Flow_1t18skh</semantic:outgoing>
+            </semantic:userTask>
+            <semantic:endEvent name="Decision accelerated" id="EndEvent_DecisionAccelerated">
+                <semantic:incoming>Flow_1t18skh</semantic:incoming>
+            </semantic:endEvent>
+            <semantic:sendTask name="Notify customer about delay" id="SendTask_NotifyCustomerDelay">
+                <semantic:extensionElements>
+                    <zeebe:taskDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" type="notifyCustomerDelay"/>
+                </semantic:extensionElements>
+                <semantic:incoming>Flow_0kaot38</semantic:incoming>
+                <semantic:outgoing>Flow_1octlto</semantic:outgoing>
+            </semantic:sendTask>
+            <semantic:sequenceFlow sourceRef="StartTimerEvent_AcceleratedDecision" targetRef="SendTask_NotifyCustomerDelay" id="Flow_0kaot38"/>
+            <semantic:sequenceFlow sourceRef="UserTask_AccelerateDecision" targetRef="EndEvent_DecisionAccelerated" id="Flow_1t18skh"/>
+            <semantic:sequenceFlow sourceRef="SendTask_NotifyCustomerDelay" targetRef="UserTask_AccelerateDecision" id="Flow_1octlto"/>
+        </semantic:subProcess>
+        <semantic:subProcess triggeredByEvent="true" id="Activity_02a6b2h">
+            <semantic:userTask name="Check for Fraud" id="UserTask_CheckForFraud">
+                <semantic:extensionElements>
+                    <zeebe:assignmentDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" candidateGroups="riskteam"/>
+                </semantic:extensionElements>
+                <semantic:incoming>Flow_0nttki4</semantic:incoming>
+                <semantic:outgoing>Flow_1istmr0</semantic:outgoing>
+            </semantic:userTask>
+            <semantic:startEvent isInterrupting="false" name="Fraud suspected" id="StartMessageEvent_FraudSuspected">
+                <semantic:outgoing>Flow_0nttki4</semantic:outgoing>
+                <semantic:messageEventDefinition id="Definition_StartMessageEvent_FraudSuspected"/>
+            </semantic:startEvent>
+            <semantic:endEvent name="Fraud Detected" id="ErrorEndEvent_FraudDetected">
+                <semantic:incoming>SequenceFlow_Yes</semantic:incoming>
+                <semantic:errorEventDefinition id="Definition_ErrorEndEvent_FraudDetected"/>
+            </semantic:endEvent>
+            <semantic:exclusiveGateway default="SequenceFlow_No" name="Fraud detected?" id="Gateway_FraudDetected">
+                <semantic:incoming>Flow_1istmr0</semantic:incoming>
+                <semantic:outgoing>SequenceFlow_Yes</semantic:outgoing>
+                <semantic:outgoing>SequenceFlow_No</semantic:outgoing>
+            </semantic:exclusiveGateway>
+            <semantic:endEvent name="Fraud no detected" id="EndEvent_FraudNoDetected">
+                <semantic:incoming>SequenceFlow_No</semantic:incoming>
+            </semantic:endEvent>
+            <semantic:sequenceFlow sourceRef="StartMessageEvent_FraudSuspected" targetRef="UserTask_CheckForFraud" id="Flow_0nttki4"/>
+            <semantic:sequenceFlow sourceRef="Gateway_FraudDetected" targetRef="ErrorEndEvent_FraudDetected" name="Yes" id="SequenceFlow_Yes">
+                <semantic:conditionExpression>=fraud</semantic:conditionExpression>
+            </semantic:sequenceFlow>
+            <semantic:sequenceFlow sourceRef="UserTask_CheckForFraud" targetRef="Gateway_FraudDetected" id="Flow_1istmr0"/>
+            <semantic:sequenceFlow sourceRef="Gateway_FraudDetected" targetRef="EndEvent_FraudNoDetected" name="No" id="SequenceFlow_No"/>
+        </semantic:subProcess>
+        <semantic:endEvent name="Timeout" id="ErrorEndEvent_Timeout">
+            <semantic:incoming>Flow_03n7pdb</semantic:incoming>
+            <semantic:errorEventDefinition id="Definition_ErrorEndEvent_Timeout"/>
+        </semantic:endEvent>
+        <semantic:endEvent name="Manually Decided" id="EndEvent_ManuallyDecided">
+            <semantic:incoming>Flow_0vjv3ik</semantic:incoming>
+        </semantic:endEvent>
+        <semantic:boundaryEvent cancelActivity="true" attachedToRef="UserTask_DecideOnApplication" name="Timeout (7 days)" id="TimerEvent_Timeout">
+            <semantic:outgoing>Flow_03n7pdb</semantic:outgoing>
+            <semantic:timerEventDefinition id="Definition_TimerEvent_Timeout">
+                <semantic:timeDuration>P7D</semantic:timeDuration>
+            </semantic:timerEventDefinition>
+        </semantic:boundaryEvent>
+        <semantic:sequenceFlow sourceRef="StartEvent_DecideManually" targetRef="UserTask_DecideOnApplication" id="Flow_08vmski"/>
+        <semantic:sequenceFlow sourceRef="UserTask_DecideOnApplication" targetRef="EndEvent_ManuallyDecided" id="Flow_0vjv3ik"/>
+        <semantic:sequenceFlow sourceRef="TimerEvent_Timeout" targetRef="ErrorEndEvent_Timeout" id="Flow_03n7pdb"/>
+    </semantic:process>
+    <bpmndi:BPMNDiagram resolution="72.0" id="BPMNDiagram_1">
+        <bpmndi:BPMNPlane bpmnElement="Collaboration_ManualDecision" id="Plane_BPMNDiagram_1">
+            <bpmndi:BPMNShape bpmnElement="Participant_01" isHorizontal="false" id="Shape_Participant_01" color:background-color="#ffffff" color:border-color="#5e5e5e">
+                <dc:Bounds x="149.95" y="60.09" width="610.02" height="720.0"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="149.95" y="60.09" width="610.02" height="28.35"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="UserTask_DecideOnApplication" id="Shape_UserTask_DecideOnApplication" color:background-color="#ffffff" color:border-color="#00a2ce">
+                <dc:Bounds x="295.94" y="90.14" width="100.06" height="79.94"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="300.19" y="134.65" width="91.28" height="11.34"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="StartEvent_DecideManually" id="Shape_StartEvent_DecideManually" color:background-color="#ffffff" color:border-color="#72ab16">
+                <dc:Bounds x="212.03" y="111.97" width="36.0" height="36.0"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="193.89" y="155.06" width="81.92" height="13.89"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="Activity_0uvp3cb" isExpanded="true" id="Shape_Activity_0uvp3cb" color:background-color="#ffffff" color:border-color="#00a2ce">
+                <dc:Bounds x="200.13" y="270.14" width="314.08" height="130.11"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="StartMessageEvent_DocumentRequested" id="Shape_StartMessageEvent_DocumentRequested" color:background-color="#ffffff" color:border-color="#72ab16">
+                <dc:Bounds x="219.97" y="312.09" width="36.0" height="36.0"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="212.88" y="354.9" width="51.87" height="26.93"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="EndEvent_DocumentReceived" id="Shape_EndEvent_DocumentReceived" color:background-color="#ffffff" color:border-color="#fd6767">
+                <dc:Bounds x="452.13" y="312.09" width="36.0" height="36.0"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="443.91" y="354.9" width="51.87" height="26.93"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="CallActivity_RequestDocument" isExpanded="false" id="Shape_CallActivity_RequestDocument" color:background-color="#ffffff" color:border-color="#00a2ce">
+                <dc:Bounds x="299.91" y="289.98" width="100.06" height="79.94"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="308.13" y="315.21" width="83.06" height="11.34"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="Flow_0irfroh" id="Edge_Flow_0irfroh" color:border-color="#666666">
+                <di:waypoint x="255.97" y="329.95"/>
+                <di:waypoint x="299.91" y="329.95"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="Flow_1wwxns6" id="Edge_Flow_1wwxns6" color:border-color="#666666">
+                <di:waypoint x="399.97" y="329.95"/>
+                <di:waypoint x="452.13" y="329.95"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="Activity_1esx1s7" isExpanded="true" id="Shape_Activity_1esx1s7" color:background-color="#ffffff" color:border-color="#00a2ce">
+                <dc:Bounds x="200.13" y="420.09" width="540.0" height="130.11"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="StartTimerEvent_AcceleratedDecision" id="Shape_StartTimerEvent_AcceleratedDecision" color:background-color="#ffffff" color:border-color="#72ab16">
+                <dc:Bounds x="225.92" y="462.05" width="36.0" height="36.0"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="217.13" y="505.13" width="58.11" height="26.93"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="UserTask_AccelerateDecision" id="Shape_UserTask_AccelerateDecision" color:background-color="#ffffff" color:border-color="#00a2ce">
+                <dc:Bounds x="450.14" y="439.94" width="100.06" height="79.94"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="458.36" y="478.77" width="83.34" height="22.68"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="EndEvent_DecisionAccelerated" id="Shape_EndEvent_DecisionAccelerated" color:background-color="#ffffff" color:border-color="#fd6767">
+                <dc:Bounds x="596.13" y="462.05" width="36.0" height="36.0"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="587.91" y="502.87" width="56.98" height="26.93"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="SendTask_NotifyCustomerDelay" id="Shape_SendTask_NotifyCustomerDelay" color:background-color="#ffffff" color:border-color="#00a2ce">
+                <dc:Bounds x="299.91" y="439.94" width="100.06" height="79.94"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="316.06" y="478.77" width="67.75" height="22.68"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="Flow_0kaot38" id="Edge_Flow_0kaot38" color:border-color="#666666">
+                <di:waypoint x="261.92" y="479.91"/>
+                <di:waypoint x="299.91" y="479.91"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="Flow_1t18skh" id="Edge_Flow_1t18skh" color:border-color="#666666">
+                <di:waypoint x="549.92" y="479.91"/>
+                <di:waypoint x="596.13" y="479.91"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="Flow_1octlto" id="Edge_Flow_1octlto" color:border-color="#666666">
+                <di:waypoint x="399.97" y="479.91"/>
+                <di:waypoint x="450.14" y="479.91"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="Activity_02a6b2h" isExpanded="true" id="Shape_Activity_02a6b2h" color:background-color="#ffffff" color:border-color="#00a2ce">
+                <dc:Bounds x="200.13" y="570.05" width="409.89" height="189.92"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="UserTask_CheckForFraud" id="Shape_UserTask_CheckForFraud" color:background-color="#ffffff" color:border-color="#00a2ce">
+                <dc:Bounds x="306.14" y="589.89" width="100.06" height="79.94"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="321.17" y="634.39" width="70.02" height="11.34"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="StartMessageEvent_FraudSuspected" id="Shape_StartMessageEvent_FraudSuspected" color:background-color="#ffffff" color:border-color="#72ab16">
+                <dc:Bounds x="225.92" y="612.0" width="36.0" height="36.0"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="202.96" y="655.09" width="81.92" height="13.89"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="ErrorEndEvent_FraudDetected" id="Shape_ErrorEndEvent_FraudDetected" color:background-color="#ffffff" color:border-color="#fd6767">
+                <dc:Bounds x="541.98" y="682.02" width="36.0" height="36.0"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="526.11" y="723.12" width="75.97" height="13.89"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="Gateway_FraudDetected" isMarkerVisible="true" id="Shape_Gateway_FraudDetected" color:background-color="#ffffff" color:border-color="#5e5e5e">
+                <dc:Bounds x="445.04" y="604.91" width="49.89" height="49.89"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="430.87" y="583.09" width="81.07" height="13.89"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="EndEvent_FraudNoDetected" id="Shape_EndEvent_FraudNoDetected" color:background-color="#ffffff" color:border-color="#fd6767">
+                <dc:Bounds x="541.98" y="612.0" width="36.0" height="36.0"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="517.04" y="655.09" width="90.14" height="13.89"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="Flow_0nttki4" id="Edge_Flow_0nttki4" color:border-color="#666666">
+                <di:waypoint x="261.92" y="630.14"/>
+                <di:waypoint x="306.14" y="630.14"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="SequenceFlow_Yes" id="Edge_SequenceFlow_Yes" color:border-color="#666666">
+                <di:waypoint x="469.98" y="655.09"/>
+                <di:waypoint x="469.98" y="699.87"/>
+                <di:waypoint x="541.98" y="699.87"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="477.07" y="682.87" width="18.14" height="13.89"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="Flow_1istmr0" id="Edge_Flow_1istmr0" color:border-color="#666666">
+                <di:waypoint x="405.92" y="630.14"/>
+                <di:waypoint x="445.04" y="630.14"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="SequenceFlow_No" id="Edge_SequenceFlow_No" color:border-color="#666666">
+                <di:waypoint x="494.93" y="630.14"/>
+                <di:waypoint x="541.98" y="630.14"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="502.02" y="612.0" width="15.02" height="13.89"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="ErrorEndEvent_Timeout" id="Shape_ErrorEndEvent_Timeout" color:background-color="#ffffff" color:border-color="#fd6767">
+                <dc:Bounds x="477.92" y="202.11" width="36.0" height="36.0"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="475.94" y="244.91" width="39.97" height="13.89"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="EndEvent_ManuallyDecided" id="Shape_EndEvent_ManuallyDecided" color:background-color="#ffffff" color:border-color="#fd6767">
+                <dc:Bounds x="477.92" y="111.97" width="36.0" height="36.0"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="452.98" y="155.06" width="87.87" height="13.89"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="TimerEvent_Timeout" id="Shape_TimerEvent_Timeout" color:background-color="#ffffff" color:border-color="#da7400">
+                <dc:Bounds x="361.98" y="151.94" width="36.0" height="36.0"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="388.91" y="193.04" width="81.92" height="13.89"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="Flow_08vmski" id="Edge_Flow_08vmski" color:border-color="#666666">
+                <di:waypoint x="248.03" y="130.11"/>
+                <di:waypoint x="295.94" y="130.11"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="Flow_0vjv3ik" id="Edge_Flow_0vjv3ik" color:border-color="#666666">
+                <di:waypoint x="396.0" y="130.11"/>
+                <di:waypoint x="477.92" y="130.11"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="Flow_03n7pdb" id="Edge_Flow_03n7pdb" color:border-color="#666666">
+                <di:waypoint x="380.13" y="187.94"/>
+                <di:waypoint x="380.13" y="219.97"/>
+                <di:waypoint x="477.92" y="219.97"/>
+            </bpmndi:BPMNEdge>
+        </bpmndi:BPMNPlane>
+        <bpmndi:BPMNLabelStyle id="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159">
+            <dc:Font name="Arial" size="11.0" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+        </bpmndi:BPMNLabelStyle>
+    </bpmndi:BPMNDiagram>
+</semantic:definitions>

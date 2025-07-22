@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<semantic:definitions xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:semantic="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:deco="http://www.omg.org/spec/BPMN/non-normative/extensions/envelope-decorator-bounds/1.0" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:arisebpmn="http://www.softwareag.com/aris/ebpmn" xmlns:i18n="http://www.omg.org/spec/BPMN/non-normative/extensions/i18n/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:aris="http://www.softwareag.com/aris/attributes" id="Definitions_BPMNDiagram_1" targetNamespace="http://www.softwareag.com/aris/bpmn2" exporter="ARIS" exporterVersion="10.0.0.42424242" xml:lang="en">
+    <semantic:collaboration id="Collaboration_0liisio" arisebpmn:type="MT_ENTERPRISE_BPMN_COLLABORATION">
+        <semantic:participant name="Document Request" processRef="requestDocument_en" id="Participant_02"/>
+    </semantic:collaboration>
+    <semantic:process xmlns:camunda="http://camunda.org/schema/1.0/bpmn" isExecutable="true" name="Document Request" id="requestDocument_en" camunda:isStartableInTasklist="false">
+        <semantic:sendTask name="Request document" id="SendTask_RequestDocument" camunda:topic="emailService" camunda:async="true" camunda:type="external">
+            <semantic:extensionElements>
+                <zeebe:taskDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" type="email"/>
+            </semantic:extensionElements>
+            <semantic:incoming>SequenceFlow_0d7dzn0</semantic:incoming>
+            <semantic:outgoing>SequenceFlow_18a0pzl</semantic:outgoing>
+        </semantic:sendTask>
+        <semantic:endEvent name="Answer received" id="EndEvent_TalkedToCustomer" camunda:asyncAfter="true">
+            <semantic:incoming>SequenceFlow_3</semantic:incoming>
+        </semantic:endEvent>
+        <semantic:sendTask name="Send reminder email" id="SendTask_SendReminderEmail" camunda:topic="emailService" camunda:asyncBefore="true" camunda:type="external">
+            <semantic:extensionElements>
+                <zeebe:taskDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" type="email"/>
+            </semantic:extensionElements>
+            <semantic:incoming>SequenceFlow_1bqpxlf</semantic:incoming>
+            <semantic:outgoing>SequenceFlow_2</semantic:outgoing>
+        </semantic:sendTask>
+        <semantic:userTask name="Call customer" id="UserTask_CallCustomer">
+            <semantic:incoming>SequenceFlow_0i97ejj</semantic:incoming>
+            <semantic:outgoing>SequenceFlow_3</semantic:outgoing>
+        </semantic:userTask>
+        <semantic:receiveTask name="Wait for answer" id="ReceiveTask_WaitForDocument">
+            <semantic:incoming>SequenceFlow_18a0pzl</semantic:incoming>
+            <semantic:outgoing>SequenceFlow_6</semantic:outgoing>
+        </semantic:receiveTask>
+        <semantic:endEvent name="Document received" id="EndEvent_GotDocument" camunda:asyncAfter="true">
+            <semantic:incoming>SequenceFlow_6</semantic:incoming>
+        </semantic:endEvent>
+        <semantic:startEvent name="Document requested" id="StartEvent_DocumentRequested">
+            <semantic:outgoing>SequenceFlow_0d7dzn0</semantic:outgoing>
+        </semantic:startEvent>
+        <semantic:endEvent name="Email sent" id="EndEvent_ReminderSent">
+            <semantic:incoming>SequenceFlow_2</semantic:incoming>
+        </semantic:endEvent>
+        <semantic:boundaryEvent cancelActivity="true" attachedToRef="ReceiveTask_WaitForDocument" name="1 week" id="BoundaryEvent_2">
+            <semantic:outgoing>SequenceFlow_0i97ejj</semantic:outgoing>
+            <semantic:timerEventDefinition id="Definition_BoundaryEvent_2">
+                <semantic:timeDuration>P7D</semantic:timeDuration>
+            </semantic:timerEventDefinition>
+        </semantic:boundaryEvent>
+        <semantic:boundaryEvent cancelActivity="false" attachedToRef="ReceiveTask_WaitForDocument" name="daily" id="BoundaryEvent_1">
+            <semantic:outgoing>SequenceFlow_1bqpxlf</semantic:outgoing>
+            <semantic:timerEventDefinition id="Definition_BoundaryEvent_1">
+                <semantic:timeCycle>R6/P1D</semantic:timeCycle>
+            </semantic:timerEventDefinition>
+        </semantic:boundaryEvent>
+        <semantic:sequenceFlow sourceRef="ReceiveTask_WaitForDocument" targetRef="EndEvent_GotDocument" id="SequenceFlow_6"/>
+        <semantic:sequenceFlow sourceRef="BoundaryEvent_2" targetRef="UserTask_CallCustomer" id="SequenceFlow_0i97ejj"/>
+        <semantic:sequenceFlow sourceRef="BoundaryEvent_1" targetRef="SendTask_SendReminderEmail" id="SequenceFlow_1bqpxlf"/>
+        <semantic:sequenceFlow sourceRef="SendTask_SendReminderEmail" targetRef="EndEvent_ReminderSent" id="SequenceFlow_2"/>
+        <semantic:sequenceFlow sourceRef="UserTask_CallCustomer" targetRef="EndEvent_TalkedToCustomer" id="SequenceFlow_3"/>
+        <semantic:sequenceFlow sourceRef="SendTask_RequestDocument" targetRef="ReceiveTask_WaitForDocument" id="SequenceFlow_18a0pzl"/>
+        <semantic:sequenceFlow sourceRef="StartEvent_DocumentRequested" targetRef="SendTask_RequestDocument" id="SequenceFlow_0d7dzn0"/>
+    </semantic:process>
+    <bpmndi:BPMNDiagram resolution="72.0" id="BPMNDiagram_1">
+        <bpmndi:BPMNPlane bpmnElement="Collaboration_0liisio" id="Plane_BPMNDiagram_1">
+            <bpmndi:BPMNShape bpmnElement="Participant_02" isHorizontal="true" id="Shape_Participant_02" color:background-color="#ffffff" color:border-color="#5e5e5e">
+                <dc:Bounds x="155.91" y="75.97" width="829.13" height="301.04"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="155.91" y="75.97" width="42.52" height="301.04"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="SendTask_RequestDocument" id="Shape_SendTask_RequestDocument" color:background-color="#ffffff" color:border-color="#00a2ce">
+                <dc:Bounds x="322.87" y="98.93" width="100.06" height="79.94"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="332.22" y="143.43" width="81.35" height="11.34"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="EndEvent_TalkedToCustomer" id="Shape_EndEvent_TalkedToCustomer" color:background-color="#ffffff" color:border-color="#fd6767">
+                <dc:Bounds x="900.0" y="206.08" width="36.0" height="36.0"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="879.02" y="246.9" width="81.07" height="13.89"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="SendTask_SendReminderEmail" id="Shape_SendTask_SendReminderEmail" color:background-color="#ffffff" color:border-color="#00a2ce">
+                <dc:Bounds x="663.02" y="280.06" width="100.06" height="79.94"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="668.69" y="324.57" width="88.44" height="11.34"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="UserTask_CallCustomer" id="Shape_UserTask_CallCustomer" color:background-color="#ffffff" color:border-color="#00a2ce">
+                <dc:Bounds x="663.02" y="183.97" width="100.06" height="79.94"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="683.43" y="228.47" width="59.24" height="11.34"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="ReceiveTask_WaitForDocument" id="Shape_ReceiveTask_WaitForDocument" color:background-color="#ffffff" color:border-color="#00a2ce">
+                <dc:Bounds x="494.08" y="98.93" width="100.06" height="79.94"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="509.95" y="143.43" width="68.31" height="11.34"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="EndEvent_GotDocument" id="Shape_EndEvent_GotDocument" color:background-color="#ffffff" color:border-color="#fd6767">
+                <dc:Bounds x="900.0" y="121.04" width="36.0" height="36.0"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="892.91" y="157.04" width="51.87" height="26.93"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="StartEvent_DocumentRequested" id="Shape_StartEvent_DocumentRequested" color:background-color="#ffffff" color:border-color="#72ab16">
+                <dc:Bounds x="212.03" y="121.04" width="36.0" height="36.0"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="204.94" y="157.04" width="51.87" height="26.93"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="EndEvent_ReminderSent" id="Shape_EndEvent_ReminderSent" color:background-color="#ffffff" color:border-color="#fd6767">
+                <dc:Bounds x="900.0" y="301.89" width="36.0" height="36.0"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="892.06" y="337.89" width="53.01" height="13.89"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="BoundaryEvent_2" id="Shape_BoundaryEvent_2" color:background-color="#ffffff" color:border-color="#da7400">
+                <dc:Bounds x="576.0" y="161.01" width="36.0" height="36.0"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="604.91" y="195.87" width="36.0" height="13.89"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="BoundaryEvent_1" id="Shape_BoundaryEvent_1" color:background-color="#ffffff" color:border-color="#da7400">
+                <dc:Bounds x="526.96" y="161.01" width="36.0" height="36.0"/>
+                <bpmndi:BPMNLabel labelStyle="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159" color:color="#000000">
+                    <dc:Bounds x="515.06" y="195.87" width="24.09" height="13.89"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="SequenceFlow_6" id="Edge_SequenceFlow_6" color:border-color="#666666">
+                <di:waypoint x="594.14" y="138.9"/>
+                <di:waypoint x="900.0" y="138.9"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="SequenceFlow_0i97ejj" id="Edge_SequenceFlow_0i97ejj" color:border-color="#666666">
+                <di:waypoint x="594.14" y="197.01"/>
+                <di:waypoint x="594.14" y="223.94"/>
+                <di:waypoint x="663.02" y="223.94"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="SequenceFlow_1bqpxlf" id="Edge_SequenceFlow_1bqpxlf" color:border-color="#666666">
+                <di:waypoint x="545.1" y="197.01"/>
+                <di:waypoint x="545.1" y="320.03"/>
+                <di:waypoint x="663.02" y="320.03"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="SequenceFlow_2" id="Edge_SequenceFlow_2" color:border-color="#666666">
+                <di:waypoint x="763.09" y="320.03"/>
+                <di:waypoint x="900.0" y="320.03"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="SequenceFlow_3" id="Edge_SequenceFlow_3" color:border-color="#666666">
+                <di:waypoint x="763.09" y="223.94"/>
+                <di:waypoint x="900.0" y="223.94"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="SequenceFlow_18a0pzl" id="Edge_SequenceFlow_18a0pzl" color:border-color="#666666">
+                <di:waypoint x="422.93" y="138.9"/>
+                <di:waypoint x="494.08" y="138.9"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="SequenceFlow_0d7dzn0" id="Edge_SequenceFlow_0d7dzn0" color:border-color="#666666">
+                <di:waypoint x="248.03" y="138.9"/>
+                <di:waypoint x="322.87" y="138.9"/>
+            </bpmndi:BPMNEdge>
+        </bpmndi:BPMNPlane>
+        <bpmndi:BPMNLabelStyle id="ArisFontStyleSheet_0_d7b815f4-04df-4971-8f01-03fe21c67159">
+            <dc:Font name="Arial" size="11.0" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+        </bpmndi:BPMNLabelStyle>
+    </bpmndi:BPMNDiagram>
+</semantic:definitions>
