@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<semantic:definitions xmlns:semantic="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:sdmn="https://www.omg.org/spec/SDMN/" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:dmn="https://www.omg.org/spec/DMN/20240513/MODEL/" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:trisobpmn="http://www.trisotech.com/2014/triso/bpmn" xmlns:triso="http://www.trisotech.com/2015/triso/modeling" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:openapi="https://openapis.org/omg/extension/1.0" xmlns:boxedext="https://www.trisotech.com/spec/DMN/20191111/EXT/" xmlns:tc="http://www.omg.org/spec/DMN/20160719/testcase" xmlns:rss="http://purl.org/rss/2.0/" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:trisofeed="http://trisotech.com/feed" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"                     xmlns:feel="https://www.omg.org/spec/DMN/20240513/FEEL/"  xmlns:drools="http://www.jboss.org/drools"  xmlns:i18n="http://www.omg.org/spec/BPMN/non-normative/extensions/i18n/1.0"  xmlns="http://bpmn.io/schema/bpmn/Definitions_1" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn/Definitions_1" exporter="Workflow Modeler" exporterVersion="8.7.0" name="Drawing 1" xml:lang="en" triso:translationLanguages="" trisobpmn:logoChoice="Default">
+    <semantic:itemDefinition triso:basicType="true" structureRef="feel:string" triso:definitionType="http://www.trisotech.com/2015/triso/modeling/ItemDefinitionType" triso:name="triso_string" id="_triso-default-bpmnItemDefinition-string_id"/>
+    <semantic:itemDefinition triso:basicType="true" structureRef="feel:Any" triso:definitionType="http://www.trisotech.com/2015/triso/modeling/ItemDefinitionType" triso:name="triso_Any" id="_triso-default-bpmnItemDefinition-Any_id"/>
+    <semantic:message name="MESSAGE_documentReceived" triso:allowProvidedAuth="false" triso:allowUrlOverride="false" id="Message_1">
+        <semantic:extensionElements>
+            <zeebe:subscription correlationKey="= documentReferenceId"/>
+        </semantic:extensionElements>
+    </semantic:message>
+    <semantic:collaboration id="Collaboration_0liisio">
+        <semantic:participant id="Participant_02" name="Document Request" triso:readOnly="false" processRef="requestDocument_en"/>
+    </semantic:collaboration>
+    <semantic:process id="requestDocument_en" name="Document Request" triso:readOnly="false" triso:collectEnds="true" camunda:isStartableInTasklist="false" isExecutable="true" isClosed="false">
+        <semantic:sendTask id="SendTask_RequestDocument" name="Request document" triso:readOnly="false" camunda:type="external" camunda:topic="emailService" camunda:async="true" implementation="##WebService">
+            <semantic:extensionElements>
+                <zeebe:taskDefinition type="email"/>
+            </semantic:extensionElements>
+            <semantic:incoming>SequenceFlow_0d7dzn0</semantic:incoming>
+            <semantic:outgoing>SequenceFlow_18a0pzl</semantic:outgoing>
+        </semantic:sendTask>
+        <semantic:endEvent id="EndEvent_TalkedToCustomer" name="Answer received" triso:readOnly="false" camunda:asyncAfter="true">
+            <semantic:incoming>SequenceFlow_3</semantic:incoming>
+        </semantic:endEvent>
+        <semantic:sendTask id="SendTask_SendReminderEmail" name="Send reminder email" triso:readOnly="false" camunda:type="external" camunda:asyncBefore="true" camunda:topic="emailService" implementation="##WebService">
+            <semantic:extensionElements>
+                <zeebe:taskDefinition type="email"/>
+            </semantic:extensionElements>
+            <semantic:incoming>SequenceFlow_1bqpxlf</semantic:incoming>
+            <semantic:outgoing>SequenceFlow_2</semantic:outgoing>
+        </semantic:sendTask>
+        <semantic:userTask id="UserTask_CallCustomer" name="Call customer" triso:readOnly="false" implementation="##unspecified">
+            <semantic:incoming>SequenceFlow_0i97ejj</semantic:incoming>
+            <semantic:outgoing>SequenceFlow_3</semantic:outgoing>
+        </semantic:userTask>
+        <semantic:receiveTask id="ReceiveTask_WaitForDocument" name="Wait for answer" triso:readOnly="false" implementation="##WebService" instantiate="false" messageRef="Message_1">
+            <semantic:incoming>SequenceFlow_18a0pzl</semantic:incoming>
+            <semantic:outgoing>SequenceFlow_6</semantic:outgoing>
+        </semantic:receiveTask>
+        <semantic:endEvent id="EndEvent_GotDocument" name="Document received" triso:readOnly="false" camunda:asyncAfter="true">
+            <semantic:incoming>SequenceFlow_6</semantic:incoming>
+        </semantic:endEvent>
+        <semantic:startEvent id="StartEvent_DocumentRequested" name="Document requested" triso:readOnly="false">
+            <semantic:outgoing>SequenceFlow_0d7dzn0</semantic:outgoing>
+        </semantic:startEvent>
+        <semantic:endEvent id="EndEvent_ReminderSent" name="Email sent" triso:readOnly="false">
+            <semantic:incoming>SequenceFlow_2</semantic:incoming>
+        </semantic:endEvent>
+        <semantic:boundaryEvent id="BoundaryEvent_1" name="daily" triso:readOnly="false" attachedToRef="ReceiveTask_WaitForDocument" cancelActivity="false">
+            <semantic:outgoing>SequenceFlow_1bqpxlf</semantic:outgoing>
+            <semantic:timerEventDefinition id="_TimerEventDefinition_2">
+                <semantic:timeCycle xsi:type="semantic:tFormalExpression">R6/P1D</semantic:timeCycle>
+            </semantic:timerEventDefinition>
+        </semantic:boundaryEvent>
+        <semantic:boundaryEvent id="BoundaryEvent_2" name="1 week" triso:readOnly="false" attachedToRef="ReceiveTask_WaitForDocument" cancelActivity="true">
+            <semantic:outgoing>SequenceFlow_0i97ejj</semantic:outgoing>
+            <semantic:timerEventDefinition id="_TimerEventDefinition_3">
+                <semantic:timeDuration xsi:type="semantic:tFormalExpression">P7D</semantic:timeDuration>
+            </semantic:timerEventDefinition>
+        </semantic:boundaryEvent>
+        <semantic:sequenceFlow id="SequenceFlow_6" triso:readOnly="false" sourceRef="ReceiveTask_WaitForDocument" targetRef="EndEvent_GotDocument" isImmediate="false"/>
+        <semantic:sequenceFlow id="SequenceFlow_0i97ejj" triso:readOnly="false" sourceRef="BoundaryEvent_2" targetRef="UserTask_CallCustomer" isImmediate="false"/>
+        <semantic:sequenceFlow id="SequenceFlow_1bqpxlf" triso:readOnly="false" sourceRef="BoundaryEvent_1" targetRef="SendTask_SendReminderEmail" isImmediate="false"/>
+        <semantic:sequenceFlow id="SequenceFlow_2" triso:readOnly="false" sourceRef="SendTask_SendReminderEmail" targetRef="EndEvent_ReminderSent" isImmediate="false"/>
+        <semantic:sequenceFlow id="SequenceFlow_3" triso:readOnly="false" sourceRef="UserTask_CallCustomer" targetRef="EndEvent_TalkedToCustomer" isImmediate="false"/>
+        <semantic:sequenceFlow id="SequenceFlow_18a0pzl" triso:readOnly="false" sourceRef="SendTask_RequestDocument" targetRef="ReceiveTask_WaitForDocument" isImmediate="false"/>
+        <semantic:sequenceFlow id="SequenceFlow_0d7dzn0" triso:readOnly="false" sourceRef="StartEvent_DocumentRequested" targetRef="SendTask_RequestDocument" isImmediate="false"/>
+    </semantic:process>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_1" name="Page 1">
+        <bpmndi:BPMNPlane bpmnElement="Collaboration_0liisio" id="BPMNPlane_1" trisobpmn:diagramWidth="1485" trisobpmn:diagramHeight="1050">
+            <bpmndi:BPMNShape id="Participant_012xlj2_di" bpmnElement="Participant_02" isHorizontal="true" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="156" y="76" width="829" height="301"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="301" width="16" x="156" y="76"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="SendTask_1hvdsj6_di" bpmnElement="SendTask_RequestDocument" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="323" y="99" width="100" height="80"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="16" width="94" x="326" y="131"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="_BPMNShape_EndEvent_30" bpmnElement="EndEvent_TalkedToCustomer" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="900" y="206" width="36" height="36"/>
+                <bpmndi:BPMNLabel color:color="#000000" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="16" width="81" x="879" y="247"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="SendTask_0rs6zt3_di" bpmnElement="SendTask_SendReminderEmail" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="663" y="280" width="100" height="80"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="31" width="94" x="666" y="304.5"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="UserTask_1pu6sug_di" bpmnElement="UserTask_CallCustomer" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="663" y="184" width="100" height="80"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="16" width="94" x="666" y="216"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="ReceiveTask_1707zk0_di" bpmnElement="ReceiveTask_WaitForDocument" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="494" y="99" width="100" height="80"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:defaultBounds="true" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="16" width="94" x="497" y="131"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="EndEvent_1u6qjao_di" bpmnElement="EndEvent_GotDocument" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="900" y="121" width="36" height="36"/>
+                <bpmndi:BPMNLabel color:color="#000000" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="31" width="52" x="893" y="157"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_DocumentRequested" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="212" y="121" width="36" height="36"/>
+                <bpmndi:BPMNLabel color:color="#000000" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="31" width="52" x="205" y="157"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="_BPMNShape_EndEvent_29" bpmnElement="EndEvent_ReminderSent" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="900" y="302" width="36" height="36"/>
+                <bpmndi:BPMNLabel color:color="#000000" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="16" width="53" x="892" y="338"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="_BPMNShape_BoundaryEvent_5" bpmnElement="BoundaryEvent_2" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="576" y="161" width="36" height="36"/>
+                <bpmndi:BPMNLabel color:color="#000000" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="16" width="36" x="605" y="196"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="_BPMNShape_BoundaryEvent_4" bpmnElement="BoundaryEvent_1" color:background-color="#ffffff" color:border-color="#000000">
+                <dc:Bounds x="527" y="161" width="36" height="36"/>
+                <bpmndi:BPMNLabel color:color="#000000" labelStyle="LSBPMNDiagram_1_0">
+                    <dc:Bounds height="16" width="24" x="515" y="196"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_6" color:border-color="#000000" bpmnElement="SequenceFlow_6">
+                <di:waypoint x="594" y="139"/>
+                <di:waypoint x="900" y="139"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:labelPosition="custom" labelStyle="LSBPMNDiagram_1_0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="SequenceFlow_0i97ejj_di" color:border-color="#000000" bpmnElement="SequenceFlow_0i97ejj">
+                <di:waypoint x="594" y="197"/>
+                <di:waypoint x="594" y="224"/>
+                <di:waypoint x="663" y="224"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:labelPosition="custom" labelStyle="LSBPMNDiagram_1_0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="SequenceFlow_1bqpxlf_di" color:border-color="#000000" bpmnElement="SequenceFlow_1bqpxlf">
+                <di:waypoint x="545" y="197"/>
+                <di:waypoint x="545" y="320"/>
+                <di:waypoint x="663" y="320"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:labelPosition="custom" labelStyle="LSBPMNDiagram_1_0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" color:border-color="#000000" bpmnElement="SequenceFlow_2">
+                <di:waypoint x="763" y="320"/>
+                <di:waypoint x="900" y="320"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:labelPosition="custom" labelStyle="LSBPMNDiagram_1_0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_3" color:border-color="#000000" bpmnElement="SequenceFlow_3">
+                <di:waypoint x="763" y="224"/>
+                <di:waypoint x="900" y="224"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:labelPosition="custom" labelStyle="LSBPMNDiagram_1_0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="SequenceFlow_18a0pzl_di" color:border-color="#000000" bpmnElement="SequenceFlow_18a0pzl">
+                <di:waypoint x="423" y="139"/>
+                <di:waypoint x="494" y="139"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:labelPosition="custom" labelStyle="LSBPMNDiagram_1_0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="SequenceFlow_0d7dzn0_di" color:border-color="#000000" bpmnElement="SequenceFlow_0d7dzn0">
+                <di:waypoint x="248" y="139"/>
+                <di:waypoint x="323" y="139"/>
+                <bpmndi:BPMNLabel color:color="#000000" triso:labelPosition="custom" labelStyle="LSBPMNDiagram_1_0"/>
+            </bpmndi:BPMNEdge>
+        </bpmndi:BPMNPlane>
+        <bpmndi:BPMNLabelStyle id="LSBPMNDiagram_1_0">
+            <dc:Font name="arial,helvetica,sans-serif" size="11" isBold="false" isItalic="false" isStrikeThrough="false" isUnderline="false"/>
+        </bpmndi:BPMNLabelStyle>
+    </bpmndi:BPMNDiagram>
+</semantic:definitions>

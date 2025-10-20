@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sem:definitions expressionLanguage="http://www.omninet.de/bpmn/expressions/v1" typeLanguage="http://www.omninet.de/bpmn/types/v1" targetNamespace="http://www.omninet.de/bpmn/definitions/v1" xmlns:sem="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:ot="http://www.omninet.de/ot/bpmn/v1">
+	<sem:itemDefinition id="_OT_NAMESPACES_">
+		<sem:extensionElements>
+			<ot:namespace id="_1" name="MIWG Test Cases" alias="MiwgTestCases">
+				<ot:schemaObjectDescription>
+					<ot:translatedText lang="de"/>
+				</ot:schemaObjectDescription>
+			</ot:namespace>
+			<ot:namespace id="_2" name="C 9.1" alias="C91" parent="_1">
+				<ot:schemaObjectDescription>
+					<ot:translatedText lang="en"/>
+				</ot:schemaObjectDescription>
+			</ot:namespace>
+			<ot:namespace id="_3" name="C 9.2" alias="C92" parent="_1">
+				<ot:schemaObjectDescription>
+					<ot:translatedText lang="en"/>
+				</ot:schemaObjectDescription>
+			</ot:namespace>
+		</sem:extensionElements>
+	</sem:itemDefinition>
+	<sem:error id="_4" name="Error_FraudDetected" ot:alias="error1" ot:namespace="_3" errorCode="02"/>
+	<sem:message id="_5" name="MESSAGE_documentReceived_91" ot:alias="message1_91" ot:namespace="_2">
+		<sem:documentation textFormat="application/x-ot-schemaObjectDescription">
+			<ot:schemaObjectDescription>
+				<ot:translatedText lang="en"/>
+			</ot:schemaObjectDescription>
+		</sem:documentation>
+	</sem:message>
+	<sem:message id="_6" name="Message_DocumentRequested" ot:alias="message1" ot:namespace="_3"/>
+	<sem:message id="_7" name="Message_FraudSuspected" ot:alias="message2" ot:namespace="_3"/>
+	<sem:collaboration id="_9" ot:outerProcess="_10">
+		<sem:participant id="_11" name="Document Request" processRef="_12"/>
+	</sem:collaboration>
+	<sem:process name="process1" ot:alias="process1" id="_10">
+		<sem:documentation textFormat="application/x-ot-schemaObjectDescription">
+			<ot:schemaObjectDescription>
+				<ot:translatedText lang="de"/>
+			</ot:schemaObjectDescription>
+		</sem:documentation>
+		<sem:extensionElements>
+			<ot:startPermission/>
+		</sem:extensionElements>
+	</sem:process>
+	<sem:process name="process3" ot:alias="process3" ot:displayName="Document Request" id="_12">
+		<sem:documentation textFormat="application/x-ot-schemaObjectDescription">
+			<ot:schemaObjectDescription>
+				<ot:translatedText lang="de"/>
+			</ot:schemaObjectDescription>
+		</sem:documentation>
+		<sem:extensionElements>
+			<ot:startPermission/>
+		</sem:extensionElements>
+		<sem:sequenceFlow id="_13" ot:alias="flow" sourceRef="_14" targetRef="_15"/>
+		<sem:sequenceFlow id="_16" ot:alias="flow1" sourceRef="_17" targetRef="_18"/>
+		<sem:sequenceFlow id="_19" ot:alias="flow4" sourceRef="_18" targetRef="_20"/>
+		<sem:sequenceFlow id="_21" ot:alias="flow2" sourceRef="_15" targetRef="_22"/>
+		<sem:sequenceFlow id="_23" ot:alias="flow3" sourceRef="_22" targetRef="_24"/>
+		<sem:sequenceFlow id="_25" ot:alias="flow5" sourceRef="_26" targetRef="_27"/>
+		<sem:sequenceFlow id="_28" ot:alias="flow6" sourceRef="_27" targetRef="_29"/>
+		<sem:startEvent id="_14" name="Document requested" ot:displayName="Document requested" ot:alias="start">
+			<sem:documentation textFormat="application/x-ot-schemaObjectDescription">
+				<ot:schemaObjectDescription>
+					<ot:translatedText lang="de"/>
+				</ot:schemaObjectDescription>
+			</sem:documentation>
+		</sem:startEvent>
+		<sem:userTask id="_27" name="Call customer" ot:displayName="Call customer" ot:alias="task4">
+			<sem:extensionElements>
+				<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" displayOkButton="false" displayApplyButton="false" formTitle="" otObject=""/>
+			</sem:extensionElements>
+		</sem:userTask>
+		<sem:endEvent id="_29" name="Answer received" ot:displayName="Answer received" ot:alias="event4"/>
+		<sem:endEvent id="_24" name="Document received" ot:displayName="Document received" ot:alias="end">
+			<sem:documentation textFormat="application/x-ot-schemaObjectDescription">
+				<ot:schemaObjectDescription>
+					<ot:translatedText lang="de"/>
+				</ot:schemaObjectDescription>
+			</sem:documentation>
+		</sem:endEvent>
+		<sem:sendTask id="_15" name="Request document" ot:displayName="Request document" ot:alias="task1">
+			<sem:ioSpecification>
+				<sem:dataInput id="_msgdata_15"/>
+				<sem:inputSet>
+					<sem:dataInputRefs>_msgdata_15</sem:dataInputRefs>
+				</sem:inputSet>
+				<sem:outputSet/>
+			</sem:ioSpecification>
+		</sem:sendTask>
+		<sem:receiveTask id="_22" name="Wait for answer" ot:displayName="Wait for answer" ot:alias="task2" messageRef="_5"/>
+		<sem:boundaryEvent id="_17" name="daily" ot:displayName="daily" ot:alias="event1" attachedToRef="_22" cancelActivity="false">
+			<sem:timerEventDefinition/>
+		</sem:boundaryEvent>
+		<sem:sendTask id="_18" name="Send reminder email" ot:displayName="Send reminder email" ot:alias="task3">
+			<sem:ioSpecification>
+				<sem:dataInput id="_msgdata_18"/>
+				<sem:inputSet>
+					<sem:dataInputRefs>_msgdata_18</sem:dataInputRefs>
+				</sem:inputSet>
+				<sem:outputSet/>
+			</sem:ioSpecification>
+		</sem:sendTask>
+		<sem:endEvent id="_20" name="Email sent" ot:displayName="Email sent" ot:alias="event2"/>
+		<sem:boundaryEvent id="_26" name="1 week" ot:displayName="1 week" ot:alias="event3" attachedToRef="_22">
+			<sem:timerEventDefinition/>
+		</sem:boundaryEvent>
+	</sem:process>
+	<sem:collaboration id="_31" ot:outerProcess="_32">
+		<sem:participant id="_33" name="Manual Check" processRef="_34"/>
+	</sem:collaboration>
+	<sem:process name="process5" ot:alias="process5" id="_32">
+		<sem:documentation textFormat="application/x-ot-schemaObjectDescription">
+			<ot:schemaObjectDescription>
+				<ot:translatedText lang="de"/>
+			</ot:schemaObjectDescription>
+		</sem:documentation>
+		<sem:extensionElements>
+			<ot:startPermission/>
+		</sem:extensionElements>
+	</sem:process>
+	<sem:process name="process6" ot:alias="process6" ot:displayName="Manual Check" id="_34">
+		<sem:documentation textFormat="application/x-ot-schemaObjectDescription">
+			<ot:schemaObjectDescription>
+				<ot:translatedText lang="de"/>
+			</ot:schemaObjectDescription>
+		</sem:documentation>
+		<sem:extensionElements>
+			<ot:startPermission/>
+		</sem:extensionElements>
+		<sem:sequenceFlow id="_35" ot:alias="flow" sourceRef="_36" targetRef="_37"/>
+		<sem:sequenceFlow id="_38" ot:alias="flow2" sourceRef="_37" targetRef="_39"/>
+		<sem:sequenceFlow id="_40" ot:alias="flow1" sourceRef="_41" targetRef="_42"/>
+		<sem:subProcess id="_43" name="Activity 2" ot:subProcessAlias="subProcess2" ot:alias="process8" triggeredByEvent="true">
+			<sem:sequenceFlow id="_44" ot:alias="flow6" sourceRef="_45" targetRef="_46"/>
+			<sem:sequenceFlow id="_47" ot:alias="flow7" sourceRef="_46" targetRef="_48"/>
+			<sem:sequenceFlow id="_49" ot:alias="flow5" sourceRef="_50" targetRef="_45"/>
+			<sem:endEvent id="_48" name="Decision accelerated" ot:displayName="Decision accelerated" ot:alias="event6"/>
+			<sem:userTask id="_46" name="Accelerate decision making" ot:displayName="Accelerate decision making" ot:alias="task4">
+				<sem:extensionElements>
+					<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" displayOkButton="false" displayApplyButton="false" formTitle="" otObject=""/>
+				</sem:extensionElements>
+			</sem:userTask>
+			<sem:startEvent id="_50" name="Accelerated decision" ot:displayName="Accelerated decision" ot:alias="event5" isInterrupting="false">
+				<sem:timerEventDefinition>
+					<sem:timeCycle>R1/P5D</sem:timeCycle>
+				</sem:timerEventDefinition>
+			</sem:startEvent>
+			<sem:sendTask id="_45" name="Notify customer about delay" ot:displayName="Notify customer about delay" ot:alias="task3">
+				<sem:ioSpecification>
+					<sem:dataInput id="_msgdata_45"/>
+					<sem:inputSet>
+						<sem:dataInputRefs>_msgdata_45</sem:dataInputRefs>
+					</sem:inputSet>
+					<sem:outputSet/>
+				</sem:ioSpecification>
+			</sem:sendTask>
+		</sem:subProcess>
+		<sem:subProcess id="_51" name="Activity 1" ot:subProcessAlias="subProcess1" ot:alias="process7" triggeredByEvent="true">
+			<sem:sequenceFlow id="_52" ot:alias="flow4" sourceRef="_53" targetRef="_54"/>
+			<sem:sequenceFlow id="_55" ot:alias="flow3" sourceRef="_56" targetRef="_53"/>
+			<sem:endEvent id="_54" name="Document Received" ot:displayName="Document Received" ot:alias="event4"/>
+			<sem:startEvent id="_56" name="Document requested" ot:displayName="Document requested" ot:alias="event3" isInterrupting="false">
+				<sem:dataOutput id="_d_57"/>
+				<sem:outputSet>
+					<sem:dataOutputRefs>_d_57</sem:dataOutputRefs>
+				</sem:outputSet>
+				<sem:messageEventDefinition messageRef="_6"/>
+			</sem:startEvent>
+			<sem:callActivity id="_53" name="Document Request" ot:displayName="Document Request" ot:alias="task2" calledElement="_12">
+				<sem:multiInstanceLoopCharacteristics/>
+			</sem:callActivity>
+		</sem:subProcess>
+		<sem:userTask id="_37" name="Decide on application" ot:displayName="Decide on application" ot:alias="task1">
+			<sem:extensionElements>
+				<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" displayOkButton="false" displayApplyButton="false" formTitle="" otObject=""/>
+			</sem:extensionElements>
+		</sem:userTask>
+		<sem:subProcess id="_58" name="Activity 3" ot:subProcessAlias="subProcess3" ot:alias="process9" triggeredByEvent="true">
+			<sem:sequenceFlow id="_59" ot:alias="flow8" sourceRef="_60" targetRef="_61"/>
+			<sem:sequenceFlow id="_62" ot:alias="flow9" sourceRef="_61" targetRef="_63"/>
+			<sem:sequenceFlow id="_64" name="No" ot:displayName="No" ot:alias="flow10" sourceRef="_63" targetRef="_65"/>
+			<sem:sequenceFlow id="_66" name="Yes" ot:displayName="Yes" ot:alias="flow11" sourceRef="_63" targetRef="_67"/>
+			<sem:startEvent id="_60" name="Fraud suspected" ot:displayName="Fraud suspected" ot:alias="event7" isInterrupting="false">
+				<sem:dataOutput id="_d_68"/>
+				<sem:outputSet>
+					<sem:dataOutputRefs>_d_68</sem:dataOutputRefs>
+				</sem:outputSet>
+				<sem:messageEventDefinition messageRef="_7"/>
+			</sem:startEvent>
+			<sem:userTask id="_61" name="Check for Fraud" ot:displayName="Check for Fraud" ot:alias="task5">
+				<sem:extensionElements>
+					<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" displayOkButton="false" displayApplyButton="false" formTitle="" otObject=""/>
+				</sem:extensionElements>
+			</sem:userTask>
+			<sem:exclusiveGateway id="_63" name="Fraud detected?" ot:displayName="Fraud detected?" ot:alias="gateway1" default="_64"/>
+			<sem:endEvent id="_65" name="Fraud no detected" ot:displayName="Fraud no detected" ot:alias="event8"/>
+			<sem:endEvent id="_67" name="Fraud Detected" ot:displayName="Fraud Detected" ot:alias="event9">
+				<sem:dataInput id="_d_69"/>
+				<sem:inputSet>
+					<sem:dataInputRefs>_d_69</sem:dataInputRefs>
+				</sem:inputSet>
+				<sem:errorEventDefinition errorRef="_4"/>
+			</sem:endEvent>
+		</sem:subProcess>
+		<sem:endEvent id="_42" name="Timeout" ot:displayName="Timeout" ot:alias="event2">
+			<sem:dataInput id="_d_70"/>
+			<sem:inputSet>
+				<sem:dataInputRefs>_d_70</sem:dataInputRefs>
+			</sem:inputSet>
+			<sem:errorEventDefinition errorRef="_4"/>
+		</sem:endEvent>
+		<sem:startEvent id="_36" name="Decide Manually" ot:displayName="Decide Manually" ot:alias="start">
+			<sem:documentation textFormat="application/x-ot-schemaObjectDescription">
+				<ot:schemaObjectDescription>
+					<ot:translatedText lang="de"/>
+				</ot:schemaObjectDescription>
+			</sem:documentation>
+		</sem:startEvent>
+		<sem:endEvent id="_39" name="Manually Decided" ot:displayName="Manually Decided" ot:alias="end">
+			<sem:documentation textFormat="application/x-ot-schemaObjectDescription">
+				<ot:schemaObjectDescription>
+					<ot:translatedText lang="de"/>
+				</ot:schemaObjectDescription>
+			</sem:documentation>
+		</sem:endEvent>
+		<sem:boundaryEvent id="_41" name="Timeout (7 days)" ot:displayName="Timeout (7 days)" ot:alias="event1" attachedToRef="_37">
+			<sem:timerEventDefinition/>
+		</sem:boundaryEvent>
+	</sem:process>
+	<bpmndi:BPMNDiagram id="_8" name="C.9.1 - export diagram">
+		<bpmndi:BPMNPlane ot:namespace="_2" ot:alias="C91ExportDiagram" ot:versionName="1" ot:diagramType="executable" ot:diagramStatus="new" ot:createdBy="User(&quot;superuser&quot;)" ot:createdDate="01.04.2025 12:56:26" ot:lastChangedBy="User(&quot;superuser&quot;)" ot:lastChangedDate="01.04.2025 12:55:13" bpmnElement="_9">
+			<di:extension>
+				<ot:schemaObjectDescription>
+					<ot:translatedText lang="de"/>
+				</ot:schemaObjectDescription>
+			</di:extension>
+			<bpmndi:BPMNShape bpmnElement="_11" isHorizontal="true">
+				<dc:Bounds x="0" y="0" width="842" height="401"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge bpmnElement="_13">
+				<di:waypoint x="104" y="67"/>
+				<di:waypoint x="167.971042471042" y="67"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_16">
+				<di:waypoint x="320.971042471042" y="113"/>
+				<di:waypoint x="320.971042471042" y="307.4"/>
+				<di:waypoint x="484.971042471042" y="307.4"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_19">
+				<di:waypoint x="574.971042471042" y="307.4"/>
+				<di:waypoint x="680" y="307.4"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_21">
+				<di:waypoint x="257.971042471042" y="67"/>
+				<di:waypoint x="303.971042471042" y="67"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_23">
+				<di:waypoint x="393.971042471042" y="67"/>
+				<di:waypoint x="680" y="67"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_25">
+				<di:waypoint x="376.971042471042" y="113"/>
+				<di:waypoint x="376.971042471042" y="171.4"/>
+				<di:waypoint x="484.971042471042" y="171.4"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_28">
+				<di:waypoint x="574.971042471042" y="171.4"/>
+				<di:waypoint x="676.971042471042" y="171.4"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNShape bpmnElement="_14">
+				<dc:Bounds x="72" y="51" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_27">
+				<dc:Bounds x="484.971042471042" y="141.4" width="90" height="60"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_29">
+				<dc:Bounds x="676.971042471042" y="155.4" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_24">
+				<dc:Bounds x="680" y="51" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_15">
+				<dc:Bounds x="167.971042471042" y="37" width="90" height="60"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_22">
+				<dc:Bounds x="303.971042471042" y="37" width="90" height="60"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_17">
+				<dc:Bounds x="304.971042471042" y="81" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_18">
+				<dc:Bounds x="484.971042471042" y="277.4" width="90" height="60"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_20">
+				<dc:Bounds x="680" y="292.4" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_26">
+				<dc:Bounds x="360.971042471042" y="81" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+		</bpmndi:BPMNPlane>
+	</bpmndi:BPMNDiagram>
+	<bpmndi:BPMNDiagram id="_30" name="C 9.2 - export diagram">
+		<bpmndi:BPMNPlane ot:namespace="_3" ot:alias="C92ExportDiagram" ot:versionName="1" ot:diagramType="executable" ot:diagramStatus="new" ot:createdBy="User(&quot;superuser&quot;)" ot:createdDate="01.04.2025 12:56:26" ot:lastChangedBy="User(&quot;superuser&quot;)" ot:lastChangedDate="01.04.2025 12:52:50" bpmnElement="_31">
+			<di:extension>
+				<ot:schemaObjectDescription>
+					<ot:translatedText lang="de"/>
+				</ot:schemaObjectDescription>
+			</di:extension>
+			<bpmndi:BPMNShape bpmnElement="_33" isHorizontal="true">
+				<dc:Bounds x="0" y="0" width="612" height="944"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge bpmnElement="_35">
+				<di:waypoint x="113" y="95"/>
+				<di:waypoint x="192.5" y="95"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_38">
+				<di:waypoint x="282.5" y="95"/>
+				<di:waypoint x="409.5" y="95"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_40">
+				<di:waypoint x="255.5" y="141"/>
+				<di:waypoint x="255.5" y="217.4"/>
+				<di:waypoint x="409.5" y="217.4"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_44">
+				<di:waypoint x="282.5" y="590.5"/>
+				<di:waypoint x="330" y="590.5"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_47">
+				<di:waypoint x="420" y="588.5"/>
+				<di:waypoint x="488" y="588.5"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_49">
+				<di:waypoint x="119" y="589.5"/>
+				<di:waypoint x="192.5" y="589.5"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNShape bpmnElement="_48">
+				<dc:Bounds x="488" y="572.5" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_46">
+				<dc:Bounds x="330" y="558.5" width="90" height="60"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_50">
+				<dc:Bounds x="87" y="573.5" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_45">
+				<dc:Bounds x="192.5" y="560.5" width="90" height="60"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_43">
+				<dc:Bounds x="53.5" y="505.5" width="516" height="180"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge bpmnElement="_52">
+				<di:waypoint x="282.5" y="367.5"/>
+				<di:waypoint x="372" y="367.5"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_55">
+				<di:waypoint x="115" y="368.5"/>
+				<di:waypoint x="192.5" y="368.5"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNShape bpmnElement="_54">
+				<dc:Bounds x="372" y="351.5" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_56">
+				<dc:Bounds x="83" y="352.5" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_53">
+				<dc:Bounds x="192.5" y="337.5" width="90" height="60"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_51">
+				<dc:Bounds x="53.5" y="275.4" width="417" height="210"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_37">
+				<dc:Bounds x="192.5" y="65" width="90" height="60"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge bpmnElement="_59">
+				<di:waypoint x="119" y="781.5"/>
+				<di:waypoint x="194" y="781.5"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_62">
+				<di:waypoint x="284" y="781.5"/>
+				<di:waypoint x="330" y="781.5"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_64">
+				<di:waypoint x="372" y="782.5"/>
+				<di:waypoint x="441.5" y="782.5"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_66">
+				<di:waypoint x="351" y="803.5"/>
+				<di:waypoint x="351" y="865.5"/>
+				<di:waypoint x="441.5" y="865.5"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNShape bpmnElement="_60">
+				<dc:Bounds x="87" y="765.5" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_61">
+				<dc:Bounds x="194" y="751.5" width="90" height="60"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_63" isMarkerVisible="true">
+				<dc:Bounds x="330" y="761.5" width="42" height="42"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_65">
+				<dc:Bounds x="441.5" y="764.5" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_67">
+				<dc:Bounds x="441.5" y="849.5" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_58">
+				<dc:Bounds x="55" y="706.5" width="489" height="196"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_42">
+				<dc:Bounds x="409.5" y="201.4" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_36">
+				<dc:Bounds x="81" y="79" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_39">
+				<dc:Bounds x="409.5" y="79" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_41">
+				<dc:Bounds x="239.5" y="109" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+		</bpmndi:BPMNPlane>
+	</bpmndi:BPMNDiagram>
+</sem:definitions>
