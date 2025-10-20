@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?><definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:i18n="http://www.omg.org/spec/BPMN/non-normative/extensions/i18n/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:signavio="http://www.signavio.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" camunda:diagramRelationId="8dc12e9b-19d8-4ead-b538-41e8a4a9b4b2" exporter="Signavio Process Editor, http://www.signavio.com" exporterVersion="19.9.0" expressionLanguage="http://www.w3.org/TR/XPath" id="_5SVkEIXnEeSmwfgVk-ryvQ" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.1.0" targetNamespace="http://camunda.org/schema/1.0/bpmn" typeLanguage="http://www.w3.org/2001/XMLSchema" xml:lang="en-US" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://www.omg.org/spec/BPMN/2.0/20100501/BPMN20.xsd">
+   <import importType="http://www.omg.org/spec/BPMN/20100524/MODEL" location="C.9.1.bpmn" namespace="http://bpmn.io/schema/bpmn/Definitions_1"/>
+   <error errorCode="02" id="Error_0hvt466" name="Error_FraudDetected"/>
+   <message id="Message_0fvpzfg" name="Message_DocumentRequested"/>
+   <message id="Message_10rm6h0" name="Message_FraudSuspected"/>
+   <globalTask id="requestDocument_en" name="Document Request">
+      <extensionElements/>
+   </globalTask>
+   <collaboration id="sid-ff4c2292-cae0-46f4-a784-2fea645c934c">
+      <participant id="Participant_01" name="Manual Check" processRef="ManualCheck">
+         <extensionElements/>
+      </participant>
+   </collaboration>
+   <process id="ManualCheck" isClosed="false" isExecutable="true" name="Manual Check" processType="None">
+      <extensionElements>
+         <zeebe:userTaskForm xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="userTaskForm_2s8lq02">{
+  "components": [
+    {
+      "key": "applicationNumber",
+      "label": "Application Number",
+      "type": "textfield",
+      "id": "Field_1djmro0"
+    },
+    {
+      "text": "&lt;img src=\"http://localhost:8080/camunda/online/banking/img/core-img/logo.png\"&gt;&lt;h2&gt;Instructions:&lt;/h2&gt;&lt;p&gt;Based on internal protocal and the given information below, tick the checkbox for 'Approved' if this application should be approved.&lt;/p&gt;&lt;p&gt; Otherwise, leave this checkbox blank.&lt;/p&gt;",
+      "type": "text",
+      "id": "Field_0e9521u"
+    },
+    {
+      "key": "applicantName",
+      "label": "Applicant",
+      "type": "textfield",
+      "id": "Field_1ex9187"
+    },
+    {
+      "key": "age",
+      "label": "Current Age",
+      "type": "number",
+      "id": "Field_17vnd80"
+    },
+    {
+      "key": "employment",
+      "label": "Employment",
+      "type": "textfield",
+      "id": "Field_08mj5fv"
+    },
+    {
+      "key": "category",
+      "label": "Category",
+      "type": "textfield",
+      "id": "Field_1k7e84u"
+    },
+    {
+      "key": "priceIndication",
+      "label": "Price indication",
+      "type": "textfield",
+      "id": "Field_1d6bhc2"
+    },
+    {
+      "key": "approved",
+      "label": "Approved",
+      "type": "checkbox",
+      "id": "Field_0hwfap9"
+    }
+  ],
+  "schemaVersion": 4,
+  "type": "default",
+  "id": "Form_0840o2b",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "1.1",
+  "exporter": {
+    "name": "Camunda Web Modeler",
+    "version": "1db7fd4"
+  }
+}</zeebe:userTaskForm>
+      </extensionElements>
+      <laneSet id="sid-c1a080db-3542-4d44-9838-c9cd2553c6bd">
+         <lane id="sid-d002641d-b94d-460e-b1ee-b0b2bee77370">
+            <flowNodeRef>UserTask_DecideOnApplication</flowNodeRef>
+            <flowNodeRef>StartEvent_DecideManually</flowNodeRef>
+            <flowNodeRef>Activity_0uvp3cb</flowNodeRef>
+            <flowNodeRef>Activity_1esx1s7</flowNodeRef>
+            <flowNodeRef>Activity_02a6b2h</flowNodeRef>
+            <flowNodeRef>ErrorEndEvent_Timeout</flowNodeRef>
+            <flowNodeRef>EndEvent_ManuallyDecided</flowNodeRef>
+            <flowNodeRef>TimerEvent_Timeout</flowNodeRef>
+         </lane>
+      </laneSet>
+      <userTask completionQuantity="1" id="UserTask_DecideOnApplication" implementation="##unspecified" isForCompensation="false" name="Decide on application" startQuantity="1">
+         <extensionElements>
+            <zeebe:ioMapping xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI">
+               <zeebe:input source="= string join(risks, &quot;, &quot;)" target="risksText"/>
+               <zeebe:input source="= applicant.age" target="age"/>
+               <zeebe:input source="= applicant.name" target="applicantName"/>
+                       
+            </zeebe:ioMapping>
+            <zeebe:assignmentDefinition xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" candidateGroups="clerks"/>
+            <zeebe:formDefinition xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" formKey="camunda-forms:bpmn:userTaskForm_2s8lq02"/>
+         </extensionElements>
+         <incoming>Flow_08vmski</incoming>
+         <outgoing>Flow_0vjv3ik</outgoing>
+      </userTask>
+      <startEvent id="StartEvent_DecideManually" isInterrupting="true" name="Decide Manually">
+         <extensionElements>
+            <signavio:signavioLabel align="left" ref="text_name" valign="top" x="-21.0" y="40.0"/>
+         </extensionElements>
+         <outgoing>Flow_08vmski</outgoing>
+      </startEvent>
+      <subProcess completionQuantity="1" id="Activity_0uvp3cb" isForCompensation="false" name="" startQuantity="1" triggeredByEvent="true">
+         <startEvent id="StartMessageEvent_DocumentRequested" isInterrupting="false" name="Document requested">
+            <extensionElements>
+               <signavio:signavioLabel align="left" ref="text_name" valign="top" x="-10.0" y="40.0"/>
+            </extensionElements>
+            <outgoing>Flow_0irfroh</outgoing>
+            <messageEventDefinition id="sid-06af6507-641b-4d7b-ab64-07f2996c68c2" messageRef="Message_0fvpzfg"/>
+         </startEvent>
+         <endEvent id="EndEvent_DocumentReceived" name="Document Received">
+            <extensionElements>
+               <signavio:signavioLabel align="left" ref="text_name" valign="top" x="-11.0" y="40.0"/>
+            </extensionElements>
+            <incoming>Flow_1wwxns6</incoming>
+         </endEvent>
+         <callActivity calledElement="requestDocument_en" completionQuantity="1" id="CallActivity_RequestDocument" isForCompensation="false" name="Document Request" startQuantity="1">
+            <extensionElements>
+               <signavio:signavioStencil id="Task"/>
+               <zeebe:calledElement xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" processId="requestDocument_en" propagateAllChildVariables="true"/>
+            </extensionElements>
+            <incoming>Flow_0irfroh</incoming>
+            <outgoing>Flow_1wwxns6</outgoing>
+            <multiInstanceLoopCharacteristics id="sid-3446fed9-0d51-441a-996d-e77bdb254583" isSequential="false">
+               <extensionElements>
+                  <zeebe:loopCharacteristics xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" inputCollection="=documents" inputElement="document"/>
+               </extensionElements>
+            </multiInstanceLoopCharacteristics>
+         </callActivity>
+         <sequenceFlow id="Flow_0irfroh" isImmediate="true" name="" sourceRef="StartMessageEvent_DocumentRequested" targetRef="CallActivity_RequestDocument"/>
+         <sequenceFlow id="Flow_1wwxns6" isImmediate="true" name="" sourceRef="CallActivity_RequestDocument" targetRef="EndEvent_DocumentReceived"/>
+      </subProcess>
+      <subProcess completionQuantity="1" id="Activity_1esx1s7" isForCompensation="false" name="" startQuantity="1" triggeredByEvent="true">
+         <startEvent id="StartTimerEvent_AcceleratedDecision" isInterrupting="false" name="Accelerated decision">
+            <extensionElements>
+               <signavio:signavioLabel align="left" ref="text_name" valign="top" x="-12.0" y="40.0"/>
+            </extensionElements>
+            <outgoing>Flow_0kaot38</outgoing>
+            <timerEventDefinition id="sid-f0f0bf7c-1ced-4c69-ac7e-0b5c24868d24">
+               <timeCycle id="sid-9955b883-adc0-4d9e-809d-b08cf6715889" xsi:type="tFormalExpression">R1/P5D</timeCycle>
+            </timerEventDefinition>
+         </startEvent>
+         <userTask completionQuantity="1" id="UserTask_AccelerateDecision" implementation="##unspecified" isForCompensation="false" name="Accelerate decision making" startQuantity="1">
+            <extensionElements>
+               <zeebe:assignmentDefinition xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" candidateGroups="teamleaders"/>
+            </extensionElements>
+            <incoming>Flow_1octlto</incoming>
+            <outgoing>Flow_1t18skh</outgoing>
+         </userTask>
+         <endEvent id="EndEvent_DecisionAccelerated" name="Decision accelerated">
+            <extensionElements>
+               <signavio:signavioLabel align="left" ref="text_name" valign="top" x="-11.0" y="38.0"/>
+            </extensionElements>
+            <incoming>Flow_1t18skh</incoming>
+         </endEvent>
+         <sendTask completionQuantity="1" id="SendTask_NotifyCustomerDelay" implementation="##unspecified" isForCompensation="false" name="Notify customer about delay" startQuantity="1">
+            <extensionElements>
+               <zeebe:taskDefinition xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" type="notifyCustomerDelay"/>
+            </extensionElements>
+            <incoming>Flow_0kaot38</incoming>
+            <outgoing>Flow_1octlto</outgoing>
+         </sendTask>
+         <sequenceFlow id="Flow_0kaot38" isImmediate="true" name="" sourceRef="StartTimerEvent_AcceleratedDecision" targetRef="SendTask_NotifyCustomerDelay"/>
+         <sequenceFlow id="Flow_1t18skh" isImmediate="true" name="" sourceRef="UserTask_AccelerateDecision" targetRef="EndEvent_DecisionAccelerated"/>
+         <sequenceFlow id="Flow_1octlto" isImmediate="true" name="" sourceRef="SendTask_NotifyCustomerDelay" targetRef="UserTask_AccelerateDecision"/>
+      </subProcess>
+      <subProcess completionQuantity="1" id="Activity_02a6b2h" isForCompensation="false" name="" startQuantity="1" triggeredByEvent="true">
+         <userTask completionQuantity="1" id="UserTask_CheckForFraud" implementation="##unspecified" isForCompensation="false" name="Check for Fraud" startQuantity="1">
+            <extensionElements>
+               <zeebe:assignmentDefinition xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" candidateGroups="riskteam"/>
+            </extensionElements>
+            <incoming>Flow_0nttki4</incoming>
+            <outgoing>Flow_1istmr0</outgoing>
+         </userTask>
+         <startEvent id="StartMessageEvent_FraudSuspected" isInterrupting="false" name="Fraud suspected">
+            <extensionElements>
+               <signavio:signavioLabel align="left" ref="text_name" valign="top" x="-26.0" y="40.0"/>
+            </extensionElements>
+            <outgoing>Flow_0nttki4</outgoing>
+            <messageEventDefinition id="sid-cb30b14e-1c0e-41fe-836d-b85e9111a45c" messageRef="Message_10rm6h0"/>
+         </startEvent>
+         <endEvent id="ErrorEndEvent_FraudDetected" name="Fraud Detected">
+            <extensionElements>
+               <signavio:signavioLabel align="left" ref="text_name" valign="top" x="-19.0" y="38.0"/>
+            </extensionElements>
+            <incoming>SequenceFlow_Yes</incoming>
+            <errorEventDefinition errorRef="Error_0hvt466" id="sid-56ab150f-119b-40b8-bf0f-c620c80e4263"/>
+         </endEvent>
+         <exclusiveGateway default="SequenceFlow_No" gatewayDirection="Diverging" id="Gateway_FraudDetected" name="Fraud detected?">
+            <extensionElements>
+               <signavio:signavioLabel align="left" ref="text_name" valign="top" x="-19.0" y="-27.0"/>
+            </extensionElements>
+            <incoming>Flow_1istmr0</incoming>
+            <outgoing>SequenceFlow_Yes</outgoing>
+            <outgoing>SequenceFlow_No</outgoing>
+         </exclusiveGateway>
+         <endEvent id="EndEvent_FraudNoDetected" name="Fraud no detected">
+            <extensionElements>
+               <signavio:signavioLabel align="left" ref="text_name" valign="top" x="-28.0" y="40.0"/>
+            </extensionElements>
+            <incoming>SequenceFlow_No</incoming>
+         </endEvent>
+         <sequenceFlow id="Flow_0nttki4" isImmediate="true" name="" sourceRef="StartMessageEvent_FraudSuspected" targetRef="UserTask_CheckForFraud"/>
+         <sequenceFlow id="SequenceFlow_Yes" isImmediate="true" name="Yes" sourceRef="Gateway_FraudDetected" targetRef="ErrorEndEvent_FraudDetected">
+            <extensionElements>
+               <signavio:signavioLabel align="left" ref="text_name" valign="top" x="477.0" y="683.0"/>
+            </extensionElements>
+            <conditionExpression id="sid-f32aed32-0310-46c1-900e-3e992193760b" xsi:type="tFormalExpression">=fraud</conditionExpression>
+         </sequenceFlow>
+         <sequenceFlow id="Flow_1istmr0" isImmediate="true" name="" sourceRef="UserTask_CheckForFraud" targetRef="Gateway_FraudDetected"/>
+         <sequenceFlow id="SequenceFlow_No" isImmediate="true" name="No" sourceRef="Gateway_FraudDetected" targetRef="EndEvent_FraudNoDetected">
+            <extensionElements>
+               <signavio:signavioLabel align="left" ref="text_name" valign="top" x="502.0" y="612.0"/>
+            </extensionElements>
+         </sequenceFlow>
+      </subProcess>
+      <endEvent id="ErrorEndEvent_Timeout" name="Timeout">
+         <extensionElements>
+            <signavio:signavioLabel align="left" ref="text_name" valign="top" x="-5.0" y="40.0"/>
+         </extensionElements>
+         <incoming>Flow_03n7pdb</incoming>
+         <errorEventDefinition errorRef="Error_0hvt466" id="sid-0b88244d-0895-4149-851c-84b9be2d8cf5"/>
+      </endEvent>
+      <endEvent id="EndEvent_ManuallyDecided" name="Manually Decided">
+         <extensionElements>
+            <signavio:signavioLabel align="left" ref="text_name" valign="top" x="-28.0" y="40.0"/>
+         </extensionElements>
+         <incoming>Flow_0vjv3ik</incoming>
+      </endEvent>
+      <boundaryEvent attachedToRef="UserTask_DecideOnApplication" cancelActivity="true" id="TimerEvent_Timeout" name="Timeout (7 days)" parallelMultiple="false">
+         <outgoing>Flow_03n7pdb</outgoing>
+         <timerEventDefinition id="sid-e1e4e533-ff49-493d-84ee-b6084e4878f3">
+            <timeDuration id="sid-9b222c0a-9904-42e7-b78d-0bed2c9d1d0a" xsi:type="tFormalExpression">P7D</timeDuration>
+         </timerEventDefinition>
+      </boundaryEvent>
+      <sequenceFlow id="Flow_08vmski" isImmediate="true" name="" sourceRef="StartEvent_DecideManually" targetRef="UserTask_DecideOnApplication"/>
+      <sequenceFlow id="Flow_0vjv3ik" isImmediate="true" name="" sourceRef="UserTask_DecideOnApplication" targetRef="EndEvent_ManuallyDecided"/>
+      <sequenceFlow id="Flow_03n7pdb" isImmediate="true" name="" sourceRef="TimerEvent_Timeout" targetRef="ErrorEndEvent_Timeout"/>
+   </process>
+   <bpmndi:BPMNDiagram id="sid-7cdd8efc-eab1-48cc-a4e5-ae28d4293110">
+      <bpmndi:BPMNPlane bpmnElement="sid-ff4c2292-cae0-46f4-a784-2fea645c934c" id="sid-a1e25dc4-44ef-49df-8f0f-aa470e9b7d82">
+         <bpmndi:BPMNShape bpmnElement="Participant_01" id="Participant_01_gui" isHorizontal="true">
+            <omgdc:Bounds height="720.0" width="610.0" x="150.0" y="60.0"/>
+            <bpmndi:BPMNLabel labelStyle="sid-e083b6ee-e215-46e8-9779-7e6b4cc763f2">
+               <omgdc:Bounds height="73.28571319580078" width="12.0" x="155.0" y="383.3571434020996"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="sid-d002641d-b94d-460e-b1ee-b0b2bee77370" id="sid-d002641d-b94d-460e-b1ee-b0b2bee77370_gui" isHorizontal="true">
+            <omgdc:Bounds height="720.0" width="580.0" x="180.0" y="60.0"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="UserTask_DecideOnApplication" id="UserTask_DecideOnApplication_gui">
+            <omgdc:Bounds height="80.0" width="100.0" x="296.0" y="90.0"/>
+            <bpmndi:BPMNLabel labelStyle="sid-e083b6ee-e215-46e8-9779-7e6b4cc763f2">
+               <omgdc:Bounds height="24.0" width="57.08570861816406" x="317.45714569091797" y="116.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="StartEvent_DecideManually" id="StartEvent_DecideManually_gui">
+            <omgdc:Bounds height="30.0" width="30.0" x="215.0" y="115.0"/>
+            <bpmndi:BPMNLabel labelStyle="sid-ada20228-3908-467a-952b-14bdc8b1b7b4">
+               <omgdc:Bounds height="11.0" width="77.78571319580078" x="194.0" y="155.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="Activity_0uvp3cb" id="Activity_0uvp3cb_gui" isExpanded="true">
+            <omgdc:Bounds height="130.0" width="314.0" x="200.0" y="270.0"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="StartMessageEvent_DocumentRequested" id="StartMessageEvent_DocumentRequested_gui">
+            <omgdc:Bounds height="30.0" width="30.0" x="223.0" y="315.0"/>
+            <bpmndi:BPMNLabel labelStyle="sid-ada20228-3908-467a-952b-14bdc8b1b7b4">
+               <omgdc:Bounds height="11.0" width="104.65714263916016" x="213.0" y="355.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="EndEvent_DocumentReceived" id="EndEvent_DocumentReceived_gui">
+            <omgdc:Bounds height="30.0" width="30.0" x="455.0" y="315.0"/>
+            <bpmndi:BPMNLabel labelStyle="sid-ada20228-3908-467a-952b-14bdc8b1b7b4">
+               <omgdc:Bounds height="11.0" width="97.5857162475586" x="444.0" y="355.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="CallActivity_RequestDocument" id="CallActivity_RequestDocument_gui">
+            <omgdc:Bounds height="80.0" width="100.0" x="300.0" y="290.0"/>
+            <bpmndi:BPMNLabel labelStyle="sid-e083b6ee-e215-46e8-9779-7e6b4cc763f2">
+               <omgdc:Bounds height="24.0" width="55.54286193847656" x="322.2285690307617" y="316.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="Activity_1esx1s7" id="Activity_1esx1s7_gui" isExpanded="true">
+            <omgdc:Bounds height="130.0" width="540.0" x="200.0" y="420.0"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="StartTimerEvent_AcceleratedDecision" id="StartTimerEvent_AcceleratedDecision_gui">
+            <omgdc:Bounds height="30.0" width="30.0" x="229.0" y="465.0"/>
+            <bpmndi:BPMNLabel labelStyle="sid-ada20228-3908-467a-952b-14bdc8b1b7b4">
+               <omgdc:Bounds height="11.0" width="99.70714569091797" x="217.0" y="505.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="UserTask_AccelerateDecision" id="UserTask_AccelerateDecision_gui">
+            <omgdc:Bounds height="80.0" width="100.0" x="450.0" y="440.0"/>
+            <bpmndi:BPMNLabel labelStyle="sid-e083b6ee-e215-46e8-9779-7e6b4cc763f2">
+               <omgdc:Bounds height="24.0" width="85.62857055664062" x="457.1857147216797" y="466.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="EndEvent_DecisionAccelerated" id="EndEvent_DecisionAccelerated_gui">
+            <omgdc:Bounds height="30.0" width="30.0" x="599.0" y="465.0"/>
+            <bpmndi:BPMNLabel labelStyle="sid-ada20228-3908-467a-952b-14bdc8b1b7b4">
+               <omgdc:Bounds height="11.0" width="99.70714569091797" x="588.0" y="503.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="SendTask_NotifyCustomerDelay" id="SendTask_NotifyCustomerDelay_gui">
+            <omgdc:Bounds height="80.0" width="100.0" x="300.0" y="440.0"/>
+            <bpmndi:BPMNLabel labelStyle="sid-e083b6ee-e215-46e8-9779-7e6b4cc763f2">
+               <omgdc:Bounds height="24.0" width="86.39999389648438" x="306.8000030517578" y="466.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="Activity_02a6b2h" id="Activity_02a6b2h_gui" isExpanded="true">
+            <omgdc:Bounds height="190.0" width="410.0" x="200.0" y="570.0"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="UserTask_CheckForFraud" id="UserTask_CheckForFraud_gui">
+            <omgdc:Bounds height="80.0" width="100.0" x="306.0" y="590.0"/>
+            <bpmndi:BPMNLabel labelStyle="sid-e083b6ee-e215-46e8-9779-7e6b4cc763f2">
+               <omgdc:Bounds height="12.0" width="86.39999389648438" x="312.8000030517578" y="622.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="StartMessageEvent_FraudSuspected" id="StartMessageEvent_FraudSuspected_gui">
+            <omgdc:Bounds height="30.0" width="30.0" x="229.0" y="615.0"/>
+            <bpmndi:BPMNLabel labelStyle="sid-ada20228-3908-467a-952b-14bdc8b1b7b4">
+               <omgdc:Bounds height="11.0" width="82.7357177734375" x="203.0" y="655.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="ErrorEndEvent_FraudDetected" id="ErrorEndEvent_FraudDetected_gui">
+            <omgdc:Bounds height="30.0" width="30.0" x="545.0" y="685.0"/>
+            <bpmndi:BPMNLabel labelStyle="sid-ada20228-3908-467a-952b-14bdc8b1b7b4">
+               <omgdc:Bounds height="11.0" width="76.37142944335938" x="526.0" y="723.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="Gateway_FraudDetected" id="Gateway_FraudDetected_gui" isMarkerVisible="true">
+            <omgdc:Bounds height="40.0" width="40.0" x="450.0" y="610.0"/>
+            <bpmndi:BPMNLabel labelStyle="sid-ada20228-3908-467a-952b-14bdc8b1b7b4">
+               <omgdc:Bounds height="12.0" width="87.94285583496094" x="431.0" y="583.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="EndEvent_FraudNoDetected" id="EndEvent_FraudNoDetected_gui">
+            <omgdc:Bounds height="30.0" width="30.0" x="545.0" y="615.0"/>
+            <bpmndi:BPMNLabel labelStyle="sid-ada20228-3908-467a-952b-14bdc8b1b7b4">
+               <omgdc:Bounds height="11.0" width="91.22142791748047" x="517.0" y="655.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="ErrorEndEvent_Timeout" id="ErrorEndEvent_Timeout_gui">
+            <omgdc:Bounds height="30.0" width="30.0" x="481.0" y="205.0"/>
+            <bpmndi:BPMNLabel labelStyle="sid-ada20228-3908-467a-952b-14bdc8b1b7b4">
+               <omgdc:Bounds height="11.0" width="40.30714416503906" x="476.0" y="245.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="EndEvent_ManuallyDecided" id="EndEvent_ManuallyDecided_gui">
+            <omgdc:Bounds height="30.0" width="30.0" x="481.0" y="115.0"/>
+            <bpmndi:BPMNLabel labelStyle="sid-ada20228-3908-467a-952b-14bdc8b1b7b4">
+               <omgdc:Bounds height="11.0" width="84.1500015258789" x="453.0" y="155.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="TimerEvent_Timeout" id="TimerEvent_Timeout_gui">
+            <omgdc:Bounds height="30.0" width="30.0" x="364.51351351351354" y="155.0"/>
+            <bpmndi:BPMNLabel labelStyle="sid-ada20228-3908-467a-952b-14bdc8b1b7b4">
+               <omgdc:Bounds height="11.0" width="85.56428527832031" x="388.51351351351354" y="193.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNEdge bpmnElement="Flow_0irfroh" id="Flow_0irfroh_gui">
+            <omgdi:waypoint x="253.0" y="330.0"/>
+            <omgdi:waypoint x="300.0" y="330.0"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge bpmnElement="Flow_1wwxns6" id="Flow_1wwxns6_gui">
+            <omgdi:waypoint x="400.0" y="330.0"/>
+            <omgdi:waypoint x="455.0" y="330.0"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge bpmnElement="Flow_0kaot38" id="Flow_0kaot38_gui">
+            <omgdi:waypoint x="259.0" y="480.0"/>
+            <omgdi:waypoint x="300.0" y="480.0"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge bpmnElement="Flow_1t18skh" id="Flow_1t18skh_gui">
+            <omgdi:waypoint x="550.0" y="480.0"/>
+            <omgdi:waypoint x="599.0" y="480.0"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge bpmnElement="Flow_1octlto" id="Flow_1octlto_gui">
+            <omgdi:waypoint x="400.0" y="480.0"/>
+            <omgdi:waypoint x="450.0" y="480.0"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge bpmnElement="Flow_0nttki4" id="Flow_0nttki4_gui">
+            <omgdi:waypoint x="259.0" y="630.0"/>
+            <omgdi:waypoint x="306.0" y="630.0"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge bpmnElement="SequenceFlow_Yes" id="SequenceFlow_Yes_gui">
+            <omgdi:waypoint x="470.0" y="650.0"/>
+            <omgdi:waypoint x="470.0" y="700.0"/>
+            <omgdi:waypoint x="545.0" y="700.0"/>
+            <bpmndi:BPMNLabel labelStyle="sid-ada20228-3908-467a-952b-14bdc8b1b7b4">
+               <omgdc:Bounds height="12.0" width="19.28570556640625" x="477.0" y="683.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge bpmnElement="Flow_1istmr0" id="Flow_1istmr0_gui">
+            <omgdi:waypoint x="406.0" y="630.0"/>
+            <omgdi:waypoint x="450.0" y="630.0"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge bpmnElement="SequenceFlow_No" id="SequenceFlow_No_gui">
+            <omgdi:waypoint x="490.0" y="630.0"/>
+            <omgdi:waypoint x="545.0" y="630.0"/>
+            <bpmndi:BPMNLabel labelStyle="sid-ada20228-3908-467a-952b-14bdc8b1b7b4">
+               <omgdc:Bounds height="12.0" width="14.65716552734375" x="502.0" y="612.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge bpmnElement="Flow_08vmski" id="Flow_08vmski_gui">
+            <omgdi:waypoint x="245.0" y="130.0"/>
+            <omgdi:waypoint x="296.0" y="130.0"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge bpmnElement="Flow_0vjv3ik" id="Flow_0vjv3ik_gui">
+            <omgdi:waypoint x="396.0" y="130.0"/>
+            <omgdi:waypoint x="481.0" y="130.0"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge bpmnElement="Flow_03n7pdb" id="Flow_03n7pdb_gui">
+            <omgdi:waypoint x="379.65945945945947" y="185.0"/>
+            <omgdi:waypoint x="380.0" y="220.0"/>
+            <omgdi:waypoint x="481.0" y="220.0"/>
+         </bpmndi:BPMNEdge>
+      </bpmndi:BPMNPlane>
+      <bpmndi:BPMNLabelStyle id="sid-ada20228-3908-467a-952b-14bdc8b1b7b4">
+         <omgdc:Font isBold="false" isItalic="false" isStrikeThrough="false" isUnderline="false" name="Arial" size="11.0"/>
+      </bpmndi:BPMNLabelStyle>
+      <bpmndi:BPMNLabelStyle id="sid-e083b6ee-e215-46e8-9779-7e6b4cc763f2">
+         <omgdc:Font isBold="false" isItalic="false" isStrikeThrough="false" isUnderline="false" name="Arial" size="12.0"/>
+      </bpmndi:BPMNLabelStyle>
+   </bpmndi:BPMNDiagram>
+</definitions>

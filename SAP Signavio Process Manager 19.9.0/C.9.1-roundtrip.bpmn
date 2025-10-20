@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?><definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:i18n="http://www.omg.org/spec/BPMN/non-normative/extensions/i18n/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:signavio="http://www.signavio.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" camunda:diagramRelationId="af86f867-ab21-41fd-aa8f-3d258886a557" exporter="Signavio Process Editor, http://www.signavio.com" exporterVersion="19.9.0" expressionLanguage="http://www.w3.org/TR/XPath" id="Definitions_1" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.1.0" targetNamespace="http://bpmn.io/schema/bpmn/Definitions_1" typeLanguage="http://www.w3.org/2001/XMLSchema" xml:lang="en-US" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://www.omg.org/spec/BPMN/2.0/20100501/BPMN20.xsd">
+   <message id="Message_1" name="MESSAGE_documentReceived"/>
+   <collaboration id="sid-0e33db6e-0e9d-4bf5-8da9-45a0e1c15550">
+      <participant id="Participant_02" name="Document Request" processRef="requestDocument_en">
+         <extensionElements/>
+      </participant>
+   </collaboration>
+   <process id="requestDocument_en" isClosed="false" isExecutable="true" name="Document Request" processType="None">
+      <extensionElements/>
+      <laneSet id="sid-045090be-9dd7-4108-b5e3-0912c317b668">
+         <lane id="sid-205b0135-39d8-49a3-85df-837dbd09910e">
+            <flowNodeRef>SendTask_RequestDocument</flowNodeRef>
+            <flowNodeRef>EndEvent_TalkedToCustomer</flowNodeRef>
+            <flowNodeRef>SendTask_SendReminderEmail</flowNodeRef>
+            <flowNodeRef>UserTask_CallCustomer</flowNodeRef>
+            <flowNodeRef>ReceiveTask_WaitForDocument</flowNodeRef>
+            <flowNodeRef>EndEvent_GotDocument</flowNodeRef>
+            <flowNodeRef>StartEvent_DocumentRequested</flowNodeRef>
+            <flowNodeRef>EndEvent_ReminderSent</flowNodeRef>
+            <flowNodeRef>BoundaryEvent_2</flowNodeRef>
+            <flowNodeRef>BoundaryEvent_1</flowNodeRef>
+         </lane>
+      </laneSet>
+      <sendTask camunda:async="true" camunda:topic="emailService" camunda:type="external" completionQuantity="1" id="SendTask_RequestDocument" implementation="##unspecified" isForCompensation="false" name="Request document" startQuantity="1">
+         <extensionElements>
+            <zeebe:taskDefinition xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" type="email"/>
+         </extensionElements>
+         <incoming>SequenceFlow_0d7dzn0</incoming>
+         <outgoing>SequenceFlow_18a0pzl</outgoing>
+      </sendTask>
+      <endEvent camunda:asyncAfter="true" id="EndEvent_TalkedToCustomer" name="Answer received">
+         <extensionElements>
+            <signavio:signavioLabel align="left" ref="text_name" valign="top" x="-24.0" y="38.0"/>
+         </extensionElements>
+         <incoming>SequenceFlow_3</incoming>
+      </endEvent>
+      <sendTask camunda:asyncBefore="true" camunda:topic="emailService" camunda:type="external" completionQuantity="1" id="SendTask_SendReminderEmail" implementation="##unspecified" isForCompensation="false" name="Send reminder email" startQuantity="1">
+         <extensionElements>
+            <zeebe:taskDefinition xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" type="email"/>
+         </extensionElements>
+         <incoming>SequenceFlow_1bqpxlf</incoming>
+         <outgoing>SequenceFlow_2</outgoing>
+      </sendTask>
+      <userTask completionQuantity="1" id="UserTask_CallCustomer" implementation="##unspecified" isForCompensation="false" name="Call customer" startQuantity="1">
+         <incoming>SequenceFlow_0i97ejj</incoming>
+         <outgoing>SequenceFlow_3</outgoing>
+      </userTask>
+      <receiveTask completionQuantity="1" id="ReceiveTask_WaitForDocument" implementation="##unspecified" instantiate="false" isForCompensation="false" messageRef="Message_1" name="Wait for answer" startQuantity="1">
+         <incoming>SequenceFlow_18a0pzl</incoming>
+         <outgoing>SequenceFlow_6</outgoing>
+      </receiveTask>
+      <endEvent camunda:asyncAfter="true" id="EndEvent_GotDocument" name="Document received">
+         <extensionElements>
+            <signavio:signavioLabel align="left" ref="text_name" valign="top" x="-10.0" y="33.0"/>
+         </extensionElements>
+         <incoming>SequenceFlow_6</incoming>
+      </endEvent>
+      <startEvent id="StartEvent_DocumentRequested" isInterrupting="true" name="Document requested">
+         <extensionElements>
+            <signavio:signavioLabel align="left" ref="text_name" valign="top" x="-10.0" y="33.0"/>
+         </extensionElements>
+         <outgoing>SequenceFlow_0d7dzn0</outgoing>
+      </startEvent>
+      <endEvent id="EndEvent_ReminderSent" name="Email sent">
+         <extensionElements>
+            <signavio:signavioLabel align="left" ref="text_name" valign="top" x="-11.0" y="33.0"/>
+         </extensionElements>
+         <incoming>SequenceFlow_2</incoming>
+      </endEvent>
+      <boundaryEvent attachedToRef="ReceiveTask_WaitForDocument" cancelActivity="true" id="BoundaryEvent_2" name="1 week" parallelMultiple="false">
+         <outgoing>SequenceFlow_0i97ejj</outgoing>
+         <timerEventDefinition id="sid-71ae5687-44f5-471e-a884-54deb6734aea">
+            <timeDuration id="sid-4def77e8-8f62-49e8-a1db-c0d9ec1029fe" xsi:type="tFormalExpression">P7D</timeDuration>
+         </timerEventDefinition>
+      </boundaryEvent>
+      <boundaryEvent attachedToRef="ReceiveTask_WaitForDocument" cancelActivity="false" id="BoundaryEvent_1" name="daily" parallelMultiple="false">
+         <outgoing>SequenceFlow_1bqpxlf</outgoing>
+         <timerEventDefinition id="sid-390e9a38-a545-42e1-81bc-fa402baae4ed">
+            <timeCycle id="sid-d96fc57b-9805-4e5f-bcd2-c3faaee5e229" xsi:type="tFormalExpression">R6/P1D</timeCycle>
+         </timerEventDefinition>
+      </boundaryEvent>
+      <sequenceFlow id="SequenceFlow_6" isImmediate="true" name="" sourceRef="ReceiveTask_WaitForDocument" targetRef="EndEvent_GotDocument">
+         <extensionElements>
+            <signavio:signavioLabel align="left" ref="text_name" valign="top" x="591.0" y="139.0"/>
+         </extensionElements>
+      </sequenceFlow>
+      <sequenceFlow id="SequenceFlow_0i97ejj" isImmediate="true" name="" sourceRef="BoundaryEvent_2" targetRef="UserTask_CallCustomer">
+         <extensionElements>
+            <signavio:signavioLabel align="left" ref="text_name" valign="top" x="488.0" y="224.0"/>
+         </extensionElements>
+      </sequenceFlow>
+      <sequenceFlow id="SequenceFlow_1bqpxlf" isImmediate="true" name="" sourceRef="BoundaryEvent_1" targetRef="SendTask_SendReminderEmail">
+         <extensionElements>
+            <signavio:signavioLabel align="left" ref="text_name" valign="top" x="484.0" y="235.0"/>
+         </extensionElements>
+      </sequenceFlow>
+      <sequenceFlow id="SequenceFlow_2" isImmediate="true" name="" sourceRef="SendTask_SendReminderEmail" targetRef="EndEvent_ReminderSent">
+         <extensionElements>
+            <signavio:signavioLabel align="left" ref="text_name" valign="top" x="681.0" y="320.0"/>
+         </extensionElements>
+      </sequenceFlow>
+      <sequenceFlow id="SequenceFlow_3" isImmediate="true" name="" sourceRef="UserTask_CallCustomer" targetRef="EndEvent_TalkedToCustomer">
+         <extensionElements>
+            <signavio:signavioLabel align="left" ref="text_name" valign="top" x="681.0" y="224.0"/>
+         </extensionElements>
+      </sequenceFlow>
+      <sequenceFlow id="SequenceFlow_18a0pzl" isImmediate="true" name="" sourceRef="SendTask_RequestDocument" targetRef="ReceiveTask_WaitForDocument">
+         <extensionElements>
+            <signavio:signavioLabel align="left" ref="text_name" valign="top" x="369.0" y="129.0"/>
+         </extensionElements>
+      </sequenceFlow>
+      <sequenceFlow id="SequenceFlow_0d7dzn0" isImmediate="true" name="" sourceRef="StartEvent_DocumentRequested" targetRef="SendTask_RequestDocument">
+         <extensionElements>
+            <signavio:signavioLabel align="left" ref="text_name" valign="top" x="152.0" y="121.0"/>
+         </extensionElements>
+      </sequenceFlow>
+   </process>
+   <bpmndi:BPMNDiagram id="sid-86facf54-7d6d-44b9-a853-c1cdc0b20fca">
+      <bpmndi:BPMNPlane bpmnElement="sid-0e33db6e-0e9d-4bf5-8da9-45a0e1c15550" id="sid-e97e96d2-5680-494b-ad7a-616112ccc008">
+         <bpmndi:BPMNShape bpmnElement="Participant_02" id="Participant_02_gui" isHorizontal="true">
+            <omgdc:Bounds height="301.0" width="829.0" x="156.0" y="76.0"/>
+            <bpmndi:BPMNLabel labelStyle="sid-e856d8eb-199a-4bab-8a87-cc6e241eafa5">
+               <omgdc:Bounds height="104.14286041259766" width="12.000000000000028" x="161.0" y="174.42856979370117"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="sid-205b0135-39d8-49a3-85df-837dbd09910e" id="sid-205b0135-39d8-49a3-85df-837dbd09910e_gui" isHorizontal="true">
+            <omgdc:Bounds height="301.0" width="799.0" x="186.0" y="76.0"/>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="SendTask_RequestDocument" id="SendTask_RequestDocument_gui">
+            <omgdc:Bounds height="80.0" width="100.0" x="323.0" y="99.0"/>
+            <bpmndi:BPMNLabel labelStyle="sid-e856d8eb-199a-4bab-8a87-cc6e241eafa5">
+               <omgdc:Bounds height="24.0" width="54.0" x="346.0" y="125.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="EndEvent_TalkedToCustomer" id="EndEvent_TalkedToCustomer_gui">
+            <omgdc:Bounds height="30.0" width="30.0" x="903.0" y="209.0"/>
+            <bpmndi:BPMNLabel labelStyle="sid-cc432622-ec9e-4a70-903c-13cce182c383">
+               <omgdc:Bounds height="11.0" width="80.61428833007812" x="879.0" y="247.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="SendTask_SendReminderEmail" id="SendTask_SendReminderEmail_gui">
+            <omgdc:Bounds height="80.0" width="100.0" x="663.0" y="280.0"/>
+            <bpmndi:BPMNLabel labelStyle="sid-e856d8eb-199a-4bab-8a87-cc6e241eafa5">
+               <omgdc:Bounds height="24.0" width="79.4571533203125" x="673.2714233398438" y="306.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="UserTask_CallCustomer" id="UserTask_CallCustomer_gui">
+            <omgdc:Bounds height="80.0" width="100.0" x="663.0" y="184.0"/>
+            <bpmndi:BPMNLabel labelStyle="sid-e856d8eb-199a-4bab-8a87-cc6e241eafa5">
+               <omgdc:Bounds height="12.0" width="73.28571319580078" x="676.3571434020996" y="216.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="ReceiveTask_WaitForDocument" id="ReceiveTask_WaitForDocument_gui">
+            <omgdc:Bounds height="80.0" width="100.0" x="494.0" y="99.0"/>
+            <bpmndi:BPMNLabel labelStyle="sid-e856d8eb-199a-4bab-8a87-cc6e241eafa5">
+               <omgdc:Bounds height="12.0" width="86.39999389648438" x="500.8000030517578" y="131.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="EndEvent_GotDocument" id="EndEvent_GotDocument_gui">
+            <omgdc:Bounds height="30.0" width="30.0" x="903.0" y="124.0"/>
+            <bpmndi:BPMNLabel labelStyle="sid-cc432622-ec9e-4a70-903c-13cce182c383">
+               <omgdc:Bounds height="11.0" width="94.75714111328125" x="893.0" y="157.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="StartEvent_DocumentRequested" id="StartEvent_DocumentRequested_gui">
+            <omgdc:Bounds height="30.0" width="30.0" x="215.0" y="124.0"/>
+            <bpmndi:BPMNLabel labelStyle="sid-cc432622-ec9e-4a70-903c-13cce182c383">
+               <omgdc:Bounds height="11.0" width="104.65714263916016" x="205.0" y="157.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="EndEvent_ReminderSent" id="EndEvent_ReminderSent_gui">
+            <omgdc:Bounds height="30.0" width="30.0" x="903.0" y="305.0"/>
+            <bpmndi:BPMNLabel labelStyle="sid-cc432622-ec9e-4a70-903c-13cce182c383">
+               <omgdc:Bounds height="11.0" width="50.91428756713867" x="892.0" y="338.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="BoundaryEvent_2" id="BoundaryEvent_2_gui">
+            <omgdc:Bounds height="30.0" width="30.0" x="579.0" y="163.36170212765958"/>
+            <bpmndi:BPMNLabel labelStyle="sid-cc432622-ec9e-4a70-903c-13cce182c383">
+               <omgdc:Bounds height="11.0" width="34.650001525878906" x="605.0" y="195.36170212765958"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="BoundaryEvent_1" id="BoundaryEvent_1_gui">
+            <omgdc:Bounds height="30.0" width="30.0" x="526.8378378378378" y="164.0"/>
+            <bpmndi:BPMNLabel labelStyle="sid-cc432622-ec9e-4a70-903c-13cce182c383">
+               <omgdc:Bounds height="11.0" width="21.921428680419922" x="511.8378378378378" y="196.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNEdge bpmnElement="SequenceFlow_6" id="SequenceFlow_6_gui">
+            <omgdi:waypoint x="594.0" y="139.0"/>
+            <omgdi:waypoint x="903.0" y="139.0"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge bpmnElement="SequenceFlow_0i97ejj" id="SequenceFlow_0i97ejj_gui">
+            <omgdi:waypoint x="594.0" y="193.36170212765958"/>
+            <omgdi:waypoint x="594.0" y="224.0"/>
+            <omgdi:waypoint x="663.0" y="224.0"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge bpmnElement="SequenceFlow_1bqpxlf" id="SequenceFlow_1bqpxlf_gui">
+            <omgdi:waypoint x="542.1742380678551" y="194.0"/>
+            <omgdi:waypoint x="545.0" y="320.0"/>
+            <omgdi:waypoint x="663.0" y="320.0"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge bpmnElement="SequenceFlow_2" id="SequenceFlow_2_gui">
+            <omgdi:waypoint x="763.0" y="320.0"/>
+            <omgdi:waypoint x="903.0" y="320.0"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge bpmnElement="SequenceFlow_3" id="SequenceFlow_3_gui">
+            <omgdi:waypoint x="763.0" y="224.0"/>
+            <omgdi:waypoint x="903.0" y="224.0"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge bpmnElement="SequenceFlow_18a0pzl" id="SequenceFlow_18a0pzl_gui">
+            <omgdi:waypoint x="423.0" y="139.0"/>
+            <omgdi:waypoint x="494.0" y="139.0"/>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge bpmnElement="SequenceFlow_0d7dzn0" id="SequenceFlow_0d7dzn0_gui">
+            <omgdi:waypoint x="245.0" y="139.0"/>
+            <omgdi:waypoint x="323.0" y="139.0"/>
+         </bpmndi:BPMNEdge>
+      </bpmndi:BPMNPlane>
+      <bpmndi:BPMNLabelStyle id="sid-cc432622-ec9e-4a70-903c-13cce182c383">
+         <omgdc:Font isBold="false" isItalic="false" isStrikeThrough="false" isUnderline="false" name="Arial" size="11.0"/>
+      </bpmndi:BPMNLabelStyle>
+      <bpmndi:BPMNLabelStyle id="sid-e856d8eb-199a-4bab-8a87-cc6e241eafa5">
+         <omgdc:Font isBold="false" isItalic="false" isStrikeThrough="false" isUnderline="false" name="Arial" size="12.0"/>
+      </bpmndi:BPMNLabelStyle>
+   </bpmndi:BPMNDiagram>
+</definitions>
