@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<bpmn:definitions exporter="MID Innovator" exporterVersion="16.1" targetNamespace="http://sample.bpmn.mid.de/" typeLanguage="http://www.w3.org/2001/XMLSchema" xmlns:bpanda="http://www.smartfacts.com" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:i18n="http://www.omg.org/spec/BPMN/non-normative/extensions/i18n/1.0" xmlns:ino="http://www.mid.de/spec/Innovator/14.3.1" xmlns:signavio="http://www.signavio.com" xmlns:tns="http://sample.bpmn.mid.de/" xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://www.omg.org/spec/BPMN/20100501/BPMN20.xsd http://www.omg.org/spec/BPMN/20100524/DI http://www.omg.org/spec/BPMN/20100501/BPMNDI.xsd http://www.omg.org/spec/DD/20100524/DC http://www.omg.org/spec/BPMN/20100501/DC.xsd http://www.omg.org/spec/DD/20100524/DI http://www.omg.org/spec/BPMN/20100501/DI.xsd" xml:lang="de">
+  <bpmn:message name="MESSAGE_documentReceived" id="Message_1">
+    <bpmn:extensionElements>
+      <ino:profilename value="ROOT PROFILE" />
+      <ino:stereotypename value="message" />
+      <ino:typename value="MID.Innovator.API.icw2bp.BPMessage" />
+      <zeebe:subscription correlationKey="= documentReferenceId" />
+      <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+      <bpanda:localization xml:lang="es">
+        <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;bpmn:extensionElements xmlns:zeebe=&quot;http://camunda.org/schema/zeebe/1.0&quot; xmlns:bpmn=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;&gt;&#xA;  &lt;zeebe:subscription correlationKey=&quot;= documentReferenceId&quot; /&gt;&#xA;&lt;/bpmn:extensionElements&gt;" />
+      </bpanda:localization>
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:collaboration name="C.9.1" id="Collaboration_0liisio">
+    <bpmn:extensionElements>
+      <ino:profilename value="ROOT PROFILE" />
+      <ino:stereotypename value="collaboration" />
+      <ino:typename value="MID.Innovator.API.icw2bp.BPCollaboration" />
+      <ino:node bpmnid="_54e11412-c95a-5b40-f621-b8b3c4e31fb9" x="0" y="0" width="1150" height="370" isMaster="true" />
+      <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+    </bpmn:extensionElements>
+    <bpmn:participant name="Document Request" processRef="requestDocument_en" id="Participant_02">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="participant" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPParticipant" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+      </bpmn:extensionElements>
+    </bpmn:participant>
+  </bpmn:collaboration>
+  <bpmn:timerEventDefinition id="_TimerEventDefinition_2">
+    <bpmn:extensionElements>
+      <ino:profilename value="ROOT PROFILE" />
+      <ino:stereotypename value="timerEventDefinition" />
+      <ino:typename value="MID.Innovator.API.icw2bp.BPTimerEventDefinition" />
+      <bpanda:property name="Name" value="daily" id="property_ELNamedElement_Name" />
+      <bpanda:property name="Namenstyp" value="Normal" id="property_ELNamedElement_NameKind" />
+      <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+    </bpmn:extensionElements>
+    <bpmn:timeCycle>R6/P1D</bpmn:timeCycle>
+  </bpmn:timerEventDefinition>
+  <bpmn:timerEventDefinition id="_TimerEventDefinition_3">
+    <bpmn:extensionElements>
+      <ino:profilename value="ROOT PROFILE" />
+      <ino:stereotypename value="timerEventDefinition" />
+      <ino:typename value="MID.Innovator.API.icw2bp.BPTimerEventDefinition" />
+      <bpanda:property name="Name" value="1 week" id="property_ELNamedElement_Name" />
+      <bpanda:property name="Namenstyp" value="Normal" id="property_ELNamedElement_NameKind" />
+      <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+    </bpmn:extensionElements>
+    <bpmn:timeDuration>P7D</bpmn:timeDuration>
+  </bpmn:timerEventDefinition>
+  <bpmn:process isExecutable="false" name="Document Request" id="requestDocument_en" camunda:isStartableInTasklist="false">
+    <bpmn:extensionElements>
+      <ino:profilename value="ROOT PROFILE" />
+      <ino:stereotypename value="process" />
+      <ino:typename value="MID.Innovator.API.icw2bp.BPProcess" />
+      <ino:node bpmnid="_00af6ef9-70e1-35ba-f2dd-02cbe6d42f2c" x="50" y="0" width="1050" height="350" isMaster="false" />
+      <ino:node bpmnid="_16ad1b94-0a07-f2b5-7c14-2078d51beacf" x="50" y="0" width="1050" height="350" isMaster="true" />
+      <bpanda:property name="Kurzname" value="" id="property_ELShortNameAble_ShortName" />
+      <bpanda:property name="Link" value="" id="stereotype_BpandaImport_Link" />
+      <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+      <bpanda:localization xml:lang="es">
+        <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;bpmn:process camunda:isStartableInTasklist=&quot;false&quot; xmlns:camunda=&quot;http://camunda.org/schema/1.0/bpmn&quot; xmlns:bpmn=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot; /&gt;" />
+      </bpanda:localization>
+    </bpmn:extensionElements>
+    <bpmn:sendTask implementation="##unspecified" isForCompensation="false" startQuantity="1" name="Request document" id="SendTask_RequestDocument" camunda:async="true" camunda:type="external" camunda:topic="emailService">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="task" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPTaskNode" />
+        <zeebe:taskDefinition type="email" />
+        <bpanda:property name="Ausführungszeit (min)" value="0" id="property_BPActivityNode_ExecutionTime" />
+        <bpanda:property name="Häufigkeit pro Jahr" value="0" id="property_BPActivityNode_FrequencyPerYear" />
+        <bpanda:property name="Kosten pro Ausführung (EUR)" value="0" id="property_BPActivityNode_CostsPerExecution" />
+        <bpanda:property name="Mittlere Schleifenanzahl" value="0" id="property_BPActivityNode_MeanLoopNumber" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        <bpanda:localization xml:lang="es">
+          <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;bpmn:sendTask camunda:async=&quot;true&quot; camunda:type=&quot;external&quot; camunda:topic=&quot;emailService&quot; xmlns:camunda=&quot;http://camunda.org/schema/1.0/bpmn&quot; xmlns:bpmn=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot; xmlns:zeebe=&quot;http://camunda.org/schema/zeebe/1.0&quot;&gt;&#xA;  &lt;bpmn:extensionElements&gt;&#xA;    &lt;zeebe:taskDefinition type=&quot;email&quot; /&gt;&#xA;  &lt;/bpmn:extensionElements&gt;&#xA;&lt;/bpmn:sendTask&gt;" />
+        </bpanda:localization>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0d7dzn0</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_18a0pzl</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:endEvent name="Answer received" id="EndEvent_TalkedToCustomer" camunda:asyncAfter="true">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="event" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPEventNode" />
+        <bpanda:property name="Ausführungszeit (min)" value="0" id="property_BPEventNode_ExecutionTime" />
+        <bpanda:property name="Häufigkeit pro Jahr" value="0" id="property_BPEventNode_FrequencyPerYear" />
+        <bpanda:property name="Kosten pro Ausführung (EUR)" value="0" id="property_BPEventNode_CostsPerExecution" />
+        <bpanda:property name="Name" value="Answer received" id="property_ELNamedElement_Name" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        <bpanda:localization xml:lang="es">
+          <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;bpmn:endEvent camunda:asyncAfter=&quot;true&quot; xmlns:camunda=&quot;http://camunda.org/schema/1.0/bpmn&quot; xmlns:bpmn=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;&gt;&lt;/bpmn:endEvent&gt;" />
+        </bpanda:localization>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_3</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sendTask implementation="##unspecified" isForCompensation="false" startQuantity="1" name="Send reminder email" id="SendTask_SendReminderEmail" camunda:asyncBefore="true" camunda:type="external" camunda:topic="emailService">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="task" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPTaskNode" />
+        <zeebe:taskDefinition type="email" />
+        <bpanda:property name="Ausführungszeit (min)" value="0" id="property_BPActivityNode_ExecutionTime" />
+        <bpanda:property name="Häufigkeit pro Jahr" value="0" id="property_BPActivityNode_FrequencyPerYear" />
+        <bpanda:property name="Kosten pro Ausführung (EUR)" value="0" id="property_BPActivityNode_CostsPerExecution" />
+        <bpanda:property name="Mittlere Schleifenanzahl" value="0" id="property_BPActivityNode_MeanLoopNumber" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        <bpanda:localization xml:lang="es">
+          <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;bpmn:sendTask camunda:asyncBefore=&quot;true&quot; camunda:type=&quot;external&quot; camunda:topic=&quot;emailService&quot; xmlns:camunda=&quot;http://camunda.org/schema/1.0/bpmn&quot; xmlns:bpmn=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot; xmlns:zeebe=&quot;http://camunda.org/schema/zeebe/1.0&quot;&gt;&#xA;  &lt;bpmn:extensionElements&gt;&#xA;    &lt;zeebe:taskDefinition type=&quot;email&quot; /&gt;&#xA;  &lt;/bpmn:extensionElements&gt;&#xA;&lt;/bpmn:sendTask&gt;" />
+        </bpanda:localization>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1bqpxlf</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_2</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:userTask isForCompensation="false" startQuantity="1" name="Call customer" id="UserTask_CallCustomer">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="task" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPTaskNode" />
+        <bpanda:property name="Ausführungszeit (min)" value="0" id="property_BPActivityNode_ExecutionTime" />
+        <bpanda:property name="Häufigkeit pro Jahr" value="0" id="property_BPActivityNode_FrequencyPerYear" />
+        <bpanda:property name="Kosten pro Ausführung (EUR)" value="0" id="property_BPActivityNode_CostsPerExecution" />
+        <bpanda:property name="Mittlere Schleifenanzahl" value="0" id="property_BPActivityNode_MeanLoopNumber" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0i97ejj</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_3</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:receiveTask implementation="##unspecified" messageRef="Message_1" isForCompensation="false" startQuantity="1" name="Wait for answer" id="ReceiveTask_WaitForDocument">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="task" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPTaskNode" />
+        <bpanda:property name="Ausführungszeit (min)" value="0" id="property_BPActivityNode_ExecutionTime" />
+        <bpanda:property name="Häufigkeit pro Jahr" value="0" id="property_BPActivityNode_FrequencyPerYear" />
+        <bpanda:property name="Kosten pro Ausführung (EUR)" value="0" id="property_BPActivityNode_CostsPerExecution" />
+        <bpanda:property name="Mittlere Schleifenanzahl" value="0" id="property_BPActivityNode_MeanLoopNumber" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_18a0pzl</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_6</bpmn:outgoing>
+    </bpmn:receiveTask>
+    <bpmn:endEvent name="Document received" id="EndEvent_GotDocument" camunda:asyncAfter="true">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="event" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPEventNode" />
+        <bpanda:property name="Ausführungszeit (min)" value="0" id="property_BPEventNode_ExecutionTime" />
+        <bpanda:property name="Häufigkeit pro Jahr" value="0" id="property_BPEventNode_FrequencyPerYear" />
+        <bpanda:property name="Kosten pro Ausführung (EUR)" value="0" id="property_BPEventNode_CostsPerExecution" />
+        <bpanda:property name="Name" value="Document received" id="property_ELNamedElement_Name" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        <bpanda:localization xml:lang="es">
+          <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;bpmn:endEvent camunda:asyncAfter=&quot;true&quot; xmlns:camunda=&quot;http://camunda.org/schema/1.0/bpmn&quot; xmlns:bpmn=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;&gt;&lt;/bpmn:endEvent&gt;" />
+        </bpanda:localization>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_6</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:startEvent name="Document requested" id="StartEvent_DocumentRequested">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="event" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPEventNode" />
+        <bpanda:property name="Ausführungszeit (min)" value="0" id="property_BPEventNode_ExecutionTime" />
+        <bpanda:property name="Häufigkeit pro Jahr" value="0" id="property_BPEventNode_FrequencyPerYear" />
+        <bpanda:property name="Kosten pro Ausführung (EUR)" value="0" id="property_BPEventNode_CostsPerExecution" />
+        <bpanda:property name="Name" value="Document requested" id="property_ELNamedElement_Name" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+      </bpmn:extensionElements>
+      <bpmn:outgoing>SequenceFlow_0d7dzn0</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:boundaryEvent cancelActivity="false" attachedToRef="ReceiveTask_WaitForDocument" name="daily" id="BoundaryEvent_1">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="event" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPEventNode" />
+        <bpanda:property name="Ausführungszeit (min)" value="0" id="property_BPEventNode_ExecutionTime" />
+        <bpanda:property name="Häufigkeit pro Jahr" value="0" id="property_BPEventNode_FrequencyPerYear" />
+        <bpanda:property name="Kosten pro Ausführung (EUR)" value="0" id="property_BPEventNode_CostsPerExecution" />
+        <bpanda:property name="Name" value="daily" id="property_ELNamedElement_Name" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+      </bpmn:extensionElements>
+      <bpmn:outgoing>SequenceFlow_1bqpxlf</bpmn:outgoing>
+      <bpmn:eventDefinitionRef>_TimerEventDefinition_2</bpmn:eventDefinitionRef>
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent cancelActivity="true" attachedToRef="ReceiveTask_WaitForDocument" name="1 week" id="BoundaryEvent_2">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="event" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPEventNode" />
+        <bpanda:property name="Ausführungszeit (min)" value="0" id="property_BPEventNode_ExecutionTime" />
+        <bpanda:property name="Häufigkeit pro Jahr" value="0" id="property_BPEventNode_FrequencyPerYear" />
+        <bpanda:property name="Kosten pro Ausführung (EUR)" value="0" id="property_BPEventNode_CostsPerExecution" />
+        <bpanda:property name="Name" value="1 week" id="property_ELNamedElement_Name" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+      </bpmn:extensionElements>
+      <bpmn:outgoing>SequenceFlow_0i97ejj</bpmn:outgoing>
+      <bpmn:eventDefinitionRef>_TimerEventDefinition_3</bpmn:eventDefinitionRef>
+    </bpmn:boundaryEvent>
+    <bpmn:endEvent name="Email sent" id="EndEvent_ReminderSent">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="event" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPEventNode" />
+        <bpanda:property name="Ausführungszeit (min)" value="0" id="property_BPEventNode_ExecutionTime" />
+        <bpanda:property name="Häufigkeit pro Jahr" value="0" id="property_BPEventNode_FrequencyPerYear" />
+        <bpanda:property name="Kosten pro Ausführung (EUR)" value="0" id="property_BPEventNode_CostsPerExecution" />
+        <bpanda:property name="Name" value="Email sent" id="property_ELNamedElement_Name" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_2</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="StartEvent_DocumentRequested" targetRef="SendTask_RequestDocument" id="SequenceFlow_0d7dzn0">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="sequenceFlow" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPSequenceFlow" />
+        <bpanda:property name="nutzt globale Bedingung" value="False" id="property_BPSequenceFlow_IsConditionReused" />
+        <bpanda:property name="Wahrscheinlichkeit (Prozent)" value="" id="property_BPSequenceFlow_Probability" />
+        <bpanda:property name="Name" value="" id="property_ELNamedElement_Name" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="BoundaryEvent_2" targetRef="UserTask_CallCustomer" id="SequenceFlow_0i97ejj">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="sequenceFlow" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPSequenceFlow" />
+        <bpanda:property name="nutzt globale Bedingung" value="False" id="property_BPSequenceFlow_IsConditionReused" />
+        <bpanda:property name="Wahrscheinlichkeit (Prozent)" value="" id="property_BPSequenceFlow_Probability" />
+        <bpanda:property name="Name" value="" id="property_ELNamedElement_Name" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="SendTask_RequestDocument" targetRef="ReceiveTask_WaitForDocument" id="SequenceFlow_18a0pzl">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="sequenceFlow" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPSequenceFlow" />
+        <bpanda:property name="nutzt globale Bedingung" value="False" id="property_BPSequenceFlow_IsConditionReused" />
+        <bpanda:property name="Wahrscheinlichkeit (Prozent)" value="" id="property_BPSequenceFlow_Probability" />
+        <bpanda:property name="Name" value="" id="property_ELNamedElement_Name" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="BoundaryEvent_1" targetRef="SendTask_SendReminderEmail" id="SequenceFlow_1bqpxlf">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="sequenceFlow" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPSequenceFlow" />
+        <bpanda:property name="nutzt globale Bedingung" value="False" id="property_BPSequenceFlow_IsConditionReused" />
+        <bpanda:property name="Wahrscheinlichkeit (Prozent)" value="" id="property_BPSequenceFlow_Probability" />
+        <bpanda:property name="Name" value="" id="property_ELNamedElement_Name" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="SendTask_SendReminderEmail" targetRef="EndEvent_ReminderSent" id="SequenceFlow_2">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="sequenceFlow" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPSequenceFlow" />
+        <bpanda:property name="nutzt globale Bedingung" value="False" id="property_BPSequenceFlow_IsConditionReused" />
+        <bpanda:property name="Wahrscheinlichkeit (Prozent)" value="" id="property_BPSequenceFlow_Probability" />
+        <bpanda:property name="Name" value="" id="property_ELNamedElement_Name" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="UserTask_CallCustomer" targetRef="EndEvent_TalkedToCustomer" id="SequenceFlow_3">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="sequenceFlow" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPSequenceFlow" />
+        <bpanda:property name="nutzt globale Bedingung" value="False" id="property_BPSequenceFlow_IsConditionReused" />
+        <bpanda:property name="Wahrscheinlichkeit (Prozent)" value="" id="property_BPSequenceFlow_Probability" />
+        <bpanda:property name="Name" value="" id="property_ELNamedElement_Name" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="ReceiveTask_WaitForDocument" targetRef="EndEvent_GotDocument" id="SequenceFlow_6">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="sequenceFlow" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPSequenceFlow" />
+        <bpanda:property name="nutzt globale Bedingung" value="False" id="property_BPSequenceFlow_IsConditionReused" />
+        <bpanda:property name="Wahrscheinlichkeit (Prozent)" value="" id="property_BPSequenceFlow_Probability" />
+        <bpanda:property name="Name" value="" id="property_ELNamedElement_Name" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram name="C.9.1" resolution="96" id="_a6aed3c6-4649-d6d3-a445-80347164e59a">
+    <bpmndi:BPMNPlane bpmnElement="Collaboration_0liisio" id="_54e11412-c95a-5b40-f621-b8b3c4e31fb9">
+      <bpmndi:BPMNShape bpmnElement="BoundaryEvent_1" id="_10bab9ba-8e7c-5af2-e067-066396762ceb">
+        <dc:Bounds height="40.0" width="40.0" x="450.0" y="110.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="50.0" width="40.0" x="430.0" y="150.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ReceiveTask_WaitForDocument" id="_11166ee6-b5c8-6456-7889-6897c3b67ca1">
+        <dc:Bounds height="90.0" width="110.0" x="430.0" y="40.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="requestDocument_en" id="_16ad1b94-0a07-f2b5-7c14-2078d51beacf">
+        <dc:Bounds height="350.0" width="1050.0" x="90.0" y="10.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="350.0" width="20.0" x="90.0" y="10.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="SendTask_SendReminderEmail" id="_21e13484-a26d-ab1e-f671-1ce8dd0a9769">
+        <dc:Bounds height="90.0" width="110.0" x="620.0" y="240.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="EndEvent_TalkedToCustomer" id="_4a809331-ba15-5f39-f9e0-74cd1cad87eb">
+        <dc:Bounds height="40.0" width="40.0" x="880.0" y="160.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="40.0" width="80.0" x="860.0" y="210.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Participant_02" id="_50e090e9-4a44-7fae-2055-0c04ea7e76f7" isHorizontal="true">
+        <dc:Bounds height="350.0" width="1100.0" x="40.0" y="10.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="350.0" width="50.0" x="40.0" y="10.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="EndEvent_ReminderSent" id="_5145e723-f30a-35f8-8e0d-8bd9a79074ac">
+        <dc:Bounds height="40.0" width="40.0" x="880.0" y="270.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="40.0" width="60.0" x="870.0" y="310.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="EndEvent_GotDocument" id="_7083de28-4fa5-a736-99bf-4312df5ab2ab">
+        <dc:Bounds height="40.0" width="40.0" x="880.0" y="60.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="50.0" width="60.0" x="870.0" y="100.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="UserTask_CallCustomer" id="_74cd56b8-4de4-af8c-1f31-54e7c74f96e7">
+        <dc:Bounds height="90.0" width="110.0" x="620.0" y="130.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="StartEvent_DocumentRequested" id="_a8fa6522-348f-6f4e-815a-f66ac9599b04">
+        <dc:Bounds height="40.0" width="40.0" x="120.0" y="60.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="70.0" width="60.0" x="110.0" y="100.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="SendTask_RequestDocument" id="_cc5df873-41de-ef0d-9887-fa6c678ac13c">
+        <dc:Bounds height="90.0" width="110.0" x="240.0" y="40.0" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="BoundaryEvent_2" id="_e6322e52-5cec-edfc-0964-68a9e4f18dd8">
+        <dc:Bounds height="40.0" width="40.0" x="500.0" y="110.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="70.0" width="40.0" x="530.0" y="150.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_1bqpxlf" id="_1671ccb7-9f95-4ee7-de00-82adc3efa874">
+        <di:waypoint x="470.0" y="150.0" />
+        <di:waypoint x="470.0" y="300.0" />
+        <di:waypoint x="620.0" y="300.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="20.0" width="20.0" x="480.0" y="160.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_18a0pzl" id="_1f6f2a1f-f2cb-9ee4-f5f1-0f99717519c4">
+        <di:waypoint x="350.0" y="85.0" />
+        <di:waypoint x="430.0" y="85.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="20.0" width="20.0" x="360.0" y="100.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_6" id="_52fb85d4-7a88-b606-24bc-2f1d509b33b6">
+        <di:waypoint x="540.0" y="80.0" />
+        <di:waypoint x="880.0" y="80.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="20.0" width="90.0" x="550.0" y="90.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_3" id="_5fed8600-47aa-7b2f-e292-712904e44466">
+        <di:waypoint x="730.0" y="180.0" />
+        <di:waypoint x="880.0" y="180.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="20.0" width="90.0" x="740.0" y="190.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_0i97ejj" id="_62914d04-7771-2b37-86cc-60da1a2d0d76">
+        <di:waypoint x="520.0" y="150.0" />
+        <di:waypoint x="520.0" y="190.0" />
+        <di:waypoint x="620.0" y="190.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="20.0" width="20.0" x="530.0" y="160.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_2" id="_88d01bff-d689-4d2a-a440-eb563519bb85">
+        <di:waypoint x="730.0" y="290.0" />
+        <di:waypoint x="880.0" y="290.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="20.0" width="90.0" x="740.0" y="300.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_0d7dzn0" id="_eab3f25a-4975-e3ed-acd3-8418ae9f0053">
+        <di:waypoint x="160.0" y="80.0" />
+        <di:waypoint x="240.0" y="80.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="20.0" width="20.0" x="170.0" y="90.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
