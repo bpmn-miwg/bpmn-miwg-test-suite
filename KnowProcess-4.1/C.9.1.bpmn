@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright 2011-2026 Tim Stephenson and contributors
+
+   Licensed under the Apache License, Version 2.0 (the "License"); you may not
+   use this file except in compliance with the License.  You may obtain a copy
+   of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+   WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+   License for the specific language governing permissions and limitations under
+   the License.
+-->
+<?xml-stylesheet type="text/xsl" href="/xslt/bpmn2svg.xslt" alternate="no" ?><semantic:definitions exporter="KnowProcess Modeler" exporterVersion="4.1.0" expressionLanguage="http://www.w3.org/1999/XPath" id="_xzzqc8zvg" name="C.9.1" targetNamespace="http://knowprocess.com/bpmn_xzzqc8zvg" typeLanguage="http://www.w3.org/2001/XMLSchema" kp:extra-namespaces="{}"
+  xmlns="http://knowprocess.com/bpmn_xzzqc8zvg"
+  xmlns:semantic="http://www.omg.org/spec/BPMN/20100524/MODEL"
+  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+  xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0"
+  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:activiti="http://activiti.org/bpmn"
+  xmlns:camunda="http://camunda.org/schema/1.0/bpmn"
+  xmlns:flowable="http://flowable.org/bpmn"
+  xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+  xmlns:sdmn="https://www.omg.org/spec/SDMN/"
+  xmlns:scedi="https://www.omg.org/spec/SCE/DI/"
+  xmlns:scedc="https://www.omg.org/spec/SCE/DC/"
+  xmlns:feel="https://www.omg.org/spec/DMN/20240513/FEEL/"
+  xmlns:kp="http://knowprocess.com/bpmn">
+  <semantic:collaboration id="COLLABORATION_1" isClosed="false">
+    <semantic:participant id="pool1" name="Document request" processRef="_9h2f05003">
+      <semantic:participantMultiplicity maximum="1" minimum="0"/>
+    </semantic:participant>
+  </semantic:collaboration>
+  <semantic:process id="_9h2f05003" isClosed="false" isExecutable="true" processType="None">
+    <semantic:laneSet></semantic:laneSet>
+    <semantic:startEvent id="start" isInterrupting="true" name="Document&#xA;requested" parallelMultiple="false">
+      <semantic:outgoing>start_to_task</semantic:outgoing>
+      <semantic:outputSet/>
+    </semantic:startEvent>
+    <semantic:sequenceFlow id="start_to_task" sourceRef="start" targetRef="task"/>
+    <semantic:sendTask completionQuantity="1" id="task" implementation="kp:http" isForCompensation="false" startQuantity="1" name="Request document">
+      <semantic:extensionElements/>
+      <semantic:incoming>start_to_task</semantic:incoming>
+    </semantic:sendTask>
+    <semantic:receiveTask id="receiveTask_byuy0n5a1" name="Wait for answer"/>
+    <semantic:endEvent id="endEvent_mf8wr05mw" name="Document&#xA;received"/>
+    <semantic:sequenceFlow id="receiveTask_byuy0n5a1_to_endEvent_mf8wr05mw" sourceRef="receiveTask_byuy0n5a1" targetRef="endEvent_mf8wr05mw"/>
+    <semantic:boundaryEvent id="boundaryEvent_hs8xwii0m" cancelActivity="true" attachedToRef="receiveTask_byuy0n5a1" name="daily">
+      <semantic:timerEventDefinition id="timerEventDefinition_bcydjfcx6"/>
+    </semantic:boundaryEvent>
+    <semantic:sendTask id="sendTask_vhz4efw3y" name="Send reminder email" implementation="kp:http"/>
+    <semantic:endEvent id="endEvent_o95peovaw" name="Email sent"/>
+    <semantic:sequenceFlow id="sendTask_vhz4efw3y_to_endEvent_o95peovaw" sourceRef="sendTask_vhz4efw3y" targetRef="endEvent_o95peovaw"/>
+    <semantic:sequenceFlow id="boundaryEvent_hs8xwii0m_to_sendTask_vhz4efw3y" sourceRef="boundaryEvent_hs8xwii0m" targetRef="sendTask_vhz4efw3y"/>
+    <semantic:boundaryEvent id="boundaryEvent_an0jik37o" cancelActivity="true" attachedToRef="receiveTask_byuy0n5a1" name="1 week">
+      <semantic:timerEventDefinition id="timerEventDefinition_1hp6q2fb1"/>
+    </semantic:boundaryEvent>
+    <semantic:userTask id="userTask_wuh9bn1iw" name="Call customer"/>
+    <semantic:endEvent id="endEvent_va91qq96i" name="Answer&#xA;received"/>
+    <semantic:sequenceFlow id="userTask_wuh9bn1iw_to_endEvent_va91qq96i" sourceRef="userTask_wuh9bn1iw" targetRef="endEvent_va91qq96i"/>
+    <semantic:sequenceFlow id="boundaryEvent_an0jik37o_to_userTask_wuh9bn1iw" sourceRef="boundaryEvent_an0jik37o" targetRef="userTask_wuh9bn1iw"/>
+    <semantic:sequenceFlow id="task_to_receiveTask_byuy0n5a1" sourceRef="task" targetRef="receiveTask_byuy0n5a1"/>
+  </semantic:process>
+  <bpmndi:BPMNDiagram id="Diagram-COLLABORATION_1" name="C.9.1">
+    <bpmndi:BPMNPlane bpmnElement="COLLABORATION_1">
+      <bpmndi:BPMNShape bpmnElement="pool1" id="di_pool1" isHorizontal="true" color:background-color="#bbd3d3" color:border-color="#666666">
+        <dc:Bounds height="438" width="930" x="0" y="0"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="0" y="0" width="20" height="438"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="task" id="di_task" color:background-color="#bbd3d3" color:border-color="#666666">
+        <dc:Bounds height="80" width="100" x="200" y="80"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds height="60" width="100" x="200" y="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="receiveTask_byuy0n5a1_di" bpmnElement="receiveTask_byuy0n5a1" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="350" y="80" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="350" y="100" height="60" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_mf8wr05mw_di" bpmnElement="endEvent_mf8wr05mw" color:border-color="#ff0000">
+        <dc:Bounds x="625" y="104" height="32" width="32"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="607.5" y="138" height="28" width="67"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="receiveTask_byuy0n5a1_to_endEvent_mf8wr05mw_di" bpmnElement="receiveTask_byuy0n5a1_to_endEvent_mf8wr05mw">
+        <di:waypoint x="450" y="120"/>
+        <di:waypoint x="625" y="120"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="488" y="101" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="boundaryEvent_hs8xwii0m_di" bpmnElement="boundaryEvent_hs8xwii0m" color:border-color="#666666">
+        <dc:Bounds x="375" y="144" height="32" width="32"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="372" y="183" height="14" width="42"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sendTask_vhz4efw3y_di" bpmnElement="sendTask_vhz4efw3y" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="475" y="307" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="475" y="327" height="60" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_o95peovaw_di" bpmnElement="endEvent_o95peovaw" color:border-color="#ff0000">
+        <dc:Bounds x="625" y="331" height="32" width="32"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="599" y="365" height="14" width="84"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="sendTask_vhz4efw3y_to_endEvent_o95peovaw_di" bpmnElement="sendTask_vhz4efw3y_to_endEvent_o95peovaw">
+        <di:waypoint x="575" y="347"/>
+        <di:waypoint x="625" y="347"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="577" y="309" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="boundaryEvent_hs8xwii0m_to_sendTask_vhz4efw3y_di" bpmnElement="boundaryEvent_hs8xwii0m_to_sendTask_vhz4efw3y">
+        <di:waypoint x="391" y="176"/>
+        <di:waypoint x="391" y="347"/>
+        <di:waypoint x="475" y="347"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="396" y="255" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="boundaryEvent_an0jik37o_di" bpmnElement="boundaryEvent_an0jik37o" color:border-color="#666666">
+        <dc:Bounds x="421" y="145" height="32" width="32"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="412" y="182" height="14" width="50"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_wuh9bn1iw_di" bpmnElement="userTask_wuh9bn1iw" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="475" y="204" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="475" y="224" height="60" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_va91qq96i_di" bpmnElement="endEvent_va91qq96i" color:border-color="#ff0000">
+        <dc:Bounds x="625" y="228" height="32" width="32"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="607.5" y="262" height="28" width="67"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="userTask_wuh9bn1iw_to_endEvent_va91qq96i_di" bpmnElement="userTask_wuh9bn1iw_to_endEvent_va91qq96i">
+        <di:waypoint x="575" y="244"/>
+        <di:waypoint x="625" y="244"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="550" y="225" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="boundaryEvent_an0jik37o_to_userTask_wuh9bn1iw_di" bpmnElement="boundaryEvent_an0jik37o_to_userTask_wuh9bn1iw">
+        <di:waypoint x="437" y="177"/>
+        <di:waypoint x="437" y="244"/>
+        <di:waypoint x="475" y="244"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="442" y="204" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="task_to_receiveTask_byuy0n5a1_di" bpmnElement="task_to_receiveTask_byuy0n5a1">
+        <di:waypoint x="300" y="120"/>
+        <di:waypoint x="350" y="120"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="302" y="82" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape bpmnElement="start" id="di_start" color:border-color="#34bb16" color:background-color="#ffffff">
+        <dc:Bounds height="30" width="30" x="100" y="105"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds height="28" width="76" x="78" y="139"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="start_to_task" id="di_start_to_task">
+        <di:waypoint x="130" y="120"/>
+        <di:waypoint x="200" y="120"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="115" y="101" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</semantic:definitions>
