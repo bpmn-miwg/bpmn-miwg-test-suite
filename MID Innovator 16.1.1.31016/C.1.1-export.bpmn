@@ -1,0 +1,1005 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<bpmn:definitions exporter="MID Innovator" exporterVersion="16.1" targetNamespace="http://sample.bpmn.mid.de/" typeLanguage="http://www.w3.org/2001/XMLSchema" xmlns:bpanda="http://www.smartfacts.com" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://activiti.org/bpmn" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:i18n="http://www.omg.org/spec/BPMN/non-normative/extensions/i18n/1.0" xmlns:ino="http://www.mid.de/spec/Innovator/14.3.1" xmlns:signavio="http://www.signavio.com" xmlns:tns="http://sample.bpmn.mid.de/" xmlns:w4="http://www.w4.eu/spec/BPMN/20110701/MODEL" xmlns:w4graph="http://www.w4.eu/spec/BPMN/20110930/GRAPH" xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://www.omg.org/spec/BPMN/20100501/BPMN20.xsd http://www.omg.org/spec/BPMN/20100524/DI http://www.omg.org/spec/BPMN/20100501/BPMNDI.xsd http://www.omg.org/spec/DD/20100524/DC http://www.omg.org/spec/BPMN/20100501/DC.xsd http://www.omg.org/spec/DD/20100524/DI http://www.omg.org/spec/BPMN/20100501/DI.xsd" xml:lang="de">
+  <bpmn:itemDefinition id="xsdString">
+    <bpmn:extensionElements>
+      <ino:profilename value="ROOT PROFILE" />
+      <ino:stereotypename value="businessObject" />
+      <ino:typename value="MID.Innovator.API.icw2bp.BPItemDefinition" />
+      <bpanda:property name="Name" value="xs:tString" id="property_ELNamedElement_Name" />
+      <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+    </bpmn:extensionElements>
+  </bpmn:itemDefinition>
+  <bpmn:itemDefinition id="xsdBool">
+    <bpmn:extensionElements>
+      <ino:profilename value="ROOT PROFILE" />
+      <ino:stereotypename value="businessObject" />
+      <ino:typename value="MID.Innovator.API.icw2bp.BPItemDefinition" />
+      <bpanda:property name="Name" value="xs:tBool" id="property_ELNamedElement_Name" />
+      <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+    </bpmn:extensionElements>
+  </bpmn:itemDefinition>
+  <bpmn:process isExecutable="false" name="Invoice Handling (OMG BPMN MIWG Demo)" id="handle-invoice">
+    <bpmn:extensionElements>
+      <ino:profilename value="ROOT PROFILE" />
+      <ino:stereotypename value="process" />
+      <ino:typename value="MID.Innovator.API.icw2bp.BPProcess" />
+      <w4graph:graphStyle>
+        <w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        <w4graph:root gridVisible="true" snapToGrid="true" rulerVisible="true" snapToGuide="true" rulerUnit="Pixels">
+          <w4graph:Grid spacing="15" color="230,230,230" />
+          <w4graph:VerticalRuler />
+          <w4graph:HorizontalRuler />
+        </w4graph:root>
+      </w4graph:graphStyle>
+      <ino:node bpmnid="_f609a7e6-ea47-8c8f-1179-43b7dba8258b" x="0" y="0" width="1010" height="470" isMaster="false" />
+      <ino:node bpmnid="_bdee5960-faee-0d56-8b37-51ebf3bc8f33" x="0" y="0" width="1010" height="470" isMaster="true" />
+      <bpanda:property name="Kurzname" value="" id="property_ELShortNameAble_ShortName" />
+      <bpanda:property name="Link" value="" id="stereotype_BpandaImport_Link" />
+      <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+      <bpanda:localization xml:lang="es">
+        <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;extensionElements xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;&gt;&#xA;  &lt;w4graph:graphStyle&gt;&#xA;    &lt;w4graph:basic background=&quot;255,255,255&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;    &lt;w4graph:root gridVisible=&quot;true&quot; snapToGrid=&quot;true&quot; rulerVisible=&quot;true&quot; snapToGuide=&quot;true&quot; rulerUnit=&quot;Pixels&quot;&gt;&#xA;      &lt;w4graph:Grid spacing=&quot;15&quot; color=&quot;230,230,230&quot; /&gt;&#xA;      &lt;w4graph:VerticalRuler /&gt;&#xA;      &lt;w4graph:HorizontalRuler /&gt;&#xA;    &lt;/w4graph:root&gt;&#xA;  &lt;/w4graph:graphStyle&gt;&#xA;&lt;/extensionElements&gt;" />
+      </bpanda:localization>
+    </bpmn:extensionElements>
+    <bpmn:userTask isForCompensation="false" startQuantity="1" name="Approve Invoice" id="approveInvoice" camunda:assignee="${approver}" camunda:formKey="app:approveInvoice.jsf">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="task" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPTaskNode" />
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc" />
+        <signavio:signavioMetaData metaKey="adaptereventtype" />
+        <signavio:signavioMetaData metaKey="documentationlink" metaValue="[]" />
+        <signavio:signavioMetaData metaKey="test" />
+        <signavio:signavioMetaData metaKey="adaptertype" />
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <signavio:signavioMetaData metaKey="adapterconfiguration" />
+        <signavio:signavioMetaData metaKey="adapterclassname" />
+        <signavio:signavioMetaData metaKey="servicereferenz" />
+        <signavio:signavioMetaData metaKey="risiko" />
+        <signavio:signavioMetaData metaKey="erteiltfreigabe" />
+        <signavio:signavioMetaData metaKey="riskandcontrols" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="194,215,235" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+        <bpanda:property name="Ausführungszeit (min)" value="0" id="property_BPActivityNode_ExecutionTime" />
+        <bpanda:property name="Häufigkeit pro Jahr" value="0" id="property_BPActivityNode_FrequencyPerYear" />
+        <bpanda:property name="Kosten pro Ausführung (EUR)" value="0" id="property_BPActivityNode_CostsPerExecution" />
+        <bpanda:property name="Mittlere Schleifenanzahl" value="0" id="property_BPActivityNode_MeanLoopNumber" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        <bpanda:localization xml:lang="es">
+          <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;userTask camunda:assignee=&quot;${approver}&quot; camunda:formKey=&quot;app:approveInvoice.jsf&quot; xmlns:camunda=&quot;http://activiti.org/bpmn&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot; xmlns:signavio=&quot;http://www.signavio.com&quot; xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot;&gt;&#xA;  &lt;extensionElements&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;bgcolor&quot; metaValue=&quot;#ffffcc&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;adaptereventtype&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;documentationlink&quot; metaValue=&quot;[]&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;test&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;adaptertype&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;userstory&quot; metaValue=&quot;[]&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;adapterconfiguration&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;adapterclassname&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;servicereferenz&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;risiko&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;erteiltfreigabe&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;riskandcontrols&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;w4graph:graphStyle&gt;&#xA;      &lt;w4graph:basic background=&quot;194,215,235&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;    &lt;/w4graph:graphStyle&gt;&#xA;  &lt;/extensionElements&gt;&#xA;&lt;/userTask&gt;" />
+        </bpanda:localization>
+      </bpmn:extensionElements>
+      <bpmn:incoming>reviewSuccessful</bpmn:incoming>
+      <bpmn:incoming>sequenceFlow_178</bpmn:incoming>
+      <bpmn:outgoing>sequenceFlow_180</bpmn:outgoing>
+      <bpmn:ioSpecification>
+        <bpmn:dataOutput name="approved" id="Bpmn_DataOutput_Y6S1ALH1EeSuDf0W70XLGw" itemSubjectRef="xsdBool">
+          <bpmn:extensionElements>
+            <ino:profilename value="ROOT PROFILE" />
+            <ino:stereotypename value="dataObject" />
+            <ino:typename value="MID.Innovator.API.icw2bp.BPDataObject" />
+            <w4graph:graphStyle>
+              <w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+            </w4graph:graphStyle>
+            <bpanda:property name="Namenstyp" value="Normal" id="property_ELNamedElement_NameKind" />
+            <bpanda:property name="nutzt globalen Zustand" value="true" id="property_BPItemAwareElement_IsStateReused" />
+            <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+            <bpanda:localization xml:lang="es">
+              <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;extensionElements xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;&gt;&#xA;  &lt;w4graph:graphStyle&gt;&#xA;    &lt;w4graph:basic background=&quot;153,153,153&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;  &lt;/w4graph:graphStyle&gt;&#xA;&lt;/extensionElements&gt;" />
+            </bpanda:localization>
+          </bpmn:extensionElements>
+        </bpmn:dataOutput>
+        <bpmn:inputSet />
+        <bpmn:outputSet />
+      </bpmn:ioSpecification>
+      <bpmn:dataOutputAssociation id="Bpmn_DataOutputAssociation_Y55MYrH1EeSuDf0W70XLGw">
+        <bpmn:extensionElements>
+          <ino:profilename value="ROOT PROFILE" />
+          <ino:stereotypename value="dataAssociation" />
+          <ino:typename value="MID.Innovator.API.icw2bp.BPDataIOAssociation" />
+          <w4graph:graphStyle>
+            <w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+            <w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false" />
+          </w4graph:graphStyle>
+          <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+          <bpanda:localization xml:lang="es">
+            <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;extensionElements xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;&gt;&#xA;  &lt;w4graph:graphStyle&gt;&#xA;    &lt;w4graph:basic background=&quot;255,255,255&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;    &lt;w4graph:line routerType=&quot;Rectilinear&quot; automaticRoute=&quot;false&quot; closestRoute=&quot;false&quot; avoidObstacleRoute=&quot;false&quot; /&gt;&#xA;  &lt;/w4graph:graphStyle&gt;&#xA;&lt;/extensionElements&gt;" />
+          </bpanda:localization>
+        </bpmn:extensionElements>
+        <bpmn:sourceRef>Bpmn_DataOutput_Y6S1ALH1EeSuDf0W70XLGw</bpmn:sourceRef>
+        <bpmn:targetRef>Bpmn_DataObjectReference_YGA4YLH1EeSuDf0W70XLGw</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+      <bpmn:potentialOwner name="Approve Invoice Potential Owner" id="Bpmn_ResourceRole_MdyGcLH0EeS1nbPdxxCzlg">
+        <bpmn:extensionElements>
+          <ino:profilename value="ROOT PROFILE" />
+          <ino:stereotypename value="activityResource" />
+          <ino:typename value="MID.Innovator.API.icw2bp.BPActivityResource" />
+          <bpanda:property name="Einsatzbedarf (Prozent von Ausführungszeit)" value="0" id="property_BPResourceRole_OperatingDemand" />
+          <bpanda:property name="Einsatzzeit (min)" value="0" id="property_BPResourceRole_OperatingTime" />
+          <bpanda:property name="Typ der Zuordnung" value="Unspecified" id="property_BPResourceRole_AssignmentType" />
+          <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        </bpmn:extensionElements>
+        <bpmn:resourceRef>Bpmn_Resource_8nPrkLHzEeS1nbPdxxCzlg</bpmn:resourceRef>
+      </bpmn:potentialOwner>
+    </bpmn:userTask>
+    <bpmn:dataObjectReference name="approver" id="Bpmn_DataObjectReference_assignApprover" dataObjectRef="dataObject_Bpmn_DataObjectReference_assignApprover">
+      <bpmn:extensionElements xmlns:w4graph="http://www.w4.eu/spec/BPMN/20110930/GRAPH">
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="dataObject" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPDataObject" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+        <bpanda:property name="Namenstyp" value="Normal" id="property_ELNamedElement_NameKind" />
+        <bpanda:property name="nutzt globalen Zustand" value="false" id="property_BPItemAwareElement_IsStateReused" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        <bpanda:localization xml:lang="es">
+          <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;extensionElements xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;&gt;&#xA;  &lt;w4graph:graphStyle&gt;&#xA;    &lt;w4graph:basic background=&quot;153,153,153&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;  &lt;/w4graph:graphStyle&gt;&#xA;&lt;/extensionElements&gt;" />
+        </bpanda:localization>
+      </bpmn:extensionElements>
+    </bpmn:dataObjectReference>
+    <bpmn:dataObject name="approver" id="dataObject_Bpmn_DataObjectReference_assignApprover" itemSubjectRef="xsdString">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="dataObject" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPDataObject" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+        <bpanda:property name="Namenstyp" value="Normal" id="property_ELNamedElement_NameKind" />
+        <bpanda:property name="nutzt globalen Zustand" value="false" id="property_BPItemAwareElement_IsStateReused" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        <bpanda:localization xml:lang="es">
+          <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;extensionElements xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;&gt;&#xA;  &lt;w4graph:graphStyle&gt;&#xA;    &lt;w4graph:basic background=&quot;153,153,153&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;  &lt;/w4graph:graphStyle&gt;&#xA;&lt;/extensionElements&gt;" />
+        </bpanda:localization>
+      </bpmn:extensionElements>
+    </bpmn:dataObject>
+    <bpmn:dataObjectReference name="approved" id="Bpmn_DataObjectReference_YGA4YLH1EeSuDf0W70XLGw" dataObjectRef="dataObject_Bpmn_DataObjectReference_YGA4YLH1EeSuDf0W70XLGw">
+      <bpmn:extensionElements xmlns:w4graph="http://www.w4.eu/spec/BPMN/20110930/GRAPH">
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="dataObject" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPDataObject" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+        <bpanda:property name="Namenstyp" value="Normal" id="property_ELNamedElement_NameKind" />
+        <bpanda:property name="nutzt globalen Zustand" value="false" id="property_BPItemAwareElement_IsStateReused" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        <bpanda:localization xml:lang="es">
+          <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;extensionElements xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;&gt;&#xA;  &lt;w4graph:graphStyle&gt;&#xA;    &lt;w4graph:basic background=&quot;153,153,153&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;  &lt;/w4graph:graphStyle&gt;&#xA;&lt;/extensionElements&gt;" />
+        </bpanda:localization>
+      </bpmn:extensionElements>
+    </bpmn:dataObjectReference>
+    <bpmn:dataObject name="approved" id="dataObject_Bpmn_DataObjectReference_YGA4YLH1EeSuDf0W70XLGw" itemSubjectRef="xsdBool">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="dataObject" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPDataObject" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+        <bpanda:property name="Namenstyp" value="Normal" id="property_ELNamedElement_NameKind" />
+        <bpanda:property name="nutzt globalen Zustand" value="false" id="property_BPItemAwareElement_IsStateReused" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        <bpanda:localization xml:lang="es">
+          <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;extensionElements xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;&gt;&#xA;  &lt;w4graph:graphStyle&gt;&#xA;    &lt;w4graph:basic background=&quot;153,153,153&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;  &lt;/w4graph:graphStyle&gt;&#xA;&lt;/extensionElements&gt;" />
+        </bpanda:localization>
+      </bpmn:extensionElements>
+    </bpmn:dataObject>
+    <bpmn:exclusiveGateway gatewayDirection="Diverging" name="Invoice approved?" id="invoice_approved">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="gateway" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPGateway" />
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+        <signavio:signavioMetaData metaKey="adaptertype" />
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <signavio:signavioMetaData metaKey="adapterconfiguration" />
+        <signavio:signavioMetaData metaKey="adapterclassname" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="185,139,0" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+        <bpanda:property name="Innovator bestimmt Richtung" value="true" id="property_BPGateway_IsGatewayDirectionDynamic" />
+        <bpanda:property name="Gateway-Typ" value="ExclusiveGateway" id="property_BPGateway_GatewayType" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        <bpanda:localization xml:lang="es">
+          <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;extensionElements xmlns:signavio=&quot;http://www.signavio.com&quot; xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;&gt;&#xA;  &lt;signavio:signavioMetaData metaKey=&quot;bgcolor&quot; metaValue=&quot;#ffffff&quot; /&gt;&#xA;  &lt;signavio:signavioMetaData metaKey=&quot;adaptertype&quot; metaValue=&quot;&quot; /&gt;&#xA;  &lt;signavio:signavioMetaData metaKey=&quot;userstory&quot; metaValue=&quot;[]&quot; /&gt;&#xA;  &lt;signavio:signavioMetaData metaKey=&quot;adapterconfiguration&quot; metaValue=&quot;&quot; /&gt;&#xA;  &lt;signavio:signavioMetaData metaKey=&quot;adapterclassname&quot; metaValue=&quot;&quot; /&gt;&#xA;  &lt;w4graph:graphStyle&gt;&#xA;    &lt;w4graph:basic background=&quot;185,139,0&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;  &lt;/w4graph:graphStyle&gt;&#xA;&lt;/extensionElements&gt;" />
+        </bpanda:localization>
+      </bpmn:extensionElements>
+      <bpmn:incoming>sequenceFlow_180</bpmn:incoming>
+      <bpmn:outgoing>invoiceNotApproved</bpmn:outgoing>
+      <bpmn:outgoing>invoiceApproved</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask isForCompensation="false" startQuantity="1" name="Assign Approver" id="assignApprover" camunda:assignee="demo" camunda:formKey="app:assignApprover.jsf">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="task" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPTaskNode" />
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc" />
+        <signavio:signavioMetaData metaKey="adaptereventtype" />
+        <signavio:signavioMetaData metaKey="documentationlink" metaValue="[]" />
+        <signavio:signavioMetaData metaKey="test" />
+        <signavio:signavioMetaData metaKey="adaptertype" />
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <signavio:signavioMetaData metaKey="adapterconfiguration" />
+        <signavio:signavioMetaData metaKey="adapterclassname" />
+        <signavio:signavioMetaData metaKey="servicereferenz" />
+        <signavio:signavioMetaData metaKey="risiko" />
+        <signavio:signavioMetaData metaKey="erteiltfreigabe" />
+        <signavio:signavioMetaData metaKey="riskandcontrols" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="194,215,235" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+        <bpanda:property name="Ausführungszeit (min)" value="0" id="property_BPActivityNode_ExecutionTime" />
+        <bpanda:property name="Häufigkeit pro Jahr" value="0" id="property_BPActivityNode_FrequencyPerYear" />
+        <bpanda:property name="Kosten pro Ausführung (EUR)" value="0" id="property_BPActivityNode_CostsPerExecution" />
+        <bpanda:property name="Mittlere Schleifenanzahl" value="0" id="property_BPActivityNode_MeanLoopNumber" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        <bpanda:localization xml:lang="es">
+          <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;userTask camunda:assignee=&quot;demo&quot; camunda:formKey=&quot;app:assignApprover.jsf&quot; xmlns:camunda=&quot;http://activiti.org/bpmn&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot; xmlns:signavio=&quot;http://www.signavio.com&quot; xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot;&gt;&#xA;  &lt;extensionElements&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;bgcolor&quot; metaValue=&quot;#ffffcc&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;adaptereventtype&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;documentationlink&quot; metaValue=&quot;[]&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;test&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;adaptertype&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;userstory&quot; metaValue=&quot;[]&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;adapterconfiguration&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;adapterclassname&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;servicereferenz&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;risiko&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;erteiltfreigabe&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;riskandcontrols&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;w4graph:graphStyle&gt;&#xA;      &lt;w4graph:basic background=&quot;194,215,235&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;    &lt;/w4graph:graphStyle&gt;&#xA;  &lt;/extensionElements&gt;&#xA;&lt;/userTask&gt;" />
+        </bpanda:localization>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1</bpmn:incoming>
+      <bpmn:outgoing>sequenceFlow_178</bpmn:outgoing>
+      <bpmn:ioSpecification>
+        <bpmn:dataOutput name="approver" id="Bpmn_DataOutput_assignApprover" itemSubjectRef="xsdString">
+          <bpmn:extensionElements>
+            <ino:profilename value="ROOT PROFILE" />
+            <ino:stereotypename value="dataObject" />
+            <ino:typename value="MID.Innovator.API.icw2bp.BPDataObject" />
+            <w4graph:graphStyle>
+              <w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+            </w4graph:graphStyle>
+            <bpanda:property name="Namenstyp" value="Normal" id="property_ELNamedElement_NameKind" />
+            <bpanda:property name="nutzt globalen Zustand" value="true" id="property_BPItemAwareElement_IsStateReused" />
+            <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+            <bpanda:localization xml:lang="es">
+              <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;extensionElements xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;&gt;&#xA;  &lt;w4graph:graphStyle&gt;&#xA;    &lt;w4graph:basic background=&quot;153,153,153&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;  &lt;/w4graph:graphStyle&gt;&#xA;&lt;/extensionElements&gt;" />
+            </bpanda:localization>
+          </bpmn:extensionElements>
+        </bpmn:dataOutput>
+        <bpmn:inputSet />
+        <bpmn:outputSet />
+      </bpmn:ioSpecification>
+      <bpmn:dataOutputAssociation id="Bpmn_DataOutputAssociation_assignApprover">
+        <bpmn:extensionElements>
+          <ino:profilename value="ROOT PROFILE" />
+          <ino:stereotypename value="dataAssociation" />
+          <ino:typename value="MID.Innovator.API.icw2bp.BPDataIOAssociation" />
+          <w4graph:graphStyle>
+            <w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+            <w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false" />
+          </w4graph:graphStyle>
+          <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+          <bpanda:localization xml:lang="es">
+            <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;extensionElements xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;&gt;&#xA;  &lt;w4graph:graphStyle&gt;&#xA;    &lt;w4graph:basic background=&quot;255,255,255&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;    &lt;w4graph:line routerType=&quot;Rectilinear&quot; automaticRoute=&quot;false&quot; closestRoute=&quot;false&quot; avoidObstacleRoute=&quot;false&quot; /&gt;&#xA;  &lt;/w4graph:graphStyle&gt;&#xA;&lt;/extensionElements&gt;" />
+          </bpanda:localization>
+        </bpmn:extensionElements>
+        <bpmn:sourceRef>Bpmn_DataOutput_assignApprover</bpmn:sourceRef>
+        <bpmn:targetRef>Bpmn_DataObjectReference_assignApprover</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+      <bpmn:potentialOwner name="Assign Approver Potential Owner" id="Bpmn_ResourceRole_DSeNcLH0EeS1nbPdxxCzlg">
+        <bpmn:extensionElements>
+          <ino:profilename value="ROOT PROFILE" />
+          <ino:stereotypename value="activityResource" />
+          <ino:typename value="MID.Innovator.API.icw2bp.BPActivityResource" />
+          <bpanda:property name="Einsatzbedarf (Prozent von Ausführungszeit)" value="0" id="property_BPResourceRole_OperatingDemand" />
+          <bpanda:property name="Einsatzzeit (min)" value="0" id="property_BPResourceRole_OperatingTime" />
+          <bpanda:property name="Typ der Zuordnung" value="Unspecified" id="property_BPResourceRole_AssignmentType" />
+          <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        </bpmn:extensionElements>
+        <bpmn:resourceRef>Bpmn_Resource_6vVHsLHzEeS1nbPdxxCzlg</bpmn:resourceRef>
+      </bpmn:potentialOwner>
+    </bpmn:userTask>
+    <bpmn:dataObjectReference name="clarified" id="Bpmn_DataObjectReference_cdsDQLH1EeSuDf0W70XLGw" dataObjectRef="dataObject_Bpmn_DataObjectReference_cdsDQLH1EeSuDf0W70XLGw">
+      <bpmn:extensionElements xmlns:w4graph="http://www.w4.eu/spec/BPMN/20110930/GRAPH">
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="dataObject" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPDataObject" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+        <bpanda:property name="Namenstyp" value="Normal" id="property_ELNamedElement_NameKind" />
+        <bpanda:property name="nutzt globalen Zustand" value="false" id="property_BPItemAwareElement_IsStateReused" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        <bpanda:localization xml:lang="es">
+          <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;extensionElements xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;&gt;&#xA;  &lt;w4graph:graphStyle&gt;&#xA;    &lt;w4graph:basic background=&quot;153,153,153&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;  &lt;/w4graph:graphStyle&gt;&#xA;&lt;/extensionElements&gt;" />
+        </bpanda:localization>
+      </bpmn:extensionElements>
+    </bpmn:dataObjectReference>
+    <bpmn:dataObject name="clarified" id="dataObject_Bpmn_DataObjectReference_cdsDQLH1EeSuDf0W70XLGw" itemSubjectRef="xsdString">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="dataObject" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPDataObject" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+        <bpanda:property name="Namenstyp" value="Normal" id="property_ELNamedElement_NameKind" />
+        <bpanda:property name="nutzt globalen Zustand" value="false" id="property_BPItemAwareElement_IsStateReused" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        <bpanda:localization xml:lang="es">
+          <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;extensionElements xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;&gt;&#xA;  &lt;w4graph:graphStyle&gt;&#xA;    &lt;w4graph:basic background=&quot;153,153,153&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;  &lt;/w4graph:graphStyle&gt;&#xA;&lt;/extensionElements&gt;" />
+        </bpanda:localization>
+      </bpmn:extensionElements>
+    </bpmn:dataObject>
+    <bpmn:userTask isForCompensation="false" startQuantity="1" name="Rechnung klären" id="reviewInvoice" camunda:assignee="demo" camunda:formKey="app:reviewInvoice.jsf">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="task" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPTaskNode" />
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc" />
+        <signavio:signavioMetaData metaKey="adaptereventtype" />
+        <signavio:signavioMetaData metaKey="documentationlink" metaValue="[]" />
+        <signavio:signavioMetaData metaKey="test" />
+        <signavio:signavioMetaData metaKey="adaptertype" />
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <signavio:signavioMetaData metaKey="adapterconfiguration" />
+        <signavio:signavioMetaData metaKey="adapterclassname" />
+        <signavio:signavioMetaData metaKey="servicereferenz" />
+        <signavio:signavioMetaData metaKey="risiko" />
+        <signavio:signavioMetaData metaKey="erteiltfreigabe" />
+        <signavio:signavioMetaData metaKey="riskandcontrols" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="194,215,235" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+        <bpanda:property name="Ausführungszeit (min)" value="0" id="property_BPActivityNode_ExecutionTime" />
+        <bpanda:property name="Häufigkeit pro Jahr" value="0" id="property_BPActivityNode_FrequencyPerYear" />
+        <bpanda:property name="Kosten pro Ausführung (EUR)" value="0" id="property_BPActivityNode_CostsPerExecution" />
+        <bpanda:property name="Mittlere Schleifenanzahl" value="0" id="property_BPActivityNode_MeanLoopNumber" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        <bpanda:localization xml:lang="es">
+          <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;userTask camunda:assignee=&quot;demo&quot; camunda:formKey=&quot;app:reviewInvoice.jsf&quot; xmlns:camunda=&quot;http://activiti.org/bpmn&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot; xmlns:signavio=&quot;http://www.signavio.com&quot; xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot;&gt;&#xA;  &lt;extensionElements&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;bgcolor&quot; metaValue=&quot;#ffffcc&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;adaptereventtype&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;documentationlink&quot; metaValue=&quot;[]&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;test&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;adaptertype&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;userstory&quot; metaValue=&quot;[]&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;adapterconfiguration&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;adapterclassname&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;servicereferenz&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;risiko&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;erteiltfreigabe&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;riskandcontrols&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;w4graph:graphStyle&gt;&#xA;      &lt;w4graph:basic background=&quot;194,215,235&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;    &lt;/w4graph:graphStyle&gt;&#xA;  &lt;/extensionElements&gt;&#xA;&lt;/userTask&gt;" />
+        </bpanda:localization>
+      </bpmn:extensionElements>
+      <bpmn:incoming>invoiceNotApproved</bpmn:incoming>
+      <bpmn:outgoing>sequenceFlow_183</bpmn:outgoing>
+      <bpmn:ioSpecification>
+        <bpmn:dataOutput name="clarified" id="Bpmn_DataOutput_dCG-8LH1EeSuDf0W70XLGw" itemSubjectRef="xsdString">
+          <bpmn:extensionElements>
+            <ino:profilename value="ROOT PROFILE" />
+            <ino:stereotypename value="dataObject" />
+            <ino:typename value="MID.Innovator.API.icw2bp.BPDataObject" />
+            <w4graph:graphStyle>
+              <w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+            </w4graph:graphStyle>
+            <bpanda:property name="Namenstyp" value="Normal" id="property_ELNamedElement_NameKind" />
+            <bpanda:property name="nutzt globalen Zustand" value="true" id="property_BPItemAwareElement_IsStateReused" />
+            <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+            <bpanda:localization xml:lang="es">
+              <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;extensionElements xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;&gt;&#xA;  &lt;w4graph:graphStyle&gt;&#xA;    &lt;w4graph:basic background=&quot;153,153,153&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;  &lt;/w4graph:graphStyle&gt;&#xA;&lt;/extensionElements&gt;" />
+            </bpanda:localization>
+          </bpmn:extensionElements>
+        </bpmn:dataOutput>
+        <bpmn:inputSet />
+        <bpmn:outputSet />
+      </bpmn:ioSpecification>
+      <bpmn:dataOutputAssociation id="Bpmn_DataOutputAssociation_dB6xsrH1EeSuDf0W70XLGw">
+        <bpmn:extensionElements>
+          <ino:profilename value="ROOT PROFILE" />
+          <ino:stereotypename value="dataAssociation" />
+          <ino:typename value="MID.Innovator.API.icw2bp.BPDataIOAssociation" />
+          <w4graph:graphStyle>
+            <w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+            <w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false" />
+          </w4graph:graphStyle>
+          <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+          <bpanda:localization xml:lang="es">
+            <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;extensionElements xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;&gt;&#xA;  &lt;w4graph:graphStyle&gt;&#xA;    &lt;w4graph:basic background=&quot;255,255,255&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;    &lt;w4graph:line routerType=&quot;Rectilinear&quot; automaticRoute=&quot;false&quot; closestRoute=&quot;false&quot; avoidObstacleRoute=&quot;false&quot; /&gt;&#xA;  &lt;/w4graph:graphStyle&gt;&#xA;&lt;/extensionElements&gt;" />
+          </bpanda:localization>
+        </bpmn:extensionElements>
+        <bpmn:sourceRef>Bpmn_DataOutput_dCG-8LH1EeSuDf0W70XLGw</bpmn:sourceRef>
+        <bpmn:targetRef>Bpmn_DataObjectReference_cdsDQLH1EeSuDf0W70XLGw</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+      <bpmn:potentialOwner name="Review Invoice Potential Owner" id="Bpmn_ResourceRole_GrG9MLH0EeS1nbPdxxCzlg">
+        <bpmn:extensionElements>
+          <ino:profilename value="ROOT PROFILE" />
+          <ino:stereotypename value="activityResource" />
+          <ino:typename value="MID.Innovator.API.icw2bp.BPActivityResource" />
+          <bpanda:property name="Einsatzbedarf (Prozent von Ausführungszeit)" value="0" id="property_BPResourceRole_OperatingDemand" />
+          <bpanda:property name="Einsatzzeit (min)" value="0" id="property_BPResourceRole_OperatingTime" />
+          <bpanda:property name="Typ der Zuordnung" value="Unspecified" id="property_BPResourceRole_AssignmentType" />
+          <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        </bpmn:extensionElements>
+        <bpmn:resourceRef>Bpmn_Resource_6vVHsLHzEeS1nbPdxxCzlg</bpmn:resourceRef>
+      </bpmn:potentialOwner>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway gatewayDirection="Diverging" name="Review successful?" id="reviewSuccessful_gw">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="gateway" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPGateway" />
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+        <signavio:signavioMetaData metaKey="adaptertype" />
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <signavio:signavioMetaData metaKey="adapterconfiguration" />
+        <signavio:signavioMetaData metaKey="adapterclassname" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="185,139,0" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+        <bpanda:property name="Innovator bestimmt Richtung" value="true" id="property_BPGateway_IsGatewayDirectionDynamic" />
+        <bpanda:property name="Gateway-Typ" value="ExclusiveGateway" id="property_BPGateway_GatewayType" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        <bpanda:localization xml:lang="es">
+          <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;extensionElements xmlns:signavio=&quot;http://www.signavio.com&quot; xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;&gt;&#xA;  &lt;signavio:signavioMetaData metaKey=&quot;bgcolor&quot; metaValue=&quot;#ffffff&quot; /&gt;&#xA;  &lt;signavio:signavioMetaData metaKey=&quot;adaptertype&quot; metaValue=&quot;&quot; /&gt;&#xA;  &lt;signavio:signavioMetaData metaKey=&quot;userstory&quot; metaValue=&quot;[]&quot; /&gt;&#xA;  &lt;signavio:signavioMetaData metaKey=&quot;adapterconfiguration&quot; metaValue=&quot;&quot; /&gt;&#xA;  &lt;signavio:signavioMetaData metaKey=&quot;adapterclassname&quot; metaValue=&quot;&quot; /&gt;&#xA;  &lt;w4graph:graphStyle&gt;&#xA;    &lt;w4graph:basic background=&quot;185,139,0&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;  &lt;/w4graph:graphStyle&gt;&#xA;&lt;/extensionElements&gt;" />
+        </bpanda:localization>
+      </bpmn:extensionElements>
+      <bpmn:incoming>sequenceFlow_183</bpmn:incoming>
+      <bpmn:outgoing>reviewNotSuccessful</bpmn:outgoing>
+      <bpmn:outgoing>reviewSuccessful</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent name="Invoice not processed" id="invoiceNotProcessed">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="event" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPEventNode" />
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="190,0,0" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+        <bpanda:property name="Ausführungszeit (min)" value="0" id="property_BPEventNode_ExecutionTime" />
+        <bpanda:property name="Häufigkeit pro Jahr" value="0" id="property_BPEventNode_FrequencyPerYear" />
+        <bpanda:property name="Kosten pro Ausführung (EUR)" value="0" id="property_BPEventNode_CostsPerExecution" />
+        <bpanda:property name="Name" value="Invoice not processed" id="property_ELNamedElement_Name" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        <bpanda:localization xml:lang="es">
+          <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;extensionElements xmlns:signavio=&quot;http://www.signavio.com&quot; xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;&gt;&#xA;  &lt;signavio:signavioMetaData metaKey=&quot;bgcolor&quot; metaValue=&quot;#ffffff&quot; /&gt;&#xA;  &lt;signavio:signavioMetaData metaKey=&quot;userstory&quot; metaValue=&quot;[]&quot; /&gt;&#xA;  &lt;w4graph:graphStyle&gt;&#xA;    &lt;w4graph:basic background=&quot;190,0,0&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;  &lt;/w4graph:graphStyle&gt;&#xA;&lt;/extensionElements&gt;" />
+        </bpanda:localization>
+      </bpmn:extensionElements>
+      <bpmn:incoming>reviewNotSuccessful</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:startEvent name="Invoice received" id="StartEvent_1" camunda:formKey="app:startProcess.jsf">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="event" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPEventNode" />
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="109,183,0" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+        <bpanda:property name="Ausführungszeit (min)" value="0" id="property_BPEventNode_ExecutionTime" />
+        <bpanda:property name="Häufigkeit pro Jahr" value="0" id="property_BPEventNode_FrequencyPerYear" />
+        <bpanda:property name="Kosten pro Ausführung (EUR)" value="0" id="property_BPEventNode_CostsPerExecution" />
+        <bpanda:property name="Name" value="Invoice received" id="property_ELNamedElement_Name" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        <bpanda:localization xml:lang="es">
+          <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;startEvent camunda:formKey=&quot;app:startProcess.jsf&quot; xmlns:camunda=&quot;http://activiti.org/bpmn&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot; xmlns:signavio=&quot;http://www.signavio.com&quot; xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot;&gt;&#xA;  &lt;extensionElements&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;bgcolor&quot; metaValue=&quot;#ffffff&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;userstory&quot; metaValue=&quot;[]&quot; /&gt;&#xA;    &lt;w4graph:graphStyle&gt;&#xA;      &lt;w4graph:basic background=&quot;109,183,0&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;    &lt;/w4graph:graphStyle&gt;&#xA;  &lt;/extensionElements&gt;&#xA;&lt;/startEvent&gt;" />
+        </bpanda:localization>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>SequenceFlow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask isForCompensation="false" startQuantity="1" name="Prepare Bank Transfer" id="prepareBankTransfer" camunda:candidateGroups="accounting" camunda:formKey="app:prepareBankTransfer.jsf">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="task" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPTaskNode" />
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc" />
+        <signavio:signavioMetaData metaKey="adaptereventtype" />
+        <signavio:signavioMetaData metaKey="documentationlink" metaValue="[]" />
+        <signavio:signavioMetaData metaKey="test" />
+        <signavio:signavioMetaData metaKey="adaptertype" />
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <signavio:signavioMetaData metaKey="adapterconfiguration" />
+        <signavio:signavioMetaData metaKey="adapterclassname" />
+        <signavio:signavioMetaData metaKey="servicereferenz" />
+        <signavio:signavioMetaData metaKey="risiko" />
+        <signavio:signavioMetaData metaKey="erteiltfreigabe" />
+        <signavio:signavioMetaData metaKey="riskandcontrols" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="194,215,235" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+        <bpanda:property name="Ausführungszeit (min)" value="0" id="property_BPActivityNode_ExecutionTime" />
+        <bpanda:property name="Häufigkeit pro Jahr" value="0" id="property_BPActivityNode_FrequencyPerYear" />
+        <bpanda:property name="Kosten pro Ausführung (EUR)" value="0" id="property_BPActivityNode_CostsPerExecution" />
+        <bpanda:property name="Mittlere Schleifenanzahl" value="0" id="property_BPActivityNode_MeanLoopNumber" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        <bpanda:localization xml:lang="es">
+          <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;userTask camunda:candidateGroups=&quot;accounting&quot; camunda:formKey=&quot;app:prepareBankTransfer.jsf&quot; xmlns:camunda=&quot;http://activiti.org/bpmn&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot; xmlns:signavio=&quot;http://www.signavio.com&quot; xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot;&gt;&#xA;  &lt;extensionElements&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;bgcolor&quot; metaValue=&quot;#ffffcc&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;adaptereventtype&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;documentationlink&quot; metaValue=&quot;[]&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;test&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;adaptertype&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;userstory&quot; metaValue=&quot;[]&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;adapterconfiguration&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;adapterclassname&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;servicereferenz&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;risiko&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;erteiltfreigabe&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;riskandcontrols&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;w4graph:graphStyle&gt;&#xA;      &lt;w4graph:basic background=&quot;194,215,235&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;    &lt;/w4graph:graphStyle&gt;&#xA;  &lt;/extensionElements&gt;&#xA;&lt;/userTask&gt;" />
+        </bpanda:localization>
+      </bpmn:extensionElements>
+      <bpmn:incoming>invoiceApproved</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_2</bpmn:outgoing>
+      <bpmn:potentialOwner name="Prepare Bank Transfer Potential Owner" id="Bpmn_ResourceRole_PKHJ0LH0EeS1nbPdxxCzlg">
+        <bpmn:extensionElements>
+          <ino:profilename value="ROOT PROFILE" />
+          <ino:stereotypename value="activityResource" />
+          <ino:typename value="MID.Innovator.API.icw2bp.BPActivityResource" />
+          <bpanda:property name="Einsatzbedarf (Prozent von Ausführungszeit)" value="0" id="property_BPResourceRole_OperatingDemand" />
+          <bpanda:property name="Einsatzzeit (min)" value="0" id="property_BPResourceRole_OperatingTime" />
+          <bpanda:property name="Typ der Zuordnung" value="Unspecified" id="property_BPResourceRole_AssignmentType" />
+          <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        </bpmn:extensionElements>
+        <bpmn:resourceRef>Bpmn_Resource_-IajYLHzEeS1nbPdxxCzlg</bpmn:resourceRef>
+      </bpmn:potentialOwner>
+    </bpmn:userTask>
+    <bpmn:endEvent name="Invoice processed" id="invoiceProcessed">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="event" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPEventNode" />
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="190,0,0" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+        <bpanda:property name="Ausführungszeit (min)" value="0" id="property_BPEventNode_ExecutionTime" />
+        <bpanda:property name="Häufigkeit pro Jahr" value="0" id="property_BPEventNode_FrequencyPerYear" />
+        <bpanda:property name="Kosten pro Ausführung (EUR)" value="0" id="property_BPEventNode_CostsPerExecution" />
+        <bpanda:property name="Name" value="Invoice processed" id="property_ELNamedElement_Name" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        <bpanda:localization xml:lang="es">
+          <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;extensionElements xmlns:signavio=&quot;http://www.signavio.com&quot; xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;&gt;&#xA;  &lt;signavio:signavioMetaData metaKey=&quot;bgcolor&quot; metaValue=&quot;#ffffff&quot; /&gt;&#xA;  &lt;signavio:signavioMetaData metaKey=&quot;userstory&quot; metaValue=&quot;[]&quot; /&gt;&#xA;  &lt;w4graph:graphStyle&gt;&#xA;    &lt;w4graph:basic background=&quot;190,0,0&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;  &lt;/w4graph:graphStyle&gt;&#xA;&lt;/extensionElements&gt;" />
+        </bpanda:localization>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_3</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask implementation="##unspecified" isForCompensation="false" startQuantity="1" name="Archive Invoice" id="archiveInvoice" camunda:delegateExpression="#{archiveService}" w4:serviceName="ArchiveInvoiceService">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="task" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPTaskNode" />
+        <camunda:field name="text0" stringValue="Hello World" />
+        <camunda:field name="text1">
+          <camunda:expression>${genderBean.getGenderString(gender)}</camunda:expression>
+        </camunda:field>
+        <camunda:field name="text2">
+          <camunda:expression>Hello ${gender == 'male' ? 'Mr.' : 'Mrs.'} ${name}</camunda:expression>
+        </camunda:field>
+        <camunda:field name="text3">
+          <camunda:string>
+	          Hello World
+	      </camunda:string>
+        </camunda:field>
+        <camunda:field name="text4">
+          <camunda:string>
+	          &lt;p&gt;Hello World&lt;/p&gt;&lt;br&gt;
+	      </camunda:string>
+        </camunda:field>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc" />
+        <signavio:signavioMetaData metaKey="adaptereventtype" />
+        <signavio:signavioMetaData metaKey="documentationlink" metaValue="[]" />
+        <signavio:signavioMetaData metaKey="test" />
+        <signavio:signavioMetaData metaKey="adaptertype" />
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <signavio:signavioMetaData metaKey="adapterconfiguration" />
+        <signavio:signavioMetaData metaKey="adapterclassname" />
+        <signavio:signavioMetaData metaKey="servicereferenz" />
+        <signavio:signavioMetaData metaKey="risiko" />
+        <signavio:signavioMetaData metaKey="erteiltfreigabe" />
+        <signavio:signavioMetaData metaKey="riskandcontrols" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="194,215,235" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+        </w4graph:graphStyle>
+        <bpanda:property name="Ausführungszeit (min)" value="0" id="property_BPActivityNode_ExecutionTime" />
+        <bpanda:property name="Häufigkeit pro Jahr" value="0" id="property_BPActivityNode_FrequencyPerYear" />
+        <bpanda:property name="Kosten pro Ausführung (EUR)" value="0" id="property_BPActivityNode_CostsPerExecution" />
+        <bpanda:property name="Mittlere Schleifenanzahl" value="0" id="property_BPActivityNode_MeanLoopNumber" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        <bpanda:localization xml:lang="es">
+          <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;serviceTask camunda:delegateExpression=&quot;#{archiveService}&quot; w4:serviceName=&quot;ArchiveInvoiceService&quot; xmlns:w4=&quot;http://www.w4.eu/spec/BPMN/20110701/MODEL&quot; xmlns:camunda=&quot;http://activiti.org/bpmn&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot; xmlns:signavio=&quot;http://www.signavio.com&quot; xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot;&gt;&#xA;  &lt;extensionElements&gt;&#xA;    &lt;camunda:field name=&quot;text0&quot; stringValue=&quot;Hello World&quot; /&gt;&#xA;    &lt;camunda:field name=&quot;text1&quot;&gt;&#xA;      &lt;camunda:expression&gt;${genderBean.getGenderString(gender)}&lt;/camunda:expression&gt;&#xA;    &lt;/camunda:field&gt;&#xA;    &lt;camunda:field name=&quot;text2&quot;&gt;&#xA;      &lt;camunda:expression&gt;Hello ${gender == 'male' ? 'Mr.' : 'Mrs.'} ${name}&lt;/camunda:expression&gt;&#xA;    &lt;/camunda:field&gt;&#xA;    &lt;camunda:field name=&quot;text3&quot;&gt;&#xA;      &lt;camunda:string&gt;&#xA;&#x9;          Hello World&#xA;&#x9;      &lt;/camunda:string&gt;&#xA;    &lt;/camunda:field&gt;&#xA;    &lt;camunda:field name=&quot;text4&quot;&gt;&#xA;      &lt;camunda:string&gt;&#xA;&#x9;          &amp;lt;p&amp;gt;Hello World&amp;lt;/p&amp;gt;&amp;lt;br&amp;gt;&#xA;&#x9;      &lt;/camunda:string&gt;&#xA;    &lt;/camunda:field&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;bgcolor&quot; metaValue=&quot;#ffffcc&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;adaptereventtype&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;documentationlink&quot; metaValue=&quot;[]&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;test&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;adaptertype&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;userstory&quot; metaValue=&quot;[]&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;adapterconfiguration&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;adapterclassname&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;servicereferenz&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;risiko&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;erteiltfreigabe&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;signavio:signavioMetaData metaKey=&quot;riskandcontrols&quot; metaValue=&quot;&quot; /&gt;&#xA;    &lt;w4graph:graphStyle&gt;&#xA;      &lt;w4graph:basic background=&quot;194,215,235&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;    &lt;/w4graph:graphStyle&gt;&#xA;  &lt;/extensionElements&gt;&#xA;&lt;/serviceTask&gt;" />
+        </bpanda:localization>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_2</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_3</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="StartEvent_1" targetRef="assignApprover" id="SequenceFlow_1">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="sequenceFlow" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPSequenceFlow" />
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+          <w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false" />
+        </w4graph:graphStyle>
+        <bpanda:property name="nutzt globale Bedingung" value="False" id="property_BPSequenceFlow_IsConditionReused" />
+        <bpanda:property name="Wahrscheinlichkeit (Prozent)" value="" id="property_BPSequenceFlow_Probability" />
+        <bpanda:property name="Name" value="" id="property_ELNamedElement_Name" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        <bpanda:localization xml:lang="es">
+          <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;extensionElements xmlns:signavio=&quot;http://www.signavio.com&quot; xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;&gt;&#xA;  &lt;signavio:signavioMetaData metaKey=&quot;userstory&quot; metaValue=&quot;[]&quot; /&gt;&#xA;  &lt;w4graph:graphStyle&gt;&#xA;    &lt;w4graph:basic background=&quot;255,255,255&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;    &lt;w4graph:line routerType=&quot;Rectilinear&quot; automaticRoute=&quot;true&quot; closestRoute=&quot;false&quot; avoidObstacleRoute=&quot;false&quot; /&gt;&#xA;  &lt;/w4graph:graphStyle&gt;&#xA;&lt;/extensionElements&gt;" />
+        </bpanda:localization>
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="prepareBankTransfer" targetRef="archiveInvoice" id="SequenceFlow_2">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="sequenceFlow" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPSequenceFlow" />
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+          <w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false" />
+        </w4graph:graphStyle>
+        <bpanda:property name="nutzt globale Bedingung" value="False" id="property_BPSequenceFlow_IsConditionReused" />
+        <bpanda:property name="Wahrscheinlichkeit (Prozent)" value="" id="property_BPSequenceFlow_Probability" />
+        <bpanda:property name="Name" value="" id="property_ELNamedElement_Name" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        <bpanda:localization xml:lang="es">
+          <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;extensionElements xmlns:signavio=&quot;http://www.signavio.com&quot; xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;&gt;&#xA;  &lt;signavio:signavioMetaData metaKey=&quot;userstory&quot; metaValue=&quot;[]&quot; /&gt;&#xA;  &lt;w4graph:graphStyle&gt;&#xA;    &lt;w4graph:basic background=&quot;255,255,255&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;    &lt;w4graph:line routerType=&quot;Rectilinear&quot; automaticRoute=&quot;true&quot; closestRoute=&quot;false&quot; avoidObstacleRoute=&quot;false&quot; /&gt;&#xA;  &lt;/w4graph:graphStyle&gt;&#xA;&lt;/extensionElements&gt;" />
+        </bpanda:localization>
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="archiveInvoice" targetRef="invoiceProcessed" id="SequenceFlow_3">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="sequenceFlow" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPSequenceFlow" />
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+          <w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false" />
+        </w4graph:graphStyle>
+        <bpanda:property name="nutzt globale Bedingung" value="False" id="property_BPSequenceFlow_IsConditionReused" />
+        <bpanda:property name="Wahrscheinlichkeit (Prozent)" value="" id="property_BPSequenceFlow_Probability" />
+        <bpanda:property name="Name" value="" id="property_ELNamedElement_Name" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        <bpanda:localization xml:lang="es">
+          <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;extensionElements xmlns:signavio=&quot;http://www.signavio.com&quot; xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;&gt;&#xA;  &lt;signavio:signavioMetaData metaKey=&quot;userstory&quot; metaValue=&quot;[]&quot; /&gt;&#xA;  &lt;w4graph:graphStyle&gt;&#xA;    &lt;w4graph:basic background=&quot;255,255,255&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;    &lt;w4graph:line routerType=&quot;Rectilinear&quot; automaticRoute=&quot;true&quot; closestRoute=&quot;false&quot; avoidObstacleRoute=&quot;false&quot; /&gt;&#xA;  &lt;/w4graph:graphStyle&gt;&#xA;&lt;/extensionElements&gt;" />
+        </bpanda:localization>
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="invoice_approved" targetRef="prepareBankTransfer" name="yes" id="invoiceApproved">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="sequenceFlow" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPSequenceFlow" />
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+          <w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false" />
+        </w4graph:graphStyle>
+        <bpanda:property name="Bedingung (lokal)" value="bpmn:getDataObject('approved')" id="property_BPSequenceFlow_ConditionExpression" />
+        <bpanda:property name="nutzt globale Bedingung" value="False" id="property_BPSequenceFlow_IsConditionReused" />
+        <bpanda:property name="Wahrscheinlichkeit (Prozent)" value="" id="property_BPSequenceFlow_Probability" />
+        <bpanda:property name="Name" value="yes" id="property_ELNamedElement_Name" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        <bpanda:localization xml:lang="es">
+          <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;extensionElements xmlns:signavio=&quot;http://www.signavio.com&quot; xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;&gt;&#xA;  &lt;signavio:signavioMetaData metaKey=&quot;userstory&quot; metaValue=&quot;[]&quot; /&gt;&#xA;  &lt;w4graph:graphStyle&gt;&#xA;    &lt;w4graph:basic background=&quot;255,255,255&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;    &lt;w4graph:line routerType=&quot;Rectilinear&quot; automaticRoute=&quot;true&quot; closestRoute=&quot;false&quot; avoidObstacleRoute=&quot;false&quot; /&gt;&#xA;  &lt;/w4graph:graphStyle&gt;&#xA;&lt;/extensionElements&gt;" />
+        </bpanda:localization>
+      </bpmn:extensionElements>
+      <bpmn:conditionExpression>bpmn:getDataObject('approved')</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="invoice_approved" targetRef="reviewInvoice" name="no" id="invoiceNotApproved">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="sequenceFlow" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPSequenceFlow" />
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+          <w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false" />
+        </w4graph:graphStyle>
+        <bpanda:property name="Bedingung (lokal)" value="not(bpmn:getDataObject('approved'))" id="property_BPSequenceFlow_ConditionExpression" />
+        <bpanda:property name="nutzt globale Bedingung" value="False" id="property_BPSequenceFlow_IsConditionReused" />
+        <bpanda:property name="Wahrscheinlichkeit (Prozent)" value="" id="property_BPSequenceFlow_Probability" />
+        <bpanda:property name="Name" value="no" id="property_ELNamedElement_Name" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        <bpanda:localization xml:lang="es">
+          <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;extensionElements xmlns:signavio=&quot;http://www.signavio.com&quot; xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;&gt;&#xA;  &lt;signavio:signavioMetaData metaKey=&quot;userstory&quot; metaValue=&quot;[]&quot; /&gt;&#xA;  &lt;w4graph:graphStyle&gt;&#xA;    &lt;w4graph:basic background=&quot;255,255,255&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;    &lt;w4graph:line routerType=&quot;Rectilinear&quot; automaticRoute=&quot;true&quot; closestRoute=&quot;false&quot; avoidObstacleRoute=&quot;false&quot; /&gt;&#xA;  &lt;/w4graph:graphStyle&gt;&#xA;&lt;/extensionElements&gt;" />
+        </bpanda:localization>
+      </bpmn:extensionElements>
+      <bpmn:conditionExpression>not(bpmn:getDataObject('approved'))</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="reviewSuccessful_gw" targetRef="invoiceNotProcessed" name="no" id="reviewNotSuccessful">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="sequenceFlow" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPSequenceFlow" />
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+          <w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false" />
+        </w4graph:graphStyle>
+        <bpanda:property name="Bedingung (lokal)" value="bpmn:getDataObject('clarified') = 'no'" id="property_BPSequenceFlow_ConditionExpression" />
+        <bpanda:property name="nutzt globale Bedingung" value="False" id="property_BPSequenceFlow_IsConditionReused" />
+        <bpanda:property name="Wahrscheinlichkeit (Prozent)" value="" id="property_BPSequenceFlow_Probability" />
+        <bpanda:property name="Name" value="no" id="property_ELNamedElement_Name" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        <bpanda:localization xml:lang="es">
+          <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;extensionElements xmlns:signavio=&quot;http://www.signavio.com&quot; xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;&gt;&#xA;  &lt;signavio:signavioMetaData metaKey=&quot;userstory&quot; metaValue=&quot;[]&quot; /&gt;&#xA;  &lt;w4graph:graphStyle&gt;&#xA;    &lt;w4graph:basic background=&quot;255,255,255&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;    &lt;w4graph:line routerType=&quot;Rectilinear&quot; automaticRoute=&quot;true&quot; closestRoute=&quot;false&quot; avoidObstacleRoute=&quot;false&quot; /&gt;&#xA;  &lt;/w4graph:graphStyle&gt;&#xA;&lt;/extensionElements&gt;" />
+        </bpanda:localization>
+      </bpmn:extensionElements>
+      <bpmn:conditionExpression>bpmn:getDataObject('clarified') = 'no'</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="reviewSuccessful_gw" targetRef="approveInvoice" name="yes" id="reviewSuccessful">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="sequenceFlow" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPSequenceFlow" />
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+          <w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false" />
+        </w4graph:graphStyle>
+        <bpanda:property name="Bedingung (lokal)" value="bpmn:getDataObject('clarified') = 'yes'" id="property_BPSequenceFlow_ConditionExpression" />
+        <bpanda:property name="nutzt globale Bedingung" value="False" id="property_BPSequenceFlow_IsConditionReused" />
+        <bpanda:property name="Wahrscheinlichkeit (Prozent)" value="" id="property_BPSequenceFlow_Probability" />
+        <bpanda:property name="Name" value="yes" id="property_ELNamedElement_Name" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        <bpanda:localization xml:lang="es">
+          <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;extensionElements xmlns:signavio=&quot;http://www.signavio.com&quot; xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;&gt;&#xA;  &lt;signavio:signavioMetaData metaKey=&quot;userstory&quot; metaValue=&quot;[]&quot; /&gt;&#xA;  &lt;w4graph:graphStyle&gt;&#xA;    &lt;w4graph:basic background=&quot;255,255,255&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;    &lt;w4graph:line routerType=&quot;Rectilinear&quot; automaticRoute=&quot;true&quot; closestRoute=&quot;false&quot; avoidObstacleRoute=&quot;false&quot; /&gt;&#xA;  &lt;/w4graph:graphStyle&gt;&#xA;&lt;/extensionElements&gt;" />
+        </bpanda:localization>
+      </bpmn:extensionElements>
+      <bpmn:conditionExpression>bpmn:getDataObject('clarified') = 'yes'</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="assignApprover" targetRef="approveInvoice" id="sequenceFlow_178">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="sequenceFlow" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPSequenceFlow" />
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+          <w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false" />
+        </w4graph:graphStyle>
+        <bpanda:property name="nutzt globale Bedingung" value="False" id="property_BPSequenceFlow_IsConditionReused" />
+        <bpanda:property name="Wahrscheinlichkeit (Prozent)" value="" id="property_BPSequenceFlow_Probability" />
+        <bpanda:property name="Name" value="" id="property_ELNamedElement_Name" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        <bpanda:localization xml:lang="es">
+          <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;extensionElements xmlns:signavio=&quot;http://www.signavio.com&quot; xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;&gt;&#xA;  &lt;signavio:signavioMetaData metaKey=&quot;userstory&quot; metaValue=&quot;[]&quot; /&gt;&#xA;  &lt;w4graph:graphStyle&gt;&#xA;    &lt;w4graph:basic background=&quot;255,255,255&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;    &lt;w4graph:line routerType=&quot;Rectilinear&quot; automaticRoute=&quot;true&quot; closestRoute=&quot;false&quot; avoidObstacleRoute=&quot;false&quot; /&gt;&#xA;  &lt;/w4graph:graphStyle&gt;&#xA;&lt;/extensionElements&gt;" />
+        </bpanda:localization>
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="approveInvoice" targetRef="invoice_approved" id="sequenceFlow_180">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="sequenceFlow" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPSequenceFlow" />
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+          <w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false" />
+        </w4graph:graphStyle>
+        <bpanda:property name="nutzt globale Bedingung" value="False" id="property_BPSequenceFlow_IsConditionReused" />
+        <bpanda:property name="Wahrscheinlichkeit (Prozent)" value="" id="property_BPSequenceFlow_Probability" />
+        <bpanda:property name="Name" value="" id="property_ELNamedElement_Name" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        <bpanda:localization xml:lang="es">
+          <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;extensionElements xmlns:signavio=&quot;http://www.signavio.com&quot; xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;&gt;&#xA;  &lt;signavio:signavioMetaData metaKey=&quot;userstory&quot; metaValue=&quot;[]&quot; /&gt;&#xA;  &lt;w4graph:graphStyle&gt;&#xA;    &lt;w4graph:basic background=&quot;255,255,255&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;    &lt;w4graph:line routerType=&quot;Rectilinear&quot; automaticRoute=&quot;true&quot; closestRoute=&quot;false&quot; avoidObstacleRoute=&quot;false&quot; /&gt;&#xA;  &lt;/w4graph:graphStyle&gt;&#xA;&lt;/extensionElements&gt;" />
+        </bpanda:localization>
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow isImmediate="true" sourceRef="reviewInvoice" targetRef="reviewSuccessful_gw" id="sequenceFlow_183">
+      <bpmn:extensionElements>
+        <ino:profilename value="ROOT PROFILE" />
+        <ino:stereotypename value="sequenceFlow" />
+        <ino:typename value="MID.Innovator.API.icw2bp.BPSequenceFlow" />
+        <signavio:signavioMetaData metaKey="userstory" metaValue="[]" />
+        <w4graph:graphStyle>
+          <w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false" />
+          <w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false" />
+        </w4graph:graphStyle>
+        <bpanda:property name="nutzt globale Bedingung" value="False" id="property_BPSequenceFlow_IsConditionReused" />
+        <bpanda:property name="Wahrscheinlichkeit (Prozent)" value="" id="property_BPSequenceFlow_Probability" />
+        <bpanda:property name="Name" value="" id="property_ELNamedElement_Name" />
+        <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+        <bpanda:localization xml:lang="es">
+          <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;extensionElements xmlns:signavio=&quot;http://www.signavio.com&quot; xmlns:w4graph=&quot;http://www.w4.eu/spec/BPMN/20110930/GRAPH&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;&gt;&#xA;  &lt;signavio:signavioMetaData metaKey=&quot;userstory&quot; metaValue=&quot;[]&quot; /&gt;&#xA;  &lt;w4graph:graphStyle&gt;&#xA;    &lt;w4graph:basic background=&quot;255,255,255&quot; foreground=&quot;0,0,0&quot; autoResize=&quot;false&quot; borderColor=&quot;100,100,100&quot; collapsed=&quot;false&quot; /&gt;&#xA;    &lt;w4graph:line routerType=&quot;Rectilinear&quot; automaticRoute=&quot;true&quot; closestRoute=&quot;false&quot; avoidObstacleRoute=&quot;false&quot; /&gt;&#xA;  &lt;/w4graph:graphStyle&gt;&#xA;&lt;/extensionElements&gt;" />
+        </bpanda:localization>
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+  </bpmn:process>
+  <bpmn:resource name="Team Assistant" id="Bpmn_Resource_6vVHsLHzEeS1nbPdxxCzlg" w4:type="User">
+    <bpmn:extensionElements>
+      <ino:profilename value="ROOT PROFILE" />
+      <ino:stereotypename value="resource" />
+      <ino:typename value="MID.Innovator.API.icw2br.BRResource" />
+      <bpanda:property name="Kosten pro Zeit (EUR/h)" value="0" id="property_MERefAbleAsResource_CostsPerTime" />
+      <bpanda:property name="Ressourcentyp" value="Resource" id="property_BRResource_ResourceType" />
+      <bpanda:property name="Elektron. Adresse" value="" id="property_BRResource_EAddress" />
+      <bpanda:property name="ist eine Klasse von Elementen" value="false" id="property_BRResource_IsClass" />
+      <bpanda:property name="ist externe Ressource" value="false" id="property_BRResource_IsExternal" />
+      <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+      <bpanda:localization xml:lang="es">
+        <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;resource w4:type=&quot;User&quot; xmlns:w4=&quot;http://www.w4.eu/spec/BPMN/20110701/MODEL&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot; /&gt;" />
+      </bpanda:localization>
+    </bpmn:extensionElements>
+  </bpmn:resource>
+  <bpmn:resource name="Approver" id="Bpmn_Resource_8nPrkLHzEeS1nbPdxxCzlg" w4:type="User">
+    <bpmn:extensionElements>
+      <ino:profilename value="ROOT PROFILE" />
+      <ino:stereotypename value="resource" />
+      <ino:typename value="MID.Innovator.API.icw2br.BRResource" />
+      <bpanda:property name="Kosten pro Zeit (EUR/h)" value="0" id="property_MERefAbleAsResource_CostsPerTime" />
+      <bpanda:property name="Ressourcentyp" value="Resource" id="property_BRResource_ResourceType" />
+      <bpanda:property name="Elektron. Adresse" value="" id="property_BRResource_EAddress" />
+      <bpanda:property name="ist eine Klasse von Elementen" value="false" id="property_BRResource_IsClass" />
+      <bpanda:property name="ist externe Ressource" value="false" id="property_BRResource_IsExternal" />
+      <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+      <bpanda:localization xml:lang="es">
+        <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;resource w4:type=&quot;User&quot; xmlns:w4=&quot;http://www.w4.eu/spec/BPMN/20110701/MODEL&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot; /&gt;" />
+      </bpanda:localization>
+    </bpmn:extensionElements>
+  </bpmn:resource>
+  <bpmn:resource name="Accountant" id="Bpmn_Resource_-IajYLHzEeS1nbPdxxCzlg" w4:type="User">
+    <bpmn:extensionElements>
+      <ino:profilename value="ROOT PROFILE" />
+      <ino:stereotypename value="resource" />
+      <ino:typename value="MID.Innovator.API.icw2br.BRResource" />
+      <bpanda:property name="Kosten pro Zeit (EUR/h)" value="0" id="property_MERefAbleAsResource_CostsPerTime" />
+      <bpanda:property name="Ressourcentyp" value="Resource" id="property_BRResource_ResourceType" />
+      <bpanda:property name="Elektron. Adresse" value="" id="property_BRResource_EAddress" />
+      <bpanda:property name="ist eine Klasse von Elementen" value="false" id="property_BRResource_IsClass" />
+      <bpanda:property name="ist externe Ressource" value="false" id="property_BRResource_IsExternal" />
+      <bpanda:property name="Bearbeitungsstatus" value="in Arbeit" id="label_Editing Status" />
+      <bpanda:localization xml:lang="es">
+        <bpanda:extensionTextTranslation name="BPMN Extension" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xA;&lt;resource w4:type=&quot;User&quot; xmlns:w4=&quot;http://www.w4.eu/spec/BPMN/20110701/MODEL&quot; xmlns=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot; /&gt;" />
+      </bpanda:localization>
+    </bpmn:extensionElements>
+  </bpmn:resource>
+  <bpmndi:BPMNDiagram name="Invoice Handling (OMG BPMN MIWG Demo)" resolution="96" id="_2d473a78-5903-16a5-6ad7-cc286e5af08e">
+    <bpmndi:BPMNPlane bpmnElement="handle-invoice" id="_bdee5960-faee-0d56-8b37-51ebf3bc8f33">
+      <bpmndi:BPMNShape bpmnElement="invoiceProcessed" id="_11ab52f6-d866-7488-b73b-33cb89f25ef8" color:background-color="#be0000">
+        <dc:Bounds height="40.0" width="40.0" x="870.0" y="380.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="40.0" width="60.0" x="850.0" y="410.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="approveInvoice" id="_2ce86f67-355b-21cd-316c-0d82d8710a9c" color:background-color="#c2d7eb">
+        <dc:Bounds height="80.0" width="100.0" x="300.0" y="200.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="30.0" width="60.0" x="340.0" y="240.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="invoice_approved" id="_31c2a604-1c0a-e601-aeaa-96e89bccf5a5" isMarkerVisible="true" color:background-color="#b98b00">
+        <dc:Bounds height="40.0" width="40.0" x="440.0" y="220.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="40.0" width="60.0" x="430.0" y="260.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="invoiceNotProcessed" id="_519ae8ed-02c2-b32b-b9b5-9789069654dd" color:background-color="#be0000">
+        <dc:Bounds height="40.0" width="40.0" x="870.0" y="50.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="40.0" width="80.0" x="850.0" y="80.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Bpmn_DataObjectReference_cdsDQLH1EeSuDf0W70XLGw" id="_547e1ff7-92b1-a6d4-bc8f-775da25630cb" color:background-color="#999999">
+        <dc:Bounds height="60.0" width="40.0" x="530.0" y="140.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="20.0" width="60.0" x="520.0" y="180.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="archiveInvoice" id="_712e446e-80c8-f34d-1c04-734cf00f7a1e" color:background-color="#c2d7eb">
+        <dc:Bounds height="80.0" width="100.0" x="730.0" y="360.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="30.0" width="60.0" x="770.0" y="400.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="StartEvent_1" id="_912ced91-e846-a219-d79c-b176278f5fdf" color:background-color="#6db700">
+        <dc:Bounds height="40.0" width="40.0" x="40.0" y="50.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="40.0" width="60.0" x="30.0" y="80.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="prepareBankTransfer" id="_a61d656b-3c82-d501-5db5-6a52ae0fcf1a" color:background-color="#c2d7eb">
+        <dc:Bounds height="80.0" width="100.0" x="590.0" y="360.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="40.0" width="60.0" x="630.0" y="400.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="reviewInvoice" id="_a7ef69a2-99d3-43df-46da-4bd87aea21b9" color:background-color="#c2d7eb">
+        <dc:Bounds height="80.0" width="100.0" x="500.0" y="30.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="30.0" width="70.0" x="540.0" y="70.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="reviewSuccessful_gw" id="_b93a13ef-ae4d-d3c0-af4b-1f7bcb84cab2" isMarkerVisible="true" color:background-color="#b98b00">
+        <dc:Bounds height="40.0" width="40.0" x="640.0" y="50.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="40.0" width="80.0" x="620.0" y="90.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Bpmn_DataObjectReference_YGA4YLH1EeSuDf0W70XLGw" id="_be5f194a-23ee-6889-7c44-54229e3414c8" color:background-color="#999999">
+        <dc:Bounds height="60.0" width="40.0" x="330.0" y="320.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="20.0" width="60.0" x="320.0" y="360.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="assignApprover" id="_e2077233-f041-99f0-d7a0-2337645abe14" color:background-color="#c2d7eb">
+        <dc:Bounds height="80.0" width="100.0" x="130.0" y="30.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="30.0" width="60.0" x="170.0" y="70.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Bpmn_DataObjectReference_assignApprover" id="_e98285d6-9042-bdc1-54a4-87d81892a1c7" color:background-color="#999999">
+        <dc:Bounds height="60.0" width="40.0" x="160.0" y="140.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="20.0" width="60.0" x="150.0" y="180.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_1" id="_0b1dd230-e878-8a2c-f96c-fbde3ac92a08">
+        <di:waypoint x="80.0" y="70.0" />
+        <di:waypoint x="130.0" y="70.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="20.0" width="20.0" x="90.0" y="80.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="reviewSuccessful" id="_15bc1fcf-2f99-24f2-ade1-f5793ea03cdf">
+        <di:waypoint x="660.0" y="50.0" />
+        <di:waypoint x="660.0" y="15.0" />
+        <di:waypoint x="355.0" y="15.0" />
+        <di:waypoint x="355.0" y="200.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="30.0" width="30.0" x="670.0" y="30.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow_183" id="_225c7170-025a-bbbb-2f03-f06ad7a1ddc8">
+        <di:waypoint x="600.0" y="70.0" />
+        <di:waypoint x="640.0" y="70.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="20.0" width="20.0" x="610.0" y="80.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_2" id="_257f1555-ddc8-7377-aa05-139f06b8a84a">
+        <di:waypoint x="690.0" y="400.0" />
+        <di:waypoint x="730.0" y="400.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="20.0" width="20.0" x="700.0" y="410.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="reviewNotSuccessful" id="_2c205383-57d3-90d1-e14f-96287a3118c8">
+        <di:waypoint x="680.0" y="70.0" />
+        <di:waypoint x="870.0" y="70.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="30.0" width="30.0" x="690.0" y="80.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Bpmn_DataOutputAssociation_dB6xsrH1EeSuDf0W70XLGw" id="_3fdb6552-e95f-7ca0-62a7-f95eaaed2496">
+        <di:waypoint x="550.0" y="110.0" />
+        <di:waypoint x="550.0" y="140.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow_178" id="_7caadc49-8894-58bb-6801-8905df5c3aa4">
+        <di:waypoint x="230.0" y="70.0" />
+        <di:waypoint x="260.0" y="70.0" />
+        <di:waypoint x="260.0" y="235.0" />
+        <di:waypoint x="300.0" y="235.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="20.0" width="20.0" x="240.0" y="80.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Bpmn_DataOutputAssociation_assignApprover" id="_b02a0a6e-3244-5e9e-9788-b0cf899b6353">
+        <di:waypoint x="180.0" y="110.0" />
+        <di:waypoint x="180.0" y="140.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="invoiceApproved" id="_c9d99e9d-08a3-1956-4a12-5f8f5eee5eee">
+        <di:waypoint x="480.0" y="240.0" />
+        <di:waypoint x="540.0" y="240.0" />
+        <di:waypoint x="540.0" y="395.0" />
+        <di:waypoint x="590.0" y="395.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="30.0" width="40.0" x="490.0" y="250.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="invoiceNotApproved" id="_e4f6480b-a315-a160-304e-505d83322981">
+        <di:waypoint x="460.0" y="220.0" />
+        <di:waypoint x="460.0" y="70.0" />
+        <di:waypoint x="500.0" y="70.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="20.0" width="30.0" x="470.0" y="210.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_3" id="_e5968912-24a8-15d4-45a6-b087db4a1b8b">
+        <di:waypoint x="830.0" y="400.0" />
+        <di:waypoint x="870.0" y="400.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="20.0" width="20.0" x="840.0" y="410.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow_180" id="_ef435291-d744-fda8-7c95-c6448414083f">
+        <di:waypoint x="400.0" y="240.0" />
+        <di:waypoint x="440.0" y="240.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="20.0" width="20.0" x="410.0" y="250.0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Bpmn_DataOutputAssociation_Y55MYrH1EeSuDf0W70XLGw" id="_f3f172fe-dbb0-0c18-85dd-60373b8f1c59">
+        <di:waypoint x="350.0" y="280.0" />
+        <di:waypoint x="350.0" y="320.0" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
