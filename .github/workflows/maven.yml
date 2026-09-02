@@ -26,17 +26,25 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
+      run: mvn -P analysis --batch-mode verify --file pom.xml
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Deploy artifacts
+      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
       run: mvn -P analysis --batch-mode deploy --file pom.xml
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Upload static files as artifact
+      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
       id: deployment
       uses: actions/upload-pages-artifact@v3 # or specific "vX.X.X" version tag for this action
       with:
         path: target/site/
 
     - name: Publish to Github pages
+      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
       # See https://github.com/marketplace/actions/github-pages-action
       uses: peaceiris/actions-gh-pages@v4
       with:

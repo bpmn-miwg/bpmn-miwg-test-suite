@@ -4,17 +4,24 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.omg.bpmn.miwg</groupId>
   <artifactId>test-suite</artifactId>
-  <version>0.4-SNAPSHOT</version>
+  <version>2026</version>
   <name>BPMN 2.0 MIWG Test Suite</name>
   <description>Reference BPMN files and various vendor's implementations of the same.</description>
   <packaging>jar</packaging>
 
   <properties>
     <java.version>21</java.version>
-    <maven.compiler.source>21</maven.compiler.source>
-    <maven.compiler.target>21</maven.compiler.target>
+    <maven.compiler.release>21</maven.compiler.release>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <bpmn-miwg-tools.version>0.7.0</bpmn-miwg-tools.version>
+    <maven.compiler.plugin.version>3.14.0</maven.compiler.plugin.version>
+    <maven.jar.plugin.version>3.4.2</maven.jar.plugin.version>
+    <maven.antrun.plugin.version>3.1.0</maven.antrun.plugin.version>
+    <maven.resources.plugin.version>3.3.1</maven.resources.plugin.version>
+    <maven.site.plugin.version>3.12.1</maven.site.plugin.version>
+
     <!-- Use this property to name just one tool to be tested
     <project.bpmn.application>Yaoqiang BPMN Editor 2.2.18</project.bpmn.application>
     -->
@@ -31,6 +38,11 @@
     <repository>
       <id>bpmn-miwg-repo</id>
       <url>https://raw.githubusercontent.com/bpmn-miwg/bpmn-miwg-mvn-repo/master/</url>
+    </repository>
+    <repository>
+      <id>jenkins-public</id>
+      <name>Jenkins Public</name>
+      <url>https://repo.jenkins-ci.org/public/</url>
     </repository>
     <repository>
       <id>github-bpmn-miwg-tools</id>
@@ -53,6 +65,11 @@
     <pluginRepository>
       <id>bpmn-miwg-plugin-repo</id>
       <url>https://raw.githubusercontent.com/bpmn-miwg/bpmn-miwg-mvn-repo/master/</url>
+    </pluginRepository>
+    <pluginRepository>
+      <id>jenkins-public</id>
+      <name>Jenkins Public</name>
+      <url>https://repo.jenkins-ci.org/public/</url>
     </pluginRepository>
     <pluginRepository>
       <id>github</id>
@@ -112,16 +129,17 @@
     <plugin>
       <groupId>org.apache.maven.plugins</groupId>
       <artifactId>maven-compiler-plugin</artifactId>
-      <version>3.13.0</version>
+      <version>${maven.compiler.plugin.version}</version>
       <configuration>
-        <source>21</source>
-        <target>21</target>
+        <release>${maven.compiler.release}</release>
+        <source>${maven.compiler.source}</source>
+        <target>${maven.compiler.target}</target>
       </configuration>
     </plugin>
     <plugin>
       <groupId>org.apache.maven.plugins</groupId>
       <artifactId>maven-jar-plugin</artifactId>
-      <version>3.4.2</version>
+      <version>${maven.jar.plugin.version}</version>
       <executions>
         <execution>
           <id>reference-only</id>
@@ -148,7 +166,7 @@
         <plugins>
           <plugin>
             <artifactId>maven-antrun-plugin</artifactId>
-            <version>3.1.0</version>
+            <version>${maven.antrun.plugin.version}</version>
             <executions>
               <execution>
                 <phase>process-resources</phase>
@@ -187,7 +205,8 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-resources-plugin</artifactId>
-            <version>3.3.1</version>
+            <version>${maven.resources.plugin.version}</version>
+            <!-- duplicate vendor files to site as well as classes (which are used for jar) -->
             <executions>
               <!-- duplicate vendor files to site as well as classes (which are used for jar) -->
               <execution>
@@ -250,7 +269,7 @@
           </plugin>
           <plugin>
             <artifactId>maven-site-plugin</artifactId>
-            <version>4.0.0-M16</version>
+            <version>${maven.site.plugin.version}</version>
             <executions>
               <!-- jar BPMN MIWG analysis reports as part of the build's normal 'install' phase -->
               <execution>
