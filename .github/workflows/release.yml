@@ -7,13 +7,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Create zip file
         run: |
           zip -r release.zip Reference/*.bpmn Reference/*.png Reference/*.xsd LICENSE.txt README.md
 
       - name: Upload release asset
+        # TODO https://github.com/actions/upload-release-asset archived Mar 4, 2021
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
