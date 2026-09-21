@@ -26,7 +26,8 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn -P analysis --batch-mode verify site:jar --file pom.xml
+      # Run the plugin goal for the execution with id 'build-site-jar', not the generic one.
+      run: mvn -P analysis --batch-mode verify site:jar@build-site-jar --file pom.xml
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
