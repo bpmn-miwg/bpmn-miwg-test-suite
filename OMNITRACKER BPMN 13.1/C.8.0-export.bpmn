@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sem:definitions expressionLanguage="http://www.omninet.de/bpmn/expressions/v1" typeLanguage="http://www.omninet.de/bpmn/types/v1" targetNamespace="http://www.omninet.de/bpmn/definitions/v1" xmlns:sem="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:ot="http://www.omninet.de/ot/bpmn/v1">
+	<sem:itemDefinition id="_OT_NAMESPACES_">
+		<sem:extensionElements>
+			<ot:namespace id="_1" name="C.8.0" alias="C80">
+				<ot:schemaObjectDescription>
+					<ot:translatedText lang="de"/>
+				</ot:schemaObjectDescription>
+			</ot:namespace>
+		</sem:extensionElements>
+	</sem:itemDefinition>
+	<sem:process name="process1" ot:alias="process1" id="_3">
+		<sem:documentation textFormat="application/x-ot-schemaObjectDescription">
+			<ot:schemaObjectDescription>
+				<ot:translatedText lang="de"/>
+			</ot:schemaObjectDescription>
+		</sem:documentation>
+		<sem:extensionElements>
+			<ot:startPermission/>
+		</sem:extensionElements>
+		<sem:ioSpecification>
+			<sem:dataInput id="_39" name="Employee Badge Number" ot:alias="input1"/>
+			<sem:dataInput id="_40" name="From" ot:alias="input2"/>
+			<sem:dataInput id="_47" name="To" ot:alias="input3"/>
+			<sem:dataOutput id="_45" name="Reason" ot:alias="output2"/>
+			<sem:dataOutput id="_46" name="Vacation Approval" ot:alias="output1"/>
+			<sem:inputSet>
+				<sem:dataInputRefs>_39</sem:dataInputRefs>
+				<sem:dataInputRefs>_40</sem:dataInputRefs>
+				<sem:dataInputRefs>_47</sem:dataInputRefs>
+			</sem:inputSet>
+			<sem:outputSet>
+				<sem:dataOutputRefs>_45</sem:dataOutputRefs>
+				<sem:dataOutputRefs>_46</sem:dataOutputRefs>
+			</sem:outputSet>
+		</sem:ioSpecification>
+		<sem:dataObject id="_4" name="Current Vacation Status" ot:alias="dataObj1" ot:displayName="Current Vacation Status"/>
+		<sem:sequenceFlow id="_5" ot:alias="flow14" sourceRef="_6" targetRef="_7"/>
+		<sem:sequenceFlow id="_8" name="Refused" ot:displayName="Refused" ot:alias="flow10" sourceRef="_9" targetRef="_10"/>
+		<sem:sequenceFlow id="_11" ot:alias="flow13" sourceRef="_12" targetRef="_6"/>
+		<sem:sequenceFlow id="_13" ot:alias="flow16" sourceRef="_14" targetRef="_15"/>
+		<sem:sequenceFlow id="_16" name="Manual Validation Required" ot:displayName="Manual Validation Required" ot:alias="flow6" sourceRef="_17" targetRef="_18">
+			<sem:conditionExpression>[Vacation Approval] = "Manual Validation Required"</sem:conditionExpression>
+		</sem:sequenceFlow>
+		<sem:sequenceFlow id="_19" ot:alias="flow11" sourceRef="_10" targetRef="_20"/>
+		<sem:sequenceFlow id="_21" ot:alias="flow9" sourceRef="_18" targetRef="_9"/>
+		<sem:sequenceFlow id="_22" ot:alias="flow8" sourceRef="_23" targetRef="_24"/>
+		<sem:sequenceFlow id="_25" name="Approved" ot:displayName="Approved" ot:alias="flow5" sourceRef="_17" targetRef="_26">
+			<sem:conditionExpression>[Vacation Approval] = "Approved"</sem:conditionExpression>
+		</sem:sequenceFlow>
+		<sem:sequenceFlow id="_27" ot:alias="flow3" sourceRef="_28" targetRef="_29"/>
+		<sem:sequenceFlow id="_30" ot:alias="flow1" sourceRef="_31" targetRef="_32"/>
+		<sem:sequenceFlow id="_33" name="Refused" ot:displayName="Refused" ot:alias="flow7" sourceRef="_17" targetRef="_23"/>
+		<sem:sequenceFlow id="_34" ot:alias="flow4" sourceRef="_35" targetRef="_17"/>
+		<sem:sequenceFlow id="_36" ot:alias="flow15" sourceRef="_26" targetRef="_14"/>
+		<sem:sequenceFlow id="_37" name="Approved" ot:displayName="Approved" ot:alias="flow12" sourceRef="_9" targetRef="_12">
+			<sem:conditionExpression>[Vacation Approval] = "Approved"</sem:conditionExpression>
+		</sem:sequenceFlow>
+		<sem:sequenceFlow id="_38" ot:alias="flow2" sourceRef="_32" targetRef="_35"/>
+		<sem:endEvent id="_29" name="Employee not found" ot:displayName="Employee not found" ot:alias="event3"/>
+		<sem:endEvent id="_15" name="Vacation Approved Automatically" ot:displayName="Vacation Approved Automatically" ot:alias="event7"/>
+		<sem:exclusiveGateway id="_17" ot:alias="gateway1" default="_33"/>
+		<sem:dataObjectReference id="_41" dataObjectRef="_4"/>
+		<sem:sendTask id="_26" name="Notify Employee of Approval" ot:displayName="Notify Employee of Approval" ot:alias="task3">
+			<sem:ioSpecification>
+				<sem:dataInput id="_msgdata_26"/>
+				<sem:inputSet>
+					<sem:dataInputRefs>_msgdata_26</sem:dataInputRefs>
+				</sem:inputSet>
+				<sem:outputSet/>
+			</sem:ioSpecification>
+		</sem:sendTask>
+		<sem:sendTask id="_12" name="Notify Employee of Approval" ot:displayName="Notify Employee of Approval" ot:alias="task7">
+			<sem:ioSpecification>
+				<sem:dataInput id="_msgdata_12"/>
+				<sem:inputSet>
+					<sem:dataInputRefs>_msgdata_12</sem:dataInputRefs>
+				</sem:inputSet>
+				<sem:outputSet/>
+			</sem:ioSpecification>
+		</sem:sendTask>
+		<sem:sendTask id="_10" name="Notify Employee of Refusal" ot:displayName="Notify Employee of Refusal" ot:alias="task6">
+			<sem:ioSpecification>
+				<sem:dataInput id="_msgdata_10"/>
+				<sem:inputSet>
+					<sem:dataInputRefs>_msgdata_10</sem:dataInputRefs>
+				</sem:inputSet>
+				<sem:outputSet/>
+			</sem:ioSpecification>
+		</sem:sendTask>
+		<sem:sendTask id="_23" name="Notify Employee of Refusal" ot:displayName="Notify Employee of Refusal" ot:alias="task5">
+			<sem:ioSpecification>
+				<sem:dataInput id="_msgdata_23"/>
+				<sem:inputSet>
+					<sem:dataInputRefs>_msgdata_23</sem:dataInputRefs>
+				</sem:inputSet>
+				<sem:outputSet/>
+			</sem:ioSpecification>
+		</sem:sendTask>
+		<sem:userTask id="_18" name="Manually Approve Vacation" ot:displayName="Manually Approve Vacation" ot:alias="task4">
+			<sem:extensionElements>
+				<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" displayOkButton="false" displayApplyButton="false" formTitle="" otObject=""/>
+			</sem:extensionElements>
+		</sem:userTask>
+		<sem:serviceTask id="_14" name="Update Remaining Vacation" ot:displayName="Update Remaining Vacation" ot:alias="task9" ot:connectorGuid="{00000000-0000-0000-0000-000000000000}"/>
+		<sem:serviceTask id="_32" name="Fetch Vacation Information" ot:displayName="Fetch Vacation Information" ot:alias="task1" ot:connectorGuid="{00000000-0000-0000-0000-000000000000}">
+			<sem:ioSpecification>
+				<sem:dataInput id="_d_a11" ot:ignoreDataInput="true"/>
+				<sem:dataOutput id="_d_a10" ot:ignoreDataOutput="true"/>
+				<sem:inputSet>
+					<sem:dataInputRefs>_d_a11</sem:dataInputRefs>
+				</sem:inputSet>
+				<sem:outputSet>
+					<sem:dataOutputRefs>_d_a10</sem:dataOutputRefs>
+				</sem:outputSet>
+			</sem:ioSpecification>
+			<sem:dataInputAssociation id="_43">
+				<sem:sourceRef>_39</sem:sourceRef>
+				<sem:targetRef>_d_a11</sem:targetRef>
+			</sem:dataInputAssociation>
+			<sem:dataOutputAssociation id="_42">
+				<sem:sourceRef>_d_a10</sem:sourceRef>
+				<sem:targetRef>_41</sem:targetRef>
+			</sem:dataOutputAssociation>
+		</sem:serviceTask>
+		<sem:endEvent id="_7" name="Vacation Approved by Manager" ot:displayName="Vacation Approved by Manager" ot:alias="event6"/>
+		<sem:endEvent id="_20" name="Vacation Refused by Manager" ot:displayName="Vacation Refused by Manager" ot:alias="event5"/>
+		<sem:endEvent id="_24" name="Vacation Refused Automatically" ot:displayName="Vacation Refused Automatically" ot:alias="event4"/>
+		<sem:boundaryEvent id="_28" ot:alias="event2" attachedToRef="_32">
+			<sem:dataOutput id="_d_44"/>
+			<sem:outputSet>
+				<sem:dataOutputRefs>_d_44</sem:dataOutputRefs>
+			</sem:outputSet>
+			<sem:errorEventDefinition/>
+		</sem:boundaryEvent>
+		<sem:startEvent id="_31" name="Vacation Request Received" ot:displayName="Vacation Request Received" ot:alias="event1"/>
+		<sem:businessRuleTask id="_35" name="Vacation Approval" ot:displayName="Vacation Approval" ot:alias="task2">
+			<sem:ioSpecification>
+				<sem:dataInput id="_d_a9" ot:ignoreDataInput="true"/>
+				<sem:dataInput id="_d_a8" ot:ignoreDataInput="true"/>
+				<sem:dataOutput id="_d_a7" ot:ignoreDataOutput="true"/>
+				<sem:dataOutput id="_d_a25" ot:ignoreDataOutput="true"/>
+				<sem:inputSet>
+					<sem:dataInputRefs>_d_a8</sem:dataInputRefs>
+					<sem:dataInputRefs>_d_a9</sem:dataInputRefs>
+				</sem:inputSet>
+				<sem:outputSet>
+					<sem:dataOutputRefs>_d_a7</sem:dataOutputRefs>
+					<sem:dataOutputRefs>_d_a25</sem:dataOutputRefs>
+				</sem:outputSet>
+			</sem:ioSpecification>
+			<sem:dataInputAssociation id="_49">
+				<sem:sourceRef>_47</sem:sourceRef>
+				<sem:targetRef>_d_a8</sem:targetRef>
+			</sem:dataInputAssociation>
+			<sem:dataInputAssociation id="_50">
+				<sem:sourceRef>_40</sem:sourceRef>
+				<sem:targetRef>_d_a9</sem:targetRef>
+			</sem:dataInputAssociation>
+			<sem:dataOutputAssociation id="_48">
+				<sem:sourceRef>_d_a7</sem:sourceRef>
+				<sem:targetRef>_46</sem:targetRef>
+			</sem:dataOutputAssociation>
+			<sem:dataOutputAssociation id="_51">
+				<sem:sourceRef>_d_a25</sem:sourceRef>
+				<sem:targetRef>_45</sem:targetRef>
+			</sem:dataOutputAssociation>
+		</sem:businessRuleTask>
+		<sem:exclusiveGateway id="_9" ot:alias="gateway2" default="_8"/>
+		<sem:serviceTask id="_6" name="Update Remaining Vacation" ot:displayName="Update Remaining Vacation" ot:alias="task8" ot:connectorGuid="{00000000-0000-0000-0000-000000000000}"/>
+	</sem:process>
+	<bpmndi:BPMNDiagram id="_2" name="C.8.0-export">
+		<bpmndi:BPMNPlane ot:namespace="_1" ot:alias="C80export" ot:activeVersion="false" ot:diagramType="executable" ot:diagramStatus="new" ot:createdBy="User(&quot;superuser&quot;)" ot:createdDate="27.08.2026 11:04:50" ot:lastChangedBy="User(&quot;superuser&quot;)" ot:lastChangedDate="27.08.2026 11:04:01" bpmnElement="_3">
+			<di:extension>
+				<ot:schemaObjectDescription>
+					<ot:translatedText lang="de"/>
+				</ot:schemaObjectDescription>
+			</di:extension>
+			<bpmndi:BPMNEdge bpmnElement="_5">
+				<di:waypoint x="1310" y="252.5"/>
+				<di:waypoint x="1396" y="252.5"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_8">
+				<di:waypoint x="970" y="273.5"/>
+				<di:waypoint x="970" y="378.5"/>
+				<di:waypoint x="1034" y="378.5"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_11">
+				<di:waypoint x="1171" y="252.5"/>
+				<di:waypoint x="1220" y="252.5"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_13">
+				<di:waypoint x="1081" y="30"/>
+				<di:waypoint x="1396" y="30"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_16">
+				<di:waypoint x="686" y="257.5"/>
+				<di:waypoint x="747" y="257.5"/>
+				<di:waypoint x="747" y="252.5"/>
+				<di:waypoint x="808" y="252.5"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_19">
+				<di:waypoint x="1124" y="378.5"/>
+				<di:waypoint x="1396" y="378.5"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_21">
+				<di:waypoint x="895" y="252.5"/>
+				<di:waypoint x="949" y="252.5"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_22">
+				<di:waypoint x="898" y="481.5"/>
+				<di:waypoint x="1395" y="481.5"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_25">
+				<di:waypoint x="665" y="236.5"/>
+				<di:waypoint x="665" y="30"/>
+				<di:waypoint x="808" y="30"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_27">
+				<di:waypoint x="230" y="304.5"/>
+				<di:waypoint x="230" y="632.5"/>
+				<di:waypoint x="1396" y="632.5"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_30">
+				<di:waypoint x="32" y="259.5"/>
+				<di:waypoint x="166" y="259.5"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_33">
+				<di:waypoint x="665" y="278.5"/>
+				<di:waypoint x="665" y="481.5"/>
+				<di:waypoint x="811" y="481.5"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_34">
+				<di:waypoint x="530" y="257.5"/>
+				<di:waypoint x="644" y="257.5"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_36">
+				<di:waypoint x="895" y="30"/>
+				<di:waypoint x="991" y="30"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_37">
+				<di:waypoint x="991" y="252.5"/>
+				<di:waypoint x="1081" y="252.5"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_38">
+				<di:waypoint x="256" y="258.5"/>
+				<di:waypoint x="441" y="258.5"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNShape bpmnElement="_39">
+				<dc:Bounds x="97" y="115.5" width="45" height="57"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_40">
+				<dc:Bounds x="408" y="7.5" width="45" height="57"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_29">
+				<dc:Bounds x="1396" y="616.5" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_15">
+				<dc:Bounds x="1396" y="14.5" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_17" isMarkerVisible="true">
+				<dc:Bounds x="644" y="236.5" width="42" height="42"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_41">
+				<dc:Bounds x="268" y="115.5" width="45" height="57"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_26">
+				<dc:Bounds x="805" y="0" width="90" height="60"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_12">
+				<dc:Bounds x="1081" y="222.5" width="90" height="60"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_10">
+				<dc:Bounds x="1034" y="348.5" width="90" height="60"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_23">
+				<dc:Bounds x="808" y="451.5" width="90" height="60"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_18">
+				<dc:Bounds x="805" y="222.5" width="90" height="60"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_14">
+				<dc:Bounds x="991" y="0" width="90" height="60"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge bpmnElement="_42">
+				<di:waypoint x="233.5" y="228.5"/>
+				<di:waypoint x="279.25" y="172.5"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_43">
+				<di:waypoint x="130.75" y="172.5"/>
+				<di:waypoint x="188.5" y="228.5"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNShape bpmnElement="_32">
+				<dc:Bounds x="166" y="228.5" width="90" height="60"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_7">
+				<dc:Bounds x="1396" y="235.5" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_20">
+				<dc:Bounds x="1396" y="361.5" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_24">
+				<dc:Bounds x="1395" y="467.5" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_28">
+				<dc:Bounds x="215" y="272.5" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_31">
+				<dc:Bounds x="0" y="243.5" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_45">
+				<dc:Bounds x="537" y="421.5" width="45" height="57"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_46">
+				<dc:Bounds x="539" y="330.5" width="45" height="57"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_47">
+				<dc:Bounds x="404" y="108.5" width="45" height="57"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge bpmnElement="_48">
+				<di:waypoint x="508.5" y="287.5"/>
+				<di:waypoint x="539" y="344.75"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_49">
+				<di:waypoint x="437.75" y="165.5"/>
+				<di:waypoint x="463.5" y="227.5"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_50">
+				<di:waypoint x="441.75" y="64.5"/>
+				<di:waypoint x="486" y="227.5"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_51">
+				<di:waypoint x="486" y="287.5"/>
+				<di:waypoint x="537" y="450"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNShape bpmnElement="_35">
+				<dc:Bounds x="441" y="227.5" width="90" height="60"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_9" isMarkerVisible="true">
+				<dc:Bounds x="949" y="231.5" width="42" height="42"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_6">
+				<dc:Bounds x="1220" y="222.5" width="90" height="60"/>
+			</bpmndi:BPMNShape>
+		</bpmndi:BPMNPlane>
+	</bpmndi:BPMNDiagram>
+</sem:definitions>

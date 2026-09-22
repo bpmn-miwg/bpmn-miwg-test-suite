@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sem:definitions expressionLanguage="http://www.omninet.de/bpmn/expressions/v1" typeLanguage="http://www.omninet.de/bpmn/types/v1" targetNamespace="http://www.omninet.de/bpmn/definitions/v1" xmlns:sem="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:ot="http://www.omninet.de/ot/bpmn/v1">
+	<sem:itemDefinition id="_OT_NAMESPACES_">
+		<sem:extensionElements>
+			<ot:namespace id="_1" name="C.1.1 - import" alias="C11Import">
+				<ot:schemaObjectDescription>
+					<ot:translatedText lang="de"/>
+				</ot:schemaObjectDescription>
+			</ot:namespace>
+		</sem:extensionElements>
+	</sem:itemDefinition>
+	<sem:message id="_2" name="invoice-received-C.1.0" ot:alias="message1" ot:namespace="_1"/>
+	<sem:dataStore id="_3" name="Financial Accounting System" ot:alias="dataStore1" ot:namespace="_1"/>
+	<sem:process name="Invoice Handling (OMG BPMN MIWG Demo)" ot:alias="process1" ot:displayName="Invoice Handling (OMG BPMN MIWG Demo)" id="_5">
+		<sem:extensionElements>
+			<ot:startPermission/>
+		</sem:extensionElements>
+		<sem:dataObject id="_6" name="clarified" ot:alias="dataObj3" ot:displayName="" itemSubjectRef="ot:external"/>
+		<sem:dataObject id="_7" name="approver" ot:alias="dataObj1" ot:displayName="" itemSubjectRef="ot:external"/>
+		<sem:dataObject id="_8" name="approved" ot:alias="dataObj2" ot:displayName="" itemSubjectRef="ot:external"/>
+		<sem:sequenceFlow id="_9" name="yes" ot:displayName="yes" ot:alias="flow1" sourceRef="_10" targetRef="_11">
+			<sem:conditionExpression>bpmn:getDataObject('approved')</sem:conditionExpression>
+		</sem:sequenceFlow>
+		<sem:sequenceFlow id="_12" name="no" ot:displayName="no" ot:alias="flow2" sourceRef="_10" targetRef="_13">
+			<sem:conditionExpression>not(bpmn:getDataObject('approved'))</sem:conditionExpression>
+		</sem:sequenceFlow>
+		<sem:sequenceFlow id="_14" name="yes" ot:displayName="yes" ot:alias="flow3" sourceRef="_15" targetRef="_16">
+			<sem:conditionExpression>bpmn:getDataObject('clarified') = 'yes'</sem:conditionExpression>
+		</sem:sequenceFlow>
+		<sem:sequenceFlow id="_17" name="no" ot:displayName="no" ot:alias="flow4" sourceRef="_15" targetRef="_18">
+			<sem:conditionExpression>bpmn:getDataObject('clarified') = 'no'</sem:conditionExpression>
+		</sem:sequenceFlow>
+		<sem:sequenceFlow id="_19" ot:alias="flow5" sourceRef="_16" targetRef="_10"/>
+		<sem:sequenceFlow id="_20" ot:alias="flow6" sourceRef="_13" targetRef="_15"/>
+		<sem:sequenceFlow id="_21" ot:alias="flow7" sourceRef="_22" targetRef="_16"/>
+		<sem:sequenceFlow id="_23" ot:alias="flow8" sourceRef="_11" targetRef="_24"/>
+		<sem:sequenceFlow id="_25" ot:alias="flow9" sourceRef="_24" targetRef="_26"/>
+		<sem:sequenceFlow id="_27" ot:alias="flow10" sourceRef="_28" targetRef="_22"/>
+		<sem:startEvent id="_28" name="Invoice&#xA;received" ot:displayName="Invoice&#xA;received" ot:alias="event2"/>
+		<sem:endEvent id="_18" name="Invoice not&#xA;processed" ot:displayName="Invoice not&#xA;processed" ot:alias="event1"/>
+		<sem:endEvent id="_26" name="Invoice&#xA;processed" ot:displayName="Invoice&#xA;processed" ot:alias="event3"/>
+		<sem:exclusiveGateway id="_10" name="Invoice&#xA;approved?" ot:displayName="Invoice&#xA;approved?" ot:alias="gateway1"/>
+		<sem:exclusiveGateway id="_15" name="Review&#xA;successful?" ot:displayName="Review&#xA;successful?" ot:alias="gateway2"/>
+		<sem:serviceTask id="_24" name="Archive&#xA;Invoice" ot:displayName="Archive&#xA;Invoice" ot:alias="task1" ot:connectorGuid="{00000000-0000-0000-0000-000000000000}"/>
+		<sem:userTask id="_16" name="Approve Invoice" ot:displayName="Approve Invoice" ot:alias="task2">
+			<sem:extensionElements>
+				<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" displayOkButton="false" displayApplyButton="false" formTitle="" otObject="" reassignMode="explicit"/>
+			</sem:extensionElements>
+			<sem:ioSpecification>
+				<sem:dataOutput id="_d_a17" ot:ignoreDataOutput="true"/>
+				<sem:inputSet/>
+				<sem:outputSet>
+					<sem:dataOutputRefs>_d_a17</sem:dataOutputRefs>
+				</sem:outputSet>
+			</sem:ioSpecification>
+			<sem:dataOutputAssociation id="_29">
+				<sem:targetRef>_8</sem:targetRef>
+			</sem:dataOutputAssociation>
+			<sem:dataOutputAssociation id="_30">
+				<sem:sourceRef>_d_a17</sem:sourceRef>
+				<sem:targetRef>_31</sem:targetRef>
+			</sem:dataOutputAssociation>
+		</sem:userTask>
+		<sem:userTask id="_22" name="Assign&#xA;Approver" ot:displayName="Assign&#xA;Approver" ot:alias="task3">
+			<sem:extensionElements>
+				<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" displayOkButton="false" displayApplyButton="false" formTitle="" otObject="" reassignMode="explicit"/>
+			</sem:extensionElements>
+			<sem:ioSpecification>
+				<sem:dataOutput id="_d_a16" ot:ignoreDataOutput="true"/>
+				<sem:inputSet/>
+				<sem:outputSet>
+					<sem:dataOutputRefs>_d_a16</sem:dataOutputRefs>
+				</sem:outputSet>
+			</sem:ioSpecification>
+			<sem:dataOutputAssociation id="_32">
+				<sem:targetRef>_7</sem:targetRef>
+			</sem:dataOutputAssociation>
+			<sem:dataOutputAssociation id="_33">
+				<sem:sourceRef>_d_a16</sem:sourceRef>
+				<sem:targetRef>_34</sem:targetRef>
+			</sem:dataOutputAssociation>
+		</sem:userTask>
+		<sem:userTask id="_13" name="Rechnung klären" ot:displayName="Rechnung klären" ot:alias="task4">
+			<sem:extensionElements>
+				<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" displayOkButton="false" displayApplyButton="false" formTitle="" otObject="" reassignMode="explicit"/>
+			</sem:extensionElements>
+			<sem:ioSpecification>
+				<sem:dataOutput id="_d_a18" ot:ignoreDataOutput="true"/>
+				<sem:inputSet/>
+				<sem:outputSet>
+					<sem:dataOutputRefs>_d_a18</sem:dataOutputRefs>
+				</sem:outputSet>
+			</sem:ioSpecification>
+			<sem:dataOutputAssociation id="_35">
+				<sem:targetRef>_6</sem:targetRef>
+			</sem:dataOutputAssociation>
+			<sem:dataOutputAssociation id="_36">
+				<sem:sourceRef>_d_a18</sem:sourceRef>
+				<sem:targetRef>_37</sem:targetRef>
+			</sem:dataOutputAssociation>
+		</sem:userTask>
+		<sem:userTask id="_11" name="Prepare&#xA;Bank&#xA;Transfer" ot:displayName="Prepare&#xA;Bank&#xA;Transfer" ot:alias="task5">
+			<sem:extensionElements>
+				<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" displayOkButton="false" displayApplyButton="false" formTitle="" otObject="" reassignMode="explicit"/>
+			</sem:extensionElements>
+		</sem:userTask>
+		<sem:dataObjectReference id="_34" dataObjectRef="_7"/>
+		<sem:dataObjectReference id="_31" dataObjectRef="_8"/>
+		<sem:dataObjectReference id="_37" dataObjectRef="_6"/>
+	</sem:process>
+	<bpmndi:BPMNDiagram id="_4" name="sid-78cf0368-c97e-4dea-885f-0e535c20d6c7">
+		<bpmndi:BPMNPlane ot:namespace="_1" ot:alias="diagram1" ot:diagramType="executable" ot:diagramStatus="new" ot:createdBy="User(&quot;superuser&quot;)" ot:createdDate="24.08.2026 13:55:39" ot:lastChangedBy="User(&quot;superuser&quot;)" ot:lastChangedDate="24.08.2026 13:53:59" bpmnElement="_5">
+			<bpmndi:BPMNEdge bpmnElement="_9">
+				<di:waypoint x="433" y="230"/>
+				<di:waypoint x="492" y="230"/>
+				<di:waypoint x="492" y="390"/>
+				<di:waypoint x="543" y="390"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_12">
+				<di:waypoint x="413" y="210"/>
+				<di:waypoint x="413" y="57"/>
+				<di:waypoint x="453" y="57"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_14">
+				<di:waypoint x="618" y="37"/>
+				<di:waypoint x="618" y="0"/>
+				<di:waypoint x="308" y="0"/>
+				<di:waypoint x="308" y="190"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_17">
+				<di:waypoint x="638" y="57"/>
+				<di:waypoint x="831" y="57"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_19">
+				<di:waypoint x="358" y="230"/>
+				<di:waypoint x="393" y="230"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_20">
+				<di:waypoint x="553" y="57"/>
+				<di:waypoint x="598" y="57"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_21">
+				<di:waypoint x="185" y="57"/>
+				<di:waypoint x="215" y="57"/>
+				<di:waypoint x="215" y="230"/>
+				<di:waypoint x="258" y="230"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_23">
+				<di:waypoint x="643" y="390"/>
+				<di:waypoint x="685" y="390"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_25">
+				<di:waypoint x="785" y="390"/>
+				<di:waypoint x="831" y="390"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_27">
+				<di:waypoint x="30" y="57"/>
+				<di:waypoint x="85" y="57"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNShape bpmnElement="_28">
+				<dc:Bounds x="0" y="42" width="30" height="30"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_18">
+				<dc:Bounds x="831" y="43" width="28" height="28"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_26">
+				<dc:Bounds x="831" y="376" width="28" height="28"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_10" isMarkerVisible="true">
+				<dc:Bounds x="393" y="210" width="40" height="40"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_15" isMarkerVisible="true">
+				<dc:Bounds x="598" y="37" width="40" height="40"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_24">
+				<dc:Bounds x="685" y="350" width="100" height="80"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge bpmnElement="_30">
+				<di:waypoint x="308" y="270"/>
+				<di:waypoint x="308" y="315"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNShape bpmnElement="_16">
+				<dc:Bounds x="258" y="190" width="100" height="80"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge bpmnElement="_33">
+				<di:waypoint x="135" y="97"/>
+				<di:waypoint x="135" y="139"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNShape bpmnElement="_22">
+				<dc:Bounds x="85" y="17" width="100" height="80"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge bpmnElement="_36">
+				<di:waypoint x="503" y="97"/>
+				<di:waypoint x="503" y="139"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNShape bpmnElement="_13">
+				<dc:Bounds x="453" y="17" width="100" height="80"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_11">
+				<dc:Bounds x="543" y="350" width="100" height="80"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_34">
+				<dc:Bounds x="117" y="139" width="35" height="35"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_31">
+				<dc:Bounds x="290" y="315" width="35" height="35"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_37">
+				<dc:Bounds x="485" y="139" width="35" height="35"/>
+			</bpmndi:BPMNShape>
+		</bpmndi:BPMNPlane>
+	</bpmndi:BPMNDiagram>
+</sem:definitions>
