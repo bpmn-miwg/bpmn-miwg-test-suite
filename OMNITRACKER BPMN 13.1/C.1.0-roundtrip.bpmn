@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sem:definitions expressionLanguage="http://www.omninet.de/bpmn/expressions/v1" typeLanguage="http://www.omninet.de/bpmn/types/v1" targetNamespace="http://www.omninet.de/bpmn/definitions/v1" xmlns:sem="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:ot="http://www.omninet.de/ot/bpmn/v1">
+	<sem:itemDefinition id="_OT_NAMESPACES_">
+		<sem:extensionElements>
+			<ot:namespace id="_1" name="C.1.0 - import" alias="C10Import">
+				<ot:schemaObjectDescription>
+					<ot:translatedText lang="de"/>
+				</ot:schemaObjectDescription>
+			</ot:namespace>
+		</sem:extensionElements>
+	</sem:itemDefinition>
+	<sem:message id="_2" name="invoice-received-C.1.0" ot:alias="message1" ot:namespace="_1"/>
+	<sem:collaboration id="_4">
+		<sem:participant id="_5" name="Team-Assistant" processRef="_6"/>
+		<sem:participant id="_7" name="Process Engine - Invoice Receipt" processRef="_8"/>
+		<sem:messageFlow id="_60" ot:alias="flow24" sourceRef="_46" targetRef="_29"/>
+		<sem:messageFlow id="_61" ot:alias="flow23" sourceRef="_13" targetRef="_45"/>
+		<sem:messageFlow id="_62" ot:alias="flow22" sourceRef="_15" targetRef="_46"/>
+		<sem:messageFlow id="_63" ot:alias="flow21" sourceRef="_22" targetRef="_43"/>
+		<sem:messageFlow id="_64" ot:alias="flow25" sourceRef="_43" targetRef="_21"/>
+	</sem:collaboration>
+	<sem:process name="Team-Assistant" ot:alias="process1" ot:displayName="Team-Assistant" id="_6">
+		<sem:extensionElements>
+			<ot:startPermission/>
+		</sem:extensionElements>
+		<sem:laneSet id="_9" ot:alias="laneSetNode1">
+			<sem:lane id="_10" name="" ot:alias="lane1"/>
+		</sem:laneSet>
+		<sem:sequenceFlow id="_11" ot:alias="flow10" sourceRef="_12" targetRef="_13"/>
+		<sem:sequenceFlow id="_14" ot:alias="flow9" sourceRef="_15" targetRef="_16"/>
+		<sem:sequenceFlow id="_17" ot:alias="flow8" sourceRef="_18" targetRef="_19"/>
+		<sem:sequenceFlow id="_20" ot:alias="flow7" sourceRef="_21" targetRef="_22"/>
+		<sem:sequenceFlow id="_23" ot:alias="flow6" sourceRef="_22" targetRef="_24"/>
+		<sem:sequenceFlow id="_25" ot:alias="flow5" sourceRef="_16" targetRef="_21"/>
+		<sem:sequenceFlow id="_26" ot:alias="flow4" sourceRef="_13" targetRef="_27"/>
+		<sem:sequenceFlow id="_28" ot:alias="flow3" sourceRef="_29" targetRef="_15"/>
+		<sem:sequenceFlow id="_30" ot:alias="flow2" sourceRef="_27" targetRef="_29"/>
+		<sem:sequenceFlow id="_31" ot:alias="flow1" sourceRef="_16" targetRef="_18"/>
+		<sem:startEvent id="_12" name="Invoice&#xA;received" ot:displayName="Invoice&#xA;received" ot:alias="event1">
+			<sem:dataOutput id="_d_32"/>
+			<sem:outputSet>
+				<sem:dataOutputRefs>_d_32</sem:dataOutputRefs>
+			</sem:outputSet>
+			<sem:messageEventDefinition/>
+		</sem:startEvent>
+		<sem:task id="_22" name="Review and document result" ot:displayName="Review and document result" ot:alias="task4"/>
+		<sem:task id="_15" name="Assign approver" ot:displayName="Assign approver" ot:alias="task3"/>
+		<sem:task id="_27" name="Archive&#xA;original" ot:displayName="Archive&#xA;original" ot:alias="task2"/>
+		<sem:task id="_13" name="Scan Invoice" ot:displayName="Scan Invoice" ot:alias="task1"/>
+		<sem:eventBasedGateway id="_16" ot:alias="gateway1"/>
+		<sem:endEvent id="_24" ot:alias="event6"/>
+		<sem:intermediateCatchEvent id="_18" name="7 days" ot:displayName="7 days" ot:alias="event5">
+			<sem:timerEventDefinition>
+				<sem:timeDuration/>
+			</sem:timerEventDefinition>
+		</sem:intermediateCatchEvent>
+		<sem:intermediateCatchEvent id="_21" name="Invoice review&#xA; needed" ot:displayName="Invoice review&#xA; needed" ot:alias="event4">
+			<sem:dataOutput id="_d_33"/>
+			<sem:outputSet>
+				<sem:dataOutputRefs>_d_33</sem:dataOutputRefs>
+			</sem:outputSet>
+			<sem:messageEventDefinition/>
+		</sem:intermediateCatchEvent>
+		<sem:endEvent id="_19" ot:alias="event2"/>
+		<sem:intermediateCatchEvent id="_29" name="Approver to &#xA;be assigned" ot:displayName="Approver to &#xA;be assigned" ot:alias="event3">
+			<sem:dataOutput id="_d_34"/>
+			<sem:outputSet>
+				<sem:dataOutputRefs>_d_34</sem:dataOutputRefs>
+			</sem:outputSet>
+			<sem:messageEventDefinition/>
+		</sem:intermediateCatchEvent>
+	</sem:process>
+	<sem:process name="BPMN MIWG Test Case C.1.0" ot:alias="process2" ot:displayName="Process Engine - Invoice Receipt" id="_8">
+		<sem:extensionElements>
+			<ot:startPermission/>
+		</sem:extensionElements>
+		<sem:laneSet id="_35" ot:alias="laneSetNode2">
+			<sem:lane id="_36" name="Accountant" ot:alias="lane2" ot:displayName="Accountant"/>
+			<sem:lane id="_37" name="Approver" ot:alias="lane3" ot:displayName="Approver"/>
+			<sem:lane id="_38" name="Team Assistant" ot:alias="lane4" ot:displayName="Team Assistant"/>
+		</sem:laneSet>
+		<sem:sequenceFlow id="_39" name="yes" ot:displayName="yes" ot:alias="flow11" sourceRef="_40" targetRef="_41">
+			<sem:conditionExpression>${approved}</sem:conditionExpression>
+		</sem:sequenceFlow>
+		<sem:sequenceFlow id="_42" name="no" ot:displayName="no" ot:alias="flow12" sourceRef="_40" targetRef="_43">
+			<sem:conditionExpression>${!approved}</sem:conditionExpression>
+		</sem:sequenceFlow>
+		<sem:sequenceFlow id="_44" ot:alias="flow20" sourceRef="_45" targetRef="_46"/>
+		<sem:sequenceFlow id="_47" ot:alias="flow19" sourceRef="_48" targetRef="_49"/>
+		<sem:sequenceFlow id="_50" ot:alias="flow18" sourceRef="_41" targetRef="_48"/>
+		<sem:sequenceFlow id="_51" ot:alias="flow17" sourceRef="_46" targetRef="_52"/>
+		<sem:sequenceFlow id="_53" ot:alias="flow16" sourceRef="_43" targetRef="_54"/>
+		<sem:sequenceFlow id="_55" ot:alias="flow15" sourceRef="_52" targetRef="_40"/>
+		<sem:sequenceFlow id="_56" name="no" ot:displayName="no" ot:alias="flow14" sourceRef="_54" targetRef="_57">
+			<sem:conditionExpression>${clarified == 'no'}</sem:conditionExpression>
+		</sem:sequenceFlow>
+		<sem:sequenceFlow id="_58" name="yes" ot:displayName="yes" ot:alias="flow13" sourceRef="_54" targetRef="_52">
+			<sem:conditionExpression>${clarified == 'yes'}</sem:conditionExpression>
+		</sem:sequenceFlow>
+		<sem:endEvent id="_49" name="Invoice&#xA;processed" ot:displayName="Invoice&#xA;processed" ot:alias="event9"/>
+		<sem:userTask id="_41" name="Prepare&#xA;Bank&#xA;Transfer" ot:displayName="Prepare&#xA;Bank&#xA;Transfer" ot:alias="task9">
+			<sem:extensionElements>
+				<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" displayOkButton="false" displayApplyButton="false" formTitle="" otObject="" reassignMode="explicit"/>
+			</sem:extensionElements>
+		</sem:userTask>
+		<sem:userTask id="_43" name="Rechnung klären" ot:displayName="Rechnung klären" ot:alias="task8">
+			<sem:extensionElements>
+				<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" displayOkButton="false" displayApplyButton="false" formTitle="" otObject="" reassignMode="explicit"/>
+			</sem:extensionElements>
+		</sem:userTask>
+		<sem:userTask id="_46" name="Assign&#xA;Approver" ot:displayName="Assign&#xA;Approver" ot:alias="task7">
+			<sem:extensionElements>
+				<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" displayOkButton="false" displayApplyButton="false" formTitle="" otObject="" reassignMode="explicit"/>
+			</sem:extensionElements>
+		</sem:userTask>
+		<sem:userTask id="_52" name="Approve Invoice" ot:displayName="Approve Invoice" ot:alias="task6">
+			<sem:extensionElements>
+				<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" displayOkButton="false" displayApplyButton="false" formTitle="" otObject="" reassignMode="explicit"/>
+			</sem:extensionElements>
+		</sem:userTask>
+		<sem:serviceTask id="_48" name="Archive&#xA;Invoice" ot:displayName="Archive&#xA;Invoice" ot:alias="task5" ot:connectorGuid="{00000000-0000-0000-0000-000000000000}"/>
+		<sem:exclusiveGateway id="_40" name="Invoice&#xA;approved?" ot:displayName="Invoice&#xA;approved?" ot:alias="gateway2"/>
+		<sem:startEvent id="_45" name="Invoice&#xA;received" ot:displayName="Invoice&#xA;received" ot:alias="event8">
+			<sem:dataOutput id="_d_59"/>
+			<sem:outputSet>
+				<sem:dataOutputRefs>_d_59</sem:dataOutputRefs>
+			</sem:outputSet>
+			<sem:messageEventDefinition messageRef="_2"/>
+		</sem:startEvent>
+		<sem:endEvent id="_57" name="Invoice not&#xA;processed" ot:displayName="Invoice not&#xA;processed" ot:alias="event7"/>
+		<sem:exclusiveGateway id="_54" name="Review&#xA;successful?" ot:displayName="Review&#xA;successful?" ot:alias="gateway3"/>
+	</sem:process>
+	<bpmndi:BPMNDiagram id="_3" name="Collaboration C.1.0">
+		<bpmndi:BPMNPlane ot:namespace="_1" ot:alias="diagram1" ot:diagramType="executable" ot:diagramStatus="new" ot:createdBy="User(&quot;superuser&quot;)" ot:createdDate="24.08.2026 13:30:15" ot:lastChangedBy="User(&quot;superuser&quot;)" ot:lastChangedDate="24.08.2026 13:29:15" bpmnElement="_4">
+			<bpmndi:BPMNShape bpmnElement="_5" isHorizontal="true">
+				<dc:Bounds x="2" y="0" width="977" height="205"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_7" isHorizontal="true">
+				<dc:Bounds x="0" y="255" width="979" height="488"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_10" isHorizontal="true">
+				<dc:Bounds x="2" y="0" width="977" height="205"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge bpmnElement="_11">
+				<di:waypoint x="84" y="118"/>
+				<di:waypoint x="122" y="118"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_14">
+				<di:waypoint x="582" y="118"/>
+				<di:waypoint x="607" y="118"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_17">
+				<di:waypoint x="716" y="62"/>
+				<di:waypoint x="896" y="62"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_20">
+				<di:waypoint x="716" y="159"/>
+				<di:waypoint x="752" y="159"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_23">
+				<di:waypoint x="852" y="159"/>
+				<di:waypoint x="896" y="159"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_25">
+				<di:waypoint x="627" y="138"/>
+				<di:waypoint x="627" y="159"/>
+				<di:waypoint x="686" y="159"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_26">
+				<di:waypoint x="222" y="118"/>
+				<di:waypoint x="270" y="118"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_28">
+				<di:waypoint x="440" y="118"/>
+				<di:waypoint x="482" y="118"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_30">
+				<di:waypoint x="370" y="118"/>
+				<di:waypoint x="410" y="118"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_31">
+				<di:waypoint x="627" y="98"/>
+				<di:waypoint x="627" y="62"/>
+				<di:waypoint x="686" y="62"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNShape bpmnElement="_12">
+				<dc:Bounds x="54" y="103" width="30" height="30"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_22">
+				<dc:Bounds x="752.5" y="119" width="100" height="80"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_15">
+				<dc:Bounds x="482.5" y="78" width="100" height="80"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_27">
+				<dc:Bounds x="270" y="78" width="100" height="80"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_13">
+				<dc:Bounds x="122" y="78" width="100" height="80"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_16">
+				<dc:Bounds x="607.5" y="98" width="40" height="40"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_24">
+				<dc:Bounds x="896" y="145" width="28" height="28"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_18">
+				<dc:Bounds x="686.75" y="47" width="30" height="30"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_21">
+				<dc:Bounds x="686.75" y="144" width="30" height="30"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_19">
+				<dc:Bounds x="896" y="48" width="28" height="28"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_29">
+				<dc:Bounds x="410.75" y="103" width="30" height="30"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_36" isHorizontal="true">
+				<dc:Bounds x="0" y="599" width="979" height="144"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_37" isHorizontal="true">
+				<dc:Bounds x="0" y="438" width="979" height="161"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_38" isHorizontal="true">
+				<dc:Bounds x="0" y="255" width="979" height="183"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge bpmnElement="_39">
+				<di:waypoint x="498" y="520"/>
+				<di:waypoint x="557" y="520"/>
+				<di:waypoint x="557" y="680"/>
+				<di:waypoint x="608" y="680"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_42">
+				<di:waypoint x="478" y="500"/>
+				<di:waypoint x="478" y="347"/>
+				<di:waypoint x="518" y="347"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_44">
+				<di:waypoint x="95" y="347"/>
+				<di:waypoint x="150" y="347"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_47">
+				<di:waypoint x="850" y="680"/>
+				<di:waypoint x="896" y="680"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_50">
+				<di:waypoint x="708" y="680"/>
+				<di:waypoint x="750" y="680"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_51">
+				<di:waypoint x="250" y="347"/>
+				<di:waypoint x="280" y="347"/>
+				<di:waypoint x="280" y="520"/>
+				<di:waypoint x="323" y="520"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_53">
+				<di:waypoint x="618" y="347"/>
+				<di:waypoint x="663" y="347"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_55">
+				<di:waypoint x="423" y="520"/>
+				<di:waypoint x="458" y="520"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_56">
+				<di:waypoint x="703" y="347"/>
+				<di:waypoint x="896" y="347"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_58">
+				<di:waypoint x="683" y="327"/>
+				<di:waypoint x="683" y="290"/>
+				<di:waypoint x="373" y="290"/>
+				<di:waypoint x="373" y="480"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNShape bpmnElement="_49">
+				<dc:Bounds x="896" y="666" width="28" height="28"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_41">
+				<dc:Bounds x="608" y="640" width="100" height="80"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_43">
+				<dc:Bounds x="518" y="307" width="100" height="80"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_46">
+				<dc:Bounds x="150" y="307" width="100" height="80"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_52">
+				<dc:Bounds x="323" y="480" width="100" height="80"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_48">
+				<dc:Bounds x="750" y="640" width="100" height="80"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_40" isMarkerVisible="true">
+				<dc:Bounds x="458" y="500" width="40" height="40"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_45">
+				<dc:Bounds x="65" y="332" width="30" height="30"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_57">
+				<dc:Bounds x="896" y="333" width="28" height="28"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_54" isMarkerVisible="true">
+				<dc:Bounds x="663" y="327" width="40" height="40"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge bpmnElement="_60">
+				<di:waypoint x="183" y="307"/>
+				<di:waypoint x="183" y="220"/>
+				<di:waypoint x="425" y="220"/>
+				<di:waypoint x="425" y="133"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_61">
+				<di:waypoint x="171" y="158"/>
+				<di:waypoint x="171" y="238"/>
+				<di:waypoint x="80" y="238"/>
+				<di:waypoint x="80" y="332"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_62">
+				<di:waypoint x="531" y="158"/>
+				<di:waypoint x="531" y="239"/>
+				<di:waypoint x="216" y="239"/>
+				<di:waypoint x="216" y="307"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_63">
+				<di:waypoint x="801" y="199"/>
+				<di:waypoint x="801" y="239"/>
+				<di:waypoint x="584" y="239"/>
+				<di:waypoint x="584" y="307"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_64">
+				<di:waypoint x="551" y="307"/>
+				<di:waypoint x="551" y="222"/>
+				<di:waypoint x="701" y="222"/>
+				<di:waypoint x="701" y="174"/>
+			</bpmndi:BPMNEdge>
+		</bpmndi:BPMNPlane>
+	</bpmndi:BPMNDiagram>
+</sem:definitions>
