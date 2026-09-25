@@ -1,0 +1,986 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright 2011-2026 Tim Stephenson and contributors
+
+   Licensed under the Apache License, Version 2.0 (the "License"); you may not
+   use this file except in compliance with the License.  You may obtain a copy
+   of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+   WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+   License for the specific language governing permissions and limitations under
+   the License.
+-->
+<?xml-stylesheet type="text/xsl" href="/xslt/bpmn2svg.xslt" alternate="no" ?>
+<semantic:definitions exporter="KnowProcess Modeler" exporterVersion="4.1.0" expressionLanguage="http://www.w3.org/1999/XPath" id="_x81gwyy8e" name="C.4.0" targetNamespace="http://knowprocess.com/bpmn-miwg/C.4.0" typeLanguage="http://www.w3.org/2001/XMLSchema" kp:extra-namespaces="{}"
+  xmlns="http://knowprocess.com/bpmn-miwg/C.4.0"
+  xmlns:semantic="http://www.omg.org/spec/BPMN/20100524/MODEL"
+  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+  xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0"
+  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:activiti="http://activiti.org/bpmn"
+  xmlns:camunda="http://camunda.org/schema/1.0/bpmn"
+  xmlns:flowable="http://flowable.org/bpmn"
+  xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+  xmlns:sdmn="https://www.omg.org/spec/SDMN/"
+  xmlns:scedi="https://www.omg.org/spec/SCE/DI/"
+  xmlns:scedc="https://www.omg.org/spec/SCE/DC/"
+  xmlns:feel="https://www.omg.org/spec/DMN/20240513/FEEL/"
+  xmlns:kp="http://knowprocess.com/bpmn">
+  <semantic:dataStore id="dataStore_0okkua7uj" name="Payroll system"/>
+  <semantic:dataStore id="dataStore_w2ficaj8h" name="User Management"/>
+  <semantic:dataStore id="dataStore_g4j2f53ky" name="Employee Details"/>
+  <semantic:collaboration id="COLLABORATION_1" isClosed="false">
+    <semantic:participant id="pool1" name="Money bank" processRef="_0714iaetc">
+      <semantic:participantMultiplicity maximum="1" minimum="0"/>
+    </semantic:participant>
+    <semantic:participant id="participant_8elb939ed" processRef="process_41pbb0gn6" name="IT"/>
+    <semantic:participant id="participant_v02gteqfo" processRef="process_o9ajfty2s" name="Payroll"/>
+    <semantic:participant id="participant_igohxlftr" processRef="process_q881wv8ay" name="Facilities"/>
+  </semantic:collaboration>
+  <semantic:process id="_0714iaetc" isClosed="false" isExecutable="true" processType="None" name="C.4.0.1">
+    <semantic:laneSet>
+      <semantic:lane id="lane1" name="HR department">
+        <semantic:flowNodeRef>start</semantic:flowNodeRef>
+        <semantic:flowNodeRef>task</semantic:flowNodeRef>
+        <semantic:flowNodeRef>exclusiveGateway_zeuqm3xo8</semantic:flowNodeRef>
+        <semantic:flowNodeRef>userTask_vric7tcm0</semantic:flowNodeRef>
+        <semantic:flowNodeRef>parallelGateway_il8w3gqc7</semantic:flowNodeRef>
+        <semantic:flowNodeRef>userTask_zdwps2n5u</semantic:flowNodeRef>
+        <semantic:flowNodeRef>userTask_8ae6e1y29</semantic:flowNodeRef>
+        <semantic:flowNodeRef>userTask_ck90ny8jy</semantic:flowNodeRef>
+        <semantic:flowNodeRef>userTask_9lx7kopz2</semantic:flowNodeRef>
+        <semantic:flowNodeRef>parallelGateway_v3g6yztes</semantic:flowNodeRef>
+        <semantic:flowNodeRef>userTask_6jkftgv67</semantic:flowNodeRef>
+        <semantic:flowNodeRef>userTask_pyfdahxac</semantic:flowNodeRef>
+        <semantic:flowNodeRef>intermediateThrowEvent_dgqpyn58p</semantic:flowNodeRef>
+        <semantic:flowNodeRef>userTask_2z7mtbt6y</semantic:flowNodeRef>
+        <semantic:flowNodeRef>userTask_omaz1yrzs</semantic:flowNodeRef>
+        <semantic:flowNodeRef>parallelGateway_3c3giv17u</semantic:flowNodeRef>
+        <semantic:flowNodeRef>intermediateThrowEvent_gmusz0hk4</semantic:flowNodeRef>
+        <semantic:flowNodeRef>intermediateThrowEvent_htaqh25zq</semantic:flowNodeRef>
+        <semantic:flowNodeRef>intermediateThrowEvent_zhyrvj95c</semantic:flowNodeRef>
+        <semantic:flowNodeRef>intermediateThrowEvent_3rx7l8xdp</semantic:flowNodeRef>
+        <semantic:flowNodeRef>parallelGateway_79osqvddg</semantic:flowNodeRef>
+        <semantic:flowNodeRef>userTask_hwblf38d1</semantic:flowNodeRef>
+        <semantic:flowNodeRef>userTask_4tmk6dfvg</semantic:flowNodeRef>
+        <semantic:flowNodeRef>endEvent_mfg21mbdl</semantic:flowNodeRef>
+      </semantic:lane>
+      <semantic:lane id="lane_fji01ykwh" name="Responsible department"/>
+    </semantic:laneSet>
+    <semantic:startEvent id="start" isInterrupting="true" name="Candidate&#xA;accepted offer" parallelMultiple="false">
+      <semantic:outgoing>start_to_task</semantic:outgoing>
+      <semantic:outputSet/>
+    </semantic:startEvent>
+    <semantic:sequenceFlow id="start_to_task" sourceRef="start" targetRef="task"/>
+    <semantic:userTask completionQuantity="1" id="task" implementation="##unspecified" isForCompensation="false" startQuantity="1" name="Send candidate contract">
+      <semantic:extensionElements/>
+      <semantic:incoming>start_to_task</semantic:incoming>
+    </semantic:userTask>
+    <semantic:sequenceFlow id="userTask_6jkftgv67_to_task" sourceRef="userTask_6jkftgv67" targetRef="task"/>
+    <semantic:exclusiveGateway id="exclusiveGateway_zeuqm3xo8" name="Contract terms&#xA;accepted?"/>
+    <semantic:userTask id="userTask_6jkftgv67" name="Review terms  of contract"/>
+    <semantic:sequenceFlow id="exclusiveGateway_zeuqm3xo8_to_userTask_6jkftgv67" sourceRef="exclusiveGateway_zeuqm3xo8" targetRef="userTask_6jkftgv67"/>
+    <semantic:userTask id="userTask_vric7tcm0" name="Get signature on contract and notify responsible department">
+      <semantic:ioSpecification id="ioSpec__75ujjza61">
+        <semantic:dataOutput id="dataOutput_izq15hszr"/>
+        <semantic:inputSet id="inputSet__5rodihbe0"/>
+        <semantic:outputSet id="outputSet__peljxdgh2">
+          <semantic:dataOutputRefs>dataOutput_izq15hszr</semantic:dataOutputRefs>
+        </semantic:outputSet>
+      </semantic:ioSpecification>
+      <semantic:dataOutputAssociation id="dataAssoc_dataOutput_izq15hszr_to_dataStoreReference_qbst9j2sr">
+        <semantic:sourceRef>dataOutput_izq15hszr</semantic:sourceRef>
+        <semantic:targetRef>dataStoreReference_qbst9j2sr</semantic:targetRef>
+      </semantic:dataOutputAssociation>
+    </semantic:userTask>
+    <semantic:parallelGateway id="parallelGateway_il8w3gqc7" name="Non-exclusive&#xA;gateway"/>
+    <semantic:userTask id="userTask_pyfdahxac" name="Request preparations for a new employee"/>
+    <semantic:intermediateThrowEvent id="intermediateThrowEvent_dgqpyn58p" name="New employee in&#xA;department X">
+      <semantic:signalEventDefinition id="signalEventDefinition_inxoior8h"/>
+    </semantic:intermediateThrowEvent>
+    <semantic:sequenceFlow id="userTask_pyfdahxac_to_intermediateThrowEvent_dgqpyn58p" sourceRef="userTask_pyfdahxac" targetRef="intermediateThrowEvent_dgqpyn58p"/>
+    <semantic:sequenceFlow id="parallelGateway_il8w3gqc7_to_userTask_pyfdahxac" sourceRef="parallelGateway_il8w3gqc7" targetRef="userTask_pyfdahxac"/>
+    <semantic:userTask id="userTask_zdwps2n5u" name="Inform employee of company policies"/>
+    <semantic:userTask id="userTask_8ae6e1y29" name="Introduce employee to company Mission, Vision and Values"/>
+    <semantic:userTask id="userTask_ck90ny8jy" name="Perform training on time reporting,sick leave and holidays"/>
+    <semantic:userTask id="userTask_9lx7kopz2" name="Register for medical insurance"/>
+    <semantic:parallelGateway id="parallelGateway_v3g6yztes" name="Non-exclusive&#xA;gateway"/>
+    <semantic:userTask id="userTask_2z7mtbt6y" name="Introduce new employee to the team"/>
+    <semantic:userTask id="userTask_omaz1yrzs" name="Perform training for the position"/>
+    <semantic:parallelGateway id="parallelGateway_3c3giv17u" name="Non-exclusive&#xA;gateway"/>
+    <semantic:intermediateCatchEvent id="intermediateThrowEvent_3rx7l8xdp" name="Input from&#xA;IT ready">
+      <semantic:messageEventDefinition id="messageEventDefinition_fj94qffh2"/>
+    </semantic:intermediateCatchEvent>
+    <semantic:sequenceFlow id="parallelGateway_3c3giv17u_to_intermediateThrowEvent_3rx7l8xdp" sourceRef="parallelGateway_3c3giv17u" targetRef="intermediateThrowEvent_3rx7l8xdp"/>
+    <semantic:intermediateCatchEvent id="intermediateThrowEvent_zhyrvj95c" name="Input from&#xA;Facilities ready">
+      <semantic:messageEventDefinition id="messageEventDefinition_bxb509ev8"/>
+    </semantic:intermediateCatchEvent>
+    <semantic:sequenceFlow id="parallelGateway_79osqvddg_to_intermediateThrowEvent_zhyrvj95c" sourceRef="intermediateThrowEvent_zhyrvj95c" targetRef="parallelGateway_79osqvddg"/>
+    <semantic:sequenceFlow id="parallelGateway_3c3giv17u_to_intermediateThrowEvent_zhyrvj95c" sourceRef="parallelGateway_3c3giv17u" targetRef="intermediateThrowEvent_zhyrvj95c"/>
+    <semantic:intermediateCatchEvent id="intermediateThrowEvent_gmusz0hk4" name="Input from&#xA;Payroll ready">
+      <semantic:messageEventDefinition id="messageEventDefinition_swai61yns"/>
+    </semantic:intermediateCatchEvent>
+    <semantic:parallelGateway id="parallelGateway_79osqvddg" name="Non-exclusive&#xA;gateway"/>
+    <semantic:sequenceFlow id="intermediateThrowEvent_3rx7l8xdp_to_parallelGateway_79osqvddg" sourceRef="intermediateThrowEvent_3rx7l8xdp" targetRef="parallelGateway_79osqvddg"/>
+    <semantic:userTask id="userTask_hwblf38d1" name="Compile welcome package"/>
+    <semantic:userTask id="userTask_4tmk6dfvg" name="Give employee welcome pack"/>
+    <semantic:endEvent id="endEvent_mfg21mbdl" name="End Event"/>
+    <semantic:sequenceFlow id="userTask_4tmk6dfvg_to_endEvent_mfg21mbdl" sourceRef="userTask_4tmk6dfvg" targetRef="endEvent_mfg21mbdl"/>
+    <semantic:sequenceFlow id="userTask_hwblf38d1_to_userTask_4tmk6dfvg" sourceRef="userTask_hwblf38d1" targetRef="userTask_4tmk6dfvg"/>
+    <semantic:sequenceFlow id="parallelGateway_79osqvddg_to_userTask_hwblf38d1" sourceRef="parallelGateway_79osqvddg" targetRef="userTask_hwblf38d1"/>
+    <semantic:sequenceFlow id="intermediateThrowEvent_gmusz0hk4_to_parallelGateway_79osqvddg" sourceRef="intermediateThrowEvent_gmusz0hk4" targetRef="parallelGateway_79osqvddg"/>
+    <semantic:sequenceFlow id="parallelGateway_3c3giv17u_to_intermediateThrowEvent_gmusz0hk4" sourceRef="parallelGateway_3c3giv17u" targetRef="intermediateThrowEvent_gmusz0hk4"/>
+    <semantic:sequenceFlow id="userTask_omaz1yrzs_to_parallelGateway_3c3giv17u" sourceRef="userTask_omaz1yrzs" targetRef="parallelGateway_3c3giv17u"/>
+    <semantic:sequenceFlow id="userTask_2z7mtbt6y_to_userTask_omaz1yrzs" sourceRef="userTask_2z7mtbt6y" targetRef="userTask_omaz1yrzs"/>
+    <semantic:sequenceFlow id="parallelGateway_v3g6yztes_to_userTask_2z7mtbt6y" sourceRef="parallelGateway_v3g6yztes" targetRef="userTask_2z7mtbt6y"/>
+    <semantic:sequenceFlow id="intermediateThrowEvent_dgqpyn58p_to_parallelGateway_v3g6yztes" sourceRef="intermediateThrowEvent_dgqpyn58p" targetRef="parallelGateway_v3g6yztes"/>
+    <semantic:sequenceFlow id="userTask_9lx7kopz2_to_parallelGateway_v3g6yztes" sourceRef="userTask_9lx7kopz2" targetRef="parallelGateway_v3g6yztes"/>
+    <semantic:sequenceFlow id="userTask_ck90ny8jy_to_userTask_9lx7kopz2" sourceRef="userTask_ck90ny8jy" targetRef="userTask_9lx7kopz2"/>
+    <semantic:sequenceFlow id="userTask_8ae6e1y29_to_userTask_ck90ny8jy" sourceRef="userTask_8ae6e1y29" targetRef="userTask_ck90ny8jy"/>
+    <semantic:sequenceFlow id="userTask_zdwps2n5u_to_userTask_8ae6e1y29" sourceRef="userTask_zdwps2n5u" targetRef="userTask_8ae6e1y29"/>
+    <semantic:sequenceFlow id="parallelGateway_il8w3gqc7_to_userTask_zdwps2n5u" sourceRef="parallelGateway_il8w3gqc7" targetRef="userTask_zdwps2n5u"/>
+    <semantic:sequenceFlow id="userTask_vric7tcm0_to_parallelGateway_il8w3gqc7" sourceRef="userTask_vric7tcm0" targetRef="parallelGateway_il8w3gqc7"/>
+    <semantic:sequenceFlow id="exclusiveGateway_zeuqm3xo8_to_userTask_vric7tcm0" sourceRef="exclusiveGateway_zeuqm3xo8" targetRef="userTask_vric7tcm0"/>
+    <semantic:sequenceFlow id="task_to_exclusiveGateway_zeuqm3xo8" sourceRef="task" targetRef="exclusiveGateway_zeuqm3xo8"/>
+    <semantic:dataStoreReference id="dataStoreReference_qbst9j2sr" dataStoreRef="dataStore_g4j2f53ky" name="Employee Details"/>
+  </semantic:process>
+  <semantic:process id="process_41pbb0gn6" name="C.4.0.2">
+    <semantic:laneSet id="laneSet_hwzejy9fy">
+      <semantic:lane id="lane_jm3zfaxzt" name=""/>
+    </semantic:laneSet>
+    <semantic:startEvent id="startEvent_3wohcjv9f" name="New employee&#xA;hired">
+      <semantic:signalEventDefinition id="signalEventDefinition_ydlqdh0en"/>
+    </semantic:startEvent>
+    <semantic:userTask id="userTask_132s3o3xo" name="Create domain account">
+      <semantic:ioSpecification id="ioSpec__wuhps0g3p">
+        <semantic:dataInput id="dataOutput_7pe1y66fk"/>
+        <semantic:dataOutput id="dataOutput_xibiucxaz"/>
+        <semantic:dataOutput id="dataOutput_ga03ox42g"/>
+        <semantic:inputSet id="inputSet__f8dpobso2">
+          <semantic:dataInputRefs>dataOutput_7pe1y66fk</semantic:dataInputRefs>
+        </semantic:inputSet>
+        <semantic:outputSet id="outputSet__xlxx10il2">
+          <semantic:dataOutputRefs>dataOutput_xibiucxaz</semantic:dataOutputRefs>
+          <semantic:dataOutputRefs>dataOutput_ga03ox42g</semantic:dataOutputRefs>
+        </semantic:outputSet>
+      </semantic:ioSpecification>
+      <semantic:dataInputAssociation id="dataAssoc_dataOutput_7pe1y66fk_to_dataStoreReference_x19n2gzwv">
+        <semantic:sourceRef>dataStoreReference_x19n2gzwv</semantic:sourceRef>
+        <semantic:targetRef>dataOutput_7pe1y66fk</semantic:targetRef>
+      </semantic:dataInputAssociation>
+      <semantic:dataOutputAssociation id="dataAssoc_dataOutput_ga03ox42g_to_dataStoreReference_vs3r4q9u9">
+        <semantic:sourceRef>dataOutput_ga03ox42g</semantic:sourceRef>
+        <semantic:targetRef>dataStoreReference_vs3r4q9u9</semantic:targetRef>
+      </semantic:dataOutputAssociation>
+    </semantic:userTask>
+    <semantic:manualTask id="scriptTask_gmlwo8tbh" name="Prepare workstation"/>
+    <semantic:userTask id="userTask_c69ev6cun" name="Assign required application and permissions">
+      <semantic:ioSpecification id="ioSpec__vvs787jio">
+        <semantic:dataOutput id="dataInput_0ccpw3z24"/>
+        <semantic:inputSet id="inputSet__ditjqhk57"/>
+        <semantic:outputSet id="outputSet__u5bbx86pv">
+          <semantic:dataOutputRefs>dataInput_0ccpw3z24</semantic:dataOutputRefs>
+        </semantic:outputSet>
+      </semantic:ioSpecification>
+      <semantic:dataOutputAssociation id="dataAssoc_dataStoreReference_vs3r4q9u9_to_userTask_c69ev6cun">
+        <semantic:sourceRef>dataInput_0ccpw3z24</semantic:sourceRef>
+        <semantic:targetRef>dataStoreReference_vs3r4q9u9</semantic:targetRef>
+      </semantic:dataOutputAssociation>
+    </semantic:userTask>
+    <semantic:serviceTask id="serviceTask_48s3omixy" name="Configure workstation" implementation="kp:http">
+      <semantic:ioSpecification id="ioSpec__69bpe5ipw">
+        <semantic:dataInput id="dataInput_k31qaimd9"/>
+        <semantic:inputSet id="inputSet__8r994ke3p">
+          <semantic:dataInputRefs>dataInput_k31qaimd9</semantic:dataInputRefs>
+        </semantic:inputSet>
+        <semantic:outputSet id="outputSet__h8dizfmtq"/>
+      </semantic:ioSpecification>
+      <semantic:dataInputAssociation id="dataAssoc_dataStoreReference_vs3r4q9u9_to_serviceTask_48s3omixy">
+        <semantic:sourceRef>dataStoreReference_vs3r4q9u9</semantic:sourceRef>
+        <semantic:targetRef>dataInput_k31qaimd9</semantic:targetRef>
+      </semantic:dataInputAssociation>
+    </semantic:serviceTask>
+    <semantic:userTask id="userTask_06x82b5fc" name="Prepare IT part of welcome package"/>
+    <semantic:endEvent id="endEvent_h8pkyq7f8" name="Workstation and&#xA;permissions ready">
+      <semantic:messageEventDefinition id="messageEventDefinition_klsq3fc5v"/>
+    </semantic:endEvent>
+    <semantic:sequenceFlow id="userTask_06x82b5fc_to_endEvent_h8pkyq7f8" sourceRef="userTask_06x82b5fc" targetRef="endEvent_h8pkyq7f8"/>
+    <semantic:sequenceFlow id="serviceTask_48s3omixy_to_userTask_06x82b5fc" sourceRef="serviceTask_48s3omixy" targetRef="userTask_06x82b5fc"/>
+    <semantic:sequenceFlow id="userTask_c69ev6cun_to_serviceTask_48s3omixy" sourceRef="userTask_c69ev6cun" targetRef="serviceTask_48s3omixy"/>
+    <semantic:sequenceFlow id="scriptTask_gmlwo8tbh_to_userTask_c69ev6cun" sourceRef="scriptTask_gmlwo8tbh" targetRef="userTask_c69ev6cun"/>
+    <semantic:sequenceFlow id="userTask_132s3o3xo_to_scriptTask_gmlwo8tbh" sourceRef="userTask_132s3o3xo" targetRef="scriptTask_gmlwo8tbh"/>
+    <semantic:sequenceFlow id="startEvent_3wohcjv9f_to_userTask_132s3o3xo" sourceRef="startEvent_3wohcjv9f" targetRef="userTask_132s3o3xo"/>
+    <semantic:dataStoreReference id="dataStoreReference_x19n2gzwv" dataStoreRef="dataStore_g4j2f53ky" name="Employee Details"/>
+    <semantic:dataStoreReference id="dataStoreReference_vs3r4q9u9" dataStoreRef="dataStore_w2ficaj8h" name="User Management"/>
+    <semantic:textAnnotation id="textAnnotation_p1agiz0iw">
+      <semantic:text>PowerShell</semantic:text>
+    </semantic:textAnnotation>
+    <semantic:association id="serviceTask_48s3omixy_to_textAnnotation_p1agiz0iw" sourceRef="serviceTask_48s3omixy" targetRef="textAnnotation_p1agiz0iw" associationDirection="None"/>
+  </semantic:process>
+  <semantic:process id="process_o9ajfty2s" name="C.4.0.3">
+    <semantic:laneSet id="laneSet_dxpzmfmgl">
+      <semantic:lane id="lane_fa82xwdvt" name=""/>
+    </semantic:laneSet>
+    <semantic:startEvent id="startEvent_x7hst8chn" name="New&#xA;employee&#xA;hired">
+      <semantic:signalEventDefinition id="signalEventDefinition_a6zte1fak"/>
+    </semantic:startEvent>
+    <semantic:userTask id="userTask_cqf2b410s" name="Validate provided information">
+      <semantic:ioSpecification id="ioSpec__iyipbdjgy">
+        <semantic:dataInput id="dataOutput_1qf90a145"/>
+        <semantic:inputSet id="inputSet__j4960jceo">
+          <semantic:dataInputRefs>dataOutput_1qf90a145</semantic:dataInputRefs>
+        </semantic:inputSet>
+        <semantic:outputSet id="outputSet__pd37mn3he"/>
+      </semantic:ioSpecification>
+      <semantic:dataInputAssociation id="dataAssoc_dataOutput_1qf90a145_to_dataStoreReference_woxu6b67z">
+        <semantic:sourceRef>dataStoreReference_woxu6b67z</semantic:sourceRef>
+        <semantic:targetRef>dataOutput_1qf90a145</semantic:targetRef>
+      </semantic:dataInputAssociation>
+    </semantic:userTask>
+    <semantic:exclusiveGateway id="exclusiveGateway_qoppggjqd" name="All necessary&#xA;data available?"/>
+    <semantic:manualTask id="manualTask_av7e9vo6q" name="Clarify missing points">
+      <semantic:standardLoopCharacteristics id="standardLoopCharacteristics_r4be0001y"/>
+    </semantic:manualTask>
+    <semantic:sequenceFlow id="exclusiveGateway_qoppggjqd_to_manualTask_av7e9vo6q" sourceRef="exclusiveGateway_qoppggjqd" targetRef="manualTask_av7e9vo6q" name="No"/>
+    <semantic:userTask id="userTask_9dqc87e1c" name="Update payroll system">
+      <semantic:ioSpecification id="ioSpec__kl8dvgray">
+        <semantic:dataOutput id="dataOutput_vmwuflmhl"/>
+        <semantic:inputSet id="inputSet__fb4k218at"/>
+        <semantic:outputSet id="outputSet__wemi2x827">
+          <semantic:dataOutputRefs>dataOutput_vmwuflmhl</semantic:dataOutputRefs>
+        </semantic:outputSet>
+      </semantic:ioSpecification>
+      <semantic:dataOutputAssociation id="dataAssoc_dataOutput_vmwuflmhl_to_dataStoreReference_rdwolsulk">
+        <semantic:sourceRef>dataOutput_vmwuflmhl</semantic:sourceRef>
+        <semantic:targetRef>dataStoreReference_rdwolsulk</semantic:targetRef>
+      </semantic:dataOutputAssociation>
+    </semantic:userTask>
+    <semantic:sequenceFlow id="manualTask_av7e9vo6q_to_userTask_9dqc87e1c" sourceRef="manualTask_av7e9vo6q" targetRef="userTask_9dqc87e1c"/>
+    <semantic:sequenceFlow id="exclusiveGateway_qoppggjqd_to_userTask_9dqc87e1c" sourceRef="exclusiveGateway_qoppggjqd" targetRef="userTask_9dqc87e1c" name="Yes">
+      <semantic:conditionExpression id="conditionExpression_r0527br2q"/>
+    </semantic:sequenceFlow>
+    <semantic:sequenceFlow id="userTask_cqf2b410s_to_exclusiveGateway_qoppggjqd" sourceRef="userTask_cqf2b410s" targetRef="exclusiveGateway_qoppggjqd"/>
+    <semantic:sequenceFlow id="startEvent_x7hst8chn_to_userTask_cqf2b410s" sourceRef="startEvent_x7hst8chn" targetRef="userTask_cqf2b410s"/>
+    <semantic:dataStoreReference id="dataStoreReference_rdwolsulk" dataStoreRef="dataStore_0okkua7uj" name="Payroll system"/>
+    <semantic:dataStoreReference id="dataStoreReference_woxu6b67z" dataStoreRef="dataStore_g4j2f53ky" name="Employee Details"/>
+  </semantic:process>
+  <semantic:process id="process_q881wv8ay" name="C.4.0.4">
+    <semantic:laneSet id="laneSet_biqoq0sml">
+      <semantic:lane id="lane_j3etrk6a0" name=""/>
+    </semantic:laneSet>
+    <semantic:startEvent id="startEvent_i7003wnq6" name="New&#xA;employee&#xA;hired">
+      <semantic:signalEventDefinition id="signalEventDefinition_um6jy07vd"/>
+    </semantic:startEvent>
+    <semantic:manualTask id="userTask_j2ddk7ran" name="Prepare access card">
+      <semantic:ioSpecification id="ioSpec__t18py3t8u">
+        <semantic:dataInput id="dataOutput_8sap0e809"/>
+        <semantic:inputSet id="inputSet__ulaywuz53">
+          <semantic:dataInputRefs>dataOutput_8sap0e809</semantic:dataInputRefs>
+        </semantic:inputSet>
+        <semantic:outputSet id="outputSet__lwa8fbi0h"/>
+      </semantic:ioSpecification>
+    </semantic:manualTask>
+    <semantic:userTask id="userTask_au1gkvpum" name="Configure user access">
+      <semantic:ioSpecification id="ioSpec__cvhpt8bw3">
+        <semantic:dataInput id="dataInput_7sjya2tf6"/>
+        <semantic:inputSet id="inputSet__k4o4m2aaf">
+          <semantic:dataInputRefs>dataInput_7sjya2tf6</semantic:dataInputRefs>
+        </semantic:inputSet>
+        <semantic:outputSet id="outputSet__ic6tjkfkk"/>
+      </semantic:ioSpecification>
+      <semantic:dataInputAssociation id="dataAssoc_dataStoreReference_h83cwl89e_to_userTask_au1gkvpum">
+        <semantic:sourceRef>dataStoreReference_h83cwl89e</semantic:sourceRef>
+        <semantic:targetRef>dataInput_7sjya2tf6</semantic:targetRef>
+      </semantic:dataInputAssociation>
+    </semantic:userTask>
+    <semantic:endEvent id="endEvent_x3g473upa" name="Access&#xA;card&#xA;ready"/>
+    <semantic:sequenceFlow id="userTask_au1gkvpum_to_endEvent_x3g473upa" sourceRef="userTask_au1gkvpum" targetRef="endEvent_x3g473upa"/>
+    <semantic:sequenceFlow id="userTask_j2ddk7ran_to_userTask_au1gkvpum" sourceRef="userTask_j2ddk7ran" targetRef="userTask_au1gkvpum"/>
+    <semantic:sequenceFlow id="startEvent_i7003wnq6_to_userTask_j2ddk7ran" sourceRef="startEvent_i7003wnq6" targetRef="userTask_j2ddk7ran"/>
+    <semantic:dataStoreReference id="dataStoreReference_h83cwl89e" dataStoreRef="dataStore_g4j2f53ky" name="Employee Details"/>
+  </semantic:process>
+  <bpmndi:BPMNDiagram id="Diagram-COLLABORATION_1" name="C.4.0.1">
+    <bpmndi:BPMNPlane bpmnElement="COLLABORATION_1">
+      <bpmndi:BPMNShape bpmnElement="pool1" id="di_pool1" isHorizontal="true" color:background-color="#bbd3d3" color:border-color="#666666">
+        <dc:Bounds height="601" width="2482" x="19" y="1"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="19" y="1" width="20" height="601"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="lane1" id="di_lane1" isHorizontal="true" color:background-color="#dedede" color:border-color="#666666">
+        <dc:Bounds height="320" width="2450" x="50" y="2"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds height="320" width="20" x="50" y="2"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="lane_fji01ykwh_di" bpmnElement="lane_fji01ykwh" color:border-color="#666666" color:background-color="#ffffff">
+        <dc:Bounds x="51" y="322" width="2450" height="280"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="51" y="322" height="280" width="20"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="task" id="di_task" color:background-color="#bbd3d3" color:border-color="#666666">
+        <dc:Bounds height="80" width="100" x="275" y="143"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds height="60" width="100" x="275" y="163"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="userTask_6jkftgv67_to_task_di" bpmnElement="userTask_6jkftgv67_to_task">
+        <di:waypoint x="420" y="52"/>
+        <di:waypoint x="250" y="52"/>
+        <di:waypoint x="250" y="160"/>
+        <di:waypoint x="275" y="160"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="348" y="98" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="exclusiveGateway_zeuqm3xo8_di" bpmnElement="exclusiveGateway_zeuqm3xo8" isMarkerVisible="false" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="450" y="163" height="40" width="40"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="411" y="208" height="28" width="118"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_6jkftgv67_di" bpmnElement="userTask_6jkftgv67" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="420" y="12" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="420" y="32" height="60" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="exclusiveGateway_zeuqm3xo8_to_userTask_6jkftgv67_di" bpmnElement="exclusiveGateway_zeuqm3xo8_to_userTask_6jkftgv67">
+        <di:waypoint x="470" y="163"/>
+        <di:waypoint x="470" y="127.5"/>
+        <di:waypoint x="470" y="127.5"/>
+        <di:waypoint x="470" y="92"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="475" y="138" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="userTask_vric7tcm0_di" bpmnElement="userTask_vric7tcm0" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="560" y="143" height="80" width="130"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="560" y="163" height="60" width="130"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataStoreReference_qbst9j2sr_di" bpmnElement="dataStoreReference_qbst9j2sr" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="670" y="263" height="50" width="50"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="670" y="318" height="18.2" width="50"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="dataAssoc_dataOutput_izq15hszr_to_dataStoreReference_qbst9j2sr_di" bpmnElement="dataAssoc_dataOutput_izq15hszr_to_dataStoreReference_qbst9j2sr">
+        <di:waypoint x="657.5" y="223"/>
+        <di:waypoint x="657.5" y="288"/>
+        <di:waypoint x="670" y="288"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds height="21" width="0" x="662" y="249"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="parallelGateway_il8w3gqc7_di" bpmnElement="parallelGateway_il8w3gqc7" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="746" y="163" height="40" width="40"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="711.5" y="208" height="28" width="109"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_pyfdahxac_di" bpmnElement="userTask_pyfdahxac" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="1087" y="408" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="1087" y="428" height="60" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="intermediateThrowEvent_dgqpyn58p_di" bpmnElement="intermediateThrowEvent_dgqpyn58p" color:border-color="#666666" color:background-color="#ffffff">
+        <dc:Bounds x="1237" y="432" height="32" width="32"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="1190" y="469" height="28" width="126"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="userTask_pyfdahxac_to_intermediateThrowEvent_dgqpyn58p_di" bpmnElement="userTask_pyfdahxac_to_intermediateThrowEvent_dgqpyn58p">
+        <di:waypoint x="1187" y="448"/>
+        <di:waypoint x="1237" y="448"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1162" y="429" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="parallelGateway_il8w3gqc7_to_userTask_pyfdahxac_di" bpmnElement="parallelGateway_il8w3gqc7_to_userTask_pyfdahxac">
+        <di:waypoint x="766" y="203"/>
+        <di:waypoint x="766" y="448"/>
+        <di:waypoint x="1087" y="448"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="877" y="429" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="userTask_zdwps2n5u_di" bpmnElement="userTask_zdwps2n5u" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="834" y="143" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="834" y="163" height="60" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_8ae6e1y29_di" bpmnElement="userTask_8ae6e1y29" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="984" y="143" height="80" width="130"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="984" y="163" height="60" width="130"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_ck90ny8jy_di" bpmnElement="userTask_ck90ny8jy" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="1158" y="143" height="80" width="130"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="1158" y="163" height="60" width="130"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_9lx7kopz2_di" bpmnElement="userTask_9lx7kopz2" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="1328" y="143" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="1328" y="163" height="60" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="parallelGateway_v3g6yztes_di" bpmnElement="parallelGateway_v3g6yztes" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="1466" y="163" height="40" width="40"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="1431.5" y="130" height="28" width="109"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_2z7mtbt6y_di" bpmnElement="userTask_2z7mtbt6y" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="1556" y="408" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="1556" y="428" height="60" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_omaz1yrzs_di" bpmnElement="userTask_omaz1yrzs" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="1706" y="408" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="1706" y="428" height="60" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="parallelGateway_3c3giv17u_di" bpmnElement="parallelGateway_3c3giv17u" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="1856" y="428" height="40" width="40"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="1821.5" y="470" height="28" width="109"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="intermediateThrowEvent_3rx7l8xdp_di" bpmnElement="intermediateThrowEvent_3rx7l8xdp" color:border-color="#666666">
+        <dc:Bounds x="1944" y="336" height="32" width="32"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="1918" y="370" height="28" width="84"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="parallelGateway_3c3giv17u_to_intermediateThrowEvent_3rx7l8xdp_di" bpmnElement="parallelGateway_3c3giv17u_to_intermediateThrowEvent_3rx7l8xdp">
+        <di:waypoint x="1876" y="428"/>
+        <di:waypoint x="1876" y="352"/>
+        <di:waypoint x="1944" y="352"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1965" y="401" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="intermediateThrowEvent_zhyrvj95c_di" bpmnElement="intermediateThrowEvent_zhyrvj95c" color:border-color="#666666">
+        <dc:Bounds x="1947" y="519" height="32" width="32"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="1896" y="553" height="28" width="134"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="parallelGateway_79osqvddg_to_intermediateThrowEvent_zhyrvj95c_di" bpmnElement="parallelGateway_79osqvddg_to_intermediateThrowEvent_zhyrvj95c">
+        <di:waypoint x="1979" y="535"/>
+        <di:waypoint x="2048" y="535"/>
+        <di:waypoint x="2048" y="468"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1964" y="516" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="parallelGateway_3c3giv17u_to_intermediateThrowEvent_zhyrvj95c_di" bpmnElement="parallelGateway_3c3giv17u_to_intermediateThrowEvent_zhyrvj95c">
+        <di:waypoint x="1876" y="468"/>
+        <di:waypoint x="1876" y="535"/>
+        <di:waypoint x="1947" y="535"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1862" y="516" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="intermediateThrowEvent_gmusz0hk4_di" bpmnElement="intermediateThrowEvent_gmusz0hk4" color:border-color="#666666">
+        <dc:Bounds x="1946" y="432" height="32" width="32"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="1907.5" y="470" height="28" width="109"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="parallelGateway_79osqvddg_di" bpmnElement="parallelGateway_79osqvddg" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="2028" y="428" height="40" width="40"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="1993.5" y="470" height="28" width="109"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="intermediateThrowEvent_3rx7l8xdp_to_parallelGateway_79osqvddg_di" bpmnElement="intermediateThrowEvent_3rx7l8xdp_to_parallelGateway_79osqvddg">
+        <di:waypoint x="1976" y="352"/>
+        <di:waypoint x="2048" y="352"/>
+        <di:waypoint x="2048" y="428"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1978" y="370" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="userTask_hwblf38d1_di" bpmnElement="userTask_hwblf38d1" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="2118" y="408" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="2118" y="428" height="60" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_4tmk6dfvg_di" bpmnElement="userTask_4tmk6dfvg" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="2268" y="408" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="2268" y="428" height="60" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_mfg21mbdl_di" bpmnElement="endEvent_mfg21mbdl" color:border-color="#ff0000">
+        <dc:Bounds x="2418" y="432" height="32" width="32"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="2396" y="470" height="14" width="76"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="userTask_4tmk6dfvg_to_endEvent_mfg21mbdl_di" bpmnElement="userTask_4tmk6dfvg_to_endEvent_mfg21mbdl">
+        <di:waypoint x="2368" y="448"/>
+        <di:waypoint x="2418" y="448"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2343" y="429" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="userTask_hwblf38d1_to_userTask_4tmk6dfvg_di" bpmnElement="userTask_hwblf38d1_to_userTask_4tmk6dfvg">
+        <di:waypoint x="2218" y="448"/>
+        <di:waypoint x="2268" y="448"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2193" y="429" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="parallelGateway_79osqvddg_to_userTask_hwblf38d1_di" bpmnElement="parallelGateway_79osqvddg_to_userTask_hwblf38d1">
+        <di:waypoint x="2068" y="448"/>
+        <di:waypoint x="2118" y="448"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2043" y="429" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="intermediateThrowEvent_gmusz0hk4_to_parallelGateway_79osqvddg_di" bpmnElement="intermediateThrowEvent_gmusz0hk4_to_parallelGateway_79osqvddg">
+        <di:waypoint x="1978" y="448"/>
+        <di:waypoint x="2028" y="448"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1953" y="429" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="parallelGateway_3c3giv17u_to_intermediateThrowEvent_gmusz0hk4_di" bpmnElement="parallelGateway_3c3giv17u_to_intermediateThrowEvent_gmusz0hk4">
+        <di:waypoint x="1896" y="448"/>
+        <di:waypoint x="1946" y="448"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1871" y="429" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="userTask_omaz1yrzs_to_parallelGateway_3c3giv17u_di" bpmnElement="userTask_omaz1yrzs_to_parallelGateway_3c3giv17u">
+        <di:waypoint x="1806" y="448"/>
+        <di:waypoint x="1856" y="448"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1781" y="429" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="userTask_2z7mtbt6y_to_userTask_omaz1yrzs_di" bpmnElement="userTask_2z7mtbt6y_to_userTask_omaz1yrzs">
+        <di:waypoint x="1656" y="448"/>
+        <di:waypoint x="1706" y="448"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1631" y="429" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="parallelGateway_v3g6yztes_to_userTask_2z7mtbt6y_di" bpmnElement="parallelGateway_v3g6yztes_to_userTask_2z7mtbt6y">
+        <di:waypoint x="1506" y="183"/>
+        <di:waypoint x="1606" y="183"/>
+        <di:waypoint x="1606" y="408"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1491" y="319" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="intermediateThrowEvent_dgqpyn58p_to_parallelGateway_v3g6yztes_di" bpmnElement="intermediateThrowEvent_dgqpyn58p_to_parallelGateway_v3g6yztes">
+        <di:waypoint x="1269" y="448"/>
+        <di:waypoint x="1486" y="448"/>
+        <di:waypoint x="1486" y="203"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1491" y="319" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="userTask_9lx7kopz2_to_parallelGateway_v3g6yztes_di" bpmnElement="userTask_9lx7kopz2_to_parallelGateway_v3g6yztes">
+        <di:waypoint x="1428" y="183"/>
+        <di:waypoint x="1466" y="183"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1397" y="164" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="userTask_ck90ny8jy_to_userTask_9lx7kopz2_di" bpmnElement="userTask_ck90ny8jy_to_userTask_9lx7kopz2">
+        <di:waypoint x="1288" y="183"/>
+        <di:waypoint x="1328" y="183"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1258" y="164" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="userTask_8ae6e1y29_to_userTask_ck90ny8jy_di" bpmnElement="userTask_8ae6e1y29_to_userTask_ck90ny8jy">
+        <di:waypoint x="1114" y="183"/>
+        <di:waypoint x="1158" y="183"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1086" y="164" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="userTask_zdwps2n5u_to_userTask_8ae6e1y29_di" bpmnElement="userTask_zdwps2n5u_to_userTask_8ae6e1y29">
+        <di:waypoint x="934" y="183"/>
+        <di:waypoint x="984" y="183"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="909" y="164" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="parallelGateway_il8w3gqc7_to_userTask_zdwps2n5u_di" bpmnElement="parallelGateway_il8w3gqc7_to_userTask_zdwps2n5u">
+        <di:waypoint x="786" y="183"/>
+        <di:waypoint x="834" y="183"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="760" y="164" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="userTask_vric7tcm0_to_parallelGateway_il8w3gqc7_di" bpmnElement="userTask_vric7tcm0_to_parallelGateway_il8w3gqc7">
+        <di:waypoint x="690" y="183"/>
+        <di:waypoint x="746" y="183"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="668" y="164" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="exclusiveGateway_zeuqm3xo8_to_userTask_vric7tcm0_di" bpmnElement="exclusiveGateway_zeuqm3xo8_to_userTask_vric7tcm0">
+        <di:waypoint x="490" y="183"/>
+        <di:waypoint x="560" y="183"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="475" y="164" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="task_to_exclusiveGateway_zeuqm3xo8_di" bpmnElement="task_to_exclusiveGateway_zeuqm3xo8">
+        <di:waypoint x="375" y="183"/>
+        <di:waypoint x="450" y="183"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="363" y="164" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape bpmnElement="start" id="di_start" color:border-color="#34bb16" color:background-color="#ffffff">
+        <dc:Bounds height="30" width="30" x="125" y="168"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds height="28" width="118" x="82" y="202"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="start_to_task" id="di_start_to_task">
+        <di:waypoint x="155" y="183"/>
+        <di:waypoint x="275" y="183"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="165" y="164" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="Diagram-process_f5pxnm8po" name="C.4.0.2">
+    <bpmndi:BPMNPlane id="Diagram-process_f5pxnm8po_plane" bpmnElement="process_f5pxnm8po">
+      <bpmndi:BPMNShape id="participant_8elb939ed_di" bpmnElement="participant_8elb939ed" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="1" y="2" width="1400" height="400"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="1" y="2" width="20" height="400"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="startEvent_3wohcjv9f_di" bpmnElement="startEvent_3wohcjv9f" color:border-color="#34bb16" color:background-color="#ffffff">
+        <dc:Bounds x="110" y="123" height="32" width="32"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="75" y="157" height="28" width="101"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_132s3o3xo_di" bpmnElement="userTask_132s3o3xo" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="242" y="99" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="242" y="119" height="60" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataStoreReference_vs3r4q9u9_di" bpmnElement="dataStoreReference_vs3r4q9u9" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="942" y="204" height="50" width="50"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="942" y="259" height="18.2" width="50"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="dataAssoc_dataOutput_ga03ox42g_to_dataStoreReference_vs3r4q9u9_di" bpmnElement="dataAssoc_dataOutput_ga03ox42g_to_dataStoreReference_vs3r4q9u9">
+        <di:waypoint x="317" y="179"/>
+        <di:waypoint x="317" y="229"/>
+        <di:waypoint x="942" y="229"/>
+        <bpmndi:BPMNLabel/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="dataStoreReference_x19n2gzwv_di" bpmnElement="dataStoreReference_x19n2gzwv" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="192" y="204" height="50" width="50"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="192" y="259" height="18.2" width="50"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="dataAssoc_dataOutput_7pe1y66fk_to_dataStoreReference_x19n2gzwv_di" bpmnElement="dataAssoc_dataOutput_7pe1y66fk_to_dataStoreReference_x19n2gzwv">
+        <di:waypoint x="242" y="229"/>
+        <di:waypoint x="267" y="229"/>
+        <di:waypoint x="267" y="179"/>
+        <bpmndi:BPMNLabel/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="scriptTask_gmlwo8tbh_di" bpmnElement="scriptTask_gmlwo8tbh" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="442" y="99" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="442" y="119" height="60" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_c69ev6cun_di" bpmnElement="userTask_c69ev6cun" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="842" y="99" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="842" y="119" height="60" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="serviceTask_48s3omixy_di" bpmnElement="serviceTask_48s3omixy" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="992" y="99" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="992" y="119" height="60" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="textAnnotation_p1agiz0iw_di" bpmnElement="textAnnotation_p1agiz0iw" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="1142" y="231" height="24" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="1142" y="231" height="24" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="serviceTask_48s3omixy_to_textAnnotation_p1agiz0iw_di" bpmnElement="serviceTask_48s3omixy_to_textAnnotation_p1agiz0iw">
+        <di:waypoint x="1042" y="179"/>
+        <di:waypoint x="1042" y="243"/>
+        <di:waypoint x="1142" y="243"/>
+        <bpmndi:BPMNLabel/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="userTask_06x82b5fc_di" bpmnElement="userTask_06x82b5fc" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="1142" y="99" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="1142" y="119" height="60" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_h8pkyq7f8_di" bpmnElement="endEvent_h8pkyq7f8" color:border-color="#ff0000">
+        <dc:Bounds x="1292" y="123" height="32" width="32"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="1236.5" y="160" height="28" width="143"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="userTask_06x82b5fc_to_endEvent_h8pkyq7f8_di" bpmnElement="userTask_06x82b5fc_to_endEvent_h8pkyq7f8">
+        <di:waypoint x="1242" y="139"/>
+        <di:waypoint x="1292" y="139"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1217" y="120" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="serviceTask_48s3omixy_to_userTask_06x82b5fc_di" bpmnElement="serviceTask_48s3omixy_to_userTask_06x82b5fc">
+        <di:waypoint x="1092" y="139"/>
+        <di:waypoint x="1142" y="139"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1067" y="120" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="dataAssoc_dataStoreReference_vs3r4q9u9_to_serviceTask_48s3omixy_di" bpmnElement="dataAssoc_dataStoreReference_vs3r4q9u9_to_serviceTask_48s3omixy">
+        <di:waypoint x="992" y="229"/>
+        <di:waypoint x="1017" y="229"/>
+        <di:waypoint x="1017" y="179"/>
+        <bpmndi:BPMNLabel/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="userTask_c69ev6cun_to_serviceTask_48s3omixy_di" bpmnElement="userTask_c69ev6cun_to_serviceTask_48s3omixy">
+        <di:waypoint x="942" y="139"/>
+        <di:waypoint x="992" y="139"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="917" y="120" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="dataAssoc_dataStoreReference_vs3r4q9u9_to_userTask_c69ev6cun_di" bpmnElement="dataAssoc_dataStoreReference_vs3r4q9u9_to_userTask_c69ev6cun">
+        <di:waypoint x="917" y="179"/>
+        <di:waypoint x="917" y="229"/>
+        <di:waypoint x="942" y="229"/>
+        <bpmndi:BPMNLabel/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="scriptTask_gmlwo8tbh_to_userTask_c69ev6cun_di" bpmnElement="scriptTask_gmlwo8tbh_to_userTask_c69ev6cun">
+        <di:waypoint x="542" y="139"/>
+        <di:waypoint x="842" y="139"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="642" y="120" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="userTask_132s3o3xo_to_scriptTask_gmlwo8tbh_di" bpmnElement="userTask_132s3o3xo_to_scriptTask_gmlwo8tbh">
+        <di:waypoint x="342" y="139"/>
+        <di:waypoint x="442" y="139"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="342" y="120" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="startEvent_3wohcjv9f_to_userTask_132s3o3xo_di" bpmnElement="startEvent_3wohcjv9f_to_userTask_132s3o3xo">
+        <di:waypoint x="142" y="139"/>
+        <di:waypoint x="242" y="139"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="142" y="120" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="Diagram-process_24rej7okh" name="C.4.0.3">
+    <bpmndi:BPMNPlane id="Diagram-process_24rej7okh_plane" bpmnElement="process_24rej7okh">
+      <bpmndi:BPMNShape id="participant_v02gteqfo_di" bpmnElement="participant_v02gteqfo" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="2" y="0" width="1400" height="400"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="2" y="0" height="400" width="24"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="startEvent_x7hst8chn_di" bpmnElement="startEvent_x7hst8chn" color:border-color="#34bb16">
+        <dc:Bounds x="102" y="111" height="32" width="32"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="84.5" y="145" height="42" width="67"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_cqf2b410s_di" bpmnElement="userTask_cqf2b410s" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="234" y="87" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="234" y="107" height="60" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataStoreReference_woxu6b67z_di" bpmnElement="dataStoreReference_woxu6b67z" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="184" y="192" height="50" width="50"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="184" y="247" height="18.2" width="50"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="dataAssoc_dataOutput_1qf90a145_to_dataStoreReference_woxu6b67z_di" bpmnElement="dataAssoc_dataOutput_1qf90a145_to_dataStoreReference_woxu6b67z">
+        <di:waypoint x="234" y="217"/>
+        <di:waypoint x="259" y="217"/>
+        <di:waypoint x="259" y="167"/>
+        <bpmndi:BPMNLabel/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="exclusiveGateway_qoppggjqd_di" bpmnElement="exclusiveGateway_qoppggjqd" isMarkerVisible="false" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="434" y="107" height="40" width="40"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="391" y="152" height="28" width="126"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="manualTask_av7e9vo6q_di" bpmnElement="manualTask_av7e9vo6q" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="524" y="191" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="524" y="211" height="60" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="exclusiveGateway_qoppggjqd_to_manualTask_av7e9vo6q_di" bpmnElement="exclusiveGateway_qoppggjqd_to_manualTask_av7e9vo6q">
+        <di:waypoint x="454" y="147"/>
+        <di:waypoint x="454" y="231"/>
+        <di:waypoint x="524" y="231"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="459" y="182" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="userTask_9dqc87e1c_di" bpmnElement="userTask_9dqc87e1c" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="774" y="87" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="774" y="107" height="60" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataStoreReference_rdwolsulk_di" bpmnElement="dataStoreReference_rdwolsulk" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="874" y="192" height="50" width="50"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="874" y="247" height="18.2" width="50"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="dataAssoc_dataOutput_vmwuflmhl_to_dataStoreReference_rdwolsulk_di" bpmnElement="dataAssoc_dataOutput_vmwuflmhl_to_dataStoreReference_rdwolsulk">
+        <di:waypoint x="849" y="167"/>
+        <di:waypoint x="849" y="217"/>
+        <di:waypoint x="874" y="217"/>
+        <bpmndi:BPMNLabel/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="manualTask_av7e9vo6q_to_userTask_9dqc87e1c_di" bpmnElement="manualTask_av7e9vo6q_to_userTask_9dqc87e1c">
+        <di:waypoint x="624" y="231"/>
+        <di:waypoint x="824" y="231"/>
+        <di:waypoint x="824" y="167"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="674" y="212" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="exclusiveGateway_qoppggjqd_to_userTask_9dqc87e1c_di" bpmnElement="exclusiveGateway_qoppggjqd_to_userTask_9dqc87e1c">
+        <di:waypoint x="474" y="127"/>
+        <di:waypoint x="774" y="127"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="574" y="108" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="userTask_cqf2b410s_to_exclusiveGateway_qoppggjqd_di" bpmnElement="userTask_cqf2b410s_to_exclusiveGateway_qoppggjqd">
+        <di:waypoint x="334" y="127"/>
+        <di:waypoint x="434" y="127"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="334" y="108" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="startEvent_x7hst8chn_to_userTask_cqf2b410s_di" bpmnElement="startEvent_x7hst8chn_to_userTask_cqf2b410s">
+        <di:waypoint x="134" y="127"/>
+        <di:waypoint x="234" y="127"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="134" y="108" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="Diagram-process_sn2ignd0p" name="C.4.0.4">
+    <bpmndi:BPMNPlane id="Diagram-process_sn2ignd0p_plane" bpmnElement="process_sn2ignd0p">
+      <bpmndi:BPMNShape id="participant_igohxlftr_di" bpmnElement="participant_igohxlftr" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="2" y="1" width="1400" height="300"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="2" y="1" height="300" width="20"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="startEvent_i7003wnq6_di" bpmnElement="startEvent_i7003wnq6" color:border-color="#34bb16">
+        <dc:Bounds x="95" y="93" height="32" width="32"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="77" y="127" height="42" width="67"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_j2ddk7ran_di" bpmnElement="userTask_j2ddk7ran" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="227" y="69" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="227" y="89" height="60" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_au1gkvpum_di" bpmnElement="userTask_au1gkvpum" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="427" y="69" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="427" y="89" height="60" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="dataAssoc_dataStoreReference_h83cwl89e_to_userTask_au1gkvpum_di" bpmnElement="dataAssoc_dataStoreReference_h83cwl89e_to_userTask_au1gkvpum">
+        <di:waypoint x="427" y="199"/>
+        <di:waypoint x="452" y="199"/>
+        <di:waypoint x="452" y="149"/>
+        <bpmndi:BPMNLabel/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="endEvent_x3g473upa_di" bpmnElement="endEvent_x3g473upa" color:border-color="#ff0000">
+        <dc:Bounds x="627" y="93" height="32" width="32"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="618" y="130" height="42" width="50"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="userTask_au1gkvpum_to_endEvent_x3g473upa_di" bpmnElement="userTask_au1gkvpum_to_endEvent_x3g473upa">
+        <di:waypoint x="527" y="109"/>
+        <di:waypoint x="627" y="109"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="527" y="90" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="userTask_j2ddk7ran_to_userTask_au1gkvpum_di" bpmnElement="userTask_j2ddk7ran_to_userTask_au1gkvpum">
+        <di:waypoint x="327" y="109"/>
+        <di:waypoint x="427" y="109"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="327" y="90" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="dataStoreReference_h83cwl89e_di" bpmnElement="dataStoreReference_h83cwl89e" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="377" y="174" height="50" width="50"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="377" y="229" height="18.2" width="50"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="startEvent_i7003wnq6_to_userTask_j2ddk7ran_di" bpmnElement="startEvent_i7003wnq6_to_userTask_j2ddk7ran">
+        <di:waypoint x="127" y="109"/>
+        <di:waypoint x="227" y="109"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="127" y="90" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</semantic:definitions>
