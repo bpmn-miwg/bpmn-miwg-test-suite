@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sem:definitions expressionLanguage="http://www.omninet.de/bpmn/expressions/v1" typeLanguage="http://www.omninet.de/bpmn/types/v1" targetNamespace="http://www.omninet.de/bpmn/definitions/v1" xmlns:sem="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:ot="http://www.omninet.de/ot/bpmn/v1">
+	<sem:itemDefinition id="_array2" ot:simpleType="ot:external" ot:isArray="true"/>
+	<sem:itemDefinition id="_OT_NAMESPACES_">
+		<sem:extensionElements>
+			<ot:namespace id="_1" name="C.10-import" alias="C.10import">
+				<ot:schemaObjectDescription>
+					<ot:translatedText lang="de"/>
+				</ot:schemaObjectDescription>
+			</ot:namespace>
+		</sem:extensionElements>
+	</sem:itemDefinition>
+	<sem:dataStore id="_2" name="Calendar" ot:alias="dataStore1" ot:namespace="_1"/>
+	<sem:dataStore id="_3" name="HR system" ot:alias="HrSystem" ot:namespace="_1" ot:displayName="HR system"/>
+	<sem:collaboration id="_5">
+		<sem:participant id="_6" name="Travel Planning" processRef="_7"/>
+		<sem:participant id="_8" name="Client" ot:displayName="Client"/>
+		<sem:messageFlow id="_78" ot:alias="flow12" sourceRef="_8" targetRef="_36"/>
+		<sem:messageFlow id="_79" ot:alias="flow13" sourceRef="_17" targetRef="_8"/>
+		<sem:messageFlow id="_80" ot:alias="flow14" sourceRef="_23" targetRef="_8"/>
+		<sem:messageFlow id="_81" ot:alias="flow15" sourceRef="_20" targetRef="_8"/>
+		<sem:messageFlow id="_82" ot:alias="flow16" sourceRef="_8" targetRef="_18"/>
+	</sem:collaboration>
+	<sem:process name="Travel Planning" ot:alias="process2" ot:displayName="Travel Planning" id="_7">
+		<sem:extensionElements>
+			<ot:startPermission/>
+		</sem:extensionElements>
+		<sem:ioSpecification>
+			<sem:dataInput id="_49" name="Client request" ot:alias="input1"/>
+			<sem:dataOutput id="_47" name="Tickets" ot:alias="output1" itemSubjectRef="_array2" isCollection="true"/>
+			<sem:dataOutput id="_48" name="Hotel reservation" ot:alias="output2" itemSubjectRef="_array2" isCollection="true"/>
+			<sem:inputSet>
+				<sem:dataInputRefs>_49</sem:dataInputRefs>
+			</sem:inputSet>
+			<sem:outputSet>
+				<sem:dataOutputRefs>_47</sem:dataOutputRefs>
+				<sem:dataOutputRefs>_48</sem:dataOutputRefs>
+			</sem:outputSet>
+		</sem:ioSpecification>
+		<sem:laneSet id="_13" ot:alias="laneSetNode1">
+			<sem:lane id="_14" name="Employee" ot:alias="lane1" ot:displayName="Employee"/>
+			<sem:lane id="_15" name="Project Office" ot:alias="lane2" ot:displayName="Project Office"/>
+		</sem:laneSet>
+		<sem:dataObject id="_9" name="On-site meeting" ot:alias="dataObj1" ot:displayName=""/>
+		<sem:dataObject id="_10" name="Tickets" ot:alias="dataObj4" ot:displayName="" itemSubjectRef="ot:external"/>
+		<sem:dataObject id="_11" name="Hotel reservation" ot:alias="dataObj3" ot:displayName=""/>
+		<sem:dataObject id="_12" name="Identified&#xA;employee" ot:alias="dataObj2" ot:displayName=""/>
+		<sem:sequenceFlow id="_16" ot:alias="flow11" sourceRef="_17" targetRef="_18"/>
+		<sem:sequenceFlow id="_19" ot:alias="flow18" sourceRef="_20" targetRef="_21"/>
+		<sem:sequenceFlow id="_22" ot:alias="flow17" sourceRef="_23" targetRef="_24"/>
+		<sem:sequenceFlow id="_25" ot:alias="flow5" sourceRef="_26" targetRef="_27"/>
+		<sem:sequenceFlow id="_28" ot:alias="flow4" sourceRef="_29" targetRef="_30"/>
+		<sem:sequenceFlow id="_31" name="Yes" ot:displayName="Yes" ot:alias="flow3" sourceRef="_32" targetRef="_29"/>
+		<sem:sequenceFlow id="_33" ot:alias="flow2" sourceRef="_34" targetRef="_26"/>
+		<sem:sequenceFlow id="_35" ot:alias="flow8" sourceRef="_36" targetRef="_37"/>
+		<sem:sequenceFlow id="_38" ot:alias="flow9" sourceRef="_37" targetRef="_32"/>
+		<sem:sequenceFlow id="_39" ot:alias="flow19" sourceRef="_18" targetRef="_40"/>
+		<sem:sequenceFlow id="_41" ot:alias="flow20" sourceRef="_40" targetRef="_42"/>
+		<sem:sequenceFlow id="_43" name="Yes" ot:displayName="Yes" ot:alias="flow1" sourceRef="_30" targetRef="_34"/>
+		<sem:sequenceFlow id="_44" name="No" ot:displayName="No" ot:alias="flow10" sourceRef="_32" targetRef="_23"/>
+		<sem:sequenceFlow id="_45" ot:alias="flow6" sourceRef="_27" targetRef="_17"/>
+		<sem:sequenceFlow id="_46" name="No" ot:displayName="No" ot:alias="flow7" sourceRef="_30" targetRef="_20"/>
+		<sem:endEvent id="_24" name="Client answered" ot:displayName="Client answered" ot:alias="event5"/>
+		<sem:endEvent id="_42" name="Trip planned" ot:displayName="Trip planned" ot:alias="event7"/>
+		<sem:dataStoreReference id="_50" dataStoreRef="_3"/>
+		<sem:dataStoreReference id="_51" dataStoreRef="_2"/>
+		<sem:callActivity id="_34" name="Plan trip" ot:displayName="Plan trip" ot:alias="activity1" calledElement="_52">
+			<sem:ioSpecification>
+				<sem:dataInput id="_d_a10" ot:ignoreDataInput="true"/>
+				<sem:dataOutput id="_d_a11" ot:ignoreDataOutput="true"/>
+				<sem:dataOutput id="_d_a12" ot:ignoreDataOutput="true"/>
+				<sem:inputSet>
+					<sem:dataInputRefs>_d_a10</sem:dataInputRefs>
+				</sem:inputSet>
+				<sem:outputSet>
+					<sem:dataOutputRefs>_d_a11</sem:dataOutputRefs>
+					<sem:dataOutputRefs>_d_a12</sem:dataOutputRefs>
+				</sem:outputSet>
+			</sem:ioSpecification>
+			<sem:dataInputAssociation id="_55">
+				<sem:sourceRef>_49</sem:sourceRef>
+				<sem:targetRef>_d_a10</sem:targetRef>
+			</sem:dataInputAssociation>
+			<sem:dataOutputAssociation id="_53">
+				<sem:targetRef>_48</sem:targetRef>
+			</sem:dataOutputAssociation>
+			<sem:dataOutputAssociation id="_54">
+				<sem:targetRef>_47</sem:targetRef>
+			</sem:dataOutputAssociation>
+			<sem:dataOutputAssociation id="_56">
+				<sem:sourceRef>_d_a11</sem:sourceRef>
+				<sem:targetRef>_47</sem:targetRef>
+			</sem:dataOutputAssociation>
+			<sem:dataOutputAssociation id="_57">
+				<sem:sourceRef>_d_a12</sem:sourceRef>
+				<sem:targetRef>_48</sem:targetRef>
+			</sem:dataOutputAssociation>
+		</sem:callActivity>
+		<sem:dataObjectReference id="_58" dataObjectRef="_9"/>
+		<sem:dataObjectReference id="_59" dataObjectRef="_10"/>
+		<sem:serviceTask id="_26" name="Update employee's calendar" ot:displayName="Update employee's calendar" ot:alias="task1" ot:connectorGuid="{00000000-0000-0000-0000-000000000000}">
+			<sem:ioSpecification>
+				<sem:dataOutput id="_60" itemSubjectRef="_61"/>
+				<sem:dataOutput id="_d_a5" ot:ignoreDataOutput="true"/>
+				<sem:inputSet/>
+				<sem:outputSet>
+					<sem:dataOutputRefs>_60</sem:dataOutputRefs>
+					<sem:dataOutputRefs>_d_a5</sem:dataOutputRefs>
+				</sem:outputSet>
+			</sem:ioSpecification>
+			<sem:dataOutputAssociation id="_62">
+				<sem:sourceRef>_d_a5</sem:sourceRef>
+				<sem:targetRef>_51</sem:targetRef>
+			</sem:dataOutputAssociation>
+		</sem:serviceTask>
+		<sem:endEvent id="_21" name="No personnel available" ot:displayName="No personnel available" ot:alias="event6"/>
+		<sem:intermediateThrowEvent id="_20" name="Notify client personel not available" ot:displayName="Notify client personel not available" ot:alias="event1">
+			<sem:dataInput id="_d_63"/>
+			<sem:inputSet>
+				<sem:dataInputRefs>_d_63</sem:dataInputRefs>
+			</sem:inputSet>
+			<sem:messageEventDefinition/>
+		</sem:intermediateThrowEvent>
+		<sem:intermediateThrowEvent id="_23" name="Answer client directly" ot:displayName="Answer client directly" ot:alias="event3">
+			<sem:dataInput id="_d_64"/>
+			<sem:inputSet>
+				<sem:dataInputRefs>_d_64</sem:dataInputRefs>
+			</sem:inputSet>
+			<sem:messageEventDefinition/>
+		</sem:intermediateThrowEvent>
+		<sem:startEvent id="_36" name="E-mail received" ot:displayName="E-mail received" ot:alias="event2">
+			<sem:dataOutput id="_d_65"/>
+			<sem:outputSet>
+				<sem:dataOutputRefs>_d_65</sem:dataOutputRefs>
+			</sem:outputSet>
+			<sem:messageEventDefinition/>
+		</sem:startEvent>
+		<sem:dataObjectReference id="_66" dataObjectRef="_12"/>
+		<sem:exclusiveGateway id="_30" name="Employee &#xA;available?" ot:displayName="Employee &#xA;available?" ot:alias="gateway1"/>
+		<sem:intermediateCatchEvent id="_18" name="Recieve meeting details" ot:displayName="Recieve meeting details" ot:alias="event4">
+			<sem:dataOutput id="_d_67"/>
+			<sem:outputSet>
+				<sem:dataOutputRefs>_d_67</sem:dataOutputRefs>
+			</sem:outputSet>
+			<sem:messageEventDefinition/>
+		</sem:intermediateCatchEvent>
+		<sem:userTask id="_40" name="Record meeting details" ot:displayName="Record meeting details" ot:alias="task6">
+			<sem:extensionElements>
+				<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" displayOkButton="false" displayApplyButton="false" formTitle="" otObject=""/>
+			</sem:extensionElements>
+			<sem:ioSpecification>
+				<sem:dataInput id="_d_a21" ot:ignoreDataInput="true"/>
+				<sem:inputSet>
+					<sem:dataInputRefs>_d_a21</sem:dataInputRefs>
+				</sem:inputSet>
+				<sem:outputSet/>
+			</sem:ioSpecification>
+			<sem:dataInputAssociation id="_68">
+				<sem:sourceRef>_50</sem:sourceRef>
+				<sem:targetRef>_d_a21</sem:targetRef>
+			</sem:dataInputAssociation>
+		</sem:userTask>
+		<sem:userTask id="_27" name="Prepare confirmation email" ot:displayName="Prepare confirmation email" ot:alias="task3">
+			<sem:extensionElements>
+				<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" displayOkButton="false" displayApplyButton="false" formTitle="" otObject="" reassignMode="explicit"/>
+			</sem:extensionElements>
+			<sem:ioSpecification>
+				<sem:dataInput id="_d_a14" ot:ignoreDataInput="true"/>
+				<sem:dataInput id="_d_a13" ot:ignoreDataInput="true"/>
+				<sem:inputSet>
+					<sem:dataInputRefs>_d_a13</sem:dataInputRefs>
+					<sem:dataInputRefs>_d_a14</sem:dataInputRefs>
+				</sem:inputSet>
+				<sem:outputSet/>
+			</sem:ioSpecification>
+			<sem:dataInputAssociation id="_69">
+				<sem:sourceRef>_70</sem:sourceRef>
+				<sem:targetRef>_d_a13</sem:targetRef>
+			</sem:dataInputAssociation>
+			<sem:dataInputAssociation id="_71">
+				<sem:sourceRef>_59</sem:sourceRef>
+				<sem:targetRef>_d_a14</sem:targetRef>
+			</sem:dataInputAssociation>
+		</sem:userTask>
+		<sem:userTask id="_37" name="Check client request" ot:displayName="Check client request" ot:alias="task4">
+			<sem:extensionElements>
+				<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" displayOkButton="false" displayApplyButton="false" formTitle="" otObject="" reassignMode="explicit"/>
+			</sem:extensionElements>
+			<sem:ioSpecification>
+				<sem:dataInput id="_d_a8" ot:ignoreDataInput="true"/>
+				<sem:dataOutput id="_d_a9" ot:ignoreDataOutput="true"/>
+				<sem:inputSet>
+					<sem:dataInputRefs>_d_a8</sem:dataInputRefs>
+				</sem:inputSet>
+				<sem:outputSet>
+					<sem:dataOutputRefs>_d_a9</sem:dataOutputRefs>
+				</sem:outputSet>
+			</sem:ioSpecification>
+			<sem:dataInputAssociation id="_73">
+				<sem:sourceRef>_49</sem:sourceRef>
+				<sem:targetRef>_d_a8</sem:targetRef>
+			</sem:dataInputAssociation>
+			<sem:dataOutputAssociation id="_72">
+				<sem:targetRef>_9</sem:targetRef>
+			</sem:dataOutputAssociation>
+			<sem:dataOutputAssociation id="_74">
+				<sem:sourceRef>_d_a9</sem:sourceRef>
+				<sem:targetRef>_58</sem:targetRef>
+			</sem:dataOutputAssociation>
+		</sem:userTask>
+		<sem:userTask id="_29" name="Check employee's availability" ot:displayName="Check employee's availability" ot:alias="task2">
+			<sem:extensionElements>
+				<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" displayOkButton="false" displayApplyButton="false" formTitle="" otObject="" reassignMode="explicit"/>
+			</sem:extensionElements>
+			<sem:ioSpecification>
+				<sem:dataInput id="_d_a7" ot:ignoreDataInput="true"/>
+				<sem:dataOutput id="_d_a6" ot:ignoreDataOutput="true"/>
+				<sem:inputSet>
+					<sem:dataInputRefs>_d_a7</sem:dataInputRefs>
+				</sem:inputSet>
+				<sem:outputSet>
+					<sem:dataOutputRefs>_d_a6</sem:dataOutputRefs>
+				</sem:outputSet>
+			</sem:ioSpecification>
+			<sem:dataInputAssociation id="_77">
+				<sem:sourceRef>_51</sem:sourceRef>
+				<sem:targetRef>_d_a7</sem:targetRef>
+			</sem:dataInputAssociation>
+			<sem:dataOutputAssociation id="_75">
+				<sem:targetRef>_12</sem:targetRef>
+			</sem:dataOutputAssociation>
+			<sem:dataOutputAssociation id="_76">
+				<sem:sourceRef>_d_a6</sem:sourceRef>
+				<sem:targetRef>_66</sem:targetRef>
+			</sem:dataOutputAssociation>
+		</sem:userTask>
+		<sem:sendTask id="_17" name="Send confirmation email" ot:displayName="Send confirmation email" ot:alias="task5">
+			<sem:ioSpecification>
+				<sem:dataInput id="_msgdata_17"/>
+				<sem:inputSet>
+					<sem:dataInputRefs>_msgdata_17</sem:dataInputRefs>
+				</sem:inputSet>
+				<sem:outputSet/>
+			</sem:ioSpecification>
+		</sem:sendTask>
+		<sem:dataObjectReference id="_70" dataObjectRef="_11"/>
+		<sem:exclusiveGateway id="_32" name="On-site Meeting?" ot:displayName="On-site Meeting?" ot:alias="gateway2"/>
+	</sem:process>
+	<sem:process name="Plan Trip" ot:alias="process1" ot:displayName="Plan Trip" id="_52">
+		<sem:extensionElements>
+			<ot:startPermission/>
+		</sem:extensionElements>
+		<sem:ioSpecification>
+			<sem:dataInput id="_92" name="Client request" ot:alias="input1"/>
+			<sem:dataOutput id="_93" name="Hotel reservation" ot:alias="output2" itemSubjectRef="_array2" isCollection="true"/>
+			<sem:dataOutput id="_99" name="Tickets" ot:alias="output1" itemSubjectRef="_array2" isCollection="true"/>
+			<sem:inputSet>
+				<sem:dataInputRefs>_92</sem:dataInputRefs>
+			</sem:inputSet>
+			<sem:outputSet>
+				<sem:dataOutputRefs>_93</sem:dataOutputRefs>
+				<sem:dataOutputRefs>_99</sem:dataOutputRefs>
+			</sem:outputSet>
+		</sem:ioSpecification>
+		<sem:dataObject id="_84" name="Preferred hotel and travel means" ot:alias="dataObj1" ot:displayName=""/>
+		<sem:sequenceFlow id="_85" ot:alias="flow3" sourceRef="_86" targetRef="_87"/>
+		<sem:sequenceFlow id="_88" ot:alias="flow2" sourceRef="_89" targetRef="_86"/>
+		<sem:sequenceFlow id="_90" ot:alias="flow1" sourceRef="_91" targetRef="_89"/>
+		<sem:endEvent id="_87" ot:alias="event2"/>
+		<sem:startEvent id="_91" ot:alias="event1"/>
+		<sem:userTask id="_89" name="Request employee preferences" ot:displayName="Request employee preferences" ot:alias="task1">
+			<sem:extensionElements>
+				<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" displayOkButton="false" displayApplyButton="false" formTitle="" otObject="" reassignMode="explicit"/>
+			</sem:extensionElements>
+			<sem:ioSpecification>
+				<sem:dataInput id="_d_a77" ot:ignoreDataInput="true"/>
+				<sem:dataOutput id="_d_a78" ot:ignoreDataOutput="true"/>
+				<sem:inputSet>
+					<sem:dataInputRefs>_d_a77</sem:dataInputRefs>
+				</sem:inputSet>
+				<sem:outputSet>
+					<sem:dataOutputRefs>_d_a78</sem:dataOutputRefs>
+				</sem:outputSet>
+			</sem:ioSpecification>
+			<sem:dataInputAssociation id="_95">
+				<sem:sourceRef>_92</sem:sourceRef>
+				<sem:targetRef>_d_a77</sem:targetRef>
+			</sem:dataInputAssociation>
+			<sem:dataOutputAssociation id="_94">
+				<sem:targetRef>_84</sem:targetRef>
+			</sem:dataOutputAssociation>
+			<sem:dataOutputAssociation id="_96">
+				<sem:sourceRef>_d_a78</sem:sourceRef>
+				<sem:targetRef>_97</sem:targetRef>
+			</sem:dataOutputAssociation>
+		</sem:userTask>
+		<sem:userTask id="_86" name="Book trip" ot:displayName="Book trip" ot:alias="task2">
+			<sem:extensionElements>
+				<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" displayOkButton="false" displayApplyButton="false" formTitle="" otObject="" reassignMode="explicit"/>
+			</sem:extensionElements>
+			<sem:ioSpecification>
+				<sem:dataOutput id="_d_a79" ot:ignoreDataOutput="true"/>
+				<sem:dataOutput id="_d_a80" ot:ignoreDataOutput="true"/>
+				<sem:inputSet/>
+				<sem:outputSet>
+					<sem:dataOutputRefs>_d_a79</sem:dataOutputRefs>
+					<sem:dataOutputRefs>_d_a80</sem:dataOutputRefs>
+				</sem:outputSet>
+			</sem:ioSpecification>
+			<sem:dataOutputAssociation id="_98">
+				<sem:targetRef>_93</sem:targetRef>
+			</sem:dataOutputAssociation>
+			<sem:dataOutputAssociation id="_100">
+				<sem:targetRef>_99</sem:targetRef>
+			</sem:dataOutputAssociation>
+			<sem:dataOutputAssociation id="_101">
+				<sem:sourceRef>_d_a79</sem:sourceRef>
+				<sem:targetRef>_93</sem:targetRef>
+			</sem:dataOutputAssociation>
+			<sem:dataOutputAssociation id="_102">
+				<sem:sourceRef>_d_a80</sem:sourceRef>
+				<sem:targetRef>_99</sem:targetRef>
+			</sem:dataOutputAssociation>
+		</sem:userTask>
+		<sem:dataObjectReference id="_97" dataObjectRef="_84"/>
+	</sem:process>
+	<bpmndi:BPMNDiagram id="_4" name="04 Travel Planning - ADONIS">
+		<bpmndi:BPMNPlane ot:namespace="_1" ot:alias="diagram2" ot:diagramType="executable" ot:diagramStatus="new" ot:createdBy="User(&quot;superuser&quot;)" ot:createdDate="17.09.2026 11:31:56" ot:lastChangedBy="User(&quot;superuser&quot;)" ot:lastChangedDate="16.09.2026 08:17:27" bpmnElement="_5">
+			<bpmndi:BPMNShape bpmnElement="_6" isHorizontal="true">
+				<dc:Bounds x="68.6" y="310.11" width="2025.92" height="725.11"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_8" isHorizontal="true">
+				<dc:Bounds x="0" y="0" width="1772.5" height="149.95"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_14" isHorizontal="true">
+				<dc:Bounds x="68.6" y="610.02" width="2025.92" height="425.2"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_15" isHorizontal="true">
+				<dc:Bounds x="68.6" y="310.11" width="2025.92" height="299.91"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge bpmnElement="_16">
+				<di:waypoint x="1592.5" y="657.92"/>
+				<di:waypoint x="1654.58" y="657.92"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_19">
+				<di:waypoint x="1103.53" y="469.13"/>
+				<di:waypoint x="1899.78" y="469.13"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_22">
+				<di:waypoint x="740.41" y="350.08"/>
+				<di:waypoint x="1903.75" y="350.08"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_25">
+				<di:waypoint x="1283.53" y="657.92"/>
+				<di:waypoint x="1333.42" y="657.92"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_28">
+				<di:waypoint x="762.52" y="464.88"/>
+				<di:waypoint x="884.41" y="464.88"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_31">
+				<di:waypoint x="545.39" y="464.88"/>
+				<di:waypoint x="662.46" y="464.88"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_33">
+				<di:waypoint x="992.41" y="656.5"/>
+				<di:waypoint x="1132.44" y="656.5"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_35">
+				<di:waypoint x="185.39" y="464.88"/>
+				<di:waypoint x="262.49" y="464.88"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_38">
+				<di:waypoint x="372.47" y="464.88"/>
+				<di:waypoint x="489.54" y="464.88"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_39">
+				<di:waypoint x="1690.58" y="657.92"/>
+				<di:waypoint x="1776.76" y="657.92"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_41">
+				<di:waypoint x="1866.61" y="657.92"/>
+				<di:waypoint x="1913.67" y="657.92"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_43">
+				<di:waypoint x="912.47" y="492.94"/>
+				<di:waypoint x="912.47" y="558.14"/>
+				<di:waypoint x="931.46" y="558.14"/>
+				<di:waypoint x="931.46" y="623.06"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_44">
+				<di:waypoint x="517.61" y="437.1"/>
+				<di:waypoint x="517.61" y="350.08"/>
+				<di:waypoint x="684.57" y="350.08"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_45">
+				<di:waypoint x="1433.48" y="657.92"/>
+				<di:waypoint x="1492.44" y="657.92"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_46">
+				<di:waypoint x="940.54" y="464.88"/>
+				<di:waypoint x="1047.4" y="464.88"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNShape bpmnElement="_47">
+				<dc:Bounds x="1013.39" y="858.05" width="47.91" height="56.13"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_48">
+				<dc:Bounds x="1013.39" y="725.1" width="47.91" height="56.13"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_49">
+				<dc:Bounds x="198.43" y="517.04" width="47.91" height="56.13"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_24">
+				<dc:Bounds x="1903.75" y="333.92" width="32.03" height="32.03"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_42">
+				<dc:Bounds x="1913.67" y="640.06" width="32.03" height="32.03"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_50">
+				<dc:Bounds x="1773.64" y="757.98" width="49.8900000000001" height="49.89"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_51">
+				<dc:Bounds x="578.55" y="532.06" width="47.91" height="56.13"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge bpmnElement="_55">
+				<di:waypoint x="246.61" y="545.1"/>
+				<di:waypoint x="931.46" y="545.1"/>
+				<di:waypoint x="931.46" y="623.06"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_56">
+				<di:waypoint x="992.41" y="656.5"/>
+				<di:waypoint x="1037.48" y="656.5"/>
+				<di:waypoint x="1037.48" y="858.05"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_57">
+				<di:waypoint x="992.41" y="656.5"/>
+				<di:waypoint x="1037.48" y="656.5"/>
+				<di:waypoint x="1037.48" y="725.1"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNShape bpmnElement="_34">
+				<dc:Bounds x="870.52" y="623.06" width="121.89" height="66.9"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_58">
+				<dc:Bounds x="413.57" y="356.88" width="47.91" height="56.13"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_59">
+				<dc:Bounds x="1283.53" y="797.95" width="37.98" height="49.89"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge bpmnElement="_62">
+				<di:waypoint x="1208.13" y="619.94"/>
+				<di:waypoint x="1208.13" y="560.13"/>
+				<di:waypoint x="626.46" y="560.13"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNShape bpmnElement="_26">
+				<dc:Bounds x="1132.44" y="619.94" width="151.09" height="75.97"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_21">
+				<dc:Bounds x="1899.78" y="452.98" width="32.03" height="32.03"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_20">
+				<dc:Bounds x="1047.4" y="441.07" width="56.1299999999999" height="56.13"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_23">
+				<dc:Bounds x="684.57" y="322.02" width="56.13" height="56.13"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_36">
+				<dc:Bounds x="129.54" y="437.1" width="56.13" height="56.13"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_66">
+				<dc:Bounds x="836.5" y="344.98" width="47.91" height="56.13"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_30" isMarkerVisible="true">
+				<dc:Bounds x="884.41" y="437.1" width="56.13" height="56.13"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_18">
+				<dc:Bounds x="1654.58" y="640.06" width="36" height="36"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge bpmnElement="_68">
+				<di:waypoint x="1798.58" y="757.98"/>
+				<di:waypoint x="1821.83" y="757.98"/>
+				<di:waypoint x="1821.83" y="687.97"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNShape bpmnElement="_40">
+				<dc:Bounds x="1776.76" y="627.87" width="90.1400000000001" height="60.09"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge bpmnElement="_69">
+				<di:waypoint x="1321.51" y="748.06"/>
+				<di:waypoint x="1358.65" y="748.06"/>
+				<di:waypoint x="1358.65" y="697.89"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_71">
+				<di:waypoint x="1321.51" y="822.9"/>
+				<di:waypoint x="1358.65" y="822.9"/>
+				<di:waypoint x="1358.65" y="697.89"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNShape bpmnElement="_27">
+				<dc:Bounds x="1333.42" y="617.95" width="100.06" height="79.9400000000001"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge bpmnElement="_73">
+				<di:waypoint x="246.61" y="545.1"/>
+				<di:waypoint x="317.48" y="545.1"/>
+				<di:waypoint x="317.48" y="505.13"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_74">
+				<di:waypoint x="372.47" y="464.88"/>
+				<di:waypoint x="437.39" y="464.88"/>
+				<di:waypoint x="437.39" y="413.01"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNShape bpmnElement="_37">
+				<dc:Bounds x="262.49" y="424.91" width="109.98" height="79.94"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge bpmnElement="_76">
+				<di:waypoint x="762.52" y="464.88"/>
+				<di:waypoint x="860.6" y="464.88"/>
+				<di:waypoint x="860.6" y="401.1"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_77">
+				<di:waypoint x="626.46" y="560.13"/>
+				<di:waypoint x="712.63" y="560.13"/>
+				<di:waypoint x="712.63" y="505.13"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNShape bpmnElement="_29">
+				<dc:Bounds x="662.46" y="424.91" width="100.06" height="79.94"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_17">
+				<dc:Bounds x="1492.44" y="617.95" width="100.06" height="79.9400000000001"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_70">
+				<dc:Bounds x="1283.53" y="723.12" width="37.98" height="49.89"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_32" isMarkerVisible="true">
+				<dc:Bounds x="489.54" y="437.1" width="56.1300000000001" height="56.13"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge bpmnElement="_78">
+				<di:waypoint x="907.65" y="149.95"/>
+				<di:waypoint x="907.65" y="293.39"/>
+				<di:waypoint x="157.61" y="293.39"/>
+				<di:waypoint x="157.61" y="437.1"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_79">
+				<di:waypoint x="1542.61" y="617.95"/>
+				<di:waypoint x="1542.61" y="384.09"/>
+				<di:waypoint x="1195.94" y="384.09"/>
+				<di:waypoint x="1195.94" y="149.95"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_80">
+				<di:waypoint x="740.41" y="350.08"/>
+				<di:waypoint x="907.65" y="350.08"/>
+				<di:waypoint x="907.65" y="149.95"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_81">
+				<di:waypoint x="1075.46" y="441.07"/>
+				<di:waypoint x="1075.46" y="295.37"/>
+				<di:waypoint x="907.65" y="295.37"/>
+				<di:waypoint x="907.65" y="149.95"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_82">
+				<di:waypoint x="1484.22" y="149.95"/>
+				<di:waypoint x="1484.22" y="394.87"/>
+				<di:waypoint x="1672.44" y="394.87"/>
+				<di:waypoint x="1672.44" y="640.06"/>
+			</bpmndi:BPMNEdge>
+		</bpmndi:BPMNPlane>
+	</bpmndi:BPMNDiagram>
+	<bpmndi:BPMNDiagram id="_83" name="Plan Trip">
+		<bpmndi:BPMNPlane ot:namespace="_1" ot:alias="diagram1" ot:diagramType="executable" ot:diagramStatus="new" ot:createdBy="User(&quot;superuser&quot;)" ot:createdDate="17.09.2026 11:31:56" ot:lastChangedBy="User(&quot;superuser&quot;)" ot:lastChangedDate="16.09.2026 08:17:27" bpmnElement="_52">
+			<bpmndi:BPMNEdge bpmnElement="_85">
+				<di:waypoint x="361.18" y="214.25"/>
+				<di:waypoint x="417.18" y="214.25"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_88">
+				<di:waypoint x="210.18" y="214.25"/>
+				<di:waypoint x="266.18" y="214.25"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_90">
+				<di:waypoint x="34.58" y="214.25"/>
+				<di:waypoint x="106.87" y="214.25"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNShape bpmnElement="_87">
+				<dc:Bounds x="417.18" y="196.25" width="36" height="36"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_92">
+				<dc:Bounds x="62.93" y="83" width="48.76" height="64.06"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_93">
+				<dc:Bounds x="358.06" y="0" width="34" height="40"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_91">
+				<dc:Bounds x="0" y="196.96" width="34.58" height="34.58"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge bpmnElement="_95">
+				<di:waypoint x="111.69" y="115.04"/>
+				<di:waypoint x="125.86" y="115.04"/>
+				<di:waypoint x="125.86" y="183.07"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_96">
+				<di:waypoint x="173.2" y="183.07"/>
+				<di:waypoint x="173.2" y="115.04"/>
+				<di:waypoint x="191.34" y="115.04"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNShape bpmnElement="_89">
+				<dc:Bounds x="106.87" y="183.07" width="104.31" height="62.36"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge bpmnElement="_101">
+				<di:waypoint x="314.18" y="177.25"/>
+				<di:waypoint x="314.18" y="20"/>
+				<di:waypoint x="358.06" y="20"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_102">
+				<di:waypoint x="314.18" y="176.25"/>
+				<di:waypoint x="314.18" y="127.06"/>
+				<di:waypoint x="358.06" y="127.06"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNShape bpmnElement="_86">
+				<dc:Bounds x="266.18" y="176.25" width="96" height="76"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_97">
+				<dc:Bounds x="191.34" y="83" width="48.76" height="64.06"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_99">
+				<dc:Bounds x="358.06" y="107.06" width="34" height="40"/>
+			</bpmndi:BPMNShape>
+		</bpmndi:BPMNPlane>
+	</bpmndi:BPMNDiagram>
+</sem:definitions>
