@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html id="home" lang="en">
+  <head>
+    <meta charset=utf-8 />
+
+    <link rel="icon" href="img/favicon.ico?" type="image/x-icon" />
+    <link rel="shortcut icon" href="img/favicon.ico?" type="image/x-icon" />
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.4/css/jquery.dataTables_themeroller.css">
+    
+    <!-- Theme -->
+    <link rel="stylesheet" type="text/css" href="//datatables.net/media/css/jui_themes/redmond/jquery-ui-1.7.2.custom.css">
+
+    <!-- jQuery -->
+    <script type="text/javascript" charset="utf8" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+    
+    <!-- DataTables -->
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+<!--     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css"> -->
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" charset="utf8">
+      $(document).ready(function(){
+        // read data from GitHub
+        //var toolsUrl = "http://raw.github.com/bpmn-miwg/bpmn-miwg-test-suite/master/tools-tested-by-miwg.json";
+//         var toolsUrl = "https://api.github.com/repos/bpmn-miwg/bpmn-miwg-test-suite/contents/tools-tested-by-miwg.json"; // application/vnd.github.v3.raw
+//         var toolsUrl = "../../bpmn-miwg-test-suite/tools-tested-by-miwg.json";
+        var toolsUrl = "tools-tested-by-miwg.json";
+        var submissionsUrl = "submissions.json";
+        var openIssuesUrl = "issues-open.json";
+        var closedIssuesUrl = "issues-closed.json";
+        var roundtripUrl = "overview.html";
+        var schemasValid = {}
+
+        $.when(
+          $.getJSON(toolsUrl),
+          $.getJSON(submissionsUrl),
+          $.get(roundtripUrl)
+          /*,
+            $.getJSON(closedIssuesUrl)*/
+        ).then(function (res1, res2, res3) {
+              var toolsTestedByMIWG = res1[0];
+              var submissions = res2[0];
+              var roundtrip = res3[0];
+
+              const html = $(roundtrip);
+
+              //var closedIssues = res3[0];
+              for (i = 0; i < toolsTestedByMIWG.tools.length; i++) {
+                 var tool = toolsTestedByMIWG.tools[i];
+                 var count = 0;
+                 var max = 0;
+                 var testsByTool = html.find('div.test[tool="' + tool.tool + ' ' + tool.version + '"]');
+                //  console.log(testsByTool)
+                 testsByTool.each((index, line) => {
+                   if (line.dataset['xsdOk']) {
+                    max += 1;
+                    count += Number(line.dataset['xsdOk'])
+                   }
+                 });
+
+                 toolsTestedByMIWG.tools[i].schemasValid = count;
+                 toolsTestedByMIWG.tools[i].schemasValidMax = max;
+                 
+                 var toolAndVersion = tool.tool + ' ' + tool.version;
+                 
+                 if (submissions[toolAndVersion]) {
+                   var submission = submissions[toolAndVersion];
+                   toolsTestedByMIWG.tools[i].testResultsSubmitted = submission.count;
+                   toolsTestedByMIWG.tools[i].testResultsASubmitted = submission.countA;
+                   toolsTestedByMIWG.tools[i].testResultsBSubmitted = submission.countB;
+                   toolsTestedByMIWG.tools[i].testResultsCSubmitted = submission.countC;
+                 } else {
+                   console.debug('Warning: No submission counts for tool: ' + toolAndVersion + ' => Try to regenerate submissions.json');
+                   toolsTestedByMIWG.tools[i].testResultsSubmitted = 0;
+                   toolsTestedByMIWG.tools[i].testResultsASubmitted = 0;
+                   toolsTestedByMIWG.tools[i].testResultsBSubmitted = 0;
+                   toolsTestedByMIWG.tools[i].testResultsCSubmitted = 0;
+                    }
+//                 toolsTestedByMIWG.tools[i].openIssues = 0;
+//                 toolsTestedByMIWG.tools[i].closedIssues = 0;
+//                 openIssues.forEach(function(issue) {
+//                   issue.labels.forEach(function(label) {
+//                     if (label.name == 'Tool: ' + toolsTestedByMIWG.tools[i].tool) {
+//                       toolsTestedByMIWG.tools[i].openIssues++;
+//                     }
+//                   });
+//                 });
+//                 closedIssues.forEach(function(issue) {
+//                   issue.labels.forEach(function(label) {
+//                     if (label.name == 'Tool: ' + toolsTestedByMIWG.tools[i].tool) {
+//                       toolsTestedByMIWG.tools[i].closedIssues++;
+//                     }
+//                   });
+//                 });
+                    }
+
+              $('#bpmn-tools').dataTable( {
+                "bJQueryUI": true,
+                "bPaginate": false,
+      //          "sAjaxSource": "http://open.dapper.net/transform.php?dappName=BPMNToolsfromBPMNorg&transformer=JSON&applyToUrl=http%3A%2F%2Fwww.businessprocessincubator.com%2Ftag%2Fproduct%2Flist%2FtagId%2F170%2F%3Fbpi-embedded%3D1%26bpi-feed%3D1%26dir%3Dasc%26layout%5B0%5D%3Dnew-window%26limit%3Dall%26mode%3Dgrid%26order%3Dname%26utm_campaign%3DFeed%26utm_medium%3Dweb%26utm_source%3DOMG",
+      //          "sAjaxSource": toolsUrl,
+      //          "sAjaxDataProp": "tools",
+                "aaData": toolsTestedByMIWG.tools,
+                             /* [ 2, BPMN   ], [ 5, Round  ], [ 4, Export ], [ 3, Import ],   [ 7, Demo   ], [ 8, Last   ], [ 9, Cat A  ], [ 10, Cat B  ], [ 11, Cat C  ], [ 12, Schema ],   [ 14, IssueO ], [ 15, IssueC ]    [ 0, Vendo ], [1, Tool  ] */
+                "aaSorting": [/*[ 2, "desc" ], [ 5, "desc" ], [ 4, "desc" ], [ 3, "desc" ],*/ [ 7, "desc" ], [ 8, "desc" ], [ 9, "desc" ], [ 10, "desc" ], [ 11, "desc" ], [ 12, "desc" ],/* [ 14, "desc" ], [ 15, "desc" ],*/ [ 0, "asc" ], [1, "asc" ]],
+                "aoColumns": [
+                    /* 0 */ { "mData": "vendor" },
+                    /* 1 */ { "mData": "tool",
+                      "mRender": function ( data, type, full ) {
+                        var result = '<a href="' + generateVisualDiffUrl(full) + '">' + data.replace('Microsoft', 'MS') + ' ' + full.version + '</a>';
+                        return '<strong>' + result + '</strong>';
+                      } },
+                    /* 2 */ { "mData": "supportsBpmn2", "mRender": renderBoolean },
+                    /* 3 */ { "mData": "hasImport", "mRender": renderImport },
+                    /* 4 */ { "mData": "hasExport", "mRender": renderExport },
+                    /* 5 */ { "mData": "hasRoundtrip", "mRender": renderRoundtrip },
+                    /* 6 */ { "mData": "participatedInDemosByYear",
+                      "mRender": function ( data, type, full ) {
+                        return data.split(",")[0];
+                      },
+                      "bVisible" : false },
+                    /* 7 */ { "mData": "participatedInDemosByYear", "mRender": renderDemoParticipation, "iDataSort": 6 },
+                    /* 8 */ { "mData": "lastResultsSubmitted", "mRender": renderLastSubmission },
+                    /* 9 */ { "mData": "testResultsSubmitted", "bVisible" : false /*"mRender": renderTestResultsSubmitted*/ },
+                    /* 10 */ { "mData": "testResultsASubmitted", "mRender": function ( data, type, full) {
+                      if (data && full.testResultsASubmitted && full.testResultsASubmitted !== 0) {
+                          return Number(String(data) + String(data/full.testResultsASubmitted));
+                        }
+                        return 0;
+                      }, "bVisible": false },
+                    /* 11 */ { "mData": "testResultsASubmitted", "mRender": renderTestResultsASubmitted, "iDataSort": 10 },
+                    /* 12 */ { "mData": "testResultsBSubmitted", "mRender": function ( data, type, full) {
+                      if (data && full.testResultsBSubmitted && full.testResultsBSubmitted !== 0) {
+                          return Number(String(data) + String(data/full.testResultsBSubmitted));
+                        }
+                        return 0;
+                      }, "bVisible": false },
+                    /* 13 */ { "mData": "testResultsBSubmitted", "mRender": renderTestResultsBSubmitted, "iDataSort": 12 },
+                    /* 14 */ { "mData": "testResultsCSubmitted", "mRender": function ( data, type, full) {
+                      if (data && full.testResultsCSubmitted && full.testResultsCSubmitted !== 0) {
+                          return Number(String(data) + String(data/full.testResultsCSubmitted));
+                        }
+                        return 0;
+                      }, "bVisible": false },
+                    /* 15 */ { "mData": "testResultsCSubmitted", "mRender": renderTestResultsCSubmitted, "iDataSort": 14 },
+                    /* 16 */ { "mData": "schemasValid",
+                      "mRender": function ( data, type, full) {
+                        var schemaValidRatio = 0;
+                        if (data && full.schemasValidMax && full.schemasValidMax !== 0) {
+                          schemaValidRatio = data/full.schemasValidMax;
+                        }
+                        return schemaValidRatio + full.schemasValidMax/10000;
+                      },
+                      "bVisible" : false },
+                    /* 17 */ { "mData": "schemasValid", "mRender": renderSchemasValid, "iDataSort": 16 },
+                    /* 18 */ { "mData": "website", "mRender": renderWebsite },
+//                     { "mData": "openSource", "mRender": renderLicense },
+                    /*{ "mData": "openIssues",
+                      "mRender": function ( data, type, full ) {
+                        return '<a href="https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues?state=open&labels=Tool%3A+' + full.tool.replace(/\+/g, '%2b').replace(/ /g, '+') + '"><strong>' + data + '</strong></a>';
+                      } },
+                    { "mData": "closedIssues",
+                      "mRender": function ( data, type, full ) {
+                        return '<a href="https://github.com/bpmn-miwg/bpmn-miwg-test-suite/issues?state=closed&labels=Tool%3A+' + full.tool.replace(/\+/g, '%2b').replace(/ /g, '+') + '"><strong>' + data + '</strong></a>';
+                      } },*/
+      //               { "mData": "notes" },
+                ],
+              } );
+
+              function renderImport(data, type, full) {
+                var result = renderBoolean(data, type, full);
+                if ((data === true) && (full.lastResultsSubmitted != 0)) {
+                  var visualDiffUrl = generateVisualDiffUrl(full, 'import');
+                  result = '<span class="sr-only">' + data + '</span><a href="' + visualDiffUrl +'">' + result + ' Diff</a>';
+                }
+                return result;
+              }
+
+              function renderExport(data, type, full) {
+                var result = renderBoolean(data, type, full);
+                if ((data === true) && (full.lastResultsSubmitted != 0)) {
+                  var visualDiffUrl = generateVisualDiffUrl(full, 'export');
+                  result = '<span class="sr-only">' + data + '</span><a href="' + visualDiffUrl + '">' + result + ' Diff</a>';
+                }
+                return result;
+              }
+              
+              function renderRoundtrip(data, type, full) {
+                var result = renderBoolean(data, type, full);
+                result = '<span class="sr-only">' + data + '</span><a href="overview.html#' + generateToolAndVersion(full) + '">' + result + ' Details</a>';
+                return result;
+              }
+
+              function renderSchemasValid(data, type, full) {
+                var schemasValid = renderTestResultsSubmittedInCategory(data, type, full, full.schemasValidMax, true);
+                var result = '<a href="overview.html#' + generateToolAndVersion(full) + '">' + schemasValid + '</a>';
+                return result;
+              }
+              
+              function generateVisualDiffUrl(full, type) {
+                  var diffUrl = 'visual-test-result-comparison.html?tool=' + generateToolAndVersion(full);
+
+                  if (type) {
+                    diffUrl += '&type=' + type;
+                  }
+
+                  return diffUrl;
+              }
+              
+              function generateToolAndVersion(full) {
+                  var toolAndVersion = encodeURIComponent(full.tool + ' ' + full.version);
+                  // TODO trying to figure out why Firefox does not 
+                  // show the anchor encoded as expected
+                  //console.debug('toolAndVersion: '+toolAndVersion);
+                  return toolAndVersion;
+                }
+
+              function renderDemoParticipation(data, type, full) {
+                var lastDemoYear = 2024; // Hard-coded last demo year - update when next demo occurs
+                var participationYears = data.split(",");
+                var lastParticipation = participationYears[0];
+                var participated = false;
+                
+                if (lastParticipation >= lastDemoYear) {
+                  participated = true;
+                } else if (lastParticipation != "0") {
+                  participated = "partial";
+                }
+                
+                var result = renderTrafficLight(participated, type, full);
+                return '<span style="white-space:nowrap;">' + result + ' ' + participationYears.join(", ") + '</span>';
+              }
+
+              function renderLastSubmission(data, type, full) {
+                var submissionYear = parseInt(data);
+                var currentYear = new Date().getFullYear();
+                var participated = false;
+                
+                if (submissionYear >= (currentYear - 1)) {
+                  participated = true;
+                } else if (submissionYear > 0) {
+                  participated = "partial";
+                }
+                
+                var result = renderTrafficLight(participated, type, full);
+                return '<span style="white-space:nowrap;">' + result + ' ' + data + '</span>';
+              }
+
+              function renderTestResultsSubmitted(data, type, full) {
+                var result = renderTrafficLight(data, type, full);
+                if ((data === true || data === "partial") && (full.hasExport === true || full.hasRoundtrip === true)) {
+                  result = result
+                    + ' <a href="overview.html#' + generateToolAndVersion(full) + '">Details</a>';
+                }
+                return result;
+              }
+
+              function renderTestResultsASubmitted(data, type, full) {
+                return renderTestResultsSubmittedInCategory(data, type, full, 24, false, true);
+              }
+
+              function renderTestResultsBSubmitted(data, type, full) {
+                return renderTestResultsSubmittedInCategory(data, type, full, 8, false, true);
+              }
+
+              function renderTestResultsCSubmitted(data, type, full) {
+                return renderTestResultsSubmittedInCategory(data, type, full, 24, false, true);
+              }
+
+              function renderTestResultsSubmittedInCategory(originalData, type, full, referenceCount, penalizeZero = false, printLink) {
+                var data = originalData;
+                if (originalData > referenceCount) {
+                  data = referenceCount;
+                }
+                var complete = false;
+                if (data >= referenceCount) {
+                  complete = true;
+                } else if (data != 0) {
+                  complete = "partial";
+                }
+
+                if (penalizeZero && referenceCount === 0) {
+                  complete = false;
+                }
+
+                var result = renderTrafficLight(complete, type, full);
+                var linkStart = '';
+                var linkEnd = '';
+
+                if (printLink) {
+                  linkStart = '<a href="https://github.com/bpmn-miwg/bpmn-miwg-test-suite/tree/master/' + full.tool + ' ' + full.version + '">';
+                  linkEnd = '</a>'
+                }
+
+                return '<span class="sr-only">' + data/referenceCount + '</span>' + result + ' ' + linkStart + data + '/' + referenceCount + linkEnd;
+              }
+
+              function renderLicense(data, type, full) {
+		var result = '';
+                if (data) {
+                  result = 'Open&nbsp;Source';
+                } else {
+                  result = 'Commercial';
+                }
+		if (full.website.length > 0) {
+		  result = '<a href="'+full.website+'">'+result+'</a>';
+              }
+		return result;
+              }
+
+              function renderWebsite(data, type, full) {
+		var result = '';
+                if (data) {
+		  result = '<a href="'+data+'" target="_blanck">' + renderIcon('new-window', '', 'website') + '</a>';
+		}
+		return result;
+              }
+
+              function renderTrafficLight(data, type, full) {
+                var icon = "minus-sign"; // ban-circle remove-sign
+                var color = "darkred";
+                if (data === true) {
+                  icon = "plus-sign"; // ok-sign
+                  color = "green";
+                } else if (data === "partial") {
+                  icon = "adjust";
+                  color = "darkorange";
+                }
+                return renderIcon(icon, color, data);
+              }
+
+              function renderBoolean(data, type, full) {
+                var icon = "minus-sign"; // remove
+                var color = "darkred";
+                if (data) {
+                  icon = "plus-sign"; // ok
+                  color = "green";
+                }
+                return renderIcon(icon, color, data);
+              }
+
+              function renderIcon(icon, color, data) {
+                return '<span class="glyphicon glyphicon-' + icon + '" style="color: ' + color + '"></span><span class="sr-only">' + data + '</span>';
+              }
+
+            })
+                    
+        $('.panel[id="legend"] .panel-title').prepend('<span class="toggle-indicator btn btn-default">+</span>&nbsp;');
+        $('.panel[id="legend"] .panel-heading').click(function(panel) {
+          // TODO this hardcoding of index 0 will always operate on legend panel
+          togglePanel('#'+$($('.panel-heading')[0]).parent()[0].id);
+        });
+      });
+                    
+      function togglePanel(selector) { 
+        console.log('toggling panel: '+selector);
+        if ($(selector+' .panel-body').css('display')=='none') {
+          $(selector+' .toggle-indicator').empty().append('-');
+        } else { 
+          $(selector+' .toggle-indicator').empty().append('+');
+        }
+        $(selector+' .panel-body').toggle(); 
+      } 
+    </script>
+  </head>
+  <body>
+    <h1><img style="margin: 0 15px;" src="img/miwg-logo.png" class="mediacenter" alt="" width="200">BPMN Tools tested for Model Interchange</h1>
+    <div style="padding: 0 15px;">
+      <table id="bpmn-tools" class="display" width="100%">
+        <thead>
+          <tr>
+            <th width="10%">Vendor</th>
+            <th width="15%">Tool</th>
+            <th>BPMN 2.0</th>
+            <th>Import</th>
+            <th>Export</th>
+            <th>Roundtrip</th>
+            <th>Last Demo Participation</th>
+            <th>Demo Participation</th>
+            <th>Last Test Submission</th>
+            <th>Results Submitted</th>
+            <th>A Results Submitted</th>
+            <th>A Results Submitted</th>
+            <th>B Results Submitted</th>
+            <th>B Results Submitted</th>
+            <th>C Results Submitted</th>
+            <th>C Results Submitted</th>
+            <th>Schema-valid</th>
+            <th>Schema-valid</th>
+            <th>Website</th>
+            <!--<th>License</th>-->
+            <!--<th>Open Issues</th>
+            <th>Closed Issues</th>-->
+<!--             <th>Notes</th> -->
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+      <br />
+      <div class="panel panel-default" id='legend'>
+        <div class="panel-heading">
+          <h3 class="panel-title">Legend</h3>
+        </div>
+        <div class="panel-body" style="display:none">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Column</th>
+                <th>Definition</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Vendor</td>
+                <td>Company that develops the tool</td>
+              </tr>
+              <tr>
+                <td>Tool Name &amp; Version</td>
+                <td>Product name of the tool and version that has been tested</td>
+              </tr>
+              <tr>
+                <td>BPMN 2.0</td>
+                <td>Tool supports BPMN version 2.0 or higher</td>
+              </tr>
+              <tr>
+                <td>Import</td>
+                <td>Tool has a feature to import BPMN 2.0 XML files based on the XML Schema Definition (XSD) that ships with the specification</td>
+              </tr>
+              <tr>
+                <td>Export</td>
+                <td>Tool has a feature to export BPMN 2.0 XML files based on the XML Schema Definition (XSD) that ships with the specification</td>
+              </tr>
+              <tr>
+                <td>Roundtrip</td>
+                <td>Tool can both import and export BPMN 2.0 XML files based on the XML Schema Definition (XSD) that ships with the specification</td>
+              </tr>
+              <tr>
+                <td>Last Demo Participation</td>
+                <td>Tool participated in one of the <a href="https://github.com/bpmn-miwg/bpmn-miwg-demos">public BPMN MIWG demos</a></td>
+              </tr>
+              <tr>
+                <td>Last Test Submission</td>
+                <td>Last time test results have been submitted for the tool either by users or the vendor</td>
+              </tr>
+              <tr>
+                <td>A Results Submitted</td>
+                <td>Number of test results submitted in category A "Layout" (<span class="glyphicon glyphicon-plus-sign" style="color: darkgreen"></span> complete, <span class="glyphicon glyphicon-adjust" style="color: darkorange"></span> partial, <span class="glyphicon glyphicon-minus-sign" style="color: darkred"></span> none)</td>
+              </tr>
+              <tr>
+                <td>B Results Submitted</td>
+                <td>Number of test results submitted in category B "Conformance class coverage" (<span class="glyphicon glyphicon-plus-sign" style="color: darkgreen"></span> complete, <span class="glyphicon glyphicon-adjust" style="color: darkorange"></span> partial, <span class="glyphicon glyphicon-minus-sign" style="color: darkred"></span> none)</td>
+              </tr>
+              <tr>
+                <td>C Results Submitted</td>
+                <td>Number of test results submitted in category C "Complex scenarios" (<span class="glyphicon glyphicon-plus-sign" style="color: darkgreen"></span> complete, <span class="glyphicon glyphicon-adjust" style="color: darkorange"></span> partial, <span class="glyphicon glyphicon-minus-sign" style="color: darkred"></span> none)</td>
+              </tr>
+              <tr>
+                <td>Schema-valid</td>
+                <td>Number files (out of the submitted BPMN XML files) that pass XML Schema validation.</td>
+              </tr>
+              <tr>
+                <td>Website</td>
+                <td>Link to the official website of the tool</td>
+              </tr>
+<!--
+              <tr>
+                <td>License</td>
+                <td>License of the tool</td>
+              </tr>
+              <tr>
+                <td>Open Issues</td>
+                <td>Issues identified by the BPMN MIWG that are still open (click on the number to see the issues)</td>
+              </tr>
+              <tr>
+                <td>Closed Issues</td>
+                <td>Issues identified by the BPMN MIWG that are already fixed by the vendor (click on the number to see the issues)</td>
+              </tr>
+-->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="panel panel-primary" id='callForParticipation'>
+        <div class="panel-heading">
+          <h3 class="panel-title"><strong>Call for Participation</strong></h3>
+        </div>
+        <div class="panel-body">
+          <p>If BPMN interchange is important to you: </p>
+          <ul>
+           <li><strong><a href="https://github.com/bpmn-miwg/bpmn-miwg-test-suite#how-to-test-a-bpmn-tool-using-this-test-suite">Test your favorite BPMN tool!</a></strong> Also users can submit test results. You don't need to be the author of a tool to use it.</li>
+           <li><strong><a href="https://www.omgwiki.org/bpmn-miwg/doku.php#requirements_of_participation_and_how_to_join">Join the Group!</a></strong> Everybody can join. There is no need to be an OMG member. Get in touch with the people behind the standards.</li>
+           <li>Make yourself heard with your vendor.</li>
+           <li>Spread the word and share this page with your peers.</li>
+          </ul>
+        </div>
+      </div>
+        
+      <div class="panel panel-default" id='contributors'>
+        <div class="panel-heading">
+          <h3 class="panel-title">Contributors</h3>
+        </div>
+        <div class="panel-body">
+          <p>
+            The <a href="https://github.com/bpmn-miwg/bpmn-miwg-tools">MIWG test tools</a> have been built by:   
+          </p>
+          <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+            <div style="display:inline-block; margin-top:10px;">
+              <a href="https://www.camunda.com" target="_newtab">
+                <img alt="Camunda" class="img-thumbnail" src="img/camunda.png" style="height: 90px" />
+              </a>
+            </div>
+            <div style="display:inline-block; margin-top:10px;">
+              <a href="https://www.knowprocess.com" target="_newtab">
+                <img alt="KnowProcess" class="img-thumbnail" src="img/knowprocess.png"/>
+              </a>
+            </div>
+            <div style="display:inline-block; margin-top:10px;">
+              <p class="img-thumbnail" style="height:90px; padding: 26px 26px;font-size: 20px;font-weight: bold;text-align: center;">Matthias Kurz</p>
+            </div>
+            <div style="display:inline-block; margin-top:10px;">
+              <a href="https://www.signavio.com" target="_newtab">
+                <img alt="Signavio" class="img-thumbnail" src="img/Signavio.jpg" style="height: 90px" />
+              </a>
+            </div>
+            <div style="display:inline-block; margin-top:10px;">
+              <a href="https://www.trisotech.com" target="_newtab">
+                <img alt="Trisotech" class="img-thumbnail" src="img/Trisotech.png" style="height: 90px" />
+              </a>
+            </div>
+          </div>
+        </div>
+        
+      <p>Powered by <a href="https://datatables.net/">jQuery DataTables</a>, <a href="https://getbootstrap.com/">Bootstrap</a> and <a href="https://open.dapper.net/">Dapper</a></p>
+    </div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-68020511-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>

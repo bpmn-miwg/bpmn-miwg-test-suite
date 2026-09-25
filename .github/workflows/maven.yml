@@ -1,7 +1,4 @@
-# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
-
-name: Java CI with Maven
+name: Build, test and publish artefacts
 
 on:
   workflow_dispatch: # allow to be triggered manually
@@ -21,27 +18,52 @@ jobs:
       packages: write
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up JDK 11
-      uses: actions/setup-java@v4
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+    - name: Set up JDK 21
+      uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c # v6
       with:
-        java-version: '11'
+        java-version: '21'
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn -P analysis --batch-mode deploy --file pom.xml
+      # Run the plugin goal for the execution with id 'build-site-jar', not the generic one.
+      run: mvn -P analysis --batch-mode verify site:jar@build-site-jar --file pom.xml
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+    # use github artefact upload instead of maven
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      with:
+        name: bpmn-miwg-test-suite
+        path: target/test-suite-*.jar
+
+    - name: Upload reference-only artifact
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      with:
+        name: bpmn-miwg-test-suite-reference-only
+        path: target/test-suite-*-reference-only.jar
+        archive: false
+    #- name: Deploy artifacts
+    #  if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    #  run: mvn -P analysis --batch-mode deploy --file pom.xml
+    #  env:
+    #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Upload static files as artifact
+      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
       id: deployment
-      uses: actions/upload-pages-artifact@v3 # or specific "vX.X.X" version tag for this action
+      uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
       with:
         path: target/site/
 
+    # This is a composite action builds site and deploys to pages
+    # the problem is that when run by non-members it fails due to not having access to secrets
+    # in fact that's probably a benefit as we don't want PRs to publish anyway
     - name: Publish to Github pages
+      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
       # See https://github.com/marketplace/actions/github-pages-action
-      uses: peaceiris/actions-gh-pages@v4
+      uses: peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453 # 4.1.0
       with:
         # github_token: ${{ secrets.GITHUB_TOKEN }}
         personal_token: ${{ secrets.TSTEPHEN_GITHUB_MIWG_TOKEN }}
@@ -52,9 +74,10 @@ jobs:
 
   # Deployment job
   deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  #     url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -63,4 +86,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
