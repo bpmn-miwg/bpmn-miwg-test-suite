@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright 2011-2026 Tim Stephenson and contributors
+
+   Licensed under the Apache License, Version 2.0 (the "License"); you may not
+   use this file except in compliance with the License.  You may obtain a copy
+   of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+   WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+   License for the specific language governing permissions and limitations under
+   the License.
+-->
+<?xml-stylesheet type="text/xsl" href="/xslt/bpmn2svg.xslt" alternate="no" ?>
+<semantic:definitions exporter="KnowProcess Modeler" exporterVersion="4.1.0" expressionLanguage="http://www.w3.org/1999/XPath" id="_55ht3tx4i" name="C.8.1" targetNamespace="http://knowprocess.com/bpmn_55ht3tx4i" typeLanguage="http://www.w3.org/2001/XMLSchema" kp:extra-namespaces="{}"
+  xmlns="http://knowprocess.com/bpmn_55ht3tx4i"
+  xmlns:semantic="http://www.omg.org/spec/BPMN/20100524/MODEL"
+  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+  xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0"
+  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:activiti="http://activiti.org/bpmn"
+  xmlns:camunda="http://camunda.org/schema/1.0/bpmn"
+  xmlns:flowable="http://flowable.org/bpmn"
+  xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+  xmlns:sdmn="https://www.omg.org/spec/SDMN/"
+  xmlns:scedi="https://www.omg.org/spec/SCE/DI/"
+  xmlns:scedc="https://www.omg.org/spec/SCE/DC/"
+  xmlns:feel="https://www.omg.org/spec/DMN/20240513/FEEL/"
+  xmlns:kp="http://knowprocess.com/bpmn">
+  <semantic:collaboration id="COLLABORATION_1" isClosed="false">
+    <semantic:participant id="pool1" name="Vacation request" processRef="_29dz2rjhm">
+      <semantic:participantMultiplicity maximum="1" minimum="0"/>
+    </semantic:participant>
+  </semantic:collaboration>
+  <semantic:process id="_29dz2rjhm" isClosed="false" isExecutable="true" processType="None">
+    <semantic:ioSpecification id="ioSpec__lf9mhpagk">
+      <semantic:dataInput id="dataInput_8dkpw72ng" name="Employee&#xA;badge number"/>
+      <semantic:dataInput id="dataInput_tzbalj1mm" name="From"/>
+      <semantic:dataInput id="dataInput_pgonh2hoy" name="To"/>
+      <semantic:dataOutput id="dataOutput_w60orx8mp" name="Vacation&#xA;approval"/>
+      <semantic:dataOutput id="dataOutput_ga6crzeuh" name="Reason"/>
+      <semantic:inputSet id="inputSet__ram7zghzc">
+        <semantic:dataInputRefs>dataInput_8dkpw72ng</semantic:dataInputRefs>
+        <semantic:dataInputRefs>dataInput_tzbalj1mm</semantic:dataInputRefs>
+        <semantic:dataInputRefs>dataInput_pgonh2hoy</semantic:dataInputRefs>
+      </semantic:inputSet>
+      <semantic:outputSet id="outputSet__mju6n1vua">
+        <semantic:dataOutputRefs>dataOutput_w60orx8mp</semantic:dataOutputRefs>
+        <semantic:dataOutputRefs>dataOutput_ga6crzeuh</semantic:dataOutputRefs>
+      </semantic:outputSet>
+    </semantic:ioSpecification>
+    <semantic:laneSet/>
+    <semantic:startEvent id="start" isInterrupting="true" name="Vacation Request&#xA;Received" parallelMultiple="false">
+      <semantic:outgoing>start_to_task</semantic:outgoing>
+      <semantic:outputSet/>
+    </semantic:startEvent>
+    <semantic:sequenceFlow id="start_to_task" sourceRef="start" targetRef="task"/>
+    <semantic:serviceTask completionQuantity="1" id="task" implementation="kp:http" isForCompensation="false" startQuantity="1" name="Fetch vacation information">
+      <semantic:extensionElements/>
+      <semantic:incoming>start_to_task</semantic:incoming>
+      <semantic:ioSpecification id="ioSpec__6g7a769ya">
+        <semantic:dataInput id="dataInput_jako6qm61"/>
+        <semantic:dataOutput id="dataOutput_yst6i0nu6"/>
+        <semantic:inputSet id="inputSet__3spa29tcv">
+          <semantic:dataInputRefs>dataInput_jako6qm61</semantic:dataInputRefs>
+        </semantic:inputSet>
+        <semantic:outputSet id="outputSet__u0k7gmpg2">
+          <semantic:dataOutputRefs>dataOutput_yst6i0nu6</semantic:dataOutputRefs>
+        </semantic:outputSet>
+      </semantic:ioSpecification>
+      <semantic:dataInputAssociation id="dataAssoc_dataInput_8dkpw72ng_to_dataInput_jako6qm61">
+        <semantic:sourceRef>dataInput_8dkpw72ng</semantic:sourceRef>
+        <semantic:targetRef>dataInput_jako6qm61</semantic:targetRef>
+      </semantic:dataInputAssociation>
+      <semantic:dataOutputAssociation id="dataAssoc_dataOutput_yst6i0nu6_to_dataObjectReference_x6h6je4fi">
+        <semantic:sourceRef>dataOutput_yst6i0nu6</semantic:sourceRef>
+        <semantic:targetRef>dataObjectReference_x6h6je4fi</semantic:targetRef>
+      </semantic:dataOutputAssociation>
+    </semantic:serviceTask>
+    <semantic:boundaryEvent id="boundaryEvent_k6f345rif" attachedToRef="task">
+      <semantic:errorEventDefinition id="errorEventDefinition_frygkbfg7"/>
+    </semantic:boundaryEvent>
+    <semantic:endEvent id="endEvent_4ths53yyq" name="Employee&#xA;not found"/>
+    <semantic:sequenceFlow id="boundaryEvent_k6f345rif_to_endEvent_4ths53yyq" sourceRef="boundaryEvent_k6f345rif" targetRef="endEvent_4ths53yyq"/>
+    <semantic:businessRuleTask id="businessRuleTask_v35co0h0i" name="Vacation approval">
+      <semantic:ioSpecification id="ioSpec__b7x0dh92e">
+        <semantic:dataInput id="dataInput_fmsik18vd"/>
+        <semantic:dataInput id="dataInput_950e1t2sz"/>
+        <semantic:dataOutput id="dataOutput_0jtoprehe"/>
+        <semantic:dataOutput id="dataOutput_qzo49l0oy"/>
+        <semantic:inputSet id="inputSet__gal2uz5bq">
+          <semantic:dataInputRefs>dataInput_fmsik18vd</semantic:dataInputRefs>
+          <semantic:dataInputRefs>dataInput_950e1t2sz</semantic:dataInputRefs>
+        </semantic:inputSet>
+        <semantic:outputSet id="outputSet__fyfo2dad8">
+          <semantic:dataOutputRefs>dataOutput_0jtoprehe</semantic:dataOutputRefs>
+          <semantic:dataOutputRefs>dataOutput_qzo49l0oy</semantic:dataOutputRefs>
+        </semantic:outputSet>
+      </semantic:ioSpecification>
+      <semantic:dataInputAssociation id="dataAssoc_dataInput_pgonh2hoy_to_dataInput_950e1t2sz">
+        <semantic:sourceRef>dataInput_pgonh2hoy</semantic:sourceRef>
+        <semantic:targetRef>dataInput_950e1t2sz</semantic:targetRef>
+      </semantic:dataInputAssociation>
+      <semantic:dataInputAssociation id="dataAssoc_dataInput_tzbalj1mm_to_dataInput_fmsik18vd">
+        <semantic:sourceRef>dataInput_tzbalj1mm</semantic:sourceRef>
+        <semantic:targetRef>dataInput_fmsik18vd</semantic:targetRef>
+      </semantic:dataInputAssociation>
+      <semantic:dataOutputAssociation id="dataAssoc_dataOutput_qzo49l0oy_to_dataOutput_ga6crzeuh">
+        <semantic:sourceRef>dataOutput_qzo49l0oy</semantic:sourceRef>
+        <semantic:targetRef>dataOutput_ga6crzeuh</semantic:targetRef>
+      </semantic:dataOutputAssociation>
+      <semantic:dataOutputAssociation id="dataAssoc_dataOutput_0jtoprehe_to_dataOutput_w60orx8mp">
+        <semantic:sourceRef>dataOutput_0jtoprehe</semantic:sourceRef>
+        <semantic:targetRef>dataOutput_w60orx8mp</semantic:targetRef>
+      </semantic:dataOutputAssociation>
+    </semantic:businessRuleTask>
+    <semantic:exclusiveGateway id="exclusiveGateway_vg6o1lf16" default="exclusiveGateway_vg6o1lf16_to_sendTask_xvgbhqjtd"/>
+    <semantic:sendTask id="sendTask_h4m315bmu" name="Notify employee of approval" implementation="kp:http"/>
+    <semantic:serviceTask id="serviceTask_owp4d8qsz" name="Update remaining vacation"/>
+    <semantic:endEvent id="endEvent_hh7ve8n3o" name="Vacation approved&#xA;automatically"/>
+    <semantic:sequenceFlow id="serviceTask_owp4d8qsz_to_endEvent_hh7ve8n3o" sourceRef="serviceTask_owp4d8qsz" targetRef="endEvent_hh7ve8n3o"/>
+    <semantic:sequenceFlow id="sendTask_h4m315bmu_to_serviceTask_owp4d8qsz" sourceRef="sendTask_h4m315bmu" targetRef="serviceTask_owp4d8qsz"/>
+    <semantic:sequenceFlow id="exclusiveGateway_vg6o1lf16_to_sendTask_h4m315bmu" sourceRef="exclusiveGateway_vg6o1lf16" targetRef="sendTask_h4m315bmu" name="Approved"/>
+    <semantic:sendTask id="sendTask_xvgbhqjtd" name="Notify employee of refusal" implementation="kp:http"/>
+    <semantic:endEvent id="endEvent_z10n6l46c" name="Vacation refused&#xA;automatically"/>
+    <semantic:sequenceFlow id="sendTask_xvgbhqjtd_to_endEvent_z10n6l46c" sourceRef="sendTask_xvgbhqjtd" targetRef="endEvent_z10n6l46c"/>
+    <semantic:sequenceFlow id="exclusiveGateway_vg6o1lf16_to_sendTask_xvgbhqjtd" sourceRef="exclusiveGateway_vg6o1lf16" targetRef="sendTask_xvgbhqjtd" name="Refused"/>
+    <semantic:userTask id="userTask_wbzs6e11y" name="Manually approve vacation"/>
+    <semantic:exclusiveGateway id="exclusiveGateway_i7r55j1cg" default="exclusiveGateway_i7r55j1cg_to_sendTask_bkkz8zrj6"/>
+    <semantic:sendTask id="sendTask_bkkz8zrj6" name="Notify employee of refusal"/>
+    <semantic:endEvent id="endEvent_mtzi7xnz5" name="Vacation refused&#xA;by manager"/>
+    <semantic:sequenceFlow id="sendTask_bkkz8zrj6_to_endEvent_mtzi7xnz5" sourceRef="sendTask_bkkz8zrj6" targetRef="endEvent_mtzi7xnz5"/>
+    <semantic:sequenceFlow id="exclusiveGateway_i7r55j1cg_to_sendTask_bkkz8zrj6" sourceRef="exclusiveGateway_i7r55j1cg" targetRef="sendTask_bkkz8zrj6" name="Refused"/>
+    <semantic:sendTask id="sendTask_sqn3xe5ue" name="Notify employee of approval"/>
+    <semantic:serviceTask id="serviceTask_f64pm8coj" name="Update remaining vacation" implementation="kp:http"/>
+    <semantic:endEvent id="endEvent_fadzgztl5" name="Vacation approved&#xA;by manager"/>
+    <semantic:sequenceFlow id="serviceTask_f64pm8coj_to_endEvent_fadzgztl5" sourceRef="serviceTask_f64pm8coj" targetRef="endEvent_fadzgztl5"/>
+    <semantic:sequenceFlow id="sendTask_sqn3xe5ue_to_serviceTask_f64pm8coj" sourceRef="sendTask_sqn3xe5ue" targetRef="serviceTask_f64pm8coj"/>
+    <semantic:sequenceFlow id="exclusiveGateway_i7r55j1cg_to_sendTask_sqn3xe5ue" sourceRef="exclusiveGateway_i7r55j1cg" targetRef="sendTask_sqn3xe5ue" name="Approved"/>
+    <semantic:sequenceFlow id="userTask_wbzs6e11y_to_exclusiveGateway_i7r55j1cg" sourceRef="userTask_wbzs6e11y" targetRef="exclusiveGateway_i7r55j1cg"/>
+    <semantic:sequenceFlow id="exclusiveGateway_vg6o1lf16_to_userTask_wbzs6e11y" sourceRef="exclusiveGateway_vg6o1lf16" targetRef="userTask_wbzs6e11y" name="Manual validation required"/>
+    <semantic:sequenceFlow id="businessRuleTask_v35co0h0i_to_exclusiveGateway_vg6o1lf16" sourceRef="businessRuleTask_v35co0h0i" targetRef="exclusiveGateway_vg6o1lf16"/>
+    <semantic:sequenceFlow id="task_to_businessRuleTask_v35co0h0i" sourceRef="task" targetRef="businessRuleTask_v35co0h0i"/>
+    <semantic:dataObjectReference id="dataObjectReference_x6h6je4fi" name="Current vacation status" dataObjectRef="dataObject_hl0xibl79">
+      <semantic:dataState id="dataState_d4ribux4b" name=""/>
+    </semantic:dataObjectReference>
+    <semantic:dataObject id="dataObject_hl0xibl79" name="Current vacation&#xA;status"/>
+  </semantic:process>
+  <bpmndi:BPMNDiagram id="Diagram-COLLABORATION_1" name="C.8.1">
+    <bpmndi:BPMNPlane bpmnElement="COLLABORATION_1">
+      <bpmndi:BPMNShape bpmnElement="pool1" id="di_pool1" isHorizontal="true" color:background-color="#f6f5f4" color:border-color="#666666">
+        <dc:Bounds height="591" width="1421" x="0" y="0"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="0" y="0" width="24" height="591"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="task" id="di_task" color:background-color="#bbd3d3" color:border-color="#666666">
+        <dc:Bounds height="80" width="100" x="199" y="176"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds height="60" width="100" x="199" y="196"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="boundaryEvent_k6f345rif_di" bpmnElement="boundaryEvent_k6f345rif" color:border-color="#666666" color:background-color="#ffffff">
+        <dc:Bounds x="274" y="240" height="32" width="32"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="306" y="256" height="14" width="0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_4ths53yyq_di" bpmnElement="endEvent_4ths53yyq" color:border-color="#ff0000" color:background-color="#ffffff">
+        <dc:Bounds x="1305" y="508" height="32" width="32"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="1283" y="545" height="28" width="76"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="boundaryEvent_k6f345rif_to_endEvent_4ths53yyq_di" bpmnElement="boundaryEvent_k6f345rif_to_endEvent_4ths53yyq">
+        <di:waypoint x="290" y="272"/>
+        <di:waypoint x="290" y="524"/>
+        <di:waypoint x="1305" y="524"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="748" y="505" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="businessRuleTask_v35co0h0i_di" bpmnElement="businessRuleTask_v35co0h0i" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="399" y="176" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="399" y="196" height="60" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataOutput_ga6crzeuh_di" bpmnElement="dataOutput_ga6crzeuh" color:border-color="#666666" color:background-color="#ecd8e6">
+        <dc:Bounds x="511" y="373" height="50" width="38"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="505" y="425" height="14" width="50"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="dataAssoc_dataOutput_qzo49l0oy_to_dataOutput_ga6crzeuh_di" bpmnElement="dataAssoc_dataOutput_qzo49l0oy_to_dataOutput_ga6crzeuh">
+        <di:waypoint x="474" y="256"/>
+        <di:waypoint x="474" y="398"/>
+        <di:waypoint x="511" y="398"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="21" width="0" x="474" y="256"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="dataOutput_w60orx8mp_di" bpmnElement="dataOutput_w60orx8mp" color:border-color="#666666" color:background-color="#ecd8e6">
+        <dc:Bounds x="511" y="281" height="50" width="38"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="496.5" y="333" height="28" width="67"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="dataAssoc_dataOutput_0jtoprehe_to_dataOutput_w60orx8mp_di" bpmnElement="dataAssoc_dataOutput_0jtoprehe_to_dataOutput_w60orx8mp">
+        <di:waypoint x="474" y="236"/>
+        <di:waypoint x="474" y="306"/>
+        <di:waypoint x="511" y="306"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="21" width="0" x="474" y="236"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="dataAssoc_dataInput_pgonh2hoy_to_dataInput_950e1t2sz_di" bpmnElement="dataAssoc_dataInput_pgonh2hoy_to_dataInput_950e1t2sz">
+        <di:waypoint x="402" y="105"/>
+        <di:waypoint x="424" y="105"/>
+        <di:waypoint x="424" y="176"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="21" width="0" x="402" y="105"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="dataInput_pgonh2hoy_di" bpmnElement="dataInput_pgonh2hoy" color:border-color="#666666" color:background-color="#ecd8e6">
+        <dc:Bounds x="364" y="80" height="50" width="38"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="374" y="132" height="14" width="17"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="dataAssoc_dataInput_tzbalj1mm_to_dataInput_fmsik18vd_di" bpmnElement="dataAssoc_dataInput_tzbalj1mm_to_dataInput_fmsik18vd">
+        <di:waypoint x="402" y="30"/>
+        <di:waypoint x="424" y="30"/>
+        <di:waypoint x="424" y="176"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="21" width="0" x="402" y="30"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="dataInput_tzbalj1mm_di" bpmnElement="dataInput_tzbalj1mm" color:border-color="#666666" color:background-color="#ecd8e6">
+        <dc:Bounds x="364" y="5" height="50" width="38"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="366" y="57" height="14" width="34"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="exclusiveGateway_vg6o1lf16_di" bpmnElement="exclusiveGateway_vg6o1lf16" isMarkerVisible="true" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="549" y="196" height="40" width="40"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="569" y="238" height="14" width="0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sendTask_h4m315bmu_di" bpmnElement="sendTask_h4m315bmu" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="639" y="65" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="639" y="85" height="60" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="serviceTask_owp4d8qsz_di" bpmnElement="serviceTask_owp4d8qsz" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="789" y="65" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="789" y="85" height="60" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_hh7ve8n3o_di" bpmnElement="endEvent_hh7ve8n3o" color:border-color="#ff0000" color:background-color="#ffffff">
+        <dc:Bounds x="1305" y="89" height="32" width="32"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="1249.5" y="126" height="28" width="143"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="serviceTask_owp4d8qsz_to_endEvent_hh7ve8n3o_di" bpmnElement="serviceTask_owp4d8qsz_to_endEvent_hh7ve8n3o">
+        <di:waypoint x="889" y="105"/>
+        <di:waypoint x="1305" y="105"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="1047" y="86" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sendTask_h4m315bmu_to_serviceTask_owp4d8qsz_di" bpmnElement="sendTask_h4m315bmu_to_serviceTask_owp4d8qsz">
+        <di:waypoint x="739" y="105"/>
+        <di:waypoint x="789" y="105"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="741" y="67" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="exclusiveGateway_vg6o1lf16_to_sendTask_h4m315bmu_di" bpmnElement="exclusiveGateway_vg6o1lf16_to_sendTask_h4m315bmu">
+        <di:waypoint x="569" y="196"/>
+        <di:waypoint x="569" y="105"/>
+        <di:waypoint x="639" y="105"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="569" y="145" width="67" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="sendTask_xvgbhqjtd_di" bpmnElement="sendTask_xvgbhqjtd" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="639" y="387" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="639" y="407" height="60" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_z10n6l46c_di" bpmnElement="endEvent_z10n6l46c" color:border-color="#ff0000" color:background-color="#ffffff">
+        <dc:Bounds x="1305" y="411" height="32" width="32"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="1254" y="448" height="28" width="134"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="sendTask_xvgbhqjtd_to_endEvent_z10n6l46c_di" bpmnElement="sendTask_xvgbhqjtd_to_endEvent_z10n6l46c">
+        <di:waypoint x="739" y="427"/>
+        <di:waypoint x="1305" y="427"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="972" y="408" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="exclusiveGateway_vg6o1lf16_to_sendTask_xvgbhqjtd_di" bpmnElement="exclusiveGateway_vg6o1lf16_to_sendTask_xvgbhqjtd">
+        <di:waypoint x="569" y="236"/>
+        <di:waypoint x="569" y="427"/>
+        <di:waypoint x="639" y="427"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="571" y="250" width="59" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="userTask_wbzs6e11y_di" bpmnElement="userTask_wbzs6e11y" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="765" y="175" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="765" y="195" height="60" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="exclusiveGateway_i7r55j1cg_di" bpmnElement="exclusiveGateway_i7r55j1cg" isMarkerVisible="true" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="915" y="195" height="40" width="40"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="935" y="237" height="14" width="0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sendTask_bkkz8zrj6_di" bpmnElement="sendTask_bkkz8zrj6" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="1005" y="279" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="1005" y="299" height="60" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_mtzi7xnz5_di" bpmnElement="endEvent_mtzi7xnz5" color:border-color="#ff0000" color:background-color="#ffffff">
+        <dc:Bounds x="1305" y="303" height="32" width="32"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="1259" y="341" height="28" width="134"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="sendTask_bkkz8zrj6_to_endEvent_mtzi7xnz5_di" bpmnElement="sendTask_bkkz8zrj6_to_endEvent_mtzi7xnz5">
+        <di:waypoint x="1105" y="319"/>
+        <di:waypoint x="1305" y="319"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="1155" y="300" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="exclusiveGateway_i7r55j1cg_to_sendTask_bkkz8zrj6_di" bpmnElement="exclusiveGateway_i7r55j1cg_to_sendTask_bkkz8zrj6">
+        <di:waypoint x="935" y="235"/>
+        <di:waypoint x="935" y="319"/>
+        <di:waypoint x="1005" y="319"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="937" y="249" width="59" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="sendTask_sqn3xe5ue_di" bpmnElement="sendTask_sqn3xe5ue" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="1005" y="175" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="1005" y="195" height="60" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="serviceTask_f64pm8coj_di" bpmnElement="serviceTask_f64pm8coj" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="1155" y="175" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="1155" y="195" height="60" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_fadzgztl5_di" bpmnElement="endEvent_fadzgztl5" color:border-color="#ff0000" color:background-color="#ffffff">
+        <dc:Bounds x="1305" y="199" height="32" width="32"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="1249.5" y="236" height="28" width="143"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="serviceTask_f64pm8coj_to_endEvent_fadzgztl5_di" bpmnElement="serviceTask_f64pm8coj_to_endEvent_fadzgztl5">
+        <di:waypoint x="1255" y="215"/>
+        <di:waypoint x="1305" y="215"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="1230" y="196" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sendTask_sqn3xe5ue_to_serviceTask_f64pm8coj_di" bpmnElement="sendTask_sqn3xe5ue_to_serviceTask_f64pm8coj">
+        <di:waypoint x="1105" y="215"/>
+        <di:waypoint x="1155" y="215"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="1080" y="196" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="exclusiveGateway_i7r55j1cg_to_sendTask_sqn3xe5ue_di" bpmnElement="exclusiveGateway_i7r55j1cg_to_sendTask_sqn3xe5ue">
+        <di:waypoint x="955" y="215"/>
+        <di:waypoint x="1005" y="215"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="940" y="184" width="67" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="userTask_wbzs6e11y_to_exclusiveGateway_i7r55j1cg_di" bpmnElement="userTask_wbzs6e11y_to_exclusiveGateway_i7r55j1cg">
+        <di:waypoint x="865" y="215"/>
+        <di:waypoint x="915" y="215"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="840" y="196" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="exclusiveGateway_vg6o1lf16_to_userTask_wbzs6e11y_di" bpmnElement="exclusiveGateway_vg6o1lf16_to_userTask_wbzs6e11y">
+        <di:waypoint x="589" y="216"/>
+        <di:waypoint x="765" y="215"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="559" y="193" width="218" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="businessRuleTask_v35co0h0i_to_exclusiveGateway_vg6o1lf16_di" bpmnElement="businessRuleTask_v35co0h0i_to_exclusiveGateway_vg6o1lf16">
+        <di:waypoint x="499" y="216"/>
+        <di:waypoint x="549" y="216"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="501" y="178" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="task_to_businessRuleTask_v35co0h0i_di" bpmnElement="task_to_businessRuleTask_v35co0h0i">
+        <di:waypoint x="299" y="216"/>
+        <di:waypoint x="399" y="216"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="299" y="197" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="dataObjectReference_x6h6je4fi_di" bpmnElement="dataObjectReference_x6h6je4fi" color:border-color="#666666" color:background-color="#ecd8e6">
+        <dc:Bounds x="310" y="89" height="50" width="38"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="310" y="144" height="18.2" width="38"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="dataAssoc_dataOutput_yst6i0nu6_to_dataObjectReference_x6h6je4fi_di" bpmnElement="dataAssoc_dataOutput_yst6i0nu6_to_dataObjectReference_x6h6je4fi">
+        <di:waypoint x="274" y="176"/>
+        <di:waypoint x="274" y="114"/>
+        <di:waypoint x="310" y="114"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="21" width="0" x="274" y="176"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="dataAssoc_dataInput_8dkpw72ng_to_dataInput_jako6qm61_di" bpmnElement="dataAssoc_dataInput_8dkpw72ng_to_dataInput_jako6qm61">
+        <di:waypoint x="186" y="114"/>
+        <di:waypoint x="224" y="114"/>
+        <di:waypoint x="224" y="176"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="21" width="0" x="186" y="114"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="dataInput_8dkpw72ng_di" bpmnElement="dataInput_8dkpw72ng" color:border-color="#666666" color:background-color="#ecd8e6">
+        <dc:Bounds x="148" y="89" height="50" width="38"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="148" y="144" height="18.2" width="38"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="start" id="di_start" color:border-color="#34bb16" color:background-color="#ffffff">
+        <dc:Bounds height="30" width="30" x="99" y="201"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds height="28" width="134" x="48" y="235"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="start_to_task" id="di_start_to_task">
+        <di:waypoint x="129" y="216"/>
+        <di:waypoint x="199" y="216"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="114" y="197" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</semantic:definitions>

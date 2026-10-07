@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sem:definitions expressionLanguage="http://www.omninet.de/bpmn/expressions/v1" typeLanguage="http://www.omninet.de/bpmn/types/v1" targetNamespace="http://www.omninet.de/bpmn/definitions/v1" xmlns:sem="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:ot="http://www.omninet.de/ot/bpmn/v1">
+	<sem:itemDefinition id="_OT_NAMESPACES_">
+		<sem:extensionElements>
+			<ot:namespace id="_1" name="C.3.0" alias="C30">
+				<ot:schemaObjectDescription>
+					<ot:translatedText lang="de"/>
+				</ot:schemaObjectDescription>
+			</ot:namespace>
+		</sem:extensionElements>
+	</sem:itemDefinition>
+	<sem:message id="_2" name="Service Level" ot:alias="message1" ot:namespace="_1"/>
+	<sem:process name="process1" ot:alias="process1" id="_4">
+		<sem:documentation textFormat="application/x-ot-schemaObjectDescription">
+			<ot:schemaObjectDescription>
+				<ot:translatedText lang="de"/>
+			</ot:schemaObjectDescription>
+		</sem:documentation>
+		<sem:extensionElements>
+			<ot:startPermission/>
+		</sem:extensionElements>
+		<sem:sequenceFlow id="_5" name="yes" ot:displayName="yes" ot:alias="flow7" sourceRef="_6" targetRef="_7"/>
+		<sem:sequenceFlow id="_8" ot:alias="flow4" sourceRef="_9" targetRef="_10"/>
+		<sem:sequenceFlow id="_11" ot:alias="flow10" sourceRef="_12" targetRef="_13"/>
+		<sem:sequenceFlow id="_14" ot:alias="edge2" sourceRef="_15" targetRef="_13"/>
+		<sem:sequenceFlow id="_16" ot:alias="edge4" sourceRef="_17" targetRef="_12"/>
+		<sem:sequenceFlow id="_18" ot:alias="flow2" sourceRef="_19" targetRef="_20"/>
+		<sem:sequenceFlow id="_21" name="Warranty" ot:displayName="Warranty" ot:alias="flow3" sourceRef="_20" targetRef="_9"/>
+		<sem:sequenceFlow id="_22" name="Emergency service" ot:displayName="Emergency service" ot:alias="flow5" sourceRef="_20" targetRef="_23"/>
+		<sem:sequenceFlow id="_24" name="no" ot:displayName="no" ot:alias="edge1" sourceRef="_6" targetRef="_9"/>
+		<sem:sequenceFlow id="_25" name="Regular repair service" ot:displayName="Regular repair service" ot:alias="flow8" sourceRef="_20" targetRef="_26"/>
+		<sem:sequenceFlow id="_27" name="Premium" ot:displayName="Premium" ot:alias="flow9" sourceRef="_26" targetRef="_12">
+			<sem:conditionExpression>Service Level == 'Premium'</sem:conditionExpression>
+		</sem:sequenceFlow>
+		<sem:sequenceFlow id="_28" ot:alias="edge3" sourceRef="_12" targetRef="_23"/>
+		<sem:sequenceFlow id="_29" name="Standard" ot:displayName="Standard" ot:alias="flow11" sourceRef="_26" targetRef="_15"/>
+		<sem:sequenceFlow id="_30" ot:alias="flow1" sourceRef="_31" targetRef="_19"/>
+		<sem:sequenceFlow id="_32" ot:alias="flow6" sourceRef="_23" targetRef="_6"/>
+		<sem:endEvent id="_13" name="Repair completed" ot:displayName="Repair completed" ot:alias="event5"/>
+		<sem:boundaryEvent id="_17" ot:alias="event6" attachedToRef="_15">
+			<sem:dataOutput id="_d_33"/>
+			<sem:outputSet>
+				<sem:dataOutputRefs>_d_33</sem:dataOutputRefs>
+			</sem:outputSet>
+			<sem:messageEventDefinition/>
+		</sem:boundaryEvent>
+		<sem:startEvent id="_31" name="Receive customer request" ot:displayName="Receive customer request" ot:alias="event1">
+			<sem:dataOutput id="_d_34"/>
+			<sem:outputSet>
+				<sem:dataOutputRefs>_d_34</sem:dataOutputRefs>
+			</sem:outputSet>
+			<sem:messageEventDefinition/>
+		</sem:startEvent>
+		<sem:endEvent id="_10" name="Fridge replaced" ot:displayName="Fridge replaced" ot:alias="event2"/>
+		<sem:endEvent id="_7" name="Emergency repair completed" ot:displayName="Emergency repair completed" ot:alias="event3"/>
+		<sem:boundaryEvent id="_35" name="2 hours" ot:displayName="2 hours" ot:alias="event4" attachedToRef="_12">
+			<sem:timerEventDefinition>
+				<sem:timeDuration/>
+			</sem:timerEventDefinition>
+		</sem:boundaryEvent>
+		<sem:exclusiveGateway id="_20" name="Service type" ot:displayName="Service type" ot:alias="gateway1"/>
+		<sem:exclusiveGateway id="_6" name="Successful?" ot:displayName="Successful?" ot:alias="gateway2"/>
+		<sem:exclusiveGateway id="_26" name="Service level" ot:displayName="Service level" ot:alias="gateway3"/>
+		<sem:userTask id="_15" name="Perform repair (standard level)" ot:displayName="Perform repair (standard level)" ot:alias="task5">
+			<sem:extensionElements>
+				<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" displayOkButton="false" displayApplyButton="false" formTitle="" otObject=""/>
+			</sem:extensionElements>
+		</sem:userTask>
+		<sem:userTask id="_19" name="Analyse customer request" ot:displayName="Analyse customer request" ot:alias="task1">
+			<sem:extensionElements>
+				<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" displayOkButton="false" displayApplyButton="false" formTitle="" otObject=""/>
+			</sem:extensionElements>
+		</sem:userTask>
+		<sem:userTask id="_9" name="Replace fridge" ot:displayName="Replace fridge" ot:alias="task2">
+			<sem:extensionElements>
+				<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" displayOkButton="false" displayApplyButton="false" formTitle="" otObject=""/>
+			</sem:extensionElements>
+		</sem:userTask>
+		<sem:userTask id="_12" name="Perform repair (premium level)" ot:displayName="Perform repair (premium level)" ot:alias="task4">
+			<sem:extensionElements>
+				<ot:userTaskDefinition title="" description="" dueDate="" responsible="" alsoVisibleFor="" formType="ruleBased" displayShowProcessButton="false" displayOkButton="false" displayApplyButton="false" formTitle="" otObject=""/>
+			</sem:extensionElements>
+		</sem:userTask>
+		<sem:callActivity id="_23" name="Perform emergency repair" ot:displayName="Perform emergency repair" ot:alias="task3"/>
+	</sem:process>
+	<bpmndi:BPMNDiagram id="_3" name="C.3.0-export">
+		<bpmndi:BPMNPlane ot:namespace="_1" ot:alias="C30export" ot:activeVersion="false" ot:diagramType="executable" ot:diagramStatus="new" ot:createdBy="User(&quot;superuser&quot;)" ot:createdDate="25.08.2026 08:11:29" ot:lastChangedBy="User(&quot;superuser&quot;)" ot:lastChangedDate="25.08.2026 08:09:18" bpmnElement="_4">
+			<di:extension>
+				<ot:schemaObjectDescription>
+					<ot:translatedText lang="de"/>
+				</ot:schemaObjectDescription>
+			</di:extension>
+			<bpmndi:BPMNEdge bpmnElement="_5">
+				<di:waypoint x="659" y="239"/>
+				<di:waypoint x="941" y="239"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_8">
+				<di:waypoint x="730" y="30"/>
+				<di:waypoint x="941" y="30"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_11">
+				<di:waypoint x="555" y="406"/>
+				<di:waypoint x="941" y="406"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_14">
+				<di:waypoint x="553" y="618"/>
+				<di:waypoint x="957" y="618"/>
+				<di:waypoint x="957" y="421"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_16">
+				<di:waypoint x="521.31370848" y="659.31370848"/>
+				<di:waypoint x="570" y="659.31370848"/>
+				<di:waypoint x="570" y="405"/>
+				<di:waypoint x="555" y="405"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_18">
+				<di:waypoint x="207" y="84"/>
+				<di:waypoint x="316" y="84"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_21">
+				<di:waypoint x="337" y="63"/>
+				<di:waypoint x="337" y="30"/>
+				<di:waypoint x="640" y="30"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_22">
+				<di:waypoint x="358" y="84"/>
+				<di:waypoint x="510" y="84"/>
+				<di:waypoint x="510" y="208"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_24">
+				<di:waypoint x="659" y="238"/>
+				<di:waypoint x="685" y="238"/>
+				<di:waypoint x="685" y="60"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_25">
+				<di:waypoint x="337" y="105"/>
+				<di:waypoint x="337" y="384"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_27">
+				<di:waypoint x="356" y="406"/>
+				<di:waypoint x="465" y="406"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_28">
+				<di:waypoint x="510" y="375"/>
+				<di:waypoint x="510" y="269"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_29">
+				<di:waypoint x="335" y="426"/>
+				<di:waypoint x="335" y="618"/>
+				<di:waypoint x="463" y="618"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_30">
+				<di:waypoint x="32" y="84"/>
+				<di:waypoint x="118" y="84"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge bpmnElement="_32">
+				<di:waypoint x="555" y="239"/>
+				<di:waypoint x="617" y="239"/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNShape bpmnElement="_13">
+				<dc:Bounds x="941" y="390" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_17">
+				<dc:Bounds x="494" y="632" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_31">
+				<dc:Bounds x="0" y="68" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_10">
+				<dc:Bounds x="941" y="15" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_7">
+				<dc:Bounds x="941" y="222" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_35">
+				<dc:Bounds x="494" y="420" width="32" height="32"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_20" isMarkerVisible="true">
+				<dc:Bounds x="316" y="63" width="42" height="42"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_6" isMarkerVisible="true">
+				<dc:Bounds x="617" y="218" width="42" height="42"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_26" isMarkerVisible="true">
+				<dc:Bounds x="314" y="385" width="42" height="42"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_15">
+				<dc:Bounds x="463" y="588" width="90" height="60"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_19">
+				<dc:Bounds x="118" y="54" width="90" height="60"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_9">
+				<dc:Bounds x="640" y="0" width="90" height="60"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_12">
+				<dc:Bounds x="465" y="376" width="90" height="60"/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape bpmnElement="_23">
+				<dc:Bounds x="465" y="209" width="90" height="60"/>
+			</bpmndi:BPMNShape>
+		</bpmndi:BPMNPlane>
+	</bpmndi:BPMNDiagram>
+</sem:definitions>

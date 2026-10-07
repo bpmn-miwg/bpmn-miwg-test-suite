@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright 2011-2026 Tim Stephenson and contributors
+
+   Licensed under the Apache License, Version 2.0 (the "License"); you may not
+   use this file except in compliance with the License.  You may obtain a copy
+   of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+   WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+   License for the specific language governing permissions and limitations under
+   the License.
+-->
+<?xml-stylesheet type="text/xsl" href="/xslt/bpmn2svg.xslt" alternate="no" ?>
+<semantic:definitions exporter="KnowProcess Modeler" exporterVersion="4.1.0" expressionLanguage="http://www.w3.org/1999/XPath" id="_wjh20zt10" name="A.3.0 definitions" targetNamespace="http://knowprocess.com/bpmn-miwg/A.3.0" typeLanguage="http://www.w3.org/2001/XMLSchema" kp:extra-namespaces="{}"
+  xmlns="http://knowprocess.com/bpmn-miwg/A.3.0"
+  xmlns:semantic="http://www.omg.org/spec/BPMN/20100524/MODEL"
+  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:activiti="http://activiti.org/bpmn"
+  xmlns:camunda="http://camunda.org/schema/1.0/bpmn"
+  xmlns:flowable="http://flowable.org/bpmn"
+  xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+  xmlns:sdmn="https://www.omg.org/spec/SDMN/"
+  xmlns:scedi="https://www.omg.org/spec/SCE/DI/"
+  xmlns:scedc="https://www.omg.org/spec/SCE/DC/"
+  xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0"
+  xmlns:feel="https://www.omg.org/spec/DMN/20240513/FEEL/"
+  xmlns:kp="http://knowprocess.com/bpmn">
+  <semantic:process id="_13s6o2wiq" isClosed="false" isExecutable="true" name="Untitled process" processType="None">
+    <semantic:startEvent id="startEvent" isInterrupting="true" name="Start Event" parallelMultiple="false">
+      <semantic:outgoing>_6</semantic:outgoing>
+      <semantic:outputSet/>
+    </semantic:startEvent>
+    <semantic:task completionQuantity="1" id="userTask" isForCompensation="false" startQuantity="1" name="Task 1">
+      <semantic:extensionElements/>
+      <semantic:incoming>_6</semantic:incoming>
+    </semantic:task>
+    <semantic:subProcess triggeredByEvent="false" completionQuantity="1" isForCompensation="false" startQuantity="1" id="subProcess_vgllb36rt" name="Collapsed&#xA;Sub-Process">
+      <semantic:task id="userTask_k16lgg4ox" name="Task 2"/>
+      <semantic:endEvent id="endEvent_wu1isadmm" name="End Event 1"/>
+      <semantic:sequenceFlow id="task_2hg8ywe50_to_endEvent_wu1isadmm" sourceRef="task_2hg8ywe50" targetRef="endEvent_wu1isadmm"/>
+      <semantic:sequenceFlow id="userTask_k16lgg4ox_to_endEvent_wu1isadmm" sourceRef="userTask_k16lgg4ox" targetRef="endEvent_wu1isadmm"/>
+      <semantic:sequenceFlow id="subProcess_vgllb36rt_to_userTask_k16lgg4ox" sourceRef="subProcess_vgllb36rt" targetRef="userTask_k16lgg4ox"/>
+    </semantic:subProcess>
+    <semantic:boundaryEvent id="boundaryEvent_uft8pdzyp" cancelActivity="true" attachedToRef="subProcess_vgllb36rt" name="Boundary Intermediate&#xA;Event Interrupting&#xA;Escalation">
+      <semantic:escalationEventDefinition id="escalationEventDefinition_mf3yjh0n5"/>
+    </semantic:boundaryEvent>
+    <semantic:task id="task_k42k6dkmd" name="Task 4"/>
+    <semantic:endEvent id="endEvent_791b7yak5" name="End Event 2"/>
+    <semantic:sequenceFlow id="task_k42k6dkmd_to_endEvent_791b7yak5" sourceRef="task_k42k6dkmd" targetRef="endEvent_791b7yak5"/>
+    <semantic:sequenceFlow id="boundaryEvent_uft8pdzyp_to_task_k42k6dkmd" sourceRef="boundaryEvent_uft8pdzyp" targetRef="task_k42k6dkmd"/>
+    <semantic:boundaryEvent id="boundaryEvent_ihbqd53sr" cancelActivity="false" attachedToRef="subProcess_vgllb36rt" name="Boundary Intermediate&#xA;Event Non-Interrupting&#xA;Message">
+      <semantic:messageEventDefinition id="messageEventDefinition_v82nqz6dz"/>
+    </semantic:boundaryEvent>
+    <semantic:task id="task_2hg8ywe50" name="Task 3"/>
+    <semantic:sequenceFlow id="boundaryEvent_ihbqd53sr_to_task_2hg8ywe50" sourceRef="boundaryEvent_ihbqd53sr" targetRef="task_2hg8ywe50"/>
+    <semantic:sequenceFlow id="userTask_to_subProcess_vgllb36rt" sourceRef="userTask" targetRef="subProcess_vgllb36rt"/>
+    <semantic:sequenceFlow id="_6" sourceRef="startEvent" targetRef="userTask"/>
+  </semantic:process>
+  <bpmndi:BPMNDiagram id="Diagram-UntitledProcess" name="A.3.0 diagram">
+    <bpmndi:BPMNPlane bpmnElement="_13s6o2wiq" color:border-color="#666666" color:background-color="#ffffff">
+      <bpmndi:BPMNShape bpmnElement="userTask" id="userTask_di" color:background-color="#bbd3d3" color:border-color="#666666">
+        <dc:Bounds height="80" width="100" x="230" y="200"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds height="60" width="100" x="230" y="220"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="subProcess_vgllb36rt_di" bpmnElement="subProcess_vgllb36rt" color:border-color="#666666" color:background-color="#ffffff" isExpanded="false">
+        <dc:Bounds x="380" y="200" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="380" y="202" height="18.2" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_k16lgg4ox_di" bpmnElement="userTask_k16lgg4ox" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="537" y="200" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="537" y="220" height="60" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_wu1isadmm_di" bpmnElement="endEvent_wu1isadmm" color:border-color="#ff0000" color:background-color="#ffffff">
+        <dc:Bounds x="687" y="224" height="32" width="32"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="657" y="258" height="14" width="92"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="task_2hg8ywe50_to_endEvent_wu1isadmm_di" bpmnElement="task_2hg8ywe50_to_endEvent_wu1isadmm">
+        <di:waypoint x="629" y="104"/>
+        <di:waypoint x="703" y="104"/>
+        <di:waypoint x="703" y="224"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="631" y="146" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="userTask_k16lgg4ox_to_endEvent_wu1isadmm_di" bpmnElement="userTask_k16lgg4ox_to_endEvent_wu1isadmm">
+        <di:waypoint x="637" y="240"/>
+        <di:waypoint x="687" y="240"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="639" y="202" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="subProcess_vgllb36rt_to_userTask_k16lgg4ox_di" bpmnElement="subProcess_vgllb36rt_to_userTask_k16lgg4ox">
+        <di:waypoint x="480" y="240"/>
+        <di:waypoint x="537" y="240"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="459" y="221" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="boundaryEvent_uft8pdzyp_di" bpmnElement="boundaryEvent_uft8pdzyp" color:border-color="#666666" color:background-color="#ffffff">
+        <dc:Bounds x="455" y="264" height="32" width="32"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="300" y="280" height="42" width="176"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="task_k42k6dkmd_di" bpmnElement="task_k42k6dkmd" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="537" y="344" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="537" y="364" height="60" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_791b7yak5_di" bpmnElement="endEvent_791b7yak5" color:border-color="#ff0000" color:background-color="#ffffff">
+        <dc:Bounds x="687" y="368" height="32" width="32"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="657" y="402" height="14" width="92"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="task_k42k6dkmd_to_endEvent_791b7yak5_di" bpmnElement="task_k42k6dkmd_to_endEvent_791b7yak5">
+        <di:waypoint x="637" y="384"/>
+        <di:waypoint x="687" y="384"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="612" y="365" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="boundaryEvent_uft8pdzyp_to_task_k42k6dkmd_di" bpmnElement="boundaryEvent_uft8pdzyp_to_task_k42k6dkmd">
+        <di:waypoint x="471" y="296"/>
+        <di:waypoint x="471" y="384"/>
+        <di:waypoint x="537" y="384"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="476" y="333" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="boundaryEvent_ihbqd53sr_di" bpmnElement="boundaryEvent_ihbqd53sr" color:border-color="#666666" color:background-color="#ffffff">
+        <dc:Bounds x="447" y="184" height="32" width="32"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="300" y="150" height="42" width="185"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="task_2hg8ywe50_di" bpmnElement="task_2hg8ywe50" color:border-color="#666666" color:background-color="#bbd3d3">
+        <dc:Bounds x="529" y="64" height="80" width="100"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="529" y="84" height="60" width="100"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="boundaryEvent_ihbqd53sr_to_task_2hg8ywe50_di" bpmnElement="boundaryEvent_ihbqd53sr_to_task_2hg8ywe50">
+        <di:waypoint x="463" y="184"/>
+        <di:waypoint x="463" y="104"/>
+        <di:waypoint x="529" y="104"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="479" y="181" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="userTask_to_subProcess_vgllb36rt_di" bpmnElement="userTask_to_subProcess_vgllb36rt">
+        <di:waypoint x="330" y="240"/>
+        <di:waypoint x="380" y="240"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="332" y="202" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape bpmnElement="startEvent" id="startEvent_di" color:background-color="#ffffff" color:border-color="#34bb16">
+        <dc:Bounds height="32" width="32" x="130" y="225"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds height="14" width="92" x="100" y="259"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="_6" id="di_6" color:border-color="#666666" color:background-color="#bbd3d3">
+        <di:waypoint x="162" y="241"/>
+        <di:waypoint x="230" y="240"/>
+        <bpmndi:BPMNLabel color:color="#666666">
+          <dc:Bounds x="146" y="222" width="100" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</semantic:definitions>
