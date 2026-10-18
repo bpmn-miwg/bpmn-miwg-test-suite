@@ -1,0 +1,397 @@
+<html>
+
+<head>
+<title>Results comparison</title>
+<link rel="icon" href="img/favicon.ico?" type="image/x-icon" />
+<link rel="shortcut icon" href="img/favicon.ico?" type="image/x-icon" />
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/navigation.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css"></head>
+
+<script src="//code.jquery.com/jquery-1.10.2.min.js" type="application/javascript"></script>
+<script src="lib/purl/purl.js" type="application/javascript"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+<script>
+
+
+$(document).ready(function() {
+  $("#message").text("Ready");
+  $("#selector").change(toolSelected);
+  
+  loadJSON();
+});
+
+var jsonData = null;
+var resultDIVs = null;
+var multipleDiagramsRefs = {};
+var referenceVariations = null;
+
+function loadJSON() {
+  $("#message").text("Loading...");
+
+
+  var url = "test-case-structure.json";
+  var toolsUrl = "tools-tested-by-miwg.json";
+
+  $.getJSON(toolsUrl, function (toolsTestedByMIWG) {
+
+    var jqxhr = $.getJSON(url)
+      .done(function(data) {
+        jsonData = data;
+        $("#message").text("Data Loaded");
+
+        var url_pattern = data.config.url_pattern;
+
+        resultDIVs = [];
+        referenceVariations = [];
+
+        $("#result3").empty();
+        var ulroot = $("#result3");
+
+        var sidebar = $("#sidebar");
+
+
+        data.categories.forEach(function(category) {
+          //$("<h3>Category " + category.category + ": " +category.name + "</h3>").appendTo(ulroot);
+          //$("<div class='description'>" +  category.description + "</div>").appendTo(ulroot);
+
+          category.cases.forEach(function(case2) {
+            //$("<h4>Case " + case2.case + "</h4>").appendTo(ulroot);
+            //$("<div class='description'>" + case2.description + "</div>").appendTo(ulroot);
+
+            case2.variations.forEach(function(variation) {
+              //$("<h5>Variation " + variation.variation + "</h5>").appendTo(ulroot);
+              //$("<div class='description'>" + variation.description + "</div>").appendTo(ulroot);
+
+              //$("<div class='caption'>Reference</caption>").appendTo(ulroot);
+
+              $("<div class='page-header'><h3 id='sect-" + variation.variation + "'>" + variation.variation + " <small>" + variation.description + "</small></h3></div>").appendTo(ulroot);
+
+              $("<li><a href='#sect-" + variation.variation + "'>" + variation.variation + "</a></li>").appendTo(sidebar)
+
+              if (!variation.numberOfDiagrams) {
+                var row = $("<div class='row' />");
+                row.appendTo(ulroot);
+                var refDiv = $("<div class='col-md-6'/>");
+                refDiv.appendTo(row);
+              
+                $("<p class='caption'>" + variation.variation + " reference</p>").appendTo(refDiv);
+
+                var png_url = url_pattern.file.replace("{CATEGORYURL}", category.url_fragment).replace("{TOOLURL}", "Reference").replace("{FILEURL}", variation.variation).replace("{FILEEXT}", "png");
+                $("<a href='"+png_url+"' target='_blank'><img src='" + png_url + "' class='bpmn-image' /></a>").appendTo(refDiv);
+                //$("<div class='caption'>Tool Results</div>").appendTo(ulroot);
+                
+                var bpmn_url = url_pattern.file.replace("{CATEGORYURL}", category.url_fragment).replace("{TOOLURL}", "Reference").replace("{FILEURL}", variation.variation).replace("{FILEEXT}", "bpmn");
+                var folder_url = url_pattern.folder.replace("{CATEGORYURL}", category.url_fragment).replace("{TOOLURL}", "Reference");
+
+                var nav = $("<ul class='nav nav-pills'/>").appendTo(refDiv);
+
+                $("<li><a href='visual-test-result-comparison-bounds.html?base=" + encodeURIComponent(png_url) + "&overlayFolder=" + encodeURIComponent(url_pattern.boundsFolder)+"&variation=" + encodeURIComponent(variation.variation) + "&title=Reference%20" + variation.variation +"' target='_blank'>Bounds Overlay <span class='glyphicon glyphicon glyphicon-picture'></span></a></li>").appendTo(nav);
+                $("<li><a href='" + bpmn_url + "' target='_blank'>BPMN file <span class='glyphicon glyphicon-new-window'></span></a></li>").appendTo(nav);
+                $("<li><a href='" + folder_url + "' target='_blank'>Reference folder <span class='glyphicon glyphicon-new-window'></span></a></li>").appendTo(nav);
+             
+                //$("<div class='col2'>right</div>").appendTo(ulroot);
+                var temp = $("<div class='col-md-6' id='results-" + variation.variation + "' >No results available.</div>");
+                temp.appendTo(row);
+                resultDIVs[variation.variation] = temp;
+                referenceVariations.push(variation);
+              } else {
+
+                
+                  
+                for (var diagramNumber = 1; diagramNumber <= variation.numberOfDiagrams; diagramNumber += 1) {
+                  var refDiv = $("<div class='col-md-6'/>");
+                  var row = $("<div class='row' />");
+                  row.appendTo(ulroot);
+
+                  refDiv.appendTo(row);
+
+                  $("<p class='caption'>" + variation.variation + " reference, diagram " + diagramNumber + "</p>").appendTo(refDiv);
+
+                  var png_url = url_pattern.file.replace("{CATEGORYURL}", category.url_fragment).replace("{TOOLURL}", "Reference").replace("{FILEURL}", variation.variation+'.'+diagramNumber).replace("{FILEEXT}", "png");
+                  $("<a href='"+png_url+"' target='_blank'><img src='" + png_url + "' class='bpmn-image' /></a>").appendTo(refDiv);
+                  //$("<div class='caption'>Tool Results</div>").appendTo(ulroot);
+                  
+                  var bpmn_url = url_pattern.file.replace("{CATEGORYURL}", category.url_fragment).replace("{TOOLURL}", "Reference").replace("{FILEURL}", variation.variation).replace("{FILEEXT}", "bpmn");
+                  var folder_url = url_pattern.folder.replace("{CATEGORYURL}", category.url_fragment).replace("{TOOLURL}", "Reference");
+
+                  var nav = $("<ul class='nav nav-pills'/>").appendTo(refDiv);
+
+                  $("<li><a href='visual-test-result-comparison-bounds.html?base=" + encodeURIComponent(png_url) + "&overlayFolder=" + encodeURIComponent(url_pattern.boundsFolder)+"&variation=" + encodeURIComponent(variation.variation + '_' + diagramNumber) + "&title=Reference%20" + variation.variation +"' target='_blank'>Bounds Overlay <span class='glyphicon glyphicon glyphicon-picture'></span></a></li>").appendTo(nav);
+                  $("<li><a href='" + bpmn_url + "' target='_blank'>BPMN file <span class='glyphicon glyphicon-new-window'></span></a></li>").appendTo(nav);
+                  $("<li><a href='" + folder_url + "' target='_blank'>Reference folder <span class='glyphicon glyphicon-new-window'></span></a></li>").appendTo(nav);
+            
+                  var temp = $("<div class='col-md-6' id='results-" + variation.variation + "' >No results available.</div>");
+                  temp.appendTo(row);
+                  multipleDiagramsRefs[variation.variation+diagramNumber] = temp;
+                }
+                referenceVariations.push(variation);
+              }
+            });
+          });
+
+        });
+
+        var selector = $("#selector");
+        selector.empty();
+        var selectedTool = $.url().param('tool');
+        toolsTestedByMIWG.tools.forEach(function(tool) {
+          var toolAndVersion = tool.tool + " " + tool.version;
+          var selected = '';
+          if (selectedTool == toolAndVersion) {
+            selected = ' selected="selected"';
+          }
+          $("<option" + selected + ">" + toolAndVersion + "</option>").appendTo(selector).data('configuration', tool);
+        });
+
+        $("#message").text("Reference processed");
+
+        toolSelected();
+
+
+
+      })
+      .fail(function() {
+        $("#message").text("Error: " + textStatus);
+      });
+    });
+}
+
+function toolSelected() {
+
+  var typesToIterate = ['import', 'export', 'roundtrip'];
+
+  // get the search value of the location of the browser window
+  var search = document.location.search;
+
+  // if there is a search value
+  if (search) {
+
+    // get the type out of the search value
+    var forcedOnlyType = search.split('&type=')[1];
+
+    // if we got a type out of the search value, overwrite the types we iterate over,
+    // so we don't iterate over import, export and rountrip but rather "ONLY" over
+    // the one type submitted through the search.
+    if (forcedOnlyType && forcedOnlyType !== 'undefined') {
+      typesToIterate = [forcedOnlyType];
+    }
+  }
+
+  $("#message").text("Processing results...");
+  var selectedOptions = $("#selector option:selected");
+  var selectedTool = selectedOptions.val();
+  var options = selectedOptions.data('configuration');
+//   var selectedToolJSON = findInList(jsonData.results, "tool", selectedTool);
+  var url_pattern = jsonData.config.url_pattern;
+
+  referenceVariations.forEach(function(referenceVariation) {
+    // don't continue if we have multiple diagrams for this variation
+    if (referenceVariation.numberOfDiagrams) {
+      for (var diagramNumber = 1; diagramNumber <= referenceVariation.numberOfDiagrams; diagramNumber += 1) {
+        var div = multipleDiagramsRefs[referenceVariation.variation+diagramNumber];
+        div.empty();
+
+        typesToIterate.forEach(function(type) {
+
+          $("<p class='caption'>" + referenceVariation.variation + ", diagram " + diagramNumber + " " + type + "</p>").appendTo(div);
+
+          var categoryID = referenceVariation.variation[0];
+          var categoryJSON = findInList(jsonData.categories, "category", categoryID);
+
+          var bpmn_url = url_pattern.file.replace("{CATEGORYURL}", categoryJSON.url_fragment).replace("{TOOLURL}", selectedTool).replace("{FILEURL}", referenceVariation.variation+"-"+type).replace("{FILEEXT}", "bpmn");
+          var png_url = url_pattern.file.replace("{CATEGORYURL}", categoryJSON.url_fragment).replace("{TOOLURL}", selectedTool).replace("{FILEURL}", referenceVariation.variation+"-"+type+"."+diagramNumber).replace("{FILEEXT}", "png");
+          var folder_url = url_pattern.folder.replace("{CATEGORYURL}", categoryJSON.url_fragment).replace("{TOOLURL}", selectedTool);
+          var img_id = "'" + referenceVariation.variation + "-" + type + "'"
+          if (type !== 'roundtrip') {
+              $("<a href='"+png_url+"' target='_blank'><img src='" + png_url + "' class='bpmn-image' onerror='ImgError(this);'/></a>").appendTo(div);
+          } else {
+              $("<p>No roundtrip image.</p>").appendTo(div);
+          }
+
+          var nav = $("<ul class='nav nav-pills'/>").appendTo(div);
+          var zoom = "";
+          if(options.boundsZoom) {
+            if(typeof(options.boundsZoom) === 'number') {
+              zoom = "zoom=" +  options.boundsZoom + "&";
+            } else {
+              if (options.boundsZoom[type]) {
+                if(typeof(options.boundsZoom[type]) === 'number') {
+                  zoom = "zoom=" +  options.boundsZoom[type] + "&";
+                } else {
+                  if(typeof(options.boundsZoom[type][referenceVariation.variation]) === 'number'){
+                    zoom = "zoom=" +  options.boundsZoom[type][referenceVariation.variation] + "&";
+                  }
+                }
+              }
+            }
+          }
+          if (type !== 'roundtrip') {
+              $("<li><a href='visual-test-result-comparison-bounds.html?" + zoom + "base=" + encodeURIComponent(png_url) + "&overlayFolder=" + encodeURIComponent(url_pattern.boundsFolder)+"&variation=" + encodeURIComponent(referenceVariation.variation + '_' + diagramNumber) + "&title=" + type + "%20" + encodeURIComponent(referenceVariation.variation) +"' target='_blank'>Bounds Overlay <span class='glyphicon glyphicon glyphicon-picture'></span></a></li>").appendTo(nav);
+          }
+          if (type !== 'import') {
+              $("<li><a href='" + bpmn_url + "' target='_blank'>BPMN file <span class='glyphicon glyphicon-new-window'></span></a></li>").appendTo(nav);
+          }
+          $("<li><a href='" + folder_url + "' target='_blank'>Results folder <span class='glyphicon glyphicon-new-window'></span></a></li>").appendTo(nav);
+        });
+
+      
+      }
+      return;
+    }
+
+    var div = resultDIVs[referenceVariation.variation];
+    div.empty();
+
+    typesToIterate.forEach(function(type) {
+
+      $("<p class='caption'>" + referenceVariation.variation + " " + type + "</p>").appendTo(div);
+
+      var categoryID = referenceVariation.variation[0];
+      var categoryJSON = findInList(jsonData.categories, "category", categoryID);
+
+      var bpmn_url = url_pattern.file.replace("{CATEGORYURL}", categoryJSON.url_fragment).replace("{TOOLURL}", selectedTool).replace("{FILEURL}", referenceVariation.variation+"-"+type).replace("{FILEEXT}", "bpmn");
+      var png_url = url_pattern.file.replace("{CATEGORYURL}", categoryJSON.url_fragment).replace("{TOOLURL}", selectedTool).replace("{FILEURL}", referenceVariation.variation+"-"+type).replace("{FILEEXT}", "png");
+      var folder_url = url_pattern.folder.replace("{CATEGORYURL}", categoryJSON.url_fragment).replace("{TOOLURL}", selectedTool);
+      var img_id = "'" + referenceVariation.variation + "-" + type + "'"
+      if (type !== 'roundtrip') {
+        $("<a href='"+png_url+"' target='_blank'><img src='" + png_url + "' class='bpmn-image' onerror='ImgError(this);'/></a>").appendTo(div);
+      } else {
+        $("<p>No roundtrip image.</p>").appendTo(div);
+      }
+
+      var nav = $("<ul class='nav nav-pills'/>").appendTo(div);
+      var zoom = "";
+      if(options.boundsZoom) {
+        if(typeof(options.boundsZoom) === 'number') {
+          zoom = "zoom=" +  options.boundsZoom + "&";
+        } else {
+          if (options.boundsZoom[type]) {
+            if(typeof(options.boundsZoom[type]) === 'number') {
+              zoom = "zoom=" +  options.boundsZoom[type] + "&";
+            } else {
+              if(typeof(options.boundsZoom[type][referenceVariation.variation]) === 'number'){
+                zoom = "zoom=" +  options.boundsZoom[type][referenceVariation.variation] + "&";
+              }
+            }
+          }
+        }
+      }
+      if (type !== 'roundtrip') {
+          $("<li><a href='visual-test-result-comparison-bounds.html?" + zoom + "base=" + encodeURIComponent(png_url) + "&overlayFolder=" + encodeURIComponent(url_pattern.boundsFolder)+"&variation=" + encodeURIComponent(referenceVariation.variation) + "&title=" + type + "%20" + encodeURIComponent(referenceVariation.variation) +"' target='_blank'>Bounds Overlay <span class='glyphicon glyphicon glyphicon-picture'></span></a></li>").appendTo(nav);
+      }
+      if (type !== 'import') {
+          $("<li><a href='" + bpmn_url + "' target='_blank'>BPMN file <span class='glyphicon glyphicon-new-window'></span></a></li>").appendTo(nav);
+      }
+      $("<li><a href='" + folder_url + "' target='_blank'>Results folder <span class='glyphicon glyphicon-new-window'></span></a></li>").appendTo(nav);
+
+    });
+
+  });
+
+
+  $("#message").text("Reference and results processed");
+
+}
+
+function findInList(list, attribute, value) {
+  var ret = null;
+  list.forEach(function(v) {
+    if (v[attribute] == value) {
+      ret = v;
+    }
+  });
+  return ret;
+}
+
+function ImgError(img) {
+  var a = img.parentElement
+  a.removeChild(img);
+  a.href = "https://github.com/bpmn-miwg/bpmn-miwg-test-suite#how-to-test-a-bpmn-tool-using-this-test-suite";
+  a.textContent = 'There is no test result available. Please test the tool and submit the results to OMG.';
+}
+
+</script>
+
+<body>
+
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+            <a class="navbar-brand" href="http://www.omgwiki.org/bpmn-miwg/doku.php?id=start">OMG BPMN MIWG</a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="http://www.omgwiki.org/bpmn-miwg/doku.php?id=start">Wiki</a></li>
+        <li><a href="https://github.com/bpmn-miwg/bpmn-miwg-test-suite/">Test Suite</a></li>
+        <li><a href="https://github.com/bpmn-miwg/bpmn-miwg-tools/">Tools</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!--<header class="navbar navbar-bright navbar-fixed-top" role="banner">-->
+
+
+<div class="container-fluid">
+
+  <div class="row">
+
+    <nav class="col-md-2">
+      <ul class="nav nav-stacked hidden-xs hidden-print hidden-sm hidden-xs affix" id="sidebar" role="complementary">
+        <li ><a href="#tool">Select tool</a></li>
+      </ul>
+    </nav>
+
+    <section class="col-md-10" id="content">
+
+      <div  class="page-header">
+      <h2 id="tool" >Tool selection</h2>
+      </div>
+
+
+      <div class="input-group">
+        <span class="input-group-addon">Tool</span>
+        <select id="selector" class="form-control" >
+        </select>
+      </div>
+
+      <p class="text-muted" id="message">Initializing...</p>
+
+      <div class="page-header">
+      <h2>Test Results</h2>
+      </div>
+      <div  id="result3">-</div>
+      </div>
+
+  </div>
+
+</div>
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-68020511-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+
+
+
+</html>
