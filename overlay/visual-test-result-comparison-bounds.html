@@ -1,0 +1,175 @@
+<html>
+
+<head>
+<title>Results bound comparison</title>
+<link rel="icon" href="http://www.omg.org/favicon.ico?" type="image/x-icon" />
+<link rel="shortcut icon" href="http://www.omg.org/favicon.ico?" type="image/x-icon" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+<script src="//code.jquery.com/jquery-1.10.2.min.js" type="application/javascript"></script>
+<script src="lib/purl/purl.js" type="application/javascript"></script>
+</head>
+<style>
+body {
+    margin: 30px 30px;
+}
+#title {
+    text-align:center;
+}
+#comparaison {
+    position: relative;
+}
+
+img {
+    border: 1px solid #333333;
+}
+
+#overlay {
+    position:absolute;
+    top: 0px;
+    left: 0px;
+    border: 1px solid #aaaaaa;
+}
+
+
+
+</style>
+
+<body>
+    <div id="title">
+        <h1></h1>
+        <p>
+            Using overlay stencil: 
+            <select id="overlay-suffix">
+                <option value="_all_bounds.png">All Bounds</option>
+                <option value="_label_bounds.png">Label Bounds</option>
+                <option value="_shapes_bounds.png">Shape/Edge Bounds</option>
+            </select>
+        </p>
+        <p><span class='glyphicon glyphicon-move'></span> Drag the stencil using the mouse drag/drop or the keyboard arrows.</p>
+        <p><span class='glyphicon glyphicon-zoom-in'></span> Zoom in/out using the Page Up/Page Down buttons (<input type="text" id="scale" size=3 value="1.0"/></span>)</p>
+    </div>
+    <div id="comparaison">
+        <img id="base"></img>
+        <img id="overlay"></img>
+    </div>
+
+</body>
+<script>
+	//Draggable code. Source: https://css-tricks.com/snippets/jquery/draggable-without-jquery-ui/
+	(function($) {
+		$.fn.drags = function(opt) {
+
+			opt = $.extend({handle:"",cursor:"move"}, opt);
+
+			if(opt.handle === "") {
+				var $el = this;
+			} else {
+				var $el = this.find(opt.handle);
+			}
+
+			return $el.css('cursor', opt.cursor).on("mousedown", function(e) {
+				if(opt.handle === "") {
+					var $drag = $(this).addClass('draggable');
+				} else {
+					var $drag = $(this).addClass('active-handle').parent().addClass('draggable');
+				}
+				var z_idx = $drag.css('z-index'),
+					drg_h = $drag.outerHeight(),
+					drg_w = $drag.outerWidth(),
+					pos_y = $drag.offset().top + drg_h - e.pageY,
+					pos_x = $drag.offset().left + drg_w - e.pageX;
+				$drag.css('z-index', 1000).parents().on("mousemove", function(e) {
+					$('.draggable').offset({
+						top:e.pageY + pos_y - drg_h,
+						left:e.pageX + pos_x - drg_w
+					}).on("mouseup", function() {
+						$(this).removeClass('draggable').css('z-index', z_idx);
+					});
+				});
+				e.preventDefault(); // disable selection
+			}).on("mouseup", function() {
+				if(opt.handle === "") {
+					$(this).removeClass('draggable');
+				} else {
+					$(this).removeClass('active-handle').parent().removeClass('draggable');
+				}
+			});
+
+		}
+	})(jQuery);
+
+
+    $('#title h1').html($.url().param('title'));
+    
+    //Set the image src in the DOM
+    var $overlay = $('#overlay');
+    $('#base').attr('src', $.url().param('base'));
+	if ($.url().param('zoom')) {
+		$('#scale').val($.url().param('zoom'));
+		$overlay.css('transform', 'scale(' + parseFloat($('#scale').val()) + ')');
+	}
+    var overlayPrefix = $.url().param('overlayFolder') + '/' + $.url().param('variation');    
+    var overlaySuffix = localStorage.miwgVisualCompareOverlay;
+    if(!overlaySuffix) {
+       overlaySuffix = '_all_bounds.png';
+    }
+	
+    $overlay.attr('src', overlayPrefix + overlaySuffix).drags({ cursor: "move"});
+    
+    $('#overlay-suffix').val(overlaySuffix).change(function(){
+        overlaySuffix = $(this).val();
+        localStorage.miwgVisualCompareOverlay = overlaySuffix;
+        $overlay.attr('src', overlayPrefix + overlaySuffix);
+    });
+        
+    
+    //Add keyboard binding
+    $('body').keydown(function(e) {
+        //Nudging
+        if (e.keyCode >= 37 && e.keyCode <=40) {
+            e.preventDefault();
+            var offset = $overlay.offset();
+            switch(e.keyCode){
+                case 37:
+                    offset.left = offset.left -1;
+                    break;
+                case 38:
+                    offset.top = offset.top - 1;
+                    break;
+                case 39:
+                    offset.left = offset.left + 1;
+                    break;
+                case 40:
+                    offset.top = offset.top +1;
+                    break;                
+                    
+            }
+            $overlay.offset(offset);
+        }
+        //Zooming
+        if(e.keyCode == 33 || e.keyCode ==34) {
+            var scale = parseFloat($('#scale').val());            
+            if(e.keyCode == 33) {
+                scale = scale + 0.1;
+            } else {
+                scale = scale - 0.1;
+            }
+            scale = scale.toFixed(2);
+            $overlay.css('transform', 'scale(' + scale + ')');
+            $('#scale').val(scale);
+        }
+        
+
+    });
+    
+    //Scale keyboard entry
+    $('#scale').change(function(){
+        $overlay.css('transform', 'scale(' + parseFloat($('#scale').val()) + ')');
+    });
+
+</script>
+
+
+
+</html>
