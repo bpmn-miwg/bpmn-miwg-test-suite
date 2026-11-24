@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:taom="https://traniva.com/ns/taom" id="Definitions_nb_c_7_0" targetNamespace="http://bpmn.io/schema/bpmn" exporter="TAOM Process Studio" exporterVersion="7.0.492">
+  <bpmn:collaboration id="Collaboration_1kkuirj">
+    <bpmn:extensionElements>
+      <taom:meta>
+        <taom:ebene lang="">L4</taom:ebene>
+        <taom:austausch form="1" docLang="-"/>
+      </taom:meta>
+      <taom:meta>
+        <taom:title lang="de">EU Bank - Process</taom:title>
+      </taom:meta>
+    </bpmn:extensionElements>
+    <bpmn:participant id="Participant_7wq173h" name="EU Bank" processRef="Process_nb_c_7_0"/>
+  </bpmn:collaboration>
+  <bpmn:process id="Process_nb_c_7_0" isExecutable="false">
+    <bpmn:ioSpecification id="IoSpecification_rp0g1ru">
+      <bpmn:dataInput id="dataInput_l0x2i10" name="Role &#10;required"/>
+      <bpmn:dataOutput id="dataOutput_8cxabx1" name="Advertisement">
+        <bpmn:dataState id="DataState_1ct7rnw" name="Approved"/>
+      </bpmn:dataOutput>
+      <bpmn:inputSet id="InputSet_rnf3oqq">
+        <bpmn:dataInputRefs>dataInput_l0x2i10</bpmn:dataInputRefs>
+      </bpmn:inputSet>
+      <bpmn:outputSet id="OutputSet_jzk59vs">
+        <bpmn:dataOutputRefs>dataOutput_8cxabx1</bpmn:dataOutputRefs>
+      </bpmn:outputSet>
+    </bpmn:ioSpecification>
+    <bpmn:laneSet id="LaneSet_ahduk">
+      <bpmn:lane id="Lane_fkk3hh5" name="Recruitment">
+        <bpmn:flowNodeRef>userTask_3cewpwb</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>businessRuleTask_enzm2en</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>serviceTask_uijq3c3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>serviceTask_x4b1ngn</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>parallelGateway_92nxltc</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>parallelGateway_n3snvka</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>endEvent_eme8juz</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_8oy8r6k" name="Hiring manager">
+        <bpmn:flowNodeRef>userTask_93wuokt</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>userTask_jeo48th</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>exclusiveGateway_s6rsopz</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>startEvent_ch3znzq</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:userTask id="userTask_93wuokt" name="Write &#10;description">
+      <bpmn:incoming>Flow_camlfg1</bpmn:incoming>
+      <bpmn:outgoing>Flow_zevdwcr</bpmn:outgoing>
+      <bpmn:ioSpecification>
+        <bpmn:dataOutput id="DataOutput_Assoc_6ggrffr" name="Description"/>
+        <bpmn:inputSet/>
+        <bpmn:outputSet>
+          <bpmn:dataOutputRefs>DataOutput_Assoc_6ggrffr</bpmn:dataOutputRefs>
+        </bpmn:outputSet>
+      </bpmn:ioSpecification>
+      <bpmn:dataOutputAssociation id="Assoc_6ggrffr">
+        <bpmn:sourceRef>DataOutput_Assoc_6ggrffr</bpmn:sourceRef>
+        <bpmn:targetRef>dataObjectReference_emcgd7c</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+      <bpmn:potentialOwner id="PotentialOwner_userTask_93wuokt" name="Hiring manager">
+        <bpmn:resourceRef>Resource_fc085c3e</bpmn:resourceRef>
+      </bpmn:potentialOwner>
+    </bpmn:userTask>
+    <bpmn:userTask id="userTask_jeo48th" name="Approve advertisement">
+      <bpmn:incoming>Flow_ejxx0se</bpmn:incoming>
+      <bpmn:outgoing>Flow_bfake5s</bpmn:outgoing>
+      <bpmn:ioSpecification>
+        <bpmn:dataInput id="DataInput_Assoc_ondykc3" name="Advertisement"/>
+        <bpmn:dataOutput id="DataOutput_Assoc_ff6h5z1" name="Advertisement"/>
+        <bpmn:inputSet>
+          <bpmn:dataInputRefs>DataInput_Assoc_ondykc3</bpmn:dataInputRefs>
+        </bpmn:inputSet>
+        <bpmn:outputSet>
+          <bpmn:dataOutputRefs>DataOutput_Assoc_ff6h5z1</bpmn:dataOutputRefs>
+        </bpmn:outputSet>
+      </bpmn:ioSpecification>
+      <bpmn:dataInputAssociation id="Assoc_ondykc3">
+        <bpmn:sourceRef>dataObjectReference_i0uasvq</bpmn:sourceRef>
+        <bpmn:targetRef>DataInput_Assoc_ondykc3</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+      <bpmn:dataOutputAssociation id="Assoc_ff6h5z1">
+        <bpmn:sourceRef>DataOutput_Assoc_ff6h5z1</bpmn:sourceRef>
+        <bpmn:targetRef>dataOutput_8cxabx1</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+      <bpmn:potentialOwner id="PotentialOwner_userTask_jeo48th" name="Hiring manager">
+        <bpmn:resourceRef>Resource_fc085c3e</bpmn:resourceRef>
+      </bpmn:potentialOwner>
+    </bpmn:userTask>
+    <bpmn:userTask id="userTask_3cewpwb" name="Complete advertisement">
+      <bpmn:incoming>Flow_zevdwcr</bpmn:incoming>
+      <bpmn:incoming>Flow_ucxzq41</bpmn:incoming>
+      <bpmn:outgoing>Flow_ejxx0se</bpmn:outgoing>
+      <bpmn:ioSpecification>
+        <bpmn:dataInput id="DataInput_Assoc_rdu0yrt" name="Description"/>
+        <bpmn:dataOutput id="DataOutput_Assoc_z2jqrru" name="Advertisement"/>
+        <bpmn:inputSet>
+          <bpmn:dataInputRefs>DataInput_Assoc_rdu0yrt</bpmn:dataInputRefs>
+        </bpmn:inputSet>
+        <bpmn:outputSet>
+          <bpmn:dataOutputRefs>DataOutput_Assoc_z2jqrru</bpmn:dataOutputRefs>
+        </bpmn:outputSet>
+      </bpmn:ioSpecification>
+      <bpmn:dataInputAssociation id="Assoc_rdu0yrt">
+        <bpmn:sourceRef>dataObjectReference_emcgd7c</bpmn:sourceRef>
+        <bpmn:targetRef>DataInput_Assoc_rdu0yrt</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+      <bpmn:dataOutputAssociation id="Assoc_z2jqrru">
+        <bpmn:sourceRef>DataOutput_Assoc_z2jqrru</bpmn:sourceRef>
+        <bpmn:targetRef>dataObjectReference_i0uasvq</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+      <bpmn:potentialOwner id="PotentialOwner_userTask_3cewpwb" name="Recruitment">
+        <bpmn:resourceRef>Resource_e1de43dd</bpmn:resourceRef>
+      </bpmn:potentialOwner>
+    </bpmn:userTask>
+    <bpmn:businessRuleTask id="businessRuleTask_enzm2en" name="Select &#10;other platforms">
+      <bpmn:incoming>Flow_8c8kg5i</bpmn:incoming>
+      <bpmn:outgoing>Flow_b6llxsp</bpmn:outgoing>
+      <bpmn:performer id="Performer_businessRuleTask_enzm2en" name="Recruitment">
+        <bpmn:resourceRef>Resource_e1de43dd</bpmn:resourceRef>
+      </bpmn:performer>
+    </bpmn:businessRuleTask>
+    <bpmn:serviceTask id="serviceTask_uijq3c3" name="Publish on &#10;homepage">
+      <bpmn:incoming>Flow_yhd3uf1</bpmn:incoming>
+      <bpmn:outgoing>Flow_ktm0sa2</bpmn:outgoing>
+      <bpmn:performer id="Performer_serviceTask_uijq3c3" name="Recruitment">
+        <bpmn:resourceRef>Resource_e1de43dd</bpmn:resourceRef>
+      </bpmn:performer>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="serviceTask_x4b1ngn" name="Publish on &#10;other platforms">
+      <bpmn:incoming>Flow_b6llxsp</bpmn:incoming>
+      <bpmn:outgoing>Flow_02uayn1</bpmn:outgoing>
+      <bpmn:performer id="Performer_serviceTask_x4b1ngn" name="Recruitment">
+        <bpmn:resourceRef>Resource_e1de43dd</bpmn:resourceRef>
+      </bpmn:performer>
+      <bpmn:multiInstanceLoopCharacteristics/>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="exclusiveGateway_s6rsopz" name="Advertisement approved?" gatewayDirection="Diverging">
+      <bpmn:incoming>Flow_bfake5s</bpmn:incoming>
+      <bpmn:outgoing>Flow_ucxzq41</bpmn:outgoing>
+      <bpmn:outgoing>Flow_hotvxbl</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:parallelGateway id="parallelGateway_92nxltc" gatewayDirection="Diverging">
+      <bpmn:incoming>Flow_hotvxbl</bpmn:incoming>
+      <bpmn:outgoing>Flow_yhd3uf1</bpmn:outgoing>
+      <bpmn:outgoing>Flow_8c8kg5i</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:parallelGateway id="parallelGateway_n3snvka" gatewayDirection="Converging">
+      <bpmn:incoming>Flow_ktm0sa2</bpmn:incoming>
+      <bpmn:incoming>Flow_02uayn1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2rtnv2v</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:dataObjectReference id="dataObjectReference_emcgd7c" name="Description"/>
+    <bpmn:dataObjectReference id="dataObjectReference_i0uasvq" name="Advertisement"/>
+    <bpmn:dataObject id="DataObject_8nowzxk" isCollection="true"/>
+    <bpmn:dataObjectReference id="dataObjectReference_d8fclho" name="Selected&#10; platforms" dataObjectRef="DataObject_8nowzxk"/>
+    <bpmn:endEvent id="endEvent_eme8juz" name="Vacancy &#10;advertised">
+      <bpmn:incoming>Flow_2rtnv2v</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:startEvent id="startEvent_ch3znzq" name="Job &#10;vacancy">
+      <bpmn:outgoing>Flow_camlfg1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_camlfg1" sourceRef="startEvent_ch3znzq" targetRef="userTask_93wuokt"/>
+    <bpmn:sequenceFlow id="Flow_zevdwcr" sourceRef="userTask_93wuokt" targetRef="userTask_3cewpwb"/>
+    <bpmn:sequenceFlow id="Flow_ejxx0se" sourceRef="userTask_3cewpwb" targetRef="userTask_jeo48th"/>
+    <bpmn:sequenceFlow id="Flow_bfake5s" sourceRef="userTask_jeo48th" targetRef="exclusiveGateway_s6rsopz"/>
+    <bpmn:sequenceFlow id="Flow_ucxzq41" sourceRef="exclusiveGateway_s6rsopz" targetRef="userTask_3cewpwb" name="No"/>
+    <bpmn:sequenceFlow id="Flow_hotvxbl" sourceRef="exclusiveGateway_s6rsopz" targetRef="parallelGateway_92nxltc" name="Yes"/>
+    <bpmn:sequenceFlow id="Flow_yhd3uf1" sourceRef="parallelGateway_92nxltc" targetRef="serviceTask_uijq3c3"/>
+    <bpmn:sequenceFlow id="Flow_8c8kg5i" sourceRef="parallelGateway_92nxltc" targetRef="businessRuleTask_enzm2en"/>
+    <bpmn:sequenceFlow id="Flow_ktm0sa2" sourceRef="serviceTask_uijq3c3" targetRef="parallelGateway_n3snvka"/>
+    <bpmn:sequenceFlow id="Flow_b6llxsp" sourceRef="businessRuleTask_enzm2en" targetRef="serviceTask_x4b1ngn"/>
+    <bpmn:sequenceFlow id="Flow_2rtnv2v" sourceRef="parallelGateway_n3snvka" targetRef="endEvent_eme8juz"/>
+    <bpmn:sequenceFlow id="Flow_02uayn1" sourceRef="serviceTask_x4b1ngn" targetRef="parallelGateway_n3snvka"/>
+  </bpmn:process>
+  <bpmn:resource id="Resource_fc085c3e" name="Hiring manager"/>
+  <bpmn:resource id="Resource_e1de43dd" name="Recruitment"/>
+  <bpmndi:BPMNDiagram id="Diagram_nb_c_7_0">
+    <bpmndi:BPMNPlane id="Plane_nb_c_7_0" bpmnElement="Collaboration_1kkuirj">
+      <bpmndi:BPMNShape id="Participant_7wq173h_di" bpmnElement="Participant_7wq173h" isHorizontal="true" taom:taomLabel="EU Bank">
+        <dc:Bounds x="50" y="50" width="1483" height="824"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_fkk3hh5_di" bpmnElement="Lane_fkk3hh5" isHorizontal="true" taom:taomLabel="Recruitment">
+        <dc:Bounds x="80" y="453" width="1453" height="421"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_8oy8r6k_di" bpmnElement="Lane_8oy8r6k" isHorizontal="true" taom:taomLabel="Hiring manager">
+        <dc:Bounds x="80" y="50" width="1453" height="403"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_93wuokt_di" bpmnElement="userTask_93wuokt" taom:taomId="T04-EUBA-AC001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Write &#10;description" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Hiring manager" taom:taomPool="EU Bank">
+        <dc:Bounds x="250" y="256" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_jeo48th_di" bpmnElement="userTask_jeo48th" taom:taomId="T04-EUBA-AC002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Approve advertisement" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Hiring manager" taom:taomPool="EU Bank">
+        <dc:Bounds x="639" y="256" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_3cewpwb_di" bpmnElement="userTask_3cewpwb" taom:taomId="T04-EUBA-AC003" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Complete advertisement" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Recruitment" taom:taomPool="EU Bank">
+        <dc:Bounds x="443" y="566" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="businessRuleTask_enzm2en_di" bpmnElement="businessRuleTask_enzm2en" taom:taomId="T04-EUBA-AC004" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Select &#10;other platforms" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Recruitment" taom:taomPool="EU Bank">
+        <dc:Bounds x="1014" y="643" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="serviceTask_uijq3c3_di" bpmnElement="serviceTask_uijq3c3" taom:taomId="T04-EUBA-AC005" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Publish on &#10;homepage" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Recruitment" taom:taomPool="EU Bank">
+        <dc:Bounds x="1089" y="487" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="serviceTask_x4b1ngn_di" bpmnElement="serviceTask_x4b1ngn" taom:taomId="T04-EUBA-AC006" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Publish on &#10;other platforms" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Recruitment" taom:taomPool="EU Bank">
+        <dc:Bounds x="1201" y="643" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="exclusiveGateway_s6rsopz_di" bpmnElement="exclusiveGateway_s6rsopz" isMarkerVisible="true" taom:taomId="T04-EUBA-GW001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Advertisement approved?" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Hiring manager" taom:taomPool="EU Bank">
+        <dc:Bounds x="809" y="268" width="52" height="52"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="parallelGateway_92nxltc_di" bpmnElement="parallelGateway_92nxltc" taom:taomId="T04-EUBA-GW002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Recruitment" taom:taomPool="EU Bank">
+        <dc:Bounds x="924" y="578" width="52" height="52"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="parallelGateway_n3snvka_di" bpmnElement="parallelGateway_n3snvka" taom:taomId="T04-EUBA-GW003" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Recruitment" taom:taomPool="EU Bank">
+        <dc:Bounds x="1319" y="578" width="52" height="52"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataInput_l0x2i10_di" bpmnElement="dataInput_l0x2i10" taom:taomId="T04-EUBA-DO001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Role &#10;required" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Hiring manager" taom:taomPool="EU Bank">
+        <dc:Bounds x="136" y="130" width="34" height="40"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataObjectReference_emcgd7c_di" bpmnElement="dataObjectReference_emcgd7c" taom:taomId="T04-EUBA-DO002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Description" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Hiring manager" taom:taomPool="EU Bank">
+        <dc:Bounds x="334" y="160" width="34" height="40"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataOutput_8cxabx1_di" bpmnElement="dataOutput_8cxabx1" taom:taomId="T04-EUBA-DO003" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Advertisement" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Hiring manager" taom:taomPool="EU Bank">
+        <dc:Bounds x="744" y="146" width="34" height="40"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataObjectReference_i0uasvq_di" bpmnElement="dataObjectReference_i0uasvq" taom:taomId="T04-EUBA-DO004" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Advertisement" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Recruitment" taom:taomPool="EU Bank">
+        <dc:Bounds x="551" y="701" width="34" height="40"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataObjectReference_d8fclho_di" bpmnElement="dataObjectReference_d8fclho" taom:taomId="T04-EUBA-DO005" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Selected&#10; platforms" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Recruitment" taom:taomPool="EU Bank">
+        <dc:Bounds x="1102" y="774" width="34" height="40"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_eme8juz_di" bpmnElement="endEvent_eme8juz" taom:taomId="T04-EUBA-EV001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Vacancy &#10;advertised" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Recruitment" taom:taomPool="EU Bank">
+        <dc:Bounds x="1449" y="583" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="startEvent_ch3znzq_di" bpmnElement="startEvent_ch3znzq" taom:taomId="T04-EUBA-EV002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Job &#10;vacancy" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Hiring manager" taom:taomPool="EU Bank">
+        <dc:Bounds x="158" y="273" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_camlfg1_di" bpmnElement="Flow_camlfg1" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="200" y="294"/>
+        <di:waypoint x="225" y="294"/>
+        <di:waypoint x="225" y="294"/>
+        <di:waypoint x="250" y="294"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_zevdwcr_di" bpmnElement="Flow_zevdwcr" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="346" y="294"/>
+        <di:waypoint x="346" y="449"/>
+        <di:waypoint x="443" y="449"/>
+        <di:waypoint x="443" y="604"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ejxx0se_di" bpmnElement="Flow_ejxx0se" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="539" y="604"/>
+        <di:waypoint x="539" y="449"/>
+        <di:waypoint x="639" y="449"/>
+        <di:waypoint x="639" y="294"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_bfake5s_di" bpmnElement="Flow_bfake5s" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="735" y="294"/>
+        <di:waypoint x="772" y="294"/>
+        <di:waypoint x="772" y="294"/>
+        <di:waypoint x="809" y="294"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ucxzq41_di" bpmnElement="Flow_ucxzq41" taom:routing="orthogonal" taom:sourceSide="n" taom:targetSide="n" taom:taomLabel="No">
+        <di:waypoint x="835" y="268"/>
+        <di:waypoint x="663" y="268"/>
+        <di:waypoint x="663" y="566"/>
+        <di:waypoint x="491" y="566"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_hotvxbl_di" bpmnElement="Flow_hotvxbl" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w" taom:taomLabel="Yes">
+        <di:waypoint x="861" y="294"/>
+        <di:waypoint x="861" y="449"/>
+        <di:waypoint x="924" y="449"/>
+        <di:waypoint x="924" y="604"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_yhd3uf1_di" bpmnElement="Flow_yhd3uf1" taom:routing="orthogonal" taom:sourceSide="n" taom:targetSide="w">
+        <di:waypoint x="950" y="578"/>
+        <di:waypoint x="1020" y="578"/>
+        <di:waypoint x="1020" y="525"/>
+        <di:waypoint x="1089" y="525"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_8c8kg5i_di" bpmnElement="Flow_8c8kg5i" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="w">
+        <di:waypoint x="950" y="630"/>
+        <di:waypoint x="982" y="630"/>
+        <di:waypoint x="982" y="681"/>
+        <di:waypoint x="1014" y="681"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ktm0sa2_di" bpmnElement="Flow_ktm0sa2" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="n">
+        <di:waypoint x="1185" y="525"/>
+        <di:waypoint x="1265" y="525"/>
+        <di:waypoint x="1265" y="578"/>
+        <di:waypoint x="1345" y="578"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_b6llxsp_di" bpmnElement="Flow_b6llxsp" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1110" y="681"/>
+        <di:waypoint x="1156" y="681"/>
+        <di:waypoint x="1156" y="681"/>
+        <di:waypoint x="1201" y="681"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2rtnv2v_di" bpmnElement="Flow_2rtnv2v" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1371" y="604"/>
+        <di:waypoint x="1410" y="604"/>
+        <di:waypoint x="1410" y="604"/>
+        <di:waypoint x="1449" y="604"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_02uayn1_di" bpmnElement="Flow_02uayn1" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="s">
+        <di:waypoint x="1297" y="681"/>
+        <di:waypoint x="1297" y="656"/>
+        <di:waypoint x="1345" y="656"/>
+        <di:waypoint x="1345" y="630"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_6ggrffr_di" bpmnElement="Assoc_6ggrffr" taom:routing="orthogonal" taom:sourceSide="n" taom:targetSide="w" taom:markerEnd="md">
+        <di:waypoint x="298" y="256"/>
+        <di:waypoint x="298" y="218"/>
+        <di:waypoint x="334" y="218"/>
+        <di:waypoint x="334" y="180"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_rdu0yrt_di" bpmnElement="Assoc_rdu0yrt" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="n" taom:markerEnd="md">
+        <di:waypoint x="368" y="180"/>
+        <di:waypoint x="368" y="373"/>
+        <di:waypoint x="491" y="373"/>
+        <di:waypoint x="491" y="566"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_z2jqrru_di" bpmnElement="Assoc_z2jqrru" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="w" taom:markerEnd="md">
+        <di:waypoint x="491" y="642"/>
+        <di:waypoint x="491" y="682"/>
+        <di:waypoint x="551" y="682"/>
+        <di:waypoint x="551" y="721"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_ondykc3_di" bpmnElement="Assoc_ondykc3" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="s" taom:markerEnd="md">
+        <di:waypoint x="585" y="721"/>
+        <di:waypoint x="585" y="527"/>
+        <di:waypoint x="687" y="527"/>
+        <di:waypoint x="687" y="332"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_ff6h5z1_di" bpmnElement="Assoc_ff6h5z1" taom:routing="orthogonal" taom:sourceSide="n" taom:targetSide="w" taom:markerEnd="md">
+        <di:waypoint x="687" y="256"/>
+        <di:waypoint x="687" y="211"/>
+        <di:waypoint x="744" y="211"/>
+        <di:waypoint x="744" y="166"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

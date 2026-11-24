@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:taom="https://traniva.com/ns/taom" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_nb_c_1_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="TAOM Process Studio" exporterVersion="7.0.492">
+  <bpmn:process id="Process_nb_c_1_1" isExecutable="false" name="Invoice Handling (OMG BPMN MIWG Demo)">
+    <bpmn:extensionElements>
+      <taom:meta>
+        <taom:ebene lang="">L4</taom:ebene>
+        <taom:austausch form="1" docLang="-"/>
+      </taom:meta>
+      <taom:meta>
+        <taom:title lang="de">Invoice Handling (OMG BPMN MIWG Demo)</taom:title>
+      </taom:meta>
+    </bpmn:extensionElements>
+    <bpmn:userTask id="userTask_ij0w1em" name="Approve Invoice">
+      <bpmn:incoming>Flow_l5at80x</bpmn:incoming>
+      <bpmn:incoming>Flow_g3qhuv0</bpmn:incoming>
+      <bpmn:outgoing>Flow_tlmtz6n</bpmn:outgoing>
+      <bpmn:ioSpecification>
+        <bpmn:dataOutput id="DataOutput_Assoc_3loi5t5" name="approved"/>
+        <bpmn:inputSet/>
+        <bpmn:outputSet>
+          <bpmn:dataOutputRefs>DataOutput_Assoc_3loi5t5</bpmn:dataOutputRefs>
+        </bpmn:outputSet>
+      </bpmn:ioSpecification>
+      <bpmn:dataOutputAssociation id="Assoc_3loi5t5">
+        <bpmn:sourceRef>DataOutput_Assoc_3loi5t5</bpmn:sourceRef>
+        <bpmn:targetRef>dataObjectReference_0ru9mvu</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:userTask>
+    <bpmn:userTask id="userTask_t5gpjcg" name="Assign&#13;&#10;Approver">
+      <bpmn:incoming>Flow_4bixyqk</bpmn:incoming>
+      <bpmn:outgoing>Flow_g3qhuv0</bpmn:outgoing>
+      <bpmn:ioSpecification>
+        <bpmn:dataOutput id="DataOutput_Assoc_2ta5t6z" name="approver"/>
+        <bpmn:inputSet/>
+        <bpmn:outputSet>
+          <bpmn:dataOutputRefs>DataOutput_Assoc_2ta5t6z</bpmn:dataOutputRefs>
+        </bpmn:outputSet>
+      </bpmn:ioSpecification>
+      <bpmn:dataOutputAssociation id="Assoc_2ta5t6z">
+        <bpmn:sourceRef>DataOutput_Assoc_2ta5t6z</bpmn:sourceRef>
+        <bpmn:targetRef>dataObjectReference_o9doufd</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:userTask>
+    <bpmn:userTask id="userTask_ikl7skx" name="Rechnung klären">
+      <bpmn:incoming>Flow_li66bs4</bpmn:incoming>
+      <bpmn:outgoing>Flow_td5fkqw</bpmn:outgoing>
+      <bpmn:ioSpecification>
+        <bpmn:dataOutput id="DataOutput_Assoc_fs9ci73" name="clarified"/>
+        <bpmn:inputSet/>
+        <bpmn:outputSet>
+          <bpmn:dataOutputRefs>DataOutput_Assoc_fs9ci73</bpmn:dataOutputRefs>
+        </bpmn:outputSet>
+      </bpmn:ioSpecification>
+      <bpmn:dataOutputAssociation id="Assoc_fs9ci73">
+        <bpmn:sourceRef>DataOutput_Assoc_fs9ci73</bpmn:sourceRef>
+        <bpmn:targetRef>dataObjectReference_cfknbe9</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:userTask>
+    <bpmn:userTask id="userTask_67nrzft" name="Prepare&#13;&#10;Bank&#13;&#10;Transfer">
+      <bpmn:incoming>Flow_14w0kr7</bpmn:incoming>
+      <bpmn:outgoing>Flow_3po1ad9</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="serviceTask_4ov1eb8" name="Archive&#10;Invoice">
+      <bpmn:incoming>Flow_3po1ad9</bpmn:incoming>
+      <bpmn:outgoing>Flow_rjz6237</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="exclusiveGateway_qe63il5" name="Invoice&#13;&#10;approved?" gatewayDirection="Diverging">
+      <bpmn:incoming>Flow_tlmtz6n</bpmn:incoming>
+      <bpmn:outgoing>Flow_14w0kr7</bpmn:outgoing>
+      <bpmn:outgoing>Flow_li66bs4</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="exclusiveGateway_aoikmo5" name="Review&#10;successful?" gatewayDirection="Diverging">
+      <bpmn:incoming>Flow_td5fkqw</bpmn:incoming>
+      <bpmn:outgoing>Flow_l5at80x</bpmn:outgoing>
+      <bpmn:outgoing>Flow_hewbo6a</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:dataObjectReference id="dataObjectReference_o9doufd" name="approver"/>
+    <bpmn:dataObjectReference id="dataObjectReference_0ru9mvu" name="approved"/>
+    <bpmn:dataObjectReference id="dataObjectReference_cfknbe9" name="clarified"/>
+    <bpmn:startEvent id="startEvent_zvqkqgv" name="Invoice&#13;&#10;received">
+      <bpmn:outgoing>Flow_4bixyqk</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="endEvent_8chf6ly" name="Invoice not&#10;processed">
+      <bpmn:incoming>Flow_hewbo6a</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="endEvent_fxdgwyp" name="Invoice&#10;processed">
+      <bpmn:incoming>Flow_rjz6237</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_14w0kr7" sourceRef="exclusiveGateway_qe63il5" targetRef="userTask_67nrzft" name="yes">
+      <bpmn:conditionExpression xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="bpmn:tFormalExpression">bpmn:getDataObject('approved')</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_li66bs4" sourceRef="exclusiveGateway_qe63il5" targetRef="userTask_ikl7skx" name="no">
+      <bpmn:conditionExpression xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="bpmn:tFormalExpression">not(bpmn:getDataObject('approved'))</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_l5at80x" sourceRef="exclusiveGateway_aoikmo5" targetRef="userTask_ij0w1em" name="yes">
+      <bpmn:conditionExpression xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="bpmn:tFormalExpression">bpmn:getDataObject('clarified') = 'yes'</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_hewbo6a" sourceRef="exclusiveGateway_aoikmo5" targetRef="endEvent_8chf6ly" name="no">
+      <bpmn:conditionExpression xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="bpmn:tFormalExpression">bpmn:getDataObject('clarified') = 'no'</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_tlmtz6n" sourceRef="userTask_ij0w1em" targetRef="exclusiveGateway_qe63il5"/>
+    <bpmn:sequenceFlow id="Flow_td5fkqw" sourceRef="userTask_ikl7skx" targetRef="exclusiveGateway_aoikmo5"/>
+    <bpmn:sequenceFlow id="Flow_g3qhuv0" sourceRef="userTask_t5gpjcg" targetRef="userTask_ij0w1em"/>
+    <bpmn:sequenceFlow id="Flow_3po1ad9" sourceRef="userTask_67nrzft" targetRef="serviceTask_4ov1eb8"/>
+    <bpmn:sequenceFlow id="Flow_rjz6237" sourceRef="serviceTask_4ov1eb8" targetRef="endEvent_fxdgwyp"/>
+    <bpmn:sequenceFlow id="Flow_4bixyqk" sourceRef="startEvent_zvqkqgv" targetRef="userTask_t5gpjcg"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_nb_c_1_1">
+    <bpmndi:BPMNPlane id="Plane_nb_c_1_1" bpmnElement="Process_nb_c_1_1">
+      <bpmndi:BPMNShape id="userTask_ij0w1em_di" bpmnElement="userTask_ij0w1em" taom:taomId="T04-PRZ-AC001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Approve Invoice" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="353" y="225" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_t5gpjcg_di" bpmnElement="userTask_t5gpjcg" taom:taomId="T04-PRZ-AC002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Assign&#13;&#10;Approver" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="180" y="52" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_ikl7skx_di" bpmnElement="userTask_ikl7skx" taom:taomId="T04-PRZ-AC003" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Rechnung klären" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="548" y="52" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_67nrzft_di" bpmnElement="userTask_67nrzft" taom:taomId="T04-PRZ-AC004" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Prepare&#13;&#10;Bank&#13;&#10;Transfer" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="638" y="385" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="serviceTask_4ov1eb8_di" bpmnElement="serviceTask_4ov1eb8" taom:taomId="T04-PRZ-AC005" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Archive&#10;Invoice" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="780" y="385" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="exclusiveGateway_qe63il5_di" bpmnElement="exclusiveGateway_qe63il5" isMarkerVisible="true" taom:taomId="T04-PRZ-GW001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Invoice&#13;&#10;approved?" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="482" y="239" width="52" height="52"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="exclusiveGateway_aoikmo5_di" bpmnElement="exclusiveGateway_aoikmo5" isMarkerVisible="false" taom:taomId="T04-PRZ-GW002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Review&#10;successful?" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="687" y="66" width="52" height="52"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataObjectReference_o9doufd_di" bpmnElement="dataObjectReference_o9doufd" taom:taomId="T04-PRZ-DO001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="approver" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="212" y="174" width="35" height="35"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataObjectReference_0ru9mvu_di" bpmnElement="dataObjectReference_0ru9mvu" taom:taomId="T04-PRZ-DO002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="approved" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="385" y="350" width="35" height="35"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataObjectReference_cfknbe9_di" bpmnElement="dataObjectReference_cfknbe9" taom:taomId="T04-PRZ-DO003" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="clarified" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="580" y="174" width="35" height="35"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="startEvent_zvqkqgv_di" bpmnElement="startEvent_zvqkqgv" taom:taomId="T04-PRZ-EV001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Invoice&#13;&#10;received" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="89" y="71" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_8chf6ly_di" bpmnElement="endEvent_8chf6ly" taom:taomId="T04-PRZ-EV002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Invoice not&#10;processed" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="919" y="71" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_fxdgwyp_di" bpmnElement="endEvent_fxdgwyp" taom:taomId="T04-PRZ-EV003" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Invoice&#10;processed" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="919" y="404" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_14w0kr7_di" bpmnElement="Flow_14w0kr7" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w" taom:taomLabel="yes">
+        <di:waypoint x="534" y="265"/>
+        <di:waypoint x="534" y="345"/>
+        <di:waypoint x="638" y="345"/>
+        <di:waypoint x="638" y="425"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_li66bs4_di" bpmnElement="Flow_li66bs4" taom:routing="orthogonal" taom:sourceSide="n" taom:targetSide="w" taom:taomLabel="no">
+        <di:waypoint x="508" y="239"/>
+        <di:waypoint x="508" y="166"/>
+        <di:waypoint x="548" y="166"/>
+        <di:waypoint x="548" y="92"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_l5at80x_di" bpmnElement="Flow_l5at80x" taom:routing="orthogonal" taom:sourceSide="n" taom:targetSide="n" taom:taomLabel="yes">
+        <di:waypoint x="713" y="66"/>
+        <di:waypoint x="558" y="66"/>
+        <di:waypoint x="558" y="225"/>
+        <di:waypoint x="403" y="225"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_hewbo6a_di" bpmnElement="Flow_hewbo6a" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w" taom:taomLabel="no">
+        <di:waypoint x="739" y="92"/>
+        <di:waypoint x="829" y="92"/>
+        <di:waypoint x="829" y="92"/>
+        <di:waypoint x="919" y="92"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_tlmtz6n_di" bpmnElement="Flow_tlmtz6n" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="453" y="265"/>
+        <di:waypoint x="468" y="265"/>
+        <di:waypoint x="468" y="265"/>
+        <di:waypoint x="482" y="265"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_td5fkqw_di" bpmnElement="Flow_td5fkqw" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="648" y="92"/>
+        <di:waypoint x="668" y="92"/>
+        <di:waypoint x="668" y="92"/>
+        <di:waypoint x="687" y="92"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_g3qhuv0_di" bpmnElement="Flow_g3qhuv0" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="280" y="92"/>
+        <di:waypoint x="280" y="179"/>
+        <di:waypoint x="353" y="179"/>
+        <di:waypoint x="353" y="265"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_3po1ad9_di" bpmnElement="Flow_3po1ad9" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="738" y="425"/>
+        <di:waypoint x="759" y="425"/>
+        <di:waypoint x="759" y="425"/>
+        <di:waypoint x="780" y="425"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_rjz6237_di" bpmnElement="Flow_rjz6237" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="880" y="425"/>
+        <di:waypoint x="900" y="425"/>
+        <di:waypoint x="900" y="425"/>
+        <di:waypoint x="919" y="425"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_4bixyqk_di" bpmnElement="Flow_4bixyqk" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="131" y="92"/>
+        <di:waypoint x="156" y="92"/>
+        <di:waypoint x="156" y="92"/>
+        <di:waypoint x="180" y="92"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_2ta5t6z_di" bpmnElement="Assoc_2ta5t6z" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="n" taom:markerEnd="md">
+        <di:waypoint x="230" y="132"/>
+        <di:waypoint x="230" y="153"/>
+        <di:waypoint x="230" y="153"/>
+        <di:waypoint x="230" y="174"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_3loi5t5_di" bpmnElement="Assoc_3loi5t5" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="n" taom:markerEnd="md">
+        <di:waypoint x="403" y="305"/>
+        <di:waypoint x="403" y="328"/>
+        <di:waypoint x="403" y="328"/>
+        <di:waypoint x="403" y="350"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_fs9ci73_di" bpmnElement="Assoc_fs9ci73" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="n" taom:markerEnd="md">
+        <di:waypoint x="598" y="132"/>
+        <di:waypoint x="598" y="153"/>
+        <di:waypoint x="598" y="153"/>
+        <di:waypoint x="598" y="174"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

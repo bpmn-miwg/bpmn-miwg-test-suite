@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:taom="https://traniva.com/ns/taom" id="Definitions_nb_c_2_0" targetNamespace="http://bpmn.io/schema/bpmn" exporter="TAOM Process Studio" exporterVersion="7.0.492">
+  <bpmn:message id="Message_a07u4qj" name="Message_1404332496319"/>
+  <bpmn:message id="Message_st0ds50" name="Message_1404332496323"/>
+  <bpmn:message id="Message_cklzvqh" name="Message_1404332496320"/>
+  <bpmn:message id="Message_t0acugj" name="Message_1404332496321"/>
+  <bpmn:collaboration id="Collaboration_lqaqlve">
+    <bpmn:extensionElements>
+      <taom:meta>
+        <taom:ebene lang="">L4</taom:ebene>
+        <taom:austausch form="1" docLang="-"/>
+      </taom:meta>
+      <taom:meta>
+        <taom:title lang="de">C.2.0</taom:title>
+      </taom:meta>
+    </bpmn:extensionElements>
+    <bpmn:participant id="Participant_urrs730" name="Customer" processRef="Process_nb_c_2_0"/>
+    <bpmn:participant id="Participant_f8tfntl" name="Amazon" processRef="Process_Participant_f8tfntl"/>
+    <bpmn:participant id="Participant_bi0i005" name="Carrier" processRef="Process_Participant_bi0i005"/>
+    <bpmn:participant id="Participant_6mc5n9q" name="Credit Card Company" processRef="Process_Participant_6mc5n9q"/>
+    <bpmn:messageFlow id="MessageFlow_4r9l3tx" sourceRef="task_y0858oh" targetRef="task_jyhm46s"/>
+    <bpmn:messageFlow id="MessageFlow_vmu2xmv" sourceRef="task_qs9pthb" targetRef="startEvent_k60zg6k"/>
+    <bpmn:messageFlow id="MessageFlow_ymnn393" sourceRef="intermediateThrowEvent_ardgjfl" targetRef="startEvent_j2tdyzu"/>
+    <bpmn:messageFlow id="MessageFlow_s66nvre" sourceRef="task_zn9m200" targetRef="startEvent_5obttge" name="Send Credit Card Information"/>
+    <bpmn:messageFlow id="MessageFlow_o4g1zso" sourceRef="endEvent_40hkjis" targetRef="task_zn9m200"/>
+  </bpmn:collaboration>
+  <bpmn:process id="Process_nb_c_2_0" isExecutable="false">
+    <bpmn:subProcess id="subProcess_xijjyiw" name="Checkout">
+      <bpmn:incoming>Flow_bxl6wv1</bpmn:incoming>
+      <bpmn:outgoing>Flow_ki0eptr</bpmn:outgoing>
+      <bpmn:task id="task_zn9m200" name="Pay Order">
+        <bpmn:incoming>Flow_naghsji</bpmn:incoming>
+        <bpmn:incoming>Flow_p7riiu1</bpmn:incoming>
+        <bpmn:outgoing>Flow_azpuodj</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:exclusiveGateway id="exclusiveGateway_whz0e91" name="Retry?" gatewayDirection="Diverging">
+        <bpmn:incoming>Flow_2r822a9</bpmn:incoming>
+        <bpmn:outgoing>Flow_p7riiu1</bpmn:outgoing>
+        <bpmn:outgoing>Flow_odqu7ys</bpmn:outgoing>
+      </bpmn:exclusiveGateway>
+      <bpmn:exclusiveGateway id="exclusiveGateway_a8teu2w" name="Payment accepted?" gatewayDirection="Diverging">
+        <bpmn:incoming>Flow_azpuodj</bpmn:incoming>
+        <bpmn:outgoing>Flow_2r822a9</bpmn:outgoing>
+        <bpmn:outgoing>Flow_ga271xb</bpmn:outgoing>
+      </bpmn:exclusiveGateway>
+      <bpmn:endEvent id="endEvent_33u19jq">
+        <bpmn:incoming>Flow_odqu7ys</bpmn:incoming>
+        <bpmn:errorEventDefinition/>
+      </bpmn:endEvent>
+      <bpmn:intermediateThrowEvent id="intermediateThrowEvent_ardgjfl" name="Send Order">
+        <bpmn:incoming>Flow_ga271xb</bpmn:incoming>
+        <bpmn:outgoing>Flow_8wu08j4</bpmn:outgoing>
+        <bpmn:messageEventDefinition messageRef="Message_t0acugj"/>
+      </bpmn:intermediateThrowEvent>
+      <bpmn:endEvent id="endEvent_jxj0q7z">
+        <bpmn:incoming>Flow_8wu08j4</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:startEvent id="startEvent_6a64nja">
+        <bpmn:outgoing>Flow_naghsji</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="Flow_naghsji" sourceRef="startEvent_6a64nja" targetRef="task_zn9m200"/>
+      <bpmn:sequenceFlow id="Flow_azpuodj" sourceRef="task_zn9m200" targetRef="exclusiveGateway_a8teu2w"/>
+      <bpmn:sequenceFlow id="Flow_p7riiu1" sourceRef="exclusiveGateway_whz0e91" targetRef="task_zn9m200" name="Yes"/>
+      <bpmn:sequenceFlow id="Flow_odqu7ys" sourceRef="exclusiveGateway_whz0e91" targetRef="endEvent_33u19jq" name="No"/>
+      <bpmn:sequenceFlow id="Flow_2r822a9" sourceRef="exclusiveGateway_a8teu2w" targetRef="exclusiveGateway_whz0e91" name="No"/>
+      <bpmn:sequenceFlow id="Flow_ga271xb" sourceRef="exclusiveGateway_a8teu2w" targetRef="intermediateThrowEvent_ardgjfl" name="Yes"/>
+      <bpmn:sequenceFlow id="Flow_8wu08j4" sourceRef="intermediateThrowEvent_ardgjfl" targetRef="endEvent_jxj0q7z"/>
+    </bpmn:subProcess>
+    <bpmn:task id="task_9fj7jjq" name="Add Item to Cart">
+      <bpmn:incoming>Flow_hpz933h</bpmn:incoming>
+      <bpmn:outgoing>Flow_v0chu57</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="task_jyhm46s" name="Receive items">
+      <bpmn:incoming>Flow_ki0eptr</bpmn:incoming>
+      <bpmn:outgoing>Flow_tqri8gf</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="task_x2d40ia" name="Browse Products on Amazon">
+      <bpmn:incoming>Flow_xpzufyq</bpmn:incoming>
+      <bpmn:incoming>Flow_p7iyzz0</bpmn:incoming>
+      <bpmn:outgoing>Flow_hpz933h</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="exclusiveGateway_qvibqef" name="Done Shopping?" gatewayDirection="Diverging">
+      <bpmn:incoming>Flow_v0chu57</bpmn:incoming>
+      <bpmn:outgoing>Flow_bxl6wv1</bpmn:outgoing>
+      <bpmn:outgoing>Flow_p7iyzz0</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="endEvent_0pjg53a">
+      <bpmn:incoming>Flow_tqri8gf</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="endEvent_mnur17d">
+      <bpmn:incoming>Flow_c76ibga</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:startEvent id="startEvent_7eq07q5">
+      <bpmn:outgoing>Flow_xpzufyq</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:boundaryEvent id="boundaryEvent_yf4hw7r" attachedToRef="subProcess_xijjyiw">
+      <bpmn:outgoing>Flow_c76ibga</bpmn:outgoing>
+      <bpmn:errorEventDefinition/>
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_xpzufyq" sourceRef="startEvent_7eq07q5" targetRef="task_x2d40ia"/>
+    <bpmn:sequenceFlow id="Flow_v0chu57" sourceRef="task_9fj7jjq" targetRef="exclusiveGateway_qvibqef"/>
+    <bpmn:sequenceFlow id="Flow_hpz933h" sourceRef="task_x2d40ia" targetRef="task_9fj7jjq"/>
+    <bpmn:sequenceFlow id="Flow_bxl6wv1" sourceRef="exclusiveGateway_qvibqef" targetRef="subProcess_xijjyiw" name="Yes"/>
+    <bpmn:sequenceFlow id="Flow_ki0eptr" sourceRef="subProcess_xijjyiw" targetRef="task_jyhm46s"/>
+    <bpmn:sequenceFlow id="Flow_c76ibga" sourceRef="boundaryEvent_yf4hw7r" targetRef="endEvent_mnur17d"/>
+    <bpmn:sequenceFlow id="Flow_tqri8gf" sourceRef="task_jyhm46s" targetRef="endEvent_0pjg53a"/>
+    <bpmn:sequenceFlow id="Flow_p7iyzz0" sourceRef="exclusiveGateway_qvibqef" targetRef="task_x2d40ia" name="No"/>
+  </bpmn:process>
+  <bpmn:process id="Process_Participant_f8tfntl" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_Process_Participant_f8tfntl">
+      <bpmn:lane id="Lane_01te9o6" name="Picker">
+        <bpmn:flowNodeRef>task_ropcnh3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>task_z8p1muf</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>startEvent_j2tdyzu</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_fyht1qe" name="Packager">
+        <bpmn:flowNodeRef>task_hftzdxd</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>task_qs9pthb</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>endEvent_b29ongs</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:task id="task_ropcnh3" name="Pick items">
+      <bpmn:incoming>Flow_wjddvxg</bpmn:incoming>
+      <bpmn:outgoing>Flow_xossr8s</bpmn:outgoing>
+      <bpmn:performer id="Performer_task_ropcnh3" name="Picker">
+        <bpmn:resourceRef>Resource_e6308b7d</bpmn:resourceRef>
+      </bpmn:performer>
+    </bpmn:task>
+    <bpmn:task id="task_z8p1muf" name="Place in bin">
+      <bpmn:incoming>Flow_xossr8s</bpmn:incoming>
+      <bpmn:outgoing>Flow_ly1hc5x</bpmn:outgoing>
+      <bpmn:performer id="Performer_task_z8p1muf" name="Picker">
+        <bpmn:resourceRef>Resource_e6308b7d</bpmn:resourceRef>
+      </bpmn:performer>
+    </bpmn:task>
+    <bpmn:task id="task_hftzdxd" name="Receive and Package&#10;items">
+      <bpmn:incoming>Flow_ly1hc5x</bpmn:incoming>
+      <bpmn:outgoing>Flow_j2rq0l7</bpmn:outgoing>
+      <bpmn:performer id="Performer_task_hftzdxd" name="Packager">
+        <bpmn:resourceRef>Resource_bb9bb7b1</bpmn:resourceRef>
+      </bpmn:performer>
+    </bpmn:task>
+    <bpmn:task id="task_qs9pthb" name="Send to carrier dock">
+      <bpmn:incoming>Flow_j2rq0l7</bpmn:incoming>
+      <bpmn:outgoing>Flow_czrw6s0</bpmn:outgoing>
+      <bpmn:performer id="Performer_task_qs9pthb" name="Packager">
+        <bpmn:resourceRef>Resource_bb9bb7b1</bpmn:resourceRef>
+      </bpmn:performer>
+    </bpmn:task>
+    <bpmn:endEvent id="endEvent_b29ongs">
+      <bpmn:incoming>Flow_czrw6s0</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:startEvent id="startEvent_j2tdyzu" name="Receive Order">
+      <bpmn:outgoing>Flow_wjddvxg</bpmn:outgoing>
+      <bpmn:messageEventDefinition messageRef="Message_t0acugj"/>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_wjddvxg" sourceRef="startEvent_j2tdyzu" targetRef="task_ropcnh3"/>
+    <bpmn:sequenceFlow id="Flow_xossr8s" sourceRef="task_ropcnh3" targetRef="task_z8p1muf"/>
+    <bpmn:sequenceFlow id="Flow_ly1hc5x" sourceRef="task_z8p1muf" targetRef="task_hftzdxd"/>
+    <bpmn:sequenceFlow id="Flow_j2rq0l7" sourceRef="task_hftzdxd" targetRef="task_qs9pthb"/>
+    <bpmn:sequenceFlow id="Flow_czrw6s0" sourceRef="task_qs9pthb" targetRef="endEvent_b29ongs"/>
+  </bpmn:process>
+  <bpmn:process id="Process_Participant_bi0i005" isExecutable="false">
+    <bpmn:task id="task_y0858oh" name="Deliver Items">
+      <bpmn:incoming>Flow_41mg0ec</bpmn:incoming>
+      <bpmn:outgoing>Flow_x1bs1sg</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="task_jt41jka" name="Load Truck">
+      <bpmn:incoming>Flow_bjsad5b</bpmn:incoming>
+      <bpmn:outgoing>Flow_41mg0ec</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="endEvent_zty3zil">
+      <bpmn:incoming>Flow_x1bs1sg</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:startEvent id="startEvent_k60zg6k" name="Pick items">
+      <bpmn:outgoing>Flow_bjsad5b</bpmn:outgoing>
+      <bpmn:messageEventDefinition messageRef="Message_st0ds50"/>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_x1bs1sg" sourceRef="task_y0858oh" targetRef="endEvent_zty3zil"/>
+    <bpmn:sequenceFlow id="Flow_41mg0ec" sourceRef="task_jt41jka" targetRef="task_y0858oh"/>
+    <bpmn:sequenceFlow id="Flow_bjsad5b" sourceRef="startEvent_k60zg6k" targetRef="task_jt41jka"/>
+  </bpmn:process>
+  <bpmn:process id="Process_Participant_6mc5n9q" isExecutable="false">
+    <bpmn:task id="task_vt9bc38" name="Take Payment">
+      <bpmn:incoming>Flow_ng2jv4b</bpmn:incoming>
+      <bpmn:outgoing>Flow_yvk753g</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="endEvent_40hkjis" name="Send Result">
+      <bpmn:incoming>Flow_yvk753g</bpmn:incoming>
+      <bpmn:messageEventDefinition messageRef="Message_cklzvqh"/>
+    </bpmn:endEvent>
+    <bpmn:startEvent id="startEvent_5obttge" name="Receive Credit Card Information">
+      <bpmn:outgoing>Flow_ng2jv4b</bpmn:outgoing>
+      <bpmn:messageEventDefinition messageRef="Message_a07u4qj"/>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_yvk753g" sourceRef="task_vt9bc38" targetRef="endEvent_40hkjis"/>
+    <bpmn:sequenceFlow id="Flow_ng2jv4b" sourceRef="startEvent_5obttge" targetRef="task_vt9bc38"/>
+  </bpmn:process>
+  <bpmn:resource id="Resource_e6308b7d" name="Picker"/>
+  <bpmn:resource id="Resource_bb9bb7b1" name="Packager"/>
+  <bpmndi:BPMNDiagram id="Diagram_nb_c_2_0">
+    <bpmndi:BPMNPlane id="Plane_nb_c_2_0" bpmnElement="Collaboration_lqaqlve">
+      <bpmndi:BPMNShape id="Participant_urrs730_di" bpmnElement="Participant_urrs730" isHorizontal="true" taom:taomLabel="Customer">
+        <dc:Bounds x="215" y="275" width="1467" height="295"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_f8tfntl_di" bpmnElement="Participant_f8tfntl" isHorizontal="true" taom:taomLabel="Amazon">
+        <dc:Bounds x="214" y="633" width="776" height="254"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_bi0i005_di" bpmnElement="Participant_bi0i005" isHorizontal="true" taom:taomLabel="Carrier">
+        <dc:Bounds x="1102" y="639" width="586" height="150"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_6mc5n9q_di" bpmnElement="Participant_6mc5n9q" isHorizontal="true" taom:taomLabel="Credit Card Company">
+        <dc:Bounds x="785" y="63" width="382" height="132"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_01te9o6_di" bpmnElement="Lane_01te9o6" isHorizontal="true" taom:taomLabel="Picker">
+        <dc:Bounds x="244" y="633" width="746" height="135"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_fyht1qe_di" bpmnElement="Lane_fyht1qe" isHorizontal="true" taom:taomLabel="Packager">
+        <dc:Bounds x="244" y="768" width="746" height="119"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="subProcess_xijjyiw_di" bpmnElement="subProcess_xijjyiw" isExpanded="true" taom:taomId="T04-CUST-SP001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Checkout" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer">
+        <dc:Bounds x="828" y="290" width="547" height="209"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="task_y0858oh_di" bpmnElement="task_y0858oh" taom:taomId="T04-CUST-AC001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Deliver Items" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Carrier">
+        <dc:Bounds x="1474" y="683" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="task_jt41jka_di" bpmnElement="task_jt41jka" taom:taomId="T04-CUST-AC002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Load Truck" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Carrier">
+        <dc:Bounds x="1259" y="683" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="task_vt9bc38_di" bpmnElement="task_vt9bc38" taom:taomId="T04-CUST-AC003" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Take Payment" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Credit Card Company">
+        <dc:Bounds x="931" y="91" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="task_9fj7jjq_di" bpmnElement="task_9fj7jjq" taom:taomId="T04-CUST-AC004" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Add Item to Cart" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer">
+        <dc:Bounds x="522" y="357" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="task_zn9m200_di" bpmnElement="task_zn9m200" taom:taomId="T04-CUST-AC005" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Pay Order" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer">
+        <dc:Bounds x="930" y="357" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="task_jyhm46s_di" bpmnElement="task_jyhm46s" taom:taomId="T04-CUST-AC006" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Receive items" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer">
+        <dc:Bounds x="1476" y="357" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="task_x2d40ia_di" bpmnElement="task_x2d40ia" taom:taomId="T04-CUST-AC007" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Browse Products on Amazon" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer">
+        <dc:Bounds x="363" y="357" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="task_ropcnh3_di" bpmnElement="task_ropcnh3" taom:taomId="T04-CUST-AC008" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Pick items" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Picker" taom:taomPool="Amazon">
+        <dc:Bounds x="368" y="653" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="task_z8p1muf_di" bpmnElement="task_z8p1muf" taom:taomId="T04-CUST-AC009" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Place in bin" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Picker" taom:taomPool="Amazon">
+        <dc:Bounds x="500" y="653" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="task_hftzdxd_di" bpmnElement="task_hftzdxd" taom:taomId="T04-CUST-AC010" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Receive and Package&#10;items" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Packager" taom:taomPool="Amazon">
+        <dc:Bounds x="641" y="790" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="task_qs9pthb_di" bpmnElement="task_qs9pthb" taom:taomId="T04-CUST-AC011" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Send to carrier dock" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Packager" taom:taomPool="Amazon">
+        <dc:Bounds x="783" y="790" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="exclusiveGateway_whz0e91_di" bpmnElement="exclusiveGateway_whz0e91" isMarkerVisible="true" taom:taomId="T04-CUST-GW001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Retry?" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer">
+        <dc:Bounds x="1066" y="432" width="52" height="52"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="exclusiveGateway_qvibqef_di" bpmnElement="exclusiveGateway_qvibqef" isMarkerVisible="true" taom:taomId="T04-CUST-GW002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Done Shopping?" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer">
+        <dc:Bounds x="680" y="369" width="52" height="52"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="exclusiveGateway_a8teu2w_di" bpmnElement="exclusiveGateway_a8teu2w" isMarkerVisible="true" taom:taomId="T04-CUST-GW003" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Payment accepted?" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer">
+        <dc:Bounds x="1067" y="320" width="52" height="52"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_zty3zil_di" bpmnElement="endEvent_zty3zil" taom:taomId="T04-CUST-EV001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Carrier">
+        <dc:Bounds x="1616" y="700" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_33u19jq_di" bpmnElement="endEvent_33u19jq" taom:taomId="T04-CUST-EV002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer">
+        <dc:Bounds x="1162" y="437" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="intermediateThrowEvent_ardgjfl_di" bpmnElement="intermediateThrowEvent_ardgjfl" taom:taomId="T04-CUST-EV003" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Send Order" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer">
+        <dc:Bounds x="1201" y="325" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_0pjg53a_di" bpmnElement="endEvent_0pjg53a" taom:taomId="T04-CUST-EV004" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer">
+        <dc:Bounds x="1611" y="374" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_b29ongs_di" bpmnElement="endEvent_b29ongs" taom:taomId="T04-CUST-EV005" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Packager" taom:taomPool="Amazon">
+        <dc:Bounds x="919" y="807" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_40hkjis_di" bpmnElement="endEvent_40hkjis" taom:taomId="T04-CUST-EV006" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Send Result" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Credit Card Company">
+        <dc:Bounds x="1084" y="108" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_jxj0q7z_di" bpmnElement="endEvent_jxj0q7z" taom:taomId="T04-CUST-EV007" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer">
+        <dc:Bounds x="1281" y="325" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_mnur17d_di" bpmnElement="endEvent_mnur17d" taom:taomId="T04-CUST-EV008" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer">
+        <dc:Bounds x="1428" y="524" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="startEvent_k60zg6k_di" bpmnElement="startEvent_k60zg6k" taom:taomId="T04-CUST-EV009" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Pick items" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Carrier">
+        <dc:Bounds x="1156" y="700" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="startEvent_7eq07q5_di" bpmnElement="startEvent_7eq07q5" taom:taomId="T04-CUST-EV010" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer">
+        <dc:Bounds x="283" y="374" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="startEvent_6a64nja_di" bpmnElement="startEvent_6a64nja" taom:taomId="T04-CUST-EV011" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer">
+        <dc:Bounds x="844" y="374" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="startEvent_j2tdyzu_di" bpmnElement="startEvent_j2tdyzu" taom:taomId="T04-CUST-EV012" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Receive Order" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Picker" taom:taomPool="Amazon">
+        <dc:Bounds x="283" y="670" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="startEvent_5obttge_di" bpmnElement="startEvent_5obttge" taom:taomId="T04-CUST-EV013" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Receive Credit Card Information" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Credit Card Company">
+        <dc:Bounds x="844" y="108" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="boundaryEvent_yf4hw7r_di" bpmnElement="boundaryEvent_yf4hw7r" taom:taomId="T04-CUST-EV014" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer">
+        <dc:Bounds x="1332" y="478" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_x1bs1sg_di" bpmnElement="Flow_x1bs1sg" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1570" y="721"/>
+        <di:waypoint x="1593" y="721"/>
+        <di:waypoint x="1593" y="721"/>
+        <di:waypoint x="1616" y="721"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_41mg0ec_di" bpmnElement="Flow_41mg0ec" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1355" y="721"/>
+        <di:waypoint x="1415" y="721"/>
+        <di:waypoint x="1415" y="721"/>
+        <di:waypoint x="1474" y="721"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_bjsad5b_di" bpmnElement="Flow_bjsad5b" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1198" y="721"/>
+        <di:waypoint x="1229" y="721"/>
+        <di:waypoint x="1229" y="721"/>
+        <di:waypoint x="1259" y="721"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_yvk753g_di" bpmnElement="Flow_yvk753g" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1027" y="129"/>
+        <di:waypoint x="1056" y="129"/>
+        <di:waypoint x="1056" y="129"/>
+        <di:waypoint x="1084" y="129"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ng2jv4b_di" bpmnElement="Flow_ng2jv4b" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="886" y="129"/>
+        <di:waypoint x="909" y="129"/>
+        <di:waypoint x="909" y="129"/>
+        <di:waypoint x="931" y="129"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_xpzufyq_di" bpmnElement="Flow_xpzufyq" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="325" y="395"/>
+        <di:waypoint x="344" y="395"/>
+        <di:waypoint x="344" y="395"/>
+        <di:waypoint x="363" y="395"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_v0chu57_di" bpmnElement="Flow_v0chu57" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="618" y="395"/>
+        <di:waypoint x="649" y="395"/>
+        <di:waypoint x="649" y="395"/>
+        <di:waypoint x="680" y="395"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_hpz933h_di" bpmnElement="Flow_hpz933h" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="459" y="395"/>
+        <di:waypoint x="491" y="395"/>
+        <di:waypoint x="491" y="395"/>
+        <di:waypoint x="522" y="395"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_bxl6wv1_di" bpmnElement="Flow_bxl6wv1" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w" taom:taomLabel="Yes">
+        <di:waypoint x="732" y="395"/>
+        <di:waypoint x="780" y="395"/>
+        <di:waypoint x="780" y="395"/>
+        <di:waypoint x="828" y="395"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ki0eptr_di" bpmnElement="Flow_ki0eptr" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1375" y="395"/>
+        <di:waypoint x="1426" y="395"/>
+        <di:waypoint x="1426" y="395"/>
+        <di:waypoint x="1476" y="395"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_naghsji_di" bpmnElement="Flow_naghsji" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="886" y="395"/>
+        <di:waypoint x="908" y="395"/>
+        <di:waypoint x="908" y="395"/>
+        <di:waypoint x="930" y="395"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_azpuodj_di" bpmnElement="Flow_azpuodj" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1026" y="395"/>
+        <di:waypoint x="1026" y="371"/>
+        <di:waypoint x="1067" y="371"/>
+        <di:waypoint x="1067" y="346"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p7riiu1_di" bpmnElement="Flow_p7riiu1" taom:routing="orthogonal" taom:sourceSide="w" taom:targetSide="s" taom:taomLabel="Yes">
+        <di:waypoint x="1066" y="458"/>
+        <di:waypoint x="1022" y="458"/>
+        <di:waypoint x="1022" y="433"/>
+        <di:waypoint x="978" y="433"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_odqu7ys_di" bpmnElement="Flow_odqu7ys" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w" taom:taomLabel="No">
+        <di:waypoint x="1118" y="458"/>
+        <di:waypoint x="1140" y="458"/>
+        <di:waypoint x="1140" y="458"/>
+        <di:waypoint x="1162" y="458"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2r822a9_di" bpmnElement="Flow_2r822a9" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="n" taom:taomLabel="No">
+        <di:waypoint x="1093" y="372"/>
+        <di:waypoint x="1093" y="402"/>
+        <di:waypoint x="1092" y="402"/>
+        <di:waypoint x="1092" y="432"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ga271xb_di" bpmnElement="Flow_ga271xb" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w" taom:taomLabel="Yes">
+        <di:waypoint x="1119" y="346"/>
+        <di:waypoint x="1160" y="346"/>
+        <di:waypoint x="1160" y="346"/>
+        <di:waypoint x="1201" y="346"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_8wu08j4_di" bpmnElement="Flow_8wu08j4" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1243" y="346"/>
+        <di:waypoint x="1262" y="346"/>
+        <di:waypoint x="1262" y="346"/>
+        <di:waypoint x="1281" y="346"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_c76ibga_di" bpmnElement="Flow_c76ibga" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="w">
+        <di:waypoint x="1353" y="520"/>
+        <di:waypoint x="1391" y="520"/>
+        <di:waypoint x="1391" y="545"/>
+        <di:waypoint x="1428" y="545"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_tqri8gf_di" bpmnElement="Flow_tqri8gf" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1572" y="395"/>
+        <di:waypoint x="1592" y="395"/>
+        <di:waypoint x="1592" y="395"/>
+        <di:waypoint x="1611" y="395"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p7iyzz0_di" bpmnElement="Flow_p7iyzz0" taom:routing="orthogonal" taom:sourceSide="n" taom:targetSide="n" taom:taomLabel="No">
+        <di:waypoint x="706" y="369"/>
+        <di:waypoint x="559" y="369"/>
+        <di:waypoint x="559" y="357"/>
+        <di:waypoint x="411" y="357"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_wjddvxg_di" bpmnElement="Flow_wjddvxg" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="325" y="691"/>
+        <di:waypoint x="347" y="691"/>
+        <di:waypoint x="347" y="691"/>
+        <di:waypoint x="368" y="691"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_xossr8s_di" bpmnElement="Flow_xossr8s" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="464" y="691"/>
+        <di:waypoint x="482" y="691"/>
+        <di:waypoint x="482" y="691"/>
+        <di:waypoint x="500" y="691"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ly1hc5x_di" bpmnElement="Flow_ly1hc5x" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="596" y="691"/>
+        <di:waypoint x="596" y="760"/>
+        <di:waypoint x="641" y="760"/>
+        <di:waypoint x="641" y="828"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_j2rq0l7_di" bpmnElement="Flow_j2rq0l7" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="737" y="828"/>
+        <di:waypoint x="760" y="828"/>
+        <di:waypoint x="760" y="828"/>
+        <di:waypoint x="783" y="828"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_czrw6s0_di" bpmnElement="Flow_czrw6s0" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="879" y="828"/>
+        <di:waypoint x="899" y="828"/>
+        <di:waypoint x="899" y="828"/>
+        <di:waypoint x="919" y="828"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_4r9l3tx_di" bpmnElement="MessageFlow_4r9l3tx" taom:routing="orthogonal" taom:sourceSide="n" taom:targetSide="s">
+        <di:waypoint x="1522" y="683"/>
+        <di:waypoint x="1522" y="558"/>
+        <di:waypoint x="1524" y="558"/>
+        <di:waypoint x="1524" y="433"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_vmu2xmv_di" bpmnElement="MessageFlow_vmu2xmv" taom:routing="orthogonal" taom:sourceSide="n" taom:targetSide="s">
+        <di:waypoint x="831" y="790"/>
+        <di:waypoint x="1004" y="790"/>
+        <di:waypoint x="1004" y="742"/>
+        <di:waypoint x="1177" y="742"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_ymnn393_di" bpmnElement="MessageFlow_ymnn393" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="n">
+        <di:waypoint x="1222" y="367"/>
+        <di:waypoint x="763" y="367"/>
+        <di:waypoint x="763" y="670"/>
+        <di:waypoint x="304" y="670"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_s66nvre_di" bpmnElement="MessageFlow_s66nvre" taom:routing="orthogonal" taom:sourceSide="n" taom:targetSide="s" taom:taomLabel="Send Credit Card Information">
+        <di:waypoint x="978" y="357"/>
+        <di:waypoint x="978" y="254"/>
+        <di:waypoint x="865" y="254"/>
+        <di:waypoint x="865" y="150"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_o4g1zso_di" bpmnElement="MessageFlow_o4g1zso" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="n">
+        <di:waypoint x="1105" y="150"/>
+        <di:waypoint x="1105" y="254"/>
+        <di:waypoint x="978" y="254"/>
+        <di:waypoint x="978" y="357"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

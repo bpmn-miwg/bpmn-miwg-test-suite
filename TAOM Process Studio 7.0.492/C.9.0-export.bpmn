@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:taom="https://traniva.com/ns/taom" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_nb_c_9_0" targetNamespace="http://bpmn.io/schema/bpmn" exporter="TAOM Process Studio" exporterVersion="7.0.492">
+  <bpmn:error id="Error_2xz1bx0" name="Error_FraudDetected" errorCode="02"/>
+  <bpmn:message id="Message_t892m07" name="Message_CancellationRequested"/>
+  <bpmn:error id="Error_9eovdxz" name="Error_Timeout" errorCode="00"/>
+  <bpmn:collaboration id="Collaboration_13jth2q">
+    <bpmn:extensionElements>
+      <taom:meta>
+        <taom:ebene lang="">L4</taom:ebene>
+        <taom:austausch form="1" docLang="-"/>
+      </taom:meta>
+      <taom:meta>
+        <taom:title lang="de">Customer Onboarding</taom:title>
+      </taom:meta>
+    </bpmn:extensionElements>
+    <bpmn:participant id="Participant_9dcatim" name="Customer Onboarding" processRef="Process_nb_c_9_0"/>
+  </bpmn:collaboration>
+  <bpmn:process id="Process_nb_c_9_0" isExecutable="false">
+    <bpmn:subProcess id="subProcess_47w7g41" triggeredByEvent="true">
+      <bpmn:serviceTask id="serviceTask_xfdmr63" name="Cancel application">
+        <bpmn:incoming>Flow_xt4q9en</bpmn:incoming>
+        <bpmn:outgoing>Flow_yj8k822</bpmn:outgoing>
+      </bpmn:serviceTask>
+      <bpmn:parallelGateway id="parallelGateway_tn13qv1" gatewayDirection="Diverging">
+        <bpmn:incoming>Flow_yj8k822</bpmn:incoming>
+        <bpmn:outgoing>Flow_dbxr86d</bpmn:outgoing>
+        <bpmn:outgoing>Flow_6gl6nbp</bpmn:outgoing>
+      </bpmn:parallelGateway>
+      <bpmn:startEvent id="startEvent_ij8qgh2" name="Cancelation requested">
+        <bpmn:outgoing>Flow_xt4q9en</bpmn:outgoing>
+        <bpmn:messageEventDefinition messageRef="Message_t892m07"/>
+      </bpmn:startEvent>
+      <bpmn:endEvent id="endEvent_wa4vjgg" name="Customer notified about successful cancelation">
+        <bpmn:incoming>Flow_dbxr86d</bpmn:incoming>
+        <bpmn:messageEventDefinition/>
+      </bpmn:endEvent>
+      <bpmn:endEvent id="endEvent_jsq5gq9" name="Operations Team notified about successful cancelation">
+        <bpmn:incoming>Flow_6gl6nbp</bpmn:incoming>
+        <bpmn:messageEventDefinition/>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_xt4q9en" sourceRef="startEvent_ij8qgh2" targetRef="serviceTask_xfdmr63"/>
+      <bpmn:sequenceFlow id="Flow_yj8k822" sourceRef="serviceTask_xfdmr63" targetRef="parallelGateway_tn13qv1"/>
+      <bpmn:sequenceFlow id="Flow_dbxr86d" sourceRef="parallelGateway_tn13qv1" targetRef="endEvent_wa4vjgg"/>
+      <bpmn:sequenceFlow id="Flow_6gl6nbp" sourceRef="parallelGateway_tn13qv1" targetRef="endEvent_jsq5gq9"/>
+    </bpmn:subProcess>
+    <bpmn:subProcess id="subProcess_ix4ooq1" triggeredByEvent="true">
+      <bpmn:userTask id="userTask_91papoh" name="Handle Timeout">
+        <bpmn:incoming>Flow_r5bns3g</bpmn:incoming>
+        <bpmn:outgoing>Flow_k6xzbtk</bpmn:outgoing>
+      </bpmn:userTask>
+      <bpmn:endEvent id="endEvent_cncxj5d" name="Timeout handled">
+        <bpmn:incoming>Flow_k6xzbtk</bpmn:incoming>
+        <bpmn:messageEventDefinition/>
+      </bpmn:endEvent>
+      <bpmn:startEvent id="startEvent_0zfxgos" name="Timeout">
+        <bpmn:outgoing>Flow_r5bns3g</bpmn:outgoing>
+        <bpmn:errorEventDefinition errorRef="Error_9eovdxz"/>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="Flow_r5bns3g" sourceRef="startEvent_0zfxgos" targetRef="userTask_91papoh"/>
+      <bpmn:sequenceFlow id="Flow_k6xzbtk" sourceRef="userTask_91papoh" targetRef="endEvent_cncxj5d"/>
+    </bpmn:subProcess>
+    <bpmn:callActivity id="callActivity_jx1z3dl" name="Manual Check">
+      <bpmn:incoming>Flow_lwhoe2k</bpmn:incoming>
+      <bpmn:outgoing>Flow_06aylrc</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:serviceTask id="serviceTask_wa3d5zz" name="Send confirmation">
+      <bpmn:incoming>Flow_x230d4a</bpmn:incoming>
+      <bpmn:outgoing>Flow_lucko72</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="serviceTask_z89z293" name="Deliver confirmation">
+      <bpmn:incoming>Flow_6dwqvya</bpmn:incoming>
+      <bpmn:incoming>Flow_hss4ye9</bpmn:incoming>
+      <bpmn:outgoing>Flow_x230d4a</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="serviceTask_jjhhc8d" name="Reject application">
+      <bpmn:incoming>Flow_64pdu7e</bpmn:incoming>
+      <bpmn:incoming>Flow_o86mdg9</bpmn:incoming>
+      <bpmn:outgoing>Flow_p6lwon6</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="serviceTask_hsf6w0k" name="Send rejection">
+      <bpmn:incoming>Flow_p6lwon6</bpmn:incoming>
+      <bpmn:outgoing>Flow_5hm76al</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sendTask id="sendTask_rolho4h" name="Report fraud">
+      <bpmn:incoming>Flow_6erzj7e</bpmn:incoming>
+      <bpmn:outgoing>Flow_c52j4m4</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:businessRuleTask id="businessRuleTask_trxr3l7" name="Check application automatically">
+      <bpmn:incoming>Flow_8nudimd</bpmn:incoming>
+      <bpmn:outgoing>Flow_gfsavfm</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:serviceTask id="serviceTask_qwp9mkm" name="Get credit score">
+      <bpmn:incoming>Flow_nfmga6p</bpmn:incoming>
+      <bpmn:outgoing>Flow_8nudimd</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="exclusiveGateway_by7z4y4" name="Decision?" gatewayDirection="Diverging">
+      <bpmn:incoming>Flow_06aylrc</bpmn:incoming>
+      <bpmn:outgoing>Flow_hss4ye9</bpmn:outgoing>
+      <bpmn:outgoing>Flow_o86mdg9</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="exclusiveGateway_xugmjgs" name="Risk?" default="Flow_6dwqvya" gatewayDirection="Diverging">
+      <bpmn:incoming>Flow_gfsavfm</bpmn:incoming>
+      <bpmn:outgoing>Flow_64pdu7e</bpmn:outgoing>
+      <bpmn:outgoing>Flow_6dwqvya</bpmn:outgoing>
+      <bpmn:outgoing>Flow_lwhoe2k</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:startEvent id="startEvent_wae787c" name="Application received">
+      <bpmn:outgoing>Flow_nfmga6p</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="endEvent_hlw0atl" name="Application&#10; issued">
+      <bpmn:incoming>Flow_lucko72</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="endEvent_ptmh8qx" name="Application &#10;rejected">
+      <bpmn:incoming>Flow_5hm76al</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="endEvent_m1ic2ij" name="Application canceled due to fraud">
+      <bpmn:incoming>Flow_c52j4m4</bpmn:incoming>
+      <bpmn:terminateEventDefinition/>
+    </bpmn:endEvent>
+    <bpmn:boundaryEvent id="boundaryEvent_tfufpbn" name="Fraud detected" attachedToRef="callActivity_jx1z3dl">
+      <bpmn:outgoing>Flow_6erzj7e</bpmn:outgoing>
+      <bpmn:errorEventDefinition errorRef="Error_2xz1bx0"/>
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_8nudimd" sourceRef="serviceTask_qwp9mkm" targetRef="businessRuleTask_trxr3l7"/>
+    <bpmn:sequenceFlow id="Flow_p6lwon6" sourceRef="serviceTask_jjhhc8d" targetRef="serviceTask_hsf6w0k"/>
+    <bpmn:sequenceFlow id="Flow_5hm76al" sourceRef="serviceTask_hsf6w0k" targetRef="endEvent_ptmh8qx"/>
+    <bpmn:sequenceFlow id="Flow_64pdu7e" sourceRef="exclusiveGateway_xugmjgs" targetRef="serviceTask_jjhhc8d" name="Red (severe risk)">
+      <bpmn:conditionExpression xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="bpmn:tFormalExpression">= some risk in riskLevels satisfies risk = "red"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_gfsavfm" sourceRef="businessRuleTask_trxr3l7" targetRef="exclusiveGateway_xugmjgs"/>
+    <bpmn:sequenceFlow id="Flow_6dwqvya" sourceRef="exclusiveGateway_xugmjgs" targetRef="serviceTask_z89z293" name="Green (no risk)"/>
+    <bpmn:sequenceFlow id="Flow_x230d4a" sourceRef="serviceTask_z89z293" targetRef="serviceTask_wa3d5zz"/>
+    <bpmn:sequenceFlow id="Flow_lucko72" sourceRef="serviceTask_wa3d5zz" targetRef="endEvent_hlw0atl"/>
+    <bpmn:sequenceFlow id="Flow_hss4ye9" sourceRef="exclusiveGateway_by7z4y4" targetRef="serviceTask_z89z293" name="Application accepted">
+      <bpmn:conditionExpression xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="bpmn:tFormalExpression">= approved</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_o86mdg9" sourceRef="exclusiveGateway_by7z4y4" targetRef="serviceTask_jjhhc8d" name="Application declined">
+      <bpmn:conditionExpression xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="bpmn:tFormalExpression">= not(approved)</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_nfmga6p" sourceRef="startEvent_wae787c" targetRef="serviceTask_qwp9mkm"/>
+    <bpmn:sequenceFlow id="Flow_lwhoe2k" sourceRef="exclusiveGateway_xugmjgs" targetRef="callActivity_jx1z3dl" name="Yellow (moderate risk)">
+      <bpmn:conditionExpression xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="bpmn:tFormalExpression">= every risk in riskLevels satisfies risk = "yellow"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_06aylrc" sourceRef="callActivity_jx1z3dl" targetRef="exclusiveGateway_by7z4y4"/>
+    <bpmn:sequenceFlow id="Flow_6erzj7e" sourceRef="boundaryEvent_tfufpbn" targetRef="sendTask_rolho4h"/>
+    <bpmn:sequenceFlow id="Flow_c52j4m4" sourceRef="sendTask_rolho4h" targetRef="endEvent_m1ic2ij"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_nb_c_9_0">
+    <bpmndi:BPMNPlane id="Plane_nb_c_9_0" bpmnElement="Collaboration_13jth2q">
+      <bpmndi:BPMNShape id="Participant_9dcatim_di" bpmnElement="Participant_9dcatim" isHorizontal="true" taom:taomLabel="Customer Onboarding">
+        <dc:Bounds x="156" y="71" width="1470" height="599"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="subProcess_47w7g41_di" bpmnElement="subProcess_47w7g41" isExpanded="true" taom:taomId="T04-CUST-SP001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer Onboarding">
+        <dc:Bounds x="200" y="400" width="440" height="250"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="subProcess_ix4ooq1_di" bpmnElement="subProcess_ix4ooq1" isExpanded="true" taom:taomId="T04-CUST-SP002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer Onboarding">
+        <dc:Bounds x="200" y="240" width="340" height="142"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_91papoh_di" bpmnElement="userTask_91papoh" taom:taomId="T04-CUST-AC001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Handle Timeout" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer Onboarding">
+        <dc:Bounds x="310" y="262" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="serviceTask_xfdmr63_di" bpmnElement="serviceTask_xfdmr63" taom:taomId="T04-CUST-AC002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Cancel application" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer Onboarding">
+        <dc:Bounds x="310" y="422" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="callActivity_jx1z3dl_di" bpmnElement="callActivity_jx1z3dl" taom:taomId="T04-CUST-SP003" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Manual Check" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer Onboarding">
+        <dc:Bounds x="770" y="217" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="serviceTask_wa3d5zz_di" bpmnElement="serviceTask_wa3d5zz" taom:taomId="T04-CUST-AC003" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Send confirmation" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer Onboarding">
+        <dc:Bounds x="1400" y="91" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="serviceTask_z89z293_di" bpmnElement="serviceTask_z89z293" taom:taomId="T04-CUST-AC004" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Deliver confirmation" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer Onboarding">
+        <dc:Bounds x="1249" y="91" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="serviceTask_jjhhc8d_di" bpmnElement="serviceTask_jjhhc8d" taom:taomId="T04-CUST-AC005" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Reject application" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer Onboarding">
+        <dc:Bounds x="1249" y="494" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="serviceTask_hsf6w0k_di" bpmnElement="serviceTask_hsf6w0k" taom:taomId="T04-CUST-AC006" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Send rejection" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer Onboarding">
+        <dc:Bounds x="1400" y="494" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sendTask_rolho4h_di" bpmnElement="sendTask_rolho4h" taom:taomId="T04-CUST-AC007" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Report fraud" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer Onboarding">
+        <dc:Bounds x="940" y="340" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="businessRuleTask_trxr3l7_di" bpmnElement="businessRuleTask_trxr3l7" taom:taomId="T04-CUST-AC008" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Check application automatically" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer Onboarding">
+        <dc:Bounds x="460" y="91" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="serviceTask_qwp9mkm_di" bpmnElement="serviceTask_qwp9mkm" taom:taomId="T04-CUST-AC009" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Get credit score" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer Onboarding">
+        <dc:Bounds x="300" y="91" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="parallelGateway_tn13qv1_di" bpmnElement="parallelGateway_tn13qv1" taom:taomId="T04-CUST-GW001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer Onboarding">
+        <dc:Bounds x="464" y="436" width="52" height="52"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="exclusiveGateway_by7z4y4_di" bpmnElement="exclusiveGateway_by7z4y4" isMarkerVisible="true" taom:taomId="T04-CUST-GW002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Decision?" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer Onboarding">
+        <dc:Bounds x="1164" y="231" width="52" height="52"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="exclusiveGateway_xugmjgs_di" bpmnElement="exclusiveGateway_xugmjgs" isMarkerVisible="true" taom:taomId="T04-CUST-GW003" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Risk?" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer Onboarding">
+        <dc:Bounds x="634" y="105" width="52" height="52"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="startEvent_wae787c_di" bpmnElement="startEvent_wae787c" taom:taomId="T04-CUST-EV001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Application received" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer Onboarding">
+        <dc:Bounds x="203" y="110" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_cncxj5d_di" bpmnElement="endEvent_cncxj5d" taom:taomId="T04-CUST-EV002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Timeout handled" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer Onboarding">
+        <dc:Bounds x="469" y="281" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="startEvent_0zfxgos_di" bpmnElement="startEvent_0zfxgos" taom:taomId="T04-CUST-EV003" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Timeout" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer Onboarding">
+        <dc:Bounds x="217" y="281" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="startEvent_ij8qgh2_di" bpmnElement="startEvent_ij8qgh2" taom:taomId="T04-CUST-EV004" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Cancelation requested" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer Onboarding">
+        <dc:Bounds x="217" y="441" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_wa4vjgg_di" bpmnElement="endEvent_wa4vjgg" taom:taomId="T04-CUST-EV005" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Customer notified about successful cancelation" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer Onboarding">
+        <dc:Bounds x="549" y="441" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_jsq5gq9_di" bpmnElement="endEvent_jsq5gq9" taom:taomId="T04-CUST-EV006" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Operations Team notified about successful cancelation" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer Onboarding">
+        <dc:Bounds x="549" y="549" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_hlw0atl_di" bpmnElement="endEvent_hlw0atl" taom:taomId="T04-CUST-EV007" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Application&#10; issued" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer Onboarding">
+        <dc:Bounds x="1552" y="110" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_ptmh8qx_di" bpmnElement="endEvent_ptmh8qx" taom:taomId="T04-CUST-EV008" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Application &#10;rejected" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer Onboarding">
+        <dc:Bounds x="1552" y="513" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_m1ic2ij_di" bpmnElement="endEvent_m1ic2ij" taom:taomId="T04-CUST-EV009" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Application canceled due to fraud" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer Onboarding">
+        <dc:Bounds x="1089" y="359" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="boundaryEvent_tfufpbn_di" bpmnElement="boundaryEvent_tfufpbn" taom:taomId="T04-CUST-EV010" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Fraud detected" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Customer Onboarding">
+        <dc:Bounds x="835" y="276" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_r5bns3g_di" bpmnElement="Flow_r5bns3g" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="259" y="302"/>
+        <di:waypoint x="285" y="302"/>
+        <di:waypoint x="285" y="302"/>
+        <di:waypoint x="310" y="302"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_k6xzbtk_di" bpmnElement="Flow_k6xzbtk" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="410" y="302"/>
+        <di:waypoint x="440" y="302"/>
+        <di:waypoint x="440" y="302"/>
+        <di:waypoint x="469" y="302"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_xt4q9en_di" bpmnElement="Flow_xt4q9en" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="259" y="462"/>
+        <di:waypoint x="285" y="462"/>
+        <di:waypoint x="285" y="462"/>
+        <di:waypoint x="310" y="462"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_yj8k822_di" bpmnElement="Flow_yj8k822" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="410" y="462"/>
+        <di:waypoint x="437" y="462"/>
+        <di:waypoint x="437" y="462"/>
+        <di:waypoint x="464" y="462"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_dbxr86d_di" bpmnElement="Flow_dbxr86d" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="516" y="462"/>
+        <di:waypoint x="533" y="462"/>
+        <di:waypoint x="533" y="462"/>
+        <di:waypoint x="549" y="462"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_6gl6nbp_di" bpmnElement="Flow_6gl6nbp" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="w">
+        <di:waypoint x="490" y="488"/>
+        <di:waypoint x="490" y="529"/>
+        <di:waypoint x="549" y="529"/>
+        <di:waypoint x="549" y="570"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_8nudimd_di" bpmnElement="Flow_8nudimd" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="400" y="131"/>
+        <di:waypoint x="430" y="131"/>
+        <di:waypoint x="430" y="131"/>
+        <di:waypoint x="460" y="131"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p6lwon6_di" bpmnElement="Flow_p6lwon6" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1349" y="534"/>
+        <di:waypoint x="1375" y="534"/>
+        <di:waypoint x="1375" y="534"/>
+        <di:waypoint x="1400" y="534"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_5hm76al_di" bpmnElement="Flow_5hm76al" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1500" y="534"/>
+        <di:waypoint x="1526" y="534"/>
+        <di:waypoint x="1526" y="534"/>
+        <di:waypoint x="1552" y="534"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_64pdu7e_di" bpmnElement="Flow_64pdu7e" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="w" taom:taomLabel="Red (severe risk)">
+        <di:waypoint x="660" y="157"/>
+        <di:waypoint x="955" y="157"/>
+        <di:waypoint x="955" y="534"/>
+        <di:waypoint x="1249" y="534"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_gfsavfm_di" bpmnElement="Flow_gfsavfm" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="560" y="131"/>
+        <di:waypoint x="597" y="131"/>
+        <di:waypoint x="597" y="131"/>
+        <di:waypoint x="634" y="131"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_6dwqvya_di" bpmnElement="Flow_6dwqvya" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w" taom:taomLabel="Green (no risk)">
+        <di:waypoint x="686" y="131"/>
+        <di:waypoint x="968" y="131"/>
+        <di:waypoint x="968" y="131"/>
+        <di:waypoint x="1249" y="131"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_x230d4a_di" bpmnElement="Flow_x230d4a" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1349" y="131"/>
+        <di:waypoint x="1375" y="131"/>
+        <di:waypoint x="1375" y="131"/>
+        <di:waypoint x="1400" y="131"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_lucko72_di" bpmnElement="Flow_lucko72" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1500" y="131"/>
+        <di:waypoint x="1526" y="131"/>
+        <di:waypoint x="1526" y="131"/>
+        <di:waypoint x="1552" y="131"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_hss4ye9_di" bpmnElement="Flow_hss4ye9" taom:routing="orthogonal" taom:sourceSide="n" taom:targetSide="w" taom:taomLabel="Application accepted">
+        <di:waypoint x="1190" y="231"/>
+        <di:waypoint x="1190" y="181"/>
+        <di:waypoint x="1249" y="181"/>
+        <di:waypoint x="1249" y="131"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_o86mdg9_di" bpmnElement="Flow_o86mdg9" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="w" taom:taomLabel="Application declined">
+        <di:waypoint x="1190" y="283"/>
+        <di:waypoint x="1190" y="409"/>
+        <di:waypoint x="1249" y="409"/>
+        <di:waypoint x="1249" y="534"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_nfmga6p_di" bpmnElement="Flow_nfmga6p" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="245" y="131"/>
+        <di:waypoint x="273" y="131"/>
+        <di:waypoint x="273" y="131"/>
+        <di:waypoint x="300" y="131"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_lwhoe2k_di" bpmnElement="Flow_lwhoe2k" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="w" taom:taomLabel="Yellow (moderate risk)">
+        <di:waypoint x="660" y="157"/>
+        <di:waypoint x="715" y="157"/>
+        <di:waypoint x="715" y="257"/>
+        <di:waypoint x="770" y="257"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_06aylrc_di" bpmnElement="Flow_06aylrc" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="870" y="257"/>
+        <di:waypoint x="1017" y="257"/>
+        <di:waypoint x="1017" y="257"/>
+        <di:waypoint x="1164" y="257"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_6erzj7e_di" bpmnElement="Flow_6erzj7e" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="w">
+        <di:waypoint x="856" y="318"/>
+        <di:waypoint x="898" y="318"/>
+        <di:waypoint x="898" y="380"/>
+        <di:waypoint x="940" y="380"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_c52j4m4_di" bpmnElement="Flow_c52j4m4" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1040" y="380"/>
+        <di:waypoint x="1065" y="380"/>
+        <di:waypoint x="1065" y="380"/>
+        <di:waypoint x="1089" y="380"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

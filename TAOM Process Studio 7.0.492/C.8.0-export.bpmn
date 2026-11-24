@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:taom="https://traniva.com/ns/taom" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_nb_c_8_0" targetNamespace="http://bpmn.io/schema/bpmn" exporter="TAOM Process Studio" exporterVersion="7.0.492">
+  <bpmn:process id="Process_nb_c_8_0" isExecutable="false" name="Vacation Request - (i18n)">
+    <bpmn:extensionElements>
+      <taom:meta>
+        <taom:ebene lang="">L4</taom:ebene>
+        <taom:austausch form="1" docLang="-"/>
+      </taom:meta>
+      <taom:meta>
+        <taom:title lang="de">Vacation Request - (i18n)</taom:title>
+      </taom:meta>
+    </bpmn:extensionElements>
+    <bpmn:ioSpecification id="IoSpecification_isklxe2">
+      <bpmn:dataInput id="dataInput_cme3c3d" name="Employee Badge Number"/>
+      <bpmn:dataInput id="dataInput_99r9myu" name="From"/>
+      <bpmn:dataInput id="dataInput_dmgtprj" name="To"/>
+      <bpmn:dataOutput id="dataOutput_zk10er4" name="Reason"/>
+      <bpmn:dataOutput id="dataOutput_ode797o" name="Vacation Approval"/>
+      <bpmn:inputSet id="InputSet_gkmw0xg">
+        <bpmn:dataInputRefs>dataInput_cme3c3d</bpmn:dataInputRefs>
+        <bpmn:dataInputRefs>dataInput_99r9myu</bpmn:dataInputRefs>
+        <bpmn:dataInputRefs>dataInput_dmgtprj</bpmn:dataInputRefs>
+      </bpmn:inputSet>
+      <bpmn:outputSet id="OutputSet_8zbcf6o">
+        <bpmn:dataOutputRefs>dataOutput_zk10er4</bpmn:dataOutputRefs>
+        <bpmn:dataOutputRefs>dataOutput_ode797o</bpmn:dataOutputRefs>
+      </bpmn:outputSet>
+    </bpmn:ioSpecification>
+    <bpmn:sendTask id="sendTask_lbk9fz1" name="Notify Employee of Approval">
+      <bpmn:incoming>Flow_0c8a8qd</bpmn:incoming>
+      <bpmn:outgoing>Flow_ss7ftac</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:businessRuleTask id="businessRuleTask_u5rzq79" name="Vacation Approval">
+      <bpmn:incoming>Flow_6exdhml</bpmn:incoming>
+      <bpmn:outgoing>Flow_oda18p1</bpmn:outgoing>
+      <bpmn:ioSpecification>
+        <bpmn:dataInput id="DataInput_Assoc_eccbvt2" name="From"/>
+        <bpmn:dataInput id="DataInput_Assoc_aw56u2v" name="To"/>
+        <bpmn:dataOutput id="DataOutput_Assoc_0qxw7ab" name="Vacation Approval"/>
+        <bpmn:dataOutput id="DataOutput_Assoc_tebi2d5" name="Reason"/>
+        <bpmn:inputSet>
+          <bpmn:dataInputRefs>DataInput_Assoc_eccbvt2</bpmn:dataInputRefs>
+          <bpmn:dataInputRefs>DataInput_Assoc_aw56u2v</bpmn:dataInputRefs>
+        </bpmn:inputSet>
+        <bpmn:outputSet>
+          <bpmn:dataOutputRefs>DataOutput_Assoc_0qxw7ab</bpmn:dataOutputRefs>
+          <bpmn:dataOutputRefs>DataOutput_Assoc_tebi2d5</bpmn:dataOutputRefs>
+        </bpmn:outputSet>
+      </bpmn:ioSpecification>
+      <bpmn:dataInputAssociation id="Assoc_eccbvt2">
+        <bpmn:sourceRef>dataInput_99r9myu</bpmn:sourceRef>
+        <bpmn:targetRef>DataInput_Assoc_eccbvt2</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+      <bpmn:dataInputAssociation id="Assoc_aw56u2v">
+        <bpmn:sourceRef>dataInput_dmgtprj</bpmn:sourceRef>
+        <bpmn:targetRef>DataInput_Assoc_aw56u2v</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+      <bpmn:dataOutputAssociation id="Assoc_0qxw7ab">
+        <bpmn:sourceRef>DataOutput_Assoc_0qxw7ab</bpmn:sourceRef>
+        <bpmn:targetRef>dataOutput_ode797o</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+      <bpmn:dataOutputAssociation id="Assoc_tebi2d5">
+        <bpmn:sourceRef>DataOutput_Assoc_tebi2d5</bpmn:sourceRef>
+        <bpmn:targetRef>dataOutput_zk10er4</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:businessRuleTask>
+    <bpmn:serviceTask id="serviceTask_mfa8vbk" name="Fetch Vacation Information">
+      <bpmn:incoming>Flow_1o2gsl0</bpmn:incoming>
+      <bpmn:outgoing>Flow_6exdhml</bpmn:outgoing>
+      <bpmn:ioSpecification>
+        <bpmn:dataInput id="DataInput_Assoc_mmgsfnn" name="Employee Badge Number"/>
+        <bpmn:dataOutput id="DataOutput_Assoc_o3njl06" name="Current Vacation Status"/>
+        <bpmn:inputSet>
+          <bpmn:dataInputRefs>DataInput_Assoc_mmgsfnn</bpmn:dataInputRefs>
+        </bpmn:inputSet>
+        <bpmn:outputSet>
+          <bpmn:dataOutputRefs>DataOutput_Assoc_o3njl06</bpmn:dataOutputRefs>
+        </bpmn:outputSet>
+      </bpmn:ioSpecification>
+      <bpmn:dataInputAssociation id="Assoc_mmgsfnn">
+        <bpmn:sourceRef>dataInput_cme3c3d</bpmn:sourceRef>
+        <bpmn:targetRef>DataInput_Assoc_mmgsfnn</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+      <bpmn:dataOutputAssociation id="Assoc_o3njl06">
+        <bpmn:sourceRef>DataOutput_Assoc_o3njl06</bpmn:sourceRef>
+        <bpmn:targetRef>dataObjectReference_gxjjvvd</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="userTask_pjd0u1w" name="Manually Approve Vacation">
+      <bpmn:incoming>Flow_ldv6efl</bpmn:incoming>
+      <bpmn:outgoing>Flow_dj0kh2y</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sendTask id="sendTask_e0yjeb2" name="Notify Employee of Refusal">
+      <bpmn:incoming>Flow_e3bfrhc</bpmn:incoming>
+      <bpmn:outgoing>Flow_5eb6ovq</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:serviceTask id="serviceTask_tpp8mnz" name="Update Remaining Vacation">
+      <bpmn:incoming>Flow_ss7ftac</bpmn:incoming>
+      <bpmn:outgoing>Flow_b02l7ni</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="serviceTask_qi1qwbb" name="Update Remaining Vacation">
+      <bpmn:incoming>Flow_ks1rxop</bpmn:incoming>
+      <bpmn:outgoing>Flow_qgs4ioc</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sendTask id="sendTask_sfxtqsx" name="Notify Employee of Approval">
+      <bpmn:incoming>Flow_lhd77yd</bpmn:incoming>
+      <bpmn:outgoing>Flow_ks1rxop</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:sendTask id="sendTask_qpjq8ps" name="Notify Employee of Refusal">
+      <bpmn:incoming>Flow_ei0x9jr</bpmn:incoming>
+      <bpmn:outgoing>Flow_rwgdmbv</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:endEvent id="endEvent_tlzkrn3" name="Vacation Approved Automatically">
+      <bpmn:incoming>Flow_qgs4ioc</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="endEvent_fh35tos" name="Employee not found">
+      <bpmn:incoming>Flow_xp6lho3</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:exclusiveGateway id="exclusiveGateway_1y9xjh8" default="Flow_ei0x9jr" gatewayDirection="Diverging">
+      <bpmn:incoming>Flow_oda18p1</bpmn:incoming>
+      <bpmn:outgoing>Flow_ei0x9jr</bpmn:outgoing>
+      <bpmn:outgoing>Flow_lhd77yd</bpmn:outgoing>
+      <bpmn:outgoing>Flow_ldv6efl</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="endEvent_609bp0l" name="Vacation Refused by Manager">
+      <bpmn:incoming>Flow_5eb6ovq</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:exclusiveGateway id="exclusiveGateway_6y54w9j" default="Flow_e3bfrhc" gatewayDirection="Diverging">
+      <bpmn:incoming>Flow_dj0kh2y</bpmn:incoming>
+      <bpmn:outgoing>Flow_e3bfrhc</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0c8a8qd</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:startEvent id="startEvent_dlsfih4" name="Vacation Request Received">
+      <bpmn:outgoing>Flow_1o2gsl0</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="endEvent_eamp4fj" name="Vacation Refused Automatically">
+      <bpmn:incoming>Flow_rwgdmbv</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="endEvent_4sxh9gd" name="Vacation Approved by Manager">
+      <bpmn:incoming>Flow_b02l7ni</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:dataObjectReference id="dataObjectReference_gxjjvvd" name="Current Vacation Status"/>
+    <bpmn:boundaryEvent id="boundaryEvent_0dykrqn" attachedToRef="serviceTask_mfa8vbk">
+      <bpmn:outgoing>Flow_xp6lho3</bpmn:outgoing>
+      <bpmn:errorEventDefinition/>
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_1o2gsl0" sourceRef="startEvent_dlsfih4" targetRef="serviceTask_mfa8vbk"/>
+    <bpmn:sequenceFlow id="Flow_b02l7ni" sourceRef="serviceTask_tpp8mnz" targetRef="endEvent_4sxh9gd"/>
+    <bpmn:sequenceFlow id="Flow_ei0x9jr" sourceRef="exclusiveGateway_1y9xjh8" targetRef="sendTask_qpjq8ps" name="Refused"/>
+    <bpmn:sequenceFlow id="Flow_6exdhml" sourceRef="serviceTask_mfa8vbk" targetRef="businessRuleTask_u5rzq79"/>
+    <bpmn:sequenceFlow id="Flow_5eb6ovq" sourceRef="sendTask_e0yjeb2" targetRef="endEvent_609bp0l"/>
+    <bpmn:sequenceFlow id="Flow_rwgdmbv" sourceRef="sendTask_qpjq8ps" targetRef="endEvent_eamp4fj"/>
+    <bpmn:sequenceFlow id="Flow_e3bfrhc" sourceRef="exclusiveGateway_6y54w9j" targetRef="sendTask_e0yjeb2" name="Refused"/>
+    <bpmn:sequenceFlow id="Flow_0c8a8qd" sourceRef="exclusiveGateway_6y54w9j" targetRef="sendTask_lbk9fz1" name="Approved">
+      <bpmn:conditionExpression xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="bpmn:tFormalExpression">Vacation Approval = "Approved"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_ss7ftac" sourceRef="sendTask_lbk9fz1" targetRef="serviceTask_tpp8mnz"/>
+    <bpmn:sequenceFlow id="Flow_ks1rxop" sourceRef="sendTask_sfxtqsx" targetRef="serviceTask_qi1qwbb"/>
+    <bpmn:sequenceFlow id="Flow_lhd77yd" sourceRef="exclusiveGateway_1y9xjh8" targetRef="sendTask_sfxtqsx" name="Approved">
+      <bpmn:conditionExpression xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="bpmn:tFormalExpression">Vacation Approval = "Approved"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_dj0kh2y" sourceRef="userTask_pjd0u1w" targetRef="exclusiveGateway_6y54w9j"/>
+    <bpmn:sequenceFlow id="Flow_xp6lho3" sourceRef="boundaryEvent_0dykrqn" targetRef="endEvent_fh35tos"/>
+    <bpmn:sequenceFlow id="Flow_qgs4ioc" sourceRef="serviceTask_qi1qwbb" targetRef="endEvent_tlzkrn3"/>
+    <bpmn:sequenceFlow id="Flow_ldv6efl" sourceRef="exclusiveGateway_1y9xjh8" targetRef="userTask_pjd0u1w" name="Manual Validation Required">
+      <bpmn:conditionExpression xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="bpmn:tFormalExpression">Vacation Approval = "Manual Validation Required"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_oda18p1" sourceRef="businessRuleTask_u5rzq79" targetRef="exclusiveGateway_1y9xjh8"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_nb_c_8_0">
+    <bpmndi:BPMNPlane id="Plane_nb_c_8_0" bpmnElement="Process_nb_c_8_0">
+      <bpmndi:BPMNShape id="sendTask_lbk9fz1_di" bpmnElement="sendTask_lbk9fz1" taom:taomId="T04-PRZ-AC001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Notify Employee of Approval" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="1581" y="275" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="businessRuleTask_u5rzq79_di" bpmnElement="businessRuleTask_u5rzq79" taom:taomId="T04-PRZ-AC002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Vacation Approval" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="658" y="275" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="serviceTask_mfa8vbk_di" bpmnElement="serviceTask_mfa8vbk" taom:taomId="T04-PRZ-AC003" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Fetch Vacation Information" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="404" y="275" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_pjd0u1w_di" bpmnElement="userTask_pjd0u1w" taom:taomId="T04-PRZ-AC004" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Manually Approve Vacation" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="1129" y="275" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sendTask_e0yjeb2_di" bpmnElement="sendTask_e0yjeb2" taom:taomId="T04-PRZ-AC005" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Notify Employee of Refusal" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="1748" y="442" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="serviceTask_tpp8mnz_di" bpmnElement="serviceTask_tpp8mnz" taom:taomId="T04-PRZ-AC006" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Update Remaining Vacation" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="1903" y="275" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="serviceTask_qi1qwbb_di" bpmnElement="serviceTask_qi1qwbb" taom:taomId="T04-PRZ-AC007" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Update Remaining Vacation" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="1373" y="101" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sendTask_sfxtqsx_di" bpmnElement="sendTask_sfxtqsx" taom:taomId="T04-PRZ-AC008" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Notify Employee of Approval" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="1062" y="101" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sendTask_qpjq8ps_di" bpmnElement="sendTask_qpjq8ps" taom:taomId="T04-PRZ-AC009" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Notify Employee of Refusal" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="1226" y="600" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_tlzkrn3_di" bpmnElement="endEvent_tlzkrn3" taom:taomId="T04-PRZ-EV001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Vacation Approved Automatically" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="2167" y="118" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_fh35tos_di" bpmnElement="endEvent_fh35tos" taom:taomId="T04-PRZ-EV002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Employee not found" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="2167" y="756" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="exclusiveGateway_1y9xjh8_di" bpmnElement="exclusiveGateway_1y9xjh8" isMarkerVisible="true" taom:taomId="T04-PRZ-GW001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="898" y="287" width="52" height="52"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_609bp0l_di" bpmnElement="endEvent_609bp0l" taom:taomId="T04-PRZ-EV003" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Vacation Refused by Manager" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="2167" y="459" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="exclusiveGateway_6y54w9j_di" bpmnElement="exclusiveGateway_6y54w9j" isMarkerVisible="true" taom:taomId="T04-PRZ-GW002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="1412" y="287" width="52" height="52"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="startEvent_dlsfih4_di" bpmnElement="startEvent_dlsfih4" taom:taomId="T04-PRZ-EV004" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Vacation Request Received" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="182" y="292" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_eamp4fj_di" bpmnElement="endEvent_eamp4fj" taom:taomId="T04-PRZ-EV005" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Vacation Refused Automatically" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="2167" y="617" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_4sxh9gd_di" bpmnElement="endEvent_4sxh9gd" taom:taomId="T04-PRZ-EV006" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Vacation Approved by Manager" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="2167" y="292" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataInput_cme3c3d_di" bpmnElement="dataInput_cme3c3d" taom:taomId="T04-PRZ-DO001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Employee Badge Number" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="315" y="172" width="48" height="56"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataInput_99r9myu_di" bpmnElement="dataInput_99r9myu" taom:taomId="T04-PRZ-DO002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="From" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="612" y="51" width="48" height="56"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataInput_dmgtprj_di" bpmnElement="dataInput_dmgtprj" taom:taomId="T04-PRZ-DO003" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="To" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="612" y="120" width="48" height="56"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataOutput_zk10er4_di" bpmnElement="dataOutput_zk10er4" taom:taomId="T04-PRZ-DO004" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Reason" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="766" y="470" width="48" height="56"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataOutput_ode797o_di" bpmnElement="dataOutput_ode797o" taom:taomId="T04-PRZ-DO005" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Vacation Approval" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="766" y="388" width="48" height="56"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataObjectReference_gxjjvvd_di" bpmnElement="dataObjectReference_gxjjvvd" taom:taomId="T04-PRZ-DO006" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Current Vacation Status" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="498" y="172" width="48" height="56"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="boundaryEvent_0dykrqn_di" bpmnElement="boundaryEvent_0dykrqn" taom:taomId="T04-PRZ-EV007" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="479" y="316" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1o2gsl0_di" bpmnElement="Flow_1o2gsl0" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="224" y="313"/>
+        <di:waypoint x="314" y="313"/>
+        <di:waypoint x="314" y="313"/>
+        <di:waypoint x="404" y="313"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_b02l7ni_di" bpmnElement="Flow_b02l7ni" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1999" y="313"/>
+        <di:waypoint x="2083" y="313"/>
+        <di:waypoint x="2083" y="313"/>
+        <di:waypoint x="2167" y="313"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_eccbvt2_di" bpmnElement="Assoc_eccbvt2" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="n" taom:markerEnd="md">
+        <di:waypoint x="660" y="79"/>
+        <di:waypoint x="660" y="177"/>
+        <di:waypoint x="706" y="177"/>
+        <di:waypoint x="706" y="275"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ei0x9jr_di" bpmnElement="Flow_ei0x9jr" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="w" taom:taomLabel="Refused">
+        <di:waypoint x="924" y="339"/>
+        <di:waypoint x="1075" y="339"/>
+        <di:waypoint x="1075" y="638"/>
+        <di:waypoint x="1226" y="638"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_o3njl06_di" bpmnElement="Assoc_o3njl06" taom:routing="orthogonal" taom:sourceSide="n" taom:targetSide="w" taom:markerEnd="md">
+        <di:waypoint x="452" y="275"/>
+        <di:waypoint x="452" y="238"/>
+        <di:waypoint x="498" y="238"/>
+        <di:waypoint x="498" y="200"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_aw56u2v_di" bpmnElement="Assoc_aw56u2v" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="n" taom:markerEnd="md">
+        <di:waypoint x="660" y="148"/>
+        <di:waypoint x="660" y="212"/>
+        <di:waypoint x="706" y="212"/>
+        <di:waypoint x="706" y="275"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_6exdhml_di" bpmnElement="Flow_6exdhml" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="500" y="313"/>
+        <di:waypoint x="579" y="313"/>
+        <di:waypoint x="579" y="313"/>
+        <di:waypoint x="658" y="313"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_0qxw7ab_di" bpmnElement="Assoc_0qxw7ab" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="w" taom:markerEnd="md">
+        <di:waypoint x="706" y="351"/>
+        <di:waypoint x="706" y="384"/>
+        <di:waypoint x="766" y="384"/>
+        <di:waypoint x="766" y="416"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_5eb6ovq_di" bpmnElement="Flow_5eb6ovq" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1844" y="480"/>
+        <di:waypoint x="2006" y="480"/>
+        <di:waypoint x="2006" y="480"/>
+        <di:waypoint x="2167" y="480"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_rwgdmbv_di" bpmnElement="Flow_rwgdmbv" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1322" y="638"/>
+        <di:waypoint x="1745" y="638"/>
+        <di:waypoint x="1745" y="638"/>
+        <di:waypoint x="2167" y="638"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_tebi2d5_di" bpmnElement="Assoc_tebi2d5" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="w" taom:markerEnd="md">
+        <di:waypoint x="706" y="351"/>
+        <di:waypoint x="706" y="425"/>
+        <di:waypoint x="766" y="425"/>
+        <di:waypoint x="766" y="498"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_e3bfrhc_di" bpmnElement="Flow_e3bfrhc" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="w" taom:taomLabel="Refused">
+        <di:waypoint x="1438" y="339"/>
+        <di:waypoint x="1593" y="339"/>
+        <di:waypoint x="1593" y="480"/>
+        <di:waypoint x="1748" y="480"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0c8a8qd_di" bpmnElement="Flow_0c8a8qd" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w" taom:taomLabel="Approved">
+        <di:waypoint x="1464" y="313"/>
+        <di:waypoint x="1523" y="313"/>
+        <di:waypoint x="1523" y="313"/>
+        <di:waypoint x="1581" y="313"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_mmgsfnn_di" bpmnElement="Assoc_mmgsfnn" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="n" taom:markerEnd="md">
+        <di:waypoint x="363" y="200"/>
+        <di:waypoint x="408" y="200"/>
+        <di:waypoint x="408" y="275"/>
+        <di:waypoint x="452" y="275"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ss7ftac_di" bpmnElement="Flow_ss7ftac" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1677" y="313"/>
+        <di:waypoint x="1790" y="313"/>
+        <di:waypoint x="1790" y="313"/>
+        <di:waypoint x="1903" y="313"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ks1rxop_di" bpmnElement="Flow_ks1rxop" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1158" y="139"/>
+        <di:waypoint x="1266" y="139"/>
+        <di:waypoint x="1266" y="139"/>
+        <di:waypoint x="1373" y="139"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_lhd77yd_di" bpmnElement="Flow_lhd77yd" taom:routing="orthogonal" taom:sourceSide="n" taom:targetSide="w" taom:taomLabel="Approved">
+        <di:waypoint x="924" y="287"/>
+        <di:waypoint x="924" y="213"/>
+        <di:waypoint x="1062" y="213"/>
+        <di:waypoint x="1062" y="139"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_dj0kh2y_di" bpmnElement="Flow_dj0kh2y" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1225" y="313"/>
+        <di:waypoint x="1319" y="313"/>
+        <di:waypoint x="1319" y="313"/>
+        <di:waypoint x="1412" y="313"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_xp6lho3_di" bpmnElement="Flow_xp6lho3" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="521" y="337"/>
+        <di:waypoint x="1344" y="337"/>
+        <di:waypoint x="1344" y="777"/>
+        <di:waypoint x="2167" y="777"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_qgs4ioc_di" bpmnElement="Flow_qgs4ioc" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1469" y="139"/>
+        <di:waypoint x="1818" y="139"/>
+        <di:waypoint x="1818" y="139"/>
+        <di:waypoint x="2167" y="139"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ldv6efl_di" bpmnElement="Flow_ldv6efl" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w" taom:taomLabel="Manual Validation Required">
+        <di:waypoint x="950" y="313"/>
+        <di:waypoint x="1040" y="313"/>
+        <di:waypoint x="1040" y="313"/>
+        <di:waypoint x="1129" y="313"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_oda18p1_di" bpmnElement="Flow_oda18p1" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="754" y="313"/>
+        <di:waypoint x="826" y="313"/>
+        <di:waypoint x="826" y="313"/>
+        <di:waypoint x="898" y="313"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

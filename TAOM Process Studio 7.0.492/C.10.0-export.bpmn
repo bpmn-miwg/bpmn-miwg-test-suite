@@ -1,0 +1,690 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:taom="https://traniva.com/ns/taom" id="Definitions_nb_c_10_0" targetNamespace="http://bpmn.io/schema/bpmn" exporter="TAOM Process Studio" exporterVersion="7.0.492">
+  <bpmn:collaboration id="Collaboration_27ukbho">
+    <bpmn:extensionElements>
+      <taom:meta>
+        <taom:ebene lang="">L4</taom:ebene>
+        <taom:austausch form="1" docLang="-"/>
+      </taom:meta>
+      <taom:meta>
+        <taom:title lang="de">C.10.0</taom:title>
+      </taom:meta>
+    </bpmn:extensionElements>
+    <bpmn:participant id="Participant_v3jevcp" name="Travel Planning" processRef="Process_nb_c_10_0"/>
+    <bpmn:participant id="Participant_5kur320" name="Client"/>
+    <bpmn:messageFlow id="MessageFlow_upk59cb" sourceRef="Participant_5kur320" targetRef="startEvent_l4chofz"/>
+    <bpmn:messageFlow id="MessageFlow_ijpp7zr" sourceRef="sendTask_lxc7edg" targetRef="Participant_5kur320"/>
+    <bpmn:messageFlow id="MessageFlow_i92c2rf" sourceRef="intermediateThrowEvent_3ta1ikj" targetRef="Participant_5kur320"/>
+    <bpmn:messageFlow id="MessageFlow_yr970tu" sourceRef="intermediateThrowEvent_qniv8br" targetRef="Participant_5kur320"/>
+    <bpmn:messageFlow id="MessageFlow_c3uam6e" sourceRef="Participant_5kur320" targetRef="intermediateCatchEvent_bg1pu85"/>
+  </bpmn:collaboration>
+  <bpmn:process id="Process_nb_c_10_0" isExecutable="false">
+    <bpmn:ioSpecification id="IoSpecification_m7vomsn">
+      <bpmn:dataInput id="dataInput_4fyibkf" name="Client request"/>
+      <bpmn:dataOutput id="dataOutput_51809ka" name="Hotel reservation"/>
+      <bpmn:dataOutput id="dataOutput_hjkjyw8" name="Tickets" isCollection="true"/>
+      <bpmn:inputSet id="InputSet_wk47hrq">
+        <bpmn:dataInputRefs>dataInput_4fyibkf</bpmn:dataInputRefs>
+      </bpmn:inputSet>
+      <bpmn:outputSet id="OutputSet_eznefsx">
+        <bpmn:dataOutputRefs>dataOutput_51809ka</bpmn:dataOutputRefs>
+        <bpmn:dataOutputRefs>dataOutput_hjkjyw8</bpmn:dataOutputRefs>
+      </bpmn:outputSet>
+    </bpmn:ioSpecification>
+    <bpmn:laneSet id="LaneSet_hb4c3">
+      <bpmn:lane id="Lane_32ld382" name="Employee">
+        <bpmn:flowNodeRef>serviceTask_zjmjwjc</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>callActivity_kvqp22t</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>userTask_x4gcoed</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>sendTask_lxc7edg</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>userTask_twwibbq</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>intermediateCatchEvent_bg1pu85</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>endEvent_06o784a</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_8r271cd" name="Project Office">
+        <bpmn:flowNodeRef>userTask_96j3cog</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>userTask_cwixf41</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>exclusiveGateway_2a355oy</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>intermediateThrowEvent_3ta1ikj</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>exclusiveGateway_y6lrfgi</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>startEvent_l4chofz</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>intermediateThrowEvent_qniv8br</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>endEvent_imn4iy7</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>endEvent_cq36zl0</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:serviceTask id="serviceTask_zjmjwjc" name="Update employee's calendar">
+      <bpmn:incoming>Flow_avh8cyp</bpmn:incoming>
+      <bpmn:outgoing>Flow_vrd9nxt</bpmn:outgoing>
+      <bpmn:ioSpecification>
+        <bpmn:dataOutput id="DataOutput_Assoc_rpthxgw" name="Calendar"/>
+        <bpmn:inputSet/>
+        <bpmn:outputSet>
+          <bpmn:dataOutputRefs>DataOutput_Assoc_rpthxgw</bpmn:dataOutputRefs>
+        </bpmn:outputSet>
+      </bpmn:ioSpecification>
+      <bpmn:dataOutputAssociation id="Assoc_rpthxgw">
+        <bpmn:sourceRef>DataOutput_Assoc_rpthxgw</bpmn:sourceRef>
+        <bpmn:targetRef>dataStoreReference_k7p4us8</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+      <bpmn:performer id="Performer_serviceTask_zjmjwjc" name="Employee">
+        <bpmn:resourceRef>Resource_f8c8b903</bpmn:resourceRef>
+      </bpmn:performer>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="userTask_96j3cog" name="Check client request">
+      <bpmn:incoming>Flow_4mpc7mr</bpmn:incoming>
+      <bpmn:outgoing>Flow_vpz8whn</bpmn:outgoing>
+      <bpmn:ioSpecification>
+        <bpmn:dataInput id="DataInput_Assoc_9ya0bo5" name="Client request"/>
+        <bpmn:dataOutput id="DataOutput_Assoc_kdk25f4" name="On-site meeting"/>
+        <bpmn:inputSet>
+          <bpmn:dataInputRefs>DataInput_Assoc_9ya0bo5</bpmn:dataInputRefs>
+        </bpmn:inputSet>
+        <bpmn:outputSet>
+          <bpmn:dataOutputRefs>DataOutput_Assoc_kdk25f4</bpmn:dataOutputRefs>
+        </bpmn:outputSet>
+      </bpmn:ioSpecification>
+      <bpmn:dataInputAssociation id="Assoc_9ya0bo5">
+        <bpmn:sourceRef>dataInput_4fyibkf</bpmn:sourceRef>
+        <bpmn:targetRef>DataInput_Assoc_9ya0bo5</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+      <bpmn:dataOutputAssociation id="Assoc_kdk25f4">
+        <bpmn:sourceRef>DataOutput_Assoc_kdk25f4</bpmn:sourceRef>
+        <bpmn:targetRef>dataObjectReference_0yjdx8t</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+      <bpmn:potentialOwner id="PotentialOwner_userTask_96j3cog" name="Project Office">
+        <bpmn:resourceRef>Resource_f586d033</bpmn:resourceRef>
+      </bpmn:potentialOwner>
+    </bpmn:userTask>
+    <bpmn:callActivity id="callActivity_kvqp22t" name="Plan trip">
+      <bpmn:incoming>Flow_qwx5rmt</bpmn:incoming>
+      <bpmn:outgoing>Flow_avh8cyp</bpmn:outgoing>
+      <bpmn:ioSpecification>
+        <bpmn:dataInput id="DataInput_Assoc_t08m3a4" name="Client request"/>
+        <bpmn:dataOutput id="DataOutput_Assoc_wn2a2yk" name="Hotel reservation"/>
+        <bpmn:dataOutput id="DataOutput_Assoc_zvinefd" name="Tickets"/>
+        <bpmn:inputSet>
+          <bpmn:dataInputRefs>DataInput_Assoc_t08m3a4</bpmn:dataInputRefs>
+        </bpmn:inputSet>
+        <bpmn:outputSet>
+          <bpmn:dataOutputRefs>DataOutput_Assoc_wn2a2yk</bpmn:dataOutputRefs>
+          <bpmn:dataOutputRefs>DataOutput_Assoc_zvinefd</bpmn:dataOutputRefs>
+        </bpmn:outputSet>
+      </bpmn:ioSpecification>
+      <bpmn:dataInputAssociation id="Assoc_t08m3a4">
+        <bpmn:sourceRef>dataInput_4fyibkf</bpmn:sourceRef>
+        <bpmn:targetRef>DataInput_Assoc_t08m3a4</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+      <bpmn:dataOutputAssociation id="Assoc_wn2a2yk">
+        <bpmn:sourceRef>DataOutput_Assoc_wn2a2yk</bpmn:sourceRef>
+        <bpmn:targetRef>dataOutput_51809ka</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+      <bpmn:dataOutputAssociation id="Assoc_zvinefd">
+        <bpmn:sourceRef>DataOutput_Assoc_zvinefd</bpmn:sourceRef>
+        <bpmn:targetRef>dataOutput_hjkjyw8</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+      <bpmn:performer id="Performer_callActivity_kvqp22t" name="Employee">
+        <bpmn:resourceRef>Resource_f8c8b903</bpmn:resourceRef>
+      </bpmn:performer>
+    </bpmn:callActivity>
+    <bpmn:userTask id="userTask_cwixf41" name="Check employee's availability">
+      <bpmn:incoming>Flow_8l75b8z</bpmn:incoming>
+      <bpmn:outgoing>Flow_zrtuji7</bpmn:outgoing>
+      <bpmn:ioSpecification>
+        <bpmn:dataInput id="DataInput_Assoc_7wohu9s" name="Calendar"/>
+        <bpmn:dataOutput id="DataOutput_Assoc_es3x3ho" name="Identified&#10;employee"/>
+        <bpmn:inputSet>
+          <bpmn:dataInputRefs>DataInput_Assoc_7wohu9s</bpmn:dataInputRefs>
+        </bpmn:inputSet>
+        <bpmn:outputSet>
+          <bpmn:dataOutputRefs>DataOutput_Assoc_es3x3ho</bpmn:dataOutputRefs>
+        </bpmn:outputSet>
+      </bpmn:ioSpecification>
+      <bpmn:dataInputAssociation id="Assoc_7wohu9s">
+        <bpmn:sourceRef>dataStoreReference_k7p4us8</bpmn:sourceRef>
+        <bpmn:targetRef>DataInput_Assoc_7wohu9s</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+      <bpmn:dataOutputAssociation id="Assoc_es3x3ho">
+        <bpmn:sourceRef>DataOutput_Assoc_es3x3ho</bpmn:sourceRef>
+        <bpmn:targetRef>dataObjectReference_ockxscg</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+      <bpmn:potentialOwner id="PotentialOwner_userTask_cwixf41" name="Project Office">
+        <bpmn:resourceRef>Resource_f586d033</bpmn:resourceRef>
+      </bpmn:potentialOwner>
+    </bpmn:userTask>
+    <bpmn:userTask id="userTask_x4gcoed" name="Prepare confirmation email">
+      <bpmn:incoming>Flow_vrd9nxt</bpmn:incoming>
+      <bpmn:outgoing>Flow_du3eep8</bpmn:outgoing>
+      <bpmn:ioSpecification>
+        <bpmn:dataInput id="DataInput_Assoc_e5zxc1c" name="Tickets"/>
+        <bpmn:dataInput id="DataInput_Assoc_kzu0au6" name="Hotel reservation"/>
+        <bpmn:inputSet>
+          <bpmn:dataInputRefs>DataInput_Assoc_e5zxc1c</bpmn:dataInputRefs>
+          <bpmn:dataInputRefs>DataInput_Assoc_kzu0au6</bpmn:dataInputRefs>
+        </bpmn:inputSet>
+        <bpmn:outputSet/>
+      </bpmn:ioSpecification>
+      <bpmn:dataInputAssociation id="Assoc_e5zxc1c">
+        <bpmn:sourceRef>dataObjectReference_0eawccq</bpmn:sourceRef>
+        <bpmn:targetRef>DataInput_Assoc_e5zxc1c</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+      <bpmn:dataInputAssociation id="Assoc_kzu0au6">
+        <bpmn:sourceRef>dataObjectReference_ug7szl1</bpmn:sourceRef>
+        <bpmn:targetRef>DataInput_Assoc_kzu0au6</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+      <bpmn:potentialOwner id="PotentialOwner_userTask_x4gcoed" name="Employee">
+        <bpmn:resourceRef>Resource_f8c8b903</bpmn:resourceRef>
+      </bpmn:potentialOwner>
+    </bpmn:userTask>
+    <bpmn:sendTask id="sendTask_lxc7edg" name="Send confirmation email">
+      <bpmn:incoming>Flow_du3eep8</bpmn:incoming>
+      <bpmn:outgoing>Flow_loyk3h0</bpmn:outgoing>
+      <bpmn:performer id="Performer_sendTask_lxc7edg" name="Employee">
+        <bpmn:resourceRef>Resource_f8c8b903</bpmn:resourceRef>
+      </bpmn:performer>
+    </bpmn:sendTask>
+    <bpmn:userTask id="userTask_twwibbq" name="Record meeting details">
+      <bpmn:incoming>Flow_tuv7poj</bpmn:incoming>
+      <bpmn:outgoing>Flow_c49pzc7</bpmn:outgoing>
+      <bpmn:ioSpecification>
+        <bpmn:dataInput id="DataInput_Assoc_j7fmn9h" name="HR system"/>
+        <bpmn:inputSet>
+          <bpmn:dataInputRefs>DataInput_Assoc_j7fmn9h</bpmn:dataInputRefs>
+        </bpmn:inputSet>
+        <bpmn:outputSet/>
+      </bpmn:ioSpecification>
+      <bpmn:dataInputAssociation id="Assoc_j7fmn9h">
+        <bpmn:sourceRef>dataStoreReference_7ny14q8</bpmn:sourceRef>
+        <bpmn:targetRef>DataInput_Assoc_j7fmn9h</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+      <bpmn:potentialOwner id="PotentialOwner_userTask_twwibbq" name="Employee">
+        <bpmn:resourceRef>Resource_f8c8b903</bpmn:resourceRef>
+      </bpmn:potentialOwner>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="exclusiveGateway_2a355oy" name="On-site Meeting?" gatewayDirection="Diverging">
+      <bpmn:incoming>Flow_vpz8whn</bpmn:incoming>
+      <bpmn:outgoing>Flow_8l75b8z</bpmn:outgoing>
+      <bpmn:outgoing>Flow_jk25ea2</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:intermediateThrowEvent id="intermediateThrowEvent_3ta1ikj" name="Answer client directly">
+      <bpmn:incoming>Flow_jk25ea2</bpmn:incoming>
+      <bpmn:outgoing>Flow_ovcfdyh</bpmn:outgoing>
+      <bpmn:messageEventDefinition/>
+    </bpmn:intermediateThrowEvent>
+    <bpmn:exclusiveGateway id="exclusiveGateway_y6lrfgi" name="Employee &#10;available?" gatewayDirection="Diverging">
+      <bpmn:incoming>Flow_zrtuji7</bpmn:incoming>
+      <bpmn:outgoing>Flow_b2icchu</bpmn:outgoing>
+      <bpmn:outgoing>Flow_qwx5rmt</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:startEvent id="startEvent_l4chofz" name="E-mail received">
+      <bpmn:outgoing>Flow_4mpc7mr</bpmn:outgoing>
+      <bpmn:messageEventDefinition/>
+    </bpmn:startEvent>
+    <bpmn:intermediateThrowEvent id="intermediateThrowEvent_qniv8br" name="Notify client personel not available">
+      <bpmn:incoming>Flow_b2icchu</bpmn:incoming>
+      <bpmn:outgoing>Flow_w1lsj8r</bpmn:outgoing>
+      <bpmn:messageEventDefinition/>
+    </bpmn:intermediateThrowEvent>
+    <bpmn:dataStoreReference id="dataStoreReference_k7p4us8" name="Calendar"/>
+    <bpmn:dataObjectReference id="dataObjectReference_0yjdx8t" name="On-site meeting"/>
+    <bpmn:dataObjectReference id="dataObjectReference_ockxscg" name="Identified&#10;employee"/>
+    <bpmn:dataStoreReference id="dataStoreReference_7ny14q8" name="HR system"/>
+    <bpmn:dataObjectReference id="dataObjectReference_ug7szl1" name="Hotel reservation"/>
+    <bpmn:dataObject id="DataObject_0mintz9" isCollection="true"/>
+    <bpmn:dataObjectReference id="dataObjectReference_0eawccq" name="Tickets" dataObjectRef="DataObject_0mintz9"/>
+    <bpmn:intermediateCatchEvent id="intermediateCatchEvent_bg1pu85" name="Recieve meeting details">
+      <bpmn:incoming>Flow_loyk3h0</bpmn:incoming>
+      <bpmn:outgoing>Flow_tuv7poj</bpmn:outgoing>
+      <bpmn:messageEventDefinition/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="endEvent_imn4iy7" name="Client answered">
+      <bpmn:incoming>Flow_ovcfdyh</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="endEvent_06o784a" name="Trip planned">
+      <bpmn:incoming>Flow_c49pzc7</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="endEvent_cq36zl0" name="No personnel available">
+      <bpmn:incoming>Flow_w1lsj8r</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_ovcfdyh" sourceRef="intermediateThrowEvent_3ta1ikj" targetRef="endEvent_imn4iy7"/>
+    <bpmn:sequenceFlow id="Flow_vrd9nxt" sourceRef="serviceTask_zjmjwjc" targetRef="userTask_x4gcoed"/>
+    <bpmn:sequenceFlow id="Flow_zrtuji7" sourceRef="userTask_cwixf41" targetRef="exclusiveGateway_y6lrfgi"/>
+    <bpmn:sequenceFlow id="Flow_8l75b8z" sourceRef="exclusiveGateway_2a355oy" targetRef="userTask_cwixf41" name="Yes"/>
+    <bpmn:sequenceFlow id="Flow_avh8cyp" sourceRef="callActivity_kvqp22t" targetRef="serviceTask_zjmjwjc"/>
+    <bpmn:sequenceFlow id="Flow_b2icchu" sourceRef="exclusiveGateway_y6lrfgi" targetRef="intermediateThrowEvent_qniv8br" name="No"/>
+    <bpmn:sequenceFlow id="Flow_4mpc7mr" sourceRef="startEvent_l4chofz" targetRef="userTask_96j3cog"/>
+    <bpmn:sequenceFlow id="Flow_w1lsj8r" sourceRef="intermediateThrowEvent_qniv8br" targetRef="endEvent_cq36zl0"/>
+    <bpmn:sequenceFlow id="Flow_tuv7poj" sourceRef="intermediateCatchEvent_bg1pu85" targetRef="userTask_twwibbq"/>
+    <bpmn:sequenceFlow id="Flow_c49pzc7" sourceRef="userTask_twwibbq" targetRef="endEvent_06o784a"/>
+    <bpmn:sequenceFlow id="Flow_qwx5rmt" sourceRef="exclusiveGateway_y6lrfgi" targetRef="callActivity_kvqp22t" name="Yes"/>
+    <bpmn:sequenceFlow id="Flow_jk25ea2" sourceRef="exclusiveGateway_2a355oy" targetRef="intermediateThrowEvent_3ta1ikj" name="No"/>
+    <bpmn:sequenceFlow id="Flow_du3eep8" sourceRef="userTask_x4gcoed" targetRef="sendTask_lxc7edg"/>
+    <bpmn:sequenceFlow id="Flow_loyk3h0" sourceRef="sendTask_lxc7edg" targetRef="intermediateCatchEvent_bg1pu85"/>
+    <bpmn:sequenceFlow id="Flow_vpz8whn" sourceRef="userTask_96j3cog" targetRef="exclusiveGateway_2a355oy"/>
+  </bpmn:process>
+  <bpmn:process id="Process_ohne_Pool" isExecutable="false" name="C.10.0">
+    <bpmn:ioSpecification>
+      <bpmn:dataInput id="dataInput_y0mxajt" name="Client request"/>
+      <bpmn:dataOutput id="dataOutput_xvh1yyy" name="Hotel reservation" isCollection="true"/>
+      <bpmn:dataOutput id="dataOutput_h6je1eh" name="Tickets" isCollection="true"/>
+      <bpmn:inputSet>
+        <bpmn:dataInputRefs>dataInput_y0mxajt</bpmn:dataInputRefs>
+      </bpmn:inputSet>
+      <bpmn:outputSet>
+        <bpmn:dataOutputRefs>dataOutput_xvh1yyy</bpmn:dataOutputRefs>
+        <bpmn:dataOutputRefs>dataOutput_h6je1eh</bpmn:dataOutputRefs>
+      </bpmn:outputSet>
+    </bpmn:ioSpecification>
+    <bpmn:userTask id="userTask_hcm9c2e" name="Book trip">
+      <bpmn:incoming>Flow_1gee6tz</bpmn:incoming>
+      <bpmn:outgoing>Flow_fv98j6m</bpmn:outgoing>
+      <bpmn:ioSpecification>
+        <bpmn:dataInput id="DataInput_Assoc_aq3kjv1" name="Preferred hotel and travel means"/>
+        <bpmn:dataOutput id="DataOutput_Assoc_anegns7" name="Hotel reservation"/>
+        <bpmn:dataOutput id="DataOutput_Assoc_bxm83mu" name="Tickets"/>
+        <bpmn:inputSet>
+          <bpmn:dataInputRefs>DataInput_Assoc_aq3kjv1</bpmn:dataInputRefs>
+        </bpmn:inputSet>
+        <bpmn:outputSet>
+          <bpmn:dataOutputRefs>DataOutput_Assoc_anegns7</bpmn:dataOutputRefs>
+          <bpmn:dataOutputRefs>DataOutput_Assoc_bxm83mu</bpmn:dataOutputRefs>
+        </bpmn:outputSet>
+      </bpmn:ioSpecification>
+      <bpmn:dataInputAssociation id="Assoc_aq3kjv1">
+        <bpmn:sourceRef>dataObjectReference_djc7j2d</bpmn:sourceRef>
+        <bpmn:targetRef>DataInput_Assoc_aq3kjv1</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+      <bpmn:dataOutputAssociation id="Assoc_anegns7">
+        <bpmn:sourceRef>DataOutput_Assoc_anegns7</bpmn:sourceRef>
+        <bpmn:targetRef>dataOutput_xvh1yyy</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+      <bpmn:dataOutputAssociation id="Assoc_bxm83mu">
+        <bpmn:sourceRef>DataOutput_Assoc_bxm83mu</bpmn:sourceRef>
+        <bpmn:targetRef>dataOutput_h6je1eh</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:userTask>
+    <bpmn:userTask id="userTask_vf5djyb" name="Request employee preferences">
+      <bpmn:incoming>Flow_vtdhcp3</bpmn:incoming>
+      <bpmn:outgoing>Flow_1gee6tz</bpmn:outgoing>
+      <bpmn:ioSpecification>
+        <bpmn:dataInput id="DataInput_Assoc_m0tjdk1" name="Client request"/>
+        <bpmn:dataOutput id="DataOutput_Assoc_cdjap95" name="Preferred hotel and travel means"/>
+        <bpmn:inputSet>
+          <bpmn:dataInputRefs>DataInput_Assoc_m0tjdk1</bpmn:dataInputRefs>
+        </bpmn:inputSet>
+        <bpmn:outputSet>
+          <bpmn:dataOutputRefs>DataOutput_Assoc_cdjap95</bpmn:dataOutputRefs>
+        </bpmn:outputSet>
+      </bpmn:ioSpecification>
+      <bpmn:dataInputAssociation id="Assoc_m0tjdk1">
+        <bpmn:sourceRef>dataInput_y0mxajt</bpmn:sourceRef>
+        <bpmn:targetRef>DataInput_Assoc_m0tjdk1</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+      <bpmn:dataOutputAssociation id="Assoc_cdjap95">
+        <bpmn:sourceRef>DataOutput_Assoc_cdjap95</bpmn:sourceRef>
+        <bpmn:targetRef>dataObjectReference_djc7j2d</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:userTask>
+    <bpmn:dataObjectReference id="dataObjectReference_djc7j2d" name="Preferred hotel and travel means"/>
+    <bpmn:endEvent id="endEvent_6uhclt1">
+      <bpmn:incoming>Flow_fv98j6m</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:startEvent id="startEvent_ivsh9ut">
+      <bpmn:outgoing>Flow_vtdhcp3</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_vtdhcp3" sourceRef="startEvent_ivsh9ut" targetRef="userTask_vf5djyb"/>
+    <bpmn:sequenceFlow id="Flow_1gee6tz" sourceRef="userTask_vf5djyb" targetRef="userTask_hcm9c2e"/>
+    <bpmn:sequenceFlow id="Flow_fv98j6m" sourceRef="userTask_hcm9c2e" targetRef="endEvent_6uhclt1"/>
+  </bpmn:process>
+  <bpmn:resource id="Resource_f8c8b903" name="Employee"/>
+  <bpmn:resource id="Resource_f586d033" name="Project Office"/>
+  <bpmndi:BPMNDiagram id="Diagram_nb_c_10_0">
+    <bpmndi:BPMNPlane id="Plane_nb_c_10_0" bpmnElement="Collaboration_27ukbho">
+      <bpmndi:BPMNShape id="Participant_v3jevcp_di" bpmnElement="Participant_v3jevcp" isHorizontal="true" taom:taomLabel="Travel Planning">
+        <dc:Bounds x="26" y="753" width="2068" height="725"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_5kur320_di" bpmnElement="Participant_5kur320" isHorizontal="true" taom:taomLabel="Client">
+        <dc:Bounds x="0" y="443" width="1773" height="150"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_32ld382_di" bpmnElement="Lane_32ld382" isHorizontal="true" taom:taomLabel="Employee">
+        <dc:Bounds x="57" y="1053" width="2036" height="423"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_8r271cd_di" bpmnElement="Lane_8r271cd" isHorizontal="true" taom:taomLabel="Project Office">
+        <dc:Bounds x="57" y="753" width="2036" height="300"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="serviceTask_zjmjwjc_di" bpmnElement="serviceTask_zjmjwjc" taom:taomId="T04-TRAV-AC001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Update employee's calendar" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Employee" taom:taomPool="Travel Planning">
+        <dc:Bounds x="1132" y="1063" width="151" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_96j3cog_di" bpmnElement="userTask_96j3cog" taom:taomId="T04-TRAV-AC002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Check client request" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Project Office" taom:taomPool="Travel Planning">
+        <dc:Bounds x="262" y="868" width="110" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="callActivity_kvqp22t_di" bpmnElement="callActivity_kvqp22t" taom:taomId="T04-TRAV-SP001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Plan trip" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Employee" taom:taomPool="Travel Planning">
+        <dc:Bounds x="871" y="1066" width="122" height="67"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_cwixf41_di" bpmnElement="userTask_cwixf41" taom:taomId="T04-TRAV-AC003" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Check employee's availability" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Project Office" taom:taomPool="Travel Planning">
+        <dc:Bounds x="662" y="868" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_x4gcoed_di" bpmnElement="userTask_x4gcoed" taom:taomId="T04-TRAV-AC004" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Prepare confirmation email" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Employee" taom:taomPool="Travel Planning">
+        <dc:Bounds x="1333" y="1061" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sendTask_lxc7edg_di" bpmnElement="sendTask_lxc7edg" taom:taomId="T04-TRAV-AC005" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Send confirmation email" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Employee" taom:taomPool="Travel Planning">
+        <dc:Bounds x="1492" y="1061" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_hcm9c2e_di" bpmnElement="userTask_hcm9c2e" taom:taomId="T04-TRAV-AC006" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Book trip" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="391" y="217" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_vf5djyb_di" bpmnElement="userTask_vf5djyb" taom:taomId="T04-TRAV-AC007" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Request employee preferences" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="231" y="224" width="104" height="62"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_twwibbq_di" bpmnElement="userTask_twwibbq" taom:taomId="T04-TRAV-AC008" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Record meeting details" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Employee" taom:taomPool="Travel Planning">
+        <dc:Bounds x="1777" y="1071" width="90" height="60"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="exclusiveGateway_2a355oy_di" bpmnElement="exclusiveGateway_2a355oy" isMarkerVisible="true" taom:taomId="T04-TRAV-GW001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="On-site Meeting?" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Project Office" taom:taomPool="Travel Planning">
+        <dc:Bounds x="492" y="882" width="52" height="52"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="intermediateThrowEvent_3ta1ikj_di" bpmnElement="intermediateThrowEvent_3ta1ikj" taom:taomId="T04-TRAV-EV001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Answer client directly" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Project Office" taom:taomPool="Travel Planning">
+        <dc:Bounds x="692" y="772" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="exclusiveGateway_y6lrfgi_di" bpmnElement="exclusiveGateway_y6lrfgi" isMarkerVisible="true" taom:taomId="T04-TRAV-GW002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Employee &#10;available?" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Project Office" taom:taomPool="Travel Planning">
+        <dc:Bounds x="886" y="882" width="52" height="52"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="startEvent_l4chofz_di" bpmnElement="startEvent_l4chofz" taom:taomId="T04-TRAV-EV002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="E-mail received" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Project Office" taom:taomPool="Travel Planning">
+        <dc:Bounds x="137" y="887" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="intermediateThrowEvent_qniv8br_di" bpmnElement="intermediateThrowEvent_qniv8br" taom:taomId="T04-TRAV-EV003" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Notify client personel not available" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Project Office" taom:taomPool="Travel Planning">
+        <dc:Bounds x="1054" y="891" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataInput_y0mxajt_di" bpmnElement="dataInput_y0mxajt" taom:taomId="T04-TRAV-DO001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Client request" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="187" y="124" width="49" height="64"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataObjectReference_djc7j2d_di" bpmnElement="dataObjectReference_djc7j2d" taom:taomId="T04-TRAV-DO002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Preferred hotel and travel means" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="316" y="124" width="49" height="64"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataInput_4fyibkf_di" bpmnElement="dataInput_4fyibkf" taom:taomId="T04-TRAV-DO003" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Client request" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Project Office" taom:taomPool="Travel Planning">
+        <dc:Bounds x="198" y="960" width="48" height="56"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataOutput_51809ka_di" bpmnElement="dataOutput_51809ka" taom:taomId="T04-TRAV-DO004" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Hotel reservation" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Employee" taom:taomPool="Travel Planning">
+        <dc:Bounds x="1013" y="1168" width="48" height="56"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataOutput_hjkjyw8_di" bpmnElement="dataOutput_hjkjyw8" taom:taomId="T04-TRAV-DO005" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Tickets" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Employee" taom:taomPool="Travel Planning">
+        <dc:Bounds x="1013" y="1301" width="48" height="56"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataStoreReference_k7p4us8_di" bpmnElement="dataStoreReference_k7p4us8" taom:taomId="T04-TRAV-DO006" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Calendar" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Project Office" taom:taomPool="Travel Planning">
+        <dc:Bounds x="579" y="975" width="48" height="56"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataObjectReference_0yjdx8t_di" bpmnElement="dataObjectReference_0yjdx8t" taom:taomId="T04-TRAV-DO007" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="On-site meeting" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Project Office" taom:taomPool="Travel Planning">
+        <dc:Bounds x="414" y="800" width="48" height="56"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataObjectReference_ockxscg_di" bpmnElement="dataObjectReference_ockxscg" taom:taomId="T04-TRAV-DO008" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Identified&#10;employee" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Project Office" taom:taomPool="Travel Planning">
+        <dc:Bounds x="837" y="788" width="48" height="56"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataStoreReference_7ny14q8_di" bpmnElement="dataStoreReference_7ny14q8" taom:taomId="T04-TRAV-DO009" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="HR system" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Employee" taom:taomPool="Travel Planning">
+        <dc:Bounds x="1774" y="1201" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataObjectReference_ug7szl1_di" bpmnElement="dataObjectReference_ug7szl1" taom:taomId="T04-TRAV-DO010" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Hotel reservation" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Employee" taom:taomPool="Travel Planning">
+        <dc:Bounds x="1284" y="1166" width="38" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataObjectReference_0eawccq_di" bpmnElement="dataObjectReference_0eawccq" taom:taomId="T04-TRAV-DO011" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Tickets" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Employee" taom:taomPool="Travel Planning">
+        <dc:Bounds x="1284" y="1241" width="38" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataOutput_xvh1yyy_di" bpmnElement="dataOutput_xvh1yyy" taom:taomId="T04-TRAV-DO012" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Hotel reservation" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="483" y="41" width="34" height="40"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataOutput_h6je1eh_di" bpmnElement="dataOutput_h6je1eh" taom:taomId="T04-TRAV-DO013" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Tickets" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="483" y="148" width="34" height="40"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_6uhclt1_di" bpmnElement="endEvent_6uhclt1" taom:taomId="T04-TRAV-EV004" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="539" y="234" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="intermediateCatchEvent_bg1pu85_di" bpmnElement="intermediateCatchEvent_bg1pu85" taom:taomId="T04-TRAV-EV005" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Recieve meeting details" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Employee" taom:taomPool="Travel Planning">
+        <dc:Bounds x="1652" y="1080" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="startEvent_ivsh9ut_di" bpmnElement="startEvent_ivsh9ut" taom:taomId="T04-TRAV-EV006" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="121" y="234" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_imn4iy7_di" bpmnElement="endEvent_imn4iy7" taom:taomId="T04-TRAV-EV007" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Client answered" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Project Office" taom:taomPool="Travel Planning">
+        <dc:Bounds x="1899" y="772" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_06o784a_di" bpmnElement="endEvent_06o784a" taom:taomId="T04-TRAV-EV008" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Trip planned" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Employee" taom:taomPool="Travel Planning">
+        <dc:Bounds x="1909" y="1078" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_cq36zl0_di" bpmnElement="endEvent_cq36zl0" taom:taomId="T04-TRAV-EV009" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="No personnel available" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomRole="Project Office" taom:taomPool="Travel Planning">
+        <dc:Bounds x="1895" y="891" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Assoc_aq3kjv1_di" bpmnElement="Assoc_aq3kjv1" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="n" taom:markerEnd="md">
+        <di:waypoint x="365" y="156"/>
+        <di:waypoint x="402" y="156"/>
+        <di:waypoint x="402" y="217"/>
+        <di:waypoint x="439" y="217"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_vtdhcp3_di" bpmnElement="Flow_vtdhcp3" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="163" y="255"/>
+        <di:waypoint x="197" y="255"/>
+        <di:waypoint x="197" y="255"/>
+        <di:waypoint x="231" y="255"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_m0tjdk1_di" bpmnElement="Assoc_m0tjdk1" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="n" taom:markerEnd="md">
+        <di:waypoint x="236" y="156"/>
+        <di:waypoint x="236" y="190"/>
+        <di:waypoint x="283" y="190"/>
+        <di:waypoint x="283" y="224"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_cdjap95_di" bpmnElement="Assoc_cdjap95" taom:routing="orthogonal" taom:sourceSide="n" taom:targetSide="w" taom:markerEnd="md">
+        <di:waypoint x="283" y="224"/>
+        <di:waypoint x="283" y="190"/>
+        <di:waypoint x="316" y="190"/>
+        <di:waypoint x="316" y="156"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1gee6tz_di" bpmnElement="Flow_1gee6tz" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="335" y="255"/>
+        <di:waypoint x="363" y="255"/>
+        <di:waypoint x="363" y="255"/>
+        <di:waypoint x="391" y="255"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_fv98j6m_di" bpmnElement="Flow_fv98j6m" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="487" y="255"/>
+        <di:waypoint x="513" y="255"/>
+        <di:waypoint x="513" y="255"/>
+        <di:waypoint x="539" y="255"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_anegns7_di" bpmnElement="Assoc_anegns7" taom:routing="orthogonal" taom:sourceSide="n" taom:targetSide="w" taom:markerEnd="md">
+        <di:waypoint x="439" y="217"/>
+        <di:waypoint x="439" y="139"/>
+        <di:waypoint x="483" y="139"/>
+        <di:waypoint x="483" y="61"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_bxm83mu_di" bpmnElement="Assoc_bxm83mu" taom:routing="orthogonal" taom:sourceSide="n" taom:targetSide="w" taom:markerEnd="md">
+        <di:waypoint x="439" y="217"/>
+        <di:waypoint x="439" y="193"/>
+        <di:waypoint x="483" y="193"/>
+        <di:waypoint x="483" y="168"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ovcfdyh_di" bpmnElement="Flow_ovcfdyh" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="734" y="793"/>
+        <di:waypoint x="1317" y="793"/>
+        <di:waypoint x="1317" y="793"/>
+        <di:waypoint x="1899" y="793"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_vrd9nxt_di" bpmnElement="Flow_vrd9nxt" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1283" y="1101"/>
+        <di:waypoint x="1308" y="1101"/>
+        <di:waypoint x="1308" y="1101"/>
+        <di:waypoint x="1333" y="1101"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_zrtuji7_di" bpmnElement="Flow_zrtuji7" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="762" y="908"/>
+        <di:waypoint x="824" y="908"/>
+        <di:waypoint x="824" y="908"/>
+        <di:waypoint x="886" y="908"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_8l75b8z_di" bpmnElement="Flow_8l75b8z" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w" taom:taomLabel="Yes">
+        <di:waypoint x="544" y="908"/>
+        <di:waypoint x="603" y="908"/>
+        <di:waypoint x="603" y="908"/>
+        <di:waypoint x="662" y="908"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_avh8cyp_di" bpmnElement="Flow_avh8cyp" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="993" y="1100"/>
+        <di:waypoint x="1063" y="1100"/>
+        <di:waypoint x="1063" y="1101"/>
+        <di:waypoint x="1132" y="1101"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_b2icchu_di" bpmnElement="Flow_b2icchu" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w" taom:taomLabel="No">
+        <di:waypoint x="938" y="908"/>
+        <di:waypoint x="996" y="908"/>
+        <di:waypoint x="996" y="912"/>
+        <di:waypoint x="1054" y="912"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_4mpc7mr_di" bpmnElement="Flow_4mpc7mr" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="179" y="908"/>
+        <di:waypoint x="221" y="908"/>
+        <di:waypoint x="221" y="908"/>
+        <di:waypoint x="262" y="908"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_w1lsj8r_di" bpmnElement="Flow_w1lsj8r" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1096" y="912"/>
+        <di:waypoint x="1496" y="912"/>
+        <di:waypoint x="1496" y="912"/>
+        <di:waypoint x="1895" y="912"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_tuv7poj_di" bpmnElement="Flow_tuv7poj" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1694" y="1101"/>
+        <di:waypoint x="1736" y="1101"/>
+        <di:waypoint x="1736" y="1101"/>
+        <di:waypoint x="1777" y="1101"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_c49pzc7_di" bpmnElement="Flow_c49pzc7" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1867" y="1101"/>
+        <di:waypoint x="1888" y="1101"/>
+        <di:waypoint x="1888" y="1099"/>
+        <di:waypoint x="1909" y="1099"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_qwx5rmt_di" bpmnElement="Flow_qwx5rmt" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="n" taom:taomLabel="Yes">
+        <di:waypoint x="912" y="934"/>
+        <di:waypoint x="912" y="1000"/>
+        <di:waypoint x="932" y="1000"/>
+        <di:waypoint x="932" y="1066"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_jk25ea2_di" bpmnElement="Flow_jk25ea2" taom:routing="orthogonal" taom:sourceSide="n" taom:targetSide="w" taom:taomLabel="No">
+        <di:waypoint x="518" y="882"/>
+        <di:waypoint x="605" y="882"/>
+        <di:waypoint x="605" y="793"/>
+        <di:waypoint x="692" y="793"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_du3eep8_di" bpmnElement="Flow_du3eep8" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1433" y="1101"/>
+        <di:waypoint x="1463" y="1101"/>
+        <di:waypoint x="1463" y="1101"/>
+        <di:waypoint x="1492" y="1101"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_loyk3h0_di" bpmnElement="Flow_loyk3h0" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1592" y="1101"/>
+        <di:waypoint x="1622" y="1101"/>
+        <di:waypoint x="1622" y="1101"/>
+        <di:waypoint x="1652" y="1101"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_vpz8whn_di" bpmnElement="Flow_vpz8whn" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="372" y="908"/>
+        <di:waypoint x="432" y="908"/>
+        <di:waypoint x="432" y="908"/>
+        <di:waypoint x="492" y="908"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_j7fmn9h_di" bpmnElement="Assoc_j7fmn9h" taom:routing="orthogonal" taom:sourceSide="n" taom:targetSide="s" taom:markerEnd="md">
+        <di:waypoint x="1799" y="1201"/>
+        <di:waypoint x="1799" y="1166"/>
+        <di:waypoint x="1822" y="1166"/>
+        <di:waypoint x="1822" y="1131"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_e5zxc1c_di" bpmnElement="Assoc_e5zxc1c" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="s" taom:markerEnd="md">
+        <di:waypoint x="1322" y="1266"/>
+        <di:waypoint x="1322" y="1204"/>
+        <di:waypoint x="1383" y="1204"/>
+        <di:waypoint x="1383" y="1141"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_kzu0au6_di" bpmnElement="Assoc_kzu0au6" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="s" taom:markerEnd="md">
+        <di:waypoint x="1322" y="1191"/>
+        <di:waypoint x="1353" y="1191"/>
+        <di:waypoint x="1353" y="1141"/>
+        <di:waypoint x="1383" y="1141"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_wn2a2yk_di" bpmnElement="Assoc_wn2a2yk" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="n" taom:markerEnd="md">
+        <di:waypoint x="993" y="1100"/>
+        <di:waypoint x="993" y="1134"/>
+        <di:waypoint x="1037" y="1134"/>
+        <di:waypoint x="1037" y="1168"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_zvinefd_di" bpmnElement="Assoc_zvinefd" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="n" taom:markerEnd="md">
+        <di:waypoint x="993" y="1100"/>
+        <di:waypoint x="993" y="1200"/>
+        <di:waypoint x="1037" y="1200"/>
+        <di:waypoint x="1037" y="1301"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_t08m3a4_di" bpmnElement="Assoc_t08m3a4" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="n" taom:markerEnd="md">
+        <di:waypoint x="246" y="988"/>
+        <di:waypoint x="589" y="988"/>
+        <di:waypoint x="589" y="1066"/>
+        <di:waypoint x="932" y="1066"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_kdk25f4_di" bpmnElement="Assoc_kdk25f4" taom:routing="orthogonal" taom:sourceSide="n" taom:targetSide="w" taom:markerEnd="md">
+        <di:waypoint x="317" y="868"/>
+        <di:waypoint x="366" y="868"/>
+        <di:waypoint x="366" y="828"/>
+        <di:waypoint x="414" y="828"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_9ya0bo5_di" bpmnElement="Assoc_9ya0bo5" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="s" taom:markerEnd="md">
+        <di:waypoint x="246" y="988"/>
+        <di:waypoint x="282" y="988"/>
+        <di:waypoint x="282" y="948"/>
+        <di:waypoint x="317" y="948"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_7wohu9s_di" bpmnElement="Assoc_7wohu9s" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="s" taom:markerEnd="md">
+        <di:waypoint x="627" y="1003"/>
+        <di:waypoint x="670" y="1003"/>
+        <di:waypoint x="670" y="948"/>
+        <di:waypoint x="712" y="948"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_es3x3ho_di" bpmnElement="Assoc_es3x3ho" taom:routing="orthogonal" taom:sourceSide="n" taom:targetSide="w" taom:markerEnd="md">
+        <di:waypoint x="712" y="868"/>
+        <di:waypoint x="775" y="868"/>
+        <di:waypoint x="775" y="816"/>
+        <di:waypoint x="837" y="816"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_rpthxgw_di" bpmnElement="Assoc_rpthxgw" taom:routing="orthogonal" taom:sourceSide="n" taom:targetSide="e" taom:markerEnd="md">
+        <di:waypoint x="1208" y="1063"/>
+        <di:waypoint x="917" y="1063"/>
+        <di:waypoint x="917" y="1003"/>
+        <di:waypoint x="627" y="1003"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_upk59cb_di" bpmnElement="MessageFlow_upk59cb" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="n">
+        <di:waypoint x="887" y="593"/>
+        <di:waypoint x="522" y="593"/>
+        <di:waypoint x="522" y="887"/>
+        <di:waypoint x="158" y="887"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_ijpp7zr_di" bpmnElement="MessageFlow_ijpp7zr" taom:routing="orthogonal" taom:sourceSide="n" taom:targetSide="s">
+        <di:waypoint x="1542" y="1061"/>
+        <di:waypoint x="1214" y="1061"/>
+        <di:waypoint x="1214" y="593"/>
+        <di:waypoint x="887" y="593"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_i92c2rf_di" bpmnElement="MessageFlow_i92c2rf" taom:routing="orthogonal" taom:sourceSide="n" taom:targetSide="s">
+        <di:waypoint x="713" y="772"/>
+        <di:waypoint x="713" y="683"/>
+        <di:waypoint x="887" y="683"/>
+        <di:waypoint x="887" y="593"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_yr970tu_di" bpmnElement="MessageFlow_yr970tu" taom:routing="orthogonal" taom:sourceSide="n" taom:targetSide="s">
+        <di:waypoint x="1075" y="891"/>
+        <di:waypoint x="1075" y="742"/>
+        <di:waypoint x="887" y="742"/>
+        <di:waypoint x="887" y="593"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_c3uam6e_di" bpmnElement="MessageFlow_c3uam6e" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="n">
+        <di:waypoint x="887" y="593"/>
+        <di:waypoint x="1280" y="593"/>
+        <di:waypoint x="1280" y="1080"/>
+        <di:waypoint x="1673" y="1080"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
