@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:taom="https://traniva.com/ns/taom" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_nb_c_9_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="TAOM Process Studio" exporterVersion="7.0.492">
+  <bpmn:collaboration id="Collaboration_7pme9tl">
+    <bpmn:extensionElements>
+      <taom:meta>
+        <taom:ebene lang="">L4</taom:ebene>
+        <taom:austausch form="1" docLang="-"/>
+      </taom:meta>
+      <taom:meta>
+        <taom:title lang="de">Document Request</taom:title>
+      </taom:meta>
+    </bpmn:extensionElements>
+    <bpmn:participant id="Participant_sdgfr6k" name="Document Request" processRef="Process_nb_c_9_1"/>
+  </bpmn:collaboration>
+  <bpmn:process id="Process_nb_c_9_1" isExecutable="false">
+    <bpmn:sendTask id="sendTask_44qkl2d" name="Request document">
+      <bpmn:incoming>Flow_og8aq88</bpmn:incoming>
+      <bpmn:outgoing>Flow_ur75zmm</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:sendTask id="sendTask_cmtd3g5" name="Send reminder email">
+      <bpmn:incoming>Flow_oxerf8u</bpmn:incoming>
+      <bpmn:outgoing>Flow_ay99sge</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:userTask id="userTask_c3v2jt4" name="Call customer">
+      <bpmn:incoming>Flow_7sxbrjn</bpmn:incoming>
+      <bpmn:outgoing>Flow_tgw9pha</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:receiveTask id="receiveTask_omhihdn" name="Wait for answer">
+      <bpmn:incoming>Flow_ur75zmm</bpmn:incoming>
+      <bpmn:outgoing>Flow_jzs8c2k</bpmn:outgoing>
+    </bpmn:receiveTask>
+    <bpmn:endEvent id="endEvent_1pgozag" name="Answer received">
+      <bpmn:incoming>Flow_tgw9pha</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="endEvent_ypfr2vn" name="Document received">
+      <bpmn:incoming>Flow_jzs8c2k</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:startEvent id="startEvent_7u6qtmg" name="Document requested">
+      <bpmn:outgoing>Flow_og8aq88</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="endEvent_1zupzqj" name="Email sent">
+      <bpmn:incoming>Flow_ay99sge</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:boundaryEvent id="boundaryEvent_08oecc7" name="1 week" attachedToRef="receiveTask_omhihdn">
+      <bpmn:outgoing>Flow_7sxbrjn</bpmn:outgoing>
+      <bpmn:timerEventDefinition>
+        <bpmn:timeDuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="bpmn:tFormalExpression">P7D</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="boundaryEvent_4ypj8fx" name="daily" attachedToRef="receiveTask_omhihdn" cancelActivity="false">
+      <bpmn:outgoing>Flow_oxerf8u</bpmn:outgoing>
+      <bpmn:timerEventDefinition>
+        <bpmn:timeCycle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="bpmn:tFormalExpression">R6/P1D</bpmn:timeCycle>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_jzs8c2k" sourceRef="receiveTask_omhihdn" targetRef="endEvent_ypfr2vn"/>
+    <bpmn:sequenceFlow id="Flow_7sxbrjn" sourceRef="boundaryEvent_08oecc7" targetRef="userTask_c3v2jt4"/>
+    <bpmn:sequenceFlow id="Flow_oxerf8u" sourceRef="boundaryEvent_4ypj8fx" targetRef="sendTask_cmtd3g5"/>
+    <bpmn:sequenceFlow id="Flow_ay99sge" sourceRef="sendTask_cmtd3g5" targetRef="endEvent_1zupzqj"/>
+    <bpmn:sequenceFlow id="Flow_tgw9pha" sourceRef="userTask_c3v2jt4" targetRef="endEvent_1pgozag"/>
+    <bpmn:sequenceFlow id="Flow_ur75zmm" sourceRef="sendTask_44qkl2d" targetRef="receiveTask_omhihdn"/>
+    <bpmn:sequenceFlow id="Flow_og8aq88" sourceRef="startEvent_7u6qtmg" targetRef="sendTask_44qkl2d"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_nb_c_9_1">
+    <bpmndi:BPMNPlane id="Plane_nb_c_9_1" bpmnElement="Collaboration_7pme9tl">
+      <bpmndi:BPMNShape id="Participant_sdgfr6k_di" bpmnElement="Participant_sdgfr6k" isHorizontal="true" taom:taomLabel="Document Request">
+        <dc:Bounds x="156" y="76" width="829" height="301"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sendTask_44qkl2d_di" bpmnElement="sendTask_44qkl2d" taom:taomId="T04-DOCU-AC001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Request document" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Document Request">
+        <dc:Bounds x="323" y="99" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sendTask_cmtd3g5_di" bpmnElement="sendTask_cmtd3g5" taom:taomId="T04-DOCU-AC002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Send reminder email" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Document Request">
+        <dc:Bounds x="663" y="280" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_c3v2jt4_di" bpmnElement="userTask_c3v2jt4" taom:taomId="T04-DOCU-AC003" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Call customer" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Document Request">
+        <dc:Bounds x="663" y="184" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="receiveTask_omhihdn_di" bpmnElement="receiveTask_omhihdn" taom:taomId="T04-DOCU-AC004" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Wait for answer" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Document Request">
+        <dc:Bounds x="494" y="99" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_1pgozag_di" bpmnElement="endEvent_1pgozag" taom:taomId="T04-DOCU-EV001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Answer received" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Document Request">
+        <dc:Bounds x="897" y="203" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_ypfr2vn_di" bpmnElement="endEvent_ypfr2vn" taom:taomId="T04-DOCU-EV002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Document received" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Document Request">
+        <dc:Bounds x="897" y="118" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="startEvent_7u6qtmg_di" bpmnElement="startEvent_7u6qtmg" taom:taomId="T04-DOCU-EV003" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Document requested" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Document Request">
+        <dc:Bounds x="209" y="118" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_1zupzqj_di" bpmnElement="endEvent_1zupzqj" taom:taomId="T04-DOCU-EV004" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Email sent" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Document Request">
+        <dc:Bounds x="897" y="299" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="boundaryEvent_08oecc7_di" bpmnElement="boundaryEvent_08oecc7" taom:taomId="T04-DOCU-EV005" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="1 week" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Document Request">
+        <dc:Bounds x="559" y="158" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="boundaryEvent_4ypj8fx_di" bpmnElement="boundaryEvent_4ypj8fx" taom:taomId="T04-DOCU-EV006" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="daily" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal" taom:taomPool="Document Request">
+        <dc:Bounds x="524" y="158" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_jzs8c2k_di" bpmnElement="Flow_jzs8c2k" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="594" y="139"/>
+        <di:waypoint x="746" y="139"/>
+        <di:waypoint x="746" y="139"/>
+        <di:waypoint x="897" y="139"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_7sxbrjn_di" bpmnElement="Flow_7sxbrjn" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="w">
+        <di:waypoint x="580" y="200"/>
+        <di:waypoint x="622" y="200"/>
+        <di:waypoint x="622" y="224"/>
+        <di:waypoint x="663" y="224"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_oxerf8u_di" bpmnElement="Flow_oxerf8u" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="w">
+        <di:waypoint x="545" y="200"/>
+        <di:waypoint x="545" y="260"/>
+        <di:waypoint x="663" y="260"/>
+        <di:waypoint x="663" y="320"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ay99sge_di" bpmnElement="Flow_ay99sge" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="763" y="320"/>
+        <di:waypoint x="830" y="320"/>
+        <di:waypoint x="830" y="320"/>
+        <di:waypoint x="897" y="320"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_tgw9pha_di" bpmnElement="Flow_tgw9pha" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="763" y="224"/>
+        <di:waypoint x="830" y="224"/>
+        <di:waypoint x="830" y="224"/>
+        <di:waypoint x="897" y="224"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ur75zmm_di" bpmnElement="Flow_ur75zmm" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="423" y="139"/>
+        <di:waypoint x="459" y="139"/>
+        <di:waypoint x="459" y="139"/>
+        <di:waypoint x="494" y="139"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_og8aq88_di" bpmnElement="Flow_og8aq88" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="251" y="139"/>
+        <di:waypoint x="287" y="139"/>
+        <di:waypoint x="287" y="139"/>
+        <di:waypoint x="323" y="139"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

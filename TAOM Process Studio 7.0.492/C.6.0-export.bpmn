@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:taom="https://traniva.com/ns/taom" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_nb_c_6_0" targetNamespace="http://bpmn.io/schema/bpmn" exporter="TAOM Process Studio" exporterVersion="7.0.492">
+  <bpmn:process id="Process_nb_c_6_0" isExecutable="false" name="Simple Travel Booking">
+    <bpmn:extensionElements>
+      <taom:meta>
+        <taom:ebene lang="">L4</taom:ebene>
+        <taom:austausch form="1" docLang="-"/>
+      </taom:meta>
+      <taom:meta>
+        <taom:title lang="de">Simple Travel Booking</taom:title>
+      </taom:meta>
+    </bpmn:extensionElements>
+    <bpmn:ioSpecification id="IoSpecification_b08dqcb">
+      <bpmn:dataInput id="dataInput_x1tqq0b" name="Travel Request"/>
+      <bpmn:dataOutput id="dataOutput_1v9td0x" name="Itinerary"/>
+      <bpmn:inputSet id="InputSet_sbpof2j">
+        <bpmn:dataInputRefs>dataInput_x1tqq0b</bpmn:dataInputRefs>
+      </bpmn:inputSet>
+      <bpmn:outputSet id="OutputSet_7rvv4ef">
+        <bpmn:dataOutputRefs>dataOutput_1v9td0x</bpmn:dataOutputRefs>
+      </bpmn:outputSet>
+    </bpmn:ioSpecification>
+    <bpmn:subProcess id="subProcess_3s6dw6d" name="Make Booking">
+      <bpmn:incoming>Flow_bl23dbc</bpmn:incoming>
+      <bpmn:outgoing>Flow_gjgsbht</bpmn:outgoing>
+      <bpmn:subProcess id="subProcess_u92g3t1" name="Handle Compensation" triggeredByEvent="true">
+        <bpmn:parallelGateway id="parallelGateway_0kuc9b0" gatewayDirection="Diverging">
+          <bpmn:incoming>Flow_nkld6kd</bpmn:incoming>
+          <bpmn:outgoing>Flow_7gl8w2f</bpmn:outgoing>
+          <bpmn:outgoing>Flow_5g6al6a</bpmn:outgoing>
+        </bpmn:parallelGateway>
+        <bpmn:parallelGateway id="parallelGateway_p72xtyt" gatewayDirection="Converging">
+          <bpmn:incoming>Flow_dap6zon</bpmn:incoming>
+          <bpmn:incoming>Flow_0i6pzp0</bpmn:incoming>
+          <bpmn:outgoing>Flow_bvzoe8o</bpmn:outgoing>
+        </bpmn:parallelGateway>
+        <bpmn:endEvent id="endEvent_ffabp7z">
+          <bpmn:incoming>Flow_bvzoe8o</bpmn:incoming>
+        </bpmn:endEvent>
+        <bpmn:intermediateThrowEvent id="intermediateThrowEvent_31d2ylq" name="Flight">
+          <bpmn:incoming>Flow_7gl8w2f</bpmn:incoming>
+          <bpmn:outgoing>Flow_dap6zon</bpmn:outgoing>
+          <bpmn:compensateEventDefinition/>
+        </bpmn:intermediateThrowEvent>
+        <bpmn:intermediateThrowEvent id="intermediateThrowEvent_riveqgw" name="Hotel">
+          <bpmn:incoming>Flow_5g6al6a</bpmn:incoming>
+          <bpmn:outgoing>Flow_0i6pzp0</bpmn:outgoing>
+          <bpmn:compensateEventDefinition/>
+        </bpmn:intermediateThrowEvent>
+        <bpmn:startEvent id="startEvent_0b19ijd" name="Booking">
+          <bpmn:outgoing>Flow_nkld6kd</bpmn:outgoing>
+          <bpmn:compensateEventDefinition/>
+        </bpmn:startEvent>
+        <bpmn:sequenceFlow id="Flow_nkld6kd" sourceRef="startEvent_0b19ijd" targetRef="parallelGateway_0kuc9b0"/>
+        <bpmn:sequenceFlow id="Flow_7gl8w2f" sourceRef="parallelGateway_0kuc9b0" targetRef="intermediateThrowEvent_31d2ylq"/>
+        <bpmn:sequenceFlow id="Flow_5g6al6a" sourceRef="parallelGateway_0kuc9b0" targetRef="intermediateThrowEvent_riveqgw"/>
+        <bpmn:sequenceFlow id="Flow_dap6zon" sourceRef="intermediateThrowEvent_31d2ylq" targetRef="parallelGateway_p72xtyt"/>
+        <bpmn:sequenceFlow id="Flow_0i6pzp0" sourceRef="intermediateThrowEvent_riveqgw" targetRef="parallelGateway_p72xtyt"/>
+        <bpmn:sequenceFlow id="Flow_bvzoe8o" sourceRef="parallelGateway_p72xtyt" targetRef="endEvent_ffabp7z"/>
+      </bpmn:subProcess>
+      <bpmn:serviceTask id="serviceTask_kqe19nj" name="Cancel Hotel" isForCompensation="true"/>
+      <bpmn:serviceTask id="serviceTask_9zlex3s" name="Cancel Flight" isForCompensation="true"/>
+      <bpmn:serviceTask id="serviceTask_nj5b5fm" name="Book Hotel">
+        <bpmn:incoming>Flow_1mgki4c</bpmn:incoming>
+        <bpmn:outgoing>Flow_dr8bdy8</bpmn:outgoing>
+      </bpmn:serviceTask>
+      <bpmn:serviceTask id="serviceTask_gex5lej" name="Book Flight">
+        <bpmn:incoming>Flow_9ozbsoe</bpmn:incoming>
+        <bpmn:outgoing>Flow_xop4fix</bpmn:outgoing>
+      </bpmn:serviceTask>
+      <bpmn:parallelGateway id="parallelGateway_w6cfdv5" gatewayDirection="Diverging">
+        <bpmn:incoming>Flow_19y1r0i</bpmn:incoming>
+        <bpmn:outgoing>Flow_9ozbsoe</bpmn:outgoing>
+        <bpmn:outgoing>Flow_1mgki4c</bpmn:outgoing>
+      </bpmn:parallelGateway>
+      <bpmn:parallelGateway id="parallelGateway_tern2me" gatewayDirection="Converging">
+        <bpmn:incoming>Flow_xop4fix</bpmn:incoming>
+        <bpmn:incoming>Flow_dr8bdy8</bpmn:incoming>
+        <bpmn:outgoing>Flow_30hk3tn</bpmn:outgoing>
+      </bpmn:parallelGateway>
+      <bpmn:endEvent id="endEvent_6s0d5al" name="Travel Booked">
+        <bpmn:incoming>Flow_30hk3tn</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:startEvent id="startEvent_a9zs37p">
+        <bpmn:outgoing>Flow_19y1r0i</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:boundaryEvent id="boundaryEvent_svgxpue" name="Hotel" attachedToRef="serviceTask_nj5b5fm">
+        <bpmn:compensateEventDefinition/>
+      </bpmn:boundaryEvent>
+      <bpmn:boundaryEvent id="boundaryEvent_dn8tcnz" name="Flight" attachedToRef="serviceTask_gex5lej">
+        <bpmn:compensateEventDefinition/>
+      </bpmn:boundaryEvent>
+      <bpmn:sequenceFlow id="Flow_19y1r0i" sourceRef="startEvent_a9zs37p" targetRef="parallelGateway_w6cfdv5"/>
+      <bpmn:sequenceFlow id="Flow_30hk3tn" sourceRef="parallelGateway_tern2me" targetRef="endEvent_6s0d5al"/>
+      <bpmn:sequenceFlow id="Flow_9ozbsoe" sourceRef="parallelGateway_w6cfdv5" targetRef="serviceTask_gex5lej"/>
+      <bpmn:sequenceFlow id="Flow_xop4fix" sourceRef="serviceTask_gex5lej" targetRef="parallelGateway_tern2me"/>
+      <bpmn:sequenceFlow id="Flow_dr8bdy8" sourceRef="serviceTask_nj5b5fm" targetRef="parallelGateway_tern2me"/>
+      <bpmn:sequenceFlow id="Flow_1mgki4c" sourceRef="parallelGateway_w6cfdv5" targetRef="serviceTask_nj5b5fm"/>
+      <bpmn:association id="Assoc_pbrlxsx" sourceRef="boundaryEvent_svgxpue" targetRef="serviceTask_kqe19nj"/>
+      <bpmn:association id="Assoc_lymuayc" sourceRef="boundaryEvent_dn8tcnz" targetRef="serviceTask_9zlex3s"/>
+    </bpmn:subProcess>
+    <bpmn:sendTask id="sendTask_h49aqik" name="Request&#10;Credit Card Information">
+      <bpmn:incoming>Flow_aml3ct0</bpmn:incoming>
+      <bpmn:outgoing>Flow_bl23dbc</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:sendTask id="sendTask_yh8t7jx" name="Confirm Booking">
+      <bpmn:incoming>Flow_xxrqwlv</bpmn:incoming>
+      <bpmn:outgoing>Flow_2ms5d4h</bpmn:outgoing>
+      <bpmn:ioSpecification>
+        <bpmn:dataOutput id="DataOutput_Assoc_kuimy7g" name="Itinerary"/>
+        <bpmn:inputSet/>
+        <bpmn:outputSet>
+          <bpmn:dataOutputRefs>DataOutput_Assoc_kuimy7g</bpmn:dataOutputRefs>
+        </bpmn:outputSet>
+      </bpmn:ioSpecification>
+      <bpmn:dataOutputAssociation id="Assoc_kuimy7g">
+        <bpmn:sourceRef>DataOutput_Assoc_kuimy7g</bpmn:sourceRef>
+        <bpmn:targetRef>dataOutput_1v9td0x</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:sendTask>
+    <bpmn:sendTask id="sendTask_96waser" name="Notify Failed Booking">
+      <bpmn:incoming>Flow_pscwksl</bpmn:incoming>
+      <bpmn:outgoing>Flow_jlp7jyh</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:serviceTask id="serviceTask_kgfvdh1" name="Charge Credit Card">
+      <bpmn:incoming>Flow_gjgsbht</bpmn:incoming>
+      <bpmn:outgoing>Flow_xxrqwlv</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sendTask id="sendTask_semzu1b" name="Make Flights and Hotel Offer">
+      <bpmn:incoming>Flow_kbwhi9o</bpmn:incoming>
+      <bpmn:outgoing>Flow_k3et42q</bpmn:outgoing>
+      <bpmn:ioSpecification>
+        <bpmn:dataInput id="DataInput_Assoc_mnsgq6f" name="Travel Request"/>
+        <bpmn:inputSet>
+          <bpmn:dataInputRefs>DataInput_Assoc_mnsgq6f</bpmn:dataInputRefs>
+        </bpmn:inputSet>
+        <bpmn:outputSet/>
+      </bpmn:ioSpecification>
+      <bpmn:dataInputAssociation id="Assoc_mnsgq6f">
+        <bpmn:sourceRef>dataInput_x1tqq0b</bpmn:sourceRef>
+        <bpmn:targetRef>DataInput_Assoc_mnsgq6f</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+    </bpmn:sendTask>
+    <bpmn:serviceTask id="serviceTask_qcz62l8" name="Update Customer Record">
+      <bpmn:incoming>Flow_tdws5qp</bpmn:incoming>
+      <bpmn:outgoing>Flow_q7ncxxt</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sendTask id="sendTask_a0gsnw2" name="Notify Customer&#10;Offer Expired">
+      <bpmn:incoming>Flow_tid2yl5</bpmn:incoming>
+      <bpmn:incoming>Flow_ly7ox1c</bpmn:incoming>
+      <bpmn:outgoing>Flow_1kl8qxn</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:sendTask id="sendTask_88nyfrq" name="Notify Failed Credit Transaction">
+      <bpmn:incoming>Flow_gowsxhx</bpmn:incoming>
+      <bpmn:outgoing>Flow_oeqfv07</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:eventBasedGateway id="eventBasedGateway_kqzg8qq" gatewayDirection="Diverging">
+      <bpmn:incoming>Flow_k3et42q</bpmn:incoming>
+      <bpmn:outgoing>Flow_7aqxnla</bpmn:outgoing>
+      <bpmn:outgoing>Flow_dhipieu</bpmn:outgoing>
+      <bpmn:outgoing>Flow_88pj37y</bpmn:outgoing>
+    </bpmn:eventBasedGateway>
+    <bpmn:endEvent id="endEvent_ogzrm58" name="Failed &#10;Booking">
+      <bpmn:incoming>Flow_jlp7jyh</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="endEvent_cbcnvkr" name="Failed Credit&#10;Transaction">
+      <bpmn:incoming>Flow_oeqfv07</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="endEvent_w35owpv" name="Booking &#10;Confirmed">
+      <bpmn:incoming>Flow_2ms5d4h</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:startEvent id="startEvent_ez3g17v" name="Receive Travel Request">
+      <bpmn:outgoing>Flow_kbwhi9o</bpmn:outgoing>
+      <bpmn:messageEventDefinition/>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="endEvent_fh8fi8z" name="Request Cancelled">
+      <bpmn:incoming>Flow_q7ncxxt</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="endEvent_vcrmdbe" name="Offer Expired">
+      <bpmn:incoming>Flow_1kl8qxn</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:intermediateThrowEvent id="intermediateThrowEvent_pyzllka" name="Booking">
+      <bpmn:incoming>Flow_cox9zsa</bpmn:incoming>
+      <bpmn:outgoing>Flow_gowsxhx</bpmn:outgoing>
+      <bpmn:compensateEventDefinition/>
+    </bpmn:intermediateThrowEvent>
+    <bpmn:intermediateCatchEvent id="intermediateCatchEvent_ozsl2ic" name="24 Hours">
+      <bpmn:incoming>Flow_88pj37y</bpmn:incoming>
+      <bpmn:outgoing>Flow_tid2yl5</bpmn:outgoing>
+      <bpmn:timerEventDefinition>
+        <bpmn:timeDate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="bpmn:tFormalExpression"/>
+      </bpmn:timerEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="intermediateCatchEvent_h62eepb" name="Cancel Request">
+      <bpmn:incoming>Flow_7aqxnla</bpmn:incoming>
+      <bpmn:outgoing>Flow_tdws5qp</bpmn:outgoing>
+      <bpmn:messageEventDefinition/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="intermediateCatchEvent_obfdn9b" name="Offer Approved">
+      <bpmn:incoming>Flow_dhipieu</bpmn:incoming>
+      <bpmn:outgoing>Flow_aml3ct0</bpmn:outgoing>
+      <bpmn:messageEventDefinition/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:boundaryEvent id="boundaryEvent_3rogg3k" attachedToRef="subProcess_3s6dw6d">
+      <bpmn:outgoing>Flow_pscwksl</bpmn:outgoing>
+      <bpmn:errorEventDefinition/>
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="boundaryEvent_5fmt8k5" attachedToRef="serviceTask_kgfvdh1">
+      <bpmn:outgoing>Flow_cox9zsa</bpmn:outgoing>
+      <bpmn:errorEventDefinition/>
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="boundaryEvent_6o97545" name="24 Hours" attachedToRef="sendTask_h49aqik">
+      <bpmn:outgoing>Flow_ly7ox1c</bpmn:outgoing>
+      <bpmn:timerEventDefinition>
+        <bpmn:timeDate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="bpmn:tFormalExpression"/>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_cox9zsa" sourceRef="boundaryEvent_5fmt8k5" targetRef="intermediateThrowEvent_pyzllka"/>
+    <bpmn:sequenceFlow id="Flow_7aqxnla" sourceRef="eventBasedGateway_kqzg8qq" targetRef="intermediateCatchEvent_h62eepb"/>
+    <bpmn:sequenceFlow id="Flow_dhipieu" sourceRef="eventBasedGateway_kqzg8qq" targetRef="intermediateCatchEvent_obfdn9b"/>
+    <bpmn:sequenceFlow id="Flow_88pj37y" sourceRef="eventBasedGateway_kqzg8qq" targetRef="intermediateCatchEvent_ozsl2ic"/>
+    <bpmn:sequenceFlow id="Flow_aml3ct0" sourceRef="intermediateCatchEvent_obfdn9b" targetRef="sendTask_h49aqik"/>
+    <bpmn:sequenceFlow id="Flow_2ms5d4h" sourceRef="sendTask_yh8t7jx" targetRef="endEvent_w35owpv"/>
+    <bpmn:sequenceFlow id="Flow_pscwksl" sourceRef="boundaryEvent_3rogg3k" targetRef="sendTask_96waser"/>
+    <bpmn:sequenceFlow id="Flow_jlp7jyh" sourceRef="sendTask_96waser" targetRef="endEvent_ogzrm58"/>
+    <bpmn:sequenceFlow id="Flow_xxrqwlv" sourceRef="serviceTask_kgfvdh1" targetRef="sendTask_yh8t7jx"/>
+    <bpmn:sequenceFlow id="Flow_gjgsbht" sourceRef="subProcess_3s6dw6d" targetRef="serviceTask_kgfvdh1"/>
+    <bpmn:sequenceFlow id="Flow_kbwhi9o" sourceRef="startEvent_ez3g17v" targetRef="sendTask_semzu1b"/>
+    <bpmn:sequenceFlow id="Flow_k3et42q" sourceRef="sendTask_semzu1b" targetRef="eventBasedGateway_kqzg8qq"/>
+    <bpmn:sequenceFlow id="Flow_tdws5qp" sourceRef="intermediateCatchEvent_h62eepb" targetRef="serviceTask_qcz62l8"/>
+    <bpmn:sequenceFlow id="Flow_q7ncxxt" sourceRef="serviceTask_qcz62l8" targetRef="endEvent_fh8fi8z"/>
+    <bpmn:sequenceFlow id="Flow_tid2yl5" sourceRef="intermediateCatchEvent_ozsl2ic" targetRef="sendTask_a0gsnw2"/>
+    <bpmn:sequenceFlow id="Flow_1kl8qxn" sourceRef="sendTask_a0gsnw2" targetRef="endEvent_vcrmdbe"/>
+    <bpmn:sequenceFlow id="Flow_ly7ox1c" sourceRef="boundaryEvent_6o97545" targetRef="sendTask_a0gsnw2"/>
+    <bpmn:sequenceFlow id="Flow_gowsxhx" sourceRef="intermediateThrowEvent_pyzllka" targetRef="sendTask_88nyfrq"/>
+    <bpmn:sequenceFlow id="Flow_oeqfv07" sourceRef="sendTask_88nyfrq" targetRef="endEvent_cbcnvkr"/>
+    <bpmn:sequenceFlow id="Flow_bl23dbc" sourceRef="sendTask_h49aqik" targetRef="subProcess_3s6dw6d"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_nb_c_6_0">
+    <bpmndi:BPMNPlane id="Plane_nb_c_6_0" bpmnElement="Process_nb_c_6_0">
+      <bpmndi:BPMNShape id="subProcess_3s6dw6d_di" bpmnElement="subProcess_3s6dw6d" isExpanded="true" taom:taomId="T04-PRZ-SP001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Make Booking" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="741" y="170" width="748" height="672"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="subProcess_u92g3t1_di" bpmnElement="subProcess_u92g3t1" isExpanded="true" taom:taomId="T04-PRZ-SP002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Handle Compensation" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="879" y="600" width="511" height="181"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sendTask_h49aqik_di" bpmnElement="sendTask_h49aqik" taom:taomId="T04-PRZ-AC001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Request&#10;Credit Card Information" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="425" y="292" width="103" height="73"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="serviceTask_kqe19nj_di" bpmnElement="serviceTask_kqe19nj" taom:taomId="T04-PRZ-AC002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Cancel Hotel" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="1134" y="444" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="serviceTask_9zlex3s_di" bpmnElement="serviceTask_9zlex3s" taom:taomId="T04-PRZ-AC003" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Cancel Flight" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="1134" y="303" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sendTask_yh8t7jx_di" bpmnElement="sendTask_yh8t7jx" taom:taomId="T04-PRZ-AC004" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Confirm Booking" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="1763" y="303" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sendTask_96waser_di" bpmnElement="sendTask_96waser" taom:taomId="T04-PRZ-AC005" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Notify Failed Booking" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="1707" y="724" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="serviceTask_kgfvdh1_di" bpmnElement="serviceTask_kgfvdh1" taom:taomId="T04-PRZ-AC006" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Charge Credit Card" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="1588" y="303" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sendTask_semzu1b_di" bpmnElement="sendTask_semzu1b" taom:taomId="T04-PRZ-AC007" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Make Flights and Hotel Offer" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="137" y="424" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="serviceTask_qcz62l8_di" bpmnElement="serviceTask_qcz62l8" taom:taomId="T04-PRZ-AC008" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Update Customer Record" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="429" y="571" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sendTask_a0gsnw2_di" bpmnElement="sendTask_a0gsnw2" taom:taomId="T04-PRZ-AC009" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Notify Customer&#10;Offer Expired" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="429" y="424" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sendTask_88nyfrq_di" bpmnElement="sendTask_88nyfrq" taom:taomId="T04-PRZ-AC010" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Notify Failed Credit Transaction" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="1757" y="136" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="serviceTask_nj5b5fm_di" bpmnElement="serviceTask_nj5b5fm" taom:taomId="T04-PRZ-AC011" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Book Hotel" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="977" y="368" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="serviceTask_gex5lej_di" bpmnElement="serviceTask_gex5lej" taom:taomId="T04-PRZ-AC012" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Book Flight" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="977" y="210" width="96" height="76"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="eventBasedGateway_kqzg8qq_di" bpmnElement="eventBasedGateway_kqzg8qq" taom:taomId="T04-PRZ-GW001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="264" y="436" width="52" height="52"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="parallelGateway_0kuc9b0_di" bpmnElement="parallelGateway_0kuc9b0" taom:taomId="T04-PRZ-GW002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="989" y="666" width="52" height="52"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="parallelGateway_p72xtyt_di" bpmnElement="parallelGateway_p72xtyt" taom:taomId="T04-PRZ-GW003" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="1217" y="666" width="52" height="52"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="parallelGateway_w6cfdv5_di" bpmnElement="parallelGateway_w6cfdv5" taom:taomId="T04-PRZ-GW004" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="919" y="307" width="52" height="52"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="parallelGateway_tern2me_di" bpmnElement="parallelGateway_tern2me" taom:taomId="T04-PRZ-GW005" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="1301" y="307" width="52" height="52"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataInput_x1tqq0b_di" bpmnElement="dataInput_x1tqq0b" taom:taomId="T04-PRZ-DO001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Travel Request" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="106" y="321" width="34" height="40"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="dataOutput_1v9td0x_di" bpmnElement="dataOutput_1v9td0x" taom:taomId="T04-PRZ-DO002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Itinerary" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="1871" y="239" width="34" height="40"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_ffabp7z_di" bpmnElement="endEvent_ffabp7z" taom:taomId="T04-PRZ-EV001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="1298" y="671" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="intermediateThrowEvent_31d2ylq_di" bpmnElement="intermediateThrowEvent_31d2ylq" taom:taomId="T04-PRZ-EV002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Flight" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="1086" y="622" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="intermediateThrowEvent_riveqgw_di" bpmnElement="intermediateThrowEvent_riveqgw" taom:taomId="T04-PRZ-EV003" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Hotel" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="1055" y="719" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_6s0d5al_di" bpmnElement="endEvent_6s0d5al" taom:taomId="T04-PRZ-EV004" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Travel Booked" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="1384" y="312" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_ogzrm58_di" bpmnElement="endEvent_ogzrm58" taom:taomId="T04-PRZ-EV005" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Failed &#10;Booking" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="1920" y="741" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_cbcnvkr_di" bpmnElement="endEvent_cbcnvkr" taom:taomId="T04-PRZ-EV006" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Failed Credit&#10;Transaction" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="1920" y="153" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_w35owpv_di" bpmnElement="endEvent_w35owpv" taom:taomId="T04-PRZ-EV007" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Booking &#10;Confirmed" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="1926" y="320" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="startEvent_ez3g17v_di" bpmnElement="startEvent_ez3g17v" taom:taomId="T04-PRZ-EV008" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Receive Travel Request" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="45" y="441" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_fh8fi8z_di" bpmnElement="endEvent_fh8fi8z" taom:taomId="T04-PRZ-EV009" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Request Cancelled" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="588" y="588" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_vcrmdbe_di" bpmnElement="endEvent_vcrmdbe" taom:taomId="T04-PRZ-EV010" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Offer Expired" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="588" y="441" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="intermediateThrowEvent_pyzllka_di" bpmnElement="intermediateThrowEvent_pyzllka" taom:taomId="T04-PRZ-EV011" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Booking" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="1654" y="153" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="intermediateCatchEvent_ozsl2ic_di" bpmnElement="intermediateCatchEvent_ozsl2ic" taom:taomId="T04-PRZ-EV012" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="24 Hours" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="337" y="441" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="intermediateCatchEvent_h62eepb_di" bpmnElement="intermediateCatchEvent_h62eepb" taom:taomId="T04-PRZ-EV013" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Cancel Request" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="337" y="588" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="intermediateCatchEvent_obfdn9b_di" bpmnElement="intermediateCatchEvent_obfdn9b" taom:taomId="T04-PRZ-EV014" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Offer Approved" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="337" y="308" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="startEvent_0b19ijd_di" bpmnElement="startEvent_0b19ijd" taom:taomId="T04-PRZ-EV015" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Booking" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="906" y="669" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="startEvent_a9zs37p_di" bpmnElement="startEvent_a9zs37p" taom:taomId="T04-PRZ-EV016" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="833" y="312" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="boundaryEvent_svgxpue_di" bpmnElement="boundaryEvent_svgxpue" taom:taomId="T04-PRZ-EV017" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Hotel" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="1009" y="423" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="boundaryEvent_dn8tcnz_di" bpmnElement="boundaryEvent_dn8tcnz" taom:taomId="T04-PRZ-EV018" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Flight" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="1010" y="265" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="boundaryEvent_3rogg3k_di" bpmnElement="boundaryEvent_3rogg3k" taom:taomId="T04-PRZ-EV019" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="1468" y="741" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="boundaryEvent_5fmt8k5_di" bpmnElement="boundaryEvent_5fmt8k5" taom:taomId="T04-PRZ-EV020" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="1649" y="282" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="boundaryEvent_6o97545_di" bpmnElement="boundaryEvent_6o97545" taom:taomId="T04-PRZ-EV021" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="24 Hours" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="476" y="344" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_nkld6kd_di" bpmnElement="Flow_nkld6kd" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="948" y="690"/>
+        <di:waypoint x="969" y="690"/>
+        <di:waypoint x="969" y="692"/>
+        <di:waypoint x="989" y="692"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_7gl8w2f_di" bpmnElement="Flow_7gl8w2f" taom:routing="orthogonal" taom:sourceSide="n" taom:targetSide="w">
+        <di:waypoint x="1015" y="666"/>
+        <di:waypoint x="1051" y="666"/>
+        <di:waypoint x="1051" y="643"/>
+        <di:waypoint x="1086" y="643"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_5g6al6a_di" bpmnElement="Flow_5g6al6a" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="w">
+        <di:waypoint x="1015" y="718"/>
+        <di:waypoint x="1035" y="718"/>
+        <di:waypoint x="1035" y="740"/>
+        <di:waypoint x="1055" y="740"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_dap6zon_di" bpmnElement="Flow_dap6zon" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="n">
+        <di:waypoint x="1128" y="643"/>
+        <di:waypoint x="1186" y="643"/>
+        <di:waypoint x="1186" y="666"/>
+        <di:waypoint x="1243" y="666"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0i6pzp0_di" bpmnElement="Flow_0i6pzp0" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="s">
+        <di:waypoint x="1097" y="740"/>
+        <di:waypoint x="1170" y="740"/>
+        <di:waypoint x="1170" y="718"/>
+        <di:waypoint x="1243" y="718"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_bvzoe8o_di" bpmnElement="Flow_bvzoe8o" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1269" y="692"/>
+        <di:waypoint x="1284" y="692"/>
+        <di:waypoint x="1284" y="692"/>
+        <di:waypoint x="1298" y="692"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_cox9zsa_di" bpmnElement="Flow_cox9zsa" taom:routing="orthogonal" taom:sourceSide="n" taom:targetSide="s">
+        <di:waypoint x="1670" y="282"/>
+        <di:waypoint x="1670" y="239"/>
+        <di:waypoint x="1675" y="239"/>
+        <di:waypoint x="1675" y="195"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_7aqxnla_di" bpmnElement="Flow_7aqxnla" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="w">
+        <di:waypoint x="290" y="488"/>
+        <di:waypoint x="290" y="549"/>
+        <di:waypoint x="337" y="549"/>
+        <di:waypoint x="337" y="609"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_dhipieu_di" bpmnElement="Flow_dhipieu" taom:routing="orthogonal" taom:sourceSide="n" taom:targetSide="w">
+        <di:waypoint x="290" y="436"/>
+        <di:waypoint x="290" y="383"/>
+        <di:waypoint x="337" y="383"/>
+        <di:waypoint x="337" y="329"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_88pj37y_di" bpmnElement="Flow_88pj37y" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="316" y="462"/>
+        <di:waypoint x="327" y="462"/>
+        <di:waypoint x="327" y="462"/>
+        <di:waypoint x="337" y="462"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_aml3ct0_di" bpmnElement="Flow_aml3ct0" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="379" y="329"/>
+        <di:waypoint x="402" y="329"/>
+        <di:waypoint x="402" y="329"/>
+        <di:waypoint x="425" y="329"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_19y1r0i_di" bpmnElement="Flow_19y1r0i" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="875" y="333"/>
+        <di:waypoint x="897" y="333"/>
+        <di:waypoint x="897" y="333"/>
+        <di:waypoint x="919" y="333"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_30hk3tn_di" bpmnElement="Flow_30hk3tn" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1353" y="333"/>
+        <di:waypoint x="1369" y="333"/>
+        <di:waypoint x="1369" y="333"/>
+        <di:waypoint x="1384" y="333"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2ms5d4h_di" bpmnElement="Flow_2ms5d4h" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1859" y="341"/>
+        <di:waypoint x="1893" y="341"/>
+        <di:waypoint x="1893" y="341"/>
+        <di:waypoint x="1926" y="341"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_pscwksl_di" bpmnElement="Flow_pscwksl" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1510" y="762"/>
+        <di:waypoint x="1609" y="762"/>
+        <di:waypoint x="1609" y="762"/>
+        <di:waypoint x="1707" y="762"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_jlp7jyh_di" bpmnElement="Flow_jlp7jyh" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1803" y="762"/>
+        <di:waypoint x="1862" y="762"/>
+        <di:waypoint x="1862" y="762"/>
+        <di:waypoint x="1920" y="762"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_xxrqwlv_di" bpmnElement="Flow_xxrqwlv" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1684" y="341"/>
+        <di:waypoint x="1724" y="341"/>
+        <di:waypoint x="1724" y="341"/>
+        <di:waypoint x="1763" y="341"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_gjgsbht_di" bpmnElement="Flow_gjgsbht" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1489" y="506"/>
+        <di:waypoint x="1489" y="424"/>
+        <di:waypoint x="1588" y="424"/>
+        <di:waypoint x="1588" y="341"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_kbwhi9o_di" bpmnElement="Flow_kbwhi9o" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="87" y="462"/>
+        <di:waypoint x="112" y="462"/>
+        <di:waypoint x="112" y="462"/>
+        <di:waypoint x="137" y="462"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_k3et42q_di" bpmnElement="Flow_k3et42q" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="233" y="462"/>
+        <di:waypoint x="249" y="462"/>
+        <di:waypoint x="249" y="462"/>
+        <di:waypoint x="264" y="462"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_tdws5qp_di" bpmnElement="Flow_tdws5qp" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="379" y="609"/>
+        <di:waypoint x="404" y="609"/>
+        <di:waypoint x="404" y="609"/>
+        <di:waypoint x="429" y="609"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_q7ncxxt_di" bpmnElement="Flow_q7ncxxt" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="525" y="609"/>
+        <di:waypoint x="557" y="609"/>
+        <di:waypoint x="557" y="609"/>
+        <di:waypoint x="588" y="609"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_tid2yl5_di" bpmnElement="Flow_tid2yl5" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="379" y="462"/>
+        <di:waypoint x="404" y="462"/>
+        <di:waypoint x="404" y="462"/>
+        <di:waypoint x="429" y="462"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1kl8qxn_di" bpmnElement="Flow_1kl8qxn" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="525" y="462"/>
+        <di:waypoint x="557" y="462"/>
+        <di:waypoint x="557" y="462"/>
+        <di:waypoint x="588" y="462"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ly7ox1c_di" bpmnElement="Flow_ly7ox1c" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="n">
+        <di:waypoint x="497" y="386"/>
+        <di:waypoint x="497" y="405"/>
+        <di:waypoint x="477" y="405"/>
+        <di:waypoint x="477" y="424"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_pbrlxsx_di" bpmnElement="Assoc_pbrlxsx" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="w">
+        <di:waypoint x="1030" y="465"/>
+        <di:waypoint x="1082" y="465"/>
+        <di:waypoint x="1082" y="482"/>
+        <di:waypoint x="1134" y="482"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_9ozbsoe_di" bpmnElement="Flow_9ozbsoe" taom:routing="orthogonal" taom:sourceSide="n" taom:targetSide="w">
+        <di:waypoint x="945" y="307"/>
+        <di:waypoint x="945" y="278"/>
+        <di:waypoint x="977" y="278"/>
+        <di:waypoint x="977" y="248"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_lymuayc_di" bpmnElement="Assoc_lymuayc" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="w">
+        <di:waypoint x="1031" y="307"/>
+        <di:waypoint x="1083" y="307"/>
+        <di:waypoint x="1083" y="341"/>
+        <di:waypoint x="1134" y="341"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_xop4fix_di" bpmnElement="Flow_xop4fix" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="n">
+        <di:waypoint x="1073" y="248"/>
+        <di:waypoint x="1200" y="248"/>
+        <di:waypoint x="1200" y="307"/>
+        <di:waypoint x="1327" y="307"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_dr8bdy8_di" bpmnElement="Flow_dr8bdy8" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="s">
+        <di:waypoint x="1073" y="406"/>
+        <di:waypoint x="1200" y="406"/>
+        <di:waypoint x="1200" y="359"/>
+        <di:waypoint x="1327" y="359"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_gowsxhx_di" bpmnElement="Flow_gowsxhx" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1696" y="174"/>
+        <di:waypoint x="1727" y="174"/>
+        <di:waypoint x="1727" y="174"/>
+        <di:waypoint x="1757" y="174"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_oeqfv07_di" bpmnElement="Flow_oeqfv07" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="1853" y="174"/>
+        <di:waypoint x="1887" y="174"/>
+        <di:waypoint x="1887" y="174"/>
+        <di:waypoint x="1920" y="174"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1mgki4c_di" bpmnElement="Flow_1mgki4c" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="w">
+        <di:waypoint x="945" y="359"/>
+        <di:waypoint x="945" y="383"/>
+        <di:waypoint x="977" y="383"/>
+        <di:waypoint x="977" y="406"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_bl23dbc_di" bpmnElement="Flow_bl23dbc" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="528" y="329"/>
+        <di:waypoint x="635" y="329"/>
+        <di:waypoint x="635" y="506"/>
+        <di:waypoint x="741" y="506"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_mnsgq6f_di" bpmnElement="Assoc_mnsgq6f" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="n" taom:markerEnd="md">
+        <di:waypoint x="140" y="341"/>
+        <di:waypoint x="140" y="383"/>
+        <di:waypoint x="185" y="383"/>
+        <di:waypoint x="185" y="424"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_kuimy7g_di" bpmnElement="Assoc_kuimy7g" taom:routing="orthogonal" taom:sourceSide="n" taom:targetSide="w" taom:markerEnd="md">
+        <di:waypoint x="1811" y="303"/>
+        <di:waypoint x="1841" y="303"/>
+        <di:waypoint x="1841" y="259"/>
+        <di:waypoint x="1871" y="259"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

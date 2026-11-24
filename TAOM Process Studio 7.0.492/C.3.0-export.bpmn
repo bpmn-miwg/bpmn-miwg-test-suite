@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:taom="https://traniva.com/ns/taom" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_nb_c_3_0" targetNamespace="http://bpmn.io/schema/bpmn" exporter="TAOM Process Studio" exporterVersion="7.0.492">
+  <bpmn:message id="Message_mu6rhi1" name="Service Level"/>
+  <bpmn:process id="Process_nb_c_3_0" isExecutable="false" name="Fridge Repair Process">
+    <bpmn:extensionElements>
+      <taom:meta>
+        <taom:ebene lang="">L4</taom:ebene>
+        <taom:austausch form="1" docLang="-"/>
+      </taom:meta>
+      <taom:meta>
+        <taom:title lang="de">Fridge Repair Process</taom:title>
+      </taom:meta>
+    </bpmn:extensionElements>
+    <bpmn:subProcess id="subProcess_pc9swd4" name="Perform emergency repair">
+      <bpmn:incoming>Flow_syxn6wf</bpmn:incoming>
+      <bpmn:incoming>Flow_wdyap02</bpmn:incoming>
+      <bpmn:outgoing>Flow_bz1xavw</bpmn:outgoing>
+    </bpmn:subProcess>
+    <bpmn:userTask id="userTask_9wnq2gm" name="Analyse customer request">
+      <bpmn:incoming>Flow_csbyyu0</bpmn:incoming>
+      <bpmn:outgoing>Flow_sa5sb93</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="userTask_jq1xmr8" name="Replace fridge">
+      <bpmn:incoming>Flow_s3rh8xq</bpmn:incoming>
+      <bpmn:incoming>Flow_6qe5bs9</bpmn:incoming>
+      <bpmn:outgoing>Flow_bz2mvkz</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="userTask_w36s3kq" name="Perform repair (standard level)">
+      <bpmn:incoming>Flow_484do1z</bpmn:incoming>
+      <bpmn:outgoing>Flow_qbe9jys</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="userTask_pjyjxtm" name="Perform repair (premium level)">
+      <bpmn:incoming>Flow_avgsque</bpmn:incoming>
+      <bpmn:incoming>Flow_3y8g4jm</bpmn:incoming>
+      <bpmn:outgoing>Flow_pxw1xr9</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="exclusiveGateway_2ytzw4t" name="Service type" gatewayDirection="Diverging">
+      <bpmn:incoming>Flow_sa5sb93</bpmn:incoming>
+      <bpmn:outgoing>Flow_s3rh8xq</bpmn:outgoing>
+      <bpmn:outgoing>Flow_syxn6wf</bpmn:outgoing>
+      <bpmn:outgoing>Flow_ecqi2jh</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="exclusiveGateway_axofs3z" name="Service level" gatewayDirection="Diverging">
+      <bpmn:incoming>Flow_ecqi2jh</bpmn:incoming>
+      <bpmn:outgoing>Flow_484do1z</bpmn:outgoing>
+      <bpmn:outgoing>Flow_avgsque</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="exclusiveGateway_bdchxqx" name="Successful?" gatewayDirection="Diverging">
+      <bpmn:incoming>Flow_bz1xavw</bpmn:incoming>
+      <bpmn:outgoing>Flow_mon29sx</bpmn:outgoing>
+      <bpmn:outgoing>Flow_6qe5bs9</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:startEvent id="startEvent_4kyheyp" name="Receive customer request">
+      <bpmn:outgoing>Flow_csbyyu0</bpmn:outgoing>
+      <bpmn:messageEventDefinition messageRef="Message_mu6rhi1"/>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="endEvent_zfam9ny" name="Fridge replaced">
+      <bpmn:incoming>Flow_bz2mvkz</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="endEvent_ypmp5mf" name="Emergency repair completed">
+      <bpmn:incoming>Flow_mon29sx</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="endEvent_9to6wwk" name="Repair completed">
+      <bpmn:incoming>Flow_qbe9jys</bpmn:incoming>
+      <bpmn:incoming>Flow_pxw1xr9</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:boundaryEvent id="boundaryEvent_zjbbn8e" name="2 hours" attachedToRef="userTask_pjyjxtm">
+      <bpmn:outgoing>Flow_wdyap02</bpmn:outgoing>
+      <bpmn:timerEventDefinition>
+        <bpmn:timeDuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="bpmn:tFormalExpression">PT2H</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="boundaryEvent_zb8q3dk" attachedToRef="userTask_w36s3kq">
+      <bpmn:outgoing>Flow_3y8g4jm</bpmn:outgoing>
+      <bpmn:messageEventDefinition messageRef="Message_mu6rhi1"/>
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_sa5sb93" sourceRef="userTask_9wnq2gm" targetRef="exclusiveGateway_2ytzw4t"/>
+    <bpmn:sequenceFlow id="Flow_s3rh8xq" sourceRef="exclusiveGateway_2ytzw4t" targetRef="userTask_jq1xmr8" name="Warranty"/>
+    <bpmn:sequenceFlow id="Flow_syxn6wf" sourceRef="exclusiveGateway_2ytzw4t" targetRef="subProcess_pc9swd4" name="Emergency service"/>
+    <bpmn:sequenceFlow id="Flow_ecqi2jh" sourceRef="exclusiveGateway_2ytzw4t" targetRef="exclusiveGateway_axofs3z" name="Regular repair service"/>
+    <bpmn:sequenceFlow id="Flow_484do1z" sourceRef="exclusiveGateway_axofs3z" targetRef="userTask_w36s3kq" name="Standard"/>
+    <bpmn:sequenceFlow id="Flow_avgsque" sourceRef="exclusiveGateway_axofs3z" targetRef="userTask_pjyjxtm" name="Premium">
+      <bpmn:conditionExpression xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="bpmn:tFormalExpression">Service Level == 'Premium'</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_qbe9jys" sourceRef="userTask_w36s3kq" targetRef="endEvent_9to6wwk"/>
+    <bpmn:sequenceFlow id="Flow_pxw1xr9" sourceRef="userTask_pjyjxtm" targetRef="endEvent_9to6wwk"/>
+    <bpmn:sequenceFlow id="Flow_bz1xavw" sourceRef="subProcess_pc9swd4" targetRef="exclusiveGateway_bdchxqx"/>
+    <bpmn:sequenceFlow id="Flow_bz2mvkz" sourceRef="userTask_jq1xmr8" targetRef="endEvent_zfam9ny"/>
+    <bpmn:sequenceFlow id="Flow_mon29sx" sourceRef="exclusiveGateway_bdchxqx" targetRef="endEvent_ypmp5mf" name="yes"/>
+    <bpmn:sequenceFlow id="Flow_6qe5bs9" sourceRef="exclusiveGateway_bdchxqx" targetRef="userTask_jq1xmr8" name="no"/>
+    <bpmn:sequenceFlow id="Flow_csbyyu0" sourceRef="startEvent_4kyheyp" targetRef="userTask_9wnq2gm"/>
+    <bpmn:sequenceFlow id="Flow_wdyap02" sourceRef="boundaryEvent_zjbbn8e" targetRef="subProcess_pc9swd4"/>
+    <bpmn:sequenceFlow id="Flow_3y8g4jm" sourceRef="boundaryEvent_zb8q3dk" targetRef="userTask_pjyjxtm"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_nb_c_3_0">
+    <bpmndi:BPMNPlane id="Plane_nb_c_3_0" bpmnElement="Process_nb_c_3_0">
+      <bpmndi:BPMNShape id="subProcess_pc9swd4_di" bpmnElement="subProcess_pc9swd4" taom:taomId="T04-PRZ-SP001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Perform emergency repair" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="504" y="231" width="121" height="59"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_9wnq2gm_di" bpmnElement="userTask_9wnq2gm" taom:taomId="T04-PRZ-AC001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Analyse customer request" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="164" y="119" width="121" height="59"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_jq1xmr8_di" bpmnElement="userTask_jq1xmr8" taom:taomId="T04-PRZ-AC002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Replace fridge" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="728" y="82" width="121" height="59"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_w36s3kq_di" bpmnElement="userTask_w36s3kq" taom:taomId="T04-PRZ-AC003" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Perform repair (standard level)" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="504" y="584" width="121" height="59"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="userTask_pjyjxtm_di" bpmnElement="userTask_pjyjxtm" taom:taomId="T04-PRZ-AC004" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Perform repair (premium level)" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="504" y="416" width="121" height="59"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="exclusiveGateway_2ytzw4t_di" bpmnElement="exclusiveGateway_2ytzw4t" isMarkerVisible="false" taom:taomId="T04-PRZ-GW001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Service type" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="359" y="123" width="52" height="52"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="exclusiveGateway_axofs3z_di" bpmnElement="exclusiveGateway_axofs3z" isMarkerVisible="false" taom:taomId="T04-PRZ-GW002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Service level" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="359" y="420" width="52" height="52"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="exclusiveGateway_bdchxqx_di" bpmnElement="exclusiveGateway_bdchxqx" isMarkerVisible="false" taom:taomId="T04-PRZ-GW003" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Successful?" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="758" y="235" width="52" height="52"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="startEvent_4kyheyp_di" bpmnElement="startEvent_4kyheyp" taom:taomId="T04-PRZ-EV001" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Receive customer request" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="52" y="128" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_zfam9ny_di" bpmnElement="endEvent_zfam9ny" taom:taomId="T04-PRZ-EV002" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Fridge replaced" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="956" y="90" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_ypmp5mf_di" bpmnElement="endEvent_ypmp5mf" taom:taomId="T04-PRZ-EV003" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Emergency repair completed" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="948" y="240" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_9to6wwk_di" bpmnElement="endEvent_9to6wwk" taom:taomId="T04-PRZ-EV004" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="Repair completed" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="950" y="425" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="boundaryEvent_zjbbn8e_di" bpmnElement="boundaryEvent_zjbbn8e" taom:taomId="T04-PRZ-EV005" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="2 hours" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="543" y="454" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="boundaryEvent_zb8q3dk_di" bpmnElement="boundaryEvent_zb8q3dk" taom:taomId="T04-PRZ-EV006" taom:taomProvenance="human" taom:taomHand="1" taom:taomLabel="" taom:taomReview="draft" taom:taomValidation="bpmn" taom:taomSecurity="internal">
+        <dc:Bounds x="543" y="622" width="42" height="42"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_sa5sb93_di" bpmnElement="Flow_sa5sb93" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="285" y="149"/>
+        <di:waypoint x="322" y="149"/>
+        <di:waypoint x="322" y="149"/>
+        <di:waypoint x="359" y="149"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_s3rh8xq_di" bpmnElement="Flow_s3rh8xq" taom:routing="orthogonal" taom:sourceSide="n" taom:targetSide="w" taom:taomLabel="Warranty">
+        <di:waypoint x="385" y="123"/>
+        <di:waypoint x="557" y="123"/>
+        <di:waypoint x="557" y="112"/>
+        <di:waypoint x="728" y="112"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_syxn6wf_di" bpmnElement="Flow_syxn6wf" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="n" taom:taomLabel="Emergency service">
+        <di:waypoint x="411" y="149"/>
+        <di:waypoint x="488" y="149"/>
+        <di:waypoint x="488" y="231"/>
+        <di:waypoint x="565" y="231"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ecqi2jh_di" bpmnElement="Flow_ecqi2jh" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="n" taom:taomLabel="Regular repair service">
+        <di:waypoint x="385" y="175"/>
+        <di:waypoint x="385" y="298"/>
+        <di:waypoint x="385" y="298"/>
+        <di:waypoint x="385" y="420"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_484do1z_di" bpmnElement="Flow_484do1z" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="w" taom:taomLabel="Standard">
+        <di:waypoint x="385" y="472"/>
+        <di:waypoint x="385" y="543"/>
+        <di:waypoint x="504" y="543"/>
+        <di:waypoint x="504" y="614"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_avgsque_di" bpmnElement="Flow_avgsque" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w" taom:taomLabel="Premium">
+        <di:waypoint x="411" y="446"/>
+        <di:waypoint x="458" y="446"/>
+        <di:waypoint x="458" y="446"/>
+        <di:waypoint x="504" y="446"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_qbe9jys_di" bpmnElement="Flow_qbe9jys" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="s">
+        <di:waypoint x="625" y="614"/>
+        <di:waypoint x="798" y="614"/>
+        <di:waypoint x="798" y="467"/>
+        <di:waypoint x="971" y="467"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_pxw1xr9_di" bpmnElement="Flow_pxw1xr9" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="625" y="446"/>
+        <di:waypoint x="788" y="446"/>
+        <di:waypoint x="788" y="446"/>
+        <di:waypoint x="950" y="446"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_bz1xavw_di" bpmnElement="Flow_bz1xavw" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="625" y="261"/>
+        <di:waypoint x="692" y="261"/>
+        <di:waypoint x="692" y="261"/>
+        <di:waypoint x="758" y="261"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_bz2mvkz_di" bpmnElement="Flow_bz2mvkz" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="849" y="112"/>
+        <di:waypoint x="903" y="112"/>
+        <di:waypoint x="903" y="111"/>
+        <di:waypoint x="956" y="111"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_mon29sx_di" bpmnElement="Flow_mon29sx" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w" taom:taomLabel="yes">
+        <di:waypoint x="810" y="261"/>
+        <di:waypoint x="879" y="261"/>
+        <di:waypoint x="879" y="261"/>
+        <di:waypoint x="948" y="261"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_6qe5bs9_di" bpmnElement="Flow_6qe5bs9" taom:routing="orthogonal" taom:sourceSide="n" taom:targetSide="s" taom:taomLabel="no">
+        <di:waypoint x="784" y="235"/>
+        <di:waypoint x="784" y="188"/>
+        <di:waypoint x="789" y="188"/>
+        <di:waypoint x="789" y="141"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_csbyyu0_di" bpmnElement="Flow_csbyyu0" taom:routing="orthogonal" taom:sourceSide="e" taom:targetSide="w">
+        <di:waypoint x="94" y="149"/>
+        <di:waypoint x="129" y="149"/>
+        <di:waypoint x="129" y="149"/>
+        <di:waypoint x="164" y="149"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_wdyap02_di" bpmnElement="Flow_wdyap02" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="s">
+        <di:waypoint x="564" y="496"/>
+        <di:waypoint x="564" y="393"/>
+        <di:waypoint x="565" y="393"/>
+        <di:waypoint x="565" y="290"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_3y8g4jm_di" bpmnElement="Flow_3y8g4jm" taom:routing="orthogonal" taom:sourceSide="s" taom:targetSide="s">
+        <di:waypoint x="564" y="664"/>
+        <di:waypoint x="564" y="570"/>
+        <di:waypoint x="565" y="570"/>
+        <di:waypoint x="565" y="475"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
